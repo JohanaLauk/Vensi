@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02/07/2017 21:48:06 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="modelo.Producto" table="producto" schema="public" optimistic-lock="version">
+        <composite-id name="id" class="modelo.ProductoId">
+            <key-property name="id" type="int">
+                <column name="id" />
+            </key-property>
+            <key-property name="codigo" type="int">
+                <column name="codigo" />
+            </key-property>
+        </composite-id>
+        <property name="nombre" type="string">
+            <column name="nombre" />
+        </property>
+    </class>
+</hibernate-mapping>
