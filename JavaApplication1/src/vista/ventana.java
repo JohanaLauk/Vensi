@@ -12,7 +12,7 @@ import modelo.Producto;
 import modelo.ProductoId;
 
 /**
- *
+ * Hice esto
  * @author Bian
  */
 public class ventana extends JFrame{
