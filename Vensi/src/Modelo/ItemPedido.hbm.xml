@@ -14,11 +14,11 @@
         <property name="cantidad" type="big_decimal">
             <column name="cantidad" precision="8" scale="3" not-null="true" />
         </property>
-        <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
+        <!-- <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_item_pedido" not-null="true" />
             </key>
             <one-to-many class="Modelo.Pedido" />
-        </set>
+        </set> -->
     </class>
 </hibernate-mapping>

@@ -16,7 +16,7 @@ public class ItemPedido  implements java.io.Serializable {
      private int id;
      private Serializable producto;
      private BigDecimal cantidad;
-     private Set pedidos = new HashSet(0);
+     //private Set pedidos = new HashSet(0);
 
     public ItemPedido() {
     }
@@ -31,7 +31,7 @@ public class ItemPedido  implements java.io.Serializable {
        this.id = id;
        this.producto = producto;
        this.cantidad = cantidad;
-       this.pedidos = pedidos;
+       //this.pedidos = pedidos;
     }
    
     public int getId() {
@@ -55,13 +55,13 @@ public class ItemPedido  implements java.io.Serializable {
     public void setCantidad(BigDecimal cantidad) {
         this.cantidad = cantidad;
     }
-    public Set getPedidos() {
+    /*public Set getPedidos() {
         return this.pedidos;
     }
     
     public void setPedidos(Set pedidos) {
         this.pedidos = pedidos;
-    }
+    }*/
 
 
 

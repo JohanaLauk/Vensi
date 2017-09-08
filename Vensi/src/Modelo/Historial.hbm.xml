@@ -6,13 +6,25 @@
     <class name="Modelo.Historial" table="historial" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
-        <many-to-one name="pedido" class="Modelo.Pedido" fetch="select">
+        
+        <list name="pedido" table="pedido" inverse="true" lazy="true" fetch="select">
+            <key column="historial_id" not-null="true"/>
+            <index column="ORDEN" />
+            <one-to-many class="Modelo.Pedido" />
+        </list>
+        <list name="turno" table="turno" inverse="true" lazy="true" fetch="select">
+            <key column="historial_id" not-null="true"/>
+            <index column="ORDEN" />
+            <one-to-many class="Modelo.Turno" />
+        </list>
+        
+       <!-- <many-to-one name="pedido" class="Modelo.Pedido" fetch="select">
             <column name="id_pedido" />
-        </many-to-one>
+        </many-to-one> 
         <many-to-one name="turno" class="Modelo.Turno" fetch="select">
-            <column name="id_turno" />
-        </many-to-one>
+            <column name="id_turno" />  
+        </many-to-one> -->
     </class>
 </hibernate-mapping>

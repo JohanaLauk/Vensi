@@ -1,6 +1,9 @@
 package Modelo;
 // Generated 07/09/2017 19:19:57 by Hibernate Tools 4.3.1
 
+import java.util.*;
+
+
 
 
 /**
@@ -10,8 +13,8 @@ public class Historial  implements java.io.Serializable {
 
 
      private int id;
-     private Pedido pedido;
-     private Turno turno;
+     private List<Pedido> pedido;
+     private List<Turno> turno;
 
     public Historial() {
     }
@@ -20,7 +23,7 @@ public class Historial  implements java.io.Serializable {
     public Historial(int id) {
         this.id = id;
     }
-    public Historial(int id, Pedido pedido, Turno turno) {
+    public Historial(int id, List pedido, List turno) {
        this.id = id;
        this.pedido = pedido;
        this.turno = turno;
@@ -33,18 +36,18 @@ public class Historial  implements java.io.Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    public Pedido getPedido() {
+    public List<Pedido> getPedido() {
         return this.pedido;
     }
     
-    public void setPedido(Pedido pedido) {
+    public void setPedido(List pedido) {
         this.pedido = pedido;
     }
-    public Turno getTurno() {
+    public List<Turno> getTurno() {
         return this.turno;
     }
     
-    public void setTurno(Turno turno) {
+    public void setTurno(List turno) {
         this.turno = turno;
     }
 

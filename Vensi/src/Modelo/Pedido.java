@@ -17,7 +17,7 @@ public class Pedido  implements java.io.Serializable {
      private Proveedor proveedor;
      private int nroPedido;
      private Date fechaHora;
-     private Set historials = new HashSet(0);
+     //private Set historials = new HashSet(0);
 
     public Pedido() {
     }
@@ -36,7 +36,7 @@ public class Pedido  implements java.io.Serializable {
        this.proveedor = proveedor;
        this.nroPedido = nroPedido;
        this.fechaHora = fechaHora;
-       this.historials = historials;
+       //this.historials = historials;
     }
    
     public int getId() {
@@ -74,13 +74,13 @@ public class Pedido  implements java.io.Serializable {
     public void setFechaHora(Date fechaHora) {
         this.fechaHora = fechaHora;
     }
-    public Set getHistorials() {
+    /*public Set getHistorials() {
         return this.historials;
     }
     
     public void setHistorials(Set historials) {
         this.historials = historials;
-    }
+    }*/
 
 
 
