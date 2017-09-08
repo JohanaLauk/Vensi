@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07/09/2017 19:19:59 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Producto" table="producto" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="codigo" type="string">
+            <column name="codigo" length="50" not-null="true" unique="true" />
+        </property>
+        <property name="descripcion" type="string">
+            <column name="descripcion" length="150" not-null="true" />
+        </property>
+        <property name="precioXKilo" type="big_decimal">
+            <column name="precio_x_kilo" precision="8" not-null="true" />
+        </property>
+        <property name="precioXUnidad" type="big_decimal">
+            <column name="precio_x_unidad" precision="8" not-null="true" />
+        </property>
+        <property name="stock" type="big_decimal">
+            <column name="stock" precision="8" scale="3" not-null="true" />
+        </property>
+        <property name="stockMinimo" type="big_decimal">
+            <column name="stock_minimo" precision="8" scale="3" not-null="true" />
+        </property>
+        <property name="pesoEnvase" type="big_decimal">
+            <column name="peso_envase" precision="5" scale="3" />
+        </property>
+    </class>
+</hibernate-mapping>

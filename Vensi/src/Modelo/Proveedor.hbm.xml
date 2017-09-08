@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07/09/2017 19:19:59 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Proveedor" table="proveedor" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="nombreCompleto" type="string">
+            <column name="nombre_completo" length="50" not-null="true" />
+        </property>
+        <property name="cuit" type="string">
+            <column name="cuit" length="11" not-null="true" />
+        </property>
+        <property name="direccion" type="string">
+            <column name="direccion" length="50" />
+        </property>
+        <property name="contacto" type="string">
+            <column name="contacto" length="100" not-null="true" />
+        </property>
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
+        </property>
+        <!--<set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_proveedor" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.Pedido" />
+        </set> -->
+    </class>
+</hibernate-mapping>

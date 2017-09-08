@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 07/09/2017 19:19:59 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="Modelo.Pedido" table="pedido" schema="public" optimistic-lock="version">
+        <id name="id" type="int">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="itemPedido" class="Modelo.ItemPedido" fetch="select">
+            <column name="id_item_pedido" not-null="true" />
+        </many-to-one>
+        <many-to-one name="proveedor" class="Modelo.Proveedor" fetch="select">
+            <column name="id_proveedor" not-null="true" />
+        </many-to-one>
+        <property name="nroPedido" type="int">
+            <column name="nro_pedido" not-null="true" />
+        </property>
+        <property name="fechaHora" type="date">
+            <column name="fecha_hora" length="13" not-null="true" />
+        </property>
+        <!-- <set name="historials" table="historial" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_pedido" />
+            </key>
+            <one-to-many class="Modelo.Historial" />
+        </set> -->
+    </class>
+</hibernate-mapping>
