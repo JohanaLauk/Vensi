@@ -18,7 +18,7 @@ public class ItemVenta  implements java.io.Serializable {
      private Serializable producto;
      private BigDecimal cantidad;
      private Date hora;
-     private Set turnos = new HashSet(0);
+     //private Set turnos = new HashSet(0);
 
     public ItemVenta() {
     }
@@ -35,7 +35,7 @@ public class ItemVenta  implements java.io.Serializable {
        this.producto = producto;
        this.cantidad = cantidad;
        this.hora = hora;
-       this.turnos = turnos;
+       //this.turnos = turnos;
     }
    
     public int getId() {
@@ -66,13 +66,13 @@ public class ItemVenta  implements java.io.Serializable {
     public void setHora(Date hora) {
         this.hora = hora;
     }
-    public Set getTurnos() {
+   /* public Set getTurnos() {
         return this.turnos;
     }
     
     public void setTurnos(Set turnos) {
         this.turnos = turnos;
-    }
+    }*/
 
 
 

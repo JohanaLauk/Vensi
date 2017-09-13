@@ -6,11 +6,17 @@
     <class name="Modelo.Turno" table="turno" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
-        <many-to-one name="itemVenta" class="Modelo.ItemVenta" fetch="select">
+        
+        <list name="itemVenta" table="item_pedido" inverse="true" lazy="true" fetch="select">
+            <key column="venta_id" not-null="true"/>
+            <index column="ORDEN" />
+            <one-to-many class="Modelo.ItemVenta" />
+         </list>
+       <!-- <many-to-one name="itemVenta" class="Modelo.ItemVenta" fetch="select">
             <column name="id_venta" />
-        </many-to-one>
+        </many-to-one> -->
         <property name="nroTurno" type="int">
             <column name="nro_turno" not-null="true" />
         </property>
@@ -20,11 +26,11 @@
         <property name="fechaHoraFin" type="date">
             <column name="fecha_hora_fin" length="13" not-null="true" />
         </property>
-        <set name="historials" table="historial" inverse="true" lazy="true" fetch="select">
+        <!--<set name="historials" table="historial" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_turno" />
             </key>
             <one-to-many class="Modelo.Historial" />
-        </set>
+        </set> -->
     </class>
 </hibernate-mapping>

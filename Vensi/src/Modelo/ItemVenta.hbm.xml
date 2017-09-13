@@ -6,7 +6,7 @@
     <class name="Modelo.ItemVenta" table="item_venta" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="producto" type="serializable">
             <column name="producto" not-null="true" />
@@ -17,11 +17,12 @@
         <property name="hora" type="time">
             <column name="hora" length="15" not-null="true" />
         </property>
-        <set name="turnos" table="turno" inverse="true" lazy="true" fetch="select">
+                
+       <!-- <set name="turnos" table="turno" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_venta" />
             </key>
             <one-to-many class="Modelo.Turno" />
-        </set>
+        </set> -->
     </class>
 </hibernate-mapping>
