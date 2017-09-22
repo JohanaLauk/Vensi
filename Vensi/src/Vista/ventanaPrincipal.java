@@ -1,5 +1,6 @@
 package Vista;
 
+import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 
 public class ventanaPrincipal extends javax.swing.JFrame 
@@ -11,6 +12,11 @@ public class ventanaPrincipal extends javax.swing.JFrame
         this.setLocationRelativeTo(null);     //centra la ventana
         
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
+        
+         this.setMinimumSize(new Dimension(800, 500));  //Indica que hasta esa medida se puede minimizar
+         
+         this.setPreferredSize(new Dimension(800, 500));    //al minimizar la ventana no permite que sea mas chico que esa medida
+         
         
         //this.setSize(900,500);    //le da un tamaño a la ventana   
        
@@ -54,6 +60,9 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vensi");
+        setPreferredSize(new java.awt.Dimension(600, 400));
+
+        panelPrincipal.setPreferredSize(new java.awt.Dimension(600, 400));
 
         btnHistorial.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnHistorial.setText("HISTORIAL");
@@ -96,11 +105,11 @@ public class ventanaPrincipal extends javax.swing.JFrame
             .addGroup(panelPrincipalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                    .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                     .addComponent(btnPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAdministracion, javax.swing.GroupLayout.DEFAULT_SIZE, 194, Short.MAX_VALUE)
+                    .addComponent(btnAdministracion, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
                     .addComponent(btnHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -118,12 +127,14 @@ public class ventanaPrincipal extends javax.swing.JFrame
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelPrincipal, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         pack();
@@ -147,7 +158,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         {
             public void run() 
             {
-                //new ventanaPrincipal().setVisible(true);        
+                
             }
         });       
     }

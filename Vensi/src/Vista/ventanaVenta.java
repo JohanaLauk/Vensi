@@ -1,5 +1,6 @@
 package Vista;
 
+import java.awt.Dimension;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -16,6 +17,7 @@ public class ventanaVenta extends javax.swing.JFrame
         
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
         
+        this.setMinimumSize(new Dimension(1050, 440));  //Indica que hasta esa medida se puede minimizar
         
         modelo = new DefaultTableModel();
         modelo.addColumn("Código");
@@ -248,7 +250,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addComponent(btnQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(19, 19, 19))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
         );
 
         menuIniciarTurno.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
