@@ -29,5 +29,8 @@
         <property name="pesoEnvase" type="big_decimal">
             <column name="peso_envase" precision="5" scale="3" />
         </property>
+        <property name="estado"  type="boolean" >
+            <column name="estado" not-null="true" />
+        </property>
     </class>
 </hibernate-mapping>

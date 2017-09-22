@@ -15,7 +15,7 @@ public class Proveedor  implements java.io.Serializable {
      private String cuit;
      private String direccion;
      private String contacto;
-     private Boolean estado;
+     private boolean estado;
      //private Set pedidos = new HashSet(0);
 
     public Proveedor() {
@@ -73,11 +73,11 @@ public class Proveedor  implements java.io.Serializable {
     public void setContacto(String contacto) {
         this.contacto = contacto;
     }
-    public Boolean getEstado() {
+    public boolean isEstado() {
         return this.estado;
     }
     
-    public void setEstado(Boolean estado) {
+    public void setEstado(boolean estado) {
         this.estado = estado;
     }
     /*public Set getPedidos() {
