@@ -18,6 +18,7 @@ public class Producto  implements java.io.Serializable {
      private BigDecimal stock;
      private BigDecimal stockMinimo;
      private BigDecimal pesoEnvase;
+     private boolean estado;
 
     public Producto() {
     }
@@ -100,6 +101,13 @@ public class Producto  implements java.io.Serializable {
         this.pesoEnvase = pesoEnvase;
     }
 
+    public boolean isEstado() {
+        return this.estado;
+    }
+    
+    public void setEstado(boolean estado) {
+        this.estado = estado;
+    }
 
 
 
