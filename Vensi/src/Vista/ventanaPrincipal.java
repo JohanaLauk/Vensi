@@ -13,10 +13,9 @@ public class ventanaPrincipal extends javax.swing.JFrame
         
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
         
-         this.setMinimumSize(new Dimension(800, 500));  //Indica que hasta esa medida se puede minimizar
+        this.setMinimumSize(new Dimension(800, 500));  //al minimizar la ventana no permite que sea mas chico que esa medida
          
-         this.setPreferredSize(new Dimension(800, 500));    //al minimizar la ventana no permite que sea mas chico que esa medida
-         
+        this.setPreferredSize(new Dimension(800, 500));    //al minimizar la ventana aparece con esa medida      
         
         //this.setSize(900,500);    //le da un tamaño a la ventana   
        
@@ -91,27 +90,25 @@ public class ventanaPrincipal extends javax.swing.JFrame
         panelPrincipalLayout.setHorizontalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAdministracion, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(btnAdministracion, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, 416, Short.MAX_VALUE)
-                    .addComponent(btnPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE))
+                .addGap(0, 0, 0))
         );
         panelPrincipalLayout.setVerticalGroup(
             panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addContainerGap()
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
                     .addComponent(btnPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(18, 18, 18)
                 .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnAdministracion, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE)
-                    .addComponent(btnHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(btnHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                    .addComponent(btnAdministracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         jMenu1.setText("Archivo");
@@ -126,14 +123,16 @@ public class ventanaPrincipal extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 842, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 832, Short.MAX_VALUE)
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 405, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
                 .addContainerGap())
         );
 

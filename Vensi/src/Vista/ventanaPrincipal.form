@@ -59,17 +59,19 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="panelPrincipal" pref="842" max="32767" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="panelPrincipal" pref="832" max="32767" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Group type="102" alignment="0" attributes="0">
-              <Component id="panelPrincipal" pref="405" max="32767" attributes="0"/>
-              <EmptySpace min="-2" max="-2" attributes="0"/>
+          <Group type="102" alignment="1" attributes="0">
+              <EmptySpace max="-2" attributes="0"/>
+              <Component id="panelPrincipal" pref="394" max="32767" attributes="0"/>
+              <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
     </DimensionLayout>
@@ -86,33 +88,31 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnVentas" max="32767" attributes="0"/>
-                      <Component id="btnAdministracion" pref="410" max="32767" attributes="0"/>
+                      <Component id="btnAdministracion" pref="421" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnHistorial" pref="416" max="32767" attributes="0"/>
                       <Component id="btnPedidos" max="32767" attributes="0"/>
+                      <Component id="btnHistorial" pref="393" max="32767" attributes="0"/>
                   </Group>
+                  <EmptySpace min="-2" pref="0" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="btnVentas" pref="189" max="32767" attributes="0"/>
                       <Component id="btnPedidos" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="18" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="btnAdministracion" pref="188" max="32767" attributes="0"/>
-                      <Component id="btnHistorial" max="32767" attributes="0"/>
+                      <Component id="btnHistorial" pref="187" max="32767" attributes="0"/>
+                      <Component id="btnAdministracion" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace min="-2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
