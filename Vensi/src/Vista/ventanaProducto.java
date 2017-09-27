@@ -24,8 +24,10 @@ public class ventanaProducto extends javax.swing.JFrame
         modelo = new DefaultTableModel();
         modelo.addColumn("Código");
         modelo.addColumn("Descripción");
-        modelo.addColumn("Precio * unidad");
-        modelo.addColumn("Precio * kilo");
+        modelo.addColumn("Precio costo * unidad");
+        modelo.addColumn("Precio costo * kilo");
+        modelo.addColumn("Precio venta * unidad");
+        modelo.addColumn("Precio venta * kilo");
         modelo.addColumn("Stock");
         modelo.addColumn("Stock mínimo");
         modelo.addColumn("Peso del envase");
@@ -34,14 +36,16 @@ public class ventanaProducto extends javax.swing.JFrame
         
         TableColumnModel tcm = tablaProd.getColumnModel();
         
-        tcm.getColumn(0).setPreferredWidth(95);
+        tcm.getColumn(0).setPreferredWidth(100);
         tcm.getColumn(1).setPreferredWidth(300);
         tcm.getColumn(2).setPreferredWidth(50);
         tcm.getColumn(3).setPreferredWidth(50);
         tcm.getColumn(4).setPreferredWidth(50);
         tcm.getColumn(5).setPreferredWidth(50);
-        tcm.getColumn(6).setPreferredWidth(50);
-        tcm.getColumn(7).setPreferredWidth(100);        
+        tcm.getColumn(6).setPreferredWidth(30);
+        tcm.getColumn(7).setPreferredWidth(30);
+        tcm.getColumn(8).setPreferredWidth(45);
+        tcm.getColumn(9).setPreferredWidth(50);        
         
         tablaProd.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
     }
@@ -68,7 +72,7 @@ public class ventanaProducto extends javax.swing.JFrame
         btnVolverProd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Administración del");
+        setTitle("Administración del producto");
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel1.setText("Buscar:");
@@ -103,8 +107,7 @@ public class ventanaProducto extends javax.swing.JFrame
                         .addGap(10, 10, 10)
                         .addComponent(cbOrdenCampoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbOrdenProd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cbOrdenProd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txfdBuscarProd))
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -119,14 +122,15 @@ public class ventanaProducto extends javax.swing.JFrame
                     .addComponent(txfdBuscarProd)
                     .addComponent(btnBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbOrdenCampoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbFiltroCampoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel4))
-                    .addComponent(cbOrdenProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(cbOrdenCampoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbFiltroCampoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbOrdenProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         tablaProd.setModel(new javax.swing.table.DefaultTableModel(
@@ -147,6 +151,11 @@ public class ventanaProducto extends javax.swing.JFrame
         });
 
         btnEditarProd.setText("Editar");
+        btnEditarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarProdActionPerformed(evt);
+            }
+        });
 
         btnMenuPrincipalProd.setText("Menú principal");
         btnMenuPrincipalProd.addActionListener(new java.awt.event.ActionListener() {
@@ -168,7 +177,7 @@ public class ventanaProducto extends javax.swing.JFrame
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -232,6 +241,12 @@ public class ventanaProducto extends javax.swing.JFrame
         vNuevoProd.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNuevoProdActionPerformed
+
+    private void btnEditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdActionPerformed
+        ventanaEditarProd vEditarProd = new ventanaEditarProd();
+        vEditarProd.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnEditarProdActionPerformed
     
     public static void main(String args[]) 
     {

@@ -132,6 +132,11 @@ public class ventanaProveedor extends javax.swing.JFrame
         });
 
         btnEditarProv.setText("Editar");
+        btnEditarProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnEditarProvActionPerformed(evt);
+            }
+        });
 
         btnMenuPrincipalProv.setText("Menú principal");
         btnMenuPrincipalProv.addActionListener(new java.awt.event.ActionListener() {
@@ -226,6 +231,12 @@ public class ventanaProveedor extends javax.swing.JFrame
         vNuevoProv.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnNuevoProvActionPerformed
+
+    private void btnEditarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProvActionPerformed
+        ventanaEditarProv vEditarProv = new ventanaEditarProv();
+        vEditarProv.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnEditarProvActionPerformed
 
     public static void main(String args[]) 
     {

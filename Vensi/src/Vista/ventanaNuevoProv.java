@@ -11,8 +11,6 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);     //centra la ventana
         
-        this.setMinimumSize(new Dimension(500, 150));  //al minimizar la ventana no permite que sea mas chico que esa medida
-        
         this.setPreferredSize(new Dimension(500, 150));    //al minimizar la ventana aparece con esa medida
     }
     
@@ -75,7 +73,7 @@ public class ventanaNuevoProv extends javax.swing.JFrame
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(2, 2, 2)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(jLabel1))
@@ -83,7 +81,7 @@ public class ventanaNuevoProv extends javax.swing.JFrame
                         .addGap(6, 6, 6)
                         .addComponent(txfdRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(9, 9, 9)
                         .addComponent(jLabel2))
@@ -91,17 +89,17 @@ public class ventanaNuevoProv extends javax.swing.JFrame
                         .addGap(3, 3, 3)
                         .addComponent(txfdCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(12, 12, 12)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel3))
                     .addComponent(txfdDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txfdContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
-                        .addComponent(jLabel4)))
+                        .addComponent(jLabel4))
+                    .addComponent(txfdContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
@@ -158,7 +156,7 @@ public class ventanaNuevoProv extends javax.swing.JFrame
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void txfdContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfdContactoActionPerformed
-        // TODO add your handling code here:
+       
     }//GEN-LAST:event_txfdContactoActionPerformed
 
     public static void main(String args[]) 

@@ -56,6 +56,11 @@ public class ventanaAdministracion extends javax.swing.JFrame
 
         btnGestionClave.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnGestionClave.setText("Gestión de claves");
+        btnGestionClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionClaveActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -123,6 +128,12 @@ public class ventanaAdministracion extends javax.swing.JFrame
         vProveedor.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnGestionProvActionPerformed
+
+    private void btnGestionClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionClaveActionPerformed
+        ventanaGestionClave vGestionClave = new ventanaGestionClave();
+        vGestionClave.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnGestionClaveActionPerformed
 
     public static void main(String args[]) 
     {
