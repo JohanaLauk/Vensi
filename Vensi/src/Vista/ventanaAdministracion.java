@@ -32,6 +32,11 @@ public class ventanaAdministracion extends javax.swing.JFrame
 
         btnGestionProv.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnGestionProv.setText("Gestión del proveedor");
+        btnGestionProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnGestionProvActionPerformed(evt);
+            }
+        });
 
         btnGestionProd.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnGestionProd.setText("Gestión del producto");
@@ -112,6 +117,12 @@ public class ventanaAdministracion extends javax.swing.JFrame
         vProducto.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnGestionProdActionPerformed
+
+    private void btnGestionProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionProvActionPerformed
+        ventanaProveedor vProveedor = new ventanaProveedor();
+        vProveedor.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnGestionProvActionPerformed
 
     public static void main(String args[]) 
     {

@@ -17,9 +17,9 @@ public class ventanaVenta extends javax.swing.JFrame
         
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
         
-        this.setMinimumSize(new Dimension(1050, 440));  //Indica que hasta esa medida se puede minimizar
+        this.setMinimumSize(new Dimension(1200, 500));  //Indica que hasta esa medida se puede minimizar
         
-        this.setPreferredSize(new Dimension(1050, 440));    //al minimizar la ventana aparece con esa medida
+        this.setPreferredSize(new Dimension(1200, 500));    //al minimizar la ventana aparece con esa medida
         
         modelo = new DefaultTableModel();
         modelo.addColumn("Código");
@@ -89,16 +89,17 @@ public class ventanaVenta extends javax.swing.JFrame
         tablaProd = new javax.swing.JTable();
         btnQuitar = new javax.swing.JButton();
         btnAgregar = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        menuIniciarTurno = new javax.swing.JMenu();
-        menuDetalleCaja = new javax.swing.JMenu();
-        menuCerrarTurno = new javax.swing.JMenu();
-        menuMenuPrincipal = new javax.swing.JMenu();
+        jPanel3 = new javax.swing.JPanel();
+        btnIniciarTurno = new javax.swing.JButton();
+        btnDetalleCaja = new javax.swing.JButton();
+        btnCerrarTurno = new javax.swing.JButton();
+        btnMenuPrincipal = new javax.swing.JButton();
 
         jMenu1.setText("jMenu1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Ventas");
+        setPreferredSize(new java.awt.Dimension(1200, 500));
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         jLabel1.setText("Buscar:");
@@ -141,7 +142,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txfdCantPesoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -195,9 +196,9 @@ public class ventanaVenta extends javax.swing.JFrame
             .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(88, 88, 88)
-                .addComponent(LabMsjPC, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                .addComponent(LabMsjPC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(labPrecioTotalCompra, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                .addComponent(labPrecioTotalCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(97, 97, 97))
         );
         jPanel2Layout.setVerticalGroup(
@@ -243,7 +244,7 @@ public class ventanaVenta extends javax.swing.JFrame
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 534, Short.MAX_VALUE)
+                .addComponent(jScrollPane1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -258,31 +259,42 @@ public class ventanaVenta extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addComponent(btnQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(19, 19, 19))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 285, Short.MAX_VALUE)
         );
 
-        menuIniciarTurno.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        menuIniciarTurno.setText("Iniciar turno");
-        jMenuBar1.add(menuIniciarTurno);
+        btnIniciarTurno.setText("Iniciar turno");
 
-        menuDetalleCaja.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        menuDetalleCaja.setText("Detalle de caja");
-        jMenuBar1.add(menuDetalleCaja);
+        btnDetalleCaja.setText("Detalle de caja");
 
-        menuCerrarTurno.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        menuCerrarTurno.setText("Cerrar turno");
-        jMenuBar1.add(menuCerrarTurno);
+        btnCerrarTurno.setText("Cerrar turno");
 
-        menuMenuPrincipal.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        menuMenuPrincipal.setText("Menú principal");
-        menuMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
+        btnMenuPrincipal.setText("Menú principal");
+        btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                menuMenuPrincipalActionPerformed(evt);
+                btnMenuPrincipalActionPerformed(evt);
             }
         });
-        jMenuBar1.add(menuMenuPrincipal);
 
-        setJMenuBar(jMenuBar1);
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(btnIniciarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnDetalleCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnCerrarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnIniciarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnDetalleCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+            .addComponent(btnCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -298,11 +310,13 @@ public class ventanaVenta extends javax.swing.JFrame
                 .addGap(20, 20, 20)
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(480, 480, 480))
+            .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, layout.createSequentialGroup()
-                .addGap(6, 6, 6)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -314,15 +328,15 @@ public class ventanaVenta extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void menuMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuMenuPrincipalActionPerformed
-        ventanaPrincipal vPrincipal = new ventanaPrincipal();
-        vPrincipal.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_menuMenuPrincipalActionPerformed
-
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
+        ventanaPrincipal vPrincipal = new ventanaPrincipal();
+        vPrincipal.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_btnMenuPrincipalActionPerformed
     
     public static void main(String args[]) 
     {        
@@ -339,7 +353,11 @@ public class ventanaVenta extends javax.swing.JFrame
     private javax.swing.JLabel LabMsjPC;
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscar;
+    private javax.swing.JButton btnCerrarTurno;
     private javax.swing.JButton btnConfirmar;
+    private javax.swing.JButton btnDetalleCaja;
+    private javax.swing.JButton btnIniciarTurno;
+    private javax.swing.JButton btnMenuPrincipal;
     private javax.swing.JButton btnQuitar;
     private javax.swing.JComboBox<String> cbOrden;
     private javax.swing.JComboBox<String> jComboBox1;
@@ -348,18 +366,14 @@ public class ventanaVenta extends javax.swing.JFrame
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labFiltro;
     private javax.swing.JLabel labPrecioTotalCompra;
-    private javax.swing.JMenu menuCerrarTurno;
-    private javax.swing.JMenu menuDetalleCaja;
-    private javax.swing.JMenu menuIniciarTurno;
-    private javax.swing.JMenu menuMenuPrincipal;
     private javax.swing.JTable tablaCarrito;
     private javax.swing.JTable tablaProd;
     private javax.swing.JTextField txfdBuscar;
