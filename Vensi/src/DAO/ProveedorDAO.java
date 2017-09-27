@@ -145,7 +145,7 @@ public class ProveedorDAO {
         return lista;
     }
     
-   /*
+   
     public List<Proveedor> buscarPorCuitNombre(String cadena)
     {
         List<Proveedor> lista = null;
@@ -163,5 +163,5 @@ public class ProveedorDAO {
         }
         return lista;
     }
-    */
+    
 }
