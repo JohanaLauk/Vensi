@@ -19,7 +19,9 @@ public class ventanaVenta extends javax.swing.JFrame
         
         this.setMinimumSize(new Dimension(1200, 500));  //Indica que hasta esa medida se puede minimizar
         
-        this.setPreferredSize(new Dimension(1200, 500));    //al minimizar la ventana aparece con esa medida
+        this.setPreferredSize(new Dimension(1200, 500));    //al ejecutarse, la ventana aparece con esa medida
+        
+        TableColumnModel tcm = tablaProd.getColumnModel();
         
         modelo = new DefaultTableModel();
         modelo.addColumn("Código");
@@ -28,9 +30,7 @@ public class ventanaVenta extends javax.swing.JFrame
         modelo.addColumn("Precio * kilo");
         modelo.addColumn("Stock");
         this.tablaProd.setModel(modelo);
-        
-        TableColumnModel tcm = tablaProd.getColumnModel();
-        
+                
         tcm.getColumn(0).setPreferredWidth(95);
         tcm.getColumn(1).setPreferredWidth(255);
         tcm.getColumn(2).setPreferredWidth(50);
@@ -38,7 +38,9 @@ public class ventanaVenta extends javax.swing.JFrame
         tcm.getColumn(4).setPreferredWidth(50);
         
         tablaProd.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
-               
+           
+        
+        TableColumnModel tcm2 = tablaCarrito.getColumnModel();
         
         modelo2 = new DefaultTableModel();
         modelo2.addColumn("Descripción");
@@ -52,9 +54,7 @@ public class ventanaVenta extends javax.swing.JFrame
         }        
         
         this.tablaCarrito.setModel(modelo2);  
-        
-        TableColumnModel tcm2 = tablaCarrito.getColumnModel();
-        
+                
         tcm2.getColumn(0).setPreferredWidth(300);
         tcm2.getColumn(1).setPreferredWidth(90);
         tcm2.getColumn(2).setPreferredWidth(60);
@@ -152,15 +152,16 @@ public class ventanaVenta extends javax.swing.JFrame
                     .addComponent(jLabel1)
                     .addComponent(txfdBuscar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labFiltro)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(cbOrden, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(txfdCantPesoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel2))))
+                        .addComponent(jLabel2))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(labFiltro)
+                        .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3)
+                        .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         LabMsjPC.setText("Total de la compra:");

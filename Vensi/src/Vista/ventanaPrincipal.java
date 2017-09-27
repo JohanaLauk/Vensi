@@ -65,6 +65,11 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
         btnHistorial.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnHistorial.setText("HISTORIAL");
+        btnHistorial.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnHistorialActionPerformed(evt);
+            }
+        });
 
         btnPedidos.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnPedidos.setText("PEDIDOS");
@@ -150,6 +155,12 @@ public class ventanaPrincipal extends javax.swing.JFrame
         vAdministracion.setVisible(true);   //hace visible una ventana
         dispose();  //cierra la ventana que deja
     }//GEN-LAST:event_btnAdministracionActionPerformed
+
+    private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
+        ventanaHistorial vHistorial = new ventanaHistorial();
+        vHistorial.setVisible(true);    //hace visible una ventana
+        dispose();  //cierra la ventana que deja
+    }//GEN-LAST:event_btnHistorialActionPerformed
 
     public static void main(String args[]) 
     {               
