@@ -7,6 +7,7 @@ package DAO;
 
 import Conexion.Sesion;
 import Modelo.Producto;
+import java.math.BigDecimal;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.*;
@@ -44,9 +45,11 @@ public class ProductoDAO {
         prod = (Producto)session.get(Producto.class, id);
         prod.setCodigo(p.getCodigo());
         prod.setDescripcion(p.getDescripcion());
-        prod.setPrecioXKilo(p.getPrecioXKilo());
+        prod.setPrecioCostoXKilo(p.getPrecioCostoXKilo());
+        prod.setPrecioCostoXUnidad(p.getPrecioCostoXUnidad());
+        prod.setPrecioVentaXKilo(p.getPrecioVentaXKilo());
+        prod.setPrecioVentaXUnidad(p.getPrecioVentaXUnidad());
         prod.setPesoEnvase(p.getPesoEnvase());
-        prod.setPrecioXUnidad(p.getPrecioXUnidad());
         prod.setStockMinimo(p.getStockMinimo());
         prod.setEstado(p.isEstado());
             

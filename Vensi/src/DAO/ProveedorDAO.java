@@ -43,7 +43,7 @@ public class ProveedorDAO {
         Proveedor prov = null;
                     
         prov = (Proveedor)session.get(Proveedor.class, id);
-        prov.setNombreCompleto(p.getNombreCompleto());
+        prov.setRazonSocial(p.getRazonSocial());
         prov.setCuit(p.getCuit());
         prov.setDireccion(p.getDireccion());
         prov.setEstado(p.isEstado());

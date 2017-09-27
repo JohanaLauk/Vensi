@@ -8,8 +8,8 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="nombreCompleto" type="string">
-            <column name="nombre_completo" length="50" not-null="true" />
+        <property name="razonSocial" type="string">
+            <column name="razon_social" length="50" not-null="true" />
         </property>
         <property name="cuit" type="string">
             <column name="cuit" length="11" not-null="true" />

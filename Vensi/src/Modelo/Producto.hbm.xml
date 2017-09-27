@@ -14,11 +14,17 @@
         <property name="descripcion" type="string">
             <column name="descripcion" length="150" not-null="true" />
         </property>
-        <property name="precioXKilo" type="big_decimal">
-            <column name="precio_x_kilo" precision="8" not-null="true" />
+        <property name="precioCostoXKilo" type="big_decimal">
+            <column name="precio_costo_x_kilo" precision="8" not-null="false" />
         </property>
-        <property name="precioXUnidad" type="big_decimal">
-            <column name="precio_x_unidad" precision="8" not-null="true" />
+        <property name="precioCostoXUnidad" type="big_decimal">
+            <column name="precio_costo_x_unidad" precision="8" not-null="false" />
+        </property>
+        <property name="precioVentaXKilo" type="big_decimal">
+            <column name="precio_venta_x_kilo" precision="8" not-null="false" />
+        </property>
+        <property name="precioVentaXUnidad" type="big_decimal">
+            <column name="precio_venta_x_unidad" precision="8" not-null="false" />
         </property>
         <property name="stock" type="big_decimal">
             <column name="stock" precision="8" scale="3" not-null="true" />

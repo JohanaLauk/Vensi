@@ -13,8 +13,10 @@ public class Producto  implements java.io.Serializable {
      private int id;
      private String codigo;
      private String descripcion;
-     private BigDecimal precioXKilo;
-     private BigDecimal precioXUnidad;
+     private BigDecimal precioCostoXKilo;
+     private BigDecimal precioCostoXUnidad;
+     private BigDecimal precioVentaXKilo;
+     private BigDecimal precioVentaXUnidad;
      private BigDecimal stock;
      private BigDecimal stockMinimo;
      private BigDecimal pesoEnvase;
@@ -22,27 +24,7 @@ public class Producto  implements java.io.Serializable {
 
     public Producto() {
     }
-
-	
-    public Producto(int id, String codigo, String descripcion, BigDecimal precioXKilo, BigDecimal precioXUnidad, BigDecimal stock, BigDecimal stockMinimo) {
-        this.id = id;
-        this.codigo = codigo;
-        this.descripcion = descripcion;
-        this.precioXKilo = precioXKilo;
-        this.precioXUnidad = precioXUnidad;
-        this.stock = stock;
-        this.stockMinimo = stockMinimo;
-    }
-    public Producto(int id, String codigo, String descripcion, BigDecimal precioXKilo, BigDecimal precioXUnidad, BigDecimal stock, BigDecimal stockMinimo, BigDecimal pesoEnvase) {
-       this.id = id;
-       this.codigo = codigo;
-       this.descripcion = descripcion;
-       this.precioXKilo = precioXKilo;
-       this.precioXUnidad = precioXUnidad;
-       this.stock = stock;
-       this.stockMinimo = stockMinimo;
-       this.pesoEnvase = pesoEnvase;
-    }
+    
    
     public int getId() {
         return this.id;
@@ -65,19 +47,34 @@ public class Producto  implements java.io.Serializable {
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
-    public BigDecimal getPrecioXKilo() {
-        return this.precioXKilo;
+    public BigDecimal getPrecioCostoXKilo() {
+        return this.precioCostoXKilo;
     }
     
-    public void setPrecioXKilo(BigDecimal precioXKilo) {
-        this.precioXKilo = precioXKilo;
+    public void setPrecioCostoXKilo(BigDecimal precioCostoXKilo) {
+        this.precioCostoXKilo = precioCostoXKilo;
     }
-    public BigDecimal getPrecioXUnidad() {
-        return this.precioXUnidad;
+    public BigDecimal getPrecioCostoXUnidad() {
+        return this.precioCostoXUnidad;
     }
     
-    public void setPrecioXUnidad(BigDecimal precioXUnidad) {
-        this.precioXUnidad = precioXUnidad;
+    public void setPrecioCostoXUnidad(BigDecimal precioCostoXUnidad) {
+        this.precioCostoXUnidad = precioCostoXUnidad;
+    }
+    public void setPrecioVentaXKilo(BigDecimal precioVentaXKilo) {
+        this.precioVentaXKilo = precioVentaXKilo;
+    }
+
+    public void setPrecioVentaXUnidad(BigDecimal precioVentaXUnidad) {
+        this.precioVentaXUnidad = precioVentaXUnidad;
+    }
+
+    public BigDecimal getPrecioVentaXKilo() {
+        return precioVentaXKilo;
+    }
+
+    public BigDecimal getPrecioVentaXUnidad() {
+        return precioVentaXUnidad;
     }
     public BigDecimal getStock() {
         return this.stock;

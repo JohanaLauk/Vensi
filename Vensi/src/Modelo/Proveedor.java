@@ -11,7 +11,7 @@ public class Proveedor  implements java.io.Serializable {
 
 
      private int id;
-     private String nombreCompleto;
+     private String razonSocial;
      private String cuit;
      private String direccion;
      private String contacto;
@@ -22,15 +22,15 @@ public class Proveedor  implements java.io.Serializable {
     }
 
 	
-    public Proveedor(int id, String nombreCompleto, String cuit, String contacto) {
+    public Proveedor(int id, String razonSocial, String cuit, String contacto) {
         this.id = id;
-        this.nombreCompleto = nombreCompleto;
+        this.razonSocial = razonSocial;
         this.cuit = cuit;
         this.contacto = contacto;
     }
-    public Proveedor(int id, String nombreCompleto, String cuit, String direccion, String contacto, Boolean estado) {
+    public Proveedor(int id, String razonSocial, String cuit, String direccion, String contacto, Boolean estado) {
        this.id = id;
-       this.nombreCompleto = nombreCompleto;
+       this.razonSocial = razonSocial;
        this.cuit = cuit;
        this.direccion = direccion;
        this.contacto = contacto;
@@ -45,13 +45,15 @@ public class Proveedor  implements java.io.Serializable {
     public void setId(int id) {
         this.id = id;
     }
-    public String getNombreCompleto() {
-        return this.nombreCompleto;
+
+    public String getRazonSocial() {
+        return razonSocial;
+    }
+
+    public void setRazonSocial(String razonSocial) {
+        this.razonSocial = razonSocial;
     }
     
-    public void setNombreCompleto(String nombreCompleto) {
-        this.nombreCompleto = nombreCompleto;
-    }
     public String getCuit() {
         return this.cuit;
     }
