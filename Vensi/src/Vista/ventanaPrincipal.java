@@ -1,7 +1,6 @@
 package Vista;
 
 import java.awt.Dimension;
-import static java.awt.Frame.MAXIMIZED_BOTH;
 
 public class ventanaPrincipal extends javax.swing.JFrame 
 {
@@ -52,7 +51,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         setPreferredSize(new java.awt.Dimension(820, 480));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labImagenIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/2ca28bee-0640-4a83-bd69-acb6506e68bcimage2 editado.jpg"))); // NOI18N
+        labImagenIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondo azul oscuro editado.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);

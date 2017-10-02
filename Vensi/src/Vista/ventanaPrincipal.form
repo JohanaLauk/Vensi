@@ -70,7 +70,7 @@
         <Component class="javax.swing.JLabel" name="labImagenIzquierda">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagen/2ca28bee-0640-4a83-bd69-acb6506e68bcimage2 editado.jpg"/>
+              <Image iconType="3" name="/Imagen/fondo azul oscuro editado.jpg"/>
             </Property>
           </Properties>
         </Component>
