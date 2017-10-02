@@ -9,26 +9,14 @@ public class ventanaPrincipal extends javax.swing.JFrame
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);     //centra la ventana
+        this.setLocationRelativeTo(null);     //centra la ventana  
         
-        this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
+        //this.setPreferredSize(new Dimension(836, 520));    //al ejecutarse, la ventana aparece con esa medida
+        this.setPreferredSize(new Dimension(820, 480));
         
-        this.setMinimumSize(new Dimension(800, 500));  //al minimizar la ventana no permite que sea mas chico que esa medida
-         
-        this.setPreferredSize(new Dimension(800, 500));    //al minimizar la ventana aparece con esa medida      
+        //this.setUndecorated(true);  //sin bordes ni botones
         
-        //this.setSize(900,500);    //le da un tamaño a la ventana   
-       
-        //Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-        //this.setSize(screenSize);   //Hacer que la ventana tenga el mismo tamaño que la pantalla en la que va a aparecer
-        
-        //this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-        
-        //this.setVisible(Boolean.TRUE);    //hace visible la ventana
-        
-        //this.setResizable(Boolean.FALSE);     //no deja modificar el tamaño de la ventana
-                       
-        //this.pack();    //ajusta la ventana supuestamente
+        //this.setOpacity(0.95f);
         
     }
 
@@ -37,14 +25,15 @@ public class ventanaPrincipal extends javax.swing.JFrame
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
+        jPanel2 = new javax.swing.JPanel();
+        labImagenIzquierda = new javax.swing.JLabel();
         panelPrincipal = new javax.swing.JPanel();
         btnHistorial = new javax.swing.JButton();
         btnPedidos = new javax.swing.JButton();
         btnAdministracion = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenu2 = new javax.swing.JMenu();
+        btnSalir = new javax.swing.JButton();
+        labImagenDerecha = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -59,87 +48,92 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vensi");
-        setPreferredSize(new java.awt.Dimension(600, 400));
+        setUndecorated(true);
+        setPreferredSize(new java.awt.Dimension(820, 480));
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        labImagenIzquierda.setIcon(new javax.swing.ImageIcon("C:\\Users\\Johana\\Downloads\\Imagenes VENSI\\Fondo\\2ca28bee-0640-4a83-bd69-acb6506e68bcimage2 editado.jpg")); // NOI18N
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labImagenIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, 320, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labImagenIzquierda, javax.swing.GroupLayout.PREFERRED_SIZE, 480, Short.MAX_VALUE)
+        );
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 480));
 
         panelPrincipal.setPreferredSize(new java.awt.Dimension(600, 400));
+        panelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnHistorial.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
-        btnHistorial.setText("HISTORIAL");
+        btnHistorial.setIcon(new javax.swing.ImageIcon("C:\\Users\\Johana\\Downloads\\Imagenes VENSI\\Iconos\\icons8-Repository-96 editado.png")); // NOI18N
+        btnHistorial.setToolTipText("Historial");
+        btnHistorial.setBorder(null);
+        btnHistorial.setBorderPainted(false);
+        btnHistorial.setContentAreaFilled(false);
         btnHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistorialActionPerformed(evt);
             }
         });
+        panelPrincipal.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 100, 120));
 
         btnPedidos.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
-        btnPedidos.setText("PEDIDOS");
+        btnPedidos.setIcon(new javax.swing.ImageIcon("C:\\Users\\Johana\\Downloads\\Imagenes VENSI\\Iconos\\pedidos editado.png")); // NOI18N
+        btnPedidos.setToolTipText("Pedidos");
+        btnPedidos.setBorder(null);
+        btnPedidos.setBorderPainted(false);
+        btnPedidos.setContentAreaFilled(false);
+        panelPrincipal.add(btnPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 100, 130));
 
         btnAdministracion.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
-        btnAdministracion.setText("ADMINISTRACIÓN");
+        btnAdministracion.setIcon(new javax.swing.ImageIcon("C:\\Users\\Johana\\Downloads\\Imagenes VENSI\\Iconos\\icons8-Administrative Tools-96 editado.png")); // NOI18N
+        btnAdministracion.setToolTipText("Administración");
+        btnAdministracion.setBorder(null);
+        btnAdministracion.setBorderPainted(false);
+        btnAdministracion.setContentAreaFilled(false);
         btnAdministracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdministracionActionPerformed(evt);
             }
         });
+        panelPrincipal.add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 110, 110));
 
         btnVentas.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
-        btnVentas.setText("VENTAS");
+        btnVentas.setIcon(new javax.swing.ImageIcon("C:\\Users\\Johana\\Downloads\\Imagenes VENSI\\Iconos\\icons8-Payroll-96 editado 2.png")); // NOI18N
+        btnVentas.setToolTipText("Ventas");
+        btnVentas.setBorder(null);
+        btnVentas.setBorderPainted(false);
+        btnVentas.setContentAreaFilled(false);
         btnVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVentasActionPerformed(evt);
             }
         });
+        panelPrincipal.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 150, 130));
 
-        javax.swing.GroupLayout panelPrincipalLayout = new javax.swing.GroupLayout(panelPrincipal);
-        panelPrincipal.setLayout(panelPrincipalLayout);
-        panelPrincipalLayout.setHorizontalGroup(
-            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnAdministracion, javax.swing.GroupLayout.DEFAULT_SIZE, 421, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, 393, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
-        );
-        panelPrincipalLayout.setVerticalGroup(
-            panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelPrincipalLayout.createSequentialGroup()
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnVentas, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
-                    .addComponent(btnPedidos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(18, 18, 18)
-                .addGroup(panelPrincipalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
-                    .addComponent(btnAdministracion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-        );
+        btnSalir.setIcon(new javax.swing.ImageIcon("C:\\Users\\Johana\\Downloads\\Imagenes VENSI\\Iconos\\icons8-Cancel-32 blanco.png")); // NOI18N
+        btnSalir.setToolTipText("Salir");
+        btnSalir.setBorder(null);
+        btnSalir.setBorderPainted(false);
+        btnSalir.setContentAreaFilled(false);
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        panelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, 30));
 
-        jMenu1.setText("Archivo");
-        jMenuBar1.add(jMenu1);
+        labImagenDerecha.setIcon(new javax.swing.ImageIcon("C:\\Users\\Johana\\Downloads\\Imagenes VENSI\\Fondo\\espacio 1 editado - copia.jpg")); // NOI18N
+        labImagenDerecha.setText("jLabel1");
+        panelPrincipal.add(labImagenDerecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 480));
 
-        jMenu2.setText("Editar");
-        jMenuBar1.add(jMenu2);
-
-        setJMenuBar(jMenuBar1);
-
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 832, Short.MAX_VALUE)
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(panelPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, 394, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        getContentPane().add(panelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 500, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -162,6 +156,10 @@ public class ventanaPrincipal extends javax.swing.JFrame
         dispose();  //cierra la ventana que deja
     }//GEN-LAST:event_btnHistorialActionPerformed
 
+    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+        System.exit(0);
+    }//GEN-LAST:event_btnSalirActionPerformed
+
     public static void main(String args[]) 
     {               
         java.awt.EventQueue.invokeLater(new Runnable() 
@@ -177,11 +175,12 @@ public class ventanaPrincipal extends javax.swing.JFrame
     private javax.swing.JButton btnAdministracion;
     private javax.swing.JButton btnHistorial;
     private javax.swing.JButton btnPedidos;
+    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVentas;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JLabel labImagenDerecha;
+    private javax.swing.JLabel labImagenIzquierda;
     private javax.swing.JPanel panelPrincipal;
     // End of variables declaration//GEN-END:variables
 }
