@@ -51,7 +51,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         setPreferredSize(new java.awt.Dimension(820, 480));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        labImagenIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/fondo azul oscuro editado.jpg"))); // NOI18N
+        labImagenIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/imagen_fondo_izquierdo.jpg"))); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -70,7 +70,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         panelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnHistorial.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
-        btnHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/icons8-Repository-96 editado.png"))); // NOI18N
+        btnHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/icono_historial_color.png"))); // NOI18N
         btnHistorial.setToolTipText("Historial");
         btnHistorial.setBorder(null);
         btnHistorial.setBorderPainted(false);
@@ -83,7 +83,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         panelPrincipal.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 100, 120));
 
         btnPedidos.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
-        btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/pedidos editado.png"))); // NOI18N
+        btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/icono_pedidos_color.png"))); // NOI18N
         btnPedidos.setToolTipText("Pedidos");
         btnPedidos.setBorder(null);
         btnPedidos.setBorderPainted(false);
@@ -91,7 +91,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         panelPrincipal.add(btnPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 100, 130));
 
         btnAdministracion.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
-        btnAdministracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/icons8-Administrative Tools-96 editado.png"))); // NOI18N
+        btnAdministracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/icono_administracion_color.png"))); // NOI18N
         btnAdministracion.setToolTipText("Administración");
         btnAdministracion.setBorder(null);
         btnAdministracion.setBorderPainted(false);
@@ -104,7 +104,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         panelPrincipal.add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 110, 110));
 
         btnVentas.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
-        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/icons8-Payroll-96 editado 2.png"))); // NOI18N
+        btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/icono_venta_color.png"))); // NOI18N
         btnVentas.setToolTipText("Ventas");
         btnVentas.setBorder(null);
         btnVentas.setBorderPainted(false);
@@ -116,7 +116,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         });
         panelPrincipal.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 150, 130));
 
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/Icono salir blanco.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/Icono_salir_blanco.png"))); // NOI18N
         btnSalir.setToolTipText("Salir");
         btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
@@ -128,7 +128,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         });
         panelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, 30));
 
-        labImagenDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/espacio 1 editado - copia.jpg"))); // NOI18N
+        labImagenDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/imagen_fondo_derecho.jpg"))); // NOI18N
         labImagenDerecha.setText("jLabel1");
         panelPrincipal.add(labImagenDerecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 480));
 
