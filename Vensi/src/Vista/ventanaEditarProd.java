@@ -46,6 +46,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         btnCancelarEditarProd = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Editar producto");
         setPreferredSize(new java.awt.Dimension(600, 400));
 
         jLabel1.setText("Código:");

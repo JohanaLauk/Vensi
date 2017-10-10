@@ -1,7 +1,6 @@
 package Vista;
 
 import java.awt.Dimension;
-import static java.awt.Frame.MAXIMIZED_BOTH;
 
 public class ventanaNuevoProv extends javax.swing.JFrame 
 {

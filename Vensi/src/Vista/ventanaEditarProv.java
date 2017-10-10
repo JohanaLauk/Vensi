@@ -145,8 +145,8 @@ public class ventanaEditarProv extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarEditarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEditarProvActionPerformed
-        ventanaProducto vProducto = new ventanaProducto();
-        vProducto.setVisible(true);
+        ventanaProveedor vProveedor = new ventanaProveedor();
+        vProveedor.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarEditarProvActionPerformed
     

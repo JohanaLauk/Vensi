@@ -67,7 +67,6 @@
                           <Component id="cbOrdenCampoP" min="-2" pref="152" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cbOrdenProv" min="-2" pref="125" max="-2" attributes="0"/>
-                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
                       <Component id="txfdBuscarProv" alignment="0" max="32767" attributes="0"/>
                   </Group>
@@ -87,15 +86,17 @@
                       <Component id="btnBuscarProv" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cbOrdenCampoP" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cbFiltroCampoProv" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Group type="102" alignment="3" attributes="0">
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="6" pref="6" max="-2" attributes="0"/>
                           <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                       </Group>
-                      <Component id="cbOrdenProv" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbOrdenCampoP" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbFiltroCampoProv" alignment="3" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbOrdenProv" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                   </Group>
               </Group>
           </Group>
@@ -115,16 +116,10 @@
         <Component class="javax.swing.JComboBox" name="cbFiltroCampoProv">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="9">
+              <StringArray count="3">
                 <StringItem index="0" value="Ninguno"/>
-                <StringItem index="1" value="C&#xf3;digo"/>
-                <StringItem index="2" value="Descripci&#xf3;n"/>
-                <StringItem index="3" value="Precio * unidad"/>
-                <StringItem index="4" value="Precio * peso"/>
-                <StringItem index="5" value="Stock"/>
-                <StringItem index="6" value="Stock m&#xed;nimo"/>
-                <StringItem index="7" value="Peso del envaso"/>
-                <StringItem index="8" value="Estado"/>
+                <StringItem index="1" value="Habilitado"/>
+                <StringItem index="2" value="Deshabilitado"/>
               </StringArray>
             </Property>
           </Properties>
@@ -140,16 +135,12 @@
         <Component class="javax.swing.JComboBox" name="cbOrdenCampoP">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="9">
+              <StringArray count="5">
                 <StringItem index="0" value="Ninguno"/>
-                <StringItem index="1" value="C&#xf3;digo"/>
-                <StringItem index="2" value="Descripci&#xf3;n"/>
-                <StringItem index="3" value="Precio * unidad"/>
-                <StringItem index="4" value="Precio * peso"/>
-                <StringItem index="5" value="Stock"/>
-                <StringItem index="6" value="Stock m&#xed;nimo"/>
-                <StringItem index="7" value="Peso del envaso"/>
-                <StringItem index="8" value="Estado"/>
+                <StringItem index="1" value="Raz&#xf3;n social"/>
+                <StringItem index="2" value="Cuit"/>
+                <StringItem index="3" value="Direcci&#xf3;n"/>
+                <StringItem index="4" value="Contacto"/>
               </StringArray>
             </Property>
           </Properties>

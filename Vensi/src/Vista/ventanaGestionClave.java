@@ -168,7 +168,7 @@ public class ventanaGestionClave extends javax.swing.JFrame
                             .addComponent(cbTipoClave, 0, 140, Short.MAX_VALUE)))
                     .addGroup(panelClaveLayout.createSequentialGroup()
                         .addComponent(btnCancelarClave, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnConfirmarClave, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );

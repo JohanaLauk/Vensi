@@ -77,11 +77,11 @@ public class ventanaProducto extends javax.swing.JFrame
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel1.setText("Buscar:");
 
-        cbFiltroCampoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Código", "Descripción", "Precio * unidad", "Precio * peso", "Stock", "Stock mínimo", "Peso del envaso", "Estado" }));
+        cbFiltroCampoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Habilitado", "Deshabilitado" }));
 
         jLabel3.setText("Ordenar por:");
 
-        cbOrdenCampoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Código", "Descripción", "Precio * unidad", "Precio * peso", "Stock", "Stock mínimo", "Peso del envaso", "Estado" }));
+        cbOrdenCampoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Código", "Descripción", "Precio", "Stock", "Peso del envase" }));
 
         btnBuscarProd.setText("Buscar");
 

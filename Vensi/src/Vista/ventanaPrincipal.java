@@ -47,8 +47,9 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Vensi");
+        setName("ventanaPrincipal"); // NOI18N
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(820, 480));
+        setOpacity(0.95F);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         labImagenIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/imagen_fondo_izquierdo.jpg"))); // NOI18N
@@ -129,7 +130,6 @@ public class ventanaPrincipal extends javax.swing.JFrame
         panelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, 30));
 
         labImagenDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/imagen_fondo_derecho.jpg"))); // NOI18N
-        labImagenDerecha.setText("jLabel1");
         panelPrincipal.add(labImagenDerecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 480));
 
         getContentPane().add(panelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 500, 480));

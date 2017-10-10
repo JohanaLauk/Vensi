@@ -68,11 +68,11 @@ public class ventanaProveedor extends javax.swing.JFrame
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel1.setText("Buscar:");
 
-        cbFiltroCampoProv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Código", "Descripción", "Precio * unidad", "Precio * peso", "Stock", "Stock mínimo", "Peso del envaso", "Estado" }));
+        cbFiltroCampoProv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Habilitado", "Deshabilitado" }));
 
         jLabel3.setText("Ordenar por:");
 
-        cbOrdenCampoP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Código", "Descripción", "Precio * unidad", "Precio * peso", "Stock", "Stock mínimo", "Peso del envaso", "Estado" }));
+        cbOrdenCampoP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Razón social", "Cuit", "Dirección", "Contacto" }));
 
         btnBuscarProv.setText("Buscar");
 
@@ -98,8 +98,7 @@ public class ventanaProveedor extends javax.swing.JFrame
                         .addGap(10, 10, 10)
                         .addComponent(cbOrdenCampoP, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbOrdenProv, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(cbOrdenProv, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txfdBuscarProv))
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -114,14 +113,15 @@ public class ventanaProveedor extends javax.swing.JFrame
                     .addComponent(txfdBuscarProv)
                     .addComponent(btnBuscarProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(cbOrdenCampoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbFiltroCampoProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel4))
-                    .addComponent(cbOrdenProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel3)
+                        .addComponent(cbOrdenCampoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbFiltroCampoProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbOrdenProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         btnNuevoProv.setText("Nuevo");
@@ -251,17 +251,9 @@ public class ventanaProveedor extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarProv;
-    private javax.swing.JButton btnEditarProd;
-    private javax.swing.JButton btnEditarProd1;
     private javax.swing.JButton btnEditarProv;
-    private javax.swing.JButton btnMenuPrincipal;
-    private javax.swing.JButton btnMenuPrincipal1;
     private javax.swing.JButton btnMenuPrincipalProv;
-    private javax.swing.JButton btnNuevoProd;
-    private javax.swing.JButton btnNuevoProd1;
     private javax.swing.JButton btnNuevoProv;
-    private javax.swing.JButton btnVolver;
-    private javax.swing.JButton btnVolver1;
     private javax.swing.JButton btnVolverProv;
     private javax.swing.JComboBox<String> cbFiltroCampoProv;
     private javax.swing.JComboBox<String> cbOrdenCampoP;
@@ -270,14 +262,8 @@ public class ventanaProveedor extends javax.swing.JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tablaProd;
-    private javax.swing.JTable tablaProd1;
     private javax.swing.JTable tablaProv;
     private javax.swing.JTextField txfdBuscarProv;
     // End of variables declaration//GEN-END:variables
