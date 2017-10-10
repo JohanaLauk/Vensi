@@ -49,11 +49,8 @@ public class ventanaProveedor extends javax.swing.JFrame
         jLabel1 = new javax.swing.JLabel();
         txfdBuscarProv = new javax.swing.JTextField();
         cbFiltroCampoProv = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        cbOrdenCampoP = new javax.swing.JComboBox<>();
         btnBuscarProv = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        cbOrdenProv = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         btnNuevoProv = new javax.swing.JButton();
         btnEditarProv = new javax.swing.JButton();
@@ -70,15 +67,9 @@ public class ventanaProveedor extends javax.swing.JFrame
 
         cbFiltroCampoProv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Habilitado", "Deshabilitado" }));
 
-        jLabel3.setText("Ordenar por:");
-
-        cbOrdenCampoP.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Razón social", "Cuit", "Dirección", "Contacto" }));
-
         btnBuscarProv.setText("Buscar");
 
         jLabel4.setText("Filtrar por:");
-
-        cbOrdenProv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -93,12 +84,7 @@ public class ventanaProveedor extends javax.swing.JFrame
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(cbFiltroCampoProv, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel3)
-                        .addGap(10, 10, 10)
-                        .addComponent(cbOrdenCampoP, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbOrdenProv, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(txfdBuscarProv))
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscarProv, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -117,11 +103,7 @@ public class ventanaProveedor extends javax.swing.JFrame
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addComponent(jLabel4))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3)
-                        .addComponent(cbOrdenCampoP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbFiltroCampoProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbOrdenProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(cbFiltroCampoProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         btnNuevoProv.setText("Nuevo");
@@ -175,7 +157,7 @@ public class ventanaProveedor extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btnMenuPrincipalProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
-            .addComponent(jScrollPane3)
+            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 810, Short.MAX_VALUE)
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -256,10 +238,7 @@ public class ventanaProveedor extends javax.swing.JFrame
     private javax.swing.JButton btnNuevoProv;
     private javax.swing.JButton btnVolverProv;
     private javax.swing.JComboBox<String> cbFiltroCampoProv;
-    private javax.swing.JComboBox<String> cbOrdenCampoP;
-    private javax.swing.JComboBox<String> cbOrdenProv;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel4;

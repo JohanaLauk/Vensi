@@ -89,6 +89,11 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnPedidos.setBorder(null);
         btnPedidos.setBorderPainted(false);
         btnPedidos.setContentAreaFilled(false);
+        btnPedidos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnPedidosActionPerformed(evt);
+            }
+        });
         panelPrincipal.add(btnPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 110, 100, 130));
 
         btnAdministracion.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
@@ -158,6 +163,12 @@ public class ventanaPrincipal extends javax.swing.JFrame
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
         System.exit(0);
     }//GEN-LAST:event_btnSalirActionPerformed
+
+    private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
+        ventanaPedido vPedido = new ventanaPedido();
+        vPedido.setVisible(true);    //hace visible una ventana
+        dispose();  //cierra la ventana que deja
+    }//GEN-LAST:event_btnPedidosActionPerformed
 
     public static void main(String args[]) 
     {               
