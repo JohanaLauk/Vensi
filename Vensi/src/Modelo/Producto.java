@@ -1,16 +1,13 @@
 package Modelo;
 
-
-
 public class Producto  implements java.io.Serializable 
 {
      private int id;
      private String codigo;
      private String descripcion;
-     private double precioCostoXKilo;
-     private double precioCostoXUnidad;
-     private double precioVentaXKilo;
-     private double precioVentaXUnidad;
+     private double precioCosto;
+     private double precioVenta;
+     private double precioVentaXPeso;
      private double stock;
      private double stockMinimo;
      private double pesoEnvase;
@@ -46,40 +43,31 @@ public class Producto  implements java.io.Serializable
         this.descripcion = descripcion;
     }
     
-    public double getPrecioCostoXKilo() 
+    public double getPrecioCosto() 
     {
-        return this.precioCostoXKilo;
+        return this.precioCosto;
     }    
-    public void setPrecioCostoXKilo(double precioCostoXKilo) 
+    public void setPrecioCosto(double precioCosto) 
     {
-        this.precioCostoXKilo = precioCostoXKilo;
-    }
+        this.precioCosto = precioCosto;
+    }       
     
-    public double getPrecioCostoXUnidad() 
+    public double getPrecioVenta() 
     {
-        return this.precioCostoXUnidad;
-    }    
-    public void setPrecioCostoXUnidad(double precioCostoXUnidad) 
-    {
-        this.precioCostoXUnidad = precioCostoXUnidad;
+        return precioVenta;
     }
+    public void setPrecioVenta(double precioVenta)
+    {
+        this.precioVenta = precioVenta;
+    }   
     
-    public void setPrecioVentaXKilo(double precioVentaXKilo) 
+    public double getPrecioVentaXPeso() 
     {
-        this.precioVentaXKilo = precioVentaXKilo;
+        return precioVentaXPeso;
     }
-    public void setPrecioVentaXUnidad(double precioVentaXUnidad)
+    public void setPrecioVentaXPeso(double precioVentaXPeso) 
     {
-        this.precioVentaXUnidad = precioVentaXUnidad;
-    }
-
-    public double getPrecioVentaXKilo() 
-    {
-        return precioVentaXKilo;
-    }
-    public double getPrecioVentaXUnidad() 
-    {
-        return precioVentaXUnidad;
+        this.precioVentaXPeso = precioVentaXPeso;
     }
     
     public double getStock() 

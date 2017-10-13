@@ -37,10 +37,9 @@ public class ProductoDAO
         prod = (Producto)session.get(Producto.class, id);
         prod.setCodigo(p.getCodigo());
         prod.setDescripcion(p.getDescripcion());
-        prod.setPrecioCostoXKilo(p.getPrecioCostoXKilo());
-        prod.setPrecioCostoXUnidad(p.getPrecioCostoXUnidad());
-        prod.setPrecioVentaXKilo(p.getPrecioVentaXKilo());
-        prod.setPrecioVentaXUnidad(p.getPrecioVentaXUnidad());
+        prod.setPrecioCosto(p.getPrecioCosto());
+        prod.setPrecioVenta(p.getPrecioVenta());
+        prod.setPrecioVentaXPeso(p.getPrecioVentaXPeso());
         prod.setPesoEnvase(p.getPesoEnvase());
         prod.setStockMinimo(p.getStockMinimo());
         prod.setEstado(p.isEstado());

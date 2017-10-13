@@ -69,7 +69,7 @@
         <Component class="javax.swing.JLabel" name="labImagenIzquierda">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagen/imagen_fondo_izquierdo.jpg"/>
+              <Image iconType="3" name="/Recursos/imagen_fondo_izquierdo.jpg"/>
             </Property>
           </Properties>
         </Component>
@@ -97,7 +97,7 @@
               <Font name="Calibri" size="50" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagen/icono_historial_color.png"/>
+              <Image iconType="3" name="/Recursos/icono_historial_color.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Historial"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -121,7 +121,7 @@
               <Font name="Calibri" size="50" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagen/icono_pedidos_color.png"/>
+              <Image iconType="3" name="/Recursos/icono_pedidos_color.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Pedidos"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -145,7 +145,7 @@
               <Font name="Calibri" size="50" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagen/icono_administracion_color.png"/>
+              <Image iconType="3" name="/Recursos/icono_administracion_color.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Administraci&#xf3;n"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -169,7 +169,7 @@
               <Font name="Calibri" size="50" style="0"/>
             </Property>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagen/icono_venta_color.png"/>
+              <Image iconType="3" name="/Recursos/icono_venta_color.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Ventas"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -190,7 +190,7 @@
         <Component class="javax.swing.JButton" name="btnSalir">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagen/Icono_salir_blanco.png"/>
+              <Image iconType="3" name="/Recursos/Icono_salir_blanco.png"/>
             </Property>
             <Property name="toolTipText" type="java.lang.String" value="Salir"/>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -211,7 +211,7 @@
         <Component class="javax.swing.JLabel" name="labImagenDerecha">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Imagen/imagen_fondo_derecho.jpg"/>
+              <Image iconType="3" name="/Recursos/imagen_fondo_derecho.jpg"/>
             </Property>
           </Properties>
           <Constraints>
