@@ -1,19 +1,19 @@
 package Modelo;
 
-import java.math.BigDecimal;
+
 
 public class Producto  implements java.io.Serializable 
 {
      private int id;
      private String codigo;
      private String descripcion;
-     private BigDecimal precioCostoXKilo;
-     private BigDecimal precioCostoXUnidad;
-     private BigDecimal precioVentaXKilo;
-     private BigDecimal precioVentaXUnidad;
-     private BigDecimal stock;
-     private BigDecimal stockMinimo;
-     private BigDecimal pesoEnvase;
+     private double precioCostoXKilo;
+     private double precioCostoXUnidad;
+     private double precioVentaXKilo;
+     private double precioVentaXUnidad;
+     private double stock;
+     private double stockMinimo;
+     private double pesoEnvase;
      private boolean estado;
 
     public Producto() 
@@ -46,65 +46,65 @@ public class Producto  implements java.io.Serializable
         this.descripcion = descripcion;
     }
     
-    public BigDecimal getPrecioCostoXKilo() 
+    public double getPrecioCostoXKilo() 
     {
         return this.precioCostoXKilo;
     }    
-    public void setPrecioCostoXKilo(BigDecimal precioCostoXKilo) 
+    public void setPrecioCostoXKilo(double precioCostoXKilo) 
     {
         this.precioCostoXKilo = precioCostoXKilo;
     }
     
-    public BigDecimal getPrecioCostoXUnidad() 
+    public double getPrecioCostoXUnidad() 
     {
         return this.precioCostoXUnidad;
     }    
-    public void setPrecioCostoXUnidad(BigDecimal precioCostoXUnidad) 
+    public void setPrecioCostoXUnidad(double precioCostoXUnidad) 
     {
         this.precioCostoXUnidad = precioCostoXUnidad;
     }
     
-    public void setPrecioVentaXKilo(BigDecimal precioVentaXKilo) 
+    public void setPrecioVentaXKilo(double precioVentaXKilo) 
     {
         this.precioVentaXKilo = precioVentaXKilo;
     }
-    public void setPrecioVentaXUnidad(BigDecimal precioVentaXUnidad)
+    public void setPrecioVentaXUnidad(double precioVentaXUnidad)
     {
         this.precioVentaXUnidad = precioVentaXUnidad;
     }
 
-    public BigDecimal getPrecioVentaXKilo() 
+    public double getPrecioVentaXKilo() 
     {
         return precioVentaXKilo;
     }
-    public BigDecimal getPrecioVentaXUnidad() 
+    public double getPrecioVentaXUnidad() 
     {
         return precioVentaXUnidad;
     }
     
-    public BigDecimal getStock() 
+    public double getStock() 
     {
         return this.stock;
     }    
-    public void setStock(BigDecimal stock)
+    public void setStock(double stock)
     {
         this.stock = stock;
     }
     
-    public BigDecimal getStockMinimo() 
+    public double getStockMinimo() 
     {
         return this.stockMinimo;
     }    
-    public void setStockMinimo(BigDecimal stockMinimo) 
+    public void setStockMinimo(double stockMinimo) 
     {
         this.stockMinimo = stockMinimo;
     }
     
-    public BigDecimal getPesoEnvase() 
+    public double getPesoEnvase() 
     {
         return this.pesoEnvase;
     }    
-    public void setPesoEnvase(BigDecimal pesoEnvase) 
+    public void setPesoEnvase(double pesoEnvase) 
     {
         this.pesoEnvase = pesoEnvase;
     }

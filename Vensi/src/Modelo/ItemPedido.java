@@ -9,7 +9,7 @@ public class ItemPedido  implements java.io.Serializable
      private int id;
      private Producto producto;
      //private Serializable producto;
-     private BigDecimal cantidad;
+     private double cantidad;
      //private Set pedidos = new HashSet(0);
 
     public ItemPedido() 
@@ -33,11 +33,11 @@ public class ItemPedido  implements java.io.Serializable
         this.producto = producto;
     }
     
-    public BigDecimal getCantidad() 
+    public double getCantidad() 
     {
         return this.cantidad;
     }    
-    public void setCantidad(BigDecimal cantidad) 
+    public void setCantidad(double cantidad) 
     {
         this.cantidad = cantidad;
     }
