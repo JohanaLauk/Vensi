@@ -1,20 +1,12 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import Conexion.Sesion;
 import org.hibernate.*;
 import Modelo.Usuario;
 import javax.swing.JOptionPane;
-/**
- *
- * @author Bian
- */
-public class UsuarioDAO {
-    
+
+public class UsuarioDAO 
+{    
     Sesion nuevaSesion = new Sesion();
     Session session = nuevaSesion.iniciarSesion();
     

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import Conexion.Sesion;
@@ -11,19 +6,16 @@ import Modelo.Pedido;
 import java.util.*;
 import javax.swing.*;
 
-/**
- *
- * @author Bian
- */
-public class PedidoDAO {
-    
+public class PedidoDAO 
+{    
     Sesion nuevaSesion = new Sesion();
     Session session = nuevaSesion.iniciarSesion();
     
     public void alta(Pedido p)
     {
         Transaction tx = session.beginTransaction();
-        try{
+        try
+        {
             session.save(p);
             tx.commit();
         }
@@ -33,7 +25,7 @@ public class PedidoDAO {
 		tx.rollback();
                     e.printStackTrace();
 		throw e;
-        }
+        }        
         session.close();
         JOptionPane.showMessageDialog(null, "Pedido creado");
     }
@@ -50,7 +42,7 @@ public class PedidoDAO {
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error");
-        }
+        }        
         return lista;
     }
     
@@ -69,7 +61,7 @@ public class PedidoDAO {
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error");
-        }
+        }        
         return lista;
     }
     
@@ -87,7 +79,7 @@ public class PedidoDAO {
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error");
-        }
+        }        
         return lista;
     }
 }

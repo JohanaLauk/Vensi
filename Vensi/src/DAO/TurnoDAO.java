@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import Conexion.Sesion;
@@ -11,19 +6,16 @@ import Modelo.Turno;
 import java.util.*;
 import javax.swing.*;
 
-/**
- *
- * @author Bian
- */
-public class TurnoDAO {
-    
+public class TurnoDAO 
+{    
     Sesion nuevaSesion = new Sesion();
     Session session = nuevaSesion.iniciarSesion();
     
     public void alta(Turno t)
     {
         Transaction tx = session.beginTransaction();
-        try{
+        try
+        {
             session.save(t);
             tx.commit();
         }

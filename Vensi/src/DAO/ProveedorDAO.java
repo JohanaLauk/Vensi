@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import Modelo.Proveedor;
@@ -11,19 +6,16 @@ import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.*;
 
-/**
- *
- * @author Bian
- */
-public class ProveedorDAO {
-    
+public class ProveedorDAO 
+{    
     Sesion nuevaSesion = new Sesion();
     Session session = nuevaSesion.iniciarSesion();
     
     public void alta(Proveedor p)
     {
         Transaction tx = session.beginTransaction();
-        try{
+        try
+        {
             session.save(p);
             tx.commit();
         }
@@ -52,8 +44,8 @@ public class ProveedorDAO {
         Transaction tx = session.beginTransaction();
         try
         {
-          session.merge(prov);
-          tx.commit();
+            session.merge(prov);
+            tx.commit();
         }
         catch(Exception e)
         {
@@ -62,8 +54,8 @@ public class ProveedorDAO {
                     e.printStackTrace();
 		throw e;
         }
-            session.close();
-            JOptionPane.showMessageDialog(null, "Proveedor modificado");
+        session.close();
+        JOptionPane.showMessageDialog(null, "Proveedor modificado");
     }
     
    /* public void baja(int id)
@@ -76,8 +68,8 @@ public class ProveedorDAO {
         Transaction tx = session.beginTransaction();
         try
         {
-          session.update(prov);
-          tx.commit();
+            session.update(prov);
+            tx.commit();
         }
         catch(Exception e)
         {
@@ -86,15 +78,16 @@ public class ProveedorDAO {
                     e.printStackTrace();
 		throw e;
         }
-            session.close();
-            JOptionPane.showMessageDialog(null, "Proveedor dado de baja");
+        session.close();
+        JOptionPane.showMessageDialog(null, "Proveedor dado de baja");
     }
     */
     
     public Proveedor buscarPorId(int id)
     {
         Proveedor p = null;
-        try{ 
+        try
+        { 
             Transaction tx = session.beginTransaction();
             p = (Proveedor)session.get(Proveedor.class,id);
             /*if(p != null)
@@ -103,11 +96,11 @@ public class ProveedorDAO {
             }*/
             tx.commit();
             session.close();
-        } catch(HibernateException e)
+        } 
+        catch(HibernateException e)
         {
             JOptionPane.showMessageDialog(null, "Proveedor no encontrado");
-        }
-        
+        }        
         return p;
     }
     

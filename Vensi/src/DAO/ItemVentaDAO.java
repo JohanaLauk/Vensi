@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import Conexion.Sesion;
@@ -11,19 +6,16 @@ import Modelo.ItemVenta;
 import java.util.List;
 import javax.swing.JOptionPane;
 
-/**
- *
- * @author Bian
- */
-public class ItemVentaDAO {
-    
+public class ItemVentaDAO 
+{    
     Sesion nuevaSesion = new Sesion();
     Session session = nuevaSesion.iniciarSesion();
     
     public void alta(ItemVenta i)
     {
         Transaction tx = session.beginTransaction();
-        try{
+        try
+        {
             session.save(i);
             tx.commit();
         }
@@ -47,8 +39,8 @@ public class ItemVentaDAO {
         Transaction tx = session.beginTransaction();
         try
         {
-          session.merge(item);
-          tx.commit();
+            session.merge(item);
+            tx.commit();
         }
         catch(Exception e)
         {
@@ -56,15 +48,14 @@ public class ItemVentaDAO {
 		tx.rollback();
                     e.printStackTrace();
 		throw e;
-        }
-            session.close();
-            //JOptionPane.showMessageDialog(null, "Item de venta modificado");
+        }            
+        session.close();
+        //JOptionPane.showMessageDialog(null, "Item de venta modificado");
     }
     
     public void borrar(int id)
     {
-        ItemVenta item = null;
-                    
+        ItemVenta item = null;                    
         item = (ItemVenta)session.get(ItemVenta.class, id);
         
         Transaction tx = session.beginTransaction();
@@ -74,7 +65,8 @@ public class ItemVentaDAO {
             {
                 session.delete(item);
             }
-          tx.commit();
+            
+            tx.commit();
         }
         catch(Exception e)
         {
@@ -82,9 +74,9 @@ public class ItemVentaDAO {
 		tx.rollback();
                     e.printStackTrace();
 		throw e;
-        }
-            session.close();
-            //JOptionPane.showMessageDialog(null, "Item eliminado");
+        }            
+        session.close();
+        //JOptionPane.showMessageDialog(null, "Item eliminado");
     }
     
     public List<ItemVenta> listar()
@@ -99,7 +91,7 @@ public class ItemVentaDAO {
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error");
-        }
+        }        
         return lista;
     }
 }
