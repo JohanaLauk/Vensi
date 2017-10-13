@@ -9,20 +9,8 @@ public class Historial  implements java.io.Serializable
     private List<Turno> turno;
 
     public Historial() 
-    { }
-	
-    public Historial(int id) 
-    {
-        this.id = id;
-    }
+    { }	
     
-    public Historial(int id, List pedido, List turno) 
-    {
-       this.id = id;
-       this.pedido = pedido;
-       this.turno = turno;
-    }
-   
     public int getId() 
     {
         return this.id;

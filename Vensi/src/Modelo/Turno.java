@@ -14,24 +14,6 @@ public class Turno  implements java.io.Serializable
 
     public Turno() 
     { }
-	
-    public Turno(int id, int nroTurno, Date fechaHoraInicio, Date fechaHoraFin) 
-    {
-        this.id = id;
-        this.nroTurno = nroTurno;
-        this.fechaHoraInicio = fechaHoraInicio;
-        this.fechaHoraFin = fechaHoraFin;
-    }
-    
-    public Turno(int id, ItemVenta itemVenta, int nroTurno, Date fechaHoraInicio, Date fechaHoraFin, Set historials) 
-    {
-       this.id = id;
-       this.itemVenta = itemVenta;
-       this.nroTurno = nroTurno;
-       this.fechaHoraInicio = fechaHoraInicio;
-       this.fechaHoraFin = fechaHoraFin;
-       //this.historials = historials;
-    }
    
     public int getId() 
     {

@@ -14,24 +14,6 @@ public class Pedido  implements java.io.Serializable
 
     public Pedido() 
     { }
-	
-    public Pedido(int id, ItemPedido itemPedido, Proveedor proveedor, int nroPedido, Date fechaHora) {
-        this.id = id;
-        this.itemPedido = itemPedido;
-        this.proveedor = proveedor;
-        this.nroPedido = nroPedido;
-        this.fechaHora = fechaHora;
-    }
-    
-    public Pedido(int id, ItemPedido itemPedido, Proveedor proveedor, int nroPedido, Date fechaHora, Set historials) 
-    {
-       this.id = id;
-       this.itemPedido = itemPedido;
-       this.proveedor = proveedor;
-       this.nroPedido = nroPedido;
-       this.fechaHora = fechaHora;
-       //this.historials = historials;
-    }
    
     public int getId() 
     {

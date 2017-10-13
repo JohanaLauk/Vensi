@@ -8,13 +8,6 @@ public class Usuario  implements java.io.Serializable
 
     public Usuario() 
     { }
-
-    public Usuario(int id, String nombreUsuario, int pin) 
-    {
-       this.id = id;
-       this.nombreUsuario = nombreUsuario;
-       this.pin = pin;
-    }
    
     public int getId() 
     {

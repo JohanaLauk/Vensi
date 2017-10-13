@@ -15,24 +15,7 @@ public class ItemVenta  implements java.io.Serializable
      //private Set turnos = new HashSet(0);
 
     public ItemVenta() 
-    { }
-	
-    public ItemVenta(int id, Producto producto, BigDecimal cantidad, Date hora) 
-    {
-        this.id = id;
-        this.producto = producto;
-        this.cantidad = cantidad;
-        this.hora = hora;
-    }
-    
-    public ItemVenta(int id, Producto producto, BigDecimal cantidad, Date hora, Set turnos) 
-    {
-       this.id = id;
-       this.producto = producto;
-       this.cantidad = cantidad;
-       this.hora = hora;
-       //this.turnos = turnos;
-    }
+    { }	   
    
     public int getId() 
     {

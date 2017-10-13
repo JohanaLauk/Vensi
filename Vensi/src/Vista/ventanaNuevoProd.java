@@ -1,5 +1,7 @@
 package Vista;
 
+import DAO.ProductoDAO;
+import Modelo.Producto;
 import java.awt.Dimension;
 
 public class ventanaNuevoProd extends javax.swing.JFrame 
@@ -118,6 +120,11 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         );
 
         btnAceptarNuevoProd.setText("Aceptar");
+        btnAceptarNuevoProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarNuevoProdActionPerformed(evt);
+            }
+        });
 
         btnCancelarNuevoProd.setText("Cancelar");
         btnCancelarNuevoProd.addActionListener(new java.awt.event.ActionListener() {
@@ -176,6 +183,17 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         vProducto.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarNuevoProdActionPerformed
+
+    private void btnAceptarNuevoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarNuevoProdActionPerformed
+        Producto unProd = new Producto();
+        unProd.setCodigo(txfdCodigoProd.getText());
+        unProd.setDescripcion(txfdDescripcionProd.getText());
+        unProd.setStockMinimo(Double.parseDouble(txfdStockMinimoProd.getText()));
+        unProd.setPesoEnvase(Double.parseDouble(txfdPesoEnvaseProd.getText()));
+               
+        ProductoDAO pDAO = new ProductoDAO();
+        pDAO.alta(unProd);
+    }//GEN-LAST:event_btnAceptarNuevoProdActionPerformed
 
     public static void main(String args[]) 
     {        

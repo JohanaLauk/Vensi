@@ -18,7 +18,6 @@ public class Producto  implements java.io.Serializable
 
     public Producto() 
     { }
-    
    
     public int getId() 
     {

@@ -13,21 +13,7 @@ public class ItemPedido  implements java.io.Serializable
      //private Set pedidos = new HashSet(0);
 
     public ItemPedido() 
-    { }
-	
-    public ItemPedido(int id, Producto producto, BigDecimal cantidad) 
-    {
-        this.id = id;
-        this.producto = producto;
-        this.cantidad = cantidad;
-    }
-    
-    public ItemPedido(int id, Producto producto, BigDecimal cantidad, Set pedidos) {
-       this.id = id;
-       this.producto = producto;
-       this.cantidad = cantidad;
-       //this.pedidos = pedidos;
-    }
+    { }    
    
     public int getId() 
     {
