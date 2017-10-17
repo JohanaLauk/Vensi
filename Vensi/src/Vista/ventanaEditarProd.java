@@ -1,9 +1,13 @@
 package Vista;
 
+import DAO.ProductoDAO;
+import Modelo.Producto;
 import java.awt.Dimension;
 
 public class ventanaEditarProd extends javax.swing.JFrame 
 {
+    ProductoDAO pDAO = new ProductoDAO();
+    
     public ventanaEditarProd() 
     {
         initComponents();
@@ -154,6 +158,11 @@ public class ventanaEditarProd extends javax.swing.JFrame
         );
 
         btnAceptarEditarProd.setText("Aceptar");
+        btnAceptarEditarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarEditarProdActionPerformed(evt);
+            }
+        });
 
         btnCancelarEditarProd.setText("Cancelar");
         btnCancelarEditarProd.addActionListener(new java.awt.event.ActionListener() {
@@ -212,6 +221,14 @@ public class ventanaEditarProd extends javax.swing.JFrame
         vProducto.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarEditarProdActionPerformed
+
+    private void btnAceptarEditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarProdActionPerformed
+        Producto p = null;
+        int id = -1;        
+        
+        pDAO.modificar(p, id);
+        
+    }//GEN-LAST:event_btnAceptarEditarProdActionPerformed
 
     public static void main(String args[]) 
     {

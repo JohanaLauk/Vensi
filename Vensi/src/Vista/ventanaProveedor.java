@@ -211,13 +211,16 @@ public class ventanaProveedor extends javax.swing.JFrame
     private void btnNuevoProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProvActionPerformed
         ventanaNuevoProv vNuevoProv = new ventanaNuevoProv();
         vNuevoProv.setVisible(true);
-        dispose();
+        dispose(); 
     }//GEN-LAST:event_btnNuevoProvActionPerformed
 
     private void btnEditarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProvActionPerformed
         ventanaEditarProv vEditarProv = new ventanaEditarProv();
         vEditarProv.setVisible(true);
         dispose();
+        
+        int filaSeleccionada = tablaProv.getSelectedRow();
+        //mandarle el id del proveedor seleccionado para visualizar los datos ya existentes, luego modificar y confirmar
     }//GEN-LAST:event_btnEditarProvActionPerformed
 
     public static void main(String args[]) 

@@ -1,9 +1,13 @@
 package Vista;
 
+import DAO.ProveedorDAO;
+import Modelo.Proveedor;
 import java.awt.Dimension;
 
 public class ventanaNuevoProv extends javax.swing.JFrame 
 {
+    ProveedorDAO pDAO = new ProveedorDAO();
+    
     public ventanaNuevoProv() 
     {
         initComponents();
@@ -103,6 +107,11 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         );
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarActionPerformed(evt);
+            }
+        });
 
         btnCancelar.setText("Cancelar");
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
@@ -157,6 +166,17 @@ public class ventanaNuevoProv extends javax.swing.JFrame
     private void txfdContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfdContactoActionPerformed
        
     }//GEN-LAST:event_txfdContactoActionPerformed
+
+    private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
+        Proveedor unProv = new Proveedor();
+        
+        unProv.setRazonSocial(txfdRazonSocial.getText());
+        unProv.setCuit(txfdCuit.getText());
+        unProv.setDireccion(txfdDireccion.getText());
+        unProv.setContacto(txfdContacto.getText());
+        
+        pDAO.alta(unProv);        
+    }//GEN-LAST:event_btnAceptarActionPerformed
 
     public static void main(String args[]) 
     {

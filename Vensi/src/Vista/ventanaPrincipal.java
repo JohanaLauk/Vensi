@@ -1,6 +1,8 @@
 package Vista;
 
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 
 public class ventanaPrincipal extends javax.swing.JFrame 
 {
@@ -17,6 +19,8 @@ public class ventanaPrincipal extends javax.swing.JFrame
         
         //this.setOpacity(0.95f);
         
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/Vensi.png"));
+        this.setIconImage(ico);
     }
 
     @SuppressWarnings("unchecked")
