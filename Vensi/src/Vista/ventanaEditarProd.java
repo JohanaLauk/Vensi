@@ -32,16 +32,14 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txfdEditarCodigoProd = new javax.swing.JTextField();
         txfdEditarDescripcionProd = new javax.swing.JTextField();
-        txfdEditarPrecioCostoUnidadProd = new javax.swing.JTextField();
-        txfdEditarPrecioCostoKiloProd = new javax.swing.JTextField();
-        txfdEditarPrecioVentaUnidadProd = new javax.swing.JTextField();
-        txfdEditarPrecioVentaKiloProd = new javax.swing.JTextField();
+        txfdEditarPrecioCosto = new javax.swing.JTextField();
+        txfdEditarPrecioVenta = new javax.swing.JTextField();
+        txfdEditarPrecioVentaXPeso = new javax.swing.JTextField();
         txfdEditarStockMinimoProd = new javax.swing.JTextField();
         txfdEditarPesoEnvaseProd = new javax.swing.JTextField();
         cbEditarEstadoProd = new javax.swing.JComboBox<>();
@@ -57,13 +55,11 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         jLabel2.setText("Descripción:");
 
-        jLabel3.setText("Precio costo * unidad:");
+        jLabel3.setText("Precio costo:");
 
-        jLabel4.setText("Precio costo * kilo:");
+        jLabel4.setText("Precio venta:");
 
-        jLabel5.setText("Precio venta * unidad:");
-
-        jLabel6.setText("Precio venta * kilo:");
+        jLabel5.setText("Precio venta por kilo:");
 
         jLabel7.setText("Stock mínimo:");
 
@@ -84,33 +80,30 @@ public class ventanaEditarProd extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(18, 18, 18)
-                        .addComponent(txfdEditarPrecioCostoKiloProd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addGap(18, 18, 18)
-                        .addComponent(txfdEditarStockMinimoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel3)
-                        .addGap(18, 18, 18)
-                        .addComponent(txfdEditarPrecioCostoUnidadProd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel5)
-                        .addGap(18, 18, 18)
-                        .addComponent(txfdEditarPrecioVentaUnidadProd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel9)
-                        .addGap(18, 18, 18)
-                        .addComponent(txfdEditarPesoEnvaseProd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addGap(18, 18, 18)
-                        .addComponent(txfdEditarPrecioVentaKiloProd, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
-                        .addComponent(cbEditarEstadoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbEditarEstadoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel9)
+                            .addGap(18, 18, 18)
+                            .addComponent(txfdEditarPesoEnvaseProd))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel7)
+                            .addGap(18, 18, 18)
+                            .addComponent(txfdEditarStockMinimoProd))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel4)
+                            .addGap(18, 18, 18)
+                            .addComponent(txfdEditarPrecioVenta))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addGap(18, 18, 18)
+                            .addComponent(txfdEditarPrecioCosto))
+                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel5)
+                            .addGap(18, 18, 18)
+                            .addComponent(txfdEditarPrecioVentaXPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addGap(0, 125, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
@@ -130,19 +123,15 @@ public class ventanaEditarProd extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
-                    .addComponent(txfdEditarPrecioCostoUnidadProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfdEditarPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
-                    .addComponent(txfdEditarPrecioCostoKiloProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfdEditarPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
-                    .addComponent(txfdEditarPrecioVentaUnidadProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txfdEditarPrecioVentaKiloProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfdEditarPrecioVentaXPeso, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
@@ -154,7 +143,8 @@ public class ventanaEditarProd extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(cbEditarEstadoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cbEditarEstadoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         btnAceptarEditarProd.setText("Aceptar");
@@ -250,7 +240,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
@@ -259,10 +248,9 @@ public class ventanaEditarProd extends javax.swing.JFrame
     private javax.swing.JTextField txfdEditarCodigoProd;
     private javax.swing.JTextField txfdEditarDescripcionProd;
     private javax.swing.JTextField txfdEditarPesoEnvaseProd;
-    private javax.swing.JTextField txfdEditarPrecioCostoKiloProd;
-    private javax.swing.JTextField txfdEditarPrecioCostoUnidadProd;
-    private javax.swing.JTextField txfdEditarPrecioVentaKiloProd;
-    private javax.swing.JTextField txfdEditarPrecioVentaUnidadProd;
+    private javax.swing.JTextField txfdEditarPrecioCosto;
+    private javax.swing.JTextField txfdEditarPrecioVenta;
+    private javax.swing.JTextField txfdEditarPrecioVentaXPeso;
     private javax.swing.JTextField txfdEditarStockMinimoProd;
     // End of variables declaration//GEN-END:variables
 }

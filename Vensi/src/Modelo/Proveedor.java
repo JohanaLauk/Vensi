@@ -7,7 +7,7 @@ public class Proveedor  implements java.io.Serializable
      private String cuit;
      private String direccion;
      private String contacto;
-     private boolean estado;
+     private boolean estado = true;
      //private Set pedidos = new HashSet(0);
 
     public Proveedor() 

@@ -51,7 +51,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
         jLabel4.setText("Stock mínimo:");
 
-        jLabel6.setText("Peso del envase:");
+        jLabel6.setText("Peso del envase en gramos:");
 
         jLabel7.setText("Precio costo:");
 
@@ -76,21 +76,21 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel3)
                                 .addGap(18, 18, 18)
-                                .addComponent(txfdPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txfdPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel7)
                                 .addGap(18, 18, 18)
-                                .addComponent(txfdPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txfdPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(18, 18, 18)
-                                .addComponent(txfdStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(txfdStockMinimo))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel6)
                                 .addGap(18, 18, 18)
-                                .addComponent(txfdPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txfdPesoEnvase)))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -141,7 +141,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnCancelarNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+            .addComponent(btnCancelarNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(btnAceptarNuevoProd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
@@ -191,9 +191,9 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         unProd.setCodigo(txfdCodigo.getText());
         unProd.setDescripcion(txfdDescripcion.getText());
         unProd.setStockMinimo(Double.parseDouble(txfdStockMinimo.getText()));
-        unProd.setPesoEnvase(Double.parseDouble(txfdPesoEnvase.getText())); 
+        unProd.setPesoEnvase(Integer.parseInt(txfdPesoEnvase.getText())); 
         
-        if (txfdPrecioCosto.getText().equals(""))
+        if (txfdPrecioCosto.getText().equals("") || txfdPrecioCosto.getText() == null)
         {
             unProd.setPrecioCosto(0.00);            
         }
@@ -201,9 +201,10 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         {
             unProd.setPrecioCosto(Double.parseDouble(txfdPrecioCosto.getText()));
         }
-        if (txfdPrecioVenta.getText().equals("") || txfdPrecioCosto.getText() == null)
+        
+        if (txfdPrecioVenta.getText().equals("") || txfdPrecioVenta.getText() == null)
         {
-            unProd.setPrecioVentaXPeso(0.00);
+            unProd.setPrecioVenta(0.00);
         }    
         else
         {
@@ -211,6 +212,10 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         }
         
         pDAO.alta(unProd);
+        
+        ventanaProducto vProducto = new ventanaProducto();
+        vProducto.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnAceptarNuevoProdActionPerformed
 
     public static void main(String args[]) 

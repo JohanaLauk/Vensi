@@ -175,7 +175,11 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         unProv.setDireccion(txfdDireccion.getText());
         unProv.setContacto(txfdContacto.getText());
         
-        pDAO.alta(unProv);        
+        pDAO.alta(unProv);      
+        
+        ventanaProveedor vProveedor = new ventanaProveedor();
+        vProveedor.setVisible(true);
+        dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     public static void main(String args[]) 

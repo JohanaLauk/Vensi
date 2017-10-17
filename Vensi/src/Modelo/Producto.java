@@ -10,8 +10,8 @@ public class Producto  implements java.io.Serializable
      private double precioVentaXPeso;
      private double stock;
      private double stockMinimo;
-     private double pesoEnvase;
-     private boolean estado;
+     private int pesoEnvase;
+     private boolean estado = true;
 
     public Producto() 
     { }
@@ -88,11 +88,11 @@ public class Producto  implements java.io.Serializable
         this.stockMinimo = stockMinimo;
     }
     
-    public double getPesoEnvase() 
+    public int getPesoEnvase() 
     {
         return this.pesoEnvase;
     }    
-    public void setPesoEnvase(double pesoEnvase) 
+    public void setPesoEnvase(int pesoEnvase) 
     {
         this.pesoEnvase = pesoEnvase;
     }

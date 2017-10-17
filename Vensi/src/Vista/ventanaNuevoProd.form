@@ -73,26 +73,26 @@
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="txfdPrecioVenta" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="txfdPrecioVenta" min="-2" pref="137" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" attributes="0">
+                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
                               <Group type="102" attributes="0">
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="txfdPrecioCosto" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="txfdPrecioCosto" min="-2" pref="139" max="-2" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="txfdStockMinimo" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="txfdStockMinimo" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" alignment="0" attributes="0">
                                   <Component id="jLabel6" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="separate" max="-2" attributes="0"/>
-                                  <Component id="txfdPesoEnvase" min="-2" pref="50" max="-2" attributes="0"/>
+                                  <Component id="txfdPesoEnvase" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
@@ -170,7 +170,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Peso del envase:"/>
+            <Property name="text" type="java.lang.String" value="Peso del envase en gramos:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdPesoEnvase">
