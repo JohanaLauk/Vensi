@@ -28,5 +28,6 @@
             </key>
             <one-to-many class="Modelo.Pedido" />
         </set> -->
+        </property>
     </class>
 </hibernate-mapping>

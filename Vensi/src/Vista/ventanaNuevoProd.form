@@ -189,7 +189,7 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="btnCancelarNuevoProd" pref="85" max="32767" attributes="0"/>
+              <Component id="btnCancelarNuevoProd" max="32767" attributes="0"/>
               <Component id="btnAceptarNuevoProd" alignment="1" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>

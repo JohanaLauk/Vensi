@@ -193,15 +193,22 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         unProd.setStockMinimo(Double.parseDouble(txfdStockMinimo.getText()));
         unProd.setPesoEnvase(Double.parseDouble(txfdPesoEnvase.getText())); 
         
-        if (txfdPrecioCosto.getText().equals("") || txfdPrecioCosto.getText() == null)
+        if (txfdPrecioCosto.getText().equals(""))
         {
             unProd.setPrecioCosto(0.00);            
         }
-        
+        else
+        {
+            unProd.setPrecioCosto(Double.parseDouble(txfdPrecioCosto.getText()));
+        }
         if (txfdPrecioVenta.getText().equals("") || txfdPrecioCosto.getText() == null)
         {
             unProd.setPrecioVentaXPeso(0.00);
-        }       
+        }    
+        else
+        {
+            unProd.setPrecioVenta(Double.parseDouble(txfdPrecioVenta.getText()));
+        }
         
         pDAO.alta(unProd);
     }//GEN-LAST:event_btnAceptarNuevoProdActionPerformed

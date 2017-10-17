@@ -14,18 +14,14 @@
         <property name="descripcion" type="string">
             <column name="descripcion" length="150" not-null="true" />
         </property>
-        <!--<property name="precioCostoXKilo" type="big_decimal"> -->
-        <property name="precioCostoXKilo" type="double">
-            <column name="precio_costo_x_kilo" precision="8" not-null="false" />
+        <property name="precioCosto" type="double">
+            <column name="precio_costo" precision="8" not-null="false" />
         </property>
-        <property name="precioCostoXUnidad" type="double">
-            <column name="precio_costo_x_unidad" precision="8" not-null="false" />
+        <property name="precioVenta" type="double">
+            <column name="precio_venta" precision="8" not-null="false" />
         </property>
-        <property name="precioVentaXKilo" type="double">
-            <column name="precio_venta_x_kilo" precision="8" not-null="false" />
-        </property>
-        <property name="precioVentaXUnidad" type="double">
-            <column name="precio_venta_x_unidad" precision="8" not-null="false" />
+        <property name="precioVentaXPeso" type="double">
+            <column name="precio_venta_x_peso" precision="8" not-null="false" />
         </property>
         <property name="stock" type="double">
             <column name="stock" precision="8" scale="3" not-null="true" />
@@ -34,7 +30,7 @@
             <column name="stock_minimo" precision="8" scale="3" not-null="true" />
         </property>
         <property name="pesoEnvase" type="double">
-            <column name="peso_envase" precision="5" scale="3" />
+            <column name="peso_envase" precision="8" scale="3" />
         </property>
         <property name="estado"  type="boolean" >
             <column name="estado" not-null="true" />
