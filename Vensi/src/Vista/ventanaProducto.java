@@ -10,8 +10,8 @@ import Modelo.Producto;
 
 public class ventanaProducto extends javax.swing.JFrame 
 {    
-    DefaultTableModel modelo;
-    ProductoDAO prodDAO = new ProductoDAO();
+    DefaultTableModel modelo, modelo2;
+    ProductoDAO pDAO = new ProductoDAO();
     
     public ventanaProducto() 
     {
@@ -275,23 +275,23 @@ public class ventanaProducto extends javax.swing.JFrame
     }
     
     public void llenarTabla()
-    {
-        DefaultTableModel modelo = new DefaultTableModel();
-        List<Producto> lista = prodDAO.listar();
+    {        
+        modelo2 = new DefaultTableModel();
+        List<Producto> lista = pDAO.listar();
         String [] datos = new String[10];
  
-        modelo.addColumn("Código");
-        modelo.addColumn("Descripción");
-        modelo.addColumn("Precio costo");
-        modelo.addColumn("Precio venta");
-        modelo.addColumn("Precio venta por peso");
-        modelo.addColumn("Stock");
-        modelo.addColumn("Stock mínimo");
-        modelo.addColumn("Peso del envase");
-        modelo.addColumn("Estado");
-        modelo.addColumn("ID");
+        modelo2.addColumn("Código");
+        modelo2.addColumn("Descripción");
+        modelo2.addColumn("Precio costo");
+        modelo2.addColumn("Precio venta");
+        modelo2.addColumn("Precio venta por peso");
+        modelo2.addColumn("Stock");
+        modelo2.addColumn("Stock mínimo");
+        modelo2.addColumn("Peso del envase");
+        modelo2.addColumn("Estado");
+        modelo2.addColumn("ID");
         
-        for(Producto p : lista)
+        for (Producto p : lista)
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
@@ -301,6 +301,7 @@ public class ventanaProducto extends javax.swing.JFrame
             datos[5] = String.valueOf(p.getStock());
             datos[6] = String.valueOf(p.getStockMinimo());
             datos[7] = String.valueOf(p.getPesoEnvase());
+            
             if(p.isEstado())
             {
                 datos[8] = "Habilitado";
@@ -311,10 +312,10 @@ public class ventanaProducto extends javax.swing.JFrame
             }
             datos[9] = String.valueOf(p.getId());
            
-           modelo.addRow(datos);
+           modelo2.addRow(datos);
         }
         
-        tablaProd.setModel(modelo);
+        tablaProd.setModel(modelo2);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

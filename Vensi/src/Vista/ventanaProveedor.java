@@ -1,14 +1,18 @@
 package Vista;
 
+import DAO.ProveedorDAO;
+import Modelo.Proveedor;
 import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 public class ventanaProveedor extends javax.swing.JFrame 
 {    
-    DefaultTableModel modelo;
+    ProveedorDAO pDAO = new ProveedorDAO();
+    DefaultTableModel modelo, modelo2;
     
     public ventanaProveedor() 
     {
@@ -23,25 +27,32 @@ public class ventanaProveedor extends javax.swing.JFrame
         this.setPreferredSize(new Dimension(1000, 500));    //al minimizar la ventana aparece con esa medida
         
         modelo = new DefaultTableModel();
-        modelo.addColumn("Nombre y apellido");
+        modelo.addColumn("Razón social");
         modelo.addColumn("Cuit");
         modelo.addColumn("Direción");
         modelo.addColumn("Contacto");
         modelo.addColumn("Estado");
+        modelo.addColumn("ID");
         this.tablaProv.setModel(modelo);
         
-        TableColumnModel tcm = tablaProv.getColumnModel();
+        llenarTabla();
         
+        TableColumnModel tcm = tablaProv.getColumnModel();        
         tcm.getColumn(0).setPreferredWidth(250);
         tcm.getColumn(1).setPreferredWidth(120);
         tcm.getColumn(2).setPreferredWidth(250);
         tcm.getColumn(3).setPreferredWidth(250);
         tcm.getColumn(4).setPreferredWidth(50);
+        tcm.getColumn(5).setPreferredWidth(0);
+        tcm.getColumn(5).setMaxWidth(0);
+        tcm.getColumn(5).setMinWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+        
         tablaProv.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
     }
     
-    @SuppressWarnings("unchecked")
-    
+    @SuppressWarnings("unchecked")    
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
@@ -216,11 +227,12 @@ public class ventanaProveedor extends javax.swing.JFrame
 
     private void btnEditarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProvActionPerformed
         ventanaEditarProv vEditarProv = new ventanaEditarProv();
-        vEditarProv.setVisible(true);
-        dispose();
         
-        int filaSeleccionada = tablaProv.getSelectedRow();
-        //mandarle el id del proveedor seleccionado para visualizar los datos ya existentes, luego modificar y confirmar
+        int filaSelec = tablaProv.getSelectedRow();
+        ventanaEditarProd.id_recibido = Integer.parseInt((String) tablaProv.getValueAt(filaSelec, 5));
+        
+        vEditarProv.setVisible(true);
+        dispose();       
     }//GEN-LAST:event_btnEditarProvActionPerformed
 
     public static void main(String args[]) 
@@ -232,6 +244,42 @@ public class ventanaProveedor extends javax.swing.JFrame
                 new ventanaProveedor().setVisible(true);
             }
         });
+    }
+    
+    public void llenarTabla()
+    {        
+        modelo2 = new DefaultTableModel();
+        List<Proveedor> lista = pDAO.listar();
+        String [] datos = new String[6]; 
+        
+        modelo2.addColumn("Razón social");
+        modelo2.addColumn("Cuit");
+        modelo2.addColumn("Direción");
+        modelo2.addColumn("Contacto");
+        modelo2.addColumn("Estado");
+        modelo2.addColumn("ID");
+        
+        for (Proveedor p : lista)
+        {
+            datos[0] = p.getRazonSocial();
+            datos[1] = p.getCuit();
+            datos[2] = String.valueOf(p.getDireccion());
+            datos[3] = String.valueOf(p.getContacto());
+
+            if (p.isEstado())
+            {
+                datos[4] = "Habilitado";
+            }
+            else
+            {
+                datos[4] = "Deshabilitado";
+            }
+            datos[5] = String.valueOf(p.getId());
+           
+           modelo2.addRow(datos);
+        }
+        
+        tablaProv.setModel(modelo2);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

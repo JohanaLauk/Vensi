@@ -223,7 +223,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
     }//GEN-LAST:event_btnCancelarEditarActionPerformed
 
     private void btnAceptarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarActionPerformed
-        
         Producto p = null;
         p.setCodigo(txfdEditarCodigo.getText());
         p.setDescripcion(txfdEditarDescripcion.getText());
@@ -260,8 +259,8 @@ public class ventanaEditarProd extends javax.swing.JFrame
     {
         Producto elProd = pDAO.buscarPorId(id_recibido);                
                 
-        txfdEditarCodigo.setText(elProd.getCodigo());
-        txfdEditarDescripcion.setText(elProd.getDescripcion());
+        txfdEditarCodigo.setText(String.valueOf(elProd.getCodigo()));
+        txfdEditarDescripcion.setText(String.valueOf(elProd.getDescripcion()));
         txfdEditarPrecioCosto.setText(String.valueOf(elProd.getPrecioCosto()));
         txfdEditarPrecioVenta.setText(String.valueOf(elProd.getPrecioVenta()));
         txfdEditarPrecioVentaXPeso.setText(String.valueOf(elProd.getPrecioVentaXPeso()));

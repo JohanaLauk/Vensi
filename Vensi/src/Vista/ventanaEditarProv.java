@@ -97,6 +97,11 @@ public class ventanaEditarProv extends javax.swing.JFrame
         );
 
         btnAceptarEditarProv.setText("Aceptar");
+        btnAceptarEditarProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarEditarProvActionPerformed(evt);
+            }
+        });
 
         btnCancelarEditarProv.setText("Cancelar");
         btnCancelarEditarProv.addActionListener(new java.awt.event.ActionListener() {
@@ -149,6 +154,10 @@ public class ventanaEditarProv extends javax.swing.JFrame
         vProveedor.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarEditarProvActionPerformed
+
+    private void btnAceptarEditarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarProvActionPerformed
+        
+    }//GEN-LAST:event_btnAceptarEditarProvActionPerformed
     
     public static void main(String args[]) 
     {
