@@ -1,13 +1,17 @@
 package Vista;
 
+import DAO.ProductoDAO;
 import java.awt.Dimension;
+import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import Modelo.Producto;
 
 public class ventanaProducto extends javax.swing.JFrame 
 {    
     DefaultTableModel modelo;
+    ProductoDAO prodDAO = new ProductoDAO();
     
     public ventanaProducto() 
     {
@@ -24,19 +28,20 @@ public class ventanaProducto extends javax.swing.JFrame
         modelo = new DefaultTableModel();
         modelo.addColumn("Código");
         modelo.addColumn("Descripción");
-        modelo.addColumn("Precio costo * unidad");
-        modelo.addColumn("Precio costo * kilo");
-        modelo.addColumn("Precio venta * unidad");
-        modelo.addColumn("Precio venta * kilo");
+        modelo.addColumn("Precio costo");
+        modelo.addColumn("Precio venta");
+        modelo.addColumn("Precio venta por peso");
         modelo.addColumn("Stock");
         modelo.addColumn("Stock mínimo");
         modelo.addColumn("Peso del envase");
         modelo.addColumn("Estado");
+        modelo.addColumn("ID");
         this.tablaProd.setModel(modelo);
         
-        TableColumnModel tcm = tablaProd.getColumnModel();
+        llenarTabla();
         
-        tcm.getColumn(0).setPreferredWidth(100);
+        TableColumnModel tcm = tablaProd.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(90);
         tcm.getColumn(1).setPreferredWidth(300);
         tcm.getColumn(2).setPreferredWidth(50);
         tcm.getColumn(3).setPreferredWidth(50);
@@ -45,9 +50,15 @@ public class ventanaProducto extends javax.swing.JFrame
         tcm.getColumn(6).setPreferredWidth(30);
         tcm.getColumn(7).setPreferredWidth(30);
         tcm.getColumn(8).setPreferredWidth(45);
-        tcm.getColumn(9).setPreferredWidth(50);        
+        tcm.getColumn(9).setPreferredWidth(0);  
+        tcm.getColumn(9).setMaxWidth(0);
+        tcm.getColumn(9).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(9).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(9).setMinWidth(0);
         
         tablaProd.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
+        
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -262,6 +273,49 @@ public class ventanaProducto extends javax.swing.JFrame
                 new ventanaProducto().setVisible(true);
             }
         });
+    }
+    
+    public void llenarTabla()
+    {
+        DefaultTableModel modelo = new DefaultTableModel();
+        List<Producto> lista = prodDAO.listar();
+        String [] datos = new String[10];
+ 
+        modelo.addColumn("Código");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio costo");
+        modelo.addColumn("Precio venta");
+        modelo.addColumn("Precio venta por peso");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Stock mínimo");
+        modelo.addColumn("Peso del envase");
+        modelo.addColumn("Estado");
+        modelo.addColumn("ID");
+        
+        for(Producto p : lista)
+        {
+            datos[0] = p.getCodigo();
+            datos[1] = p.getDescripcion();
+            datos[2] = String.valueOf(p.getPrecioCosto());
+            datos[3] = String.valueOf(p.getPrecioVenta());
+            datos[4] = String.valueOf(p.getPrecioVentaXPeso());
+            datos[5] = String.valueOf(p.getStock());
+            datos[6] = String.valueOf(p.getStockMinimo());
+            datos[7] = String.valueOf(p.getPesoEnvase());
+            if(p.isEstado())
+            {
+                datos[8] = "Habilitado";
+            }
+            else
+            {
+                datos[8] = "Deshabilitado";
+            }
+            datos[9] = String.valueOf(p.getId());
+           
+           modelo.addRow(datos);
+        }
+        
+        tablaProd.setModel(modelo);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
