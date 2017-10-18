@@ -20,6 +20,9 @@ public class ventanaEditarProd extends javax.swing.JFrame
         
         this.setResizable(false);   //No permite modificar el tamaño de la ventana
         
+        labIdSelec.setVisible(false);   //label que contiene el id
+        encontrarProd();
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -35,17 +38,18 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel7 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txfdEditarCodigoProd = new javax.swing.JTextField();
-        txfdEditarDescripcionProd = new javax.swing.JTextField();
+        txfdEditarCodigo = new javax.swing.JTextField();
+        txfdEditarDescripcion = new javax.swing.JTextField();
         txfdEditarPrecioCosto = new javax.swing.JTextField();
         txfdEditarPrecioVenta = new javax.swing.JTextField();
         txfdEditarPrecioVentaXPeso = new javax.swing.JTextField();
-        txfdEditarStockMinimoProd = new javax.swing.JTextField();
-        txfdEditarPesoEnvaseProd = new javax.swing.JTextField();
-        cbEditarEstadoProd = new javax.swing.JComboBox<>();
+        txfdEditarStockMinimo = new javax.swing.JTextField();
+        txfdEditarPesoEnvase = new javax.swing.JTextField();
+        cbEditarEstado = new javax.swing.JComboBox<>();
+        labIdSelec = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
-        btnAceptarEditarProd = new javax.swing.JButton();
-        btnCancelarEditarProd = new javax.swing.JButton();
+        btnAceptarEditar = new javax.swing.JButton();
+        btnCancelarEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Editar producto");
@@ -67,7 +71,9 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         jLabel8.setText("Estado:");
 
-        cbEditarEstadoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "Deshabilitado" }));
+        cbEditarEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "Deshabilitado" }));
+
+        labIdSelec.setText("jLabel6");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -76,22 +82,24 @@ public class ventanaEditarProd extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
-                .addComponent(txfdEditarDescripcionProd))
+                .addComponent(txfdEditarDescripcion))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
-                        .addComponent(cbEditarEstadoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(41, 41, 41)
+                        .addComponent(labIdSelec))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel9)
                             .addGap(18, 18, 18)
-                            .addComponent(txfdEditarPesoEnvaseProd))
+                            .addComponent(txfdEditarPesoEnvase))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel7)
                             .addGap(18, 18, 18)
-                            .addComponent(txfdEditarStockMinimoProd))
+                            .addComponent(txfdEditarStockMinimo))
                         .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel4)
                             .addGap(18, 18, 18)
@@ -104,22 +112,22 @@ public class ventanaEditarProd extends javax.swing.JFrame
                             .addComponent(jLabel5)
                             .addGap(18, 18, 18)
                             .addComponent(txfdEditarPrecioVentaXPeso, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(0, 125, Short.MAX_VALUE))
+                .addGap(0, 50, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addGap(18, 18, 18)
-                .addComponent(txfdEditarCodigoProd))
+                .addComponent(txfdEditarCodigo))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(txfdEditarCodigoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfdEditarCodigo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(txfdEditarDescripcionProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfdEditarDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
@@ -135,29 +143,30 @@ public class ventanaEditarProd extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txfdEditarStockMinimoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfdEditarStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
-                    .addComponent(txfdEditarPesoEnvaseProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfdEditarPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel8)
-                    .addComponent(cbEditarEstadoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labIdSelec))
                 .addContainerGap())
         );
 
-        btnAceptarEditarProd.setText("Aceptar");
-        btnAceptarEditarProd.addActionListener(new java.awt.event.ActionListener() {
+        btnAceptarEditar.setText("Aceptar");
+        btnAceptarEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarEditarProdActionPerformed(evt);
+                btnAceptarEditarActionPerformed(evt);
             }
         });
 
-        btnCancelarEditarProd.setText("Cancelar");
-        btnCancelarEditarProd.addActionListener(new java.awt.event.ActionListener() {
+        btnCancelarEditar.setText("Cancelar");
+        btnCancelarEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarEditarProdActionPerformed(evt);
+                btnCancelarEditarActionPerformed(evt);
             }
         });
 
@@ -170,16 +179,16 @@ public class ventanaEditarProd extends javax.swing.JFrame
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
-                        .addComponent(btnAceptarEditarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnCancelarEditarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(btnAceptarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCancelarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(btnAceptarEditarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAceptarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(24, 24, 24)
-                .addComponent(btnCancelarEditarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnCancelarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -206,19 +215,19 @@ public class ventanaEditarProd extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnCancelarEditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEditarProdActionPerformed
+    private void btnCancelarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEditarActionPerformed
         ventanaProducto vProducto = new ventanaProducto();
         vProducto.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnCancelarEditarProdActionPerformed
+    }//GEN-LAST:event_btnCancelarEditarActionPerformed
 
-    private void btnAceptarEditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarProdActionPerformed
+    private void btnAceptarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarActionPerformed
         Producto p = null;
         int id = -1;        
         
         pDAO.modificar(p, id);
         
-    }//GEN-LAST:event_btnAceptarEditarProdActionPerformed
+    }//GEN-LAST:event_btnAceptarEditarActionPerformed
 
     public static void main(String args[]) 
     {
@@ -230,11 +239,27 @@ public class ventanaEditarProd extends javax.swing.JFrame
             }
         });
     }
+    
+    public void encontrarProd()
+    {
+        int id_recibido = Integer.parseInt(labIdSelec.getText());
+        ProductoDAO pDAO = new ProductoDAO();
+        Producto elProd = pDAO.buscarPorId(id_recibido);                
+                
+        txfdEditarCodigo.setText(elProd.getCodigo());
+        txfdEditarDescripcion.setText(elProd.getDescripcion());
+        txfdEditarPrecioCosto.setText(String.valueOf(elProd.getPrecioCosto()));
+        txfdEditarPrecioVenta.setText(String.valueOf(elProd.getPrecioVenta()));
+        txfdEditarPrecioVentaXPeso.setText(String.valueOf(elProd.getPrecioVentaXPeso()));
+        txfdEditarStockMinimo.setText(String.valueOf(elProd.getStockMinimo()));
+        txfdEditarPesoEnvase.setText(String.valueOf(elProd.getPesoEnvase()));
+        cbEditarEstado.setSelectedItem(elProd.isEstado());        
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnAceptarEditarProd;
-    private javax.swing.JButton btnCancelarEditarProd;
-    private javax.swing.JComboBox<String> cbEditarEstadoProd;
+    private javax.swing.JButton btnAceptarEditar;
+    private javax.swing.JButton btnCancelarEditar;
+    private javax.swing.JComboBox<String> cbEditarEstado;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -245,12 +270,13 @@ public class ventanaEditarProd extends javax.swing.JFrame
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField txfdEditarCodigoProd;
-    private javax.swing.JTextField txfdEditarDescripcionProd;
-    private javax.swing.JTextField txfdEditarPesoEnvaseProd;
+    public static javax.swing.JLabel labIdSelec;
+    private javax.swing.JTextField txfdEditarCodigo;
+    private javax.swing.JTextField txfdEditarDescripcion;
+    private javax.swing.JTextField txfdEditarPesoEnvase;
     private javax.swing.JTextField txfdEditarPrecioCosto;
     private javax.swing.JTextField txfdEditarPrecioVenta;
     private javax.swing.JTextField txfdEditarPrecioVentaXPeso;
-    private javax.swing.JTextField txfdEditarStockMinimoProd;
+    private javax.swing.JTextField txfdEditarStockMinimo;
     // End of variables declaration//GEN-END:variables
 }

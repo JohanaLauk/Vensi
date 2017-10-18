@@ -41,24 +41,22 @@ public class ventanaProducto extends javax.swing.JFrame
         llenarTabla();
         
         TableColumnModel tcm = tablaProd.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(90);
+        tcm.getColumn(0).setPreferredWidth(100);
         tcm.getColumn(1).setPreferredWidth(300);
         tcm.getColumn(2).setPreferredWidth(50);
         tcm.getColumn(3).setPreferredWidth(50);
         tcm.getColumn(4).setPreferredWidth(50);
         tcm.getColumn(5).setPreferredWidth(50);
-        tcm.getColumn(6).setPreferredWidth(30);
-        tcm.getColumn(7).setPreferredWidth(30);
-        tcm.getColumn(8).setPreferredWidth(45);
+        tcm.getColumn(6).setPreferredWidth(50);
+        tcm.getColumn(7).setPreferredWidth(50);
+        tcm.getColumn(8).setPreferredWidth(50);
         tcm.getColumn(9).setPreferredWidth(0);  
         tcm.getColumn(9).setMaxWidth(0);
         tcm.getColumn(9).setMinWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(9).setMaxWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(9).setMinWidth(0);
         
-        tablaProd.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
-        
-        
+        tablaProd.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?               
     }
     
     @SuppressWarnings("unchecked")
@@ -257,11 +255,12 @@ public class ventanaProducto extends javax.swing.JFrame
 
     private void btnEditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdActionPerformed
         ventanaEditarProd vEditarProd = new ventanaEditarProd();
+        
+        int filaSelec = tablaProd.getSelectedRow();
+        ventanaEditarProd.labIdSelec.setText(tablaProd.getValueAt(filaSelec, 9).toString());
+        
         vEditarProd.setVisible(true);
         dispose();
-        
-        int filaSeleccionada = tablaProd.getSelectedRow();
-        //mandarle el id del producto seleccionado para visualizar los datos ya existentes, luego modificar y confirmar
     }//GEN-LAST:event_btnEditarProdActionPerformed
     
     public static void main(String args[]) 
