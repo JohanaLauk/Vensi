@@ -7,6 +7,7 @@ import java.awt.Dimension;
 public class ventanaEditarProd extends javax.swing.JFrame 
 {
     ProductoDAO pDAO = new ProductoDAO();
+    public static int id_recibido;
     
     public ventanaEditarProd() 
     {
@@ -20,7 +21,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         
         this.setResizable(false);   //No permite modificar el tamaño de la ventana
         
-        labIdSelec.setVisible(false);   //label que contiene el id
+        //labIdSelec.setVisible(false);   //label que contiene el id
         encontrarProd();
         
     }
@@ -222,10 +223,25 @@ public class ventanaEditarProd extends javax.swing.JFrame
     }//GEN-LAST:event_btnCancelarEditarActionPerformed
 
     private void btnAceptarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarActionPerformed
-        Producto p = null;
-        int id = -1;        
         
-        pDAO.modificar(p, id);
+        Producto p = null;
+        p.setCodigo(txfdEditarCodigo.getText());
+        p.setDescripcion(txfdEditarDescripcion.getText());
+        p.setPesoEnvase(Integer.parseInt(txfdEditarPesoEnvase.getText()));
+        p.setPrecioCosto(Double.parseDouble(txfdEditarPrecioCosto.getText()));
+        p.setPrecioVenta(Double.parseDouble(txfdEditarPrecioVenta.getText()));
+        p.setPrecioVentaXPeso(Double.parseDouble(txfdEditarPrecioVentaXPeso.getText()));
+        p.setStockMinimo(Double.parseDouble(txfdEditarStockMinimo.getText()));
+        if(cbEditarEstado.getSelectedItem().equals("Habilitado"))
+        {
+            p.setEstado(true);
+        }
+        else
+        {
+            p.setEstado(false);
+        }
+        
+        pDAO.modificar(p, id_recibido);
         
     }//GEN-LAST:event_btnAceptarEditarActionPerformed
 
@@ -242,8 +258,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
     
     public void encontrarProd()
     {
-        int id_recibido = Integer.parseInt(labIdSelec.getText());
-        ProductoDAO pDAO = new ProductoDAO();
         Producto elProd = pDAO.buscarPorId(id_recibido);                
                 
         txfdEditarCodigo.setText(elProd.getCodigo());

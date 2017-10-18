@@ -257,7 +257,7 @@ public class ventanaProducto extends javax.swing.JFrame
         ventanaEditarProd vEditarProd = new ventanaEditarProd();
         
         int filaSelec = tablaProd.getSelectedRow();
-        ventanaEditarProd.labIdSelec.setText(tablaProd.getValueAt(filaSelec, 9).toString());
+        ventanaEditarProd.id_recibido = Integer.parseInt((String) tablaProd.getValueAt(filaSelec, 9));
         
         vEditarProd.setVisible(true);
         dispose();
