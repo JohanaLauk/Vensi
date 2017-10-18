@@ -1,17 +1,18 @@
 package DAO;
 
-import Conexion.Sesion;
+import Conexion.NewHibernateUtil;
 import org.hibernate.*;
 import Modelo.Usuario;
 import javax.swing.JOptionPane;
 
 public class UsuarioDAO 
 {    
-    Sesion nuevaSesion = new Sesion();
-    Session session = nuevaSesion.iniciarSesion();
-    
+        
     public void alta(Usuario u)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         Transaction tx = session.beginTransaction();
         try
         {
@@ -31,6 +32,9 @@ public class UsuarioDAO
     
     public void modificarContraseña(int id, int pin)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         Usuario u = null;
         
         Query query = session.createQuery("FROM Usuario u WHERE u.pin LIKE :pin");

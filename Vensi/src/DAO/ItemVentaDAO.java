@@ -1,6 +1,6 @@
 package DAO;
 
-import Conexion.Sesion;
+import Conexion.NewHibernateUtil;
 import org.hibernate.*;
 import Modelo.ItemVenta;
 import java.util.List;
@@ -8,11 +8,12 @@ import javax.swing.JOptionPane;
 
 public class ItemVentaDAO 
 {    
-    Sesion nuevaSesion = new Sesion();
-    Session session = nuevaSesion.iniciarSesion();
     
     public void alta(ItemVenta i)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         Transaction tx = session.beginTransaction();
         try
         {
@@ -32,6 +33,9 @@ public class ItemVentaDAO
     
     public void modificar(ItemVenta i, int id)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         ItemVenta item = null;
         item = (ItemVenta)session.get(ItemVenta.class, id);
         item.setCantidad(i.getCantidad());
@@ -55,6 +59,9 @@ public class ItemVentaDAO
     
     public void borrar(int id)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         ItemVenta item = null;                    
         item = (ItemVenta)session.get(ItemVenta.class, id);
         
@@ -81,6 +88,9 @@ public class ItemVentaDAO
     
     public List<ItemVenta> listar()
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         List<ItemVenta> lista = null;
         try
         {

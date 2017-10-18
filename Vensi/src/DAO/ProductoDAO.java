@@ -1,6 +1,7 @@
 package DAO;
 
-import Conexion.Sesion;
+import Conexion.NewHibernateUtil;
+
 import Modelo.Producto;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -8,11 +9,12 @@ import org.hibernate.*;
 
 public class ProductoDAO 
 {    
-    Sesion nuevaSesion = new Sesion();
-    Session session = nuevaSesion.iniciarSesion();
-    
+        
     public void alta(Producto p)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         Transaction tx = session.beginTransaction();
         try
         {
@@ -32,6 +34,9 @@ public class ProductoDAO
     
     public void modificar(Producto p, int id)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+               
         Producto prod = null;
                    
         prod = (Producto)session.get(Producto.class, id);
@@ -44,7 +49,7 @@ public class ProductoDAO
         prod.setStockMinimo(p.getStockMinimo());
         prod.setEstado(p.isEstado());
             
-        Transaction tx = session.beginTransaction();
+         Transaction tx = session.beginTransaction();
         try
         {
             session.merge(prod);
@@ -63,6 +68,8 @@ public class ProductoDAO
     
    /* public void baja(int id)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
         Producto prod = null;
        
             
@@ -89,6 +96,9 @@ public class ProductoDAO
     
     public Producto buscarPorId(int id)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         Producto p = null;
         try
         {                       
@@ -110,6 +120,9 @@ public class ProductoDAO
     
     public List<Producto> buscarPorCodigo(String codigo)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         List<Producto> lista = null;
         try
         {            
@@ -128,6 +141,9 @@ public class ProductoDAO
     
     public List<Producto> buscarPorCodigoNombre(String cadena)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         List<Producto> lista = null;
         try
         {            
@@ -146,6 +162,9 @@ public class ProductoDAO
     
     public List<Producto> listar()
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         List<Producto> lista = null;
         try
         {            
@@ -162,6 +181,9 @@ public class ProductoDAO
     
     public List<Producto> alarma()
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         List<Producto> lista = null;
         try
         {            

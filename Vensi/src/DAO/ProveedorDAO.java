@@ -1,18 +1,18 @@
 package DAO;
 
+import Conexion.NewHibernateUtil;
 import Modelo.Proveedor;
-import Conexion.Sesion;
 import java.util.List;
 import javax.swing.JOptionPane;
 import org.hibernate.*;
 
 public class ProveedorDAO 
 {    
-    Sesion nuevaSesion = new Sesion();
-    Session session = nuevaSesion.iniciarSesion();
-    
+        
     public void alta(Proveedor p)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
         Transaction tx = session.beginTransaction();
         try
         {
@@ -32,6 +32,9 @@ public class ProveedorDAO
     
     public void modificar(Proveedor p, int id)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         Proveedor prov = null;
                     
         prov = (Proveedor)session.get(Proveedor.class, id);
@@ -60,6 +63,8 @@ public class ProveedorDAO
     
    /* public void baja(int id)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
         Proveedor prov = null;
                     
         prov = (Proveedor)session.get(Proveedor.class, id);
@@ -85,6 +90,9 @@ public class ProveedorDAO
     
     public Proveedor buscarPorId(int id)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         Proveedor p = null;
         try
         { 
@@ -106,6 +114,9 @@ public class ProveedorDAO
     
     public List<Proveedor> listar()
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         List<Proveedor> lista = null;
         try
         {
@@ -122,6 +133,9 @@ public class ProveedorDAO
     
     public List<Proveedor> buscarPorCuit(String cuit)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         List<Proveedor> lista = null;
         try
         {
@@ -141,6 +155,9 @@ public class ProveedorDAO
    
     public List<Proveedor> buscarPorCuitNombre(String cadena)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         List<Proveedor> lista = null;
         try
         {

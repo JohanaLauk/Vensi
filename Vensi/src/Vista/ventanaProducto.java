@@ -254,11 +254,12 @@ public class ventanaProducto extends javax.swing.JFrame
     }//GEN-LAST:event_btnNuevoProdActionPerformed
 
     private void btnEditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdActionPerformed
-        ventanaEditarProd vEditarProd = new ventanaEditarProd();
+        //ventanaEditarProd vEditarProd = new ventanaEditarProd();
         
         int filaSelec = tablaProd.getSelectedRow();
-        ventanaEditarProd.id_recibido = Integer.parseInt((String) tablaProd.getValueAt(filaSelec, 9));
+        ventanaEditarProd.id_recibido = Integer.parseInt( tablaProd.getValueAt(filaSelec, 9).toString());
         
+        ventanaEditarProd vEditarProd = new ventanaEditarProd();
         vEditarProd.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnEditarProdActionPerformed

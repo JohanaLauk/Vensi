@@ -223,7 +223,8 @@ public class ventanaEditarProd extends javax.swing.JFrame
     }//GEN-LAST:event_btnCancelarEditarActionPerformed
 
     private void btnAceptarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarActionPerformed
-        Producto p = null;
+        
+        Producto p = new Producto();
         p.setCodigo(txfdEditarCodigo.getText());
         p.setDescripcion(txfdEditarDescripcion.getText());
         p.setPesoEnvase(Integer.parseInt(txfdEditarPesoEnvase.getText()));
@@ -241,6 +242,10 @@ public class ventanaEditarProd extends javax.swing.JFrame
         }
         
         pDAO.modificar(p, id_recibido);
+        
+        ventanaProducto vProducto = new ventanaProducto();
+        vProducto.setVisible(true);
+        dispose();
         
     }//GEN-LAST:event_btnAceptarEditarActionPerformed
 
@@ -266,7 +271,15 @@ public class ventanaEditarProd extends javax.swing.JFrame
         txfdEditarPrecioVentaXPeso.setText(String.valueOf(elProd.getPrecioVentaXPeso()));
         txfdEditarStockMinimo.setText(String.valueOf(elProd.getStockMinimo()));
         txfdEditarPesoEnvase.setText(String.valueOf(elProd.getPesoEnvase()));
-        cbEditarEstado.setSelectedItem(elProd.isEstado());        
+        if(elProd.isEstado())
+        {
+            cbEditarEstado.setSelectedItem("Habilitado");
+        }
+        else
+        {
+            cbEditarEstado.setSelectedItem("Deshabilitado");
+        }
+         
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

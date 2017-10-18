@@ -1,17 +1,18 @@
 package DAO;
 
+import Conexion.NewHibernateUtil;
 import org.hibernate.*;
 import Modelo.Historial;
-import Conexion.Sesion;
+
 import javax.swing.JOptionPane;
 
 public class HistorialDAO 
 {    
-    Sesion nuevaSesion = new Sesion();
-    Session session = nuevaSesion.iniciarSesion();
-    
+        
     public void alta(Historial h)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
         Transaction tx = session.beginTransaction();
         try
         {
@@ -31,6 +32,9 @@ public class HistorialDAO
     
     public Historial obtener()
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         Historial h = null;
         try
         {

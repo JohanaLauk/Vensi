@@ -1,6 +1,6 @@
 package DAO;
 
-import Conexion.Sesion;
+import Conexion.NewHibernateUtil;
 import org.hibernate.*;
 import Modelo.Pedido;
 import java.util.*;
@@ -8,11 +8,12 @@ import javax.swing.*;
 
 public class PedidoDAO 
 {    
-    Sesion nuevaSesion = new Sesion();
-    Session session = nuevaSesion.iniciarSesion();
-    
+        
     public void alta(Pedido p)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         Transaction tx = session.beginTransaction();
         try
         {
@@ -32,6 +33,9 @@ public class PedidoDAO
     
     public List<Pedido> listar()
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         List<Pedido> lista = null;
         try
         {
@@ -48,6 +52,9 @@ public class PedidoDAO
     
     public List<Pedido> buscarPorFecha(Date fechaInicio, Date fechaFin)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         List<Pedido> lista = null;
         try
         {
@@ -67,6 +74,9 @@ public class PedidoDAO
     
     public List<Pedido> buscarPorNumero(int nro)
     {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
         List<Pedido> lista = null;
         try
         {
