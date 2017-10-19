@@ -158,9 +158,30 @@ public class ProductoDAO
             JOptionPane.showMessageDialog(null, "Error. Producto por codigo o descripcion");
         }        
         return lista;
+    }   
+    
+    public List<Producto> listarPredeterminado()    //este anda bien
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
+        List<Producto> lista = null;
+        
+        try
+        {            
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("FROM Producto ORDER BY DESCRIPCION ASC");            
+            lista = query.list();
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error. Listar productos");
+        }        
+        return lista;
     }
     
-    public List<Producto> listar(String[] orden)
+    public List<Producto> listarPersonalizado(String[] orden)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -172,10 +193,18 @@ public class ProductoDAO
         try
         {            
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Producto ORDER BY :ordenS :tipoS");
-            query.setParameter("ordenS", ordenSelec);
-            query.setParameter("tipoS", tipoSelec);
-            lista = query.list();
+            if (tipoSelec.equals("DESC"))
+            {
+                Query query = session.createQuery("FROM Producto ORDER BY :ordenS DESC");
+                query.setParameter("ordenS", ordenSelec);
+                lista = query.list();
+            }
+            else
+            {
+                Query query = session.createQuery("FROM Producto ORDER BY :ordenS ASC");
+                query.setParameter("ordenS", ordenSelec);
+                lista = query.list();
+            }
             tx.commit();
         }
         catch(Exception e)
