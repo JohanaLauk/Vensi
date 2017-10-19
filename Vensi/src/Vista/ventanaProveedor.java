@@ -5,6 +5,7 @@ import Modelo.Proveedor;
 import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -79,6 +80,11 @@ public class ventanaProveedor extends javax.swing.JFrame
         cbFiltroCampoProv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
 
         btnBuscarProv.setText("Buscar");
+        btnBuscarProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarProvActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Filtrar por:");
 
@@ -228,13 +234,25 @@ public class ventanaProveedor extends javax.swing.JFrame
     private void btnEditarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProvActionPerformed
         int filaSelec = tablaProv.getSelectedRow();
         
-        //GUARDAMOS EL ID EN LA VARIABLE DE LA VENTANA_EDITAR_PROV, DEL PROVEEDOR SELECCIONADO EN LA TABLA
-        ventanaEditarProv.id_recibido = Integer.parseInt((String) tablaProv.getValueAt(filaSelec, 5));
-        
-        ventanaEditarProv vEditarProv = new ventanaEditarProv();
-        vEditarProv.setVisible(true);
-        dispose();       
+        if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
+        {
+            //GUARDAMOS EL ID EN LA VARIABLE DE LA VENTANA_EDITAR_PROV, DEL PROVEEDOR SELECCIONADO EN LA TABLA
+            ventanaEditarProv.id_recibido = Integer.parseInt((String) tablaProv.getValueAt(filaSelec, 5));
+
+            ventanaEditarProv vEditarProv = new ventanaEditarProv();
+            vEditarProv.setVisible(true);
+            dispose(); 
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un proveedor");
+        }             
     }//GEN-LAST:event_btnEditarProvActionPerformed
+
+    private void btnBuscarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProvActionPerformed
+        String cadena = txfdBuscarProv.getText();
+        pDAO.buscarPorCuitNombre(cadena);
+    }//GEN-LAST:event_btnBuscarProvActionPerformed
 
     public static void main(String args[]) 
     {

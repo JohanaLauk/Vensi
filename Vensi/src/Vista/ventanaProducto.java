@@ -7,11 +7,15 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import Modelo.Producto;
+import javax.swing.JOptionPane;
 
 public class ventanaProducto extends javax.swing.JFrame 
 {    
     DefaultTableModel modelo, modelo2;
     ProductoDAO pDAO = new ProductoDAO();
+    
+    String ordenSelec = null;
+    String tipoSelec = null;
     
     public ventanaProducto() 
     {
@@ -54,7 +58,9 @@ public class ventanaProducto extends javax.swing.JFrame
         tablaProd.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
         
-        tablaProd.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?               
+        tablaProd.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
+        
+        //pDAO.listar();
     }
     
     @SuppressWarnings("unchecked")
@@ -66,10 +72,10 @@ public class ventanaProducto extends javax.swing.JFrame
         txfdBuscarProd = new javax.swing.JTextField();
         cbFiltroCampoProd = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        cbOrdenCampoProd = new javax.swing.JComboBox<>();
+        cbCampoOrden = new javax.swing.JComboBox<>();
         btnBuscarProd = new javax.swing.JButton();
         jLabel4 = new javax.swing.JLabel();
-        cbOrdenProd = new javax.swing.JComboBox<>();
+        cbTipoOrden = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProd = new javax.swing.JTable();
@@ -88,13 +94,28 @@ public class ventanaProducto extends javax.swing.JFrame
 
         jLabel3.setText("Ordenar por:");
 
-        cbOrdenCampoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripción", "Código", "Precio", "Stock", "Peso del envase" }));
+        cbCampoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripción", "Código", "Precio costo", "Precio venta", "Stock", "Stock mínimo", "Peso del envase" }));
+        cbCampoOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCampoOrdenActionPerformed(evt);
+            }
+        });
 
         btnBuscarProd.setText("Buscar");
+        btnBuscarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarProdActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Filtrar por:");
 
-        cbOrdenProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        cbTipoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        cbTipoOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoOrdenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -112,9 +133,9 @@ public class ventanaProducto extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addGap(10, 10, 10)
-                        .addComponent(cbOrdenCampoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbCampoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbOrdenProd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txfdBuscarProd))
                 .addGap(18, 18, 18)
                 .addComponent(btnBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -135,9 +156,9 @@ public class ventanaProducto extends javax.swing.JFrame
                         .addComponent(jLabel4))
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
-                        .addComponent(cbOrdenCampoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbCampoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(cbFiltroCampoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbOrdenProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         tablaProd.setModel(new javax.swing.table.DefaultTableModel(
@@ -254,13 +275,67 @@ public class ventanaProducto extends javax.swing.JFrame
     private void btnEditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdActionPerformed
         int filaSelec = tablaProd.getSelectedRow();
         
-        //GUARDAMOS EL ID EN LA VARIABLE DE LA VENTANA_EDITAR_PROD, DEL PRODUCTO SELECCIONADO EN LA TABLA
-        ventanaEditarProd.id_recibido = Integer.parseInt( tablaProd.getValueAt(filaSelec, 8).toString());   
+        if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
+        {
+            //GUARDAMOS EL ID EN LA VARIABLE DE LA VENTANA_EDITAR_PROD, DEL PRODUCTO SELECCIONADO EN LA TABLA
+            ventanaEditarProd.id_recibido = Integer.parseInt( tablaProd.getValueAt(filaSelec, 8).toString());   
         
-        ventanaEditarProd vEditarProd = new ventanaEditarProd();
-        vEditarProd.setVisible(true);
-        dispose();
+            ventanaEditarProd vEditarProd = new ventanaEditarProd();
+            vEditarProd.setVisible(true);
+            dispose();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
+        }        
     }//GEN-LAST:event_btnEditarProdActionPerformed
+
+    private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
+        String cadena = txfdBuscarProd.getText();
+        pDAO.buscarPorCodigoNombre(cadena);
+    }//GEN-LAST:event_btnBuscarProdActionPerformed
+       
+    private void cbCampoOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCampoOrdenActionPerformed
+        if (cbCampoOrden.getSelectedItem().equals("Descripcion"))
+        {
+                ordenSelec = "descripcion";
+        }
+        if (cbCampoOrden.getSelectedItem().equals("Código"))
+        {
+                ordenSelec = "codigo";
+        }
+        if (cbCampoOrden.getSelectedItem().equals("Precio costo"))
+        {
+                ordenSelec = "precio_costo";
+        }
+        if (cbCampoOrden.getSelectedItem().equals("Precio venta"))
+        {
+                ordenSelec = "precio_venta";
+        }
+        if (cbCampoOrden.getSelectedItem().equals("Stock"))
+        {
+                ordenSelec = "stock";
+        }
+        if (cbCampoOrden.getSelectedItem().equals("Stock mínimo"))
+        {
+                ordenSelec = "stock_minimo";
+        }
+        if (cbCampoOrden.getSelectedItem().equals("Peso del envase"))
+        {
+                ordenSelec = "peso_envase";
+        }        
+    }//GEN-LAST:event_cbCampoOrdenActionPerformed
+       
+    private void cbTipoOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoOrdenActionPerformed
+        if (cbTipoOrden.getSelectedItem().equals("Ascendente"))
+        {
+                tipoSelec = "asc";
+        }
+        if (cbTipoOrden.getSelectedItem().equals("Descendente"))
+        {
+                tipoSelec = "desc";
+        }
+    }//GEN-LAST:event_cbTipoOrdenActionPerformed
     
     public static void main(String args[]) 
     {
@@ -276,7 +351,7 @@ public class ventanaProducto extends javax.swing.JFrame
     public void llenarTabla()
     {        
         modelo2 = new DefaultTableModel();
-        List<Producto> lista = pDAO.listar();
+        List<Producto> lista = pDAO.listar("descripcion");
         String [] datos = new String[10];
  
         modelo2.addColumn("Código");
@@ -314,6 +389,16 @@ public class ventanaProducto extends javax.swing.JFrame
         
         tablaProd.setModel(modelo2);
     }
+    
+    public String[] OrdenarTabla()
+    {
+        String[] ordenamiento = new String[2];
+                
+        ordenamiento[0] = ordenSelec;
+        ordenamiento[1] = tipoSelec;
+        
+        return ordenamiento;
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarProd;
@@ -321,9 +406,9 @@ public class ventanaProducto extends javax.swing.JFrame
     private javax.swing.JButton btnMenuPrincipalProd;
     private javax.swing.JButton btnNuevoProd;
     private javax.swing.JButton btnVolverProd;
+    private javax.swing.JComboBox<String> cbCampoOrden;
     private javax.swing.JComboBox<String> cbFiltroCampoProd;
-    private javax.swing.JComboBox<String> cbOrdenCampoProd;
-    private javax.swing.JComboBox<String> cbOrdenProd;
+    private javax.swing.JComboBox<String> cbTipoOrden;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

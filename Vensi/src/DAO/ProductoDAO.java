@@ -160,7 +160,7 @@ public class ProductoDAO
         return lista;
     }
     
-    public List<Producto> listar(String filtro)
+    public List<Producto> listar(String orden)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -169,8 +169,8 @@ public class ProductoDAO
         try
         {            
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Producto ORDER BY :filtro");
-            query.setParameter("filtro", filtro);
+            Query query = session.createQuery("FROM Producto ORDER BY :orden");
+            query.setParameter("orden", orden);
             lista = query.list();
             tx.commit();
         }
