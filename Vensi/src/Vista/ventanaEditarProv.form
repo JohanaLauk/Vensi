@@ -65,11 +65,16 @@
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="cbEditarEstadoProv" min="-2" pref="160" max="-2" attributes="0"/>
-                      <Component id="txfdEditarDireccionProv" alignment="0" pref="281" max="32767" attributes="0"/>
-                      <Component id="txfdEditarCuitProv" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txfdEditarRazonSocialProv" alignment="0" max="32767" attributes="0"/>
-                      <Component id="txfdEditarContactoProv" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Component id="cbEditarEstado" min="-2" pref="160" max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
+                          <Component id="labIdSelec" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="38" max="-2" attributes="0"/>
+                      </Group>
+                      <Component id="txfdEditarDireccion" alignment="0" pref="281" max="32767" attributes="0"/>
+                      <Component id="txfdEditarCuit" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txfdEditarRazonSocial" alignment="0" max="32767" attributes="0"/>
+                      <Component id="txfdEditarContacto" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
               </Group>
@@ -80,27 +85,28 @@
               <Group type="102" alignment="0" attributes="0">
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel1" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txfdEditarRazonSocialProv" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfdEditarRazonSocial" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txfdEditarCuitProv" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfdEditarCuit" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txfdEditarDireccionProv" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfdEditarDireccion" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txfdEditarContactoProv" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="txfdEditarContacto" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="jLabel5" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="cbEditarEstadoProv" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="cbEditarEstado" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="labIdSelec" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -132,7 +138,7 @@
             <Property name="text" type="java.lang.String" value="Estado:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cbEditarEstadoProv">
+        <Component class="javax.swing.JComboBox" name="cbEditarEstado">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
@@ -145,13 +151,18 @@
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JTextField" name="txfdEditarRazonSocialProv">
+        <Component class="javax.swing.JTextField" name="txfdEditarRazonSocial">
         </Component>
-        <Component class="javax.swing.JTextField" name="txfdEditarCuitProv">
+        <Component class="javax.swing.JTextField" name="txfdEditarCuit">
         </Component>
-        <Component class="javax.swing.JTextField" name="txfdEditarDireccionProv">
+        <Component class="javax.swing.JTextField" name="txfdEditarDireccion">
         </Component>
-        <Component class="javax.swing.JTextField" name="txfdEditarContactoProv">
+        <Component class="javax.swing.JTextField" name="txfdEditarContacto">
+        </Component>
+        <Component class="javax.swing.JLabel" name="labIdSelec">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="ID_Prov"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
@@ -160,35 +171,35 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="btnAceptarEditarProv" max="32767" attributes="0"/>
-              <Component id="btnCancelarEditarProv" alignment="1" pref="85" max="32767" attributes="0"/>
+              <Component id="btnAceptarEditar" max="32767" attributes="0"/>
+              <Component id="btnCancelarEditar" alignment="1" pref="85" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
-                  <Component id="btnAceptarEditarProv" max="32767" attributes="0"/>
+                  <Component id="btnAceptarEditar" max="32767" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnCancelarEditarProv" max="32767" attributes="0"/>
+                  <Component id="btnCancelarEditar" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnAceptarEditarProv">
+        <Component class="javax.swing.JButton" name="btnAceptarEditar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Aceptar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAceptarEditarProvActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAceptarEditarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnCancelarEditarProv">
+        <Component class="javax.swing.JButton" name="btnCancelarEditar">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarEditarProvActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarEditarActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

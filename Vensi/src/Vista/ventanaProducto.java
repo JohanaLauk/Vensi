@@ -30,7 +30,6 @@ public class ventanaProducto extends javax.swing.JFrame
         modelo.addColumn("Descripción");
         modelo.addColumn("Precio costo");
         modelo.addColumn("Precio venta");
-        modelo.addColumn("Precio venta por peso");
         modelo.addColumn("Stock");
         modelo.addColumn("Stock mínimo");
         modelo.addColumn("Peso del envase");
@@ -48,13 +47,12 @@ public class ventanaProducto extends javax.swing.JFrame
         tcm.getColumn(4).setPreferredWidth(50);
         tcm.getColumn(5).setPreferredWidth(50);
         tcm.getColumn(6).setPreferredWidth(50);
-        tcm.getColumn(7).setPreferredWidth(50);
-        tcm.getColumn(8).setPreferredWidth(50);
-        tcm.getColumn(9).setPreferredWidth(0);  
-        tcm.getColumn(9).setMaxWidth(0);
-        tcm.getColumn(9).setMinWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(9).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(9).setMinWidth(0);
+        tcm.getColumn(7).setPreferredWidth(50);        
+        tcm.getColumn(8).setPreferredWidth(0);  
+        tcm.getColumn(8).setMaxWidth(0);
+        tcm.getColumn(8).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
         
         tablaProd.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?               
     }
@@ -86,11 +84,11 @@ public class ventanaProducto extends javax.swing.JFrame
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel1.setText("Buscar:");
 
-        cbFiltroCampoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Habilitado", "Deshabilitado" }));
+        cbFiltroCampoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
 
         jLabel3.setText("Ordenar por:");
 
-        cbOrdenCampoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Código", "Descripción", "Precio", "Stock", "Peso del envase" }));
+        cbOrdenCampoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripción", "Código", "Precio", "Stock", "Peso del envase" }));
 
         btnBuscarProd.setText("Buscar");
 
@@ -254,10 +252,10 @@ public class ventanaProducto extends javax.swing.JFrame
     }//GEN-LAST:event_btnNuevoProdActionPerformed
 
     private void btnEditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdActionPerformed
-        //ventanaEditarProd vEditarProd = new ventanaEditarProd();
-        
         int filaSelec = tablaProd.getSelectedRow();
-        ventanaEditarProd.id_recibido = Integer.parseInt( tablaProd.getValueAt(filaSelec, 9).toString());
+        
+        //GUARDAMOS EL ID EN LA VARIABLE DE LA VENTANA_EDITAR_PROD, DEL PRODUCTO SELECCIONADO EN LA TABLA
+        ventanaEditarProd.id_recibido = Integer.parseInt( tablaProd.getValueAt(filaSelec, 8).toString());   
         
         ventanaEditarProd vEditarProd = new ventanaEditarProd();
         vEditarProd.setVisible(true);
@@ -285,7 +283,6 @@ public class ventanaProducto extends javax.swing.JFrame
         modelo2.addColumn("Descripción");
         modelo2.addColumn("Precio costo");
         modelo2.addColumn("Precio venta");
-        modelo2.addColumn("Precio venta por peso");
         modelo2.addColumn("Stock");
         modelo2.addColumn("Stock mínimo");
         modelo2.addColumn("Peso del envase");
@@ -298,20 +295,19 @@ public class ventanaProducto extends javax.swing.JFrame
             datos[1] = p.getDescripcion();
             datos[2] = String.valueOf(p.getPrecioCosto());
             datos[3] = String.valueOf(p.getPrecioVenta());
-            datos[4] = String.valueOf(p.getPrecioVentaXPeso());
-            datos[5] = String.valueOf(p.getStock());
-            datos[6] = String.valueOf(p.getStockMinimo());
-            datos[7] = String.valueOf(p.getPesoEnvase());
+            datos[4] = String.valueOf(p.getStock());
+            datos[5] = String.valueOf(p.getStockMinimo());
+            datos[6] = String.valueOf(p.getPesoEnvase());
             
             if(p.isEstado())
             {
-                datos[8] = "Habilitado";
+                datos[7] = "Habilitado";
             }
             else
             {
-                datos[8] = "Deshabilitado";
+                datos[7] = "Deshabilitado";
             }
-            datos[9] = String.valueOf(p.getId());
+            datos[8] = String.valueOf(p.getId());
            
            modelo2.addRow(datos);
         }

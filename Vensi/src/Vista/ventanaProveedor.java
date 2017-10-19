@@ -76,7 +76,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel1.setText("Buscar:");
 
-        cbFiltroCampoProv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Habilitado", "Deshabilitado" }));
+        cbFiltroCampoProv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
 
         btnBuscarProv.setText("Buscar");
 
@@ -226,11 +226,12 @@ public class ventanaProveedor extends javax.swing.JFrame
     }//GEN-LAST:event_btnNuevoProvActionPerformed
 
     private void btnEditarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProvActionPerformed
-        ventanaEditarProv vEditarProv = new ventanaEditarProv();
-        
         int filaSelec = tablaProv.getSelectedRow();
-        ventanaEditarProd.id_recibido = Integer.parseInt((String) tablaProv.getValueAt(filaSelec, 5));
         
+        //GUARDAMOS EL ID EN LA VARIABLE DE LA VENTANA_EDITAR_PROV, DEL PROVEEDOR SELECCIONADO EN LA TABLA
+        ventanaEditarProv.id_recibido = Integer.parseInt((String) tablaProv.getValueAt(filaSelec, 5));
+        
+        ventanaEditarProv vEditarProv = new ventanaEditarProv();
         vEditarProv.setVisible(true);
         dispose();       
     }//GEN-LAST:event_btnEditarProvActionPerformed
