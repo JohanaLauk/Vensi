@@ -160,17 +160,21 @@ public class ProductoDAO
         return lista;
     }
     
-    public List<Producto> listar(String orden)
+    public List<Producto> listar(String[] orden)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
         
         List<Producto> lista = null;
+        String ordenSelec = orden[0];
+        String tipoSelec = orden[1];
+        
         try
         {            
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Producto ORDER BY :orden");
-            query.setParameter("orden", orden);
+            Query query = session.createQuery("FROM Producto ORDER BY :ordenS :tipoS");
+            query.setParameter("ordenS", ordenSelec);
+            query.setParameter("tipoS", tipoSelec);
             lista = query.list();
             tx.commit();
         }

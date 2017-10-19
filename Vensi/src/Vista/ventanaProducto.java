@@ -351,7 +351,7 @@ public class ventanaProducto extends javax.swing.JFrame
     public void llenarTabla()
     {        
         modelo2 = new DefaultTableModel();
-        List<Producto> lista = pDAO.listar("descripcion");
+        List<Producto> lista = pDAO.listar(OrdenarTabla());
         String [] datos = new String[10];
  
         modelo2.addColumn("Código");
