@@ -160,7 +160,7 @@ public class ProductoDAO
         return lista;
     }
     
-    public List<Producto> listar()
+    public List<Producto> listar(String filtro)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -169,7 +169,9 @@ public class ProductoDAO
         try
         {            
             Transaction tx = session.beginTransaction();
-            lista = session.createQuery("FROM Producto").list();
+            Query query = session.createQuery("FROM Producto ORDER BY :filtro");
+            query.setParameter("filtro", filtro);
+            lista = query.list();
             tx.commit();
         }
         catch(Exception e)
@@ -178,6 +180,25 @@ public class ProductoDAO
         }        
         return lista;
     }
+    
+    /*public List<Producto> listar()
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
+        List<Producto> lista = null;
+        try
+        {            
+            Transaction tx = session.beginTransaction();
+            lista = session.createQuery("FROM Producto ORDER BY descripcion").list();
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error. Listar productos");
+        }        
+        return lista;
+    }*/
     
     public List<Producto> alarma()
     {

@@ -30,15 +30,15 @@ public class UsuarioDAO
         JOptionPane.showMessageDialog(null, "Usuario creado");
     }
     
-    public void modificarContraseña(int id, int pin)
+    public void modificarContraseña(String usuario, int pin)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
         
         Usuario u = null;
         
-        Query query = session.createQuery("FROM Usuario u WHERE u.pin LIKE :pin");
-        query.setParameter("pin", pin+"%");
+        Query query = session.createQuery("FROM Usuario u WHERE u.nombre_usuario LIKE :usuario");
+        query.setParameter("usuario", usuario+"%");
         u = (Usuario) query.uniqueResult();
             
         u.setPin(pin);
@@ -58,5 +58,25 @@ public class UsuarioDAO
         }
         session.close();
         JOptionPane.showMessageDialog(null,"Contraseña modificada");
+    }
+    
+    public boolean verificar(String usuario, int pin )
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
+        boolean verificado = false;
+        Usuario u;
+        
+        Query query = session.createQuery("FROM Usuario u WHERE u.nombre_usuario LIKE :usuario");
+        query.setParameter("usuario", usuario+"%");
+        u = (Usuario) query.uniqueResult();
+        
+        if(u.getPin() == pin)
+        {
+            verificado = true;
+        }
+        
+        return verificado;        
     }
 }
