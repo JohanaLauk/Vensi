@@ -3,11 +3,11 @@ package DAO;
 import Conexion.NewHibernateUtil;
 import org.hibernate.*;
 import Modelo.Usuario;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class UsuarioDAO 
-{    
-        
+{        
     public void alta(Usuario u)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
@@ -78,5 +78,26 @@ public class UsuarioDAO
         }
         
         return verificado;        
+    }
+    
+    public List<Usuario> listarDetalles()
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
+        List<Usuario> lista = null;
+        
+        try
+        {            
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("FROM Usuario ORDER BY id ASC");            
+            lista = query.list();
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error. Listar usuarios");
+        }        
+        return lista;
     }
 }

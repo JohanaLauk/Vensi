@@ -2,9 +2,9 @@ package Modelo;
 
 public class Usuario  implements java.io.Serializable 
 {
-     private int id;
-     private String nombreUsuario;
-     private int pin;
+    private int id;
+    private String nombreUsuario;
+    private int pin;
 
     public Usuario() 
     { }
