@@ -170,7 +170,7 @@ public class ProductoDAO
         try
         {            
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Producto ORDER BY DESCRIPCION ASC");            
+            Query query = session.createQuery("FROM Producto ORDER BY descripcion ASC");            
             lista = query.list();
             tx.commit();
         }

@@ -15,7 +15,7 @@ public class ventanaProducto extends javax.swing.JFrame
     ProductoDAO pDAO = new ProductoDAO();
     
     String ordenSelec = null;
-    String tipoSelec = null;
+    String tipoSelec = "ASC";
     
     public ventanaProducto() 
     {
