@@ -59,7 +59,7 @@ public class PedidoDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Pedido p WHERE p.fecha_hora_inicio BETWEEN :fechaInicio AND :fechaFin");
+            Query query = session.createQuery("FROM Pedido p WHERE p.fechaHora BETWEEN :fechaInicio AND :fechaFin");
             query.setParameter("fechaInicio", "%"+fechaInicio+"%");
             query.setParameter("fechaFin", "%"+fechaInicio+"%");
             lista = query.list();
@@ -81,7 +81,7 @@ public class PedidoDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Pedido p WHERE p.nro_pedido LIKE :nro");
+            Query query = session.createQuery("FROM Pedido p WHERE p.nroPedido LIKE :nro");
             query.setParameter("nro", "%"+nro+"%");
             lista = query.list();
             tx.commit();

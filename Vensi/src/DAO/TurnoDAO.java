@@ -59,7 +59,7 @@ public class TurnoDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Turno t WHERE t.fecha_hora_inicio BETWEEN :fechaInicio AND :fechaFin");
+            Query query = session.createQuery("FROM Turno t WHERE t.fechaHoraInicio BETWEEN :fechaInicio AND :fechaFin");
             query.setParameter("fechaInicio", "%"+fechaInicio+"%");
             query.setParameter("fechaFin", "%"+fechaInicio+"%");
             lista = query.list();
@@ -81,7 +81,7 @@ public class TurnoDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Turno t WHERE t.nro_turno LIKE :nro");
+            Query query = session.createQuery("FROM Turno t WHERE t.nroTurno LIKE :nro");
             query.setParameter("nro", "%"+nro+"%");
             lista = query.list();
             tx.commit();

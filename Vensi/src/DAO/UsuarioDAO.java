@@ -37,8 +37,8 @@ public class UsuarioDAO
         
         Usuario u = null;
         
-        Query query = session.createQuery("FROM Usuario u WHERE u.nombre_usuario LIKE :usuario");
-        query.setParameter("usuario", usuario+"%");
+        Query query = session.createQuery("FROM Usuario u WHERE u.nombreUsuario LIKE :usuario");
+        query.setParameter("usuario", usuario);
         u = (Usuario) query.uniqueResult();
             
         u.setPin(pin);
@@ -68,7 +68,7 @@ public class UsuarioDAO
         boolean verificado = false;
         Usuario u;
         
-        Query query = session.createQuery("FROM Usuario u WHERE u.nombre_usuario LIKE :usuario");
+        Query query = session.createQuery("FROM Usuario u WHERE u.nombreUsuario LIKE :usuario");
         query.setParameter("usuario", usuario+"%");
         u = (Usuario) query.uniqueResult();
         

@@ -277,14 +277,17 @@ public class ventanaGestionClave extends javax.swing.JFrame
         
         if (pin == pinVerif)
         {
-            Usuario unUsuario = new Usuario();
-            unUsuario.setNombreUsuario(nombreUsuario);
-            unUsuario.setPin(pin);
+            //Usuario unUsuario = new Usuario();
+            //unUsuario.setNombreUsuario(nombreUsuario);
+            //unUsuario.setPin(pin);
+            //uDAO.alta(unUsuario);
             
-            uDAO.alta(unUsuario);
+            uDAO.modificarContraseña(nombreUsuario, pin);
             
             password1.getText();
             password2.getText();
+            
+            mostrarDetalles();
         }
         else
         {

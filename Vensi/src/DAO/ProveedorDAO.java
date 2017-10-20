@@ -162,7 +162,7 @@ public class ProveedorDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.nombre_completo LIKE :cadena");
+            Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.razonSocial LIKE :cadena");
             query.setParameter("cadena", "%"+cadena+"%");
             lista = query.list();
             tx.commit();
