@@ -80,7 +80,7 @@ public class UsuarioDAO
         return verificado;        
     }
     
-    public List<Usuario> listarDetalles()
+    public List<Usuario> listar()
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -90,7 +90,7 @@ public class UsuarioDAO
         try
         {            
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Usuario ORDER BY id ASC");            
+            Query query = session.createQuery("FROM Usuario");            
             lista = query.list();
             tx.commit();
         }

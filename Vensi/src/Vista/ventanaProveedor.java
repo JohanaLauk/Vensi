@@ -14,6 +14,7 @@ public class ventanaProveedor extends javax.swing.JFrame
 {    
     ProveedorDAO pDAO = new ProveedorDAO();
     DefaultTableModel modelo, modelo2;
+    TableColumnModel tcm, tcm2;
     
     public ventanaProveedor() 
     {
@@ -26,31 +27,25 @@ public class ventanaProveedor extends javax.swing.JFrame
         this.setMinimumSize(new Dimension(1000, 500));  //al minimizar la ventana no permite que sea mas chico que esa medida
         
         this.setPreferredSize(new Dimension(1000, 500));    //al minimizar la ventana aparece con esa medida
-        
-        modelo = new DefaultTableModel();
-        modelo.addColumn("Razón social");
-        modelo.addColumn("Cuit");
-        modelo.addColumn("Direción");
-        modelo.addColumn("Contacto");
-        modelo.addColumn("Estado");
-        modelo.addColumn("ID");
-        this.tablaProv.setModel(modelo);
-        
-        llenarTabla();
-        
-        TableColumnModel tcm = tablaProv.getColumnModel();        
-        tcm.getColumn(0).setPreferredWidth(250);
-        tcm.getColumn(1).setPreferredWidth(120);
-        tcm.getColumn(2).setPreferredWidth(250);
-        tcm.getColumn(3).setPreferredWidth(250);
-        tcm.getColumn(4).setPreferredWidth(50);
-        tcm.getColumn(5).setPreferredWidth(0);
-        tcm.getColumn(5).setMaxWidth(0);
-        tcm.getColumn(5).setMinWidth(0);
-        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
-        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
-        
-        tablaProv.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
+               
+        if (txfdBuscarProv.getText().equals(""))
+        {
+            if (cbFiltroCampoProv.getSelectedItem().equals("Todos"))
+            {
+                llenarTablaInicio();
+            }
+            else
+            {
+                if (cbFiltroCampoProv.getSelectedItem().equals("Habilitados"))
+                {
+                    
+                }
+                else
+                {
+                    
+                }
+            }
+        }
     }
     
     @SuppressWarnings("unchecked")    
@@ -251,7 +246,23 @@ public class ventanaProveedor extends javax.swing.JFrame
 
     private void btnBuscarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProvActionPerformed
         String cadena = txfdBuscarProv.getText();
-        pDAO.buscarPorCuitNombre(cadena);
+        List<Proveedor> listaP = pDAO.buscarPorCuitNombre(cadena);
+        
+        if (cbFiltroCampoProv.getSelectedItem().equals("Todos"))
+        {
+            llenarTablaBusqueda(listaP);
+        }
+        else
+        {
+            if (cbFiltroCampoProv.getSelectedItem().equals("Habilitados"))
+            {
+                
+            }
+            else
+            {
+                
+            }
+        }
     }//GEN-LAST:event_btnBuscarProvActionPerformed
 
     public static void main(String args[]) 
@@ -265,10 +276,59 @@ public class ventanaProveedor extends javax.swing.JFrame
         });
     }
     
-    public void llenarTabla()
+    public void llenarTablaInicio() //lista lo que hay en la bd
+    {        
+        modelo = new DefaultTableModel();
+        List<Proveedor> lista = pDAO.listarPredeterminado();  
+        String[] datos = new String[6]; 
+        
+        modelo.addColumn("Razón social");
+        modelo.addColumn("Cuit");
+        modelo.addColumn("Direción");
+        modelo.addColumn("Contacto");
+        modelo.addColumn("Estado");
+        modelo.addColumn("ID");
+        
+        for (Proveedor p : lista)
+        {
+            datos[0] = p.getRazonSocial();
+            datos[1] = p.getCuit();
+            datos[2] = String.valueOf(p.getDireccion());
+            datos[3] = String.valueOf(p.getContacto());
+
+            if (p.isEstado())
+            {
+                datos[4] = "Habilitado";
+            }
+            else
+            {
+                datos[4] = "Deshabilitado";
+            }
+            datos[5] = String.valueOf(p.getId());   
+            
+            modelo.addRow(datos);
+        }    
+        
+        tablaProv.setModel(modelo);
+        
+        tcm = tablaProv.getColumnModel();        
+        tcm.getColumn(0).setPreferredWidth(250);
+        tcm.getColumn(1).setPreferredWidth(120);
+        tcm.getColumn(2).setPreferredWidth(250);
+        tcm.getColumn(3).setPreferredWidth(250);
+        tcm.getColumn(4).setPreferredWidth(50);
+        tcm.getColumn(5).setPreferredWidth(0);
+        tcm.getColumn(5).setMaxWidth(0);
+        tcm.getColumn(5).setMinWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+
+        //tablaProv.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);      
+    }
+    
+    public void llenarTablaBusqueda(List<Proveedor> lista)
     {        
         modelo2 = new DefaultTableModel();
-        List<Proveedor> lista = pDAO.listar();
         String [] datos = new String[6]; 
         
         modelo2.addColumn("Razón social");
@@ -293,12 +353,25 @@ public class ventanaProveedor extends javax.swing.JFrame
             {
                 datos[4] = "Deshabilitado";
             }
-            datos[5] = String.valueOf(p.getId());
-           
-           modelo2.addRow(datos);
-        }
-        
+            datos[5] = String.valueOf(p.getId());   
+            
+            modelo2.addRow(datos);
+        }        
         tablaProv.setModel(modelo2);
+        
+        tcm2 = tablaProv.getColumnModel();        
+        tcm2.getColumn(0).setPreferredWidth(250);
+        tcm2.getColumn(1).setPreferredWidth(120);
+        tcm2.getColumn(2).setPreferredWidth(250);
+        tcm2.getColumn(3).setPreferredWidth(250);
+        tcm2.getColumn(4).setPreferredWidth(50);
+        tcm2.getColumn(5).setPreferredWidth(0);
+        tcm2.getColumn(5).setMaxWidth(0);
+        tcm2.getColumn(5).setMinWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+
+        //tablaProv.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

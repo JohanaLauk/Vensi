@@ -88,6 +88,25 @@ public class ProveedorDAO
     }
     */
     
+    public List<Proveedor> listarPredeterminado()
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
+        List<Proveedor> lista = null;
+        try
+        {
+            Transaction tx = session.beginTransaction();
+            lista = session.createQuery("FROM Proveedor ORDER BY razon_social ASC").list();
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error. ListarPredeterminado proveedor");
+        }
+        return lista;
+    }
+    
     public Proveedor buscarPorId(int id)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
@@ -110,25 +129,6 @@ public class ProveedorDAO
             JOptionPane.showMessageDialog(null, "Proveedor no encontrado");
         }        
         return p;
-    }
-    
-    public List<Proveedor> listar()
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
-        
-        List<Proveedor> lista = null;
-        try
-        {
-            Transaction tx = session.beginTransaction();
-            lista = session.createQuery("FROM Proveedor").list();
-            tx.commit();
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "Error");
-        }
-        return lista;
     }
     
     public List<Proveedor> buscarPorCuit(String cuit)
