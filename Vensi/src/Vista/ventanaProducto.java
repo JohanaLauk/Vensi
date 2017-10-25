@@ -34,7 +34,7 @@ public class ventanaProducto extends javax.swing.JFrame
         {
             if (cbFiltroCampoProd.getSelectedItem().equals("Todos"))
             {
-                llenarTablaInicio();   
+                llenarTablaCompleta();   
             }
         }                    
     }
@@ -68,6 +68,11 @@ public class ventanaProducto extends javax.swing.JFrame
         jLabel1.setText("Buscar:");
 
         cbFiltroCampoProd.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
+        cbFiltroCampoProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFiltroCampoProdActionPerformed(evt);
+            }
+        });
 
         jLabel3.setText("Ordenar por:");
 
@@ -342,6 +347,24 @@ public class ventanaProducto extends javax.swing.JFrame
     private void btnActualizarTablaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnActualizarTablaActionPerformed
         llenarTablaPersonalizada();
     }//GEN-LAST:event_btnActualizarTablaActionPerformed
+
+    private void cbFiltroCampoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroCampoProdActionPerformed
+        if (cbFiltroCampoProd.getSelectedItem().equals("Todos"))
+        {
+            llenarTablaCompleta();
+        }
+        else
+        {
+            if (cbFiltroCampoProd.getSelectedItem().equals("Habilitados"))
+            {
+                
+            }
+            else
+            {
+                
+            }
+        }
+    }//GEN-LAST:event_cbFiltroCampoProdActionPerformed
     
     public static void main(String args[]) 
     {
@@ -354,10 +377,10 @@ public class ventanaProducto extends javax.swing.JFrame
         });
     }
     
-    public void llenarTablaInicio() //listo lo que hay en la bd
+    public void llenarTablaCompleta() //listar lo que hay en la bd
     {        
         modelo = new DefaultTableModel();
-        List<Producto> lista = pDAO.listarPredeterminado();
+        List<Producto> lista = pDAO.listarTodo();
         String[] datos = new String[9];
  
         modelo.addColumn("Código");
