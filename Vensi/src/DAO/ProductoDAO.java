@@ -160,61 +160,7 @@ public class ProductoDAO
         return lista;
     }   
     
-    public List<Producto> listarPredeterminado()    //este anda bien
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
-        
-        List<Producto> lista = null;
-        
-        try
-        {            
-            Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Producto ORDER BY descripcion ASC");            
-            lista = query.list();
-            tx.commit();
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "Error. Listar productos");
-        }        
-        return lista;
-    }
-    
-    public List<Producto> listarPersonalizado(String[] orden)
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
-        
-        List<Producto> lista = null;
-        String ordenSelec = orden[0];
-        String tipoSelec = orden[1];
-        
-        try
-        {            
-            Transaction tx = session.beginTransaction();
-            if (tipoSelec.equals("DESC"))
-            {
-                Query query = session.createQuery("FROM Producto ORDER BY :ordenS DESC");
-                query.setParameter("ordenS", ordenSelec);
-                lista = query.list();
-            }
-            else
-            {
-                Query query = session.createQuery("FROM Producto ORDER BY :ordenS ASC");
-                query.setParameter("ordenS", ordenSelec);
-                lista = query.list();
-            }
-            tx.commit();
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "Error. Listar productos");
-        }        
-        return lista;
-    }
-    
-    /*public List<Producto> listar()
+    public List<Producto> listarTodo()
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -231,25 +177,202 @@ public class ProductoDAO
             JOptionPane.showMessageDialog(null, "Error. Listar productos");
         }        
         return lista;
-    }*/
+    }
     
-    public List<Producto> alarma()
-    {
+    public List<Producto> listarHabilitado() {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
-        
+
         List<Producto> lista = null;
-        try
-        {            
+
+        try {
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("FROM Producto WHERE estado = true ORDER BY descripcion ASC");
+            lista = query.list();
+            tx.commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error. Listar productos habilitados");
+        }
+        return lista;
+    }
+    
+    public List<Producto> listarDeshabilitado() {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+
+        List<Producto> lista = null;
+
+        try {
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("FROM Producto WHERE estado = false ORDER BY descripcion ASC");
+            lista = query.list();
+            tx.commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error. Listar productos deshabilitados");
+        }
+        return lista;
+    }
+    
+    public List<Producto> listarDescripcion(String orden) {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+
+        List<Producto> lista = null;
+        Query query;
+        try {
+            Transaction tx = session.beginTransaction();
+            if (orden.equals("ASC") || orden.equals("asc")) {
+                query = session.createQuery("FROM Producto WHERE estado = false ORDER BY descripcion ASC");
+            } else {
+                query = session.createQuery("FROM Producto WHERE estado = false ORDER BY descripcion DESC");
+            }
+            lista = query.list();
+            tx.commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error. Listar productos por descripción");
+        }
+        return lista;
+    }
+    
+    public List<Producto> listarCodigo(String orden) {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+
+        List<Producto> lista = null;
+        Query query;
+        try {
+            Transaction tx = session.beginTransaction();
+            if (orden.equals("ASC") || orden.equals("asc")) {
+                query = session.createQuery("FROM Producto ORDER BY codigo ASC");
+            } else {
+                query = session.createQuery("FROM Producto ORDER BY codigo DESC");
+            }
+            lista = query.list();
+            tx.commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error. Listar productos por código");
+        }
+        return lista;
+    }
+    
+    public List<Producto> listarCosto(String orden) {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+
+        List<Producto> lista = null;
+        Query query;
+        try {
+            Transaction tx = session.beginTransaction();
+            if (orden.equals("ASC") || orden.equals("asc")) {
+                query = session.createQuery("FROM Producto ORDER BY precioCosto ASC");
+            } else {
+                query = session.createQuery("FROM Producto ORDER BY precioCosto DESC");
+            }
+            lista = query.list();
+            tx.commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error. Listar productos por precio de costo");
+        }
+        return lista;
+    }
+    
+    public List<Producto> listarVenta(String orden) {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+
+        List<Producto> lista = null;
+        Query query;
+        try {
+            Transaction tx = session.beginTransaction();
+            if (orden.equals("ASC") || orden.equals("asc")) {
+                query = session.createQuery("FROM Producto ORDER BY precioVenta ASC");
+            } else {
+                query = session.createQuery("FROM Producto ORDER BY precioVenta DESC");
+            }
+            lista = query.list();
+            tx.commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error. Listar productos por precio de venta");
+        }
+        return lista;
+    }
+    
+    public List<Producto> listarStock(String orden) {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+
+        List<Producto> lista = null;
+        Query query;
+        try {
+            Transaction tx = session.beginTransaction();
+            if (orden.equals("ASC") || orden.equals("asc")) {
+                query = session.createQuery("FROM Producto ORDER BY stock ASC");
+            } else {
+                query = session.createQuery("FROM Producto ORDER BY stock DESC");
+            }
+            lista = query.list();
+            tx.commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error. Listar productos por stock");
+        }
+        return lista;
+    }
+    
+    public List<Producto> listarStockMinimo(String orden) {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+
+        List<Producto> lista = null;
+        Query query;
+        try {
+            Transaction tx = session.beginTransaction();
+            if (orden.equals("ASC") || orden.equals("asc")) {
+                query = session.createQuery("FROM Producto ORDER BY stockMinimo ASC");
+            } else {
+                query = session.createQuery("FROM Producto ORDER BY stockMinimo DESC");
+            }
+            lista = query.list();
+            tx.commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error. Listar productos por stock mínimo");
+        }
+        return lista;
+    }
+    
+    public List<Producto> listarPesoEnvase(String orden) {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+
+        List<Producto> lista = null;
+        Query query;
+        try {
+            Transaction tx = session.beginTransaction();
+            if (orden.equals("ASC") || orden.equals("asc")) {
+                query = session.createQuery("FROM Producto ORDER BY pesoEnvase ASC");
+            } else {
+                query = session.createQuery("FROM Producto ORDER BY pesoEnvase DESC");
+            }
+            lista = query.list();
+            tx.commit();
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error. Listar productos por peso de envase");
+        }
+        return lista;
+    }
+    
+    public List<Producto> alarma() {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+
+        List<Producto> lista = null;
+        try {
             Transaction tx = session.beginTransaction();
             Query query = session.createQuery("FROM Producto p WHERE p.stock <= p.stockMinimo");
             lista = query.list();
             tx.commit();
-        }
-        catch(Exception e)
-        {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error. Lista stock minimo");
-        }        
+        }
         return lista;
     }
 }
