@@ -7,8 +7,7 @@ import javax.swing.JOptionPane;
 import org.hibernate.*;
 
 public class ProveedorDAO 
-{    
-        
+{            
     public void alta(Proveedor p)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
@@ -59,36 +58,9 @@ public class ProveedorDAO
         }
         session.close();
         JOptionPane.showMessageDialog(null, "Proveedor modificado");
-    }
+    }  
     
-   /* public void baja(int id)
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
-        Proveedor prov = null;
-                    
-        prov = (Proveedor)session.get(Proveedor.class, id);
-        prov.setEstado(false);
-            
-        Transaction tx = session.beginTransaction();
-        try
-        {
-            session.update(prov);
-            tx.commit();
-        }
-        catch(Exception e)
-        {
-            if (tx.isActive())
-		tx.rollback();
-                    e.printStackTrace();
-		throw e;
-        }
-        session.close();
-        JOptionPane.showMessageDialog(null, "Proveedor dado de baja");
-    }
-    */
-    
-    public List<Proveedor> listarPredeterminado()
+    public List<Proveedor> listarTodo()
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -97,7 +69,45 @@ public class ProveedorDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            lista = session.createQuery("FROM Proveedor ORDER BY razon_social ASC").list();
+            lista = session.createQuery("FROM Proveedor ORDER BY razon_social").list();
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error. ListarPredeterminado proveedor");
+        }
+        return lista;
+    }
+    
+    public List<Proveedor> listarHabilitados()
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
+        List<Proveedor> lista = null;
+        try
+        {
+            Transaction tx = session.beginTransaction();
+            lista = session.createQuery("FROM Proveedor WHERE estado = true ORDER BY razon_social").list();
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error. ListarPredeterminado proveedor");
+        }
+        return lista;
+    }
+    
+    public List<Proveedor> listarDeshabilitados()
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
+        List<Proveedor> lista = null;
+        try
+        {
+            Transaction tx = session.beginTransaction();
+            lista = session.createQuery("FROM Proveedor WHERE estado = false ORDER BY razon_social").list();
             tx.commit();
         }
         catch(Exception e)
@@ -162,7 +172,7 @@ public class ProveedorDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.razonSocial LIKE :cadena");
+            Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.razonSocial LIKE :cadena ORDER BY razon_social");
             query.setParameter("cadena", "%"+cadena+"%");
             lista = query.list();
             tx.commit();
@@ -172,6 +182,5 @@ public class ProveedorDAO
             JOptionPane.showMessageDialog(null, "Error");
         }
         return lista;
-    }
-    
+    }    
 }

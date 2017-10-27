@@ -13,7 +13,7 @@ public class Vensi
         {
             Usuario general = new Usuario();
             general.setNombreUsuario("Dueño");
-            general.setPin(0000); //no tiene que ser ese
+            general.setPin(0000);
             
             Usuario sistemaVentas = new Usuario();
             sistemaVentas.setNombreUsuario("Empleado");

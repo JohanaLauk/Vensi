@@ -118,7 +118,7 @@ public class ProductoDAO
         try
         {            
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena");
+            Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena ORDER BY descripcion");
             query.setParameter("cadena", "%"+cadena+"%");
             lista = query.list();
             tx.commit();
@@ -130,11 +130,11 @@ public class ProductoDAO
         return lista;
     }   
     
-    public List<Producto> listarTodo()  //ordenado por descripcio ASC
+    public List<Producto> listarInicio()
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
-        
+                
         List<Producto> lista = null;
         try
         {            
@@ -149,246 +149,296 @@ public class ProductoDAO
         return lista;
     }
     
-    public List<Producto> listarHabilitado()    //prod habilitados ordenados por descrip ASC
+    public List<Producto> listarPersonalizado(String[] datos)  //ordenado por descripcio ASC
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
-
+        
+        String filtro = datos[0];
+        String ordenCampo = datos[1];
+        String tipoOrden = datos[2];
+        
         List<Producto> lista = null;
-
-        try 
-        {
-            Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Producto WHERE estado = true ORDER BY descripcion ASC");
-            lista = query.list();
-            tx.commit();
-        } 
-        catch (Exception e) 
-        {
-            JOptionPane.showMessageDialog(null, "Error. Listar productos habilitados");
-        }
-        return lista;
-    }
-    
-    public List<Producto> listarDeshabilitado()     //prod deshabilitados ordenados por descrip ASC
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
-
-        List<Producto> lista = null;
-
-        try 
-        {
-            Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Producto WHERE estado = false ORDER BY descripcion ASC");
-            lista = query.list();
-            tx.commit();
-        } 
-        catch (Exception e) 
-        {
-            JOptionPane.showMessageDialog(null, "Error. Listar productos deshabilitados");
-        }
-        return lista;
-    }
-    
-    public List<Producto> listarDescripcion(String orden) //prod ordenados por descrip ASC o DESC
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
-
-        List<Producto> lista = null;
-        Query query;
-        try 
-        {
+        try
+        {            
             Transaction tx = session.beginTransaction();
             
-            if (orden.equals("ASC") || orden.equals("asc")) 
+            if (filtro.equals("Todos"))
             {
-                query = session.createQuery("FROM Producto ORDER BY descripcion ASC");
-            } 
-            else 
-            {
-                query = session.createQuery("FROM Producto ORDER BY descripcion DESC");
+                switch (ordenCampo)
+                {
+                    case "descripcion":
+                    {
+                         if (tipoOrden.equals("ASC"))
+                         {
+                             lista = session.createQuery("FROM Producto ORDER BY descripcion").list();
+                         }
+                         else
+                         {
+                             lista = session.createQuery("FROM Producto ORDER BY descripcion DESC").list();
+                         }
+                    } break;
+                    
+                    case "codigo":
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            lista = session.createQuery("FROM Producto ORDER BY codigo").list();
+                        }
+                        else
+                        {
+                            lista = session.createQuery("FROM Producto ORDER BY codigo DESC").list();
+                        }
+                    } break;
+                    
+                    case "precio_costo":
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            lista = session.createQuery("FROM Producto ORDER BY precio_costo").list();
+                        }
+                        else
+                        {
+                            lista = session.createQuery("FROM Producto ORDER BY precio_costo DESC").list();
+                        }
+                    } break;
+                    
+                    case "precio_venta":
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            lista = session.createQuery("FROM Producto ORDER BY precio_venta").list();
+                        }
+                        else
+                        {
+                            lista = session.createQuery("FROM Producto ORDER BY precio_venta DESC").list();
+                        }
+                    } break;
+                    
+                    case "stock":
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            lista = session.createQuery("FROM Producto ORDER BY stock").list();
+                        }
+                        else
+                        {
+                            lista = session.createQuery("FROM Producto ORDER BY stock DESC").list();
+                        }
+                    } break;
+                    
+                    case "stock_minimo":
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            lista = session.createQuery("FROM Producto ORDER BY stock_minimo").list();
+                        }
+                        else
+                        {
+                            lista = session.createQuery("FROM Producto ORDER BY stock_minimo DESC").list();
+                        }
+                    } break;
+                    
+                    case "peso_envase":
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            lista = session.createQuery("FROM Producto ORDER BY peso_envase").list();
+                        }
+                        else
+                        {
+                            lista = session.createQuery("FROM Producto ORDER BY peso_envase DESC").list();
+                        }
+                    } break;
+                }
             }
-            lista = query.list();
-            tx.commit();
-        } 
-        catch (Exception e) 
-        {
-            JOptionPane.showMessageDialog(null, "Error. Listar productos por descripción");
-        }
-        return lista;
-    }
-    
-    public List<Producto> listarCodigo(String orden)    //prod ordenados por codigo ASC o DESC
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+            else
+            {
+                if (filtro.equals("Habilitados"))
+                {
+                    switch (ordenCampo)
+                    {
+                        case "descripcion":
+                        {
+                             if (tipoOrden.equals("ASC"))
+                             {
+                                 lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY descripcion").list();
+                             }
+                             else
+                             {
+                                 lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY descripcion DESC").list();
+                             }
+                        } break;
 
-        List<Producto> lista = null;
-        Query query;
-        try 
-        {
-            Transaction tx = session.beginTransaction();
-            
-            if (orden.equals("ASC") || orden.equals("asc")) 
-            {
-                query = session.createQuery("FROM Producto ORDER BY codigo ASC");
-            } 
-            else 
-            {
-                query = session.createQuery("FROM Producto ORDER BY codigo DESC");
-            }
-            lista = query.list();
-            tx.commit();
-        } 
-        catch (Exception e) 
-        {
-            JOptionPane.showMessageDialog(null, "Error. Listar productos por código");
-        }
-        return lista;
-    }
-    
-    public List<Producto> listarPCosto(String orden)     //prod ordenados por precioCosto ASC o DESC
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+                        case "codigo":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY codigo").list();
+                            }
+                            else
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY codigo DESC").list();
+                            }
+                        } break;
 
-        List<Producto> lista = null;
-        Query query;
-        try 
-        {
-            Transaction tx = session.beginTransaction();
-            if (orden.equals("ASC") || orden.equals("asc")) 
-            {
-                query = session.createQuery("FROM Producto ORDER BY precioCosto ASC");
-            } 
-            else 
-            {
-                query = session.createQuery("FROM Producto ORDER BY precioCosto DESC");
-            }
-            lista = query.list();
-            tx.commit();
-        } 
-        catch (Exception e) 
-        {
-            JOptionPane.showMessageDialog(null, "Error. Listar productos por precio de costo");
-        }
-        return lista;
-    }
-    
-    public List<Producto> listarPVenta(String orden)    //prod ordenados por precioVenta ASC o DESC
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+                        case "precio_costo":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY precio_costo").list();
+                            }
+                            else
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY precio_costo DESC").list();
+                            }
+                        } break;
 
-        List<Producto> lista = null;
-        Query query;
-        try 
-        {
-            Transaction tx = session.beginTransaction();
-            
-            if (orden.equals("ASC") || orden.equals("asc")) 
-            {
-                query = session.createQuery("FROM Producto ORDER BY precioVenta ASC");
-                
-            } 
-            else 
-            {
-                query = session.createQuery("FROM Producto ORDER BY precioVenta DESC");
-            }
-            lista = query.list();
-            tx.commit();
-        } 
-        catch (Exception e) 
-        {
-            JOptionPane.showMessageDialog(null, "Error. Listar productos por precio de venta");
-        }
-        return lista;
-    }
-    
-    public List<Producto> listarStock(String orden)     //prod ordenados por stock ASC o DESC
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+                        case "precio_venta":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY precio_venta").list();
+                            }
+                            else
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY precio_venta DESC").list();
+                            }
+                        } break;
 
-        List<Producto> lista = null;
-        Query query;
-        try 
-        {
-            Transaction tx = session.beginTransaction();
-            if (orden.equals("ASC") || orden.equals("asc")) 
-            {
-                query = session.createQuery("FROM Producto ORDER BY stock ASC");
-            } 
-            else 
-            {
-                query = session.createQuery("FROM Producto ORDER BY stock DESC");
-            }
-            lista = query.list();
-            tx.commit();
-        } 
-        catch (Exception e) 
-        {
-            JOptionPane.showMessageDialog(null, "Error. Listar productos por stock");
-        }
-        return lista;
-    }
-    
-    public List<Producto> listarStockMinimo(String orden)   //prod ordenados por stockMinimo ASC o DESC
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+                        case "stock":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY stock").list();
+                            }
+                            else
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY stock DESC").list();
+                            }
+                        } break;
 
-        List<Producto> lista = null;
-        Query query;
-        try 
-        {
-            Transaction tx = session.beginTransaction();
-            if (orden.equals("ASC") || orden.equals("asc")) 
-            {
-                query = session.createQuery("FROM Producto ORDER BY stockMinimo ASC");
-            } 
-            else 
-            {
-                query = session.createQuery("FROM Producto ORDER BY stockMinimo DESC");
-            }
-            lista = query.list();
-            tx.commit();
-        } 
-        catch (Exception e) 
-        {
-            JOptionPane.showMessageDialog(null, "Error. Listar productos por stock mínimo");
-        }
-        return lista;
-    }
-    
-    public List<Producto> listarPesoEnvase(String orden)    //prod ordenados por pesoEnvase ASC o DESC
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+                        case "stock_minimo":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY stock_minimo").list();
+                            }
+                            else
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY stock_minimo DESC").list();
+                            }
+                        } break;
 
-        List<Producto> lista = null;
-        Query query;
-        try 
-        {
-            Transaction tx = session.beginTransaction();
-            
-            if (orden.equals("ASC") || orden.equals("asc")) 
-            {
-                query = session.createQuery("FROM Producto ORDER BY pesoEnvase ASC");
-            } 
-            else 
-            {
-                query = session.createQuery("FROM Producto ORDER BY pesoEnvase DESC");
-            }
-            lista = query.list();
+                        case "peso_envase":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY peso_envase").list();
+                            }
+                            else
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY peso_envase DESC").list();
+                            }
+                        } break;
+                    }
+                }
+                else
+                {
+                    switch (ordenCampo)
+                    {
+                        case "descripcion":
+                        {
+                             if (tipoOrden.equals("ASC"))
+                             {
+                                 lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY descripcion").list();
+                             }
+                             else
+                             {
+                                 lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY descripcion DESC").list();
+                             }
+                        } break;
+
+                        case "codigo":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY codigo").list();
+                            }
+                            else
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY codigo DESC").list();
+                            }
+                        } break;
+
+                        case "precio_costo":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY precio_costo").list();
+                            }
+                            else
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY precio_costo DESC").list();
+                            }
+                        } break;
+
+                        case "precio_venta":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY precio_venta").list();
+                            }
+                            else
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY precio_venta DESC").list();
+                            }
+                        } break;
+
+                        case "stock":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY stock").list();
+                            }
+                            else
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY stock DESC").list();
+                            }
+                        } break;
+
+                        case "stock_minimo":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY stock_minimo").list();
+                            }
+                            else
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY stock_minimo DESC").list();
+                            }
+                        } break;
+
+                        case "peso_envase":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY peso_envase").list();
+                            }
+                            else
+                            {
+                                lista = session.createQuery("FROM Producto WHERE estado = false ORDER BY peso_envase DESC").list();
+                            }
+                        } break;
+                    }
+                }
+            }            
             tx.commit();
-        } 
-        catch (Exception e) 
-        {
-            JOptionPane.showMessageDialog(null, "Error. Listar productos por peso de envase");
         }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error. Listar productos");
+        }        
         return lista;
     }
     

@@ -6,7 +6,6 @@ import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
@@ -28,24 +27,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         
         this.setPreferredSize(new Dimension(1000, 500));    //al minimizar la ventana aparece con esa medida
                
-        if (txfdBuscarProv.getText().equals(""))
-        {
-            if (cbFiltroCampoProv.getSelectedItem().equals("Todos"))
-            {
-                llenarTablaInicio();
-            }
-            else
-            {
-                if (cbFiltroCampoProv.getSelectedItem().equals("Habilitados"))
-                {
-                    
-                }
-                else
-                {
-                    
-                }
-            }
-        }
+        llenarTablaInicio();  
     }
     
     @SuppressWarnings("unchecked")    
@@ -73,6 +55,11 @@ public class ventanaProveedor extends javax.swing.JFrame
         jLabel1.setText("Buscar:");
 
         cbFiltroCampoProv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
+        cbFiltroCampoProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFiltroCampoProvActionPerformed(evt);
+            }
+        });
 
         btnBuscarProv.setText("Buscar");
         btnBuscarProv.addActionListener(new java.awt.event.ActionListener() {
@@ -248,22 +235,37 @@ public class ventanaProveedor extends javax.swing.JFrame
         String cadena = txfdBuscarProv.getText();
         List<Proveedor> listaP = pDAO.buscarPorCuitNombre(cadena);
         
+        llenarTablaBusqueda(listaP);  
+        
+        if (txfdBuscarProv.getText().equals("") || txfdBuscarProv.getText() == null)
+        {
+            cbFiltroCampoProv.setEnabled(true); 
+        }
+        else
+        {
+            cbFiltroCampoProv.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnBuscarProvActionPerformed
+
+    private void cbFiltroCampoProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroCampoProvActionPerformed
         if (cbFiltroCampoProv.getSelectedItem().equals("Todos"))
         {
-            llenarTablaBusqueda(listaP);
+            llenarTablaInicio();
         }
         else
         {
             if (cbFiltroCampoProv.getSelectedItem().equals("Habilitados"))
             {
-                
+                List<Proveedor> listaMostrar = pDAO.listarHabilitados();
+                llenarTablaPersonalizada(listaMostrar);
             }
             else
             {
-                
+                List<Proveedor> listaMostrar = pDAO.listarDeshabilitados();
+                llenarTablaPersonalizada(listaMostrar);
             }
         }
-    }//GEN-LAST:event_btnBuscarProvActionPerformed
+    }//GEN-LAST:event_cbFiltroCampoProvActionPerformed
 
     public static void main(String args[]) 
     {
@@ -276,10 +278,10 @@ public class ventanaProveedor extends javax.swing.JFrame
         });
     }
     
-    public void llenarTablaInicio() //lista lo que hay en la bd
+    public void llenarTablaInicio()
     {        
         modelo = new DefaultTableModel();
-        List<Proveedor> lista = pDAO.listarPredeterminado();  
+        List<Proveedor> lista = pDAO.listarTodo();  
         String[] datos = new String[6]; 
         
         modelo.addColumn("Razón social");
@@ -290,6 +292,55 @@ public class ventanaProveedor extends javax.swing.JFrame
         modelo.addColumn("ID");
         
         for (Proveedor p : lista)
+        {
+            datos[0] = p.getRazonSocial();
+            datos[1] = p.getCuit();
+            datos[2] = String.valueOf(p.getDireccion());
+            datos[3] = String.valueOf(p.getContacto());
+
+            if (p.isEstado())
+            {
+                datos[4] = "Habilitado";
+            }
+            else
+            {
+                datos[4] = "Deshabilitado";
+            }
+            datos[5] = String.valueOf(p.getId());   
+            
+            modelo.addRow(datos);
+        }    
+        
+        tablaProv.setModel(modelo);
+        
+        tcm = tablaProv.getColumnModel();        
+        tcm.getColumn(0).setPreferredWidth(250);
+        tcm.getColumn(1).setPreferredWidth(120);
+        tcm.getColumn(2).setPreferredWidth(250);
+        tcm.getColumn(3).setPreferredWidth(250);
+        tcm.getColumn(4).setPreferredWidth(50);
+        tcm.getColumn(5).setPreferredWidth(0);
+        tcm.getColumn(5).setMaxWidth(0);
+        tcm.getColumn(5).setMinWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+
+        //tablaProv.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);      
+    }
+    
+    public void llenarTablaPersonalizada(List<Proveedor> listaMostrar) 
+    {        
+        modelo = new DefaultTableModel();
+        String[] datos = new String[6]; 
+        
+        modelo.addColumn("Razón social");
+        modelo.addColumn("Cuit");
+        modelo.addColumn("Direción");
+        modelo.addColumn("Contacto");
+        modelo.addColumn("Estado");
+        modelo.addColumn("ID");
+        
+        for (Proveedor p : listaMostrar)
         {
             datos[0] = p.getRazonSocial();
             datos[1] = p.getCuit();
