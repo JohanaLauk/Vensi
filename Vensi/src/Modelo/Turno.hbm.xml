@@ -10,16 +10,13 @@
         </id>
         
         <list name="itemVenta" table="item_pedido" inverse="true" lazy="true" fetch="select">
-            <key column="venta_id" not-null="true"/>
+            <key column="venta_id" not-null="false"/>  <!--esto estaba en true en un principio -->
             <index column="ORDEN" />
             <one-to-many class="Modelo.ItemVenta" />
          </list>
        <!-- <many-to-one name="itemVenta" class="Modelo.ItemVenta" fetch="select">
             <column name="id_venta" />
         </many-to-one> -->
-        <property name="nroTurno" type="int">
-            <column name="nro_turno" not-null="true" />
-        </property>
         <property name="fechaHoraInicio" type="date">
             <column name="fecha_hora_inicio" length="13" not-null="true" />
         </property>

@@ -51,7 +51,7 @@ public class ventanaGestionClave extends javax.swing.JFrame
 
         jLabel1.setText("Usuario:");
 
-        cbTipoClave.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Sistema de ventas", "General" }));
+        cbTipoClave.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Dueño", "Empleado" }));
 
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -153,15 +153,15 @@ public class ventanaGestionClave extends javax.swing.JFrame
     private void btnConfirmarClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarClaveActionPerformed
         String nombreUsuario = null;
         
-        if (cbTipoClave.getSelectedItem().equals("General"))
+        if (cbTipoClave.getSelectedItem().equals("Dueño"))
         {
-            nombreUsuario = "General";
+            nombreUsuario = "Dueño";
         }
         else
         {
-            if (cbTipoClave.getSelectedItem().equals("Sistema de ventas"))                
+            if (cbTipoClave.getSelectedItem().equals("Empleado"))                
             {
-                nombreUsuario = "Sistema de ventas";
+                nombreUsuario = "Empleado";
             }
         }
                 

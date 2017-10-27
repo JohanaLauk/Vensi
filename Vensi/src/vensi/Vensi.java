@@ -12,11 +12,11 @@ public class Vensi
         if(uDAO.listar().isEmpty())
         {
             Usuario general = new Usuario();
-            general.setNombreUsuario("General");
+            general.setNombreUsuario("Dueño");
             general.setPin(0000); //no tiene que ser ese
             
             Usuario sistemaVentas = new Usuario();
-            sistemaVentas.setNombreUsuario("Sistema de ventas");
+            sistemaVentas.setNombreUsuario("Empleado");
             sistemaVentas.setPin(0000);
             
             uDAO.alta(general);

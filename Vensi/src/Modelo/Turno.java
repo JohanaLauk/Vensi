@@ -7,7 +7,6 @@ public class Turno  implements java.io.Serializable
 {
      private int id;
      private ItemVenta itemVenta;
-     private int nroTurno;
      private Date fechaHoraInicio;
      private Date fechaHoraFin;
      //private Set historials = new HashSet(0);
@@ -31,17 +30,7 @@ public class Turno  implements java.io.Serializable
     public void setItemVenta(ItemVenta itemVenta) 
     {
         this.itemVenta = itemVenta;
-    }
-    
-    public int getNroTurno() 
-    {
-        return this.nroTurno;
     }    
-    public void setNroTurno(int nroTurno) 
-    {
-        this.nroTurno = nroTurno;
-    }
-    
     public Date getFechaHoraInicio() 
     {
         return this.fechaHoraInicio;

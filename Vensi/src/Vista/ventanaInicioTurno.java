@@ -1,12 +1,23 @@
 package Vista;
 
+import DAO.TurnoDAO;
+import DAO.UsuarioDAO;
+import Modelo.Turno;
+import java.util.Date;
+import javax.swing.JOptionPane;
+
 public class ventanaInicioTurno extends javax.swing.JFrame 
 {
+    UsuarioDAO uDAO = new UsuarioDAO();
+    TurnoDAO tDAO = new TurnoDAO();
+    
     public ventanaInicioTurno() 
     {        
         initComponents();
         
         this.setLocationRelativeTo(null);   //centra la ventana
+        
+        btnSIiniciarTurno.setEnabled(false);
     }
     
     @SuppressWarnings("unchecked")
@@ -17,6 +28,8 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         btnNOiniciarTurno = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
         btnSIiniciarTurno = new javax.swing.JButton();
+        lbPin = new javax.swing.JLabel();
+        txfdPin = new javax.swing.JPasswordField();
         labTitulo = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
         labImagenFondo = new javax.swing.JLabel();
@@ -41,20 +54,43 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         jLabel1.setText("¿Está seguro que desea iniciar el turno ahora?");
 
         btnSIiniciarTurno.setText("SI");
+        btnSIiniciarTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSIiniciarTurnoActionPerformed(evt);
+            }
+        });
+
+        lbPin.setText("Ingrese el pin:");
+
+        txfdPin.setText("jPasswordField1");
+        txfdPin.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txfdPinKeyPressed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(117, 117, 117)
-                .addComponent(btnNOiniciarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(85, 85, 85)
-                .addComponent(btnSIiniciarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(115, 115, 115)
+                                .addComponent(btnNOiniciarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(85, 85, 85)
+                                .addComponent(btnSIiniciarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(138, 138, 138)
+                                .addComponent(lbPin)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txfdPin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -62,14 +98,18 @@ public class ventanaInicioTurno extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(lbPin)
+                    .addComponent(txfdPin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 25, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnNOiniciarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnSIiniciarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(27, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 480, 130));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 480, 180));
 
         labTitulo.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         labTitulo.setForeground(new java.awt.Color(255, 255, 255));
@@ -110,6 +150,30 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         vVenta.setVisible(true);    //hace visible una ventana
         dispose();  //cierra la ventana que deja
     }//GEN-LAST:event_btnNOiniciarTurnoActionPerformed
+
+    private void txfdPinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPinKeyPressed
+        
+        btnSIiniciarTurno.setEnabled(true);
+    }//GEN-LAST:event_txfdPinKeyPressed
+
+    private void btnSIiniciarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSIiniciarTurnoActionPerformed
+        
+        if(uDAO.verificar("Dueño", Integer.parseInt(txfdPin.getText())) | uDAO.verificar("Empleado", Integer.parseInt(txfdPin.getText())))
+        {
+            Turno nuevoTurno = new Turno();
+            nuevoTurno.setFechaHoraInicio(new Date());
+            tDAO.alta(nuevoTurno);
+            
+            ventanaVenta vVenta = new ventanaVenta();
+            vVenta.setVisible(true);    
+            dispose();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+            txfdPin.setText("");
+        }
+    }//GEN-LAST:event_btnSIiniciarTurnoActionPerformed
     
     public static void main(String args[]) 
     {        
@@ -130,5 +194,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labImagenFondo;
     private javax.swing.JLabel labTitulo;
+    private javax.swing.JLabel lbPin;
+    private javax.swing.JPasswordField txfdPin;
     // End of variables declaration//GEN-END:variables
 }
