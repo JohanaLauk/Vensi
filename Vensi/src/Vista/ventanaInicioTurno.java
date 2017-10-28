@@ -62,7 +62,6 @@ public class ventanaInicioTurno extends javax.swing.JFrame
 
         lbPin.setText("Ingrese el pin:");
 
-        txfdPin.setText("jPasswordField1");
         txfdPin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txfdPinKeyPressed(evt);
@@ -79,17 +78,16 @@ public class ventanaInicioTurno extends javax.swing.JFrame
                         .addContainerGap()
                         .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 468, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addGap(115, 115, 115)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(115, 115, 115)
                                 .addComponent(btnNOiniciarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(85, 85, 85)
                                 .addComponent(btnSIiniciarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(138, 138, 138)
                                 .addComponent(lbPin)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txfdPin, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(txfdPin, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -118,7 +116,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         getContentPane().add(labTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/Icono_salir_blanco.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono_salir_blanco.png"))); // NOI18N
         btnSalir.setToolTipText("Salir");
         btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
@@ -133,7 +131,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 30, 30));
 
         labImagenFondo.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/Imagen_fondo_agua.jpg"))); // NOI18N
+        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Imagen_fondo_agua.jpg"))); // NOI18N
         getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 190));
 
         pack();
@@ -153,7 +151,11 @@ public class ventanaInicioTurno extends javax.swing.JFrame
 
     private void txfdPinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPinKeyPressed
         
-        btnSIiniciarTurno.setEnabled(true);
+        if (!txfdPin.equals("")) {
+            btnSIiniciarTurno.setEnabled(true);
+        } else {
+            btnSIiniciarTurno.setEnabled(false);
+        }
     }//GEN-LAST:event_txfdPinKeyPressed
 
     private void btnSIiniciarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSIiniciarTurnoActionPerformed
@@ -162,6 +164,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         {
             Turno nuevoTurno = new Turno();
             nuevoTurno.setFechaHoraInicio(new Date());
+            nuevoTurno.setFechaHoraFin(new Date());  // sólo para que no quede nula
             tDAO.alta(nuevoTurno);
             
             ventanaVenta vVenta = new ventanaVenta();
