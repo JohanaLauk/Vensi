@@ -2,7 +2,6 @@ package Vista;
 
 import DAO.UsuarioDAO;
 import Modelo.Usuario;
-import java.awt.Dimension;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -16,13 +15,7 @@ public class ventanaGestionClave extends javax.swing.JFrame
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);     //centra la ventana
-        
-        //this.setMinimumSize(new Dimension(510, 220));  //al minimizar la ventana no permite que sea mas chico que esa medida
-        
-        //this.setPreferredSize(new Dimension(510, 220));    //al minimizar la ventana aparece con esa medida
-        
-        //this.setResizable(false);   //No permite modificar el tamaño de la ventana              
+        this.setLocationRelativeTo(null);     //centra la ventana    
         
     }
     
@@ -51,7 +44,7 @@ public class ventanaGestionClave extends javax.swing.JFrame
 
         jLabel1.setText("Usuario:");
 
-        cbTipoClave.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Dueño", "Empleado" }));
+        cbTipoClave.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Propietario", "Empleado" }));
 
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -153,9 +146,9 @@ public class ventanaGestionClave extends javax.swing.JFrame
     private void btnConfirmarClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarClaveActionPerformed
         String nombreUsuario = null;
         
-        if (cbTipoClave.getSelectedItem().equals("Dueño"))
+        if (cbTipoClave.getSelectedItem().equals("Propietario"))
         {
-            nombreUsuario = "Dueño";
+            nombreUsuario = "Propietario";
         }
         else
         {
@@ -163,11 +156,15 @@ public class ventanaGestionClave extends javax.swing.JFrame
             {
                 nombreUsuario = "Empleado";
             }
-        }
-                
+            else
+            {
+                JOptionPane.showMessageDialog(null,"No ha seleccionado un usuario");
+            }
+        }  
+        
         int pinActual = Integer.parseInt(passActual.getText());
         int pinNuevo = Integer.parseInt(passNuevo.getText());
-        int pinVerif = Integer.parseInt(passVerif.getText());
+        int pinVerif = Integer.parseInt(passVerif.getText());       
         
         List<Usuario> lista = uDAO.listar();
         
@@ -175,7 +172,7 @@ public class ventanaGestionClave extends javax.swing.JFrame
         {
             if (u.getNombreUsuario().equals(nombreUsuario))
             {
-                if (u.getPin() == pinActual) //arreglar
+                if (u.getPin() == pinActual)
                 {
                     if (pinNuevo == pinVerif)
                     {
@@ -183,12 +180,12 @@ public class ventanaGestionClave extends javax.swing.JFrame
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null,"Las contraseñas no coinciden");
+                        JOptionPane.showMessageDialog(null,"Los pines no coinciden");
                     }            
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null,"La contraseña actual del usuario '"+nombreUsuario+"' no es correcta");
+                    JOptionPane.showMessageDialog(null,"El pin actual del usuario '"+nombreUsuario+"' no es correcto");
                 }
             }
         } 
@@ -207,8 +204,6 @@ public class ventanaGestionClave extends javax.swing.JFrame
             }
         });
     }
-    
-    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnConfirmarClave;

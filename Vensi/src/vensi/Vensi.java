@@ -11,16 +11,16 @@ public class Vensi
         UsuarioDAO uDAO = new UsuarioDAO();
         if(uDAO.listar().isEmpty())
         {
-            Usuario general = new Usuario();
-            general.setNombreUsuario("Dueño");
-            general.setPin(0000);
+            Usuario propietario = new Usuario();
+            propietario.setNombreUsuario("Propietario");
+            propietario.setPin(0000);
             
-            Usuario sistemaVentas = new Usuario();
-            sistemaVentas.setNombreUsuario("Empleado");
-            sistemaVentas.setPin(0000);
+            Usuario empleado = new Usuario();
+            empleado.setNombreUsuario("Empleado");
+            empleado.setPin(0000);
             
-            uDAO.alta(general);
-            uDAO.alta(sistemaVentas);
+            uDAO.alta(propietario); 
+            uDAO.alta(empleado);
         }
         
         new ventanaPrincipal().setVisible(true);
