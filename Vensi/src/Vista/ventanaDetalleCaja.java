@@ -1,42 +1,49 @@
 package Vista;
 
-import javax.swing.JTable;
+import DAO.ItemVentaDAO;
+import DAO.TurnoDAO;
+import Modelo.ItemVenta;
+import Modelo.Turno;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 public class ventanaDetalleCaja extends javax.swing.JFrame 
 {
+    Turno elTurno = new Turno();
+    TurnoDAO tDAO = new TurnoDAO();
+    ItemVentaDAO itDAO = new ItemVentaDAO();
     DefaultTableModel modelo;
+    TableColumnModel tcm;
             
     public ventanaDetalleCaja() 
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);   //centra la ventana
-        
-        TableColumnModel tcm = tablaDetalleCaja.getColumnModel();
+        this.setLocationRelativeTo(null);   //centra la ventana         
         
         modelo = new DefaultTableModel();
         modelo.addColumn("Detalle");
         modelo.addColumn("Cantidad");
         modelo.addColumn("Entrada");
         modelo.addColumn("Salida");
+
         this.tablaDetalleCaja.setModel(modelo);
-                
+
+        tcm = tablaDetalleCaja.getColumnModel();
         tcm.getColumn(0).setPreferredWidth(300);
         tcm.getColumn(1).setPreferredWidth(80);
         tcm.getColumn(2).setPreferredWidth(80);
         tcm.getColumn(3).setPreferredWidth(80);
         
-        tablaDetalleCaja.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
+        //llenarTabla();
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         btnSalir = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -52,13 +59,8 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         setUndecorated(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Detalle de caja");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
-
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/Icono_salir_blanco.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono_salir_blanco.png"))); // NOI18N
         btnSalir.setToolTipText("Salir");
         btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
@@ -69,6 +71,11 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             }
         });
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(930, 10, 30, 30));
+
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Detalle de caja");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -128,7 +135,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 950, 490));
 
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/Imagen_fondo_agua.jpg"))); // NOI18N
+        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo 2 grande.png"))); // NOI18N
         getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 550));
 
         pack();
@@ -163,6 +170,56 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         });
     }
 
+    public void llenarTabla()   //Con el contenido de la listaVentas que tiene el turno
+    {        
+        modelo = new DefaultTableModel();
+        //List<> listaMovimientos = elTurno.getListaMovimientos;
+        String[] datos = new String[4];
+        
+        if (listaMovimientos.size() == 0)
+        {
+            modelo = new DefaultTableModel();
+            modelo.addColumn("Detalle");
+            modelo.addColumn("Cantidad");
+            modelo.addColumn("Entrada");
+            modelo.addColumn("Salida");
+
+            this.tablaDetalleCaja.setModel(modelo);
+
+            tcm = tablaDetalleCaja.getColumnModel();
+            tcm.getColumn(0).setPreferredWidth(300);
+            tcm.getColumn(1).setPreferredWidth(80);
+            tcm.getColumn(2).setPreferredWidth(80);
+            tcm.getColumn(3).setPreferredWidth(80);
+        }
+        else
+        {
+            modelo.addColumn("Detalle");
+            modelo.addColumn("Cantidad");
+            modelo.addColumn("Entrada");
+            modelo.addColumn("Salida");
+
+            for (ItemVenta v : listaMovimientos)
+            {
+                datos[0] = String.valueOf(v.getProducto());
+                datos[1] = String.valueOf(v.getCantidad());
+                datos[2] = String.valueOf("Valor de entrada"); //v.);  //valor de entrada
+                datos[3] = String.valueOf("Valor de salida"); //v.);  //valor de salida
+
+                modelo.addRow(datos);
+            }
+
+            tablaDetalleCaja.setModel(modelo);
+
+            tcm = tablaDetalleCaja.getColumnModel();
+
+            tcm.getColumn(0).setPreferredWidth(300);
+            tcm.getColumn(1).setPreferredWidth(80);
+            tcm.getColumn(2).setPreferredWidth(80);
+            tcm.getColumn(3).setPreferredWidth(80);
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCargarES;
     private javax.swing.JButton btnSalir;

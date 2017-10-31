@@ -317,8 +317,7 @@ public class ventanaProducto extends javax.swing.JFrame
         } 
         
         List<Producto> listaPersonalizada = pDAO.listarPersonalizado(OrdenarTabla());
-        llenarTablaPersonalizada(listaPersonalizada);
-        
+        llenarTablaPersonalizada(listaPersonalizada);        
     }//GEN-LAST:event_cbCampoOrdenActionPerformed
        
     private void cbTipoOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoOrdenActionPerformed
@@ -367,7 +366,7 @@ public class ventanaProducto extends javax.swing.JFrame
         });
     }
     
-    public void llenarTablaInicio()  //anda
+    public void llenarTablaInicio()
     {        
         modelo = new DefaultTableModel();
         List<Producto> listaInicial = pDAO.listarInicio();

@@ -7,8 +7,7 @@ import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ItemVentaDAO 
-{    
-    
+{        
     public void alta(ItemVenta i)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();

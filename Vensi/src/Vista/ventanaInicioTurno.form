@@ -49,17 +49,18 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <EmptySpace min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel1" pref="468" max="32767" attributes="0"/>
+                          <Component id="jLabel1" pref="460" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="1" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
+                                  <EmptySpace min="-2" pref="115" max="-2" attributes="0"/>
                                   <Component id="btnNOiniciarTurno" min="-2" pref="80" max="-2" attributes="0"/>
                                   <EmptySpace min="-2" pref="85" max="-2" attributes="0"/>
                                   <Component id="btnSIiniciarTurno" min="-2" pref="80" max="-2" attributes="0"/>
                               </Group>
-                              <Group type="102" attributes="0">
+                              <Group type="102" alignment="0" attributes="0">
+                                  <EmptySpace min="-2" pref="125" max="-2" attributes="0"/>
                                   <Component id="lbPin" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Component id="txfdPin" min="-2" pref="132" max="-2" attributes="0"/>
@@ -77,12 +78,12 @@
               <Group type="102" alignment="1" attributes="0">
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="22" max="-2" attributes="0"/>
+                  <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
-                      <Component id="lbPin" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txfdPin" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="lbPin" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
+                      <Component id="txfdPin" alignment="3" min="-2" pref="28" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="25" max="32767" attributes="0"/>
+                  <EmptySpace pref="29" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="btnNOiniciarTurno" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="btnSIiniciarTurno" alignment="3" min="-2" pref="35" max="-2" attributes="0"/>
@@ -112,6 +113,14 @@
             <Property name="text" type="java.lang.String" value="&#xbf;Est&#xe1; seguro que desea iniciar el turno ahora?"/>
           </Properties>
         </Component>
+        <Component class="javax.swing.JLabel" name="lbPin">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="Ingrese el pin:"/>
+          </Properties>
+        </Component>
         <Component class="javax.swing.JButton" name="btnSIiniciarTurno">
           <Properties>
             <Property name="text" type="java.lang.String" value="SI"/>
@@ -119,11 +128,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSIiniciarTurnoActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="lbPin">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Ingrese el pin:"/>
-          </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="txfdPin">
           <Events>
@@ -183,12 +187,12 @@
           <Font name="Calibri" size="14" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Recursos/Imagen_fondo_agua.jpg"/>
+          <Image iconType="3" name="/Recursos/petroleo 2 grande.png"/>
         </Property>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="500" height="190"/>
+          <AbsoluteConstraints x="0" y="0" width="500" height="250"/>
         </Constraint>
       </Constraints>
     </Component>

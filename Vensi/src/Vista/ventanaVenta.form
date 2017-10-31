@@ -40,15 +40,15 @@
       <Group type="103" groupAlignment="0" attributes="0">
           <Group type="102" alignment="1" attributes="0">
               <EmptySpace min="-2" max="-2" attributes="0"/>
-              <Component id="jPanel4" max="32767" attributes="0"/>
+              <Component id="jPanel3" max="32767" attributes="0"/>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-              <Component id="jPanel2" max="32767" attributes="0"/>
+              <Component id="jPanel4" max="32767" attributes="0"/>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
-          <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
+          <Component id="jPanel1" alignment="0" max="32767" attributes="0"/>
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
-              <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace max="32767" attributes="0"/>
           </Group>
       </Group>
@@ -56,13 +56,13 @@
     <DimensionLayout dim="1">
       <Group type="103" groupAlignment="1" attributes="0">
           <Group type="102" alignment="1" attributes="0">
-              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
-              <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="jPanel1" min="-2" max="-2" attributes="0"/>
+              <EmptySpace type="separate" max="-2" attributes="0"/>
+              <Component id="jPanel2" min="-2" max="-2" attributes="0"/>
               <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
+                  <Component id="jPanel3" max="32767" attributes="0"/>
                   <Component id="jPanel4" max="32767" attributes="0"/>
-                  <Component id="jPanel2" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" max="-2" attributes="0"/>
           </Group>
@@ -74,27 +74,84 @@
 
       <Layout>
         <DimensionLayout dim="0">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="btnIniciarTurno" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnDetalleCaja" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnCerrarTurno" max="32767" attributes="0"/>
+                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnMenuPrincipal" max="32767" attributes="0"/>
+              </Group>
+          </Group>
+        </DimensionLayout>
+        <DimensionLayout dim="1">
+          <Group type="103" groupAlignment="0" attributes="0">
+              <Component id="btnIniciarTurno" alignment="0" min="-2" pref="34" max="-2" attributes="0"/>
+              <Component id="btnMenuPrincipal" alignment="0" min="-2" pref="34" max="-2" attributes="0"/>
+              <Component id="btnDetalleCaja" alignment="0" min="-2" pref="34" max="-2" attributes="0"/>
+              <Component id="btnCerrarTurno" alignment="0" min="-2" pref="34" max="-2" attributes="0"/>
+          </Group>
+        </DimensionLayout>
+      </Layout>
+      <SubComponents>
+        <Component class="javax.swing.JButton" name="btnIniciarTurno">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Iniciar turno"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciarTurnoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnDetalleCaja">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Detalle de caja"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDetalleCajaActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnCerrarTurno">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Cerrar turno"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCerrarTurnoActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnMenuPrincipal">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Men&#xfa; principal"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuPrincipalActionPerformed"/>
+          </Events>
+        </Component>
+      </SubComponents>
+    </Container>
+    <Container class="javax.swing.JPanel" name="jPanel2">
+
+      <Layout>
+        <DimensionLayout dim="0">
           <Group type="103" groupAlignment="1" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Group type="102" attributes="0">
-                          <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbFiltroCampoVentaProd" min="-2" pref="115" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
+                          <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
                           <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbOrdenCampoProd" min="-2" max="-2" attributes="0"/>
+                          <Component id="cbOrdenCampo" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="cbOrdenDatosProd" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace min="-2" pref="63" max="-2" attributes="0"/>
+                          <Component id="cbTipoOrden" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="247" max="-2" attributes="0"/>
                           <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="txfdCantPesoProd" min="-2" pref="65" max="-2" attributes="0"/>
                       </Group>
-                      <Group type="102" alignment="1" attributes="0">
+                      <Group type="102" attributes="0">
                           <Component id="txfdBuscar" max="32767" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
                           <Component id="btnBuscar" min="-2" max="-2" attributes="0"/>
@@ -114,25 +171,16 @@
                       </Group>
                   </Group>
                   <EmptySpace type="unrelated" max="32767" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Group type="102" alignment="0" attributes="0">
-                          <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
-                          <Group type="103" groupAlignment="3" attributes="0">
-                              <Component id="jLabel4" alignment="3" min="-2" max="-2" attributes="0"/>
-                              <Component id="cbFiltroCampoVentaProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                          </Group>
-                      </Group>
-                      <Group type="103" alignment="0" groupAlignment="3" attributes="0">
-                          <Component id="txfdCantPesoProd" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="103" groupAlignment="3" attributes="0">
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="txfdCantPesoProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="jLabel2" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Group type="103" alignment="3" groupAlignment="3" attributes="0">
                           <Component id="jLabel3" alignment="3" min="-2" max="-2" attributes="0"/>
-                          <Component id="cbOrdenCampoProd" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
-                          <Component id="cbOrdenDatosProd" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="cbOrdenCampo" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
+                          <Component id="cbTipoOrden" alignment="3" min="-2" pref="23" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <EmptySpace min="1" pref="1" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="2" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -152,6 +200,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -165,23 +216,25 @@
             <Property name="text" type="java.lang.String" value="Ordenar por:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cbOrdenCampoProd">
+        <Component class="javax.swing.JComboBox" name="cbOrdenCampo">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="5">
-                <StringItem index="0" value="Ninguno"/>
-                <StringItem index="1" value="Descripci&#xf3;n"/>
-                <StringItem index="2" value="C&#xf3;digo"/>
-                <StringItem index="3" value="Precio"/>
-                <StringItem index="4" value="Stock"/>
+              <StringArray count="4">
+                <StringItem index="0" value="Descripci&#xf3;n"/>
+                <StringItem index="1" value="C&#xf3;digo"/>
+                <StringItem index="2" value="Precio"/>
+                <StringItem index="3" value="Stock"/>
               </StringArray>
             </Property>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbOrdenCampoActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
-        <Component class="javax.swing.JComboBox" name="cbOrdenDatosProd">
+        <Component class="javax.swing.JComboBox" name="cbTipoOrden">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="2">
@@ -190,97 +243,16 @@
               </StringArray>
             </Property>
           </Properties>
-          <AuxValues>
-            <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
-          </AuxValues>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel4">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Filtrar por:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JComboBox" name="cbFiltroCampoVentaProd">
-          <Properties>
-            <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
-                <StringItem index="0" value="Ninguno"/>
-                <StringItem index="1" value="Habilitado"/>
-                <StringItem index="2" value="Deshabilitado"/>
-              </StringArray>
-            </Property>
-          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbTipoOrdenActionPerformed"/>
+          </Events>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanel2">
-
-      <Layout>
-        <DimensionLayout dim="0">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="btnConfirmar" alignment="0" max="32767" attributes="0"/>
-              <Component id="jScrollPane2" alignment="0" pref="561" max="32767" attributes="0"/>
-              <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
-                  <Component id="LabMsjPC" max="32767" attributes="0"/>
-                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Component id="labPrecioTotalCompra" max="32767" attributes="0"/>
-                  <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-        <DimensionLayout dim="1">
-          <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
-                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Component id="LabMsjPC" pref="45" max="32767" attributes="0"/>
-                      <Component id="labPrecioTotalCompra" max="32767" attributes="0"/>
-                  </Group>
-                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnConfirmar" min="-2" pref="64" max="-2" attributes="0"/>
-              </Group>
-          </Group>
-        </DimensionLayout>
-      </Layout>
-      <SubComponents>
-        <Component class="javax.swing.JLabel" name="LabMsjPC">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Total de la compra:"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JLabel" name="labPrecioTotalCompra">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="$----"/>
-          </Properties>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnConfirmar">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Confirmar"/>
-          </Properties>
-        </Component>
-        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
-          <AuxValues>
-            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
-          </AuxValues>
-
-          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
-          <SubComponents>
-            <Component class="javax.swing.JTable" name="tablaCarrito">
-              <Properties>
-                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
-                  <Table columnCount="0" rowCount="10"/>
-                </Property>
-              </Properties>
-            </Component>
-          </SubComponents>
-        </Container>
-      </SubComponents>
-    </Container>
-    <Container class="javax.swing.JPanel" name="jPanel4">
+    <Container class="javax.swing.JPanel" name="jPanel3">
 
       <Layout>
         <DimensionLayout dim="0">
@@ -305,7 +277,7 @@
                   <Component id="btnQuitar" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="19" max="-2" attributes="0"/>
               </Group>
-              <Component id="jScrollPane1" pref="284" max="32767" attributes="0"/>
+              <Component id="jScrollPane1" pref="283" max="32767" attributes="0"/>
           </Group>
         </DimensionLayout>
       </Layout>
@@ -373,64 +345,72 @@
         </Component>
       </SubComponents>
     </Container>
-    <Container class="javax.swing.JPanel" name="jPanel3">
+    <Container class="javax.swing.JPanel" name="jPanel4">
 
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" alignment="0" attributes="0">
-                  <Component id="btnIniciarTurno" max="32767" attributes="0"/>
+              <Component id="btnConfirmar" alignment="0" max="32767" attributes="0"/>
+              <Component id="jScrollPane2" alignment="0" pref="561" max="32767" attributes="0"/>
+              <Group type="102" alignment="1" attributes="0">
+                  <EmptySpace min="-2" pref="88" max="-2" attributes="0"/>
+                  <Component id="LabMsjPC" max="32767" attributes="0"/>
                   <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnDetalleCaja" max="32767" attributes="0"/>
-                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnCerrarTurno" max="32767" attributes="0"/>
-                  <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                  <Component id="btnMenuPrincipal" max="32767" attributes="0"/>
+                  <Component id="labPrecioTotalCompra" max="32767" attributes="0"/>
+                  <EmptySpace min="-2" pref="97" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
         <DimensionLayout dim="1">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Component id="btnIniciarTurno" alignment="0" min="-2" pref="34" max="-2" attributes="0"/>
-              <Component id="btnMenuPrincipal" alignment="0" min="-2" pref="34" max="-2" attributes="0"/>
-              <Component id="btnDetalleCaja" alignment="0" min="-2" pref="34" max="-2" attributes="0"/>
-              <Component id="btnCerrarTurno" alignment="0" min="-2" pref="34" max="-2" attributes="0"/>
+              <Group type="102" alignment="0" attributes="0">
+                  <Component id="jScrollPane2" pref="0" max="32767" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                      <Component id="LabMsjPC" pref="45" max="32767" attributes="0"/>
+                      <Component id="labPrecioTotalCompra" max="32767" attributes="0"/>
+                  </Group>
+                  <EmptySpace type="unrelated" min="-2" max="-2" attributes="0"/>
+                  <Component id="btnConfirmar" min="-2" pref="64" max="-2" attributes="0"/>
+              </Group>
           </Group>
         </DimensionLayout>
       </Layout>
       <SubComponents>
-        <Component class="javax.swing.JButton" name="btnIniciarTurno">
+        <Component class="javax.swing.JLabel" name="LabMsjPC">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Iniciar turno"/>
+            <Property name="text" type="java.lang.String" value="Total de la compra:"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JLabel" name="labPrecioTotalCompra">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="$----"/>
+          </Properties>
+        </Component>
+        <Component class="javax.swing.JButton" name="btnConfirmar">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Confirmar"/>
           </Properties>
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnIniciarTurnoActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnConfirmarActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="btnDetalleCaja">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Detalle de caja"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnDetalleCajaActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnCerrarTurno">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Cerrar turno"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCerrarTurnoActionPerformed"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JButton" name="btnMenuPrincipal">
-          <Properties>
-            <Property name="text" type="java.lang.String" value="Men&#xfa; principal"/>
-          </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuPrincipalActionPerformed"/>
-          </Events>
-        </Component>
+        <Container class="javax.swing.JScrollPane" name="jScrollPane2">
+          <AuxValues>
+            <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+          </AuxValues>
+
+          <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+          <SubComponents>
+            <Component class="javax.swing.JTable" name="tablaCarrito">
+              <Properties>
+                <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
+                  <Table columnCount="0" rowCount="10"/>
+                </Property>
+              </Properties>
+            </Component>
+          </SubComponents>
+        </Container>
       </SubComponents>
     </Container>
   </SubComponents>

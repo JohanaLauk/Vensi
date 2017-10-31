@@ -1,7 +1,14 @@
 package Vista;
 
+import DAO.TurnoDAO;
+import Modelo.Turno;
+import java.util.Date;
+
 public class ventanaCierreTurno extends javax.swing.JFrame 
 {
+    TurnoDAO tDAO = new TurnoDAO();
+    ventanaInicioTurno vIT = new ventanaInicioTurno();
+    
     public ventanaCierreTurno() 
     {
         initComponents();
@@ -78,6 +85,11 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         jLabel14.setText("Diferencia");
 
         btnAceptarCerrarTurno.setText("Aceptar");
+        btnAceptarCerrarTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarCerrarTurnoActionPerformed(evt);
+            }
+        });
 
         btnCancelarCerrarTurno.setText("Cancelar");
         btnCancelarCerrarTurno.addActionListener(new java.awt.event.ActionListener() {
@@ -103,7 +115,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
                 .addComponent(btnAceptarCerrarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                 .addContainerGap())
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(jPanel1Layout.createSequentialGroup()
@@ -120,15 +132,14 @@ public class ventanaCierreTurno extends javax.swing.JFrame
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel14)
-                            .addGap(60, 60, 60))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGap(28, 28, 28)))))
+                            .addGap(32, 32, 32))
+                        .addComponent(jTextField23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(17, 17, 17)
+                .addGap(26, 26, 26)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -140,7 +151,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAceptarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -435,6 +446,15 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         vVenta.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarCerrarTurnoActionPerformed
+
+    private void btnAceptarCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarCerrarTurnoActionPerformed
+        Turno unTurno = new Turno();
+        unTurno.setFechaHoraInicio(vIT.fechaHoraInicio);
+        unTurno.setFechaHoraFin(new Date());  // sólo para que no quede nula
+        //setear la lista
+        
+        tDAO.alta(unTurno);
+    }//GEN-LAST:event_btnAceptarCerrarTurnoActionPerformed
 
     public static void main(String args[]) 
     {

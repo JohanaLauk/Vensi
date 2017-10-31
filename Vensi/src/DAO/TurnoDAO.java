@@ -7,8 +7,7 @@ import java.util.*;
 import javax.swing.*;
 
 public class TurnoDAO 
-{    
-        
+{            
     public void alta(Turno t)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
