@@ -1,6 +1,7 @@
 package Modelo;
 
 import java.util.Date;
+import java.util.List;
 
 public class Turno  implements java.io.Serializable 
 {
@@ -8,6 +9,7 @@ public class Turno  implements java.io.Serializable
      //private List<> movimientos; //ACOMODAR
      private Date fechaHoraInicio;
      private Date fechaHoraFin;
+     private List<ItemVenta> itemVenta;
      //private Set historials = new HashSet(0);
 
     public Turno() 
@@ -22,13 +24,13 @@ public class Turno  implements java.io.Serializable
         this.id = id;
     }
     
-    public ItemVenta getItemVenta() 
+    public List<ItemVenta> getItemVenta() 
     {
         return this.itemVenta;
     }    
     public void setItemVenta(ItemVenta itemVenta) 
     {
-        this.itemVenta = itemVenta;
+        this.itemVenta.add(itemVenta);
     }   
     
     public Date getFechaHoraInicio() 
