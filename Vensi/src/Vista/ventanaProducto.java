@@ -12,8 +12,8 @@ import javax.swing.JOptionPane;
 public class ventanaProducto extends javax.swing.JFrame 
 {    
     ProductoDAO pDAO = new ProductoDAO();
-    DefaultTableModel modelo, modelo2;    
-    TableColumnModel tcm, tcm2;
+    DefaultTableModel modelo, modelo2, modelo3;    
+    TableColumnModel tcm, tcm2, tcm3;
     
     String filtroSelec = null;
     String ordenSelec = null;
@@ -289,31 +289,31 @@ public class ventanaProducto extends javax.swing.JFrame
     private void cbCampoOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCampoOrdenActionPerformed
         if (cbCampoOrden.getSelectedItem().equals("Descripción"))
         {
-                ordenSelec = "descripcion";
+            ordenSelec = "descripcion";
         }
         if (cbCampoOrden.getSelectedItem().equals("Código"))
         {
-                ordenSelec = "codigo";
+            ordenSelec = "codigo";
         }
         if (cbCampoOrden.getSelectedItem().equals("Precio costo"))
         {
-                ordenSelec = "precio_costo";
+            ordenSelec = "precio_costo";
         }
         if (cbCampoOrden.getSelectedItem().equals("Precio venta"))
         {
-                ordenSelec = "precio_venta";
+            ordenSelec = "precio_venta";
         }
         if (cbCampoOrden.getSelectedItem().equals("Stock"))
         {
-                ordenSelec = "stock";
+            ordenSelec = "stock";
         }
         if (cbCampoOrden.getSelectedItem().equals("Stock mínimo"))
         {
-                ordenSelec = "stock_minimo";
+            ordenSelec = "stock_minimo";
         }
         if (cbCampoOrden.getSelectedItem().equals("Peso del envase"))
         {
-                ordenSelec = "peso_envase";
+            ordenSelec = "peso_envase";
         } 
         
         List<Producto> listaPersonalizada = pDAO.listarPersonalizado(OrdenarTabla());
@@ -425,7 +425,7 @@ public class ventanaProducto extends javax.swing.JFrame
         tablaProd.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
     }
     
-    public void llenarTablaPersonalizada(List<Producto> listaPersonalizada)     //anda
+    public void llenarTablaPersonalizada(List<Producto> listaPersonalizada)
     {        
         modelo = new DefaultTableModel();
         String[] datos = new String[9];
@@ -537,7 +537,7 @@ public class ventanaProducto extends javax.swing.JFrame
         tablaProd.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
     }
     
-    public String[] OrdenarTabla()  //anda
+    public String[] OrdenarTabla()
     {
         String[] ordenamiento = new String[3];
                 

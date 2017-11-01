@@ -4,7 +4,6 @@ import DAO.ProductoDAO;
 import Modelo.Producto;
 import java.awt.Dimension;
 import java.util.List;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
@@ -202,13 +201,14 @@ public class ventanaVenta extends javax.swing.JFrame
                         .addComponent(txfdBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txfdCantPesoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel3)
                         .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txfdCantPesoProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)))
                 .addGap(2, 2, 2))
         );
 
@@ -393,19 +393,19 @@ public class ventanaVenta extends javax.swing.JFrame
     private void cbOrdenCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrdenCampoActionPerformed
         if (cbOrdenCampo.getSelectedItem().equals("Descripción"))
         {
-                ordenSelec = "descripcion";
+            ordenSelec = "descripcion";
         }
         if (cbOrdenCampo.getSelectedItem().equals("Código"))
         {
-                ordenSelec = "codigo";
+            ordenSelec = "codigo";
         }
         if (cbOrdenCampo.getSelectedItem().equals("Precio"))
         {
-                ordenSelec = "precio_venta";
+            ordenSelec = "precio_venta";
         }
         if (cbOrdenCampo.getSelectedItem().equals("Stock"))
         {
-                ordenSelec = "stock";
+            ordenSelec = "stock";
         }
         
         List<Producto> listaPersonalizada = pDAO.listarPersonalizado(OrdenarTabla());
@@ -487,29 +487,34 @@ public class ventanaVenta extends javax.swing.JFrame
         
         
         //Tabla CARRITO
-        
-        tcm2 = tablaCarrito.getColumnModel();
-        
+              
         modelo2 = new DefaultTableModel();
         modelo2.addColumn("Descripción");
         modelo2.addColumn("Cantidad/peso");
         modelo2.addColumn("Precio");
         modelo2.addColumn("Precio Total");
+        modelo2.addColumn("ID");
         
         for (int i=0 ; i<15 ; i++)
         {
             modelo2.addRow(new Object[]{"","","",""});
         }        
         
-        this.tablaCarrito.setModel(modelo2);  
-                
+        tablaCarrito.setModel(modelo2);  
+        
+        tcm2 = tablaCarrito.getColumnModel();        
         tcm2.getColumn(0).setPreferredWidth(300);
         tcm2.getColumn(1).setPreferredWidth(90);
-        tcm2.getColumn(2).setPreferredWidth(60);
-        tcm2.getColumn(3).setPreferredWidth(80);
+        tcm2.getColumn(2).setPreferredWidth(90);
+        tcm2.getColumn(3).setPreferredWidth(90);
+        tcm.getColumn(4).setPreferredWidth(0);     
+        tcm.getColumn(4).setMaxWidth(0);
+        tcm.getColumn(4).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
     }
     
-    public void llenarTablaPersonalizada(List<Producto> listaPersonalizada)     //anda
+    public void llenarTablaPersonalizada(List<Producto> listaPersonalizada) 
     {        
         modelo = new DefaultTableModel();
         String[] datos = new String[6];
@@ -587,7 +592,7 @@ public class ventanaVenta extends javax.swing.JFrame
         tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
     }
     
-    public String[] OrdenarTabla()  //anda
+    public String[] OrdenarTabla()
     {
         String[] ordenamiento = new String[3];
                 

@@ -1,13 +1,20 @@
 package Vista;
 
-import javax.swing.JTable;
+import DAO.ProductoDAO;
+import Modelo.Producto;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 public class ventanaPedido extends javax.swing.JFrame 
 {
-    DefaultTableModel modelo, modelo2;
-    TableColumnModel tcm, tcm2;
+    ProductoDAO pDAO = new ProductoDAO();
+    DefaultTableModel modelo, modelo2, modelo3;
+    TableColumnModel tcm, tcm2, tcm3;
+    
+    String filtroSelec = null;
+    String ordenSelec = null;
+    String tipoSelec = null;
     
     public ventanaPedido() 
     {
@@ -17,38 +24,7 @@ public class ventanaPedido extends javax.swing.JFrame
         
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
         
-        modelo = new DefaultTableModel();
-        modelo.addColumn("Código");
-        modelo.addColumn("Descripción");
-        modelo.addColumn("Precio costo");
-        modelo.addColumn("Stock");
-        modelo.addColumn("Stock mínimo");
-        this.tablaProducto.setModel(modelo);
-        
-        tcm = tablaProducto.getColumnModel();
-        
-        tcm.getColumn(0).setPreferredWidth(100);
-        tcm.getColumn(1).setPreferredWidth(300);
-        tcm.getColumn(2).setPreferredWidth(80);
-        tcm.getColumn(3).setPreferredWidth(80);
-        tcm.getColumn(4).setPreferredWidth(80);    
-        
-        tablaProducto.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
-        
-        
-        modelo2 = new DefaultTableModel();
-        modelo2.addColumn("Código");
-        modelo2.addColumn("Descripción");
-        modelo2.addColumn("Cantidad");
-        this.tablaProdPedidoProvisoria.setModel(modelo2);
-        
-        tcm2 = tablaProdPedidoProvisoria.getColumnModel();
-        
-        tcm2.getColumn(0).setPreferredWidth(100);
-        tcm2.getColumn(1).setPreferredWidth(300);
-        tcm2.getColumn(2).setPreferredWidth(50);  
-        
-        tablaProdPedidoProvisoria.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
+        llenarTablaInicio();        
     }
     
     @SuppressWarnings("unchecked")
@@ -60,13 +36,13 @@ public class ventanaPedido extends javax.swing.JFrame
         txfdBuscarProd = new javax.swing.JTextField();
         btnBuscarProd = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
-        jComboBox2 = new javax.swing.JComboBox<>();
+        cbOrdenCampo = new javax.swing.JComboBox<>();
+        cbTipoOrden = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
-        tablaProducto = new javax.swing.JTable();
+        tablaProd = new javax.swing.JTable();
         btnCargarInventario = new javax.swing.JButton();
         btnVolverMP = new javax.swing.JButton();
-        jComboBox4 = new javax.swing.JComboBox<>();
+        cbFiltro = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
@@ -82,7 +58,7 @@ public class ventanaPedido extends javax.swing.JFrame
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tablaProdPedidoProvisoria = new javax.swing.JTable();
+        tablaPedidoProvisoria = new javax.swing.JTable();
         btnBorrarProdListaProvisoria = new javax.swing.JButton();
         btnEditarListaProvisoria = new javax.swing.JButton();
         btnGuardarListaProvisoria = new javax.swing.JButton();
@@ -93,14 +69,29 @@ public class ventanaPedido extends javax.swing.JFrame
         jLabel1.setText("Buscar:");
 
         btnBuscarProd.setText("Buscar");
+        btnBuscarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarProdActionPerformed(evt);
+            }
+        });
 
         jLabel2.setText("Ordenar por:");
 
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripción", "Código", "Stock mínimo" }));
+        cbOrdenCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripción", "Código", "Precio costo", "Stock", "Stock mínimo" }));
+        cbOrdenCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbOrdenCampoActionPerformed(evt);
+            }
+        });
 
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        cbTipoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        cbTipoOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoOrdenActionPerformed(evt);
+            }
+        });
 
-        tablaProducto.setModel(new javax.swing.table.DefaultTableModel(
+        tablaProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -108,7 +99,7 @@ public class ventanaPedido extends javax.swing.JFrame
 
             }
         ));
-        jScrollPane1.setViewportView(tablaProducto);
+        jScrollPane1.setViewportView(tablaProd);
 
         btnCargarInventario.setText("Cargar al inventario");
 
@@ -119,7 +110,12 @@ public class ventanaPedido extends javax.swing.JFrame
             }
         });
 
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitados", "Deshabilitados" }));
+        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
+        cbFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFiltroActionPerformed(evt);
+            }
+        });
 
         jLabel4.setText("Filtrar por:");
 
@@ -142,13 +138,13 @@ public class ventanaPedido extends javax.swing.JFrame
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
                         .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox1, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbOrdenCampo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jComboBox2, 0, 85, Short.MAX_VALUE)
+                        .addComponent(cbTipoOrden, 0, 85, Short.MAX_VALUE)
                         .addGap(5, 5, 5))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -172,10 +168,10 @@ public class ventanaPedido extends javax.swing.JFrame
                 .addGap(9, 9, 9)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
-                    .addComponent(jComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
-                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -264,7 +260,7 @@ public class ventanaPedido extends javax.swing.JFrame
 
         jLabel3.setText("Lista pedido provisoria:");
 
-        tablaProdPedidoProvisoria.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPedidoProvisoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -272,7 +268,7 @@ public class ventanaPedido extends javax.swing.JFrame
 
             }
         ));
-        jScrollPane3.setViewportView(tablaProdPedidoProvisoria);
+        jScrollPane3.setViewportView(tablaPedidoProvisoria);
 
         btnBorrarProdListaProvisoria.setText("Borrar");
 
@@ -344,6 +340,94 @@ public class ventanaPedido extends javax.swing.JFrame
         vPrincipal.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVolverMPActionPerformed
+
+    private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
+        if (cbFiltro.getSelectedItem().equals("Todos"))
+        {
+            filtroSelec = "Todos";
+        }
+        else
+        {
+            if (cbFiltro.getSelectedItem().equals("Habilitados"))
+            {
+                filtroSelec = "Habilitados";                
+            }
+            else
+            {
+                filtroSelec = "Deshabilitados";
+            }
+        }
+        
+        List<Producto> listaPersonalizada = pDAO.listarPersonalizado(OrdenarTabla());
+        llenarTablaPersonalizada(listaPersonalizada);
+    }//GEN-LAST:event_cbFiltroActionPerformed
+
+    private void cbOrdenCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrdenCampoActionPerformed
+        if (cbOrdenCampo.getSelectedItem().equals("Descripción"))
+        {
+            ordenSelec = "descripcion";
+        }
+        if (cbOrdenCampo.getSelectedItem().equals("Código"))
+        {
+            ordenSelec = "codigo";
+        }
+        if (cbOrdenCampo.getSelectedItem().equals("Precio costo"))
+        {
+            ordenSelec = "precio_costo";
+        }
+        if (cbOrdenCampo.getSelectedItem().equals("Precio venta"))
+        {
+            ordenSelec = "precio_venta";
+        }
+        if (cbOrdenCampo.getSelectedItem().equals("Stock"))
+        {
+            ordenSelec = "stock";
+        }
+        if (cbOrdenCampo.getSelectedItem().equals("Stock mínimo"))
+        {
+            ordenSelec = "stock_minimo";
+        }
+        if (cbOrdenCampo.getSelectedItem().equals("Peso del envase"))
+        {
+            ordenSelec = "peso_envase";
+        } 
+        
+        List<Producto> listaPersonalizada = pDAO.listarPersonalizado(OrdenarTabla());
+        llenarTablaPersonalizada(listaPersonalizada); 
+    }//GEN-LAST:event_cbOrdenCampoActionPerformed
+
+    private void cbTipoOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoOrdenActionPerformed
+        if (cbTipoOrden.getSelectedItem().equals("Descendente"))
+        {
+            tipoSelec = "DESC";
+        }
+        else
+        {
+            tipoSelec = "ASC";
+        }
+        
+        List<Producto> listaPersonalizada = pDAO.listarPersonalizado(OrdenarTabla());
+        llenarTablaPersonalizada(listaPersonalizada);
+    }//GEN-LAST:event_cbTipoOrdenActionPerformed
+
+    private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
+        String cadena = txfdBuscarProd.getText();
+        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena);
+        llenarTablaBusqueda(listaBusqueda);
+        
+        if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
+        {
+            cbFiltro.setEnabled(true);
+            cbOrdenCampo.setEnabled(true);
+            cbTipoOrden.setEnabled(true); 
+        }
+        else
+        {
+            cbFiltro.setEnabled(false);
+            cbOrdenCampo.setEnabled(false);
+            cbTipoOrden.setEnabled(false);
+        }  
+    }//GEN-LAST:event_btnBuscarProdActionPerformed
     
     public static void main(String args[]) 
     {
@@ -356,6 +440,173 @@ public class ventanaPedido extends javax.swing.JFrame
         });
     }
 
+    public void llenarTablaInicio()
+    {        
+        modelo = new DefaultTableModel();
+        List<Producto> listaInicial = pDAO.listarInicio();
+        String[] datos = new String[6];
+ 
+        modelo.addColumn("Código");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio costo");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Stock mínimo");
+        modelo.addColumn("ID");
+        
+        for (Producto p : listaInicial)
+        {
+            datos[0] = p.getCodigo();
+            datos[1] = p.getDescripcion();
+            datos[2] = String.valueOf(p.getPrecioCosto());
+            datos[3] = String.valueOf(p.getStock());
+            datos[4] = String.valueOf(p.getStockMinimo());            
+            datos[5] = String.valueOf(p.getId());
+           
+            modelo.addRow(datos);
+        }
+        
+        tablaProd.setModel(modelo);
+        
+        tcm = tablaProd.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(100);
+        tcm.getColumn(1).setPreferredWidth(300);
+        tcm.getColumn(2).setPreferredWidth(80);
+        tcm.getColumn(3).setPreferredWidth(80);
+        tcm.getColumn(4).setPreferredWidth(80);         
+        tcm.getColumn(5).setPreferredWidth(0);  
+        tcm.getColumn(5).setMaxWidth(0);
+        tcm.getColumn(5).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+        
+        
+        //tabla PEDIDO
+        
+        modelo2 = new DefaultTableModel();
+        modelo2.addColumn("Código");
+        modelo2.addColumn("Descripción");
+        modelo2.addColumn("Cantidad");
+        modelo2.addColumn("ID");       
+        
+        for (int i=0 ; i<15 ; i++)
+        {
+            modelo2.addRow(new Object[]{"","","",""});
+        }
+        
+        tablaPedidoProvisoria.setModel(modelo2);
+        
+        tcm2 = tablaPedidoProvisoria.getColumnModel();        
+        tcm2.getColumn(0).setPreferredWidth(100);
+        tcm2.getColumn(1).setPreferredWidth(300);
+        tcm2.getColumn(2).setPreferredWidth(80);  
+        tcm2.getColumn(3).setPreferredWidth(0);  
+        tcm2.getColumn(3).setMaxWidth(0);
+        tcm2.getColumn(3).setMinWidth(0);
+        tablaPedidoProvisoria.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
+        tablaPedidoProvisoria.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
+    }
+    
+    public void llenarTablaPersonalizada(List<Producto> listaPersonalizada)
+    {        
+        modelo = new DefaultTableModel();
+        String[] datos = new String[6];
+ 
+        modelo.addColumn("Código");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio costo");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Stock mínimo");
+        modelo.addColumn("ID");
+        
+        for (Producto p : listaPersonalizada)
+        {
+            datos[0] = p.getCodigo();
+            datos[1] = p.getDescripcion();
+            datos[2] = String.valueOf(p.getPrecioCosto());
+            datos[3] = String.valueOf(p.getStock());
+            datos[4] = String.valueOf(p.getStockMinimo());
+            datos[5] = String.valueOf(p.getId());
+           
+           modelo.addRow(datos);
+        }
+        
+        tablaProd.setModel(modelo);
+        
+        tcm = tablaProd.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(100);
+        tcm.getColumn(1).setPreferredWidth(300);
+        tcm.getColumn(2).setPreferredWidth(80);
+        tcm.getColumn(3).setPreferredWidth(80);
+        tcm.getColumn(4).setPreferredWidth(80);               
+        tcm.getColumn(5).setPreferredWidth(0);  
+        tcm.getColumn(5).setMaxWidth(0);
+        tcm.getColumn(5).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);   
+    }
+    
+    public void llenarTablaBusqueda (List<Producto> listaBusqueda)
+    {
+        modelo3 = new DefaultTableModel();
+        String[] datos = new String[6];
+ 
+        modelo3.addColumn("Código");
+        modelo3.addColumn("Descripción");
+        modelo3.addColumn("Precio costo");
+        modelo3.addColumn("Stock");
+        modelo3.addColumn("Stock mínimo");
+        modelo3.addColumn("ID");
+        
+        for (Producto p : listaBusqueda)
+        {
+            datos[0] = p.getCodigo();
+            datos[1] = p.getDescripcion();
+            datos[2] = String.valueOf(p.getPrecioCosto());
+            datos[3] = String.valueOf(p.getStock());
+            datos[4] = String.valueOf(p.getStockMinimo());
+            datos[5] = String.valueOf(p.getId());
+           
+           modelo3.addRow(datos);
+        }
+        
+        tablaProd.setModel(modelo3);
+        
+        tcm3 = tablaProd.getColumnModel();
+        tcm3.getColumn(0).setPreferredWidth(100);
+        tcm3.getColumn(1).setPreferredWidth(300);
+        tcm3.getColumn(2).setPreferredWidth(50);
+        tcm3.getColumn(3).setPreferredWidth(50);
+        tcm3.getColumn(4).setPreferredWidth(50);        
+        tcm3.getColumn(5).setPreferredWidth(0);  
+        tcm3.getColumn(5).setMaxWidth(0);
+        tcm3.getColumn(5).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+    }
+    
+    public String[] OrdenarTabla()
+    {
+        String[] ordenamiento = new String[3];
+                
+        if (filtroSelec == null)
+        {
+            filtroSelec = "Todos";
+        }
+        if (ordenSelec == null)
+        {
+            ordenSelec = "descripcion";
+        }
+        if (tipoSelec == null)
+        {
+            tipoSelec = "ASC";
+        }
+        ordenamiento[0] = filtroSelec;
+        ordenamiento[1] = ordenSelec;
+        ordenamiento[2] = tipoSelec;
+                
+        return ordenamiento;
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrarProdListaProvisoria;
     private javax.swing.JButton btnBuscarProd;
@@ -365,10 +616,10 @@ public class ventanaPedido extends javax.swing.JFrame
     private javax.swing.JButton btnGuardarListaProvisoria;
     private javax.swing.JButton btnOk;
     private javax.swing.JButton btnVolverMP;
-    private javax.swing.JComboBox<String> jComboBox1;
-    private javax.swing.JComboBox<String> jComboBox2;
+    private javax.swing.JComboBox<String> cbFiltro;
+    private javax.swing.JComboBox<String> cbOrdenCampo;
+    private javax.swing.JComboBox<String> cbTipoOrden;
     private javax.swing.JComboBox<String> jComboBox3;
-    private javax.swing.JComboBox<String> jComboBox4;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -384,8 +635,8 @@ public class ventanaPedido extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JTable tablaProdPedidoProvisoria;
-    private javax.swing.JTable tablaProducto;
+    private javax.swing.JTable tablaPedidoProvisoria;
+    private javax.swing.JTable tablaProd;
     private javax.swing.JTextField txfdBuscarProd;
     private javax.swing.JTextField txfdCantidadPedido;
     // End of variables declaration//GEN-END:variables

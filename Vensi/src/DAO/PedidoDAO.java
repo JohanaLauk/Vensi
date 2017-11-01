@@ -7,8 +7,7 @@ import java.util.*;
 import javax.swing.*;
 
 public class PedidoDAO 
-{    
-        
+{            
     public void alta(Pedido p)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
