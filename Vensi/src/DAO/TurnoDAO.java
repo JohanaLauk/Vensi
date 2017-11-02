@@ -91,4 +91,25 @@ public class TurnoDAO
         }
         return lista;
     }
+    
+    public Turno obtenerUltimo()
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
+        Turno t = null;
+        try
+        {
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("FROM Turno t ORDER BY t.id DESC LIMIT 1");
+            t = (Turno)query.uniqueResult();
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error al obtener último turno");
+        }
+        
+        return t;
+    }
 }
