@@ -361,12 +361,14 @@ public class ventanaVenta extends javax.swing.JFrame
     private void btnIniciarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarTurnoActionPerformed
         ventanaInicioTurno vInicioTurno = new ventanaInicioTurno();
         vInicioTurno.setVisible(true);
+        this.btnIniciarTurno.setEnabled(false); //una vez iniciado no se puede volver a apretar
         dispose();
     }//GEN-LAST:event_btnIniciarTurnoActionPerformed
 
     private void btnCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarTurnoActionPerformed
         ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
         vCierreTurno.setVisible(true);
+        this.btnIniciarTurno.setEnabled(true); //una vez cerrado el turno se activa
         dispose();
     }//GEN-LAST:event_btnCerrarTurnoActionPerformed
 
