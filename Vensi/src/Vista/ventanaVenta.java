@@ -4,6 +4,7 @@ import DAO.ProductoDAO;
 import Modelo.Producto;
 import java.awt.Dimension;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
@@ -32,8 +33,7 @@ public class ventanaVenta extends javax.swing.JFrame
         llenarTablaInicio();
         
         /*if ()   //si el turno no está iniciado
-        {
-            
+        {            
             btnDetalleCaja.setEnabled(false);
             btnCerrarTurno.setEnabled(false);
             for (int i=0 ; i < jPanel2.getComponents().length ; i++)
@@ -237,6 +237,11 @@ public class ventanaVenta extends javax.swing.JFrame
         });
 
         btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -361,14 +366,14 @@ public class ventanaVenta extends javax.swing.JFrame
     private void btnIniciarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarTurnoActionPerformed
         ventanaInicioTurno vInicioTurno = new ventanaInicioTurno();
         vInicioTurno.setVisible(true);
-        this.btnIniciarTurno.setEnabled(false); //una vez iniciado no se puede volver a apretar
+        //this.btnIniciarTurno.setEnabled(false); //una vez iniciado no se puede volver a apretar
         dispose();
     }//GEN-LAST:event_btnIniciarTurnoActionPerformed
 
     private void btnCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarTurnoActionPerformed
         ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
         vCierreTurno.setVisible(true);
-        this.btnIniciarTurno.setEnabled(true); //una vez cerrado el turno se activa
+        //this.btnIniciarTurno.setEnabled(true); //una vez cerrado el turno se activa
         dispose();
     }//GEN-LAST:event_btnCerrarTurnoActionPerformed
 
@@ -434,6 +439,21 @@ public class ventanaVenta extends javax.swing.JFrame
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         //crear el objeto item_venta
     }//GEN-LAST:event_btnConfirmarActionPerformed
+
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
+        int filaSelec = tablaProd.getSelectedRow();
+        
+        if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
+        {
+            //OBTENEMOS EL ID DEL PRODUCTO SELECCIONADO
+            int id_recibido = Integer.parseInt(tablaProd.getValueAt(filaSelec, 5).toString());
+            double cantidad = Double.parseDouble(txfdCantPesoProd.getText());
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
+        }
+    }//GEN-LAST:event_btnAgregarActionPerformed
     
     public static void main(String args[]) 
     {        
@@ -446,10 +466,10 @@ public class ventanaVenta extends javax.swing.JFrame
         });
     }
     
-    public void llenarTablaInicio()
+    public void llenarTablaInicio() //ACOMODAR - LISTAR SOLO PROD HABILITADOS
     {       
         //Tabla PRODUCTOS
-        
+       
         modelo = new DefaultTableModel();
         List<Producto> listaInicial = pDAO.listarInicio();
         String[] datos = new String[6];
@@ -592,6 +612,32 @@ public class ventanaVenta extends javax.swing.JFrame
         tcm3.getColumn(5).setMinWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+    }
+    
+    public void llenarCarrito(int idProd, double cantidad)
+    {
+        //FALTA
+        String[] datos = new String[6];
+        
+        modelo2 = new DefaultTableModel();
+        modelo2.addColumn("Descripción");
+        modelo2.addColumn("Cantidad/peso");
+        modelo2.addColumn("Precio");
+        modelo2.addColumn("Precio Total");
+        modelo2.addColumn("ID");
+                       
+        tablaCarrito.setModel(modelo2);  
+        
+        tcm2 = tablaCarrito.getColumnModel();        
+        tcm2.getColumn(0).setPreferredWidth(300);
+        tcm2.getColumn(1).setPreferredWidth(90);
+        tcm2.getColumn(2).setPreferredWidth(90);
+        tcm2.getColumn(3).setPreferredWidth(90);
+        tcm.getColumn(4).setPreferredWidth(0);     
+        tcm.getColumn(4).setMaxWidth(0);
+        tcm.getColumn(4).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
     }
     
     public String[] OrdenarTabla()

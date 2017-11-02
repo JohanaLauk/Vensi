@@ -255,7 +255,7 @@ public class ventanaProducto extends javax.swing.JFrame
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
         {
             //GUARDAMOS EL ID EN LA VARIABLE DE LA VENTANA_EDITAR_PROD, DEL PRODUCTO SELECCIONADO EN LA TABLA
-            ventanaEditarProd.id_recibido = Integer.parseInt( tablaProd.getValueAt(filaSelec, 8).toString());   
+            ventanaEditarProd.id_recibido = Integer.parseInt(tablaProd.getValueAt(filaSelec, 8).toString());   
         
             ventanaEditarProd vEditarProd = new ventanaEditarProd();
             vEditarProd.setVisible(true);
