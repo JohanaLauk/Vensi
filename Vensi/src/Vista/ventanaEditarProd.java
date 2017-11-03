@@ -208,7 +208,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         Producto prod = new Producto();
         
         prod.setCodigo(txfdEditarCodigo.getText());
-        prod.setDescripcion(txfdEditarDescripcion.getText());
+        prod.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());
         prod.setPesoEnvase(Integer.parseInt(txfdEditarPesoEnvase.getText()));
         prod.setPrecioCosto(Double.parseDouble(txfdEditarPrecioCosto.getText()));
         prod.setPrecioVenta(Double.parseDouble(txfdEditarPrecioVenta.getText()));

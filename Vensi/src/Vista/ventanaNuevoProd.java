@@ -189,7 +189,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         Producto unProd = new Producto();
         
         unProd.setCodigo(txfdCodigo.getText());
-        unProd.setDescripcion(txfdDescripcion.getText());
+        unProd.setDescripcion(txfdDescripcion.getText().toUpperCase());
         unProd.setStockMinimo(Double.parseDouble(txfdStockMinimo.getText()));
         unProd.setPesoEnvase(Integer.parseInt(txfdPesoEnvase.getText())); 
         

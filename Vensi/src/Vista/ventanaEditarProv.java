@@ -175,9 +175,9 @@ public class ventanaEditarProv extends javax.swing.JFrame
     private void btnAceptarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarActionPerformed
         Proveedor prov = new Proveedor();
         
-        prov.setRazonSocial(txfdEditarRazonSocial.getText());
+        prov.setRazonSocial(txfdEditarRazonSocial.getText().toUpperCase());
         prov.setCuit(txfdEditarCuit.getText());
-        prov.setDireccion(txfdEditarDireccion.getText());
+        prov.setDireccion(txfdEditarDireccion.getText().toUpperCase());
         prov.setContacto(txfdEditarContacto.getText());
         
         if(cbEditarEstado.getSelectedItem().equals("Habilitado"))

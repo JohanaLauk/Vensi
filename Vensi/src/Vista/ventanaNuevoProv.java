@@ -170,9 +170,9 @@ public class ventanaNuevoProv extends javax.swing.JFrame
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         Proveedor unProv = new Proveedor();
         
-        unProv.setRazonSocial(txfdRazonSocial.getText());
+        unProv.setRazonSocial(txfdRazonSocial.getText().toUpperCase());
         unProv.setCuit(txfdCuit.getText());
-        unProv.setDireccion(txfdDireccion.getText());
+        unProv.setDireccion(txfdDireccion.getText().toUpperCase());
         unProv.setContacto(txfdContacto.getText());
         
         pDAO.alta(unProv);      

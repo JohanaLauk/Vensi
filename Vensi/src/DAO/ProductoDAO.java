@@ -122,7 +122,7 @@ public class ProductoDAO
             if (filtro.equals("Todos"))
             {
                 Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena ORDER BY descripcion");
-                query.setParameter("cadena", "%"+cadena+"%");
+                query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
                 lista = query.list();
             }
             else
@@ -130,13 +130,13 @@ public class ProductoDAO
                 if (filtro.equals("Habilitados"))
                 {
                     Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena and estado = true ORDER BY descripcion");
-                    query.setParameter("cadena", "%"+cadena+"%");
+                    query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
                     lista = query.list();
                 }
                 else
                 {
                     Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena and estado = false ORDER BY descripcion");
-                    query.setParameter("cadena", "%"+cadena+"%");
+                    query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
                     lista = query.list();
                 }
             }
