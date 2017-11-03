@@ -31,7 +31,7 @@ public class ventanaProducto extends javax.swing.JFrame
         
         this.setPreferredSize(new Dimension(1000, 500));    //al minimizar la ventana aparece con esa medida
                        
-        llenarTablaInicio();               
+        llenarTabla();               
     }
     
     @SuppressWarnings("unchecked")
@@ -273,7 +273,7 @@ public class ventanaProducto extends javax.swing.JFrame
 
     private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
         String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena);
+        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec);
         llenarTablaBusqueda(listaBusqueda);
         
         if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
@@ -281,6 +281,7 @@ public class ventanaProducto extends javax.swing.JFrame
             cbFiltroCampoProd.setEnabled(true);
             cbCampoOrden.setEnabled(true);
             cbTipoOrden.setEnabled(true); 
+            llenarTabla();
         }
         else
         {
@@ -320,8 +321,7 @@ public class ventanaProducto extends javax.swing.JFrame
             ordenSelec = "peso_envase";
         } 
         
-        List<Producto> listaPersonalizada = pDAO.listarPersonalizado(OrdenarTabla());
-        llenarTablaPersonalizada(listaPersonalizada);        
+        llenarTabla(); 
     }//GEN-LAST:event_cbCampoOrdenActionPerformed
        
     private void cbTipoOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoOrdenActionPerformed
@@ -334,8 +334,7 @@ public class ventanaProducto extends javax.swing.JFrame
             tipoSelec = "ASC";
         }
         
-        List<Producto> listaPersonalizada = pDAO.listarPersonalizado(OrdenarTabla());
-        llenarTablaPersonalizada(listaPersonalizada);
+        llenarTabla();
     }//GEN-LAST:event_cbTipoOrdenActionPerformed
 
     private void cbFiltroCampoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroCampoProdActionPerformed
@@ -355,8 +354,7 @@ public class ventanaProducto extends javax.swing.JFrame
             }
         }
         
-        List<Producto> listaPersonalizada = pDAO.listarPersonalizado(OrdenarTabla());
-        llenarTablaPersonalizada(listaPersonalizada);
+        llenarTabla();
     }//GEN-LAST:event_cbFiltroCampoProdActionPerformed
     
     public static void main(String args[]) 
@@ -370,10 +368,10 @@ public class ventanaProducto extends javax.swing.JFrame
         });
     }
     
-    public void llenarTablaInicio()
+    public void llenarTabla()
     {        
         modelo = new DefaultTableModel();
-        List<Producto> listaInicial = pDAO.listarInicio();
+        List<Producto> lista = pDAO.listar(OrdenarTabla());
         String[] datos = new String[9];
  
         modelo.addColumn("Código");
@@ -386,7 +384,7 @@ public class ventanaProducto extends javax.swing.JFrame
         modelo.addColumn("Estado");
         modelo.addColumn("ID");
         
-        for (Producto p : listaInicial)
+        for (Producto p : lista)
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
@@ -427,63 +425,7 @@ public class ventanaProducto extends javax.swing.JFrame
         tablaProd.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
         
         tablaProd.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
-    }
-    
-    public void llenarTablaPersonalizada(List<Producto> listaPersonalizada)
-    {        
-        modelo = new DefaultTableModel();
-        String[] datos = new String[9];
- 
-        modelo.addColumn("Código");
-        modelo.addColumn("Descripción");
-        modelo.addColumn("Precio costo");
-        modelo.addColumn("Precio venta");
-        modelo.addColumn("Stock");
-        modelo.addColumn("Stock mínimo");
-        modelo.addColumn("Peso del envase");
-        modelo.addColumn("Estado");
-        modelo.addColumn("ID");
-        
-        for (Producto p : listaPersonalizada)
-        {
-            datos[0] = p.getCodigo();
-            datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf(p.getPrecioCosto());
-            datos[3] = String.valueOf(p.getPrecioVenta());
-            datos[4] = String.valueOf(p.getStock());
-            datos[5] = String.valueOf(p.getStockMinimo());
-            datos[6] = String.valueOf(p.getPesoEnvase());
-            
-            if(p.isEstado())
-            {
-                datos[7] = "Habilitado";
-            }
-            else
-            {
-                datos[7] = "Deshabilitado";
-            }
-            datos[8] = String.valueOf(p.getId());
-           
-           modelo.addRow(datos);
-        }
-        
-        tablaProd.setModel(modelo);
-        
-        tcm = tablaProd.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(100);
-        tcm.getColumn(1).setPreferredWidth(300);
-        tcm.getColumn(2).setPreferredWidth(50);
-        tcm.getColumn(3).setPreferredWidth(50);
-        tcm.getColumn(4).setPreferredWidth(50);
-        tcm.getColumn(5).setPreferredWidth(50);
-        tcm.getColumn(6).setPreferredWidth(50);
-        tcm.getColumn(7).setPreferredWidth(50);        
-        tcm.getColumn(8).setPreferredWidth(0);  
-        tcm.getColumn(8).setMaxWidth(0);
-        tcm.getColumn(8).setMinWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
-    }
+    }   
     
     public void llenarTablaBusqueda (List<Producto> listaBusqueda)
     {

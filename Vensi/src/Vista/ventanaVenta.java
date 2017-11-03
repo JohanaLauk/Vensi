@@ -11,12 +11,14 @@ import javax.swing.table.TableColumnModel;
 public class ventanaVenta extends javax.swing.JFrame 
 {    
     ProductoDAO pDAO = new ProductoDAO();
-    DefaultTableModel modelo, modelo2, modelo3;
+    DefaultTableModel modelo, modelo2, modelo3, m;
     TableColumnModel tcm, tcm2, tcm3;
     
     String filtroSelec = null;
     String ordenSelec = null;
     String tipoSelec = null;
+    
+    static double totalCarrito = 0; //inicializa en 0 cada vez que se confirma la compra
     
     public ventanaVenta() 
     {
@@ -30,7 +32,8 @@ public class ventanaVenta extends javax.swing.JFrame
         
         this.setPreferredSize(new Dimension(1200, 500));    //al ejecutarse, la ventana aparece con esa medida
         
-        llenarTablaInicio();
+        llenarTabla();
+        llenarTablaCarrito();
         
         /*if ()   //si el turno no está iniciado
         {            
@@ -66,13 +69,13 @@ public class ventanaVenta extends javax.swing.JFrame
         btnMenuPrincipal = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txfdBuscar = new javax.swing.JTextField();
         btnBuscar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         txfdCantPesoProd = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         cbOrdenCampo = new javax.swing.JComboBox<>();
         cbTipoOrden = new javax.swing.JComboBox<>();
+        txfdBuscarProd = new org.jdesktop.swingx.JXTextField();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProd = new javax.swing.JTable();
@@ -168,16 +171,18 @@ public class ventanaVenta extends javax.swing.JFrame
             }
         });
 
+        txfdBuscarProd.setToolTipText("");
+        txfdBuscarProd.setPrompt("Busque por código o por descripción");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(10, 10, 10)
+                        .addGap(14, 14, 14)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -188,18 +193,18 @@ public class ventanaVenta extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txfdCantPesoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 65, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txfdBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfdBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
                         .addComponent(btnBuscar))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txfdBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(txfdBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -263,12 +268,12 @@ public class ventanaVenta extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addComponent(btnQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(19, 19, 19))
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 283, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 282, Short.MAX_VALUE)
         );
 
         LabMsjPC.setText("Total de la compra:");
 
-        labPrecioTotalCompra.setText("$----");
+        labPrecioTotalCompra.setText("$0");
 
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -353,10 +358,6 @@ public class ventanaVenta extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
-        
-    }//GEN-LAST:event_btnQuitarActionPerformed
-
     private void btnMenuPrincipalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalActionPerformed
         ventanaPrincipal vPrincipal = new ventanaPrincipal();
         vPrincipal.setVisible(true);
@@ -393,8 +394,7 @@ public class ventanaVenta extends javax.swing.JFrame
             tipoSelec = "ASC";
         }
         
-        List<Producto> listaPersonalizada = pDAO.listarPersonalizado(OrdenarTabla());
-        llenarTablaPersonalizada(listaPersonalizada);
+        llenarTabla();        
     }//GEN-LAST:event_cbTipoOrdenActionPerformed
 
     private void cbOrdenCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrdenCampoActionPerformed
@@ -415,19 +415,19 @@ public class ventanaVenta extends javax.swing.JFrame
             ordenSelec = "stock";
         }
         
-        List<Producto> listaPersonalizada = pDAO.listarPersonalizado(OrdenarTabla());
-        llenarTablaPersonalizada(listaPersonalizada);   
+        llenarTabla();   
     }//GEN-LAST:event_cbOrdenCampoActionPerformed
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        String cadena = txfdBuscar.getText();
-        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena);
+        String cadena = txfdBuscarProd.getText();
+        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, "Habilitados");
         llenarTablaBusqueda(listaBusqueda);
         
-        if (txfdBuscar.getText().equals("") || txfdBuscar.getText() == null)
+        if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
         {
             cbOrdenCampo.setEnabled(true);
             cbTipoOrden.setEnabled(true); 
+            llenarTabla();
         }
         else
         {
@@ -438,6 +438,7 @@ public class ventanaVenta extends javax.swing.JFrame
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         //crear el objeto item_venta
+        totalCarrito = 0;
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -445,15 +446,55 @@ public class ventanaVenta extends javax.swing.JFrame
         
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
         {
+            double x=0;
+            String precioTotal = null;            
+            
             //OBTENEMOS EL ID DEL PRODUCTO SELECCIONADO
-            int id_recibido = Integer.parseInt(tablaProd.getValueAt(filaSelec, 5).toString());
-            double cantidad = Double.parseDouble(txfdCantPesoProd.getText());
+            String descrip = tablaProd.getValueAt(filaSelec, 1).toString();
+            String cantidad = txfdCantPesoProd.getText().toString();
+            String precioU = tablaProd.getValueAt(filaSelec, 2).toString();
+            
+            x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
+            precioTotal = String.valueOf(x).toString();
+            
+            String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();            
+            
+            m = (DefaultTableModel) tablaCarrito.getModel();
+            String filaNueva[] = {descrip, cantidad, precioU, precioTotal, id_recibido};
+            m.addRow(filaNueva);            
+            
+            totalCarrito = totalCarrito + x;
+            labPrecioTotalCompra.setText(String.valueOf(totalCarrito));
+            
+            txfdCantPesoProd.setText(null);
         }
         else
         {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
         }
     }//GEN-LAST:event_btnAgregarActionPerformed
+
+    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
+        int filaSelec = tablaCarrito.getSelectedRow();
+        
+        if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
+        {
+            String cantidad = tablaCarrito.getValueAt(filaSelec, 1).toString();
+            String precioU = tablaCarrito.getValueAt(filaSelec, 2).toString();
+            String precioTotal = tablaCarrito.getValueAt(filaSelec, 3).toString();
+            
+            double x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
+            totalCarrito = totalCarrito - x;
+            labPrecioTotalCompra.setText(String.valueOf(totalCarrito));
+            
+            m = (DefaultTableModel) tablaCarrito.getModel();
+            m.removeRow(filaSelec);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
+        }
+    }//GEN-LAST:event_btnQuitarActionPerformed
     
     public static void main(String args[]) 
     {        
@@ -466,79 +507,10 @@ public class ventanaVenta extends javax.swing.JFrame
         });
     }
     
-    public void llenarTablaInicio() //ACOMODAR - LISTAR SOLO PROD HABILITADOS
-    {       
-        //Tabla PRODUCTOS
-       
-        modelo = new DefaultTableModel();
-        List<Producto> listaInicial = pDAO.listarInicio();
-        String[] datos = new String[6];
- 
-        modelo.addColumn("Código");
-        modelo.addColumn("Descripción");
-        modelo.addColumn("Precio");
-        modelo.addColumn("Precio por kilo");
-        modelo.addColumn("Stock");
-        modelo.addColumn("ID");
-        
-        for (Producto p : listaInicial)
-        {
-            datos[0] = p.getCodigo();
-            datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf(p.getPrecioVenta());            
-            datos[3] = String.valueOf(p.getPrecioVentaXPeso());
-            datos[4] = String.valueOf(p.getStock());
-            datos[5] = String.valueOf(p.getId());
-           
-           modelo.addRow(datos);
-        }
-        
-        tablaProd.setModel(modelo);
-        
-        tcm = tablaProd.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(100);
-        tcm.getColumn(1).setPreferredWidth(300);
-        tcm.getColumn(2).setPreferredWidth(80);
-        tcm.getColumn(3).setPreferredWidth(80);
-        tcm.getColumn(4).setPreferredWidth(80);
-        tcm.getColumn(5).setPreferredWidth(0);     
-        tcm.getColumn(5).setMaxWidth(0);
-        tcm.getColumn(5).setMinWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
-        
-        
-        //Tabla CARRITO
-              
-        modelo2 = new DefaultTableModel();
-        modelo2.addColumn("Descripción");
-        modelo2.addColumn("Cantidad/peso");
-        modelo2.addColumn("Precio");
-        modelo2.addColumn("Precio Total");
-        modelo2.addColumn("ID");
-        
-        for (int i=0 ; i<15 ; i++)
-        {
-            modelo2.addRow(new Object[]{"","","",""});
-        }        
-        
-        tablaCarrito.setModel(modelo2);  
-        
-        tcm2 = tablaCarrito.getColumnModel();        
-        tcm2.getColumn(0).setPreferredWidth(300);
-        tcm2.getColumn(1).setPreferredWidth(90);
-        tcm2.getColumn(2).setPreferredWidth(90);
-        tcm2.getColumn(3).setPreferredWidth(90);
-        tcm.getColumn(4).setPreferredWidth(0);     
-        tcm.getColumn(4).setMaxWidth(0);
-        tcm.getColumn(4).setMinWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
-    }
-    
-    public void llenarTablaPersonalizada(List<Producto> listaPersonalizada) 
+    public void llenarTabla() 
     {        
         modelo = new DefaultTableModel();
+        List<Producto> lista = pDAO.listar(OrdenarTabla());
         String[] datos = new String[6];
  
         modelo.addColumn("Código");
@@ -548,7 +520,7 @@ public class ventanaVenta extends javax.swing.JFrame
         modelo.addColumn("Stock");
         modelo.addColumn("ID");
         
-        for (Producto p : listaPersonalizada)
+        for (Producto p : lista)
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
@@ -575,6 +547,34 @@ public class ventanaVenta extends javax.swing.JFrame
         tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);      
     }
     
+    public void llenarTablaCarrito() //ACOMODAR - LISTAR SOLO PROD HABILITADOS
+    {              
+        modelo2 = new DefaultTableModel();
+        modelo2.addColumn("Descripción");
+        modelo2.addColumn("Cantidad/peso");
+        modelo2.addColumn("Precio");
+        modelo2.addColumn("Precio Total");
+        modelo2.addColumn("ID");
+        
+        /*for (int i=0 ; i<15 ; i++)
+        {
+            modelo2.addRow(new Object[]{"","","",""});
+        }*/        
+        
+        tablaCarrito.setModel(modelo2);  
+        
+        tcm2 = tablaCarrito.getColumnModel();        
+        tcm2.getColumn(0).setPreferredWidth(300);
+        tcm2.getColumn(1).setPreferredWidth(90);
+        tcm2.getColumn(2).setPreferredWidth(90);
+        tcm2.getColumn(3).setPreferredWidth(90);
+        tcm2.getColumn(4).setPreferredWidth(0);     
+        tcm2.getColumn(4).setMaxWidth(0);
+        tcm2.getColumn(4).setMinWidth(0);
+        tablaCarrito.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
+        tablaCarrito.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
+    }
+       
     public void llenarTablaBusqueda (List<Producto> listaBusqueda)
     {
         modelo3 = new DefaultTableModel();
@@ -614,40 +614,12 @@ public class ventanaVenta extends javax.swing.JFrame
         tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
     }
     
-    public void llenarCarrito(int idProd, double cantidad)
-    {
-        //FALTA
-        String[] datos = new String[6];
-        
-        modelo2 = new DefaultTableModel();
-        modelo2.addColumn("Descripción");
-        modelo2.addColumn("Cantidad/peso");
-        modelo2.addColumn("Precio");
-        modelo2.addColumn("Precio Total");
-        modelo2.addColumn("ID");
-                       
-        tablaCarrito.setModel(modelo2);  
-        
-        tcm2 = tablaCarrito.getColumnModel();        
-        tcm2.getColumn(0).setPreferredWidth(300);
-        tcm2.getColumn(1).setPreferredWidth(90);
-        tcm2.getColumn(2).setPreferredWidth(90);
-        tcm2.getColumn(3).setPreferredWidth(90);
-        tcm.getColumn(4).setPreferredWidth(0);     
-        tcm.getColumn(4).setMaxWidth(0);
-        tcm.getColumn(4).setMinWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
-    }
-    
     public String[] OrdenarTabla()
     {
         String[] ordenamiento = new String[3];
                 
-        if (filtroSelec == null)
-        {
-            filtroSelec = "Todos";
-        }
+        filtroSelec = "Habilitados";
+        
         if (ordenSelec == null)
         {
             ordenSelec = "descripcion";
@@ -688,7 +660,7 @@ public class ventanaVenta extends javax.swing.JFrame
     private javax.swing.JLabel labPrecioTotalCompra;
     private javax.swing.JTable tablaCarrito;
     private javax.swing.JTable tablaProd;
-    private javax.swing.JTextField txfdBuscar;
+    private org.jdesktop.swingx.JXTextField txfdBuscarProd;
     private javax.swing.JTextField txfdCantPesoProd;
     // End of variables declaration//GEN-END:variables
 }

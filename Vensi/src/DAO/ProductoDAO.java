@@ -109,18 +109,38 @@ public class ProductoDAO
         return lista;
     }
     
-    public List<Producto> buscarPorCodigoNombre(String cadena)
+    public List<Producto> buscarPorCodigoNombre(String cadena, String filtro)  //para ventanaProducto
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
         
         List<Producto> lista = null;
+    
         try
         {            
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena ORDER BY descripcion");
-            query.setParameter("cadena", "%"+cadena+"%");
-            lista = query.list();
+            if (filtro.equals("Todos"))
+            {
+                Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena ORDER BY descripcion");
+                query.setParameter("cadena", "%"+cadena+"%");
+                lista = query.list();
+            }
+            else
+            {
+                if (filtro.equals("Habilitados"))
+                {
+                    Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena and estado = true ORDER BY descripcion");
+                    query.setParameter("cadena", "%"+cadena+"%");
+                    lista = query.list();
+                }
+                else
+                {
+                    Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena and estado = false ORDER BY descripcion");
+                    query.setParameter("cadena", "%"+cadena+"%");
+                    lista = query.list();
+                }
+            }
+            
             tx.commit();
         }
         catch (Exception e)
@@ -128,28 +148,9 @@ public class ProductoDAO
             JOptionPane.showMessageDialog(null, "Error. Producto por codigo o descripcion");
         }        
         return lista;
-    }   
-    
-    public List<Producto> listarInicio()
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
-                
-        List<Producto> lista = null;
-        try
-        {            
-            Transaction tx = session.beginTransaction();
-            lista = session.createQuery("FROM Producto ORDER BY descripcion").list();
-            tx.commit();
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "Error. Listar productos");
-        }        
-        return lista;
     }
-    
-    public List<Producto> listarPersonalizado(String[] datos)  //ordenado por descripcio ASC
+            
+    public List<Producto> listar(String[] datos)  //ordenado por descripcio ASC
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();

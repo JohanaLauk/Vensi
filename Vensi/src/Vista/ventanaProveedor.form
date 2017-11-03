@@ -140,9 +140,6 @@
           <Properties>
             <Property name="prompt" type="java.lang.String" value="Busque por c&#xf3;digo o por descripci&#xf3;n"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfdBuscarProvActionPerformed"/>
-          </Events>
         </Component>
       </SubComponents>
     </Container>

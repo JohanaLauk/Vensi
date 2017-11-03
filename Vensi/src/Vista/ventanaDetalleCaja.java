@@ -176,7 +176,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         //List<> listaMovimientos = elTurno.getListaMovimientos;
         String[] datos = new String[4];
         
-        if (listaMovimientos.size() == 0)
+        /*if (listaMovimientos.size() == 0)
         {
             modelo = new DefaultTableModel();
             modelo.addColumn("Detalle");
@@ -217,7 +217,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             tcm.getColumn(1).setPreferredWidth(80);
             tcm.getColumn(2).setPreferredWidth(80);
             tcm.getColumn(3).setPreferredWidth(80);
-        }
+        }*/
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

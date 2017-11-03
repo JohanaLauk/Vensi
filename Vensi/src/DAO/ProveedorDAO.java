@@ -60,7 +60,7 @@ public class ProveedorDAO
         JOptionPane.showMessageDialog(null, "Proveedor modificado");
     }  
     
-    public List<Proveedor> listarTodo()
+    public List<Proveedor> listar(String filtro)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -69,7 +69,22 @@ public class ProveedorDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            lista = session.createQuery("FROM Proveedor ORDER BY razon_social").list();
+            if (filtro.equals("Todos"))
+            {
+                lista = session.createQuery("FROM Proveedor ORDER BY razon_social").list();
+            }
+            else
+            {
+                if (filtro.equals("Habilitados"))
+                {
+                    lista = session.createQuery("FROM Proveedor WHERE estado = true ORDER BY razon_social").list();
+                }
+                else
+                {
+                    lista = session.createQuery("FROM Proveedor WHERE estado = false ORDER BY razon_social").list();
+                }
+            }
+            
             tx.commit();
         }
         catch(Exception e)
@@ -77,45 +92,7 @@ public class ProveedorDAO
             JOptionPane.showMessageDialog(null, "Error. ListarPredeterminado proveedor");
         }
         return lista;
-    }
-    
-    public List<Proveedor> listarHabilitados()
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
-        
-        List<Proveedor> lista = null;
-        try
-        {
-            Transaction tx = session.beginTransaction();
-            lista = session.createQuery("FROM Proveedor WHERE estado = true ORDER BY razon_social").list();
-            tx.commit();
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "Error. ListarPredeterminado proveedor");
-        }
-        return lista;
-    }
-    
-    public List<Proveedor> listarDeshabilitados()
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
-        
-        List<Proveedor> lista = null;
-        try
-        {
-            Transaction tx = session.beginTransaction();
-            lista = session.createQuery("FROM Proveedor WHERE estado = false ORDER BY razon_social").list();
-            tx.commit();
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "Error. ListarPredeterminado proveedor");
-        }
-        return lista;
-    }
+    }        
     
     public Proveedor buscarPorId(int id)
     {
@@ -163,7 +140,7 @@ public class ProveedorDAO
     }
     
    
-    public List<Proveedor> buscarPorCuitNombre(String cadena)
+    public List<Proveedor> buscarPorCuitNombre(String cadena, String filtro)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -172,9 +149,28 @@ public class ProveedorDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.razonSocial LIKE :cadena ORDER BY razon_social");
-            query.setParameter("cadena", "%"+cadena+"%");
-            lista = query.list();
+            if (filtro.equals("Todos"))
+            {
+                Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.razonSocial LIKE :cadena ORDER BY razon_social");
+                query.setParameter("cadena", "%"+cadena+"%");
+                lista = query.list();
+            }
+            else
+            {
+                if (filtro.equals("Habilitados"))
+                {
+                    Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.razonSocial LIKE :cadena and estado = true ORDER BY razon_social");
+                    query.setParameter("cadena", "%"+cadena+"%");
+                    lista = query.list();
+                }
+                else
+                {
+                    Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.razonSocial LIKE :cadena and estado = false ORDER BY razon_social");
+                    query.setParameter("cadena", "%"+cadena+"%");
+                    lista = query.list();
+                }
+            }
+            
             tx.commit();
         }
         catch(Exception e)

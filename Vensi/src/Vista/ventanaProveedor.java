@@ -15,6 +15,8 @@ public class ventanaProveedor extends javax.swing.JFrame
     DefaultTableModel modelo, modelo2;
     TableColumnModel tcm, tcm2;
     
+    String filtroSelec = "Todos";
+    
     public ventanaProveedor() 
     {
         initComponents();
@@ -27,7 +29,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         
         this.setPreferredSize(new Dimension(1000, 500));    //al minimizar la ventana aparece con esa medida
                
-        llenarTablaInicio();  
+        llenarTabla();          
     }
     
     @SuppressWarnings("unchecked")    
@@ -71,11 +73,6 @@ public class ventanaProveedor extends javax.swing.JFrame
         jLabel4.setText("Filtrar por:");
 
         txfdBuscarProv.setPrompt("Busque por código o por descripción");
-        txfdBuscarProv.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfdBuscarProvActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -243,13 +240,15 @@ public class ventanaProveedor extends javax.swing.JFrame
 
     private void btnBuscarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProvActionPerformed
         String cadena = txfdBuscarProv.getText();
-        List<Proveedor> listaP = pDAO.buscarPorCuitNombre(cadena);
         
-        llenarTablaBusqueda(listaP);  
+        List<Proveedor> listaPB = pDAO.buscarPorCuitNombre(cadena, filtroSelec);
+        
+        llenarTablaBusqueda(listaPB);  
         
         if (txfdBuscarProv.getText().equals("") || txfdBuscarProv.getText() == null)
         {
             cbFiltroCampoProv.setEnabled(true); 
+            llenarTabla();
         }
         else
         {
@@ -260,26 +259,20 @@ public class ventanaProveedor extends javax.swing.JFrame
     private void cbFiltroCampoProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroCampoProvActionPerformed
         if (cbFiltroCampoProv.getSelectedItem().equals("Todos"))
         {
-            llenarTablaInicio();
+            filtroSelec = "Todos";
         }
         else
         {
             if (cbFiltroCampoProv.getSelectedItem().equals("Habilitados"))
             {
-                List<Proveedor> listaMostrar = pDAO.listarHabilitados();
-                llenarTablaPersonalizada(listaMostrar);
+                filtroSelec = "Habilitados";
             }
             else
             {
-                List<Proveedor> listaMostrar = pDAO.listarDeshabilitados();
-                llenarTablaPersonalizada(listaMostrar);
+                filtroSelec = "Deshabilitados";
             }
         }
     }//GEN-LAST:event_cbFiltroCampoProvActionPerformed
-
-    private void txfdBuscarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfdBuscarProvActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfdBuscarProvActionPerformed
 
     public static void main(String args[]) 
     {
@@ -292,10 +285,10 @@ public class ventanaProveedor extends javax.swing.JFrame
         });
     }
     
-    public void llenarTablaInicio()
+    public void llenarTabla()
     {        
         modelo = new DefaultTableModel();
-        List<Proveedor> lista = pDAO.listarTodo();  
+        List<Proveedor> lista = pDAO.listar(filtroSelec);  
         String[] datos = new String[6]; 
         
         modelo.addColumn("Razón social");
@@ -338,60 +331,9 @@ public class ventanaProveedor extends javax.swing.JFrame
         tcm.getColumn(5).setMinWidth(0);
         tablaProv.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
         tablaProv.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
-
-        //tablaProv.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);      
-    }
+    }    
     
-    public void llenarTablaPersonalizada(List<Proveedor> listaMostrar) 
-    {        
-        modelo = new DefaultTableModel();
-        String[] datos = new String[6]; 
-        
-        modelo.addColumn("Razón social");
-        modelo.addColumn("Cuit");
-        modelo.addColumn("Direción");
-        modelo.addColumn("Contacto");
-        modelo.addColumn("Estado");
-        modelo.addColumn("ID");
-        
-        for (Proveedor p : listaMostrar)
-        {
-            datos[0] = p.getRazonSocial();
-            datos[1] = p.getCuit();
-            datos[2] = String.valueOf(p.getDireccion());
-            datos[3] = String.valueOf(p.getContacto());
-
-            if (p.isEstado())
-            {
-                datos[4] = "Habilitado";
-            }
-            else
-            {
-                datos[4] = "Deshabilitado";
-            }
-            datos[5] = String.valueOf(p.getId());   
-            
-            modelo.addRow(datos);
-        }    
-        
-        tablaProv.setModel(modelo);
-        
-        tcm = tablaProv.getColumnModel();        
-        tcm.getColumn(0).setPreferredWidth(250);
-        tcm.getColumn(1).setPreferredWidth(120);
-        tcm.getColumn(2).setPreferredWidth(250);
-        tcm.getColumn(3).setPreferredWidth(250);
-        tcm.getColumn(4).setPreferredWidth(50);
-        tcm.getColumn(5).setPreferredWidth(0);
-        tcm.getColumn(5).setMaxWidth(0);
-        tcm.getColumn(5).setMinWidth(0);
-        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
-        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
-
-        //tablaProv.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);      
-    }
-    
-    public void llenarTablaBusqueda(List<Proveedor> lista)
+    public void llenarTablaBusqueda(List<Proveedor> listaBusqueda)
     {        
         modelo2 = new DefaultTableModel();
         String [] datos = new String[6]; 
@@ -403,7 +345,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         modelo2.addColumn("Estado");
         modelo2.addColumn("ID");
         
-        for (Proveedor p : lista)
+        for (Proveedor p : listaBusqueda)
         {
             datos[0] = p.getRazonSocial();
             datos[1] = p.getCuit();
