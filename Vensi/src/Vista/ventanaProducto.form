@@ -69,10 +69,11 @@
                           <Component id="cbCampoOrden" min="-2" pref="152" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="cbTipoOrden" min="-2" pref="125" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="6" max="32767" attributes="0"/>
                       </Group>
                       <Component id="txfdBuscarProd" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace type="separate" max="-2" attributes="0"/>
+                  <EmptySpace type="unrelated" max="-2" attributes="0"/>
                   <Component id="btnBuscarProd" min="-2" pref="97" max="-2" attributes="0"/>
                   <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
               </Group>
@@ -83,8 +84,10 @@
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" max="32767" attributes="0"/>
-                      <Component id="txfdBuscarProd" alignment="0" max="32767" attributes="0"/>
+                      <Group type="103" groupAlignment="3" attributes="0">
+                          <Component id="jLabel1" alignment="3" max="32767" attributes="0"/>
+                          <Component id="txfdBuscarProd" alignment="3" min="-2" max="-2" attributes="0"/>
+                      </Group>
                       <Component id="btnBuscarProd" alignment="0" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
@@ -113,8 +116,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Buscar:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txfdBuscarProd">
         </Component>
         <Component class="javax.swing.JComboBox" name="cbFiltroCampoProd">
           <Properties>
@@ -187,6 +188,11 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="txfdBuscarProd">
+          <Properties>
+            <Property name="prompt" type="java.lang.String" value="Busque por c&#xf3;digo o por descripci&#xf3;n"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
