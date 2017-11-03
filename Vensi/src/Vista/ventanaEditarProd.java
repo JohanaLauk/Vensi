@@ -207,7 +207,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
     private void btnAceptarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarActionPerformed
         Producto prod = new Producto();
         
-        prod.setCodigo(txfdEditarCodigo.getText());
+        prod.setCodigo(txfdEditarCodigo.getText().toUpperCase());
         prod.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());
         prod.setPesoEnvase(Integer.parseInt(txfdEditarPesoEnvase.getText()));
         prod.setPrecioCosto(Double.parseDouble(txfdEditarPrecioCosto.getText()));

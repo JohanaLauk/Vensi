@@ -188,7 +188,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     private void btnAceptarNuevoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarNuevoProdActionPerformed
         Producto unProd = new Producto();
         
-        unProd.setCodigo(txfdCodigo.getText());
+        unProd.setCodigo(txfdCodigo.getText().toUpperCase());
         unProd.setDescripcion(txfdDescripcion.getText().toUpperCase());
         unProd.setStockMinimo(Double.parseDouble(txfdStockMinimo.getText()));
         unProd.setPesoEnvase(Integer.parseInt(txfdPesoEnvase.getText())); 
