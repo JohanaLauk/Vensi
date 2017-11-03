@@ -73,6 +73,11 @@ public class ventanaProveedor extends javax.swing.JFrame
         jLabel4.setText("Filtrar por:");
 
         txfdBuscarProv.setPrompt("Busque por código o por descripción");
+        txfdBuscarProv.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfdBuscarProvKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -100,10 +105,11 @@ public class ventanaProveedor extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txfdBuscarProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnBuscarProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnBuscarProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfdBuscarProv, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(21, 21, 21)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -255,6 +261,24 @@ public class ventanaProveedor extends javax.swing.JFrame
             cbFiltroCampoProv.setEnabled(false);
         }
     }//GEN-LAST:event_btnBuscarProvActionPerformed
+
+    private void txfdBuscarProvKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProvKeyReleased
+        String cadena = txfdBuscarProv.getText();
+        
+        List<Proveedor> listaPB = pDAO.buscarPorCuitNombre(cadena, filtroSelec);
+        
+        llenarTablaBusqueda(listaPB);
+        
+        if (txfdBuscarProv.getText().equals("") || txfdBuscarProv.getText() == null)
+        {
+            cbFiltroCampoProv.setEnabled(true); 
+            llenarTabla();
+        }
+        else
+        {
+            cbFiltroCampoProv.setEnabled(false);
+        }
+    }//GEN-LAST:event_txfdBuscarProvKeyReleased
 
     private void cbFiltroCampoProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroCampoProvActionPerformed
         if (cbFiltroCampoProv.getSelectedItem().equals("Todos"))

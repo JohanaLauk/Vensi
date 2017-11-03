@@ -94,6 +94,11 @@ public class ventanaProducto extends javax.swing.JFrame
         });
 
         txfdBuscarProd.setPrompt("Busque por código o por descripción");
+        txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfdBuscarProdKeyReleased(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -125,10 +130,11 @@ public class ventanaProducto extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txfdBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(btnBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(btnBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfdBuscarProd, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -270,26 +276,6 @@ public class ventanaProducto extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
         }        
     }//GEN-LAST:event_btnEditarProdActionPerformed
-
-    private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
-        String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec);
-        llenarTablaBusqueda(listaBusqueda);
-        
-        if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
-        {
-            cbFiltroCampoProd.setEnabled(true);
-            cbCampoOrden.setEnabled(true);
-            cbTipoOrden.setEnabled(true); 
-            llenarTabla();
-        }
-        else
-        {
-            cbFiltroCampoProd.setEnabled(false);
-            cbCampoOrden.setEnabled(false);
-            cbTipoOrden.setEnabled(false);
-        }      
-    }//GEN-LAST:event_btnBuscarProdActionPerformed
        
     private void cbCampoOrdenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbCampoOrdenActionPerformed
         if (cbCampoOrden.getSelectedItem().equals("Descripción"))
@@ -356,6 +342,46 @@ public class ventanaProducto extends javax.swing.JFrame
         
         llenarTabla();
     }//GEN-LAST:event_cbFiltroCampoProdActionPerformed
+
+    private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
+        String cadena = txfdBuscarProd.getText();
+        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+        llenarTablaBusqueda(listaBusqueda);
+        
+        if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
+        {
+            cbFiltroCampoProd.setEnabled(true);
+            cbCampoOrden.setEnabled(true);
+            cbTipoOrden.setEnabled(true); 
+            llenarTabla();
+        }
+        else
+        {
+            cbFiltroCampoProd.setEnabled(false);
+            cbCampoOrden.setEnabled(false);
+            cbTipoOrden.setEnabled(false);
+        }
+    }//GEN-LAST:event_btnBuscarProdActionPerformed
+
+    private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
+        String cadena = txfdBuscarProd.getText();
+        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+        llenarTablaBusqueda(listaBusqueda);
+        
+        if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
+        {
+            cbFiltroCampoProd.setEnabled(true);
+            cbCampoOrden.setEnabled(true);
+            cbTipoOrden.setEnabled(true); 
+            llenarTabla();
+        }
+        else
+        {
+            cbFiltroCampoProd.setEnabled(false);
+            cbCampoOrden.setEnabled(false);
+            cbTipoOrden.setEnabled(false);
+        }
+    }//GEN-LAST:event_txfdBuscarProdKeyReleased
     
     public static void main(String args[]) 
     {
