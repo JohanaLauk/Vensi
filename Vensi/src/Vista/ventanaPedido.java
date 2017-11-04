@@ -1,14 +1,18 @@
 package Vista;
 
 import DAO.ProductoDAO;
+import DAO.ProveedorDAO;
 import Modelo.Producto;
+import Modelo.Proveedor;
 import java.util.List;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 public class ventanaPedido extends javax.swing.JFrame 
 {
-    ProductoDAO pDAO = new ProductoDAO();
+    ProductoDAO prodDAO = new ProductoDAO();
+    ProveedorDAO provDAO = new ProveedorDAO();
     DefaultTableModel modelo, modelo2, modelo3;
     TableColumnModel tcm, tcm2, tcm3;
     
@@ -26,6 +30,7 @@ public class ventanaPedido extends javax.swing.JFrame
         
         llenarTabla();        
         llenarTablaPedido();
+        llenarCBBProveedor();
     }
     
     @SuppressWarnings("unchecked")
@@ -55,7 +60,7 @@ public class ventanaPedido extends javax.swing.JFrame
         jLabel6 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
-        jComboBox3 = new javax.swing.JComboBox<>();
+        cbProveedores = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
@@ -257,21 +262,27 @@ public class ventanaPedido extends javax.swing.JFrame
 
         jLabel7.setText("Indique el proveedor:");
 
+        cbProveedores.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbProveedoresActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel7)
                 .addGap(18, 18, 18)
-                .addComponent(jComboBox3, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbProveedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jComboBox3, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
@@ -437,7 +448,7 @@ public class ventanaPedido extends javax.swing.JFrame
 
     private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
         String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec);
         llenarTablaBusqueda(listaBusqueda);
         
         if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
@@ -457,7 +468,7 @@ public class ventanaPedido extends javax.swing.JFrame
 
     private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
         String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec);
         llenarTablaBusqueda(listaBusqueda);
         
         if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
@@ -474,6 +485,11 @@ public class ventanaPedido extends javax.swing.JFrame
             cbTipoOrden.setEnabled(false);
         }
     }//GEN-LAST:event_txfdBuscarProdKeyReleased
+
+    private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed
+        String itemSelec = String.valueOf(cbProveedores.getSelectedItem());
+        cbProveedores.setSelectedItem(itemSelec);       
+    }//GEN-LAST:event_cbProveedoresActionPerformed
     
     public static void main(String args[]) 
     {
@@ -489,7 +505,7 @@ public class ventanaPedido extends javax.swing.JFrame
     public void llenarTabla()
     {        
         modelo = new DefaultTableModel();
-        List<Producto> listaInicial = pDAO.listar(OrdenarTabla());
+        List<Producto> listaInicial = prodDAO.listar(OrdenarTabla());
         String[] datos = new String[6];
  
         modelo.addColumn("Código");
@@ -614,6 +630,28 @@ public class ventanaPedido extends javax.swing.JFrame
         return ordenamiento;
     }
     
+    public void llenarCBBProveedor()
+    {
+        DefaultComboBoxModel modeloCBB = new DefaultComboBoxModel();
+        
+        List<Proveedor> listaP = provDAO.listar("Habilitados");
+        
+        if (listaP.size() < 0)
+        {            
+            modeloCBB.addElement("No hay proveedores");
+        }
+        else
+        {
+            modeloCBB.addElement("Seleccionar");
+            for (Proveedor p : listaP)
+            {
+                modeloCBB.addElement(p.getRazonSocial());
+            }
+        }
+        
+        cbProveedores.setModel(modeloCBB);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBorrarProdListaProvisoria;
     private javax.swing.JButton btnBuscarProd;
@@ -625,8 +663,8 @@ public class ventanaPedido extends javax.swing.JFrame
     private javax.swing.JButton btnVolverMP;
     private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JComboBox<String> cbOrdenCampo;
+    private javax.swing.JComboBox<String> cbProveedores;
     private javax.swing.JComboBox<String> cbTipoOrden;
-    private javax.swing.JComboBox<String> jComboBox3;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

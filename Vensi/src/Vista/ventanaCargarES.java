@@ -32,6 +32,7 @@ public class ventanaCargarES extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        btnSalir = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         cbTipoES = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
@@ -40,7 +41,6 @@ public class ventanaCargarES extends javax.swing.JFrame
         btnConfirmar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         txAreaDescripcion = new javax.swing.JTextArea();
-        btnSalir = new javax.swing.JButton();
         labTitulo = new javax.swing.JLabel();
         panelidentificarProd = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -57,10 +57,23 @@ public class ventanaCargarES extends javax.swing.JFrame
         setPreferredSize(new java.awt.Dimension(780, 440));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono_salir_blanco.png"))); // NOI18N
+        btnSalir.setToolTipText("Salir");
+        btnSalir.setBorder(null);
+        btnSalir.setBorderPainted(false);
+        btnSalir.setContentAreaFilled(false);
+        btnSalir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSalirActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 10, 30, 30));
+
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cbTipoES.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Apertura de caja", "Retiro", "Anulación de venta", "Sueldo", "Mantenimiento", "Gasto vario", "Proveedor", "Alquiler", "Impuesto", " ", " ", " ", " ", " " }));
+        cbTipoES.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Apertura de caja", "Retiro", "Anulación de venta", "Sueldo", "Mantenimiento", "Gasto vario", "Proveedor", "Alquiler", "Impuesto" }));
         cbTipoES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoESActionPerformed(evt);
@@ -95,19 +108,6 @@ public class ventanaCargarES extends javax.swing.JFrame
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 340, 370));
 
-        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/Icono_salir_blanco.png"))); // NOI18N
-        btnSalir.setToolTipText("Salir");
-        btnSalir.setBorder(null);
-        btnSalir.setBorderPainted(false);
-        btnSalir.setContentAreaFilled(false);
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 10, 30, 30));
-
         labTitulo.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         labTitulo.setForeground(new java.awt.Color(255, 255, 255));
         labTitulo.setText("Cargar entrada/salida");
@@ -136,7 +136,7 @@ public class ventanaCargarES extends javax.swing.JFrame
 
         getContentPane().add(panelidentificarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 420, 370));
 
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagen/Imagen_fondo_agua.jpg"))); // NOI18N
+        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo 2 grande.png"))); // NOI18N
         labImagenFondo.setText("jLabel1");
         getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
 
