@@ -162,6 +162,13 @@ public class ventanaHistorial extends javax.swing.JFrame
                     .addComponent(txfdFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        tablaHistorial = new javax.swing.JTable()
+        {
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false;
+            }
+        };
         tablaHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -173,6 +180,9 @@ public class ventanaHistorial extends javax.swing.JFrame
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaHistorial.setFocusable(false);
+        tablaHistorial.getTableHeader().setResizingAllowed(false);
+        tablaHistorial.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaHistorial);
 
         jLabel6.setText("Resultados");

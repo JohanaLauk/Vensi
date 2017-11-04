@@ -148,6 +148,13 @@ public class ventanaProducto extends javax.swing.JFrame
                 .addGap(2, 2, 2))
         );
 
+        tablaProd = new javax.swing.JTable()
+        {
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false;
+            }
+        };
         tablaProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -156,6 +163,9 @@ public class ventanaProducto extends javax.swing.JFrame
 
             }
         ));
+        tablaProd.setFocusable(false);
+        tablaProd.getTableHeader().setResizingAllowed(false);
+        tablaProd.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaProd);
 
         btnNuevoProd.setText("Nuevo");

@@ -92,6 +92,13 @@ public class ventanaPedido extends javax.swing.JFrame
             }
         });
 
+        tablaProd = new javax.swing.JTable()
+        {
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false;
+            }
+        };
         tablaProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -100,6 +107,9 @@ public class ventanaPedido extends javax.swing.JFrame
 
             }
         ));
+        tablaProd.setFocusable(false);
+        tablaProd.getTableHeader().setResizingAllowed(false);
+        tablaProd.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaProd);
 
         btnCargarInventario.setText("Cargar al inventario");
@@ -148,7 +158,7 @@ public class ventanaPedido extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbOrdenCampo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -268,6 +278,13 @@ public class ventanaPedido extends javax.swing.JFrame
 
         jLabel3.setText("Lista pedido provisoria:");
 
+        tablaPedidoProvisoria = new javax.swing.JTable()
+        {
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false;
+            }
+        };
         tablaPedidoProvisoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -276,6 +293,9 @@ public class ventanaPedido extends javax.swing.JFrame
 
             }
         ));
+        tablaPedidoProvisoria.setFocusable(false);
+        tablaPedidoProvisoria.getTableHeader().setResizingAllowed(false);
+        tablaPedidoProvisoria.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tablaPedidoProvisoria);
 
         btnBorrarProdListaProvisoria.setText("Borrar");

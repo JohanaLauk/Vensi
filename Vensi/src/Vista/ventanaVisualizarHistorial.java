@@ -50,6 +50,13 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
 
         jLabel1.setText("Información");
 
+        tablaTurno = new javax.swing.JTable()
+        {
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false;
+            }
+        };
         tablaTurno.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -61,6 +68,9 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        tablaTurno.setFocusable(false);
+        tablaTurno.getTableHeader().setResizingAllowed(false);
+        tablaTurno.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaTurno);
 
         btnVolverVerHistorial.setText("Volver");

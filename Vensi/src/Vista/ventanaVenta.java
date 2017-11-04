@@ -223,6 +223,13 @@ public class ventanaVenta extends javax.swing.JFrame
                 .addGap(2, 2, 2))
         );
 
+        tablaProd = new javax.swing.JTable()
+        {
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false;
+            }
+        };
         tablaProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -231,6 +238,9 @@ public class ventanaVenta extends javax.swing.JFrame
 
             }
         ));
+        tablaProd.setFocusable(false);
+        tablaProd.getTableHeader().setResizingAllowed(false);
+        tablaProd.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaProd);
         if (tablaProd.getColumnModel().getColumnCount() > 0) {
             tablaProd.getColumnModel().getColumn(0).setPreferredWidth(95);
@@ -288,6 +298,13 @@ public class ventanaVenta extends javax.swing.JFrame
             }
         });
 
+        tablaCarrito = new javax.swing.JTable()
+        {
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false;
+            }
+        };
         tablaCarrito.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
@@ -305,6 +322,9 @@ public class ventanaVenta extends javax.swing.JFrame
 
             }
         ));
+        tablaCarrito.setFocusable(false);
+        tablaCarrito.getTableHeader().setResizingAllowed(false);
+        tablaCarrito.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaCarrito);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);

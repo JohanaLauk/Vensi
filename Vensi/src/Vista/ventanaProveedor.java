@@ -146,6 +146,13 @@ public class ventanaProveedor extends javax.swing.JFrame
             }
         });
 
+        tablaProv = new javax.swing.JTable()
+        {
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false;
+            }
+        };
         tablaProv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -154,6 +161,9 @@ public class ventanaProveedor extends javax.swing.JFrame
 
             }
         ));
+        tablaProv.setFocusable(false);
+        tablaProv.getTableHeader().setResizingAllowed(false);
+        tablaProv.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tablaProv);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);

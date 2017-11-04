@@ -90,6 +90,13 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         jLabel3.setText("Total caja:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 110, -1));
 
+        tablaDetalleCaja = new javax.swing.JTable()
+        {
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false;
+            }
+        };
         tablaDetalleCaja.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -98,6 +105,9 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
 
             }
         ));
+        tablaDetalleCaja.setFocusable(false);
+        tablaDetalleCaja.getTableHeader().setResizingAllowed(false);
+        tablaDetalleCaja.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaDetalleCaja);
 
         jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 930, 360));
