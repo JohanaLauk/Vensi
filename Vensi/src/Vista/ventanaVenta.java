@@ -454,16 +454,25 @@ public class ventanaVenta extends javax.swing.JFrame
         
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
         {
-            double x=0;
-            String precioTotal = null;            
+            double x = 0;
+            String precioTotal = null;        
+            String cantidad = null;            
             
-            //OBTENEMOS EL ID DEL PRODUCTO SELECCIONADO
             String descrip = tablaProd.getValueAt(filaSelec, 1).toString();
-            String cantidad = txfdCantPesoProd.getText().toString();
+            
+            try //no anda, no sé por qué
+            {
+                cantidad = txfdCantPesoProd.getText();
+            }
+            catch (Exception e)
+            {
+                JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad");
+            }
+            
             String precioU = tablaProd.getValueAt(filaSelec, 2).toString();
             
             x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
-            precioTotal = String.valueOf(x).toString();
+            precioTotal = String.valueOf(x);
             
             String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();            
             
