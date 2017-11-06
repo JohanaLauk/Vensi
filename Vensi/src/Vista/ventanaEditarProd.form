@@ -186,12 +186,24 @@
         <Component class="javax.swing.JTextField" name="txfdEditarDescripcion">
         </Component>
         <Component class="javax.swing.JTextField" name="txfdEditarPrecioCosto">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdEditarPrecioCostoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdEditarPrecioVenta">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdEditarPrecioVentaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdEditarStockMinimo">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdEditarStockMinimoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdEditarPesoEnvase">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdEditarPesoEnvaseKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JComboBox" name="cbEditarEstado">
           <Properties>

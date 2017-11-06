@@ -152,6 +152,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="passNuevo">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="passNuevoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -159,6 +162,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="passVerif">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="passVerifKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnConfirmarClave">
           <Properties>
@@ -174,6 +180,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JPasswordField" name="passActual">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="passActualKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>

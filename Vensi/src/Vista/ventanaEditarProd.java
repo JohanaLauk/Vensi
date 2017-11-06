@@ -68,6 +68,30 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         jLabel8.setText("Estado:");
 
+        txfdEditarPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdEditarPrecioCostoKeyTyped(evt);
+            }
+        });
+
+        txfdEditarPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdEditarPrecioVentaKeyTyped(evt);
+            }
+        });
+
+        txfdEditarStockMinimo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdEditarStockMinimoKeyTyped(evt);
+            }
+        });
+
+        txfdEditarPesoEnvase.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdEditarPesoEnvaseKeyTyped(evt);
+            }
+        });
+
         cbEditarEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "Deshabilitado" }));
 
         labIdSelec.setText("ID_Prod");
@@ -229,6 +253,32 @@ public class ventanaEditarProd extends javax.swing.JFrame
         vProducto.setVisible(true);
         dispose();        
     }//GEN-LAST:event_btnAceptarEditarActionPerformed
+
+    private void txfdEditarPrecioCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPrecioCostoKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
+                (c != '.' || txfdEditarPrecioCosto.getText().contains("."))) 
+            evt.consume();
+    }//GEN-LAST:event_txfdEditarPrecioCostoKeyTyped
+
+    private void txfdEditarPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPrecioVentaKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
+                (c != '.' || txfdEditarPrecioVenta.getText().contains("."))) 
+            evt.consume();
+    }//GEN-LAST:event_txfdEditarPrecioVentaKeyTyped
+
+    private void txfdEditarStockMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarStockMinimoKeyTyped
+        char c = evt.getKeyChar();
+        if(c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_txfdEditarStockMinimoKeyTyped
+
+    private void txfdEditarPesoEnvaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPesoEnvaseKeyTyped
+        char c = evt.getKeyChar();
+        if(c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_txfdEditarPesoEnvaseKeyTyped
 
     public static void main(String args[]) 
     {

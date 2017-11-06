@@ -55,7 +55,19 @@ public class ventanaGestionClave extends javax.swing.JFrame
 
         jLabel5.setText("Pin nuevo: ");
 
+        passNuevo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                passNuevoKeyTyped(evt);
+            }
+        });
+
         jLabel6.setText("Pin verif:");
+
+        passVerif.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                passVerifKeyTyped(evt);
+            }
+        });
 
         btnConfirmarClave.setText("Confirmar");
         btnConfirmarClave.addActionListener(new java.awt.event.ActionListener() {
@@ -65,6 +77,12 @@ public class ventanaGestionClave extends javax.swing.JFrame
         });
 
         jLabel3.setText("Pin actual:");
+
+        passActual.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                passActualKeyTyped(evt);
+            }
+        });
 
         jLabel2.setText("Edición de clave");
 
@@ -158,16 +176,20 @@ public class ventanaGestionClave extends javax.swing.JFrame
             }
             else
             {
-                JOptionPane.showMessageDialog(null,"No ha seleccionado un usuario");
+                JOptionPane.showMessageDialog(null,"No ha seleccionado un usuario.");
             }
         }  
         
-        int pinActual = Integer.parseInt(passActual.getText());
-        int pinNuevo = Integer.parseInt(passNuevo.getText());
-        int pinVerif = Integer.parseInt(passVerif.getText());       
-        
+        if(passActual.getText().isEmpty() | passNuevo.getText().isEmpty() | passVerif.getText().isEmpty())
+        {
+            JOptionPane.showMessageDialog(null,"Debe completar todos los campos.");
+        }
+        else{
+            int pinActual = Integer.parseInt(passActual.getText());
+            int pinNuevo = Integer.parseInt(passNuevo.getText());
+            int pinVerif = Integer.parseInt(passVerif.getText());
+            
         List<Usuario> lista = uDAO.listar();
-        
         for (Usuario u : lista)
         {
             if (u.getNombreUsuario().equals(nombreUsuario))
@@ -180,19 +202,35 @@ public class ventanaGestionClave extends javax.swing.JFrame
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null,"Los pines no coinciden");
+                        JOptionPane.showMessageDialog(null,"Los pines no coinciden.");
                     }            
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null,"El pin actual del usuario '"+nombreUsuario+"' no es correcto");
+                    JOptionPane.showMessageDialog(null,"El pin actual del usuario '"+nombreUsuario+"' no es correcto.");
                 }
             }
         } 
         passActual.setText(null);
         passNuevo.setText(null);
         passVerif.setText(null);
+        }
     }//GEN-LAST:event_btnConfirmarClaveActionPerformed
+
+    private void passActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passActualKeyTyped
+        char c = evt.getKeyChar();
+        if(c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_passActualKeyTyped
+
+    private void passNuevoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passNuevoKeyTyped
+        char c = evt.getKeyChar();
+        if(c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_passNuevoKeyTyped
+
+    private void passVerifKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passVerifKeyTyped
+        char c = evt.getKeyChar();
+        if(c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_passVerifKeyTyped
 
     public static void main(String args[]) 
     {

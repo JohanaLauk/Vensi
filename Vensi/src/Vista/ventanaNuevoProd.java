@@ -51,9 +51,38 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
         jLabel4.setText("Stock mínimo:");
 
+        txfdPrecioVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txfdPrecioVentaActionPerformed(evt);
+            }
+        });
+        txfdPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdPrecioVentaKeyTyped(evt);
+            }
+        });
+
+        txfdStockMinimo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdStockMinimoKeyTyped(evt);
+            }
+        });
+
         jLabel6.setText("Peso del envase en gramos:");
 
+        txfdPesoEnvase.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdPesoEnvaseKeyTyped(evt);
+            }
+        });
+
         jLabel7.setText("Precio costo:");
+
+        txfdPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdPrecioCostoKeyTyped(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -217,6 +246,36 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         vProducto.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAceptarNuevoProdActionPerformed
+
+    private void txfdPrecioCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioCostoKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
+                (c != '.' || txfdPrecioCosto.getText().contains("."))) 
+            evt.consume();
+    }//GEN-LAST:event_txfdPrecioCostoKeyTyped
+
+    private void txfdStockMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdStockMinimoKeyTyped
+        char c = evt.getKeyChar();
+        if(c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_txfdStockMinimoKeyTyped
+
+    private void txfdPesoEnvaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPesoEnvaseKeyTyped
+        char c = evt.getKeyChar();
+        if(c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_txfdPesoEnvaseKeyTyped
+
+    private void txfdPrecioVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfdPrecioVentaActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txfdPrecioVentaActionPerformed
+
+    private void txfdPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioVentaKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
+                (c != '.' || txfdPrecioCosto.getText().contains("."))) 
+            evt.consume();
+    }//GEN-LAST:event_txfdPrecioVentaKeyTyped
 
     public static void main(String args[]) 
     {        

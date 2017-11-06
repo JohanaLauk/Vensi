@@ -165,8 +165,15 @@
         <Component class="javax.swing.JTextField" name="txfdDescripcion">
         </Component>
         <Component class="javax.swing.JTextField" name="txfdPrecioVenta">
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfdPrecioVentaActionPerformed"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdPrecioVentaKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdStockMinimo">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdStockMinimoKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -174,6 +181,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdPesoEnvase">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdPesoEnvaseKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel7">
           <Properties>
@@ -181,6 +191,9 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdPrecioCosto">
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdPrecioCostoKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
