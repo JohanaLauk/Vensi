@@ -253,6 +253,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                 (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
                 (c != '.' || txfdPrecioCosto.getText().contains("."))) 
             evt.consume();
+       
     }//GEN-LAST:event_txfdPrecioCostoKeyTyped
 
     private void txfdStockMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdStockMinimoKeyTyped
