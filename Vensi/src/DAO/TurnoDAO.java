@@ -101,7 +101,8 @@ public class TurnoDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Turno t ORDER BY t.id DESC LIMIT 1");
+            Query query = session.createQuery("FROM Turno t ORDER BY t.id DESC");
+            query.setMaxResults(1);
             t = (Turno)query.uniqueResult();
             tx.commit();
         }

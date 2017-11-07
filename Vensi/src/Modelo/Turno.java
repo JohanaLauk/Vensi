@@ -10,6 +10,8 @@ public class Turno  implements java.io.Serializable
      private Date fechaHoraFin;
      private List<ItemVenta> listaItemVenta;    //la BD exige un id_itemVenta
 
+   
+
     public Turno() 
     { }
    
@@ -22,15 +24,14 @@ public class Turno  implements java.io.Serializable
         this.id = id;
     }
     
-    public List<ItemVenta> getItemVenta() 
-    {
-        return this.listaItemVenta;
-    }    
-    public void setItemVenta(ItemVenta unItemVenta) 
-    {
-        this.listaItemVenta.add(unItemVenta);
-    }   
-    
+     public List<ItemVenta> getListaItemVenta() {
+        return listaItemVenta;
+    }
+
+    public void setListaItemVenta(List<ItemVenta> listaItemVenta) {
+        this.listaItemVenta = listaItemVenta;
+    }
+        
     public Date getFechaHoraInicio() 
     {
         return this.fechaHoraInicio;
