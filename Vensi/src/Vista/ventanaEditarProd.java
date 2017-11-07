@@ -259,8 +259,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         if((c < '0' || c > '9') && 
                 (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
                 (c != '.' || txfdEditarPrecioCosto.getText().contains("."))) 
-            evt.consume();
-        
+            evt.consume();        
     }//GEN-LAST:event_txfdEditarPrecioCostoKeyTyped
 
     private void txfdEditarPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPrecioVentaKeyTyped
