@@ -407,9 +407,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="50 x"/>
           </Properties>
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton4ActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd200">
         </Component>
@@ -422,9 +419,6 @@
         <Component class="javax.swing.JTextField" name="txfd10">
         </Component>
         <Component class="javax.swing.JTextField" name="txfd5">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfd5ActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd2">
         </Component>
@@ -433,9 +427,6 @@
         <Component class="javax.swing.JTextField" name="txfd0050">
         </Component>
         <Component class="javax.swing.JTextField" name="txfd0025">
-          <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="txfd0025ActionPerformed"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd500total">
           <Properties>

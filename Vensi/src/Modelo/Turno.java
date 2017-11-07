@@ -6,11 +6,9 @@ import java.util.List;
 public class Turno  implements java.io.Serializable 
 {
      private int id;
-     //private List<> movimientos; //ACOMODAR
      private Date fechaHoraInicio;
      private Date fechaHoraFin;
-     private List<ItemVenta> itemVenta;
-     //private Set historials = new HashSet(0);
+     private List<ItemVenta> listaItemVenta;    //la BD exige un id_itemVenta
 
     public Turno() 
     { }
@@ -26,11 +24,11 @@ public class Turno  implements java.io.Serializable
     
     public List<ItemVenta> getItemVenta() 
     {
-        return this.itemVenta;
+        return this.listaItemVenta;
     }    
-    public void setItemVenta(ItemVenta itemVenta) 
+    public void setItemVenta(ItemVenta unItemVenta) 
     {
-        this.itemVenta.add(itemVenta);
+        this.listaItemVenta.add(unItemVenta);
     }   
     
     public Date getFechaHoraInicio() 
@@ -50,15 +48,4 @@ public class Turno  implements java.io.Serializable
     {
         this.fechaHoraFin = fechaHoraFin;
     }
-    
-    /*public Set getHistorials() 
-    {
-        return this.historials;
-    }    
-    public void setHistorials(Set historials) 
-    {
-        this.historials = historials;
-    }*/
 }
-
-

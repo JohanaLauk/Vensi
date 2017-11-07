@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         
-        <list name="itemVenta" table="item_pedido" inverse="true" lazy="true" fetch="select">
+        <list name="itemVenta" table="item_venta" inverse="true" lazy="true" fetch="select">
             <key column="venta_id" not-null="false"/>  <!--esto estaba en true en un principio -->
             <index column="ORDEN" />
             <one-to-many class="Modelo.ItemVenta" />
@@ -21,13 +21,7 @@
             <column name="fecha_hora_inicio" length="13" not-null="true" />
         </property>
         <property name="fechaHoraFin" type="date">
-            <column name="fecha_hora_fin" length="13" not-null="true" />
+            <column name="fecha_hora_fin" length="13" not-null="false" />
         </property>
-        <!--<set name="historials" table="historial" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_turno" />
-            </key>
-            <one-to-many class="Modelo.Historial" />
-        </set> -->
     </class>
 </hibernate-mapping>

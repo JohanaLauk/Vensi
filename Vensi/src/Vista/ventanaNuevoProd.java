@@ -51,11 +51,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
         jLabel4.setText("Stock mínimo:");
 
-        txfdPrecioVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfdPrecioVentaActionPerformed(evt);
-            }
-        });
         txfdPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdPrecioVentaKeyTyped(evt);
@@ -265,10 +260,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         char c = evt.getKeyChar();
         if(c < '0' || c > '9') evt.consume();
     }//GEN-LAST:event_txfdPesoEnvaseKeyTyped
-
-    private void txfdPrecioVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfdPrecioVentaActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfdPrecioVentaActionPerformed
 
     private void txfdPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioVentaKeyTyped
         char c = evt.getKeyChar();

@@ -1,7 +1,9 @@
 package Vista;
 
 import DAO.ProductoDAO;
+import DAO.TurnoDAO;
 import Modelo.Producto;
+import Modelo.Turno;
 import java.awt.Dimension;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -11,6 +13,7 @@ import javax.swing.table.TableColumnModel;
 public class ventanaVenta extends javax.swing.JFrame 
 {    
     ProductoDAO pDAO = new ProductoDAO();
+    TurnoDAO tDAO = new TurnoDAO();
     DefaultTableModel modelo, modelo2, modelo3, m;
     TableColumnModel tcm, tcm2, tcm3;
     
@@ -32,11 +35,13 @@ public class ventanaVenta extends javax.swing.JFrame
         
         this.setPreferredSize(new Dimension(1200, 500));    //al ejecutarse, la ventana aparece con esa medida
         
+        List<Turno> listaTurno = tDAO.listar();
+        
         llenarTabla();
         llenarTablaCarrito();
         
-        /*if ()   //si el turno no está iniciado
-        {            
+        if (listaTurno.isEmpty())  //lista vacía
+        {
             btnDetalleCaja.setEnabled(false);
             btnCerrarTurno.setEnabled(false);
             for (int i=0 ; i < jPanel2.getComponents().length ; i++)
@@ -52,10 +57,30 @@ public class ventanaVenta extends javax.swing.JFrame
                 jPanel4.getComponent(i).setEnabled(false);
             }
         }
-        else
-        {                    
-            btnIniciarTurno.setEnabled(false);
-        }*/        
+        else    //lista con turnos
+        {
+            if (tDAO.obtenerUltimo().getFechaHoraInicio() != null && tDAO.obtenerUltimo().getFechaHoraFin() == null)   //si el turno no está cerrado
+            {    
+                btnIniciarTurno.setEnabled(false);  
+            }
+            else
+            {                    
+                btnDetalleCaja.setEnabled(false);
+                btnCerrarTurno.setEnabled(false);
+                for (int i=0 ; i < jPanel2.getComponents().length ; i++)
+                {
+                    jPanel2.getComponent(i).setEnabled(false);
+                }
+                for (int i=0 ; i < jPanel3.getComponents().length ; i++)
+                {
+                    jPanel3.getComponent(i).setEnabled(false);
+                }
+                for (int i=0 ; i < jPanel4.getComponents().length ; i++)
+                {
+                    jPanel4.getComponent(i).setEnabled(false);
+                }
+            }
+        }       
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -446,6 +471,11 @@ public class ventanaVenta extends javax.swing.JFrame
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         //crear el objeto item_venta
+        //guardar el item_venta en su tabla (dandolo de alta)
+          
+        //obtener el mismo objeto turno que se creo al iniciar un turno
+        //setear la lista del turno
+        
         totalCarrito = 0;
     }//GEN-LAST:event_btnConfirmarActionPerformed
 

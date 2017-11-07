@@ -2,6 +2,7 @@ package Vista;
 
 import DAO.TurnoDAO;
 import DAO.UsuarioDAO;
+import Modelo.Turno;
 import java.util.Date;
 import javax.swing.JOptionPane;
 
@@ -9,8 +10,6 @@ public class ventanaInicioTurno extends javax.swing.JFrame
 {
     UsuarioDAO uDAO = new UsuarioDAO();
     TurnoDAO tDAO = new TurnoDAO();
-    
-    static Date fechaHoraInicio = null;
     
     public ventanaInicioTurno() 
     {        
@@ -166,17 +165,24 @@ public class ventanaInicioTurno extends javax.swing.JFrame
 
     private void btnSIiniciarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSIiniciarTurnoActionPerformed
         if(uDAO.verificar("Propietario", Integer.parseInt(txfdPin.getText())) || uDAO.verificar("Empleado", Integer.parseInt(txfdPin.getText())))
-        {            
-            fechaHoraInicio = new Date();            
+        {         
+            Turno unTurno = new Turno();
+            
+            Date fechaHoraInicio = new Date();   
+            
+            unTurno.setFechaHoraInicio(fechaHoraInicio);
+            
+            tDAO.alta(unTurno);
             
             ventanaVenta vVenta = new ventanaVenta();
             vVenta.setVisible(true);    
-            dispose();
+            dispose();            
         }
         else
         {
             JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
             txfdPin.setText("");
+            btnSIiniciarTurno.setEnabled(false);
         }
     }//GEN-LAST:event_btnSIiniciarTurnoActionPerformed
     

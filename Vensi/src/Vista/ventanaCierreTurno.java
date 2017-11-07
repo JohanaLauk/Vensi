@@ -1,14 +1,7 @@
 package Vista;
 
-import DAO.TurnoDAO;
-import Modelo.Turno;
-import java.util.Date;
-
 public class ventanaCierreTurno extends javax.swing.JFrame 
 {
-    TurnoDAO tDAO = new TurnoDAO();
-    ventanaInicioTurno vIT = new ventanaInicioTurno();
-    
     public ventanaCierreTurno() 
     {
         initComponents();
@@ -179,23 +172,6 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         jButton11.setText("00,25 x");
 
         jButton4.setText("50 x");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
-
-        txfd5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfd5ActionPerformed(evt);
-            }
-        });
-
-        txfd0025.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfd0025ActionPerformed(evt);
-            }
-        });
 
         txfd500total.setEditable(false);
 
@@ -429,18 +405,6 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton4ActionPerformed
-
-    private void txfd5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfd5ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfd5ActionPerformed
-
-    private void txfd0025ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfd0025ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txfd0025ActionPerformed
-
     private void btnCancelarCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCerrarTurnoActionPerformed
         ventanaVenta vVenta = new ventanaVenta();
         vVenta.setVisible(true);
@@ -448,12 +412,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     }//GEN-LAST:event_btnCancelarCerrarTurnoActionPerformed
 
     private void btnAceptarCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarCerrarTurnoActionPerformed
-        Turno unTurno = new Turno();
-        unTurno.setFechaHoraInicio(vIT.fechaHoraInicio);
-        unTurno.setFechaHoraFin(new Date());  // sólo para que no quede nula
-        //setear la lista
-        
-        tDAO.alta(unTurno);
+        //obtener el mismo objeto turno que se creo al iniciar un turno
+        //setear la fechaHora cierre
     }//GEN-LAST:event_btnAceptarCerrarTurnoActionPerformed
 
     public static void main(String args[]) 
