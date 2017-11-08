@@ -1,13 +1,12 @@
 package Modelo;
 
-import java.util.Date;
+import java.util.*;
 
 public class Pedido  implements java.io.Serializable 
 {
     private int id;
-    private ItemPedido itemPedido;
+    private List<ItemPedido> itemPedido;
     private Proveedor proveedor;
-    private int nroPedido;
     private Date fechaHora;
 
     public Pedido() 
@@ -21,16 +20,15 @@ public class Pedido  implements java.io.Serializable
     {
         this.id = id;
     }
-    
-    public ItemPedido getItemPedido() 
-    {
-        return this.itemPedido;
-    }    
-    public void setItemPedido(ItemPedido itemPedido) 
-    {
-        this.itemPedido = itemPedido;
+
+    public List<ItemPedido> getItemPedido() {
+        return itemPedido;
     }
-    
+
+    public void setItemPedido(ItemPedido itemPedido) {
+        this.itemPedido.add(itemPedido);
+    }
+        
     public Proveedor getProveedor() 
     {
         return this.proveedor;
@@ -39,16 +37,7 @@ public class Pedido  implements java.io.Serializable
     {
         this.proveedor = proveedor;
     }
-    
-    public int getNroPedido() 
-    {
-        return this.nroPedido;
-    }    
-    public void setNroPedido(int nroPedido) 
-    {
-        this.nroPedido = nroPedido;
-    }
-    
+        
     public Date getFechaHora() 
     {
         return this.fechaHora;
@@ -58,12 +47,4 @@ public class Pedido  implements java.io.Serializable
         this.fechaHora = fechaHora;
     }
     
-    /*public Set getHistorials() 
-    {
-        return this.historials;
-    }        
-    public void setHistorials(Set historials) 
-    {
-        this.historials = historials;
-    }*/
 }

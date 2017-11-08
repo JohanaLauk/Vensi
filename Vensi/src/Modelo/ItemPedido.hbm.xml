@@ -8,17 +8,14 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <property name="producto" type="serializable">
+        <!--<property name="producto" type="serializable">
             <column name="producto" not-null="true" />
-        </property>
+        </property> -->
+        <one-to-one name="producto" class="Producto" cascade="none"> 
+        </one-to-one>
         <property name="cantidad" type="double">
             <column name="cantidad" precision="8" scale="3" not-null="true" />
         </property>
-        <!-- <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_item_pedido" not-null="true" />
-            </key>
-            <one-to-many class="Modelo.Pedido" />
-        </set> -->
+        
     </class>
 </hibernate-mapping>

@@ -17,24 +17,19 @@
             <index column="ORDEN" />
             <one-to-many class="Modelo.ItemPedido" />
         </list>
-      
+            
         <!--<many-to-one name="proveedor" class="Modelo.Proveedor" fetch="select">
             <column name="id_proveedor" not-null="true" />
-        </many-to-one> -->
+        </many-to-one> 
         <property name="proveedor" type="serializable">
             <column name="proveedor" not-null="true" />
-        </property>
-        <property name="nroPedido" type="int">
-            <column name="nro_pedido" not-null="true" />
-        </property>
+        </property> -->
+        <one-to-one name="proveedor" class="Proveedor" cascade="none"> 
+        </one-to-one>
+        
         <property name="fechaHora" type="date">
             <column name="fecha_hora" length="13" not-null="true" />
         </property>
-        <!-- <set name="historials" table="historial" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_pedido" />
-            </key>
-            <one-to-many class="Modelo.Historial" />
-        </set> -->
+        
     </class>
 </hibernate-mapping>
