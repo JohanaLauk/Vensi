@@ -1,16 +1,14 @@
 package Modelo;
 
 import java.util.Date;
-import java.util.Set;
 
 public class Pedido  implements java.io.Serializable 
 {
-     private int id;
-     private ItemPedido itemPedido;
-     private Proveedor proveedor;
-     private int nroPedido;
-     private Date fechaHora;
-     //private Set historials = new HashSet(0);
+    private int id;
+    private ItemPedido itemPedido;
+    private Proveedor proveedor;
+    private int nroPedido;
+    private Date fechaHora;
 
     public Pedido() 
     { }

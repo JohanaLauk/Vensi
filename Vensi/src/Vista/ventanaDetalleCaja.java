@@ -4,6 +4,7 @@ import DAO.ItemVentaDAO;
 import DAO.TurnoDAO;
 import Modelo.ItemVenta;
 import Modelo.Turno;
+import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
@@ -20,22 +21,8 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         initComponents();
         
         this.setLocationRelativeTo(null);   //centra la ventana         
-        
-        modelo = new DefaultTableModel();
-        modelo.addColumn("Detalle");
-        modelo.addColumn("Cantidad");
-        modelo.addColumn("Entrada");
-        modelo.addColumn("Salida");
-
-        this.tablaDetalleCaja.setModel(modelo);
-
-        tcm = tablaDetalleCaja.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(300);
-        tcm.getColumn(1).setPreferredWidth(80);
-        tcm.getColumn(2).setPreferredWidth(80);
-        tcm.getColumn(3).setPreferredWidth(80);
-        
-        //llenarTabla();
+         
+        llenarTabla();
     }
 
     @SuppressWarnings("unchecked")
@@ -180,21 +167,20 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         });
     }
 
-    public void llenarTabla()   //Con el contenido de la listaVentas que tiene el turno
+    public void llenarTabla()
     {        
         modelo = new DefaultTableModel();
-        //List<> listaMovimientos = elTurno.getListaMovimientos;
+        List<ItemVenta> listaIT = itDAO.listar();
         String[] datos = new String[4];
         
-        /*if (listaMovimientos.size() == 0)
-        {
-            modelo = new DefaultTableModel();
+        if (listaIT.isEmpty())        
+        {            
             modelo.addColumn("Detalle");
             modelo.addColumn("Cantidad");
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
 
-            this.tablaDetalleCaja.setModel(modelo);
+            tablaDetalleCaja.setModel(modelo);
 
             tcm = tablaDetalleCaja.getColumnModel();
             tcm.getColumn(0).setPreferredWidth(300);
@@ -209,12 +195,12 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
 
-            for (ItemVenta v : listaMovimientos)
+            for (ItemVenta v : listaIT)
             {
                 datos[0] = String.valueOf(v.getProducto());
                 datos[1] = String.valueOf(v.getCantidad());
-                datos[2] = String.valueOf("Valor de entrada"); //v.);  //valor de entrada
-                datos[3] = String.valueOf("Valor de salida"); //v.);  //valor de salida
+                datos[2] = String.valueOf("Valor de entrada"); 
+                datos[3] = String.valueOf("Valor de salida"); 
 
                 modelo.addRow(datos);
             }
@@ -222,12 +208,11 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             tablaDetalleCaja.setModel(modelo);
 
             tcm = tablaDetalleCaja.getColumnModel();
-
             tcm.getColumn(0).setPreferredWidth(300);
             tcm.getColumn(1).setPreferredWidth(80);
             tcm.getColumn(2).setPreferredWidth(80);
             tcm.getColumn(3).setPreferredWidth(80);
-        }*/
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

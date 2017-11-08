@@ -1,18 +1,10 @@
 package Modelo;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Date;
-import java.util.Set;
-
 public class ItemVenta  implements java.io.Serializable 
 {    
      private int id;
-     private Producto producto;
-     //private Serializable producto;
+     private Producto producto;     
      private double cantidad;
-     private Date hora;
-     //private Set turnos = new HashSet(0);
 
     public ItemVenta() 
     { }	   
@@ -26,7 +18,7 @@ public class ItemVenta  implements java.io.Serializable
         this.id = id;
     }
     
-    public Serializable getProducto() 
+    public Producto getProducto() 
     {
         return this.producto;
     }    
@@ -42,23 +34,5 @@ public class ItemVenta  implements java.io.Serializable
     public void setCantidad(double cantidad) 
     {
         this.cantidad = cantidad;
-    }
-    
-    public Date getHora() 
-    {
-        return this.hora;
-    }    
-    public void setHora(Date hora) 
-    {
-        this.hora = hora;
-    }
-    
-    /*public Set getTurnos() 
-    {
-        return this.turnos;
-    }    
-    public void setTurnos(Set turnos) 
-    {
-        this.turnos = turnos;
-    }*/
+    }  
 }

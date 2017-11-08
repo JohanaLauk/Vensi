@@ -1,16 +1,10 @@
 package Modelo;
 
-import java.io.Serializable;
-import java.math.BigDecimal;
-import java.util.Set;
-
 public class ItemPedido  implements java.io.Serializable 
 {
      private int id;
      private Producto producto;
-     //private Serializable producto;
      private double cantidad;
-     //private Set pedidos = new HashSet(0);
 
     public ItemPedido() 
     { }    
@@ -24,7 +18,7 @@ public class ItemPedido  implements java.io.Serializable
         this.id = id;
     }
     
-    public Serializable getProducto() 
+    public Producto getProducto() 
     {
         return this.producto;
     }    
@@ -41,13 +35,4 @@ public class ItemPedido  implements java.io.Serializable
     {
         this.cantidad = cantidad;
     }
-    
-    /*public Set getPedidos() 
-    {
-        return this.pedidos;
-    }    
-    public void setPedidos(Set pedidos) 
-    {
-        this.pedidos = pedidos;
-    }*/
 }

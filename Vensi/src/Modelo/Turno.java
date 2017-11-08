@@ -5,12 +5,10 @@ import java.util.List;
 
 public class Turno  implements java.io.Serializable 
 {
-     private int id;
-     private Date fechaHoraInicio;
-     private Date fechaHoraFin;
-     private List<ItemVenta> listaItemVenta;    //la BD exige un id_itemVenta
-
-   
+    private int id;
+    private Date fechaHoraInicio;
+    private Date fechaHoraFin;
+    private List<ItemVenta> listaItemVenta;    //la BD exige un id_itemVenta
 
     public Turno() 
     { }

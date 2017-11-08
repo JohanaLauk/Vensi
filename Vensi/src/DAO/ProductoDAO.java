@@ -73,11 +73,7 @@ public class ProductoDAO
         try
         {                       
             Transaction tx = session.beginTransaction();
-            p = (Producto)session.get(Producto.class,id);
-            /*if(p != null)
-            {
-                JOptionPane.showMessageDialog(null, "Producto encontrado");
-            }*/
+            p = (Producto)session.get(Producto.class,id);            
             tx.commit();
             session.close();
         } 

@@ -14,9 +14,6 @@
         <property name="cantidad" type="double">
             <column name="cantidad" precision="8" scale="3" not-null="true" />
         </property>
-        <property name="hora" type="time">
-            <column name="hora" length="15" not-null="true" />
-        </property>
                 
        <!-- <set name="turnos" table="turno" inverse="true" lazy="true" fetch="select">
             <key>

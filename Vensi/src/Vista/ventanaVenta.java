@@ -1,7 +1,9 @@
 package Vista;
 
+import DAO.ItemVentaDAO;
 import DAO.ProductoDAO;
 import DAO.TurnoDAO;
+import Modelo.ItemVenta;
 import Modelo.Producto;
 import Modelo.Turno;
 import java.awt.Dimension;
@@ -14,8 +16,10 @@ public class ventanaVenta extends javax.swing.JFrame
 {    
     ProductoDAO pDAO = new ProductoDAO();
     TurnoDAO tDAO = new TurnoDAO();
+    ItemVentaDAO itDAO = new ItemVentaDAO();
+    
     DefaultTableModel modelo, modelo2, modelo3, m;
-    TableColumnModel tcm, tcm2, tcm3;
+    TableColumnModel tcm, tcm2, tcm3;    
     
     String filtroSelec = null;
     String ordenSelec = null;
@@ -35,52 +39,11 @@ public class ventanaVenta extends javax.swing.JFrame
         
         this.setPreferredSize(new Dimension(1200, 500));    //al ejecutarse, la ventana aparece con esa medida
         
-        List<Turno> listaTurno = tDAO.listar();
-        
         llenarTabla();
         llenarTablaCarrito();
         
-        if (listaTurno.isEmpty())  //lista vacía
-        {
-            btnDetalleCaja.setEnabled(false);
-            btnCerrarTurno.setEnabled(false);
-            for (int i=0 ; i < jPanel2.getComponents().length ; i++)
-            {
-                jPanel2.getComponent(i).setEnabled(false);
-            }
-            for (int i=0 ; i < jPanel3.getComponents().length ; i++)
-            {
-                jPanel3.getComponent(i).setEnabled(false);
-            }
-            for (int i=0 ; i < jPanel4.getComponents().length ; i++)
-            {
-                jPanel4.getComponent(i).setEnabled(false);
-            }
-        }
-        else    //lista con turnos
-        {
-            if (tDAO.obtenerUltimo().getFechaHoraInicio() != null && tDAO.obtenerUltimo().getFechaHoraFin() == null)   //si el turno no está cerrado
-            {    
-                btnIniciarTurno.setEnabled(false);  
-            }
-            else
-            {                    
-                btnDetalleCaja.setEnabled(false);
-                btnCerrarTurno.setEnabled(false);
-                for (int i=0 ; i < jPanel2.getComponents().length ; i++)
-                {
-                    jPanel2.getComponent(i).setEnabled(false);
-                }
-                for (int i=0 ; i < jPanel3.getComponents().length ; i++)
-                {
-                    jPanel3.getComponent(i).setEnabled(false);
-                }
-                for (int i=0 ; i < jPanel4.getComponents().length ; i++)
-                {
-                    jPanel4.getComponent(i).setEnabled(false);
-                }
-            }
-        }       
+        verificarTurno();
+               
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -470,12 +433,70 @@ public class ventanaVenta extends javax.swing.JFrame
     }//GEN-LAST:event_cbOrdenCampoActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        //crear el objeto item_venta
-        //guardar el item_venta en su tabla (dandolo de alta)
-          
-        //obtener el mismo objeto turno que se creo al iniciar un turno
-        //setear la lista del turno
+        int cantFilasCarrito = tablaCarrito.getRowCount();
         
+        List<ItemVenta> listaIV = itDAO.listar();
+        
+        if (cantFilasCarrito != 0)     //carrito NO vacio
+        {
+            if (!listaIV.isEmpty())     //si la lista ItemVenta no está vacía
+            {
+                for (int i=0 ; i<cantFilasCarrito ; i++)   //recorre todas las filas
+                {               
+                    String idProd = tablaCarrito.getValueAt(i, 4).toString();                    
+                    //Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
+
+                    String cantPeso = tablaCarrito.getValueAt(i, 1).toString();
+
+                    for (ItemVenta x : listaIV)
+                    {
+                        if (x.getProducto().getId() == Integer.parseInt(idProd)) //si el prod que se vendió ya está en la tabla listaVentas... 
+                        {
+                            ItemVenta unItemVenta = new ItemVenta(); 
+
+                            double cantPesoTotal = unItemVenta.getCantidad() + Double.parseDouble(cantPeso);
+
+                            unItemVenta.setCantidad(cantPesoTotal);
+
+                            itDAO.modificar(unItemVenta, x.getId());
+                        }
+                        else    //si el prod no está en la tabla
+                        {
+                            ItemVenta unItemVenta = new ItemVenta();
+                            unItemVenta.setProducto(elProd);    //debería guardar el id del prod en la bd. ¿o no?
+                            unItemVenta.setCantidad(Double.parseDouble(cantPeso));
+
+                            itDAO.alta(unItemVenta);
+                        }
+                    }
+                }
+            }
+            else    //si la lista ItemVenta está vacía
+            {
+                JOptionPane.showMessageDialog(null, "Se estan agregando productos por primera vez");
+
+                for (int i=0 ; i<cantFilasCarrito ; i++)   //recorre todas las filas del carrito
+                {               
+                    String idProd = tablaCarrito.getValueAt(i, 4).toString();
+                    //Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
+                    
+                    String cantPeso = tablaCarrito.getValueAt(i, 1).toString();
+
+                    ItemVenta unItemVenta = new ItemVenta();
+                    unItemVenta.setProducto(elProd);    //debería guardar el id del prod en la bd. ¿o no?
+                    unItemVenta.setCantidad(Double.parseDouble(cantPeso));
+
+                    itDAO.alta(unItemVenta);                
+                }
+            }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "El carrito está vacío");
+        }  
+
+                  
+        //obtener el mismo objeto turno que se creo al iniciar un turno y setearle la lista de ventas
         totalCarrito = 0;
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
@@ -716,6 +737,53 @@ public class ventanaVenta extends javax.swing.JFrame
         ordenamiento[2] = tipoSelec;
                 
         return ordenamiento;
+    }
+    
+    public void verificarTurno()
+    {
+        List<Turno> listaTurno = tDAO.listar();
+        
+        if (listaTurno.isEmpty())  //lista vacía
+        {
+            btnDetalleCaja.setEnabled(false);
+            btnCerrarTurno.setEnabled(false);
+            for (int i=0 ; i < jPanel2.getComponents().length ; i++)
+            {
+                jPanel2.getComponent(i).setEnabled(false);
+            }
+            for (int i=0 ; i < jPanel3.getComponents().length ; i++)
+            {
+                jPanel3.getComponent(i).setEnabled(false);
+            }
+            for (int i=0 ; i < jPanel4.getComponents().length ; i++)
+            {
+                jPanel4.getComponent(i).setEnabled(false);
+            }
+        }
+        else    //lista con turnos
+        {
+            if (tDAO.obtenerUltimo().getFechaHoraInicio() != null && tDAO.obtenerUltimo().getFechaHoraFin() == null)   //si el turno no está cerrado
+            {    
+                btnIniciarTurno.setEnabled(false);  
+            }
+            else
+            {                    
+                btnDetalleCaja.setEnabled(false);
+                btnCerrarTurno.setEnabled(false);
+                for (int i=0 ; i < jPanel2.getComponents().length ; i++)
+                {
+                    jPanel2.getComponent(i).setEnabled(false);
+                }
+                for (int i=0 ; i < jPanel3.getComponents().length ; i++)
+                {
+                    jPanel3.getComponent(i).setEnabled(false);
+                }
+                for (int i=0 ; i < jPanel4.getComponents().length ; i++)
+                {
+                    jPanel4.getComponent(i).setEnabled(false);
+                }
+            }
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
