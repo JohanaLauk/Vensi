@@ -444,7 +444,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 for (int i=0 ; i<cantFilasCarrito ; i++)   //recorre todas las filas
                 {               
                     String idProd = tablaCarrito.getValueAt(i, 4).toString();                    
-                    //Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
+                    Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
 
                     String cantPeso = tablaCarrito.getValueAt(i, 1).toString();
 
@@ -478,7 +478,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 for (int i=0 ; i<cantFilasCarrito ; i++)   //recorre todas las filas del carrito
                 {               
                     String idProd = tablaCarrito.getValueAt(i, 4).toString();
-                    //Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
+                    Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
                     
                     String cantPeso = tablaCarrito.getValueAt(i, 1).toString();
 
