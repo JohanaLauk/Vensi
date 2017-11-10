@@ -143,6 +143,12 @@ public class ventanaVenta extends javax.swing.JFrame
 
         jLabel2.setText("Cantidad/Peso:");
 
+        txfdCantPesoProd.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdCantPesoProdKeyTyped(evt);
+            }
+        });
+
         jLabel3.setText("Ordenar por:");
 
         cbOrdenCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripción", "Código", "Precio", "Stock" }));
@@ -511,30 +517,29 @@ public class ventanaVenta extends javax.swing.JFrame
             
             String descrip = tablaProd.getValueAt(filaSelec, 1).toString();
             
-            try //no anda, no sé por qué
-            {
-                cantidad = txfdCantPesoProd.getText();
-            }
-            catch (Exception e)
+            cantidad = txfdCantPesoProd.getText();
+            if(cantidad.equals(""))
             {
                 JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad");
             }
+            else{
             
-            String precioU = tablaProd.getValueAt(filaSelec, 2).toString();
+                String precioU = tablaProd.getValueAt(filaSelec, 2).toString();
             
-            x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
-            precioTotal = String.valueOf(x);
+                x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
+                precioTotal = String.valueOf(x);
             
-            String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();            
+                String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();            
             
-            m = (DefaultTableModel) tablaCarrito.getModel();
-            String filaNueva[] = {descrip, cantidad, precioU, precioTotal, id_recibido};
-            m.addRow(filaNueva);            
+                m = (DefaultTableModel) tablaCarrito.getModel();
+                String filaNueva[] = {descrip, cantidad, precioU, precioTotal, id_recibido};
+                m.addRow(filaNueva);            
             
-            totalCarrito = totalCarrito + x;
-            labPrecioTotalCompra.setText(String.valueOf(totalCarrito));
+                totalCarrito = totalCarrito + x;
+                labPrecioTotalCompra.setText(String.valueOf(totalCarrito));
             
-            txfdCantPesoProd.setText(null);
+                txfdCantPesoProd.setText(null);
+            }
         }
         else
         {
@@ -599,6 +604,14 @@ public class ventanaVenta extends javax.swing.JFrame
             cbTipoOrden.setEnabled(false);
         }
     }//GEN-LAST:event_txfdBuscarProdKeyReleased
+
+    private void txfdCantPesoProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantPesoProdKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
+                (c != '.' || txfdCantPesoProd.getText().contains("."))) 
+            evt.consume();
+    }//GEN-LAST:event_txfdCantPesoProdKeyTyped
     
     public static void main(String args[]) 
     {        
