@@ -633,7 +633,7 @@ public class ventanaVenta extends javax.swing.JFrame
         modelo.addColumn("Código");
         modelo.addColumn("Descripción");
         modelo.addColumn("Precio");
-        modelo.addColumn("Precio por kilo");
+        modelo.addColumn("$ por kilo");
         modelo.addColumn("Stock");
         modelo.addColumn("ID");
         
@@ -652,11 +652,11 @@ public class ventanaVenta extends javax.swing.JFrame
         tablaProd.setModel(modelo);
         
         tcm = tablaProd.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(100);
-        tcm.getColumn(1).setPreferredWidth(300);
-        tcm.getColumn(2).setPreferredWidth(80);
-        tcm.getColumn(3).setPreferredWidth(80);
-        tcm.getColumn(4).setPreferredWidth(80);
+        tcm.getColumn(0).setPreferredWidth(80);
+        tcm.getColumn(1).setPreferredWidth(400);
+        tcm.getColumn(2).setPreferredWidth(30);
+        tcm.getColumn(3).setPreferredWidth(30);
+        tcm.getColumn(4).setPreferredWidth(30);
         tcm.getColumn(5).setPreferredWidth(0);     
         tcm.getColumn(5).setMaxWidth(0);
         tcm.getColumn(5).setMinWidth(0);
@@ -668,7 +668,7 @@ public class ventanaVenta extends javax.swing.JFrame
     {              
         modelo2 = new DefaultTableModel();
         modelo2.addColumn("Descripción");
-        modelo2.addColumn("Cantidad/peso");
+        modelo2.addColumn("Cantidad");
         modelo2.addColumn("Precio");
         modelo2.addColumn("Precio Total");
         modelo2.addColumn("ID");
@@ -682,9 +682,9 @@ public class ventanaVenta extends javax.swing.JFrame
         
         tcm2 = tablaCarrito.getColumnModel();        
         tcm2.getColumn(0).setPreferredWidth(300);
-        tcm2.getColumn(1).setPreferredWidth(90);
-        tcm2.getColumn(2).setPreferredWidth(90);
-        tcm2.getColumn(3).setPreferredWidth(90);
+        tcm2.getColumn(1).setPreferredWidth(20);
+        tcm2.getColumn(2).setPreferredWidth(20);
+        tcm2.getColumn(3).setPreferredWidth(30);
         tcm2.getColumn(4).setPreferredWidth(0);     
         tcm2.getColumn(4).setMaxWidth(0);
         tcm2.getColumn(4).setMinWidth(0);
@@ -719,11 +719,11 @@ public class ventanaVenta extends javax.swing.JFrame
         tablaProd.setModel(modelo3);
         
         tcm3 = tablaProd.getColumnModel();
-        tcm3.getColumn(0).setPreferredWidth(100);
-        tcm3.getColumn(1).setPreferredWidth(300);
-        tcm3.getColumn(2).setPreferredWidth(80);
-        tcm3.getColumn(3).setPreferredWidth(80);
-        tcm3.getColumn(4).setPreferredWidth(80);
+        tcm3.getColumn(0).setPreferredWidth(80);
+        tcm3.getColumn(1).setPreferredWidth(400);
+        tcm3.getColumn(2).setPreferredWidth(30);
+        tcm3.getColumn(3).setPreferredWidth(30);
+        tcm3.getColumn(4).setPreferredWidth(30);
         tcm3.getColumn(5).setPreferredWidth(0);     
         tcm3.getColumn(5).setMaxWidth(0);
         tcm3.getColumn(5).setMinWidth(0);
@@ -760,6 +760,7 @@ public class ventanaVenta extends javax.swing.JFrame
         {
             btnDetalleCaja.setEnabled(false);
             btnCerrarTurno.setEnabled(false);
+            
             for (int i=0 ; i < jPanel2.getComponents().length ; i++)
             {
                 jPanel2.getComponent(i).setEnabled(false);
@@ -783,14 +784,17 @@ public class ventanaVenta extends javax.swing.JFrame
             {                    
                 btnDetalleCaja.setEnabled(false);
                 btnCerrarTurno.setEnabled(false);
+                
                 for (int i=0 ; i < jPanel2.getComponents().length ; i++)
                 {
                     jPanel2.getComponent(i).setEnabled(false);
                 }
+                
                 for (int i=0 ; i < jPanel3.getComponents().length ; i++)
                 {
                     jPanel3.getComponent(i).setEnabled(false);
                 }
+                
                 for (int i=0 ; i < jPanel4.getComponents().length ; i++)
                 {
                     jPanel4.getComponent(i).setEnabled(false);

@@ -35,5 +35,8 @@
         <property name="estado"  type="boolean" >
             <column name="estado" not-null="true" />
         </property>
+        <property name="porPeso"  type="boolean" >
+            <column name="por_peso" not-null="false" />
+        </property>
     </class>
 </hibernate-mapping>
