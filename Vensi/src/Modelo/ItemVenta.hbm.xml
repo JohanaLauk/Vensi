@@ -8,7 +8,7 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <one-to-one name="producto" class="Producto" cascade="none"> 
+        <one-to-one name="producto" class="Modelo.Producto" cascade="none"> 
         </one-to-one>
         <property name="cantidad" type="double">
             <column name="cantidad" precision="8" scale="3" not-null="true" />

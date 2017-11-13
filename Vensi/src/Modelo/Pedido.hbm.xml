@@ -24,7 +24,7 @@
         <property name="proveedor" type="serializable">
             <column name="proveedor" not-null="true" />
         </property> -->
-        <one-to-one name="proveedor" class="Proveedor" cascade="none"> 
+        <one-to-one name="proveedor" class="Modelo.Proveedor" cascade="none"> 
         </one-to-one>
         
         <property name="fechaHora" type="date">

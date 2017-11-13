@@ -22,12 +22,6 @@
         </property>
         <property name="estado" type="boolean">
             <column name="estado" not-null="true" />
-        <!--<set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_proveedor" not-null="true" />
-            </key>
-            <one-to-many class="Modelo.Pedido" />
-        </set> -->
         </property>
     </class>
 </hibernate-mapping>
