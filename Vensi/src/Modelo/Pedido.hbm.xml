@@ -23,9 +23,11 @@
         </many-to-one> 
         <property name="proveedor" type="serializable">
             <column name="proveedor" not-null="true" />
-        </property> -->
+        </property> 
         <one-to-one name="proveedor" class="Modelo.Proveedor" cascade="none"> 
-        </one-to-one>
+        </one-to-one> -->
+        <many-to-one name = "proveedor" column = "id_proveedor" 
+         class="Modelo.Proveedor" not-null="true"/>
         
         <property name="fechaHora" type="date">
             <column name="fecha_hora" length="13" not-null="true" />

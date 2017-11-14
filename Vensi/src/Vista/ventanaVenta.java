@@ -11,7 +11,9 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -481,7 +483,7 @@ public class ventanaVenta extends javax.swing.JFrame
                             double cantPesoTotal = unItemVenta.getCantidad() + Double.parseDouble(cantPeso);
 
                             unItemVenta.setCantidad(cantPesoTotal);
-
+                            
                             itDAO.modificar(unItemVenta, x.getId());
                         }
                         else    //si el prod no está en la tabla
@@ -489,6 +491,7 @@ public class ventanaVenta extends javax.swing.JFrame
                             ItemVenta unItemVenta = new ItemVenta();
                             unItemVenta.setProducto(elProd);    //debería guardar el id del prod en la bd. ¿o no?
                             unItemVenta.setCantidad(Double.parseDouble(cantPeso));
+                            unItemVenta.setHora(new Date());
 
                             itDAO.alta(unItemVenta);
                         }
@@ -509,6 +512,7 @@ public class ventanaVenta extends javax.swing.JFrame
                     ItemVenta unItemVenta = new ItemVenta();
                     unItemVenta.setProducto(elProd);    //debería guardar el id del prod en la bd. ¿o no?
                     unItemVenta.setCantidad(Double.parseDouble(cantPeso));
+                    unItemVenta.setHora(new Date());
 
                     itDAO.alta(unItemVenta);                
                 }

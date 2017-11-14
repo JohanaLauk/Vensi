@@ -1,10 +1,13 @@
 package Modelo;
 
+import java.util.Date;
+
 public class ItemVenta  implements java.io.Serializable 
 {    
      private int id;
      private Producto producto;     
      private double cantidad;
+     private Date hora;
 
     public ItemVenta() 
     { }	   
@@ -35,4 +38,13 @@ public class ItemVenta  implements java.io.Serializable
     {
         this.cantidad = cantidad;
     }  
+
+    public Date getHora() {
+        return hora;
+    }
+
+    public void setHora(Date hora) {
+        this.hora = hora;
+    }
+    
 }

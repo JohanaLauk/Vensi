@@ -8,10 +8,15 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <one-to-one name="producto" class="Modelo.Producto" cascade="none"> 
-        </one-to-one>
+        <many-to-one name = "producto" column = "id_producto" 
+         class="Modelo.Producto" not-null="true"/>
+        <!--<one-to-one name="producto" class="Modelo.Producto" cascade="none"> 
+        </one-to-one> -->
         <property name="cantidad" type="double">
             <column name="cantidad" precision="8" scale="3" not-null="true" />
+        </property>
+        <property name="hora"  type="time">
+            <column name="hora" />
         </property>
                 
     </class>
