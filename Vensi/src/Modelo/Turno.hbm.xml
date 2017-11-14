@@ -14,6 +14,7 @@
             <index column="ORDEN" />
             <one-to-many class="Modelo.ItemVenta" />
          </list>
+         
        <!-- <many-to-one name="itemVenta" class="Modelo.ItemVenta" fetch="select">
             <column name="id_venta" />
         </many-to-one> -->
