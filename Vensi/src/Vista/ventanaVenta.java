@@ -7,6 +7,11 @@ import Modelo.ItemVenta;
 import Modelo.Producto;
 import Modelo.Turno;
 import java.awt.Dimension;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -25,6 +30,8 @@ public class ventanaVenta extends javax.swing.JFrame
     String ordenSelec = null;
     String tipoSelec = null;
     
+    List<ItemVenta> listaVentasTurno = new ArrayList<ItemVenta>();
+    
     static double totalCarrito = 0; //inicializa en 0 cada vez que se confirma la compra
     
     public ventanaVenta() 
@@ -39,9 +46,19 @@ public class ventanaVenta extends javax.swing.JFrame
         
         this.setPreferredSize(new Dimension(1200, 500));    //al ejecutarse, la ventana aparece con esa medida
         
-        llenarTabla();
-        llenarTablaCarrito();
+        //Al hacer click en el JFrame se quita la seleccion en los JTable
+        this.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent me) 
+            {
+                tablaProd.clearSelection();
+                tablaCarrito.clearSelection();
+            } 
+        });
         
+        llenarTabla();
+        llenarTablaCarrito();        
         verificarTurno();
                
     }
@@ -454,7 +471,8 @@ public class ventanaVenta extends javax.swing.JFrame
 
                     String cantPeso = tablaCarrito.getValueAt(i, 1).toString();
 
-                    for (ItemVenta x : listaIV)
+                    for (ItemVenta x : listaIV) //recorre la tabla ItemVenta
+                    //for (ItemVenta x : listaVentasTurno)    //recorre la lista de ventas en el turno
                     {
                         if (x.getProducto().getId() == Integer.parseInt(idProd)) //si el prod que se vendió ya está en la tabla listaVentas... 
                         {
@@ -522,8 +540,8 @@ public class ventanaVenta extends javax.swing.JFrame
             {
                 JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad");
             }
-            else{
-            
+            else
+            {            
                 String precioU = tablaProd.getValueAt(filaSelec, 2).toString();
             
                 x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
@@ -661,7 +679,31 @@ public class ventanaVenta extends javax.swing.JFrame
         tcm.getColumn(5).setMaxWidth(0);
         tcm.getColumn(5).setMinWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);      
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);   
+        
+        tablaProd.addFocusListener(new FocusListener() 
+        {
+            @Override
+            public void focusGained(FocusEvent fe) 
+            {
+                tablaProd.setRowSelectionAllowed(true);
+            }
+
+            @Override
+            public void focusLost(FocusEvent fe) 
+            {                
+                tablaProd.setRowSelectionAllowed(false);
+            } 
+        });
+        
+        tablaProd.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseClicked(MouseEvent me) 
+            {
+                tablaProd.setRowSelectionAllowed(true);
+            } 
+        });
     }
     
     public void llenarTablaCarrito() //ACOMODAR - LISTAR SOLO PROD HABILITADOS
@@ -690,6 +732,30 @@ public class ventanaVenta extends javax.swing.JFrame
         tcm2.getColumn(4).setMinWidth(0);
         tablaCarrito.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
         tablaCarrito.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
+        
+        tablaCarrito.addFocusListener(new FocusListener() 
+        {
+            @Override
+            public void focusGained(FocusEvent fe) 
+            {
+                tablaCarrito.setRowSelectionAllowed(true);
+            }
+
+            @Override
+            public void focusLost(FocusEvent fe) 
+            {                
+                tablaCarrito.setRowSelectionAllowed(false);
+            } 
+        });
+        
+        tablaCarrito.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseClicked(MouseEvent me) 
+            {
+                tablaCarrito.setRowSelectionAllowed(true);
+            } 
+        });
     }
        
     public void llenarTablaBusqueda (List<Producto> listaBusqueda)

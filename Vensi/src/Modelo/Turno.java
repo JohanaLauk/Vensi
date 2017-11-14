@@ -22,11 +22,12 @@ public class Turno  implements java.io.Serializable
         this.id = id;
     }
     
-     public List<ItemVenta> getListaItemVenta() {
+    public List<ItemVenta> getListaItemVenta() 
+    {
         return listaItemVenta;
     }
-
-    public void setListaItemVenta(List<ItemVenta> listaItemVenta) {
+    public void setListaItemVenta(List<ItemVenta> listaItemVenta)
+    {
         this.listaItemVenta = listaItemVenta;
     }
         

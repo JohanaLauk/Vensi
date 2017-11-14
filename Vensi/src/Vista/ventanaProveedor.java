@@ -4,6 +4,10 @@ import DAO.ProveedorDAO;
 import Modelo.Proveedor;
 import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -28,7 +32,17 @@ public class ventanaProveedor extends javax.swing.JFrame
         this.setMinimumSize(new Dimension(1000, 500));  //al minimizar la ventana no permite que sea mas chico que esa medida
         
         this.setPreferredSize(new Dimension(1000, 500));    //al minimizar la ventana aparece con esa medida
-               
+         
+        //Al hacer click en el JFrame se quita la seleccion en el JTable
+        this.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent me) 
+            {                
+                tablaProv.clearSelection();
+            } 
+        });
+        
         llenarTabla();          
     }
     
@@ -365,6 +379,30 @@ public class ventanaProveedor extends javax.swing.JFrame
         tcm.getColumn(5).setMinWidth(0);
         tablaProv.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
         tablaProv.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+        
+        tablaProv.addFocusListener(new FocusListener() 
+        {
+            @Override
+            public void focusGained(FocusEvent fe) 
+            {
+                tablaProv.setRowSelectionAllowed(true);
+            }
+
+            @Override
+            public void focusLost(FocusEvent fe) 
+            {                
+                tablaProv.setRowSelectionAllowed(false);
+            } 
+        });
+        
+        tablaProv.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseClicked(MouseEvent me) 
+            {
+                tablaProv.setRowSelectionAllowed(true);
+            } 
+        });
     }    
     
     public void llenarTablaBusqueda(List<Proveedor> listaBusqueda)

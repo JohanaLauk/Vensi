@@ -7,6 +7,10 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import Modelo.Producto;
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JOptionPane;
 
 public class ventanaProducto extends javax.swing.JFrame 
@@ -31,6 +35,16 @@ public class ventanaProducto extends javax.swing.JFrame
         
         this.setPreferredSize(new Dimension(1000, 500));    //al minimizar la ventana aparece con esa medida
                        
+        //Al hacer click en el JFrame se quita la seleccion en el JTable
+        this.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent me) 
+            {                
+                tablaProd.clearSelection();
+            } 
+        });
+        
         llenarTabla();               
     }
     
@@ -460,7 +474,29 @@ public class ventanaProducto extends javax.swing.JFrame
         tablaProd.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
         
-        tablaProd.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
+        tablaProd.addFocusListener(new FocusListener() 
+        {
+            @Override
+            public void focusGained(FocusEvent fe) 
+            {
+                tablaProd.setRowSelectionAllowed(true);
+            }
+
+            @Override
+            public void focusLost(FocusEvent fe) 
+            {                
+                tablaProd.setRowSelectionAllowed(false);
+            } 
+        });
+        
+        tablaProd.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseClicked(MouseEvent me) 
+            {
+                tablaProd.setRowSelectionAllowed(true);
+            } 
+        });
     }   
     
     public void llenarTablaBusqueda (List<Producto> listaBusqueda)

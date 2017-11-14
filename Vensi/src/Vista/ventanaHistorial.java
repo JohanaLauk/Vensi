@@ -1,5 +1,9 @@
 package Vista;
 
+import java.awt.event.FocusEvent;
+import java.awt.event.FocusListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -25,20 +29,18 @@ public class ventanaHistorial extends javax.swing.JFrame
         txfdFechaDesde.setEnabled(false);
         LabFechaHasta.setEnabled(false);
         txfdFechaHasta.setEnabled(false);
+                
+        //Al hacer click en el JFrame se quita la seleccion en el JTable
+        this.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent me) 
+            {                
+                tablaHistorial.clearSelection();
+            } 
+        });
         
-        modelo = new DefaultTableModel();
-        modelo.addColumn("");
-        modelo.addColumn("");
-        modelo.addColumn("");
-        this.tablaHistorial.setModel(modelo);   
-        
-        TableColumnModel tcm = tablaHistorial.getColumnModel();
-        
-        tcm.getColumn(0).setPreferredWidth(100);
-        tcm.getColumn(1).setPreferredWidth(200);
-        tcm.getColumn(2).setPreferredWidth(200);
-        
-        tablaHistorial.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
+        llenarTabla();
     }
     
     @SuppressWarnings("unchecked")
@@ -354,6 +356,45 @@ public class ventanaHistorial extends javax.swing.JFrame
             {
                 new ventanaHistorial().setVisible(true);
             }
+        });
+    }
+    
+    public void llenarTabla()
+    {
+        modelo = new DefaultTableModel();
+        modelo.addColumn("");
+        modelo.addColumn("");
+        modelo.addColumn("");
+        
+        tablaHistorial.setModel(modelo);   
+        
+        TableColumnModel tcm = tablaHistorial.getColumnModel();        
+        tcm.getColumn(0).setPreferredWidth(100);
+        tcm.getColumn(1).setPreferredWidth(200);
+        tcm.getColumn(2).setPreferredWidth(200);
+        
+        tablaHistorial.addFocusListener(new FocusListener() 
+        {
+            @Override
+            public void focusGained(FocusEvent fe) 
+            {
+                tablaHistorial.setRowSelectionAllowed(true);
+            }
+
+            @Override
+            public void focusLost(FocusEvent fe) 
+            {                
+                tablaHistorial.setRowSelectionAllowed(false);
+            } 
+        });
+        
+        tablaHistorial.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseClicked(MouseEvent me) 
+            {
+                tablaHistorial.setRowSelectionAllowed(true);
+            } 
         });
     }
 
