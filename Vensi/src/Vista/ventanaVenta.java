@@ -489,7 +489,7 @@ public class ventanaVenta extends javax.swing.JFrame
                         else    //si el prod no está en la tabla
                         {
                             ItemVenta unItemVenta = new ItemVenta();
-                            unItemVenta.setProducto(elProd);    //debería guardar el id del prod en la bd. ¿o no?
+                            unItemVenta.setProducto(elProd);    
                             unItemVenta.setCantidad(Double.parseDouble(cantPeso));
                             unItemVenta.setHora(new Date());
 
@@ -510,7 +510,7 @@ public class ventanaVenta extends javax.swing.JFrame
                     String cantPeso = tablaCarrito.getValueAt(i, 1).toString();
 
                     ItemVenta unItemVenta = new ItemVenta();
-                    unItemVenta.setProducto(elProd);    //debería guardar el id del prod en la bd. ¿o no?
+                    unItemVenta.setProducto(elProd);    
                     unItemVenta.setCantidad(Double.parseDouble(cantPeso));
                     unItemVenta.setHora(new Date());
 
@@ -522,7 +522,6 @@ public class ventanaVenta extends javax.swing.JFrame
         {
             JOptionPane.showMessageDialog(null, "El carrito está vacío");
         }  
-
                   
         //obtener el mismo objeto turno que se creo al iniciar un turno y setearle la lista de ventas
         totalCarrito = 0;

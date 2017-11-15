@@ -197,7 +197,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
 
             for (ItemVenta v : listaIT)
             {
-                datos[0] = String.valueOf(v.getProducto());
+                datos[0] = String.valueOf(v.getProducto().getDescripcion());
                 datos[1] = String.valueOf(v.getCantidad());
                 datos[2] = String.valueOf("Valor de entrada"); 
                 datos[3] = String.valueOf("Valor de salida"); 
