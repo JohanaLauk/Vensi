@@ -696,6 +696,7 @@ public class ventanaVenta extends javax.swing.JFrame
             public void focusLost(FocusEvent fe) 
             {                
                 tablaProd.setRowSelectionAllowed(false);
+                
             } 
         });
         
@@ -705,6 +706,8 @@ public class ventanaVenta extends javax.swing.JFrame
             public void mouseClicked(MouseEvent me) 
             {
                 tablaProd.setRowSelectionAllowed(true);
+                btnQuitar.setEnabled(false);
+                btnAgregar.setEnabled(true);
             } 
         });
     }
@@ -757,6 +760,8 @@ public class ventanaVenta extends javax.swing.JFrame
             public void mouseClicked(MouseEvent me) 
             {
                 tablaCarrito.setRowSelectionAllowed(true);
+                btnAgregar.setEnabled(false);
+                btnQuitar.setEnabled(true);
             } 
         });
     }
