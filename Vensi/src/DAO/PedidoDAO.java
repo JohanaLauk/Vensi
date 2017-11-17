@@ -55,23 +55,33 @@ public class PedidoDAO
         Session session = sesion.openSession();
         
         List<Pedido> lista = null;
+        Query query;
         try
         {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Pedido p WHERE p.fechaHora BETWEEN :fechaInicio AND :fechaFin");
-            query.setParameter("fechaInicio", "%"+fechaInicio+"%");
-            query.setParameter("fechaFin", "%"+fechaInicio+"%");
+            if(fechaFin == null)
+            {
+                query = session.createQuery("FROM Pedido p WHERE p.fechaHora = fechaInicio");
+                query.setParameter("fechaInicio", fechaInicio);
+            }
+            else
+            {
+                query = session.createQuery("FROM Pedido p WHERE p.fechaHora BETWEEN :fechaInicio AND :fechaFin");
+                query.setParameter("fechaInicio", fechaInicio);
+                query.setParameter("fechaFin", fechaFin);
+            }
+    
             lista = query.list();
             tx.commit();
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "Error");
+            JOptionPane.showMessageDialog(null, "Error"+e.getMessage());
         }        
         return lista;
     }
     
-    public List<Pedido> buscarPorNumero(int nro)
+    /*public List<Pedido> buscarPorNumero(int nro)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -90,7 +100,8 @@ public class PedidoDAO
             JOptionPane.showMessageDialog(null, "Error");
         }        
         return lista;
-    }
+    }*/
+    
     public Pedido buscarPorID(int nro)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();

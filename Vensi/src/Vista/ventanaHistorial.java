@@ -391,16 +391,13 @@ public class ventanaHistorial extends javax.swing.JFrame
             }
             else
             {
-                List<Turno> lista = tDAO.buscarPorNumero(Integer.parseInt(txfdNro.getText()));
+                Turno t = tDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
                 String [] datos = new String[3];
-                for(Turno t : lista)
-                {
+                
                     datos[0] = String.valueOf(t.getId());
                     datos[1] = String.valueOf(t.getFechaHoraInicio());
                     datos[2] = String.valueOf(t.getFechaHoraFin());
-                    
                     modelo.addRow(datos);
-                }
             }
                 this.tablaHistorial.setModel(modelo);
             

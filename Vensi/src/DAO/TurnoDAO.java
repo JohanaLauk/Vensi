@@ -55,12 +55,22 @@ public class TurnoDAO
         Session session = sesion.openSession();
         
         List<Turno> lista = null;
+        Query query;
         try
         {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Turno t WHERE t.fechaHoraInicio BETWEEN :fechaInicio AND :fechaFin");
-            query.setParameter("fechaInicio", "%"+fechaInicio+"%");
-            query.setParameter("fechaFin", "%"+fechaInicio+"%");
+            if(fechaFin == null)
+            {
+                query = session.createQuery("FROM Turno t WHERE t.fechaHoraInicio = :fechaInicio");
+                query.setParameter("fechaInicio", fechaInicio);
+            }
+            else
+            {
+                query = session.createQuery("FROM Turno t WHERE t.fechaHoraInicio BETWEEN :fechaInicio AND :fechaFin");
+                query.setParameter("fechaInicio", fechaInicio);
+                query.setParameter("fechaFin", fechaFin);
+            }
+            
             lista = query.list();
             tx.commit();
         }
@@ -71,7 +81,7 @@ public class TurnoDAO
         return lista;
     }
     
-    public List<Turno> buscarPorNumero(int nro)
+    /*public List<Turno> buscarPorNumero(int nro)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -90,6 +100,25 @@ public class TurnoDAO
             JOptionPane.showMessageDialog(null, "Error");
         }
         return lista;
+    }*/
+    
+    public Turno buscarPorID(int nro)
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
+        Turno t = null;
+        try
+        {
+            Transaction tx = session.beginTransaction();
+            t = (Turno)session.get(Turno.class, nro);
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error");
+        }        
+        return t;
     }
     
     public Turno obtenerUltimo()
