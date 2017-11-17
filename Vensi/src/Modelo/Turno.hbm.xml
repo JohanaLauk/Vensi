@@ -10,8 +10,8 @@
         </id>
         
         <list name="listaItemVenta" table="item_venta" inverse="true" lazy="true" fetch="select">
-            <key column="venta_id" not-null="false"/>  <!--esto estaba en true en un principio -->
-            <index column="ORDEN" />
+            <key column="id" not-null="false"/>  <!--esto estaba en true en un principio -->
+            <index column="orden" />
             <one-to-many class="Modelo.ItemVenta" />
          </list>
          

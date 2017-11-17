@@ -1,9 +1,14 @@
 package Vista;
 
+import DAO.PedidoDAO;
+import DAO.TurnoDAO;
+import Modelo.Pedido;
+import Modelo.Turno;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.List;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -11,6 +16,9 @@ import javax.swing.table.TableColumnModel;
 public class ventanaHistorial extends javax.swing.JFrame 
 {
     DefaultTableModel modelo;
+    TableColumnModel tcm ;
+    TurnoDAO tDAO = new TurnoDAO();
+    PedidoDAO pDAO = new PedidoDAO();
     
     public ventanaHistorial() 
     {
@@ -26,9 +34,9 @@ public class ventanaHistorial extends javax.swing.JFrame
         txfdNro.setEnabled(false);         
         
         labFecha.setEnabled(false);
-        txfdFechaDesde.setEnabled(false);
+        dateDesde.setEnabled(false);
         LabFechaHasta.setEnabled(false);
-        txfdFechaHasta.setEnabled(false);
+        dateHasta.setEnabled(false);
                 
         //Al hacer click en el JFrame se quita la seleccion en el JTable
         this.addMouseListener(new MouseAdapter()
@@ -40,7 +48,7 @@ public class ventanaHistorial extends javax.swing.JFrame
             } 
         });
         
-        llenarTabla();
+        llenarTabla(null);
     }
     
     @SuppressWarnings("unchecked")
@@ -58,9 +66,9 @@ public class ventanaHistorial extends javax.swing.JFrame
         labNro = new javax.swing.JLabel();
         txfdNro = new javax.swing.JTextField();
         labFecha = new javax.swing.JLabel();
-        txfdFechaDesde = new javax.swing.JTextField();
         LabFechaHasta = new javax.swing.JLabel();
-        txfdFechaHasta = new javax.swing.JTextField();
+        dateDesde = new org.jdesktop.swingx.JXDatePicker();
+        dateHasta = new org.jdesktop.swingx.JXDatePicker();
         jPanel3 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaHistorial = new javax.swing.JTable();
@@ -88,7 +96,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                 .addComponent(jLabel1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addGap(0, 19, Short.MAX_VALUE)
+                .addGap(0, 0, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(rbTurno)
@@ -129,18 +137,18 @@ public class ventanaHistorial extends javax.swing.JFrame
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labNro)
+                    .addComponent(labFecha))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfdNro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labFecha)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfdFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(LabFechaHasta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfdFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labNro)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfdNro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
@@ -159,9 +167,9 @@ public class ventanaHistorial extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labFecha)
-                    .addComponent(txfdFechaDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(LabFechaHasta)
-                    .addComponent(txfdFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         tablaHistorial = new javax.swing.JTable()
@@ -273,31 +281,15 @@ public class ventanaHistorial extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        TableColumnModel tcm = tablaHistorial.getColumnModel();
+        
         
         if (rbTurno.isSelected())
         {
-            modelo = new DefaultTableModel();
-            modelo.addColumn("Número");
-            modelo.addColumn("Fecha y hora inicio");
-            modelo.addColumn("Fecha y hora fin");
-            this.tablaHistorial.setModel(modelo);
-                    
-            tcm.getColumn(0).setPreferredWidth(100);
-            tcm.getColumn(1).setPreferredWidth(200);
-            tcm.getColumn(2).setPreferredWidth(200);
+            llenarTabla("Turno");
         }
         if (rbPedido.isSelected())
         {
-            modelo = new DefaultTableModel();
-            modelo.addColumn("Número");
-            modelo.addColumn("Fecha y hora");
-            modelo.addColumn("Proveedor");
-            this.tablaHistorial.setModel(modelo);
-        
-            tcm.getColumn(0).setPreferredWidth(100);
-            tcm.getColumn(1).setPreferredWidth(200);
-            tcm.getColumn(2).setPreferredWidth(200);     
+            llenarTabla("Pedido");
         }       
         
         tablaHistorial.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
@@ -310,9 +302,9 @@ public class ventanaHistorial extends javax.swing.JFrame
             txfdNro.setEnabled(false);         
         
             labFecha.setEnabled(false);
-            txfdFechaDesde.setEnabled(false);
+            dateDesde.setEnabled(false);
             LabFechaHasta.setEnabled(false);
-            txfdFechaHasta.setEnabled(false);
+            dateHasta.setEnabled(false);
         }       
         if (cbBuscarPor.getSelectedItem().equals("Número"))   
         {
@@ -320,16 +312,16 @@ public class ventanaHistorial extends javax.swing.JFrame
             txfdNro.setEnabled(true);    
             
             labFecha.setEnabled(false);
-            txfdFechaDesde.setEnabled(false);
+            dateDesde.setEnabled(false);
             LabFechaHasta.setEnabled(false);
-            txfdFechaHasta.setEnabled(false);
+            dateHasta.setEnabled(false);
         }
         if (cbBuscarPor.getSelectedItem().equals("Fecha"))
         {
             labFecha.setEnabled(true);
-            txfdFechaDesde.setEnabled(true);
+            dateDesde.setEnabled(true);
             LabFechaHasta.setEnabled(true);
-            txfdFechaHasta.setEnabled(true);
+            dateHasta.setEnabled(true);
             
             labNro.setEnabled(false);
             txfdNro.setEnabled(false); 
@@ -359,19 +351,103 @@ public class ventanaHistorial extends javax.swing.JFrame
         });
     }
     
-    public void llenarTabla()
+    public void llenarTabla(String clase)
     {
-        modelo = new DefaultTableModel();
-        modelo.addColumn("");
-        modelo.addColumn("");
-        modelo.addColumn("");
+        if(clase == null)
+        {
+            modelo = new DefaultTableModel();
+            modelo.addColumn("");
+            modelo.addColumn("");
+            modelo.addColumn("");
         
-        tablaHistorial.setModel(modelo);   
+            tablaHistorial.setModel(modelo);   
         
-        TableColumnModel tcm = tablaHistorial.getColumnModel();        
-        tcm.getColumn(0).setPreferredWidth(100);
-        tcm.getColumn(1).setPreferredWidth(200);
-        tcm.getColumn(2).setPreferredWidth(200);
+            tcm = tablaHistorial.getColumnModel();        
+            tcm.getColumn(0).setPreferredWidth(100);
+            tcm.getColumn(1).setPreferredWidth(200);
+            tcm.getColumn(2).setPreferredWidth(200);
+        
+        }
+        else if(clase.equals("Turno"))
+        {   
+            modelo = new DefaultTableModel();
+            modelo.addColumn("Número");
+            modelo.addColumn("Fecha y hora inicio");
+            modelo.addColumn("Fecha y hora fin");
+
+            if(cbBuscarPor.getSelectedItem().equals("Fecha"))
+            {
+                List<Turno> lista = tDAO.buscarPorFecha(dateDesde.getDate(), dateHasta.getDate());
+                String [] datos = new String[3];
+                for(Turno t : lista)
+                {
+                    datos[0] = String.valueOf(t.getId());
+                    datos[1] = String.valueOf(t.getFechaHoraInicio());
+                    datos[2] = String.valueOf(t.getFechaHoraFin());
+                    
+                    modelo.addRow(datos);
+                }
+                
+            }
+            else
+            {
+                List<Turno> lista = tDAO.buscarPorNumero(Integer.parseInt(txfdNro.getText()));
+                String [] datos = new String[3];
+                for(Turno t : lista)
+                {
+                    datos[0] = String.valueOf(t.getId());
+                    datos[1] = String.valueOf(t.getFechaHoraInicio());
+                    datos[2] = String.valueOf(t.getFechaHoraFin());
+                    
+                    modelo.addRow(datos);
+                }
+            }
+                this.tablaHistorial.setModel(modelo);
+            
+                tcm = tablaHistorial.getColumnModel();
+                tcm.getColumn(0).setPreferredWidth(100);
+                tcm.getColumn(1).setPreferredWidth(200);
+                tcm.getColumn(2).setPreferredWidth(200);
+            
+        }
+        else{ //acá es el de pedido
+            modelo = new DefaultTableModel();
+            modelo.addColumn("Número");
+            modelo.addColumn("Fecha y hora");
+            modelo.addColumn("Proveedor");
+            
+            if(cbBuscarPor.getSelectedItem().equals("Fecha"))
+            {
+                List<Pedido> lista = pDAO.buscarPorFecha(dateDesde.getDate(), dateHasta.getDate());
+                String [] datos = new String[3];
+                for(Pedido p : lista)
+                {
+                    datos[0] = String.valueOf(p.getId());
+                    datos[1] = String.valueOf(p.getFechaHora());
+                    datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
+                    
+                    modelo.addRow(datos);
+                }
+            }
+            else
+            {
+                Pedido p = pDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
+                String [] datos = new String[3];
+                //for(Pedido p : lista)
+                //{
+                    datos[0] = String.valueOf(p.getId());
+                    datos[1] = String.valueOf(p.getFechaHora());
+                    datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
+                    
+                    modelo.addRow(datos);
+                //}
+            }
+            this.tablaHistorial.setModel(modelo);
+        
+            tcm.getColumn(0).setPreferredWidth(100);
+            tcm.getColumn(1).setPreferredWidth(200);
+            tcm.getColumn(2).setPreferredWidth(200);
+        }
         
         tablaHistorial.addFocusListener(new FocusListener() 
         {
@@ -397,6 +473,7 @@ public class ventanaHistorial extends javax.swing.JFrame
             } 
         });
     }
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabFechaHasta;
@@ -405,6 +482,8 @@ public class ventanaHistorial extends javax.swing.JFrame
     private javax.swing.JButton btnMenuPrincipalHistorial;
     private javax.swing.JButton btnVisualizarHistorial;
     private javax.swing.JComboBox<String> cbBuscarPor;
+    private org.jdesktop.swingx.JXDatePicker dateDesde;
+    private org.jdesktop.swingx.JXDatePicker dateHasta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
@@ -417,8 +496,6 @@ public class ventanaHistorial extends javax.swing.JFrame
     private javax.swing.JRadioButton rbPedido;
     private javax.swing.JRadioButton rbTurno;
     private javax.swing.JTable tablaHistorial;
-    private javax.swing.JTextField txfdFechaDesde;
-    private javax.swing.JTextField txfdFechaHasta;
     private javax.swing.JTextField txfdNro;
     // End of variables declaration//GEN-END:variables
 }

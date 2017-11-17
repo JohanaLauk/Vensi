@@ -80,7 +80,7 @@ public class PedidoDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Pedido p WHERE p.nroPedido LIKE :nro");
+            Query query = session.createQuery("FROM Pedido p WHERE p.id = :nro");
             query.setParameter("nro", "%"+nro+"%");
             lista = query.list();
             tx.commit();
@@ -90,5 +90,23 @@ public class PedidoDAO
             JOptionPane.showMessageDialog(null, "Error");
         }        
         return lista;
+    }
+    public Pedido buscarPorID(int nro)
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
+        Pedido p = null;
+        try
+        {
+            Transaction tx = session.beginTransaction();
+            p = (Pedido)session.get(Pedido.class, nro);
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error");
+        }        
+        return p;
     }
 }

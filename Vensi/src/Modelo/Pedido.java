@@ -25,8 +25,8 @@ public class Pedido  implements java.io.Serializable
         return itemPedido;
     }
 
-    public void setItemPedido(ItemPedido itemPedido) {
-        this.itemPedido.add(itemPedido);
+    public void setItemPedido(List<ItemPedido> itemPedido) {
+        this.itemPedido = itemPedido;
     }
         
     public Proveedor getProveedor() 

@@ -74,7 +74,7 @@
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
               <Group type="102" alignment="1" attributes="0">
-                  <EmptySpace min="0" pref="19" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="1" attributes="0">
                           <Component id="rbTurno" min="-2" max="-2" attributes="0"/>
@@ -133,21 +133,21 @@
               <Group type="102" attributes="0">
                   <EmptySpace max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="labNro" alignment="0" min="-2" max="-2" attributes="0"/>
+                      <Component id="labFecha" alignment="0" min="-2" max="-2" attributes="0"/>
+                  </Group>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="0" attributes="0">
+                      <Component id="txfdNro" alignment="0" min="-2" pref="40" max="-2" attributes="0"/>
                       <Group type="102" alignment="0" attributes="0">
-                          <Component id="labFecha" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txfdFechaDesde" min="-2" pref="40" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="dateDesde" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="LabFechaHasta" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txfdFechaHasta" min="-2" pref="40" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" alignment="0" attributes="0">
-                          <Component id="labNro" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace type="unrelated" max="-2" attributes="0"/>
-                          <Component id="txfdNro" min="-2" pref="40" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="dateHasta" min="-2" max="-2" attributes="0"/>
                       </Group>
                   </Group>
+                  <EmptySpace max="-2" attributes="0"/>
               </Group>
               <Group type="102" attributes="0">
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -171,9 +171,9 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="3" attributes="0">
                       <Component id="labFecha" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txfdFechaDesde" alignment="3" min="-2" max="-2" attributes="0"/>
                       <Component id="LabFechaHasta" alignment="3" min="-2" max="-2" attributes="0"/>
-                      <Component id="txfdFechaHasta" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dateDesde" alignment="3" min="-2" max="-2" attributes="0"/>
+                      <Component id="dateHasta" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
           </Group>
@@ -210,14 +210,14 @@
             <Property name="text" type="java.lang.String" value="Ingrese la fecha:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txfdFechaDesde">
-        </Component>
         <Component class="javax.swing.JLabel" name="LabFechaHasta">
           <Properties>
             <Property name="text" type="java.lang.String" value="hasta"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txfdFechaHasta">
+        <Component class="org.jdesktop.swingx.JXDatePicker" name="dateDesde">
+        </Component>
+        <Component class="org.jdesktop.swingx.JXDatePicker" name="dateHasta">
         </Component>
       </SubComponents>
     </Container>

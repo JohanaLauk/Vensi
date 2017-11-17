@@ -13,8 +13,8 @@
         </many-to-one> -->
         
         <list name="itemPedido" table="item_pedido" inverse="true" lazy="true" fetch="select">
-            <key column="pedido_id" not-null="true"/>
-            <index column="ORDEN" />
+            <key column="id" not-null="true"/>
+            <list-index column="orden" />
             <one-to-many class="Modelo.ItemPedido" />
         </list>
             
