@@ -473,7 +473,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 {         
                     ItemVenta unItemVenta = new ItemVenta();
                     unItemVenta.setProducto(elProd);    
-                    unItemVenta.setCantidad(Double.parseDouble(cantPeso));
+                    unItemVenta.setCantidad(Integer.parseInt(cantPeso));
                     unItemVenta.setFecha_hora(new Date());
                                         
                     itDAO.alta(unItemVenta); 
@@ -494,11 +494,11 @@ public class ventanaVenta extends javax.swing.JFrame
                         {
                             ItemVenta unItemVenta = new ItemVenta();
                             unItemVenta.setProducto(elProd);    
-                            unItemVenta.setCantidad(Double.parseDouble(cantPeso));
+                            unItemVenta.setCantidad(Integer.parseInt(cantPeso));
                             unItemVenta.setFecha_hora(new Date());
                             itDAO.alta(unItemVenta);
 
-                            x.setCantidad(x.getCantidad() + Double.parseDouble(cantPeso));
+                            x.setCantidad(x.getCantidad() + Integer.parseInt(cantPeso));
                             x.setFecha_hora(new Date());
                             
                             JOptionPane.showMessageDialog(null, "Producto repetido agregado");
@@ -511,7 +511,7 @@ public class ventanaVenta extends javax.swing.JFrame
 
                             ItemVenta unItemVenta = new ItemVenta();
                             unItemVenta.setProducto(elProd);    
-                            unItemVenta.setCantidad(Double.parseDouble(cantPeso));
+                            unItemVenta.setCantidad(Integer.parseInt(cantPeso));
                             unItemVenta.setFecha_hora(new Date());
 
                             itDAO.alta(unItemVenta);
@@ -634,8 +634,7 @@ public class ventanaVenta extends javax.swing.JFrame
     private void txfdCantPesoProdKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantPesoProdKeyTyped
         char c = evt.getKeyChar();
         if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
-                (c != '.' || txfdCantPesoProd.getText().contains("."))) 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfdCantPesoProdKeyTyped
     

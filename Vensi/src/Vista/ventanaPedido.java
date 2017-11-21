@@ -189,7 +189,7 @@ public class ventanaPedido extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbOrdenCampo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -231,6 +231,12 @@ public class ventanaPedido extends javax.swing.JFrame
         );
 
         jLabel5.setText("Cantidad:");
+
+        txfdCantidadPedido.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdCantidadPedidoKeyTyped(evt);
+            }
+        });
 
         btnOk.setText("OK");
         btnOk.addActionListener(new java.awt.event.ActionListener() {
@@ -551,6 +557,13 @@ public class ventanaPedido extends javax.swing.JFrame
         }
         txfdCantidadPedido.setText("");
     }//GEN-LAST:event_btnOkActionPerformed
+
+    private void txfdCantidadPedidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadPedidoKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfdCantidadPedidoKeyTyped
     
     public static void main(String args[]) 
     {

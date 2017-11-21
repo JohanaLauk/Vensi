@@ -15,8 +15,8 @@
          class="Modelo.Producto" not-null="true"/>
         <!--<one-to-one name="producto" class="Modelo.Producto" cascade="none"> 
         </one-to-one> -->
-        <property name="cantidad" type="double">
-            <column name="cantidad" precision="8" scale="3" not-null="true" />
+        <property name="cantidad" type="int">
+            <column name="cantidad" not-null="true" />
         </property>
         
     </class>
