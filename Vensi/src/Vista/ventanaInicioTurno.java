@@ -70,6 +70,9 @@ public class ventanaInicioTurno extends javax.swing.JFrame
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txfdPinKeyPressed(evt);
             }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdPinKeyTyped(evt);
+            }
         });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -189,6 +192,14 @@ public class ventanaInicioTurno extends javax.swing.JFrame
             btnSIiniciarTurno.setEnabled(false);
         }
     }//GEN-LAST:event_btnSIiniciarTurnoActionPerformed
+
+    private void txfdPinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPinKeyTyped
+        
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume(); 
+    }//GEN-LAST:event_txfdPinKeyTyped
     
     public static void main(String args[]) 
     {        
