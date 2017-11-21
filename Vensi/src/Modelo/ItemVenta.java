@@ -8,6 +8,9 @@ public class ItemVenta  implements java.io.Serializable
      private Producto producto;     
      private double cantidad;
      private Date fecha_hora;
+     private Turno turno;
+
+    
 
     public ItemVenta() 
     { }	   
@@ -39,12 +42,21 @@ public class ItemVenta  implements java.io.Serializable
         this.cantidad = cantidad;
     }  
 
-    public Date getFecha_Hora() 
-    {
+   public Date getFecha_hora() {
         return fecha_hora;
     }
-    public void setFecha_Hora(Date fecha_hora) 
-    {
+
+    public void setFecha_hora(Date fecha_hora) {
         this.fecha_hora = fecha_hora;
-    }   
+    }
+
+    public Turno getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Turno turno) {
+        this.turno = turno;
+    }
+    
+    
 }

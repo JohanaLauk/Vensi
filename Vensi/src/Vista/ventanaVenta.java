@@ -474,10 +474,15 @@ public class ventanaVenta extends javax.swing.JFrame
                     ItemVenta unItemVenta = new ItemVenta();
                     unItemVenta.setProducto(elProd);    
                     unItemVenta.setCantidad(Double.parseDouble(cantPeso));
-                    unItemVenta.setFecha_Hora(new Date());
+                    unItemVenta.setFecha_hora(new Date());
                                         
                     itDAO.alta(unItemVenta); 
+                    try{
                     listaVentasTurno.add(unItemVenta);
+                    }catch(Exception e)
+                    {
+                        JOptionPane.showMessageDialog(null, e.getMessage());
+                    }
                     
                     JOptionPane.showMessageDialog(null, "Producto nuevo agregado");
                 }
@@ -490,11 +495,11 @@ public class ventanaVenta extends javax.swing.JFrame
                             ItemVenta unItemVenta = new ItemVenta();
                             unItemVenta.setProducto(elProd);    
                             unItemVenta.setCantidad(Double.parseDouble(cantPeso));
-                            unItemVenta.setFecha_Hora(new Date());
+                            unItemVenta.setFecha_hora(new Date());
                             itDAO.alta(unItemVenta);
 
                             x.setCantidad(x.getCantidad() + Double.parseDouble(cantPeso));
-                            x.setFecha_Hora(new Date());
+                            x.setFecha_hora(new Date());
                             
                             JOptionPane.showMessageDialog(null, "Producto repetido agregado");
 
@@ -507,7 +512,7 @@ public class ventanaVenta extends javax.swing.JFrame
                             ItemVenta unItemVenta = new ItemVenta();
                             unItemVenta.setProducto(elProd);    
                             unItemVenta.setCantidad(Double.parseDouble(cantPeso));
-                            unItemVenta.setFecha_Hora(new Date());
+                            unItemVenta.setFecha_hora(new Date());
 
                             itDAO.alta(unItemVenta);
                             listaVentasTurno.add(unItemVenta);
