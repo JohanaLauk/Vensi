@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         
-        <list name="listaItemVenta" table="item_venta" inverse="true" lazy="true" fetch="select">
+        <list name="listaVentasTurno" table="item_venta" inverse="true" lazy="true" fetch="select">
             <key column="id" not-null="false"/>  <!--esto estaba en true en un principio -->
             <index column="orden" />
             <one-to-many class="Modelo.ItemVenta" />

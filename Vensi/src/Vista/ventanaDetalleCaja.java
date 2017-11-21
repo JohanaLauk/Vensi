@@ -170,7 +170,8 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     public void llenarTabla()
     {        
         modelo = new DefaultTableModel();
-        List<ItemVenta> listaIT = itDAO.listar();
+        List<ItemVenta> listaIT = itDAO.listar();   //lista de la tabla en BD
+        List<ItemVenta> listaVentasTurno = elTurno.getListaVentasTurno();   //lista ventas del turno
         String[] datos = new String[4];
         
         if (listaIT.isEmpty())        
@@ -195,7 +196,8 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
 
-            for (ItemVenta v : listaIT)
+            //for (ItemVenta v : listaIT)
+            for (ItemVenta v : listaVentasTurno)    
             {
                 datos[0] = String.valueOf(v.getProducto().getDescripcion());
                 datos[1] = String.valueOf(v.getCantidad());

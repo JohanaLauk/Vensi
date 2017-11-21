@@ -11,8 +11,6 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
@@ -24,6 +22,7 @@ public class ventanaVenta extends javax.swing.JFrame
     ProductoDAO pDAO = new ProductoDAO();
     TurnoDAO tDAO = new TurnoDAO();
     ItemVentaDAO itDAO = new ItemVentaDAO();
+    Turno elTurno = new Turno();    
     
     DefaultTableModel modelo, modelo2, modelo3, m;
     TableColumnModel tcm, tcm2, tcm3;    
@@ -32,7 +31,7 @@ public class ventanaVenta extends javax.swing.JFrame
     String ordenSelec = null;
     String tipoSelec = null;
     
-    List<ItemVenta> listaVentasTurno = new ArrayList<ItemVenta>();
+    List<ItemVenta> listaVentasTurno = elTurno.getListaVentasTurno();
     
     static double totalCarrito = 0; //inicializa en 0 cada vez que se confirma la compra
     
@@ -48,7 +47,7 @@ public class ventanaVenta extends javax.swing.JFrame
         
         this.setPreferredSize(new Dimension(1200, 500));    //al ejecutarse, la ventana aparece con esa medida
         
-        //Al hacer click en el JFrame se quita la seleccion en los JTable
+        //Al hacer click en el JFrame...
         this.addMouseListener(new MouseAdapter()
         {
             @Override
@@ -56,6 +55,8 @@ public class ventanaVenta extends javax.swing.JFrame
             {
                 tablaProd.clearSelection();
                 tablaCarrito.clearSelection();
+                btnQuitar.setEnabled(false);
+                btnAgregar.setEnabled(false);
             } 
         });
         
@@ -458,64 +459,63 @@ public class ventanaVenta extends javax.swing.JFrame
     }//GEN-LAST:event_cbOrdenCampoActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        int cantFilasCarrito = tablaCarrito.getRowCount();
-        
-        List<ItemVenta> listaIV = itDAO.listar();
+        int cantFilasCarrito = tablaCarrito.getRowCount();        
         
         if (cantFilasCarrito != 0)     //carrito NO vacio
-        {
-            if (!listaIV.isEmpty())     //si la lista ItemVenta no está vacía
-            {
-                for (int i=0 ; i<cantFilasCarrito ; i++)   //recorre todas las filas
-                {               
-                    String idProd = tablaCarrito.getValueAt(i, 4).toString();                    
-                    Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
+        {            
+            for (int i=0 ; i<cantFilasCarrito ; i++)   //recorre todas las filas del carrito
+            {               
+                String idProd = tablaCarrito.getValueAt(i, 4).toString();                    
+                Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
+                String cantPeso = tablaCarrito.getValueAt(i, 1).toString();
 
-                    String cantPeso = tablaCarrito.getValueAt(i, 1).toString();
-
-                    for (ItemVenta x : listaIV) //recorre la tabla ItemVenta
-                    //for (ItemVenta x : listaVentasTurno)    //recorre la lista de ventas en el turno
+                if (listaVentasTurno == null)   //lista vacía
+                {         
+                    ItemVenta unItemVenta = new ItemVenta();
+                    unItemVenta.setProducto(elProd);    
+                    unItemVenta.setCantidad(Double.parseDouble(cantPeso));
+                    unItemVenta.setFecha_Hora(new Date());
+                                        
+                    itDAO.alta(unItemVenta); 
+                    listaVentasTurno.add(unItemVenta);
+                    
+                    JOptionPane.showMessageDialog(null, "Producto nuevo agregado");
+                }
+                else
+                {
+                    for (ItemVenta x : listaVentasTurno)    //recorre la lista de ventas en el turno
                     {
-                        if (x.getProducto().getId() == Integer.parseInt(idProd)) //si el prod que se vendió ya está en la tabla listaVentas... 
-                        {
-                            ItemVenta unItemVenta = new ItemVenta(); 
-
-                            double cantPesoTotal = unItemVenta.getCantidad() + Double.parseDouble(cantPeso);
-
-                            unItemVenta.setCantidad(cantPesoTotal);
-                            
-                            itDAO.modificar(unItemVenta, x.getId());
-                        }
-                        else    //si el prod no está en la tabla
+                        if (x.getProducto().getId() == Integer.parseInt(idProd)) //si el prod que se vendió ya está en el List listaVentasTurno... 
                         {
                             ItemVenta unItemVenta = new ItemVenta();
                             unItemVenta.setProducto(elProd);    
                             unItemVenta.setCantidad(Double.parseDouble(cantPeso));
-                            unItemVenta.setHora(new Date());
+                            unItemVenta.setFecha_Hora(new Date());
+                            itDAO.alta(unItemVenta);
+
+                            x.setCantidad(x.getCantidad() + Double.parseDouble(cantPeso));
+                            x.setFecha_Hora(new Date());
+                            
+                            JOptionPane.showMessageDialog(null, "Producto repetido agregado");
+
+                            //listaVentasTurno[3].setCantidad(nuevaCantidad);
+                        }
+                        else    //si el prod no está en la lista de ventas del turno
+                        {
+                            JOptionPane.showMessageDialog(null, "Producto nuevo");
+
+                            ItemVenta unItemVenta = new ItemVenta();
+                            unItemVenta.setProducto(elProd);    
+                            unItemVenta.setCantidad(Double.parseDouble(cantPeso));
+                            unItemVenta.setFecha_Hora(new Date());
 
                             itDAO.alta(unItemVenta);
+                            listaVentasTurno.add(unItemVenta);
+                            
+                            JOptionPane.showMessageDialog(null, "Producto nuevo agregado");                            
                         }
                     }
-                }
-            }
-            else    //si la lista ItemVenta está vacía
-            {
-                JOptionPane.showMessageDialog(null, "Se estan agregando productos por primera vez");
-
-                for (int i=0 ; i<cantFilasCarrito ; i++)   //recorre todas las filas del carrito
-                {               
-                    String idProd = tablaCarrito.getValueAt(i, 4).toString();
-                    Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
-                    
-                    String cantPeso = tablaCarrito.getValueAt(i, 1).toString();
-
-                    ItemVenta unItemVenta = new ItemVenta();
-                    unItemVenta.setProducto(elProd);    
-                    unItemVenta.setCantidad(Double.parseDouble(cantPeso));
-                    unItemVenta.setHora(new Date());
-
-                    itDAO.alta(unItemVenta);                
-                }
+                }                
             }
         }
         else

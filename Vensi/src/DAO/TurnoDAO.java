@@ -116,7 +116,7 @@ public class TurnoDAO
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "Error");
+            JOptionPane.showMessageDialog(null, "Error al buscar por ID");
         }        
         return t;
     }

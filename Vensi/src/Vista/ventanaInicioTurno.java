@@ -2,8 +2,11 @@ package Vista;
 
 import DAO.TurnoDAO;
 import DAO.UsuarioDAO;
+import Modelo.ItemVenta;
 import Modelo.Turno;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ventanaInicioTurno extends javax.swing.JFrame 
@@ -166,12 +169,13 @@ public class ventanaInicioTurno extends javax.swing.JFrame
     private void btnSIiniciarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSIiniciarTurnoActionPerformed
         if(uDAO.verificar("Propietario", Integer.parseInt(txfdPin.getText())) || uDAO.verificar("Empleado", Integer.parseInt(txfdPin.getText())))
         {         
-            Turno unTurno = new Turno();
-            
+            Turno unTurno = new Turno();            
+                    
             Date fechaHoraInicio = new Date();   
             
             unTurno.setFechaHoraInicio(fechaHoraInicio);
-            
+            unTurno.setListaVentasTurno(null);
+                        
             tDAO.alta(unTurno);
             
             ventanaVenta vVenta = new ventanaVenta();
