@@ -458,56 +458,16 @@ public class ventanaVenta extends javax.swing.JFrame
         
         if (cantFilasCarrito != 0)     //carrito NO vacio
         {            
-            for (int i=0 ; i<=cantFilasCarrito ; i++)   //recorre todas las filas del carrito
+            for (int i=0 ; i<cantFilasCarrito ; i++)   //recorre todas las filas del carrito
             {               
                 String idProd = tablaCarrito.getValueAt(i, 4).toString();                    
                 Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
                 String cantPeso = tablaCarrito.getValueAt(i, 1).toString();
-                Turno turnoActual = tDAO.obtenerUltimo();
-                
-                /*try
-                {
-                    List<ItemVenta> listaItemVenta = itDAO.listar(turnoActual.getId());
-                    
-                    for (ItemVenta x : listaItemVenta)    //recorre la tabla item_venta
-                    {
-                        if (x.getProducto().getId() == Integer.parseInt(idProd)) //si el prod ya está en la tabla...
-                        {
-                            x.setCantidad(x.getCantidad() + Integer.parseInt(cantPeso));
-                            x.setFecha_hora(new Date());
-                            
-                            JOptionPane.showMessageDialog(null, "El producto está repetido. ItemVenta modificado");
-                        }
-                        else    //si el prod NO está en la tabla...
-                        {
-                            ItemVenta unItemVenta = new ItemVenta();
-                            unItemVenta.setProducto(elProd);    
-                            unItemVenta.setCantidad(Integer.parseInt(cantPeso));
-                            unItemVenta.setFecha_hora(new Date());
-                            unItemVenta.setTurno(turnoActual);
-
-                            itDAO.alta(unItemVenta);
-                            
-                            JOptionPane.showMessageDialog(null, "El producto es nuevo, ItemVenta agregado");                            
-                        }
-                    }
-                }
-                catch (NullPointerException e)
-                {
-                    ItemVenta unItemVenta = new ItemVenta();
-                    unItemVenta.setProducto(elProd);    
-                    unItemVenta.setCantidad(Integer.parseInt(cantPeso));
-                    unItemVenta.setFecha_hora(new Date());
-                    unItemVenta.setTurno(turnoActual);
-                                        
-                    itDAO.alta(unItemVenta);                     
-                    
-                    JOptionPane.showMessageDialog(null, "La tabla estaba vacía, ItemVenta agregado");        
-                }*/
+                Turno turnoActual = tDAO.obtenerUltimo();                
                 
                 List<ItemVenta> listaItemVenta = itDAO.listar(turnoActual.getId());
                 
-                if (listaItemVenta.isEmpty() || listaItemVenta == null)   //tabla item_venta VACÍA
+                if (listaItemVenta.isEmpty())   //tabla item_venta VACÍA
                 {         
                     ItemVenta unItemVenta = new ItemVenta();
                     unItemVenta.setProducto(elProd);    
@@ -517,18 +477,21 @@ public class ventanaVenta extends javax.swing.JFrame
                                         
                     itDAO.alta(unItemVenta);                     
                     
-                    JOptionPane.showMessageDialog(null, "La tabla estaba vacía, ItemVenta agregado");
+                    JOptionPane.showMessageDialog(null, "Tabla vacía, 1° ItemVenta agregado.");
                 }
                 else    //tabla item_venta NO VACÍA
                 {
-                    for (ItemVenta x : listaItemVenta)    //recorre la tabla item_venta
+                    for (ItemVenta x : listaItemVenta)    //recorre la tabla item_venta del turno actual
                     {
-                        if (x.getProducto().getId() == Integer.parseInt(idProd)) //si el prod ya está en la tabla...
+                        if (x.getProducto().getId() == elProd.getId()) //si el prod ya está en la tabla...
                         {
-                            x.setCantidad(x.getCantidad() + Integer.parseInt(cantPeso));
-                            x.setFecha_hora(new Date());
+                            ItemVenta elItemVenta = new ItemVenta();
+                            elItemVenta.setCantidad(x.getCantidad() + Integer.parseInt(cantPeso));
+                            elItemVenta.setFecha_hora(new Date());
+                                                        
+                            itDAO.modificar(elItemVenta, x.getId());
                             
-                            JOptionPane.showMessageDialog(null, "El producto está repetido. ItemVenta modificado");
+                            JOptionPane.showMessageDialog(null, "Producto repetido. ItemVenta modificado.");
                         }
                         else    //si el prod NO está en la tabla...
                         {
@@ -540,15 +503,16 @@ public class ventanaVenta extends javax.swing.JFrame
 
                             itDAO.alta(unItemVenta);
                             
-                            JOptionPane.showMessageDialog(null, "El producto es nuevo, ItemVenta agregado");                            
+                            JOptionPane.showMessageDialog(null, "Producto nuevo, ItemVenta agregado.");                            
                         }
+                        break;
                     }
                 }                
             }
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "El carrito está vacío");
+            JOptionPane.showMessageDialog(null, "El carrito está vacío.");
         }
         totalCarrito = 0;
         llenarTablaCarrito();

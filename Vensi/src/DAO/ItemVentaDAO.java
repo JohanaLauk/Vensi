@@ -30,14 +30,15 @@ public class ItemVentaDAO
         JOptionPane.showMessageDialog(null, "ItemVenta agregado");
     }
     
-    public void modificar(ItemVenta i, int id)
+    public void modificar(ItemVenta i, int id)  //i = recibe la fecha y la cantidad nueva   |   id = id_ItemVenta existente
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
         
         ItemVenta item = null;
         item = (ItemVenta)session.get(ItemVenta.class, id);
-        item.setCantidad(i.getCantidad());
+        item.setCantidad(i.getCantidad());  //guarda la nueva cantidad
+        item.setFecha_hora(i.getFecha_hora());  //guarda la nueva fechaHora
                   
         Transaction tx = session.beginTransaction();
         try
