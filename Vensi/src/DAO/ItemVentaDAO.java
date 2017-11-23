@@ -27,7 +27,7 @@ public class ItemVentaDAO
 		throw e;
         }
         session.close();
-        //JOptionPane.showMessageDialog(null, "Item agregado");
+        JOptionPane.showMessageDialog(null, "ItemVenta agregado");
     }
     
     public void modificar(ItemVenta i, int id)
@@ -53,7 +53,7 @@ public class ItemVentaDAO
 		throw e;
         }            
         session.close();
-        //JOptionPane.showMessageDialog(null, "Item de venta modificado");
+        JOptionPane.showMessageDialog(null, "ItemVenta modificado");
     }
     
     public void borrar(int id)
@@ -82,10 +82,10 @@ public class ItemVentaDAO
 		throw e;
         }            
         session.close();
-        //JOptionPane.showMessageDialog(null, "Item eliminado");
+        JOptionPane.showMessageDialog(null, "ItemVenta eliminado");
     }
     
-    public List<ItemVenta> listar()
+    public List<ItemVenta> listar(int nroTurno)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -94,12 +94,14 @@ public class ItemVentaDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            lista = session.createQuery("FROM ItemVenta").list();
+            Query query = session.createQuery("FROM item_venta iv WHERE iv.id_turno = :nroTurno");
+            query.setParameter("nroTurno", nroTurno);
+            lista = query.list();
             tx.commit();
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "Error");
+            JOptionPane.showMessageDialog(null, "Error al listar los ItemVenta del turno");
         }        
         return lista;
     }

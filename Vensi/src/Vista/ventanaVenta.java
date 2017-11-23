@@ -31,8 +31,6 @@ public class ventanaVenta extends javax.swing.JFrame
     String ordenSelec = null;
     String tipoSelec = null;
     
-    List<ItemVenta> listaVentasTurno = elTurno.getListaVentasTurno();
-    
     static double totalCarrito = 0; //inicializa en 0 cada vez que se confirma la compra
     
     public ventanaVenta() 
@@ -62,8 +60,7 @@ public class ventanaVenta extends javax.swing.JFrame
         
         llenarTabla();
         llenarTablaCarrito();        
-        verificarTurno();
-               
+        verificarTurno();               
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -407,14 +404,12 @@ public class ventanaVenta extends javax.swing.JFrame
     private void btnIniciarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarTurnoActionPerformed
         ventanaInicioTurno vInicioTurno = new ventanaInicioTurno();
         vInicioTurno.setVisible(true);
-        //this.btnIniciarTurno.setEnabled(false); //una vez iniciado no se puede volver a apretar
         dispose();
     }//GEN-LAST:event_btnIniciarTurnoActionPerformed
 
     private void btnCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarTurnoActionPerformed
         ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
         vCierreTurno.setVisible(true);
-        //this.btnIniciarTurno.setEnabled(true); //una vez cerrado el turno se activa
         dispose();
     }//GEN-LAST:event_btnCerrarTurnoActionPerformed
 
@@ -463,61 +458,89 @@ public class ventanaVenta extends javax.swing.JFrame
         
         if (cantFilasCarrito != 0)     //carrito NO vacio
         {            
-            for (int i=0 ; i<cantFilasCarrito ; i++)   //recorre todas las filas del carrito
+            for (int i=0 ; i<=cantFilasCarrito ; i++)   //recorre todas las filas del carrito
             {               
                 String idProd = tablaCarrito.getValueAt(i, 4).toString();                    
                 Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
                 String cantPeso = tablaCarrito.getValueAt(i, 1).toString();
+                Turno turnoActual = tDAO.obtenerUltimo();
+                
+                /*try
+                {
+                    List<ItemVenta> listaItemVenta = itDAO.listar(turnoActual.getId());
+                    
+                    for (ItemVenta x : listaItemVenta)    //recorre la tabla item_venta
+                    {
+                        if (x.getProducto().getId() == Integer.parseInt(idProd)) //si el prod ya está en la tabla...
+                        {
+                            x.setCantidad(x.getCantidad() + Integer.parseInt(cantPeso));
+                            x.setFecha_hora(new Date());
+                            
+                            JOptionPane.showMessageDialog(null, "El producto está repetido. ItemVenta modificado");
+                        }
+                        else    //si el prod NO está en la tabla...
+                        {
+                            ItemVenta unItemVenta = new ItemVenta();
+                            unItemVenta.setProducto(elProd);    
+                            unItemVenta.setCantidad(Integer.parseInt(cantPeso));
+                            unItemVenta.setFecha_hora(new Date());
+                            unItemVenta.setTurno(turnoActual);
 
-                if (listaVentasTurno == null)   //lista vacía
+                            itDAO.alta(unItemVenta);
+                            
+                            JOptionPane.showMessageDialog(null, "El producto es nuevo, ItemVenta agregado");                            
+                        }
+                    }
+                }
+                catch (NullPointerException e)
+                {
+                    ItemVenta unItemVenta = new ItemVenta();
+                    unItemVenta.setProducto(elProd);    
+                    unItemVenta.setCantidad(Integer.parseInt(cantPeso));
+                    unItemVenta.setFecha_hora(new Date());
+                    unItemVenta.setTurno(turnoActual);
+                                        
+                    itDAO.alta(unItemVenta);                     
+                    
+                    JOptionPane.showMessageDialog(null, "La tabla estaba vacía, ItemVenta agregado");        
+                }*/
+                
+                List<ItemVenta> listaItemVenta = itDAO.listar(turnoActual.getId());
+                
+                if (listaItemVenta.isEmpty() || listaItemVenta == null)   //tabla item_venta VACÍA
                 {         
                     ItemVenta unItemVenta = new ItemVenta();
                     unItemVenta.setProducto(elProd);    
                     unItemVenta.setCantidad(Integer.parseInt(cantPeso));
                     unItemVenta.setFecha_hora(new Date());
+                    unItemVenta.setTurno(turnoActual);
                                         
-                    itDAO.alta(unItemVenta); 
-                    try{
-                    listaVentasTurno.add(unItemVenta);
-                    }catch(Exception e)
-                    {
-                        JOptionPane.showMessageDialog(null, e.getMessage());
-                    }
+                    itDAO.alta(unItemVenta);                     
                     
-                    JOptionPane.showMessageDialog(null, "Producto nuevo agregado");
+                    JOptionPane.showMessageDialog(null, "La tabla estaba vacía, ItemVenta agregado");
                 }
-                else
+                else    //tabla item_venta NO VACÍA
                 {
-                    for (ItemVenta x : listaVentasTurno)    //recorre la lista de ventas en el turno
+                    for (ItemVenta x : listaItemVenta)    //recorre la tabla item_venta
                     {
-                        if (x.getProducto().getId() == Integer.parseInt(idProd)) //si el prod que se vendió ya está en el List listaVentasTurno... 
+                        if (x.getProducto().getId() == Integer.parseInt(idProd)) //si el prod ya está en la tabla...
                         {
-                            ItemVenta unItemVenta = new ItemVenta();
-                            unItemVenta.setProducto(elProd);    
-                            unItemVenta.setCantidad(Integer.parseInt(cantPeso));
-                            unItemVenta.setFecha_hora(new Date());
-                            itDAO.alta(unItemVenta);
-
                             x.setCantidad(x.getCantidad() + Integer.parseInt(cantPeso));
                             x.setFecha_hora(new Date());
                             
-                            JOptionPane.showMessageDialog(null, "Producto repetido agregado");
-
-                            //listaVentasTurno[3].setCantidad(nuevaCantidad);
+                            JOptionPane.showMessageDialog(null, "El producto está repetido. ItemVenta modificado");
                         }
-                        else    //si el prod no está en la lista de ventas del turno
+                        else    //si el prod NO está en la tabla...
                         {
-                            JOptionPane.showMessageDialog(null, "Producto nuevo");
-
                             ItemVenta unItemVenta = new ItemVenta();
                             unItemVenta.setProducto(elProd);    
                             unItemVenta.setCantidad(Integer.parseInt(cantPeso));
                             unItemVenta.setFecha_hora(new Date());
+                            unItemVenta.setTurno(turnoActual);
 
                             itDAO.alta(unItemVenta);
-                            listaVentasTurno.add(unItemVenta);
                             
-                            JOptionPane.showMessageDialog(null, "Producto nuevo agregado");                            
+                            JOptionPane.showMessageDialog(null, "El producto es nuevo, ItemVenta agregado");                            
                         }
                     }
                 }                
@@ -526,10 +549,9 @@ public class ventanaVenta extends javax.swing.JFrame
         else
         {
             JOptionPane.showMessageDialog(null, "El carrito está vacío");
-        }  
-                  
-        //obtener el mismo objeto turno que se creo al iniciar un turno y setearle la lista de ventas
+        }
         totalCarrito = 0;
+        llenarTablaCarrito();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -716,7 +738,7 @@ public class ventanaVenta extends javax.swing.JFrame
         });
     }
     
-    public void llenarTablaCarrito() //ACOMODAR - LISTAR SOLO PROD HABILITADOS
+    public void llenarTablaCarrito()
     {              
         modelo2 = new DefaultTableModel();
         modelo2.addColumn("Descripción");
@@ -857,6 +879,8 @@ public class ventanaVenta extends javax.swing.JFrame
             if (tDAO.obtenerUltimo().getFechaHoraInicio() != null && tDAO.obtenerUltimo().getFechaHoraFin() == null)   //si el turno no está cerrado
             {    
                 btnIniciarTurno.setEnabled(false);  
+                btnQuitar.setEnabled(false);
+                btnAgregar.setEnabled(false);
             }
             else
             {                    

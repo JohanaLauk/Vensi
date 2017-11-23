@@ -2,11 +2,8 @@ package Vista;
 
 import DAO.TurnoDAO;
 import DAO.UsuarioDAO;
-import Modelo.ItemVenta;
 import Modelo.Turno;
-import java.util.ArrayList;
 import java.util.Date;
-import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ventanaInicioTurno extends javax.swing.JFrame 
@@ -177,7 +174,6 @@ public class ventanaInicioTurno extends javax.swing.JFrame
             Date fechaHoraInicio = new Date();   
             
             unTurno.setFechaHoraInicio(fechaHoraInicio);
-            unTurno.setListaVentasTurno(null);
                         
             tDAO.alta(unTurno);
             
