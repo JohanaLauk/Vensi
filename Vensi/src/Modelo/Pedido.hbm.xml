@@ -7,25 +7,12 @@
         <id name="id" type="int">
             <column name="id" />
             <generator class="identity" />
-        </id>
-       <!-- <many-to-one name="itemPedido" class="Modelo.ItemPedido" fetch="select">
-            <column name="id_item_pedido" not-null="true" />
-        </many-to-one> -->
-        
-        <list name="itemPedido" table="item_pedido" inverse="true" lazy="true" fetch="select">
+        </id>     
+        <!-- <list name="itemPedido" table="item_pedido" inverse="true" lazy="true" fetch="select">
             <key column="id" not-null="true"/>
             <list-index column="orden" />
             <one-to-many class="Modelo.ItemPedido" />
-        </list>
-            
-        <!--<many-to-one name="proveedor" class="Modelo.Proveedor" fetch="select">
-            <column name="id_proveedor" not-null="true" />
-        </many-to-one> 
-        <property name="proveedor" type="serializable">
-            <column name="proveedor" not-null="true" />
-        </property> 
-        <one-to-one name="proveedor" class="Modelo.Proveedor" cascade="none"> 
-        </one-to-one> -->
+        </list> -->
         <many-to-one name = "proveedor" column = "id_proveedor" 
          class="Modelo.Proveedor" not-null="true"/>
         

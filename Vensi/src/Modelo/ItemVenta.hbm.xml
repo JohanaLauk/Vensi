@@ -10,8 +10,6 @@
         </id>
         <many-to-one name = "producto" column = "id_producto" 
          class="Modelo.Producto" not-null="true"/>
-        <!--<one-to-one name="producto" class="Modelo.Producto" cascade="none"> 
-        </one-to-one> -->
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />
         </property>

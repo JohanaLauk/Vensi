@@ -9,15 +9,11 @@
             <generator class="identity" />
         </id>
         
-        <list name="listaVentasTurno" table="item_venta" inverse="true" lazy="true" fetch="select">
-            <key column="id" not-null="false"/>  <!--esto estaba en true en un principio -->
+        <!--<list name="listaVentasTurno" table="item_venta" inverse="true" lazy="true" fetch="select">
+            <key column="id" not-null="false"/>  esto estaba en true en un principio 
             <index column="orden" />
             <one-to-many class="Modelo.ItemVenta" />
-         </list>
-         
-       <!-- <many-to-one name="itemVenta" class="Modelo.ItemVenta" fetch="select">
-            <column name="id_venta" />
-        </many-to-one> -->
+         </list> -->
         <property name="fechaHoraInicio" type="date">
             <column name="fecha_hora_inicio" length="13" not-null="true" />
         </property>

@@ -5,7 +5,7 @@ import java.util.*;
 public class Pedido  implements java.io.Serializable 
 {
     private int id;
-    private List<ItemPedido> itemPedido;
+    //private List<ItemPedido> itemPedido;
     private Proveedor proveedor;
     private Date fechaHora;
 
@@ -21,13 +21,13 @@ public class Pedido  implements java.io.Serializable
         this.id = id;
     }
 
-    public List<ItemPedido> getItemPedido() {
+    /*public List<ItemPedido> getItemPedido() {
         return itemPedido;
     }
 
     public void setItemPedido(List<ItemPedido> itemPedido) {
         this.itemPedido = itemPedido;
-    }
+    }*/
         
     public Proveedor getProveedor() 
     {

@@ -1,4 +1,4 @@
-package Modelo;
+ package Modelo;
 
 import java.util.Date;
 import java.util.List;
@@ -8,7 +8,7 @@ public class Turno  implements java.io.Serializable
     private int id;
     private Date fechaHoraInicio;
     private Date fechaHoraFin;
-    private List<ItemVenta> listaVentasTurno;
+    //private List<ItemVenta> listaVentasTurno;
 
     public Turno() 
     { }
@@ -22,14 +22,14 @@ public class Turno  implements java.io.Serializable
         this.id = id;
     }
     
-    public List<ItemVenta> getListaVentasTurno() 
+    /*public List<ItemVenta> getListaVentasTurno() 
     {
         return listaVentasTurno;
     }
     public void setListaVentasTurno(List<ItemVenta> listaVentasTurno)
     {
         this.listaVentasTurno = listaVentasTurno;
-    }
+    }*/
         
     public Date getFechaHoraInicio() 
     {

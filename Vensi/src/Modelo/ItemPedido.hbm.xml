@@ -18,6 +18,6 @@
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />
         </property>
-        
+        <many-to-one name="pedido" class="Modelo.Pedido" column="id_pedido" not-null="true" />    
     </class>
 </hibernate-mapping>
