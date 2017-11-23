@@ -53,5 +53,6 @@ Contributor(s):
     <mapping resource="Modelo/Turno.hbm.xml"/>
     <mapping resource="Modelo/Producto.hbm.xml"/>
     <mapping resource="Modelo/Usuario.hbm.xml"/>
+    <mapping resource="Modelo/EntradaSalida.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
