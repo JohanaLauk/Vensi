@@ -94,7 +94,7 @@ public class ItemVentaDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM item_venta iv WHERE iv.id_turno = :nroTurno");
+            Query query = session.createQuery("FROM ItemVenta iv WHERE iv.turno.id = :nroTurno");
             query.setParameter("nroTurno", nroTurno);
             lista = query.list();
             tx.commit();
