@@ -480,33 +480,36 @@ public class ventanaVenta extends javax.swing.JFrame
                     
                     JOptionPane.showMessageDialog(null, "Tabla vacía, 1° ItemVenta agregado.");
                 }
-                else    //tabla item_venta NO VACÍA
-                {                        
-                    for (ItemVenta item : listaItemVenta)    //recorre la tabla item_venta del turno actual
-                    {                        
-                        if (item.getProducto().getId() == elProd.getId()) //si el prod ya está en la tabla...
-                        {                            
-                            ItemVenta elItemVenta = new ItemVenta();
-                            elItemVenta.setCantidad(item.getCantidad() + Integer.parseInt(cantPeso));
-                            elItemVenta.setFecha_hora(new Date());
-
-                            itDAO.modificar(elItemVenta, item.getId());
-
-                            JOptionPane.showMessageDialog(null, "Producto repetido. ItemVenta modificado.");
-                        }                        
-                        else
-                        {
-                            ItemVenta unItemVenta = new ItemVenta();
-                            unItemVenta.setProducto(elProd);    
-                            unItemVenta.setCantidad(Integer.parseInt(cantPeso));
-                            unItemVenta.setFecha_hora(new Date());
-                            unItemVenta.setTurno(turnoActual);
-
-                            itDAO.alta(unItemVenta);
-
-                            JOptionPane.showMessageDialog(null, "Producto nuevo, ItemVenta agregado.");
+                else //tabla item_venta NO VACÍA
+                {
+                    boolean repetido = false;
+                    ItemVenta itemModificar = null;
+                    for (ItemVenta item : listaItemVenta) //recorre la tabla item_venta del turno actual
+                    {
+                        if (item.getProducto().getId() == elProd.getId()) {
+                            repetido = true;
+                            itemModificar = item;
                         }
-                        break;
+
+                    }
+                    if (repetido) {
+                        ItemVenta elItemVenta = new ItemVenta();
+                        elItemVenta.setCantidad(itemModificar.getCantidad() + Integer.parseInt(cantPeso));
+                        elItemVenta.setFecha_hora(new Date());
+
+                        itDAO.modificar(elItemVenta, itemModificar.getId());
+
+                        JOptionPane.showMessageDialog(null, "Producto repetido. ItemVenta modificado.");
+                    } else {
+                        ItemVenta unItemVenta = new ItemVenta();
+                        unItemVenta.setProducto(elProd);
+                        unItemVenta.setCantidad(Integer.parseInt(cantPeso));
+                        unItemVenta.setFecha_hora(new Date());
+                        unItemVenta.setTurno(turnoActual);
+
+                        itDAO.alta(unItemVenta);
+
+                        JOptionPane.showMessageDialog(null, "Producto nuevo, ItemVenta agregado.");
                     }
                 }               
             }            
