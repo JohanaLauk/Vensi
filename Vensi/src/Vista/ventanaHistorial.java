@@ -1,5 +1,7 @@
 package Vista;
 
+import DAO.ItemPedidoDAO;
+import DAO.ItemVentaDAO;
 import DAO.PedidoDAO;
 import DAO.TurnoDAO;
 import Modelo.Pedido;
@@ -19,6 +21,7 @@ public class ventanaHistorial extends javax.swing.JFrame
     TableColumnModel tcm ;
     TurnoDAO tDAO = new TurnoDAO();
     PedidoDAO pDAO = new PedidoDAO();
+    
     
     public ventanaHistorial() 
     {
@@ -335,6 +338,16 @@ public class ventanaHistorial extends javax.swing.JFrame
     }//GEN-LAST:event_btnMenuPrincipalHistorialActionPerformed
 
     private void btnVisualizarHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarHistorialActionPerformed
+        
+        if (rbTurno.isSelected())
+        {
+            ventanaVisualizarHistorial.tablaSelec = "Turno";
+        }
+        if (rbPedido.isSelected())
+        {
+            ventanaVisualizarHistorial.tablaSelec = "Pedido";
+        }       
+        ventanaVisualizarHistorial.idSelec = Integer.parseInt(tablaHistorial.getValueAt(tablaHistorial.getSelectedRow(),0).toString());
         ventanaVisualizarHistorial vVisualizarHistorial = new ventanaVisualizarHistorial();
         vVisualizarHistorial.setVisible(true);
         dispose();

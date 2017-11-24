@@ -55,6 +55,7 @@ public class EntradaSalidaDAO {
         ensa.setDescripcion(es.getDescripcion());
         ensa.setFechaHora(es.getFechaHora());
         ensa.setTipo(es.isTipo());
+        ensa.setTurno(es.getTurno());
             
          Transaction tx = session.beginTransaction();
         try
@@ -93,7 +94,7 @@ public class EntradaSalidaDAO {
         return ensa;
     }
     
-    public List<EntradaSalida> listar()
+    public List<EntradaSalida> listar(int nroTurno)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -102,7 +103,8 @@ public class EntradaSalidaDAO {
         try
         {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM EntradaSalida");
+            Query query = session.createQuery("FROM EntradaSalida en WHERE en.turno.id = :nroTurno");
+            query.setParameter("nroTurno", nroTurno);
             lista = query.list();
             tx.commit();
             session.close();

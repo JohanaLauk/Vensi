@@ -18,6 +18,7 @@ public class EntradaSalida {
     private double monto;
     private boolean tipo;
     private Date fechaHora;
+    private Turno turno;
 
     public EntradaSalida() {
     }
@@ -69,6 +70,16 @@ public class EntradaSalida {
     public void setFechaHora(Date fechaHora) {
         this.fechaHora = fechaHora;
     }
+
+    public Turno getTurno() {
+        return turno;
+    }
+
+    public void setTurno(Turno turno) {
+        this.turno = turno;
+    }
+    
+    
     
     
 }

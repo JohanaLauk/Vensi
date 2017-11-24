@@ -20,5 +20,6 @@
         <property name="fechaHora" type="date">
             <column name="fecha_hora" length="13" not-null="true" />
         </property>
+        <many-to-one name="turno" class="Modelo.Turno" column="id_turno" not-null="true" />
     </class>
 </hibernate-mapping>

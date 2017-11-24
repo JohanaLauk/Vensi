@@ -86,7 +86,7 @@ public class ItemPedidoDAO
         //JOptionPane.showMessageDialog(null, "Item eliminado");
     }
     
-    public List<ItemPedido> listar()
+    public List<ItemPedido> listar(int nroPedido)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -95,12 +95,14 @@ public class ItemPedidoDAO
         try
         {
             Transaction tx = session.beginTransaction();
-            lista = session.createQuery("FROM ItemPedido").list();
+            Query query = session.createQuery("FROM ItemPedido ip WHERE ip.pedido.id = :nroPedido");
+            query.setParameter("nroPedido", nroPedido);
+            lista = query.list(); 
             tx.commit();
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "Error");
+            JOptionPane.showMessageDialog(null, "Error al listar los ItemPedido del pedido");
         }       
         return lista;
     }
