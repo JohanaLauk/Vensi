@@ -494,7 +494,10 @@ public class ventanaVenta extends javax.swing.JFrame
                             
                             JOptionPane.showMessageDialog(null, "Producto repetido. ItemVenta modificado.");
                         }
-                        
+                        break;
+                    }
+                    for (ItemVenta x : listaItemVenta)    //recorre la tabla item_venta del turno actual
+                    {
                         if (x.getProducto().getId() != elProd.getId()) //si el prod ya está en la tabla...
                         {
                             ItemVenta unItemVenta = new ItemVenta();
@@ -504,8 +507,8 @@ public class ventanaVenta extends javax.swing.JFrame
                             unItemVenta.setTurno(turnoActual);
 
                             itDAO.alta(unItemVenta);
-                            
-                            JOptionPane.showMessageDialog(null, "Producto nuevo, ItemVenta agregado.");                            
+
+                            JOptionPane.showMessageDialog(null, "Producto nuevo, ItemVenta agregado.");
                         }
                         break;
                     }
