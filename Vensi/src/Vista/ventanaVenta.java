@@ -485,7 +485,7 @@ public class ventanaVenta extends javax.swing.JFrame
                     for (ItemVenta x : listaItemVenta)    //recorre la tabla item_venta del turno actual
                     {
                         if (x.getProducto().getId() == elProd.getId()) //si el prod ya está en la tabla...
-                        {
+                        {                            
                             ItemVenta elItemVenta = new ItemVenta();
                             elItemVenta.setCantidad(x.getCantidad() + Integer.parseInt(cantPeso));
                             elItemVenta.setFecha_hora(new Date());
@@ -494,7 +494,8 @@ public class ventanaVenta extends javax.swing.JFrame
                             
                             JOptionPane.showMessageDialog(null, "Producto repetido. ItemVenta modificado.");
                         }
-                        else    //si el prod NO está en la tabla...
+                        
+                        if (x.getProducto().getId() != elProd.getId()) //si el prod ya está en la tabla...
                         {
                             ItemVenta unItemVenta = new ItemVenta();
                             unItemVenta.setProducto(elProd);    
