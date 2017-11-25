@@ -20,8 +20,7 @@ public class ventanaHistorial extends javax.swing.JFrame
     DefaultTableModel modelo;
     TableColumnModel tcm ;
     TurnoDAO tDAO = new TurnoDAO();
-    PedidoDAO pDAO = new PedidoDAO();
-    
+    PedidoDAO pDAO = new PedidoDAO();    
     
     public ventanaHistorial() 
     {
@@ -284,8 +283,6 @@ public class ventanaHistorial extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        
-        
         if (rbTurno.isSelected())
         {
             llenarTabla("Turno");
@@ -293,9 +290,7 @@ public class ventanaHistorial extends javax.swing.JFrame
         if (rbPedido.isSelected())
         {
             llenarTabla("Pedido");
-        }       
-        
-        tablaHistorial.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
+        }      
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cbBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBuscarPorActionPerformed
@@ -338,7 +333,6 @@ public class ventanaHistorial extends javax.swing.JFrame
     }//GEN-LAST:event_btnMenuPrincipalHistorialActionPerformed
 
     private void btnVisualizarHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarHistorialActionPerformed
-        
         if (rbTurno.isSelected())
         {
             ventanaVisualizarHistorial.tablaSelec = "Turno";
@@ -378,8 +372,7 @@ public class ventanaHistorial extends javax.swing.JFrame
             tcm = tablaHistorial.getColumnModel();        
             tcm.getColumn(0).setPreferredWidth(100);
             tcm.getColumn(1).setPreferredWidth(200);
-            tcm.getColumn(2).setPreferredWidth(200);
-        
+            tcm.getColumn(2).setPreferredWidth(200);        
         }
         else if(clase.equals("Turno"))
         {   
@@ -399,28 +392,28 @@ public class ventanaHistorial extends javax.swing.JFrame
                     datos[2] = String.valueOf(t.getFechaHoraFin());
                     
                     modelo.addRow(datos);
-                }
-                
+                }                
             }
             else
             {
                 Turno t = tDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
                 String [] datos = new String[3];
                 
-                    datos[0] = String.valueOf(t.getId());
-                    datos[1] = String.valueOf(t.getFechaHoraInicio());
-                    datos[2] = String.valueOf(t.getFechaHoraFin());
-                    modelo.addRow(datos);
+                datos[0] = String.valueOf(t.getId());
+                datos[1] = String.valueOf(t.getFechaHoraInicio());
+                datos[2] = String.valueOf(t.getFechaHoraFin());
+                modelo.addRow(datos);
             }
-                this.tablaHistorial.setModel(modelo);
             
-                tcm = tablaHistorial.getColumnModel();
-                tcm.getColumn(0).setPreferredWidth(100);
-                tcm.getColumn(1).setPreferredWidth(200);
-                tcm.getColumn(2).setPreferredWidth(200);
-            
+            this.tablaHistorial.setModel(modelo);
+
+            tcm = tablaHistorial.getColumnModel();
+            tcm.getColumn(0).setPreferredWidth(100);
+            tcm.getColumn(1).setPreferredWidth(200);
+            tcm.getColumn(2).setPreferredWidth(200);            
         }
-        else{ //acá es el de pedido
+        else
+        {   //acá es el de pedido
             modelo = new DefaultTableModel();
             modelo.addColumn("Número");
             modelo.addColumn("Fecha y hora");
@@ -482,8 +475,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                 tablaHistorial.setRowSelectionAllowed(true);
             } 
         });
-    }
-    
+    }   
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabFechaHasta;

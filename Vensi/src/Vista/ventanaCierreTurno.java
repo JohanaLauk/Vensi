@@ -1,12 +1,20 @@
 package Vista;
 
+import DAO.TurnoDAO;
+import Modelo.Turno;
+import java.util.Date;
+
 public class ventanaCierreTurno extends javax.swing.JFrame 
 {
+    TurnoDAO tDAO = new TurnoDAO();    
+    Turno elTurno = new Turno();
+    
     public ventanaCierreTurno() 
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);   //centra la ventana
+        this.setLocationRelativeTo(null);   //centra la ventana       
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -19,9 +27,9 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         jLabel14 = new javax.swing.JLabel();
         btnAceptarCerrarTurno = new javax.swing.JButton();
         btnCancelarCerrarTurno = new javax.swing.JButton();
-        jTextField23 = new javax.swing.JTextField();
-        jTextField24 = new javax.swing.JTextField();
-        jTextField25 = new javax.swing.JTextField();
+        txfdDiferencia = new javax.swing.JTextField();
+        txfdCalculado = new javax.swing.JTextField();
+        txfdHay = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -91,11 +99,11 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
-        jTextField23.setEditable(false);
+        txfdDiferencia.setEditable(false);
 
-        jTextField24.setEditable(false);
+        txfdCalculado.setEditable(false);
 
-        jTextField25.setEditable(false);
+        txfdHay.setEditable(false);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -115,9 +123,9 @@ public class ventanaCierreTurno extends javax.swing.JFrame
                             .addGap(36, 36, 36)
                             .addComponent(jLabel13)
                             .addGap(38, 38, 38))
-                        .addComponent(jTextField24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txfdCalculado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfdHay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(47, 47, 47)
                                 .addComponent(jLabel12)
@@ -126,7 +134,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel14)
                             .addGap(32, 32, 32))
-                        .addComponent(jTextField23, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(txfdDiferencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(35, 35, 35))
         );
         jPanel1Layout.setVerticalGroup(
@@ -135,15 +143,15 @@ public class ventanaCierreTurno extends javax.swing.JFrame
                 .addGap(26, 26, 26)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField24, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txfdCalculado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField25, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txfdHay, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(74, 74, 74)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jTextField23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txfdDiferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -171,7 +179,106 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
         jButton11.setText("00,25 x");
 
+        txfd500.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfd500KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfd500KeyTyped(evt);
+            }
+        });
+
         jButton4.setText("50 x");
+
+        txfd200.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfd200KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfd200KeyTyped(evt);
+            }
+        });
+
+        txfd100.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfd100KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfd100KeyTyped(evt);
+            }
+        });
+
+        txfd50.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfd50KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfd50KeyTyped(evt);
+            }
+        });
+
+        txfd20.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfd20KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfd20KeyTyped(evt);
+            }
+        });
+
+        txfd10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfd10KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfd10KeyTyped(evt);
+            }
+        });
+
+        txfd5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfd5KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfd5KeyTyped(evt);
+            }
+        });
+
+        txfd2.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfd2KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfd2KeyTyped(evt);
+            }
+        });
+
+        txfd1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfd1KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfd1KeyTyped(evt);
+            }
+        });
+
+        txfd0050.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfd0050KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfd0050KeyTyped(evt);
+            }
+        });
+
+        txfd0025.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfd0025KeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfd0025KeyTyped(evt);
+            }
+        });
 
         txfd500total.setEditable(false);
 
@@ -405,6 +512,62 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    public double calcularHay()
+    {
+        double hay = 0;
+        int m500=0, m200=0, m100=0, m50=0, m20=0, m10=0, m5=0, m2=0, m1=0;
+        double m0050=0, m0025=0;
+        
+        if (!txfd500total.getText().equals(""))
+        {
+            m500 = Integer.parseInt(txfd500.getText()) * 500;
+        }        
+        if (!txfd200total.getText().equals(""))
+        {
+            m200 = Integer.parseInt(txfd200.getText()) * 200;
+        }
+        if (!txfd100total.getText().equals(""))
+        {
+            m100 = Integer.parseInt(txfd100.getText()) * 100;;
+        }
+        if (!txfd50total.getText().equals(""))
+        {
+            m50 = Integer.parseInt(txfd50.getText()) * 50;
+        }
+        if (!txfd20total.getText().equals(""))
+        {
+            m20 = Integer.parseInt(txfd20.getText()) * 20;
+        }
+        if (!txfd10total.getText().equals(""))
+        {
+            m10 = Integer.parseInt(txfd10.getText()) * 10;
+        }
+        if (!txfd5total.getText().equals(""))
+        {
+            m5 = Integer.parseInt(txfd5.getText()) * 5;
+        }
+        if (!txfd2total.getText().equals(""))
+        {
+            m2 = Integer.parseInt(txfd2.getText()) * 2;
+        }
+        if (!txfd1total.getText().equals(""))
+        {
+            m1 = Integer.parseInt(txfd1.getText()) * 1;
+        }
+        if (!txfd0050total.getText().equals(""))
+        {
+            m0050 = Double.parseDouble(txfd0050.getText()) * 00.50;
+        }
+        if (!txfd0025total.getText().equals(""))
+        {
+            m0025 = Double.parseDouble(txfd0025.getText()) * 00.25;
+        }
+               
+        hay = m500+m200+m100+m50+m20+m10+m5+m2+m1+m0050+m0025;
+        
+        return hay;
+    }
+    
     private void btnCancelarCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCerrarTurnoActionPerformed
         ventanaVenta vVenta = new ventanaVenta();
         vVenta.setVisible(true);
@@ -412,9 +575,240 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     }//GEN-LAST:event_btnCancelarCerrarTurnoActionPerformed
 
     private void btnAceptarCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarCerrarTurnoActionPerformed
-        //obtener el mismo objeto turno que se creo al iniciar un turno
-        //setear la fechaHora cierre
+        elTurno = tDAO.obtenerUltimo();
+        elTurno.setFechaHoraFin(new Date());
     }//GEN-LAST:event_btnAceptarCerrarTurnoActionPerformed
+
+    private void txfd500KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd500KeyReleased
+        if (txfd500.getText().equals(""))
+        {
+            txfd500total.setText("");            
+        }
+        else
+        {
+            int cant500 = Integer.parseInt(txfd500.getText());
+            int monto500 = 500 * cant500;
+            txfd500total.setText(String.valueOf(monto500));
+        }        
+        txfdHay.setText(String.valueOf("$" + calcularHay()));        
+    }//GEN-LAST:event_txfd500KeyReleased
+
+    private void txfd500KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd500KeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfd500KeyTyped
+
+    private void txfd200KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd200KeyReleased
+        if (txfd200.getText().equals(""))
+        {
+            txfd200total.setText("");            
+        }
+        else
+        {
+            int cant200 = Integer.parseInt(txfd200.getText());
+            int monto200 = 200 * cant200;
+            txfd200total.setText(String.valueOf(monto200));
+        }
+        txfdHay.setText(String.valueOf("$" + calcularHay()));
+    }//GEN-LAST:event_txfd200KeyReleased
+
+    private void txfd200KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd200KeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfd200KeyTyped
+
+    private void txfd100KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd100KeyReleased
+        if (txfd100.getText().equals(""))
+        {
+            txfd100total.setText("");            
+        }
+        else
+        {
+            int cant100 = Integer.parseInt(txfd100.getText());
+            int monto100 = 100 * cant100;
+            txfd100total.setText(String.valueOf(monto100));
+        }
+        txfdHay.setText(String.valueOf("$" + calcularHay()));
+    }//GEN-LAST:event_txfd100KeyReleased
+
+    private void txfd100KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd100KeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfd100KeyTyped
+
+    private void txfd50KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd50KeyReleased
+        if (txfd50.getText().equals(""))
+        {
+            txfd50total.setText("");            
+        }
+        else
+        {
+            int cant50 = Integer.parseInt(txfd50.getText());
+            int monto50 = 50 * cant50;
+            txfd50total.setText(String.valueOf(monto50));
+        }
+        txfdHay.setText(String.valueOf("$" + calcularHay()));
+    }//GEN-LAST:event_txfd50KeyReleased
+
+    private void txfd50KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd50KeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfd50KeyTyped
+
+    private void txfd20KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd20KeyReleased
+        if (txfd20.getText().equals(""))
+        {
+            txfd20total.setText("");            
+        }
+        else
+        {
+            int cant20 = Integer.parseInt(txfd20.getText());
+            int monto20 = 20 * cant20;
+            txfd20total.setText(String.valueOf(monto20));
+        }
+        txfdHay.setText(String.valueOf("$" + calcularHay()));
+    }//GEN-LAST:event_txfd20KeyReleased
+
+    private void txfd20KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd20KeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfd20KeyTyped
+
+    private void txfd10KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd10KeyReleased
+        if (txfd10.getText().equals(""))
+        {
+            txfd10total.setText("");            
+        }
+        else
+        {
+            int cant10 = Integer.parseInt(txfd10.getText());
+            int monto10 = 10 * cant10;
+            txfd10total.setText(String.valueOf(monto10));
+        }
+        txfdHay.setText(String.valueOf("$" + calcularHay()));
+    }//GEN-LAST:event_txfd10KeyReleased
+
+    private void txfd10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd10KeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfd10KeyTyped
+
+    private void txfd5KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd5KeyReleased
+        if (txfd5.getText().equals(""))
+        {
+            txfd5total.setText("");            
+        }
+        else
+        {
+            int cant5 = Integer.parseInt(txfd5.getText());
+            int monto5 = 5 * cant5;
+            txfd5total.setText(String.valueOf(monto5));
+        }
+        txfdHay.setText(String.valueOf("$" + calcularHay()));
+    }//GEN-LAST:event_txfd5KeyReleased
+
+    private void txfd5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd5KeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfd5KeyTyped
+
+    private void txfd2KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd2KeyReleased
+        if (txfd2.getText().equals(""))
+        {
+            txfd2total.setText("");            
+        }
+        else
+        {
+            int cant2 = Integer.parseInt(txfd2.getText());
+            int monto2 = 2 * cant2;
+            txfd2total.setText(String.valueOf(monto2));
+        }
+        txfdHay.setText(String.valueOf("$" + calcularHay()));
+    }//GEN-LAST:event_txfd2KeyReleased
+
+    private void txfd2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd2KeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfd2KeyTyped
+
+    private void txfd1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd1KeyReleased
+        if (txfd1.getText().equals(""))
+        {
+            txfd1total.setText("");            
+        }
+        else
+        {
+            int cant1 = Integer.parseInt(txfd1.getText());
+            int monto1 = 1 * cant1;
+            txfd1total.setText(String.valueOf(monto1));
+        }
+        txfdHay.setText(String.valueOf("$" + calcularHay()));
+    }//GEN-LAST:event_txfd1KeyReleased
+
+    private void txfd1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd1KeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfd1KeyTyped
+
+    private void txfd0050KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd0050KeyReleased
+        if (txfd0050.getText().equals(""))
+        {
+            txfd0050total.setText("");            
+        }
+        else
+        {
+            int cant0050 = Integer.parseInt(txfd0050.getText());
+            double monto0050 = 00.50 * cant0050;
+            txfd0050total.setText(String.valueOf(monto0050));
+        }
+        txfdHay.setText(String.valueOf("$" + calcularHay()));
+    }//GEN-LAST:event_txfd0050KeyReleased
+
+    private void txfd0050KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd0050KeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfd0050KeyTyped
+
+    private void txfd0025KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd0025KeyReleased
+        if (txfd0025.getText().equals(""))
+        {
+            txfd0025total.setText("");            
+        }
+        else
+        {
+            int cant0025 = Integer.parseInt(txfd0025.getText());
+            double monto0025 = 00.25 * cant0025;
+            txfd0025total.setText(String.valueOf(monto0025));
+        }        
+        txfdHay.setText(String.valueOf("$" + calcularHay()));
+    }//GEN-LAST:event_txfd0025KeyReleased
+
+    private void txfd0025KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd0025KeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfd0025KeyTyped
 
     public static void main(String args[]) 
     {
@@ -457,9 +851,6 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JTextField jTextField23;
-    private javax.swing.JTextField jTextField24;
-    private javax.swing.JTextField jTextField25;
     private javax.swing.JTextField txfd0025;
     private javax.swing.JTextField txfd0025total;
     private javax.swing.JTextField txfd0050;
@@ -482,5 +873,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     private javax.swing.JTextField txfd500total;
     private javax.swing.JTextField txfd50total;
     private javax.swing.JTextField txfd5total;
+    private javax.swing.JTextField txfdCalculado;
+    private javax.swing.JTextField txfdDiferencia;
+    private javax.swing.JTextField txfdHay;
     // End of variables declaration//GEN-END:variables
 }

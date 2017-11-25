@@ -23,6 +23,9 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         this.setLocationRelativeTo(null);   //centra la ventana         
          
         llenarTabla();
+        double montoVenta = calcularVenta();
+        txfdTotalVenta.setText("$" + String.valueOf(montoVenta));
+        
     }
 
     @SuppressWarnings("unchecked")
@@ -200,8 +203,8 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             {
                 datos[0] = String.valueOf(v.getProducto().getDescripcion());
                 datos[1] = String.valueOf(v.getCantidad());
-                datos[2] = String.valueOf("¿Valor de entrada?"); 
-                datos[3] = String.valueOf("¿Valor de salida?"); 
+                datos[2] = String.valueOf(v.getCantidad() * v.getProducto().getPrecioVenta()); 
+                datos[3] = String.valueOf("---"); 
 
                 modelo.addRow(datos);
             }
@@ -214,6 +217,19 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             tcm.getColumn(2).setPreferredWidth(80);
             tcm.getColumn(3).setPreferredWidth(80);
         }
+    }
+    
+    public double calcularVenta()
+    {
+        Turno turnoActual = tDAO.obtenerUltimo();
+        List<ItemVenta> listaIT = itDAO.listar(turnoActual.getId());
+        double montoVenta = 0;
+        
+        for (ItemVenta x : listaIT)
+        {
+            montoVenta = montoVenta + (x.getProducto().getPrecioVenta() * x.getCantidad());
+        }
+        return montoVenta;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

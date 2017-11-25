@@ -484,15 +484,17 @@ public class ventanaVenta extends javax.swing.JFrame
                 {
                     boolean repetido = false;
                     ItemVenta itemModificar = null;
+                    
                     for (ItemVenta item : listaItemVenta) //recorre la tabla item_venta del turno actual
                     {
-                        if (item.getProducto().getId() == elProd.getId()) {
+                        if (item.getProducto().getId() == elProd.getId()) 
+                        {
                             repetido = true;
                             itemModificar = item;
                         }
-
                     }
-                    if (repetido) {
+                    if (repetido) 
+                    {
                         ItemVenta elItemVenta = new ItemVenta();
                         elItemVenta.setCantidad(itemModificar.getCantidad() + Integer.parseInt(cantPeso));
                         elItemVenta.setFecha_hora(new Date());
@@ -500,7 +502,9 @@ public class ventanaVenta extends javax.swing.JFrame
                         itDAO.modificar(elItemVenta, itemModificar.getId());
 
                         JOptionPane.showMessageDialog(null, "Producto repetido. ItemVenta modificado.");
-                    } else {
+                    } 
+                    else 
+                    {
                         ItemVenta unItemVenta = new ItemVenta();
                         unItemVenta.setProducto(elProd);
                         unItemVenta.setCantidad(Integer.parseInt(cantPeso));
