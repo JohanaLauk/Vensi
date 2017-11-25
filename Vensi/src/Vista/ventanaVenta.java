@@ -515,7 +515,9 @@ public class ventanaVenta extends javax.swing.JFrame
 
                         JOptionPane.showMessageDialog(null, "Producto nuevo, ItemVenta agregado.");
                     }
-                }               
+                }    
+                
+                pDAO.restarStock(Integer.parseInt(idProd), Integer.parseInt(cantPeso));//Descuenta stock
             }            
         }
         else

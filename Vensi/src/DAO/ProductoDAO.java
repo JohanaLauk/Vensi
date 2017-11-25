@@ -439,23 +439,67 @@ public class ProductoDAO
         return lista;
     }
     
-    public List<Producto> alarma() 
-    {
+    public List<Producto> alarma() {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
 
         List<Producto> lista = null;
-        try 
-        {
+        try {
             Transaction tx = session.beginTransaction();
             Query query = session.createQuery("FROM Producto p WHERE p.stock <= p.stockMinimo");
             lista = query.list();
             tx.commit();
-        } 
-        catch (Exception e) 
-        {
+        } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error. Lista stock minimo");
         }
         return lista;
+    }
+    
+    public void restarStock(int id, int cantidad)
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        Producto p = null;
+        p = (Producto)session.get(Producto.class, id);
+        p.setStock(p.getStock() - cantidad); 
+        
+        Transaction tx = session.beginTransaction();
+        try{
+            session.merge(p);
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            if (tx.isActive())
+		tx.rollback();
+                    e.printStackTrace();
+		throw e;
+        }        
+        session.close();
+        JOptionPane.showMessageDialog(null, "Stock de producto modificado");
+    }
+    
+    public void sumarStock(int id, int cantidad)
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        Producto p = null;
+        p = (Producto)session.get(Producto.class, id);
+        p.setStock(p.getStock() + cantidad); 
+        
+        Transaction tx = session.beginTransaction();
+        try{
+            session.merge(p);
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            if (tx.isActive())
+		tx.rollback();
+                    e.printStackTrace();
+		throw e;
+        }        
+        session.close();
+        JOptionPane.showMessageDialog(null, "Stock de producto modificado");
     }
 }
