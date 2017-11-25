@@ -525,6 +525,8 @@ public class ventanaVenta extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, "El carrito está vacío.");
         }
         totalCarrito = 0;
+        labPrecioTotalCompra.setText("$" + totalCarrito);
+        llenarTabla();
         llenarTablaCarrito();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
