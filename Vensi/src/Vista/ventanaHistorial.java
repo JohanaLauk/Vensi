@@ -11,6 +11,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -384,26 +385,34 @@ public class ventanaHistorial extends javax.swing.JFrame
             if(cbBuscarPor.getSelectedItem().equals("Fecha"))
             {
                 List<Turno> lista = tDAO.buscarPorFecha(dateDesde.getDate(), dateHasta.getDate());
-                String [] datos = new String[3];
-                for(Turno t : lista)
-                {
-                    datos[0] = String.valueOf(t.getId());
-                    datos[1] = String.valueOf(t.getFechaHoraInicio());
-                    datos[2] = String.valueOf(t.getFechaHoraFin());
-                    
-                    modelo.addRow(datos);
-                }                
+                if (lista.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
+                } else {
+                    String[] datos = new String[3];
+                    for (Turno t : lista) {
+                        datos[0] = String.valueOf(t.getId());
+                        datos[1] = String.valueOf(t.getFechaHoraInicio());
+                        datos[2] = String.valueOf(t.getFechaHoraFin());
+
+                        modelo.addRow(datos);
+                    }
+                }
             }
             else
             {
                 Turno t = tDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
-                String [] datos = new String[3];
-                
-                datos[0] = String.valueOf(t.getId());
-                datos[1] = String.valueOf(t.getFechaHoraInicio());
-                datos[2] = String.valueOf(t.getFechaHoraFin());
-                modelo.addRow(datos);
+                if (t == null) {
+                    JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
+                } else {
+                    String[] datos = new String[3];
+
+                    datos[0] = String.valueOf(t.getId());
+                    datos[1] = String.valueOf(t.getFechaHoraInicio());
+                    datos[2] = String.valueOf(t.getFechaHoraFin());
+                    modelo.addRow(datos);
+                }
             }
+                
             
             this.tablaHistorial.setModel(modelo);
 
@@ -422,28 +431,34 @@ public class ventanaHistorial extends javax.swing.JFrame
             if(cbBuscarPor.getSelectedItem().equals("Fecha"))
             {
                 List<Pedido> lista = pDAO.buscarPorFecha(dateDesde.getDate(), dateHasta.getDate());
-                String [] datos = new String[3];
-                for(Pedido p : lista)
-                {
-                    datos[0] = String.valueOf(p.getId());
-                    datos[1] = String.valueOf(p.getFechaHora());
-                    datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
-                    
-                    modelo.addRow(datos);
+                if (lista.isEmpty()) {
+                    JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
+                } else {
+                    String[] datos = new String[3];
+                    for (Pedido p : lista) {
+                        datos[0] = String.valueOf(p.getId());
+                        datos[1] = String.valueOf(p.getFechaHora());
+                        datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
+
+                        modelo.addRow(datos);
+                    }
                 }
             }
             else
             {
                 Pedido p = pDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
-                String [] datos = new String[3];
-                //for(Pedido p : lista)
-                //{
+                if (p == null) {
+                    JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
+                } else {
+                    String[] datos = new String[3];
+
                     datos[0] = String.valueOf(p.getId());
                     datos[1] = String.valueOf(p.getFechaHora());
                     datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
-                    
+
                     modelo.addRow(datos);
-                //}
+
+                }
             }
             this.tablaHistorial.setModel(modelo);
         
