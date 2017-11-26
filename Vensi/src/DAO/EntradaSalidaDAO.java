@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package DAO;
 
 import Conexion.NewHibernateUtil;
@@ -15,12 +10,8 @@ import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;
 
-/**
- *
- * @author Bian
- */
-public class EntradaSalidaDAO {
-    
+public class EntradaSalidaDAO 
+{    
     public void alta(EntradaSalida es)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
@@ -43,7 +34,7 @@ public class EntradaSalidaDAO {
         JOptionPane.showMessageDialog(null, "Entrada/Salida agregada");
     }
     
-    public void modificar(EntradaSalida es, int id)
+    public void modificar(EntradaSalida es, int id) //creo que no lo vamos a necesitar
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
@@ -57,7 +48,7 @@ public class EntradaSalidaDAO {
         ensa.setTipo(es.isTipo());
         ensa.setTurno(es.getTurno());
             
-         Transaction tx = session.beginTransaction();
+        Transaction tx = session.beginTransaction();
         try
         {
             session.merge(ensa);

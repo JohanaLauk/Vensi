@@ -1,7 +1,9 @@
 package Vista;
 
+import DAO.EntradaSalidaDAO;
 import DAO.ItemVentaDAO;
 import DAO.TurnoDAO;
+import Modelo.EntradaSalida;
 import Modelo.ItemVenta;
 import Modelo.Turno;
 import java.util.List;
@@ -13,19 +15,24 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     Turno elTurno = new Turno();
     TurnoDAO tDAO = new TurnoDAO();
     ItemVentaDAO itDAO = new ItemVentaDAO();
+    EntradaSalidaDAO esDAO = new EntradaSalidaDAO();
     DefaultTableModel modelo;
     TableColumnModel tcm;
+    
+    static double totalCajaEsperado=0;
             
     public ventanaDetalleCaja() 
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);   //centra la ventana         
-         
-        llenarTabla();
-        double montoVenta = calcularVenta();
-        txfdTotalVenta.setText("$" + String.valueOf(montoVenta));
+        this.setLocationRelativeTo(null);   //centra la ventana  
         
+        llenarTabla();
+                
+        txfdTotalVenta.setText("$" + String.valueOf(calcularVenta()));
+        
+        totalCajaEsperado = calcularTotalCaja();
+        txfdTotalCaja.setText("$" + String.valueOf(totalCajaEsperado));        
     }
 
     @SuppressWarnings("unchecked")
@@ -174,7 +181,10 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     {        
         modelo = new DefaultTableModel();
         Turno turnoActual = tDAO.obtenerUltimo();
-        List<ItemVenta> listaIT = itDAO.listar(turnoActual.getId());   //lista de la tabla en BD
+        
+        List<ItemVenta> listaIT = itDAO.listar(turnoActual.getId());   //lista tabla item_venta
+        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());   //lista tabla entrada_salida
+        
         String[] datos = new String[4];
         
         if (listaIT.isEmpty())        
@@ -199,6 +209,25 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
 
+            for (EntradaSalida es : listaES)            
+            {
+                datos[0] = String.valueOf(es.getNombre());
+                datos[1] = String.valueOf("---");
+                
+                if (es.isTipo())    // entrada
+                {
+                    datos[2] = String.valueOf(es.getMonto());
+                    datos[3] = String.valueOf("---"); 
+                }
+                else    //salida
+                {
+                    datos[2] = String.valueOf("---"); 
+                    datos[3] = String.valueOf(es.getMonto());
+                }
+                
+                modelo.addRow(datos);
+            }
+            
             for (ItemVenta v : listaIT)            
             {
                 datos[0] = String.valueOf(v.getProducto().getDescripcion());
@@ -230,6 +259,33 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             montoVenta = montoVenta + (x.getProducto().getPrecioVenta() * x.getCantidad());
         }
         return montoVenta;
+    }
+    
+    public double calcularTotalCaja()
+    {
+        Turno turnoActual = tDAO.obtenerUltimo();
+        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
+        
+        double montoEntradaSalida=0;  
+        double totalCaja=0;
+        
+        double montoVenta = calcularVenta();
+        
+        for (EntradaSalida x : listaES)
+        {
+            if (x.isTipo()) //entrada
+            {
+                montoEntradaSalida = montoEntradaSalida + x.getMonto();
+            }
+            else
+            {
+                montoEntradaSalida = montoEntradaSalida - x.getMonto();
+            }            
+        }        
+        
+        totalCaja = montoVenta + montoEntradaSalida;
+        
+        return totalCaja;
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

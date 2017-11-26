@@ -8,8 +8,11 @@
             <column name="id" />
             <generator class="identity" />
         </id>
+        <property name="nombre" type="string">
+            <column name="nombre" length="150" not-null="true" />
+        </property>
         <property name="descripcion" type="string">
-            <column name="descripcion" length="150" not-null="true" />
+            <column name="descripcion" length="150" not-null="false" />
         </property>
         <property name="monto" type="double">
             <column name="monto" precision="8" scale="3" not-null="true" />

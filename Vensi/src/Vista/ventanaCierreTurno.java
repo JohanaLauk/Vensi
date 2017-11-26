@@ -13,7 +13,11 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);   //centra la ventana       
+        this.setLocationRelativeTo(null);   //centra la ventana  
+        
+        //el HAY se calcula automaticamente a medida que va ingresando los billetes
+        txfdMontoEsperado.setText("$" + String.valueOf(calcularMontoEsperado()));
+        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));
         
     }
 
@@ -28,7 +32,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         btnAceptarCerrarTurno = new javax.swing.JButton();
         btnCancelarCerrarTurno = new javax.swing.JButton();
         txfdDiferencia = new javax.swing.JTextField();
-        txfdCalculado = new javax.swing.JTextField();
+        txfdMontoEsperado = new javax.swing.JTextField();
         txfdHay = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
@@ -81,7 +85,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
         jLabel12.setText("Hay");
 
-        jLabel13.setText("Calculado");
+        jLabel13.setText("Monto esperado:");
 
         jLabel14.setText("Diferencia");
 
@@ -101,7 +105,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
         txfdDiferencia.setEditable(false);
 
-        txfdCalculado.setEditable(false);
+        txfdMontoEsperado.setEditable(false);
 
         txfdHay.setEditable(false);
 
@@ -109,33 +113,29 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnCancelarCerrarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnAceptarCerrarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(btnCancelarCerrarTurno)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAceptarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 81, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfdMontoEsperado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                        .addComponent(txfdHay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addGap(36, 36, 36)
-                            .addComponent(jLabel13)
+                            .addGap(47, 47, 47)
+                            .addComponent(jLabel12)
                             .addGap(38, 38, 38))
-                        .addComponent(txfdCalculado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txfdHay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(47, 47, 47)
-                                .addComponent(jLabel12)
-                                .addGap(38, 38, 38))))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel14)
                             .addGap(32, 32, 32))
-                        .addComponent(txfdDiferencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(35, 35, 35))
+                        .addComponent(txfdDiferencia, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel13)
+                        .addGap(18, 18, 18)))
+                .addGap(24, 24, 24))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -143,16 +143,16 @@ public class ventanaCierreTurno extends javax.swing.JFrame
                 .addGap(26, 26, 26)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txfdCalculado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txfdMontoEsperado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(64, 64, 64)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txfdHay, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txfdDiferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(50, 50, 50)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnCancelarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btnAceptarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -568,6 +568,27 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         return hay;
     }
     
+    public double calcularMontoEsperado()
+    {
+        double montoEsperado=0;
+        
+        montoEsperado = ventanaDetalleCaja.totalCajaEsperado;        
+        
+        return montoEsperado;
+    }
+    
+    public double calcularDiferencia()
+    {
+        double diferencia = 0;
+        
+        double hay = calcularHay();
+        double montoEsperado = calcularMontoEsperado();
+        
+        diferencia = hay - montoEsperado;
+        
+        return diferencia;
+    }
+    
     private void btnCancelarCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCerrarTurnoActionPerformed
         ventanaVenta vVenta = new ventanaVenta();
         vVenta.setVisible(true);
@@ -589,8 +610,9 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             int cant500 = Integer.parseInt(txfd500.getText());
             int monto500 = 500 * cant500;
             txfd500total.setText(String.valueOf(monto500));
-        }        
-        txfdHay.setText(String.valueOf("$" + calcularHay()));        
+        }
+        txfdHay.setText("$" + String.valueOf(calcularHay()));
+        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));
     }//GEN-LAST:event_txfd500KeyReleased
 
     private void txfd500KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd500KeyTyped
@@ -611,7 +633,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             int monto200 = 200 * cant200;
             txfd200total.setText(String.valueOf(monto200));
         }
-        txfdHay.setText(String.valueOf("$" + calcularHay()));
+        txfdHay.setText("$" + String.valueOf(calcularHay()));
+        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));
     }//GEN-LAST:event_txfd200KeyReleased
 
     private void txfd200KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd200KeyTyped
@@ -632,7 +655,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             int monto100 = 100 * cant100;
             txfd100total.setText(String.valueOf(monto100));
         }
-        txfdHay.setText(String.valueOf("$" + calcularHay()));
+        txfdHay.setText("$" + String.valueOf(calcularHay()));
+        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));
     }//GEN-LAST:event_txfd100KeyReleased
 
     private void txfd100KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd100KeyTyped
@@ -653,7 +677,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             int monto50 = 50 * cant50;
             txfd50total.setText(String.valueOf(monto50));
         }
-        txfdHay.setText(String.valueOf("$" + calcularHay()));
+        txfdHay.setText("$" + String.valueOf(calcularHay()));
+        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));
     }//GEN-LAST:event_txfd50KeyReleased
 
     private void txfd50KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd50KeyTyped
@@ -674,7 +699,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             int monto20 = 20 * cant20;
             txfd20total.setText(String.valueOf(monto20));
         }
-        txfdHay.setText(String.valueOf("$" + calcularHay()));
+        txfdHay.setText("$" + String.valueOf(calcularHay()));
+        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));
     }//GEN-LAST:event_txfd20KeyReleased
 
     private void txfd20KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd20KeyTyped
@@ -695,7 +721,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             int monto10 = 10 * cant10;
             txfd10total.setText(String.valueOf(monto10));
         }
-        txfdHay.setText(String.valueOf("$" + calcularHay()));
+        txfdHay.setText("$" + String.valueOf(calcularHay()));
+        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));
     }//GEN-LAST:event_txfd10KeyReleased
 
     private void txfd10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd10KeyTyped
@@ -716,7 +743,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             int monto5 = 5 * cant5;
             txfd5total.setText(String.valueOf(monto5));
         }
-        txfdHay.setText(String.valueOf("$" + calcularHay()));
+        txfdHay.setText("$" + String.valueOf(calcularHay()));
+        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));
     }//GEN-LAST:event_txfd5KeyReleased
 
     private void txfd5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd5KeyTyped
@@ -737,7 +765,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             int monto2 = 2 * cant2;
             txfd2total.setText(String.valueOf(monto2));
         }
-        txfdHay.setText(String.valueOf("$" + calcularHay()));
+        txfdHay.setText("$" + String.valueOf(calcularHay()));
+        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));
     }//GEN-LAST:event_txfd2KeyReleased
 
     private void txfd2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd2KeyTyped
@@ -758,7 +787,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             int monto1 = 1 * cant1;
             txfd1total.setText(String.valueOf(monto1));
         }
-        txfdHay.setText(String.valueOf("$" + calcularHay()));
+        txfdHay.setText("$" + String.valueOf(calcularHay()));
+        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));
     }//GEN-LAST:event_txfd1KeyReleased
 
     private void txfd1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd1KeyTyped
@@ -779,7 +809,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             double monto0050 = 00.50 * cant0050;
             txfd0050total.setText(String.valueOf(monto0050));
         }
-        txfdHay.setText(String.valueOf("$" + calcularHay()));
+        txfdHay.setText("$" + String.valueOf(calcularHay()));
+        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));
     }//GEN-LAST:event_txfd0050KeyReleased
 
     private void txfd0050KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd0050KeyTyped
@@ -799,8 +830,9 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             int cant0025 = Integer.parseInt(txfd0025.getText());
             double monto0025 = 00.25 * cant0025;
             txfd0025total.setText(String.valueOf(monto0025));
-        }        
-        txfdHay.setText(String.valueOf("$" + calcularHay()));
+        } 
+        txfdHay.setText("$" + String.valueOf(calcularHay()));
+        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));
     }//GEN-LAST:event_txfd0025KeyReleased
 
     private void txfd0025KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd0025KeyTyped
@@ -873,8 +905,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     private javax.swing.JTextField txfd500total;
     private javax.swing.JTextField txfd50total;
     private javax.swing.JTextField txfd5total;
-    private javax.swing.JTextField txfdCalculado;
     private javax.swing.JTextField txfdDiferencia;
     private javax.swing.JTextField txfdHay;
+    private javax.swing.JTextField txfdMontoEsperado;
     // End of variables declaration//GEN-END:variables
 }
