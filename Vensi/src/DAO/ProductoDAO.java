@@ -84,25 +84,25 @@ public class ProductoDAO
         return p;
     }
     
-    public List<Producto> buscarPorCodigo(String codigo)
+    public Producto buscarPorCodigo(String codigo)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
         
-        List<Producto> lista = null;
+        Producto p = null;
         try
         {            
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :codigo");
-            query.setParameter("codigo", codigo+"%");
-            lista = query.list();
+            Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :codigo AND p.estado = TRUE");
+            query.setParameter("codigo", codigo);
+            p = (Producto)query.uniqueResult();
             tx.commit();
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error. Producto por codigo");
         }        
-        return lista;
+        return p;
     }
     
     public List<Producto> buscarPorCodigoNombre(String cadena, String filtro)  //para ventanaProducto
@@ -446,7 +446,7 @@ public class ProductoDAO
         List<Producto> lista = null;
         try {
             Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Producto p WHERE p.stock <= p.stockMinimo");
+            Query query = session.createQuery("FROM Producto p WHERE p.stock <= p.stockMinimo AND p.estado = TRUE");
             lista = query.list();
             tx.commit();
         } catch (Exception e) {

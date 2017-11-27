@@ -1,17 +1,20 @@
 package Vista;
 
-import DAO.EntradaSalidaDAO;
-import DAO.TurnoDAO;
-import Modelo.EntradaSalida;
-import Modelo.Turno;
+import DAO.*;
+import Modelo.*;
 import java.awt.Dimension;
 import java.util.Date;
+import java.util.List;
+import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
 
 public class ventanaCargarES extends javax.swing.JFrame 
 {
     EntradaSalidaDAO esDAO = new EntradaSalidaDAO();
     TurnoDAO tDAO = new TurnoDAO();
+    ProductoDAO pDAO = new ProductoDAO();
+    DefaultListModel modeloList;
+    Producto productoSelec = null;
         
     String nombre="";
     
@@ -141,6 +144,12 @@ public class ventanaCargarES extends javax.swing.JFrame
         jLabel5.setText("Cantidad:");
         panelidentificarProd.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, 20));
         panelidentificarProd.add(txfdCantidadProdAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 90, -1));
+
+        txfdCodigoProdAnular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfdCodigoProdAnularKeyReleased(evt);
+            }
+        });
         panelidentificarProd.add(txfdCodigoProdAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 130, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
@@ -152,6 +161,11 @@ public class ventanaCargarES extends javax.swing.JFrame
         panelidentificarProd.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 310, 140));
 
         btnAnular.setText("Anular");
+        btnAnular.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAnularActionPerformed(evt);
+            }
+        });
         panelidentificarProd.add(btnAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 100, 30));
 
         labTituloPanelAnularProd.setForeground(new java.awt.Color(255, 255, 255));
@@ -277,6 +291,15 @@ public class ventanaCargarES extends javax.swing.JFrame
         txAreaDescripcion.setText("");
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
+    private void txfdCodigoProdAnularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCodigoProdAnularKeyReleased
+        String cadena = txfdCodigoProdAnular.getText();
+        llenarListBusqueda(cadena);
+    }//GEN-LAST:event_txfdCodigoProdAnularKeyReleased
+
+    private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
+        
+    }//GEN-LAST:event_btnAnularActionPerformed
+
     public void habDeshabComponentes(String nombre)
     {
         if (nombre.equals("Anulación de venta"))
@@ -356,4 +379,23 @@ public class ventanaCargarES extends javax.swing.JFrame
     private javax.swing.JTextField txfdCodigoProdAnular;
     private javax.swing.JTextField txfdMonto;
     // End of variables declaration//GEN-END:variables
+
+    private void llenarListBusqueda(String cadena) {
+
+        productoSelec = pDAO.buscarPorCodigo(cadena);
+        modeloList = new DefaultListModel();
+        modeloList.addElement("Código: "+productoSelec.getCodigo());
+        modeloList.addElement("Descripción: "+productoSelec.getDescripcion());
+        modeloList.addElement("Stock: "+String.valueOf(productoSelec.getStock()));
+        if(productoSelec.isPorPeso())
+        {
+            modeloList.addElement("Tipo: Por peso");
+            modeloList.addElement("Precio de venta: "+String.valueOf(productoSelec.getPrecioVentaXPeso()));
+        }
+        else{
+            modeloList.addElement("Tipo: Por unidad");
+            modeloList.addElement("Precio de venta: "+String.valueOf(productoSelec.getPrecioVenta()));
+        }
+        listaInfoProdAnular.setModel(modeloList);
+    }
 }

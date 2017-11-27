@@ -35,21 +35,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);   //centra la ventana
         
-       /* modelo = new DefaultTableModel();
-        modelo.addColumn("Detalle");
-        modelo.addColumn("Cantidad");
-        modelo.addColumn("Entrada");
-        modelo.addColumn("Salida");
-        this.tablaTurno.setModel(modelo);
-        
-        TableColumnModel tcm = tablaTurno.getColumnModel();
-        
-        tcm.getColumn(0).setPreferredWidth(200);
-        tcm.getColumn(1).setPreferredWidth(100);
-        tcm.getColumn(2).setPreferredWidth(100);
-        tcm.getColumn(3).setPreferredWidth(100);
-        
-        tablaTurno.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?*/
+       
        llenarDatos();
     }
 
