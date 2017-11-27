@@ -15,7 +15,9 @@ public class ventanaCargarES extends javax.swing.JFrame
     ProductoDAO pDAO = new ProductoDAO();
     DefaultListModel modeloList;
     Producto productoSelec = null;
-        
+    Turno turnoSelec = null;
+    ItemVentaDAO iDAO = new ItemVentaDAO();
+            
     String nombre="";
     
     public ventanaCargarES() 
@@ -298,6 +300,36 @@ public class ventanaCargarES extends javax.swing.JFrame
 
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         
+        int cantidad = Integer.parseInt(txfdCantidadProdAnular.getText());
+        turnoSelec = tDAO.obtenerUltimo();
+        List<ItemVenta> lista = iDAO.listar(turnoSelec.getId());
+        for(ItemVenta i : lista)
+        {
+            if(i.getProducto().getId() == productoSelec.getId()){
+                if(cantidad <= i.getCantidad()){
+                    pDAO.sumarStock(productoSelec.getId(),cantidad);
+                    EntradaSalida es = new EntradaSalida();
+                    es.setDescripcion(productoSelec.getDescripcion());
+                    es.setFechaHora(new Date());
+                    es.setNombre("Anulación de venta.");
+                    es.setTipo(true);
+                    es.setTurno(turnoSelec);
+                    if(productoSelec.isPorPeso()){
+                        es.setMonto(productoSelec.getPrecioVentaXPeso()*cantidad);
+                    }else{
+                        es.setMonto(productoSelec.getPrecioVenta()*cantidad);
+                    }
+                    esDAO.alta(es);
+                    JOptionPane.showMessageDialog(null, "Venta anulada.");
+                }
+                else{
+                    JOptionPane.showMessageDialog(null, "La cantidad ingresada debe ser menor o igual a la cantidad comprada.");
+                }
+                
+            }else{
+                JOptionPane.showMessageDialog(null, "No se han realizado compras de este producto.");
+            }
+        }
     }//GEN-LAST:event_btnAnularActionPerformed
 
     public void habDeshabComponentes(String nombre)

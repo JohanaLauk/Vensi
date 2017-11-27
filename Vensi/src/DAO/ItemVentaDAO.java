@@ -57,34 +57,7 @@ public class ItemVentaDAO
         JOptionPane.showMessageDialog(null, "ItemVenta modificado");
     }
     
-    public void borrar(int id)
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
-        
-        ItemVenta item = null;                    
-        item = (ItemVenta)session.get(ItemVenta.class, id);
-        
-        Transaction tx = session.beginTransaction();
-        try
-        {
-            if(item != null)
-            {
-                session.delete(item);
-            }
-            
-            tx.commit();
-        }
-        catch(Exception e)
-        {
-            if (tx.isActive())
-		tx.rollback();
-                    e.printStackTrace();
-		throw e;
-        }            
-        session.close();
-        JOptionPane.showMessageDialog(null, "ItemVenta eliminado");
-    }
+    
     
     public List<ItemVenta> listar(int nroTurno)
     {
