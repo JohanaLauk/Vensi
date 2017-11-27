@@ -19,8 +19,9 @@ public class ventanaPedido extends javax.swing.JFrame
 {
     ProductoDAO prodDAO = new ProductoDAO();
     ProveedorDAO provDAO = new ProveedorDAO();
-    DefaultTableModel modelo, modelo2, modelo3, m;
+    DefaultTableModel modelo, modelo2, modelo3, m, m2;
     TableColumnModel tcm, tcm2, tcm3;
+    DefaultListModel modeloList;
     
     String filtroSelec = null;
     String ordenSelec = null;
@@ -43,14 +44,14 @@ public class ventanaPedido extends javax.swing.JFrame
                 //tablaProd.setRowSelectionAllowed(false);
                 //tablaPedidoProvisoria.setRowSelectionAllowed(false);
                 tablaProd.clearSelection();
-                tablaPedidoProvisoria.clearSelection();
+                tablaPedido.clearSelection();
                 listInfoProd.clearSelection();
                 
-                DefaultListModel modeloList = new DefaultListModel(); 
-                modeloList.clear();
-                modeloList.addElement("Código: ");
-                modeloList.addElement("Descripcion: ");
-                listInfoProd.setModel(modeloList);
+                limpiarList();
+                
+                btnQuitar.setEnabled(false);
+                btnAgregar.setEnabled(false);
+                txfdCantidadPedido.setEnabled(false);                
             } 
         });      
         
@@ -71,7 +72,6 @@ public class ventanaPedido extends javax.swing.JFrame
         cbTipoOrden = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProd = new javax.swing.JTable();
-        btnCargarInventario = new javax.swing.JButton();
         btnVolverMP = new javax.swing.JButton();
         cbFiltro = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
@@ -79,21 +79,19 @@ public class ventanaPedido extends javax.swing.JFrame
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txfdCantidadPedido = new javax.swing.JTextField();
-        btnOk = new javax.swing.JButton();
-        btnCancelar = new javax.swing.JButton();
+        btnAgregar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listInfoProd = new javax.swing.JList<>();
         jLabel6 = new javax.swing.JLabel();
+        btnQuitar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         cbProveedores = new javax.swing.JComboBox<>();
         jPanel4 = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jScrollPane3 = new javax.swing.JScrollPane();
-        tablaPedidoProvisoria = new javax.swing.JTable();
-        btnBorrarProdListaProvisoria = new javax.swing.JButton();
-        btnEditarListaProvisoria = new javax.swing.JButton();
-        btnGuardarListaProvisoria = new javax.swing.JButton();
+        tablaPedido = new javax.swing.JTable();
+        btnImprimirPedido = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Pedido");
@@ -143,8 +141,6 @@ public class ventanaPedido extends javax.swing.JFrame
         tablaProd.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaProd);
 
-        btnCargarInventario.setText("Cargar al inventario");
-
         btnVolverMP.setText("Volver al menú principal");
         btnVolverMP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,12 +172,6 @@ public class ventanaPedido extends javax.swing.JFrame
                 .addGap(10, 10, 10)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(10, 10, 10)
-                .addComponent(btnVolverMP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnCargarInventario, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(2, 2, 2))
-            .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -189,11 +179,11 @@ public class ventanaPedido extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbOrdenCampo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbOrdenCampo, 0, 85, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbTipoOrden, 0, 85, Short.MAX_VALUE)
+                        .addComponent(cbTipoOrden, 0, 83, Short.MAX_VALUE)
                         .addGap(5, 5, 5))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
@@ -201,6 +191,10 @@ public class ventanaPedido extends javax.swing.JFrame
                         .addComponent(txfdBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(133, 133, 133)
+                .addComponent(btnVolverMP, javax.swing.GroupLayout.DEFAULT_SIZE, 167, Short.MAX_VALUE)
+                .addGap(149, 149, 149))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -224,9 +218,7 @@ public class ventanaPedido extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCargarInventario, javax.swing.GroupLayout.DEFAULT_SIZE, 31, Short.MAX_VALUE)
-                    .addComponent(btnVolverMP, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnVolverMP, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
@@ -238,14 +230,12 @@ public class ventanaPedido extends javax.swing.JFrame
             }
         });
 
-        btnOk.setText("OK");
-        btnOk.addActionListener(new java.awt.event.ActionListener() {
+        btnAgregar.setText("Agregar");
+        btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnOkActionPerformed(evt);
+                btnAgregarActionPerformed(evt);
             }
         });
-
-        btnCancelar.setText("Cancelar");
 
         listInfoProd.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "Código:", "Descripción:" };
@@ -256,6 +246,13 @@ public class ventanaPedido extends javax.swing.JFrame
 
         jLabel6.setText("Datos del producto:");
 
+        btnQuitar.setText("Quitar");
+        btnQuitar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnQuitarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -265,16 +262,14 @@ public class ventanaPedido extends javax.swing.JFrame
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfdCantidadPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 82, Short.MAX_VALUE))
+                        .addComponent(txfdCantidadPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(jScrollPane2))
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnOk, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(11, 11, 11))
+                    .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
+                    .addComponent(btnQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(149, 149, 149)
                 .addComponent(jLabel6)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -283,18 +278,18 @@ public class ventanaPedido extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(txfdCantidadPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(btnOk, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnCancelar, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 0, 0))
+                        .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(btnQuitar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
         );
 
         jLabel7.setText("Indique el proveedor:");
@@ -324,16 +319,16 @@ public class ventanaPedido extends javax.swing.JFrame
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jLabel3.setText("Lista pedido provisoria:");
+        jLabel3.setText("Lista pedido:");
 
-        tablaPedidoProvisoria = new javax.swing.JTable()
+        tablaPedido = new javax.swing.JTable()
         {
             public boolean isCellEditable(int rowIndex, int colIndex)
             {
                 return false;
             }
         };
-        tablaPedidoProvisoria.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPedido.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -341,46 +336,35 @@ public class ventanaPedido extends javax.swing.JFrame
 
             }
         ));
-        tablaPedidoProvisoria.setFocusable(false);
-        tablaPedidoProvisoria.getTableHeader().setResizingAllowed(false);
-        tablaPedidoProvisoria.getTableHeader().setReorderingAllowed(false);
-        jScrollPane3.setViewportView(tablaPedidoProvisoria);
+        tablaPedido.setFocusable(false);
+        tablaPedido.getTableHeader().setResizingAllowed(false);
+        tablaPedido.getTableHeader().setReorderingAllowed(false);
+        jScrollPane3.setViewportView(tablaPedido);
 
-        btnBorrarProdListaProvisoria.setText("Borrar");
-
-        btnEditarListaProvisoria.setText("Editar");
-
-        btnGuardarListaProvisoria.setText("Guardar lista provisoria");
+        btnImprimirPedido.setText("Imprimir pedido");
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)
                 .addGap(265, 265, 265))
             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addGroup(jPanel4Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(btnBorrarProdListaProvisoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(27, 27, 27)
-                .addComponent(btnEditarListaProvisoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(26, 26, 26)
-                .addComponent(btnGuardarListaProvisoria, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(21, 21, 21))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addGap(128, 128, 128)
+                .addComponent(btnImprimirPedido, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                .addGap(106, 106, 106))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
-                .addGap(10, 10, 10)
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnEditarListaProvisoria, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBorrarProdListaProvisoria, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnGuardarListaProvisoria, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(12, 12, 12))
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnImprimirPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -528,7 +512,7 @@ public class ventanaPedido extends javax.swing.JFrame
         cbProveedores.setSelectedItem(itemSelec);       
     }//GEN-LAST:event_cbProveedoresActionPerformed
 
-    private void btnOkActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnOkActionPerformed
+    private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int filaSelec = tablaProd.getSelectedRow();
         
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
@@ -546,7 +530,7 @@ public class ventanaPedido extends javax.swing.JFrame
             }
             else
             {   
-                m = (DefaultTableModel) tablaPedidoProvisoria.getModel();
+                m = (DefaultTableModel) tablaPedido.getModel();
                 String filaNueva[] = {codigo, descrip, cantidad, id_recibido};
                 m.addRow(filaNueva);     
             }
@@ -556,7 +540,13 @@ public class ventanaPedido extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
         }
         txfdCantidadPedido.setText("");
-    }//GEN-LAST:event_btnOkActionPerformed
+        
+        limpiarList();
+        
+        btnAgregar.setEnabled(false);
+        btnQuitar.setEnabled(false);
+        txfdCantidadPedido.setEnabled(false);
+    }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void txfdCantidadPedidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadPedidoKeyTyped
         char c = evt.getKeyChar();
@@ -564,6 +554,19 @@ public class ventanaPedido extends javax.swing.JFrame
                 (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfdCantidadPedidoKeyTyped
+
+    private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
+        int filaSelec = tablaPedido.getSelectedRow();
+        
+        m2 = (DefaultTableModel) tablaPedido.getModel(); 
+        m2.removeRow(filaSelec); 
+        
+        limpiarList();
+        
+        btnAgregar.setEnabled(false);
+        btnQuitar.setEnabled(false);
+        txfdCantidadPedido.setEnabled(false);
+    }//GEN-LAST:event_btnQuitarActionPerformed
     
     public static void main(String args[]) 
     {
@@ -650,6 +653,10 @@ public class ventanaPedido extends javax.swing.JFrame
                     modeloList.addElement("Descripcion: " + desc);
 
                     listInfoProd.setModel(modeloList);
+                                        
+                    btnAgregar.setEnabled(true);
+                    txfdCantidadPedido.setEnabled(true);
+                    btnQuitar.setEnabled(false);
                 }
             } 
         });
@@ -662,45 +669,58 @@ public class ventanaPedido extends javax.swing.JFrame
         modelo2.addColumn("Descripción");
         modelo2.addColumn("Cantidad");
         modelo2.addColumn("ID");       
+                
+        tablaPedido.setModel(modelo2);
         
-        /*for (int i=0 ; i<15 ; i++)
-        {
-            modelo2.addRow(new Object[]{"","","",""});
-        }*/
-        
-        tablaPedidoProvisoria.setModel(modelo2);
-        
-        tcm2 = tablaPedidoProvisoria.getColumnModel();        
+        tcm2 = tablaPedido.getColumnModel();        
         tcm2.getColumn(0).setPreferredWidth(100);
         tcm2.getColumn(1).setPreferredWidth(300);
         tcm2.getColumn(2).setPreferredWidth(50);  
         tcm2.getColumn(3).setPreferredWidth(0);  
         tcm2.getColumn(3).setMaxWidth(0);
         tcm2.getColumn(3).setMinWidth(0);
-        tablaPedidoProvisoria.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
-        tablaPedidoProvisoria.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
+        tablaPedido.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
+        tablaPedido.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
         
-        tablaPedidoProvisoria.addFocusListener(new FocusListener() 
+        tablaPedido.addFocusListener(new FocusListener() 
         {
             @Override
             public void focusGained(FocusEvent fe) 
             {
-                tablaPedidoProvisoria.setRowSelectionAllowed(true);
+                tablaPedido.setRowSelectionAllowed(true);
             }
 
             @Override
             public void focusLost(FocusEvent fe) 
             {                
-                tablaPedidoProvisoria.setRowSelectionAllowed(false);
+                tablaPedido.setRowSelectionAllowed(false);
             } 
         });
         
-        tablaPedidoProvisoria.addMouseListener(new MouseAdapter() 
+        tablaPedido.addMouseListener(new MouseAdapter() 
         {
             @Override
             public void mouseClicked(MouseEvent me) 
             {
-                tablaPedidoProvisoria.setRowSelectionAllowed(true);
+                tablaPedido.setRowSelectionAllowed(true);
+                
+                int filaSelec = tablaPedido.getSelectedRow();
+        
+                if (filaSelec >= 0)
+                {
+                    String cod = tablaPedido.getValueAt(filaSelec, 0).toString();
+                    String desc = tablaPedido.getValueAt(filaSelec, 1).toString();
+                    
+                    modeloList = new DefaultListModel(); 
+                    modeloList.clear();
+                    modeloList.addElement("Código: " + cod);
+                    modeloList.addElement("Descripcion: " + desc);
+                    listInfoProd.setModel(modeloList);
+                    
+                    txfdCantidadPedido.setEnabled(false);
+                    btnAgregar.setEnabled(false);
+                    btnQuitar.setEnabled(true);
+                }
             } 
         });
     }
@@ -789,14 +809,20 @@ public class ventanaPedido extends javax.swing.JFrame
         cbProveedores.setModel(modeloCBB);
     }
     
+    public void limpiarList()
+    {
+        modeloList = new DefaultListModel(); 
+        modeloList.clear();
+        modeloList.addElement("Código: ");
+        modeloList.addElement("Descripcion: ");
+        listInfoProd.setModel(modeloList);
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBorrarProdListaProvisoria;
+    private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnBuscarProd;
-    private javax.swing.JButton btnCancelar;
-    private javax.swing.JButton btnCargarInventario;
-    private javax.swing.JButton btnEditarListaProvisoria;
-    private javax.swing.JButton btnGuardarListaProvisoria;
-    private javax.swing.JButton btnOk;
+    private javax.swing.JButton btnImprimirPedido;
+    private javax.swing.JButton btnQuitar;
     private javax.swing.JButton btnVolverMP;
     private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JComboBox<String> cbOrdenCampo;
@@ -817,7 +843,7 @@ public class ventanaPedido extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JList<String> listInfoProd;
-    private javax.swing.JTable tablaPedidoProvisoria;
+    private javax.swing.JTable tablaPedido;
     private javax.swing.JTable tablaProd;
     private org.jdesktop.swingx.JXTextField txfdBuscarProd;
     private javax.swing.JTextField txfdCantidadPedido;

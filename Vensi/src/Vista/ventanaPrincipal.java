@@ -36,6 +36,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnAdministracion = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
+        btnInventario = new javax.swing.JButton();
         labImagenDerecha = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -85,7 +86,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnHistorialActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 290, 100, 120));
+        panelPrincipal.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 330, 100, 120));
 
         btnPedidos.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icono_pedidos_color.png"))); // NOI18N
@@ -111,7 +112,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnAdministracionActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 290, 110, 110));
+        panelPrincipal.add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 190, 110, 110));
 
         btnVentas.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icono_venta_color.png"))); // NOI18N
@@ -124,7 +125,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnVentasActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 110, 150, 130));
+        panelPrincipal.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 50, 150, 130));
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono_salir_blanco.png"))); // NOI18N
         btnSalir.setToolTipText("Salir");
@@ -137,6 +138,14 @@ public class ventanaPrincipal extends javax.swing.JFrame
             }
         });
         panelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, 30));
+
+        btnInventario.setText("Inventario");
+        btnInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnInventarioActionPerformed(evt);
+            }
+        });
+        panelPrincipal.add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 313, -1, 120));
 
         labImagenDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/imagen_fondo_derecho.jpg"))); // NOI18N
         panelPrincipal.add(labImagenDerecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 480));
@@ -174,6 +183,12 @@ public class ventanaPrincipal extends javax.swing.JFrame
         dispose();  //cierra la ventana que deja
     }//GEN-LAST:event_btnPedidosActionPerformed
 
+    private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
+        ventanaInventario vInventario = new ventanaInventario();
+        vInventario.setVisible(true);    //hace visible una ventana
+        dispose();  //cierra la ventana que deja
+    }//GEN-LAST:event_btnInventarioActionPerformed
+
     public static void main(String args[]) 
     {               
         java.awt.EventQueue.invokeLater(new Runnable() 
@@ -188,6 +203,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdministracion;
     private javax.swing.JButton btnHistorial;
+    private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnPedidos;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVentas;

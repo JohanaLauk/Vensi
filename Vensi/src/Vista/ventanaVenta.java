@@ -723,11 +723,6 @@ public class ventanaVenta extends javax.swing.JFrame
         modelo2.addColumn("Precio Total");
         modelo2.addColumn("ID");
         
-        /*for (int i=0 ; i<15 ; i++)
-        {
-            modelo2.addRow(new Object[]{"","","",""});
-        }*/        
-        
         tablaCarrito.setModel(modelo2);  
         
         tcm2 = tablaCarrito.getColumnModel();        
