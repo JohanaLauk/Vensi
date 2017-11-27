@@ -336,9 +336,10 @@ public class ventanaCargarES extends javax.swing.JFrame
                 }
                 for(int i=0 ; i < panelES.getComponents().length ; i++)  //deshabilita los 2 paneles
                 {
-                    cbTipoES.setEnabled(true);
                     panelES.getComponent(i).setEnabled(true);
                 }
+                txAreaDescripcion.setEditable(true);
+                cbTipoES.setEnabled(true);
             }
         }
     }
