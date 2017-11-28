@@ -11,7 +11,7 @@ public class Producto  implements java.io.Serializable
      private double stock;
      private double stockMinimo;
      private int pesoEnvase;
-     private boolean porPeso = false;
+     private boolean porPeso = false;   //es por unidad
      private boolean estado = true;
 
     public Producto() 
