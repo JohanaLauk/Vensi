@@ -320,6 +320,7 @@ public class ventanaProveedor extends javax.swing.JFrame
                 filtroSelec = "Deshabilitados";
             }
         }
+        llenarTabla();
     }//GEN-LAST:event_cbFiltroCampoProvActionPerformed
 
     public static void main(String args[]) 

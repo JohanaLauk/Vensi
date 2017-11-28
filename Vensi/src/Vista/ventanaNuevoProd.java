@@ -16,6 +16,8 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         
         this.setPreferredSize(new Dimension(600, 200));    //al minimizar la ventana aparece con esa medida
         
+        txfdPesoEnvase.setEnabled(false); 
+        
         //this.setUndecorated(true);  //quitamos los bordes de la ventana, incluyendo los botones
     }
     
@@ -67,7 +69,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             }
         });
 
-        jLabel6.setText("Peso del envase en gramos:");
+        jLabel6.setText("Peso del envase (gramos):");
 
         txfdPesoEnvase.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -87,9 +89,19 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
         bgTipoVenta.add(rbUnidad);
         rbUnidad.setText("Unidad");
+        rbUnidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbUnidadActionPerformed(evt);
+            }
+        });
 
         bgTipoVenta.add(rbPeso);
         rbPeso.setText("Peso");
+        rbPeso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbPesoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -115,25 +127,25 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                                 .addComponent(txfdPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 137, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel7)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txfdPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                .addGroup(jPanel1Layout.createSequentialGroup()
-                                    .addComponent(jLabel4)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(txfdStockMinimo))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel7)
+                                .addGap(18, 18, 18)
+                                .addComponent(txfdPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel4)
+                                .addGap(18, 18, 18)
+                                .addComponent(txfdStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel6)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txfdPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
                                     .addGap(18, 18, 18)
-                                    .addComponent(txfdPesoEnvase)))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(jLabel5)
-                                .addGap(18, 18, 18)
-                                .addComponent(rbUnidad)
-                                .addGap(18, 18, 18)
-                                .addComponent(rbPeso)))
+                                    .addComponent(rbUnidad)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(rbPeso))))
                         .addGap(0, 0, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -161,13 +173,14 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                     .addComponent(txfdStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txfdPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 6, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(rbUnidad)
-                    .addComponent(rbPeso)))
+                    .addComponent(rbPeso))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txfdPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnAceptarNuevoProd.setText("Aceptar");
@@ -236,9 +249,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         
         unProd.setCodigo(txfdCodigo.getText().toUpperCase());
         unProd.setDescripcion(txfdDescripcion.getText().toUpperCase());
-        unProd.setStockMinimo(Double.parseDouble(txfdStockMinimo.getText()));
-        unProd.setPesoEnvase(Integer.parseInt(txfdPesoEnvase.getText())); 
-        
+                
         if (txfdPrecioCosto.getText().equals("") || txfdPrecioCosto.getText() == null)
         {
             unProd.setPrecioCosto(0.00);            
@@ -257,14 +268,18 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             unProd.setPrecioVenta(Double.parseDouble(txfdPrecioVenta.getText()));
         }
         
-        if (rbUnidad.isSelected())    //Si es por unidad
+        unProd.setStockMinimo(Double.parseDouble(txfdStockMinimo.getText()));
+                
+        if (rbPeso.isSelected())
         {
-            unProd.setPorPeso(false);
+            unProd.setPorPeso(true);    //por peso
+            unProd.setPesoEnvase(Integer.parseInt(txfdPesoEnvase.getText()));
         }
         else
         {
-            unProd.setPorPeso(true);    //Si es por peso
-        }
+            unProd.setPorPeso(false);   //por unidad
+            unProd.setPesoEnvase(0);
+        }        
         
         pDAO.alta(unProd);
         
@@ -299,6 +314,28 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                 (c != '.' || txfdPrecioCosto.getText().contains("."))) 
             evt.consume();
     }//GEN-LAST:event_txfdPrecioVentaKeyTyped
+
+    private void rbPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPesoActionPerformed
+        if (rbPeso.isSelected())
+        {
+            txfdPesoEnvase.setEnabled(true);            
+        }
+        else
+        {
+            txfdPesoEnvase.setEnabled(false); 
+        }
+    }//GEN-LAST:event_rbPesoActionPerformed
+
+    private void rbUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbUnidadActionPerformed
+        if (rbUnidad.isSelected())
+        {
+            txfdPesoEnvase.setEnabled(false);            
+        }
+        else
+        {
+            txfdPesoEnvase.setEnabled(true); 
+        }
+    }//GEN-LAST:event_rbUnidadActionPerformed
 
     public static void main(String args[]) 
     {        

@@ -439,17 +439,21 @@ public class ProductoDAO
         return lista;
     }
     
-    public List<Producto> alarma() {
+    public List<Producto> alarma() 
+    {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
 
         List<Producto> lista = null;
-        try {
+        try 
+        {
             Transaction tx = session.beginTransaction();
             Query query = session.createQuery("FROM Producto p WHERE p.stock <= p.stockMinimo AND p.estado = TRUE");
             lista = query.list();
             tx.commit();
-        } catch (Exception e) {
+        } 
+        catch (Exception e) 
+        {
             JOptionPane.showMessageDialog(null, "Error. Lista stock minimo");
         }
         return lista;
@@ -464,7 +468,8 @@ public class ProductoDAO
         p.setStock(p.getStock() - cantidad); 
         
         Transaction tx = session.beginTransaction();
-        try{
+        try
+        {
             session.merge(p);
             tx.commit();
         }
@@ -488,7 +493,8 @@ public class ProductoDAO
         p.setStock(p.getStock() + cantidad); 
         
         Transaction tx = session.beginTransaction();
-        try{
+        try
+        {
             session.merge(p);
             tx.commit();
         }

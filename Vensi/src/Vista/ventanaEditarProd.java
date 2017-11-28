@@ -15,13 +15,14 @@ public class ventanaEditarProd extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);     //centra la ventana  
         
-        this.setMinimumSize(new Dimension(600, 400));  //al minimizar la ventana no permite que sea mas chico que esa medida
+        this.setMinimumSize(new Dimension(600, 350));  //al minimizar la ventana no permite que sea mas chico que esa medida
        
-        this.setPreferredSize(new Dimension(600,400));    //al minimizar la ventana aparece con esa medida
+        this.setPreferredSize(new Dimension(600,350));    //al minimizar la ventana aparece con esa medida
         
         this.setResizable(false);   //No permite modificar el tamaño de la ventana
         
         labIdSelec.setVisible(false);   //label que contiene el id
+        txfdEditarPesoEnvase.setEnabled(false); 
         
         mostrarProdSelec();        
     }
@@ -30,6 +31,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        bgTipoVenta = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -46,13 +48,16 @@ public class ventanaEditarProd extends javax.swing.JFrame
         txfdEditarPesoEnvase = new javax.swing.JTextField();
         cbEditarEstado = new javax.swing.JComboBox<>();
         labIdSelec = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        rbUnidad = new javax.swing.JRadioButton();
+        rbPeso = new javax.swing.JRadioButton();
         jPanel2 = new javax.swing.JPanel();
         btnAceptarEditar = new javax.swing.JButton();
         btnCancelarEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Editar producto");
-        setPreferredSize(new java.awt.Dimension(600, 400));
+        setPreferredSize(new java.awt.Dimension(600, 350));
 
         jLabel1.setText("Código:");
 
@@ -64,7 +69,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         jLabel7.setText("Stock mínimo:");
 
-        jLabel9.setText("Peso del envase:");
+        jLabel9.setText("Peso del envase (gramos):");
 
         jLabel8.setText("Estado:");
 
@@ -96,6 +101,24 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         labIdSelec.setText("ID_Prod");
 
+        jLabel5.setText("Se vende por:");
+
+        bgTipoVenta.add(rbUnidad);
+        rbUnidad.setText("Unidad");
+        rbUnidad.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbUnidadActionPerformed(evt);
+            }
+        });
+
+        bgTipoVenta.add(rbPeso);
+        rbPeso.setText("Peso");
+        rbPeso.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbPesoActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -120,21 +143,27 @@ public class ventanaEditarProd extends javax.swing.JFrame
                             .addGap(18, 18, 18)
                             .addComponent(txfdEditarPrecioCosto)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addGap(18, 18, 18)
+                        .addComponent(txfdEditarStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addGap(18, 18, 18)
                         .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
                         .addComponent(labIdSelec))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
                             .addComponent(jLabel9)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(txfdEditarPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel5)
                             .addGap(18, 18, 18)
-                            .addComponent(txfdEditarPesoEnvase, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel7)
+                            .addComponent(rbUnidad)
                             .addGap(18, 18, 18)
-                            .addComponent(txfdEditarStockMinimo))))
-                .addGap(0, 71, Short.MAX_VALUE))
+                            .addComponent(rbPeso))))
+                .addGap(0, 57, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -160,13 +189,20 @@ public class ventanaEditarProd extends javax.swing.JFrame
                     .addComponent(txfdEditarStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5)
+                    .addComponent(rbUnidad)
+                    .addComponent(rbPeso))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txfdEditarPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel8)
-                    .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labIdSelec)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labIdSelec)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel8)
+                        .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnAceptarEditar.setText("Aceptar");
@@ -193,9 +229,11 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addContainerGap()
                 .addComponent(btnAceptarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(21, 21, 21)
-                .addComponent(btnCancelarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnCancelarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -211,12 +249,11 @@ public class ventanaEditarProd extends javax.swing.JFrame
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
 
         pack();
@@ -232,11 +269,21 @@ public class ventanaEditarProd extends javax.swing.JFrame
         Producto prod = new Producto();
         
         prod.setCodigo(txfdEditarCodigo.getText().toUpperCase());
-        prod.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());
-        prod.setPesoEnvase(Integer.parseInt(txfdEditarPesoEnvase.getText()));
+        prod.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());        
         prod.setPrecioCosto(Double.parseDouble(txfdEditarPrecioCosto.getText()));
         prod.setPrecioVenta(Double.parseDouble(txfdEditarPrecioVenta.getText()));
         prod.setStockMinimo(Double.parseDouble(txfdEditarStockMinimo.getText()));
+                
+        if (rbPeso.isSelected())
+        {
+            prod.setPorPeso(true);
+            prod.setPesoEnvase(Integer.parseInt(txfdEditarPesoEnvase.getText()));
+        }
+        else
+        {
+            prod.setPorPeso(false);
+            prod.setPesoEnvase(0);
+        }
         
         if(cbEditarEstado.getSelectedItem().equals("Habilitado"))
         {
@@ -281,6 +328,28 @@ public class ventanaEditarProd extends javax.swing.JFrame
         if(c < '0' || c > '9') evt.consume();
     }//GEN-LAST:event_txfdEditarPesoEnvaseKeyTyped
 
+    private void rbUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbUnidadActionPerformed
+        if (rbUnidad.isSelected())
+        {
+            txfdEditarPesoEnvase.setEnabled(false);
+        }
+        else
+        {
+            txfdEditarPesoEnvase.setEnabled(true);
+        }
+    }//GEN-LAST:event_rbUnidadActionPerformed
+
+    private void rbPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPesoActionPerformed
+        if (rbPeso.isSelected())
+        {
+            txfdEditarPesoEnvase.setEnabled(true);
+        }
+        else
+        {
+            txfdEditarPesoEnvase.setEnabled(false);
+        }
+    }//GEN-LAST:event_rbPesoActionPerformed
+
     public static void main(String args[]) 
     {
         java.awt.EventQueue.invokeLater(new Runnable() 
@@ -315,6 +384,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup bgTipoVenta;
     private javax.swing.JButton btnAceptarEditar;
     private javax.swing.JButton btnCancelarEditar;
     private javax.swing.JComboBox<String> cbEditarEstado;
@@ -322,12 +392,15 @@ public class ventanaEditarProd extends javax.swing.JFrame
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     public static javax.swing.JLabel labIdSelec;
+    private javax.swing.JRadioButton rbPeso;
+    private javax.swing.JRadioButton rbUnidad;
     private javax.swing.JTextField txfdEditarCodigo;
     private javax.swing.JTextField txfdEditarDescripcion;
     private javax.swing.JTextField txfdEditarPesoEnvase;

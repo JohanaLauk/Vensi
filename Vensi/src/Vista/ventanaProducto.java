@@ -289,7 +289,7 @@ public class ventanaProducto extends javax.swing.JFrame
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
         {
             //GUARDAMOS EL ID EN LA VARIABLE DE LA VENTANA_EDITAR_PROD, DEL PRODUCTO SELECCIONADO EN LA TABLA
-            ventanaEditarProd.id_recibido = Integer.parseInt(tablaProd.getValueAt(filaSelec, 8).toString());   
+            ventanaEditarProd.id_recibido = Integer.parseInt(tablaProd.getValueAt(filaSelec, 9).toString());   
         
             ventanaEditarProd vEditarProd = new ventanaEditarProd();
             vEditarProd.setVisible(true);
@@ -422,7 +422,7 @@ public class ventanaProducto extends javax.swing.JFrame
     {        
         modelo = new DefaultTableModel();
         List<Producto> lista = pDAO.listar(OrdenarTabla());
-        String[] datos = new String[9];
+        String[] datos = new String[10];
  
         modelo.addColumn("Código");
         modelo.addColumn("Descripción");
@@ -430,6 +430,7 @@ public class ventanaProducto extends javax.swing.JFrame
         modelo.addColumn("Precio venta");
         modelo.addColumn("Stock");
         modelo.addColumn("Stock mínimo");
+        modelo.addColumn("Tipo de venta");
         modelo.addColumn("Peso del envase");
         modelo.addColumn("Estado");
         modelo.addColumn("ID");
@@ -442,17 +443,27 @@ public class ventanaProducto extends javax.swing.JFrame
             datos[3] = String.valueOf(p.getPrecioVenta());
             datos[4] = String.valueOf(p.getStock());
             datos[5] = String.valueOf(p.getStockMinimo());
-            datos[6] = String.valueOf(p.getPesoEnvase());
             
-            if(p.isEstado())
+            if (p.isPorPeso())
             {
-                datos[7] = "Habilitado";
+                datos[6] = "Por peso";
+                datos[7] = String.valueOf(p.getPesoEnvase());
             }
             else
             {
-                datos[7] = "Deshabilitado";
+                datos[6] = "Por unidad";
+                datos[7] = "---";
+            }                      
+            
+            if(p.isEstado())
+            {
+                datos[8] = "Habilitado";
             }
-            datos[8] = String.valueOf(p.getId());
+            else
+            {
+                datos[8] = "Deshabilitado";
+            }
+            datos[9] = String.valueOf(p.getId());
            
            modelo.addRow(datos);
         }
@@ -466,13 +477,14 @@ public class ventanaProducto extends javax.swing.JFrame
         tcm.getColumn(3).setPreferredWidth(50);
         tcm.getColumn(4).setPreferredWidth(50);
         tcm.getColumn(5).setPreferredWidth(50);
-        tcm.getColumn(6).setPreferredWidth(50);
-        tcm.getColumn(7).setPreferredWidth(50);        
-        tcm.getColumn(8).setPreferredWidth(0);  
-        tcm.getColumn(8).setMaxWidth(0);
-        tcm.getColumn(8).setMinWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
+        tcm.getColumn(6).setPreferredWidth(80);
+        tcm.getColumn(7).setPreferredWidth(50);
+        tcm.getColumn(8).setPreferredWidth(50);        
+        tcm.getColumn(9).setPreferredWidth(0);  
+        tcm.getColumn(9).setMaxWidth(0);
+        tcm.getColumn(9).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(9).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(9).setMinWidth(0);
         
         tablaProd.addFocusListener(new FocusListener() 
         {
@@ -502,7 +514,7 @@ public class ventanaProducto extends javax.swing.JFrame
     public void llenarTablaBusqueda (List<Producto> listaBusqueda)
     {
         modelo2 = new DefaultTableModel();
-        String[] datos = new String[9];
+        String[] datos = new String[10];
  
         modelo2.addColumn("Código");
         modelo2.addColumn("Descripción");
@@ -510,6 +522,7 @@ public class ventanaProducto extends javax.swing.JFrame
         modelo2.addColumn("Precio venta");
         modelo2.addColumn("Stock");
         modelo2.addColumn("Stock mínimo");
+        modelo2.addColumn("Tipo de venta");
         modelo2.addColumn("Peso del envase");
         modelo2.addColumn("Estado");
         modelo2.addColumn("ID");
@@ -522,19 +535,29 @@ public class ventanaProducto extends javax.swing.JFrame
             datos[3] = String.valueOf(p.getPrecioVenta());
             datos[4] = String.valueOf(p.getStock());
             datos[5] = String.valueOf(p.getStockMinimo());
-            datos[6] = String.valueOf(p.getPesoEnvase());
             
-            if(p.isEstado())
+            if (p.isPorPeso())
             {
-                datos[7] = "Habilitado";
+                datos[6] = "Por peso";
             }
             else
             {
-                datos[7] = "Deshabilitado";
+                datos[6] = "Por unidad";
             }
-            datos[8] = String.valueOf(p.getId());
+            
+            datos[7] = String.valueOf(p.getPesoEnvase());
+            
+            if(p.isEstado())
+            {
+                datos[8] = "Habilitado";
+            }
+            else
+            {
+                datos[8] = "Deshabilitado";
+            }
+            datos[9] = String.valueOf(p.getId());
            
-           modelo2.addRow(datos);
+            modelo2.addRow(datos);
         }
         
         tablaProd.setModel(modelo2);
@@ -546,13 +569,14 @@ public class ventanaProducto extends javax.swing.JFrame
         tcm2.getColumn(3).setPreferredWidth(50);
         tcm2.getColumn(4).setPreferredWidth(50);
         tcm2.getColumn(5).setPreferredWidth(50);
-        tcm2.getColumn(6).setPreferredWidth(50);
-        tcm2.getColumn(7).setPreferredWidth(50);        
-        tcm2.getColumn(8).setPreferredWidth(0);  
-        tcm2.getColumn(8).setMaxWidth(0);
-        tcm2.getColumn(8).setMinWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
+        tcm.getColumn(6).setPreferredWidth(80);
+        tcm.getColumn(7).setPreferredWidth(50);
+        tcm.getColumn(8).setPreferredWidth(50);        
+        tcm.getColumn(9).setPreferredWidth(0);  
+        tcm.getColumn(9).setMaxWidth(0);
+        tcm.getColumn(9).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(9).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(9).setMinWidth(0);
     }
     
     public String[] OrdenarTabla()
