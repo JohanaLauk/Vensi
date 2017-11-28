@@ -26,6 +26,10 @@ public class ventanaInventario extends javax.swing.JFrame
         this.setLocationRelativeTo(null);   //centra la ventana
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
         
+        txfdCantidad.setEnabled(false);
+        btnAgregar.setEnabled(false);
+        btnQuitar.setEnabled(false);
+                
         //Al hacer click en el JFrame se quita la seleccion en los JTable
         this.addMouseListener(new MouseAdapter()
         {
@@ -317,6 +321,9 @@ public class ventanaInventario extends javax.swing.JFrame
         
         limpiarList();
         
+        tablaProdReponer.setRowSelectionAllowed(false);
+        tablaListaInventario.setRowSelectionAllowed(false);
+        
         txfdCantidad.setEnabled(false);        
         btnAgregar.setEnabled(false);
         btnQuitar.setEnabled(false);
@@ -337,6 +344,7 @@ public class ventanaInventario extends javax.swing.JFrame
         limpiarList();
         
         txfdCantidad.setEnabled(false);
+        btnAgregar.setEnabled(false);
         btnQuitar.setEnabled(false);
     }//GEN-LAST:event_btnQuitarActionPerformed
 

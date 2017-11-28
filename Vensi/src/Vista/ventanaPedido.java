@@ -35,6 +35,10 @@ public class ventanaPedido extends javax.swing.JFrame
         
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
         
+        btnQuitar.setEnabled(false);
+        btnAgregar.setEnabled(false);
+        txfdCantidad.setEnabled(false);
+        
         //Al hacer click en el JFrame se quita la seleccion en los JTable
         this.addMouseListener(new MouseAdapter()
         {
@@ -51,7 +55,7 @@ public class ventanaPedido extends javax.swing.JFrame
                 
                 btnQuitar.setEnabled(false);
                 btnAgregar.setEnabled(false);
-                txfdCantidadPedido.setEnabled(false);                
+                txfdCantidad.setEnabled(false);                
             } 
         });      
         
@@ -78,7 +82,7 @@ public class ventanaPedido extends javax.swing.JFrame
         txfdBuscarProd = new org.jdesktop.swingx.JXTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
-        txfdCantidadPedido = new javax.swing.JTextField();
+        txfdCantidad = new javax.swing.JTextField();
         btnAgregar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         listInfoProd = new javax.swing.JList<>();
@@ -224,9 +228,9 @@ public class ventanaPedido extends javax.swing.JFrame
 
         jLabel5.setText("Cantidad:");
 
-        txfdCantidadPedido.addKeyListener(new java.awt.event.KeyAdapter() {
+        txfdCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txfdCantidadPedidoKeyTyped(evt);
+                txfdCantidadKeyTyped(evt);
             }
         });
 
@@ -262,10 +266,9 @@ public class ventanaPedido extends javax.swing.JFrame
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfdCantidadPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                     .addComponent(btnQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
@@ -284,7 +287,7 @@ public class ventanaPedido extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfdCantidadPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -522,7 +525,7 @@ public class ventanaPedido extends javax.swing.JFrame
             String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();
             
             String cantidad = null;   
-            cantidad = txfdCantidadPedido.getText();
+            cantidad = txfdCantidad.getText();
             
             if(cantidad.equals(""))
             {
@@ -539,21 +542,24 @@ public class ventanaPedido extends javax.swing.JFrame
         {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
         }
-        txfdCantidadPedido.setText("");
+        txfdCantidad.setText("");
         
         limpiarList();
         
+        tablaProd.setRowSelectionAllowed(false);
+        tablaPedido.setRowSelectionAllowed(false);
+        
         btnAgregar.setEnabled(false);
         btnQuitar.setEnabled(false);
-        txfdCantidadPedido.setEnabled(false);
+        txfdCantidad.setEnabled(false);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
-    private void txfdCantidadPedidoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadPedidoKeyTyped
+    private void txfdCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadKeyTyped
         char c = evt.getKeyChar();
         if((c < '0' || c > '9') && 
                 (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
-    }//GEN-LAST:event_txfdCantidadPedidoKeyTyped
+    }//GEN-LAST:event_txfdCantidadKeyTyped
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
         int filaSelec = tablaPedido.getSelectedRow();
@@ -563,9 +569,9 @@ public class ventanaPedido extends javax.swing.JFrame
         
         limpiarList();
         
+        txfdCantidad.setEnabled(false);
         btnAgregar.setEnabled(false);
-        btnQuitar.setEnabled(false);
-        txfdCantidadPedido.setEnabled(false);
+        btnQuitar.setEnabled(false);        
     }//GEN-LAST:event_btnQuitarActionPerformed
     
     public static void main(String args[]) 
@@ -655,7 +661,7 @@ public class ventanaPedido extends javax.swing.JFrame
                     listInfoProd.setModel(modeloList);
                                         
                     btnAgregar.setEnabled(true);
-                    txfdCantidadPedido.setEnabled(true);
+                    txfdCantidad.setEnabled(true);
                     btnQuitar.setEnabled(false);
                 }
             } 
@@ -717,7 +723,7 @@ public class ventanaPedido extends javax.swing.JFrame
                     modeloList.addElement("Descripcion: " + desc);
                     listInfoProd.setModel(modeloList);
                     
-                    txfdCantidadPedido.setEnabled(false);
+                    txfdCantidad.setEnabled(false);
                     btnAgregar.setEnabled(false);
                     btnQuitar.setEnabled(true);
                 }
@@ -846,6 +852,6 @@ public class ventanaPedido extends javax.swing.JFrame
     private javax.swing.JTable tablaPedido;
     private javax.swing.JTable tablaProd;
     private org.jdesktop.swingx.JXTextField txfdBuscarProd;
-    private javax.swing.JTextField txfdCantidadPedido;
+    private javax.swing.JTextField txfdCantidad;
     // End of variables declaration//GEN-END:variables
 }
