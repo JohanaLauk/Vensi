@@ -183,7 +183,7 @@ public class ventanaPedido extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(45, 45, 45)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 64, Short.MAX_VALUE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 64, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbOrdenCampo, 0, 85, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -345,6 +345,11 @@ public class ventanaPedido extends javax.swing.JFrame
         jScrollPane3.setViewportView(tablaPedido);
 
         btnImprimirPedido.setText("Imprimir pedido");
+        btnImprimirPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirPedidoActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
@@ -573,6 +578,19 @@ public class ventanaPedido extends javax.swing.JFrame
         btnAgregar.setEnabled(false);
         btnQuitar.setEnabled(false);        
     }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void btnImprimirPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirPedidoActionPerformed
+        
+        String itemSelec = String.valueOf(cbProveedores.getSelectedItem());
+        int filasTabla = tablaPedido.getRowCount();
+        if(!itemSelec.equals("Seleccionar") && !itemSelec.equals("No hay proveedores") && filasTabla!=0 ){
+            //código para imprimir
+        }else if(itemSelec.equals("Seleccionar") || itemSelec.equals("No hay proveedores")){
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un proveedor");
+        }else{
+            JOptionPane.showMessageDialog(null, "Debe agregar un producto");
+        }
+    }//GEN-LAST:event_btnImprimirPedidoActionPerformed
     
     public static void main(String args[]) 
     {

@@ -1,11 +1,13 @@
 package Vista;
 
-import DAO.ProductoDAO;
-import Modelo.Producto;
+import DAO.*;
+
+import Modelo.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.JOptionPane;
@@ -15,6 +17,9 @@ import javax.swing.table.TableColumnModel;
 public class ventanaInventario extends javax.swing.JFrame 
 {
     ProductoDAO prodDAO = new ProductoDAO();
+    ProveedorDAO provDAO = new ProveedorDAO();
+    PedidoDAO pedidoDAO = new PedidoDAO();
+    ItemPedidoDAO iDAO = new ItemPedidoDAO();
     DefaultTableModel modelo, modelo2, m, m2;
     TableColumnModel tcm, tcm2;
     DefaultListModel modeloList;
@@ -142,6 +147,11 @@ public class ventanaInventario extends javax.swing.JFrame
         jScrollPane3.setViewportView(tablaListaInventario);
 
         btnCargarInventario.setText("Cargar al inventario");
+        btnCargarInventario.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCargarInventarioActionPerformed(evt);
+            }
+        });
 
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -285,7 +295,7 @@ public class ventanaInventario extends javax.swing.JFrame
 
     private void txfdCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') &&
+        if((c < '1' || c > '9') &&
             (c != java.awt.event.KeyEvent.VK_BACK_SPACE))
         evt.consume();
     }//GEN-LAST:event_txfdCantidadKeyTyped
@@ -347,6 +357,35 @@ public class ventanaInventario extends javax.swing.JFrame
         btnAgregar.setEnabled(false);
         btnQuitar.setEnabled(false);
     }//GEN-LAST:event_btnQuitarActionPerformed
+
+    private void btnCargarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarInventarioActionPerformed
+        
+        Producto producto = null;
+        //  FALTA AGREGAR EL PROVEEDOR 
+        //Proveedor proveedor = (Proveedor)provDAO.buscarPorCuitNombre(cbProveedor.getSelectedItem(), "Habilitados").get(0);
+    
+        Pedido pedido = new Pedido();
+        pedido.setFechaHora(new Date());
+        //pedido.setProveedor(proveedor);
+        pedidoDAO.alta(pedido);
+
+        int filasTabla = tablaListaInventario.getRowCount();
+        for(int i = 0; i<filasTabla; i++ ){
+            
+            producto = prodDAO.buscarPorId(Integer.parseInt(tablaListaInventario.getValueAt(i,3).toString()));
+            ItemPedido itemPedido = new ItemPedido();
+            itemPedido.setProducto(producto);
+            itemPedido.setCantidad(Integer.parseInt(tablaListaInventario.getValueAt(i,2).toString()));
+            itemPedido.setPedido(pedido);
+            
+            iDAO.alta(itemPedido);
+            prodDAO.sumarStock(producto.getId(), Integer.parseInt(tablaListaInventario.getValueAt(i,2).toString()));
+        }
+        
+        //cbProveedor
+        txfdCantidad.setText(null);
+        tablaListaInventario.removeAll();
+    }//GEN-LAST:event_btnCargarInventarioActionPerformed
 
     public static void main(String args[]) 
     {

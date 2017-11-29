@@ -151,7 +151,7 @@ public class ProveedorDAO
             Transaction tx = session.beginTransaction();
             if (filtro.equals("Todos"))
             {
-                Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.razonSocial LIKE :cadena ORDER BY razon_social");
+                Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.razonSocial LIKE :cadena ORDER BY razonSocial");
                 query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
                 lista = query.list();
             }
@@ -159,13 +159,13 @@ public class ProveedorDAO
             {
                 if (filtro.equals("Habilitados"))
                 {
-                    Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.razonSocial LIKE :cadena and estado = true ORDER BY razon_social");
+                    Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.razonSocial LIKE :cadena and estado = true ORDER BY razonSocial");
                     query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
                     lista = query.list();
                 }
                 else
                 {
-                    Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.razonSocial LIKE :cadena and estado = false ORDER BY razon_social");
+                    Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cadena OR p.razonSocial LIKE :cadena and estado = false ORDER BY razonSocial");
                     query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
                     lista = query.list();
                 }

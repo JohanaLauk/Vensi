@@ -600,7 +600,10 @@ public class ventanaVenta extends javax.swing.JFrame
         {
             double x = 0;
             String precioTotal = null;        
-            String cantidad = null;            
+            String cantidad;            
+            boolean modificar = false;
+            int filaModificar = -1;
+            int idActual;
             
             String descrip = tablaProd.getValueAt(filaSelec, 1).toString();
             
@@ -610,17 +613,29 @@ public class ventanaVenta extends javax.swing.JFrame
                 JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad");
             }
             else
-            {            
+            {   
+                m = (DefaultTableModel) tablaCarrito.getModel();
                 String precioU = tablaProd.getValueAt(filaSelec, 2).toString();
             
                 x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
                 precioTotal = String.valueOf(x);
             
-                String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();            
-            
-                m = (DefaultTableModel) tablaCarrito.getModel();
+                String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();      
+                for(int i=0; i<tablaCarrito.getModel().getRowCount(); i++){
+                                
+                    if(Integer.parseInt(tablaCarrito.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido)){
+                        modificar = true;
+                        filaModificar = i;                              
+                    }
+                }
+                if(modificar){  
+                    cantidad = String.valueOf(Integer.parseInt(cantidad)+Integer.parseInt(tablaCarrito.getValueAt(filaModificar,1).toString()));
+                    m.removeRow(filaModificar);
+                }
+
                 String filaNueva[] = {descrip, cantidad, precioU, precioTotal, id_recibido};
-                m.addRow(filaNueva);            
+                m.addRow(filaNueva); 
+                
             
                 totalCarrito = totalCarrito + x;
                 labPrecioTotalCompra.setText(String.valueOf(totalCarrito));
@@ -709,7 +724,7 @@ public class ventanaVenta extends javax.swing.JFrame
 
     private void txfdCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
+        if((c < '1' || c > '9') && 
                 (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfdCantidadKeyTyped
@@ -824,11 +839,12 @@ public class ventanaVenta extends javax.swing.JFrame
         tcm2.getColumn(1).setPreferredWidth(20);
         tcm2.getColumn(2).setPreferredWidth(20);
         tcm2.getColumn(3).setPreferredWidth(30);
-        tcm2.getColumn(4).setPreferredWidth(0);     
+        tcm2.getColumn(4).setPreferredWidth(20);
+        /*tcm2.getColumn(4).setPreferredWidth(0);     
         tcm2.getColumn(4).setMaxWidth(0);
         tcm2.getColumn(4).setMinWidth(0);
         tablaCarrito.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
-        tablaCarrito.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
+        tablaCarrito.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);*/
         
         tablaCarrito.addFocusListener(new FocusListener() 
         {
