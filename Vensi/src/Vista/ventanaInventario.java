@@ -359,9 +359,8 @@ public class ventanaInventario extends javax.swing.JFrame
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void btnCargarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarInventarioActionPerformed
-        
         Producto producto = null;
-        //  FALTA AGREGAR EL PROVEEDOR 
+        //FALTA AGREGAR EL PROVEEDOR 
         //Proveedor proveedor = (Proveedor)provDAO.buscarPorCuitNombre(cbProveedor.getSelectedItem(), "Habilitados").get(0);
     
         Pedido pedido = new Pedido();
@@ -370,8 +369,8 @@ public class ventanaInventario extends javax.swing.JFrame
         pedidoDAO.alta(pedido);
 
         int filasTabla = tablaListaInventario.getRowCount();
-        for(int i = 0; i<filasTabla; i++ ){
-            
+        for(int i = 0; i<filasTabla; i++ )
+        {            
             producto = prodDAO.buscarPorId(Integer.parseInt(tablaListaInventario.getValueAt(i,3).toString()));
             ItemPedido itemPedido = new ItemPedido();
             itemPedido.setProducto(producto);

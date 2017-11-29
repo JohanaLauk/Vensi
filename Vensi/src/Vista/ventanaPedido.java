@@ -2,6 +2,7 @@ package Vista;
 
 import DAO.ProductoDAO;
 import DAO.ProveedorDAO;
+import Impresion.Generar;
 import Modelo.Producto;
 import Modelo.Proveedor;
 import java.awt.event.FocusEvent;
@@ -580,16 +581,27 @@ public class ventanaPedido extends javax.swing.JFrame
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void btnImprimirPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirPedidoActionPerformed
-        
         String itemSelec = String.valueOf(cbProveedores.getSelectedItem());
         int filasTabla = tablaPedido.getRowCount();
-        if(!itemSelec.equals("Seleccionar") && !itemSelec.equals("No hay proveedores") && filasTabla!=0 ){
+        
+        if(!itemSelec.equals("Seleccionar") && !itemSelec.equals("No hay proveedores") && filasTabla!=0 )
+        {
             //código para imprimir
-        }else if(itemSelec.equals("Seleccionar") || itemSelec.equals("No hay proveedores")){
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un proveedor");
-        }else{
-            JOptionPane.showMessageDialog(null, "Debe agregar un producto");
+            
+            Generar generarNotaPedido = new Generar();
+            generarNotaPedido.notaPedido();     //aca debería pasarle por parametro lo que debe imprimir
         }
+        else 
+        {
+            if(itemSelec.equals("Seleccionar") || itemSelec.equals("No hay proveedores"))
+            {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar un proveedor");
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Debe agregar un producto");
+            }
+        }        
     }//GEN-LAST:event_btnImprimirPedidoActionPerformed
     
     public static void main(String args[]) 
