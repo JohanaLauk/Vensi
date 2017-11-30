@@ -2,6 +2,9 @@ package Impresion;
 
 import Conexion.NewHibernateUtil;
 import Modelo.Producto;
+import java.sql.Connection;
+
+import java.sql.DriverManager;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -19,14 +22,14 @@ public class Generar
     {
         try
         {
-            SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Vensi");
                         
             JasperReport jr = (JasperReport)JRLoader.loadObject("notaPedido.jasper");
             Map parametro = new HashMap();
             
             parametro.put("listaProdPedido", listaProdPedido);
                         
-            JasperPrint jp = JasperFillManager.fillReport(jr, parametro, sesion);    //el 3° parametro es el del error
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametro,con);    //el 3° parametro es el del error
             //JasperPrint jp = JasperFillManager.fillReport(jr, parametro, connection);
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setTitle("Nota de pedido");
