@@ -46,6 +46,7 @@ public class ProductoDAO
         prod.setPesoEnvase(p.getPesoEnvase());
         prod.setStockMinimo(p.getStockMinimo());
         prod.setEstado(p.isEstado());
+        prod.setProveedor(p.getProveedor());
             
          Transaction tx = session.beginTransaction();
         try
@@ -95,6 +96,28 @@ public class ProductoDAO
             Transaction tx = session.beginTransaction();
             Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :codigo AND p.estado = TRUE");
             query.setParameter("codigo", codigo);
+            p = (Producto)query.uniqueResult();
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error. Producto por codigo");
+        }        
+        return p;
+    }
+    
+    public Producto buscarPorCodigo(String codigo, int proveedor)
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
+        Producto p = null;
+        try
+        {            
+            Transaction tx = session.beginTransaction();
+            Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :codigo AND p.estado = TRUE AND p.proveedor.id = :proveedor");
+            query.setParameter("codigo", codigo);
+            query.setParameter("proveedor", proveedor);
             p = (Producto)query.uniqueResult();
             tx.commit();
         }
@@ -430,6 +453,301 @@ public class ProductoDAO
                     }
                 }
             }            
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error. Listar productos");
+        }        
+        return lista;
+    }
+    
+    public List<Producto> listar(String[] datos, int idProveedor)  //ordenado por descripcio ASC
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+        
+        String filtro = datos[0];
+        String ordenCampo = datos[1];
+        String tipoOrden = datos[2];
+        Query query = null;
+        List<Producto> lista = null;
+        try
+        {            
+            Transaction tx = session.beginTransaction();
+            
+            if (filtro.equals("Todos"))
+            {
+                switch (ordenCampo)
+                {
+                    case "descripcion":
+                    {
+                         if (tipoOrden.equals("ASC"))
+                         {
+                             query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY descripcion");
+                         }
+                         else
+                         {
+                             query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY descripcion DESC");
+                         }
+                    } break;
+                    
+                    case "codigo":
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY codigo");
+                        }
+                        else
+                        {
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY codigo DESC");
+                        }
+                    } break;
+                    
+                    case "precio_costo":
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY precio_costo");
+                        }
+                        else
+                        {
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY precio_costo DESC");
+                        }
+                    } break;
+                    
+                    case "precio_venta":
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY precio_venta");
+                        }
+                        else
+                        {
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY precio_venta DESC");
+                        }
+                    } break;
+                    
+                    case "stock":
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY stock");
+                        }
+                        else
+                        {
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY stock DESC");
+                        }
+                    } break;
+                    
+                    case "stock_minimo":
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY stock_minimo");
+                        }
+                        else
+                        {
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY stock_minimo DESC");
+                        }
+                    } break;
+                    
+                    case "peso_envase":
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY peso_envase");
+                        }
+                        else
+                        {
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY peso_envase DESC");
+                        }
+                    } break;
+                }
+            }
+            else
+            {
+                if (filtro.equals("Habilitados"))
+                {
+                    switch (ordenCampo)
+                    {
+                        case "descripcion":
+                        {
+                             if (tipoOrden.equals("ASC"))
+                             {
+                                 query = session.createQuery("FROM Producto p WHERE p.estado = true AND p.proveedor.id = :proveedor ORDER BY descripcion");
+                             }
+                             else
+                             {
+                                 query = session.createQuery("FROM Producto p WHERE p.estado = true AND p.proveedor.id = :proveedor ORDER BY descripcion DESC");
+                             }
+                        } break;
+
+                        case "codigo":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY codigo");
+                            }
+                            else
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY codigo DESC");
+                            }
+                        } break;
+
+                        case "precio_costo":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY precio_costo");
+                            }
+                            else
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY precio_costo DESC");
+                            }
+                        } break;
+
+                        case "precio_venta":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY precio_venta");
+                            }
+                            else
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY precio_venta DESC");
+                            }
+                        } break;
+
+                        case "stock":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY stock");
+                            }
+                            else
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY stock DESC");
+                            }
+                        } break;
+
+                        case "stock_minimo":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY stock_minimo");
+                            }
+                            else
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY stock_minimo DESC");
+                            }
+                        } break;
+
+                        case "peso_envase":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY peso_envase");
+                            }
+                            else
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY peso_envase DESC");
+                            }
+                        } break;
+                    }
+                }
+                else
+                {
+                    switch (ordenCampo)
+                    {
+                        case "descripcion":
+                        {
+                             if (tipoOrden.equals("ASC"))
+                             {
+                                 query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY descripcion");
+                             }
+                             else
+                             {
+                                 query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY descripcion DESC");
+                             }
+                        } break;
+
+                        case "codigo":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY codigo");
+                            }
+                            else
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY codigo DESC");
+                            }
+                        } break;
+
+                        case "precio_costo":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY precio_costo");
+                            }
+                            else
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY precio_costo DESC");
+                            }
+                        } break;
+
+                        case "precio_venta":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY precio_venta");
+                            }
+                            else
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY precio_venta DESC");
+                            }
+                        } break;
+
+                        case "stock":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY stock");
+                            }
+                            else
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY stock DESC");
+                            }
+                        } break;
+
+                        case "stock_minimo":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY stock_minimo");
+                            }
+                            else
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY stock_minimo DESC");
+                            }
+                        } break;
+
+                        case "peso_envase":
+                        {
+                            if (tipoOrden.equals("ASC"))
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY peso_envase");
+                            }
+                            else
+                            {
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY peso_envase DESC");
+                            }
+                        } break;
+                    }
+                }
+            }            
+            query.setParameter("proveedor", idProveedor);
+            lista = query.list();
             tx.commit();
         }
         catch(Exception e)

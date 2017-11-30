@@ -38,5 +38,10 @@
         <property name="porPeso"  type="boolean" >
             <column name="por_peso" not-null="false" />
         </property>
+        <list name="proveedor" table="proveedor" inverse="true" lazy="true" fetch="select">
+            <key column="id" not-null="false"/>  
+            <index column="orden" />
+            <one-to-many class="Modelo.Proveedor" />
+         </list>
     </class>
 </hibernate-mapping>
