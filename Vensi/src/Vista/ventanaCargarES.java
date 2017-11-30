@@ -126,6 +126,15 @@ public class ventanaCargarES extends javax.swing.JFrame
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Monto:");
         panelES.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, 20));
+
+        txfdMonto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfdMontoKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdMontoKeyTyped(evt);
+            }
+        });
         panelES.add(txfdMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 80, -1));
 
         getContentPane().add(panelES, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 340, 370));
@@ -145,11 +154,23 @@ public class ventanaCargarES extends javax.swing.JFrame
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Cantidad:");
         panelidentificarProd.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, 20));
+
+        txfdCantidadProdAnular.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfdCantidadProdAnularKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdCantidadProdAnularKeyTyped(evt);
+            }
+        });
         panelidentificarProd.add(txfdCantidadProdAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 90, -1));
 
         txfdCodigoProdAnular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfdCodigoProdAnularKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdCodigoProdAnularKeyTyped(evt);
             }
         });
         panelidentificarProd.add(txfdCodigoProdAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 130, -1));
@@ -295,18 +316,20 @@ public class ventanaCargarES extends javax.swing.JFrame
 
     private void txfdCodigoProdAnularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCodigoProdAnularKeyReleased
         String cadena = txfdCodigoProdAnular.getText();
-        llenarListBusqueda(cadena);
+        llenarListBusqueda(cadena);  
     }//GEN-LAST:event_txfdCodigoProdAnularKeyReleased
 
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
-        
         int cantidad = Integer.parseInt(txfdCantidadProdAnular.getText());
         turnoSelec = tDAO.obtenerUltimo();
         List<ItemVenta> lista = iDAO.listar(turnoSelec.getId());
+        
         for(ItemVenta i : lista)
         {
-            if(i.getProducto().getId() == productoSelec.getId()){
-                if(cantidad <= i.getCantidad()){
+            if(i.getProducto().getId() == productoSelec.getId())
+            {
+                if(cantidad <= i.getCantidad())
+                {
                     pDAO.sumarStock(productoSelec.getId(),cantidad);
                     EntradaSalida es = new EntradaSalida();
                     es.setDescripcion(productoSelec.getDescripcion());
@@ -314,23 +337,84 @@ public class ventanaCargarES extends javax.swing.JFrame
                     es.setNombre("Anulación de venta.");
                     es.setTipo(true);
                     es.setTurno(turnoSelec);
-                    if(productoSelec.isPorPeso()){
+                    
+                    if(productoSelec.isPorPeso())
+                    {
                         es.setMonto(productoSelec.getPrecioVentaXPeso()*cantidad);
-                    }else{
+                    }
+                    else
+                    {
                         es.setMonto(productoSelec.getPrecioVenta()*cantidad);
                     }
                     esDAO.alta(es);
                     JOptionPane.showMessageDialog(null, "Venta anulada.");
                 }
-                else{
+                else
+                {
                     JOptionPane.showMessageDialog(null, "La cantidad ingresada debe ser menor o igual a la cantidad comprada.");
-                }
-                
-            }else{
+                }                
+            }
+            else
+            {
                 JOptionPane.showMessageDialog(null, "No se han realizado compras de este producto.");
             }
         }
     }//GEN-LAST:event_btnAnularActionPerformed
+
+    private void txfdMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdMontoKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '1' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfdMontoKeyTyped
+
+    private void txfdCantidadProdAnularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadProdAnularKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '1' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfdCantidadProdAnularKeyTyped
+
+    private void txfdCodigoProdAnularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCodigoProdAnularKeyTyped
+       char c = evt.getKeyChar();
+        if((c < '1' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfdCodigoProdAnularKeyTyped
+
+    private void txfdMontoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdMontoKeyReleased
+        if (!txfdMonto.getText().equals(""))
+        {
+            btnConfirmar.setEnabled(true);
+        }
+        else
+        {
+            btnConfirmar.setEnabled(false);
+        }
+    }//GEN-LAST:event_txfdMontoKeyReleased
+
+    private void txfdCantidadProdAnularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadProdAnularKeyReleased
+        String cadena = txfdCodigoProdAnular.getText();
+        
+        if (cadena == null)
+        {
+            if (txfdCantidadProdAnular.getText().equals(""))
+            {                  
+                btnAnular.setEnabled(false);
+            } 
+        }
+        else
+        {
+            if (txfdCantidadProdAnular.getText().equals(""))
+            {                  
+                btnAnular.setEnabled(false);
+            }            
+            else
+            {            
+                btnAnular.setEnabled(true);
+            }
+        }
+    }//GEN-LAST:event_txfdCantidadProdAnularKeyReleased
 
     public void habDeshabComponentes(String nombre)
     {
@@ -342,36 +426,47 @@ public class ventanaCargarES extends javax.swing.JFrame
             }
             for(int i=0 ; i < panelES.getComponents().length ; i++)  //deshabilita los 2 paneles
             {
-                cbTipoES.setEnabled(true);
-                panelES.getComponent(i).setEnabled(false);
+                panelES.getComponent(i).setEnabled(false);                
             }
+            
+            cbTipoES.setEnabled(true);
+            txfdMonto.setText(null);           
+            txAreaDescripcion.setText(null);
+            btnAnular.setEnabled(false);
         }
         else
         {
             if (nombre.equals("Ninguno"))
             {
                 for(int i=0 ; i < panelES.getComponents().length ; i++)  //deshabilita los 2 paneles
-                {
-                    cbTipoES.setEnabled(true);
-                    panelES.getComponent(i).setEnabled(false);
+                {                    
+                    panelES.getComponent(i).setEnabled(false);                    
                 }
                 for(int i=0 ; i < panelidentificarProd.getComponents().length ; i++)  //deshabilita el panel de identificar producto
                 {
                     panelidentificarProd.getComponent(i).setEnabled(false);
                 }
+                
+                cbTipoES.setEnabled(true);                    
+                txfdMonto.setText(null);           
+                txAreaDescripcion.setText(null);
             }
             else
             {           
-                for(int i=0 ; i < panelidentificarProd.getComponents().length ; i++)  //deshabilita el panel de identificar producto
+                for (int i=0 ; i < panelidentificarProd.getComponents().length ; i++)  //deshabilita el panel de identificar producto
                 {
                     panelidentificarProd.getComponent(i).setEnabled(false);
                 }
-                for(int i=0 ; i < panelES.getComponents().length ; i++)  //deshabilita los 2 paneles
+                for (int i=0 ; i < panelES.getComponents().length ; i++)  //deshabilita los 2 paneles
                 {
                     panelES.getComponent(i).setEnabled(true);
                 }
+                
+                btnConfirmar.setEnabled(false);
                 txAreaDescripcion.setEditable(true);
                 cbTipoES.setEnabled(true);
+                txfdMonto.setText(null);           
+                txAreaDescripcion.setText(null);
             }
         }
     }
@@ -385,6 +480,40 @@ public class ventanaCargarES extends javax.swing.JFrame
                 new ventanaCargarES().setVisible(true);
             }
         });
+    }
+    
+    private void llenarListBusqueda(String cadena) 
+    {
+        productoSelec = pDAO.buscarPorCodigo(cadena);
+        
+        if (productoSelec == null)
+        {
+            modeloList = new DefaultListModel();
+            modeloList.clear();
+            
+            listaInfoProdAnular.setModel(modeloList);
+            btnAnular.setEnabled(false);
+        }
+        else
+        {
+            modeloList = new DefaultListModel();
+            modeloList.addElement("Código: "+productoSelec.getCodigo());
+            modeloList.addElement("Descripción: "+productoSelec.getDescripcion());
+            modeloList.addElement("Stock: "+String.valueOf(productoSelec.getStock()));
+
+            if (productoSelec.isPorPeso())
+            {
+                modeloList.addElement("Tipo: Por peso");
+                modeloList.addElement("Precio de venta: "+String.valueOf(productoSelec.getPrecioVentaXPeso()));
+            }
+            else
+            {
+                modeloList.addElement("Tipo: Por unidad");
+                modeloList.addElement("Precio de venta: "+String.valueOf(productoSelec.getPrecioVenta()));
+            }
+            
+            listaInfoProdAnular.setModel(modeloList);
+        }        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -412,23 +541,4 @@ public class ventanaCargarES extends javax.swing.JFrame
     private javax.swing.JTextField txfdCodigoProdAnular;
     private javax.swing.JTextField txfdMonto;
     // End of variables declaration//GEN-END:variables
-
-    private void llenarListBusqueda(String cadena) {
-
-        productoSelec = pDAO.buscarPorCodigo(cadena);
-        modeloList = new DefaultListModel();
-        modeloList.addElement("Código: "+productoSelec.getCodigo());
-        modeloList.addElement("Descripción: "+productoSelec.getDescripcion());
-        modeloList.addElement("Stock: "+String.valueOf(productoSelec.getStock()));
-        if(productoSelec.isPorPeso())
-        {
-            modeloList.addElement("Tipo: Por peso");
-            modeloList.addElement("Precio de venta: "+String.valueOf(productoSelec.getPrecioVentaXPeso()));
-        }
-        else{
-            modeloList.addElement("Tipo: Por unidad");
-            modeloList.addElement("Precio de venta: "+String.valueOf(productoSelec.getPrecioVenta()));
-        }
-        listaInfoProdAnular.setModel(modeloList);
-    }
 }
