@@ -605,7 +605,7 @@ public class ventanaVenta extends javax.swing.JFrame
             String cantidad;            
             boolean modificar = false;
             int filaModificar = -1;
-            int idActual;
+            
             
             String descrip = tablaProd.getValueAt(filaSelec, 1).toString();
             
@@ -632,14 +632,18 @@ public class ventanaVenta extends javax.swing.JFrame
                 }
                 if(modificar){  
                     cantidad = String.valueOf(Integer.parseInt(cantidad)+Integer.parseInt(tablaCarrito.getValueAt(filaModificar,1).toString()));
+                    x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
+                    precioTotal = String.valueOf(x);
                     m.removeRow(filaModificar);
                 }
 
                 String filaNueva[] = {descrip, cantidad, precioU, precioTotal, id_recibido};
                 m.addRow(filaNueva); 
                 
-            
-                totalCarrito = totalCarrito + x;
+                totalCarrito = 0;
+                for(int i = 0; i < tablaCarrito.getRowCount(); i++){
+                    totalCarrito += Double.parseDouble(tablaCarrito.getValueAt(i, 3).toString());
+                }
                 labPrecioTotalCompra.setText(String.valueOf(totalCarrito));
             
                 txfdCantidad.setText(null);
