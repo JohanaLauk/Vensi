@@ -3,12 +3,14 @@ package Vista;
 import DAO.ProductoDAO;
 import DAO.ProveedorDAO;
 import Impresion.Generar;
+import Modelo.ItemImprimir;
 import Modelo.Producto;
 import Modelo.Proveedor;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
@@ -612,13 +614,27 @@ public class ventanaPedido extends javax.swing.JFrame
     private void btnImprimirPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirPedidoActionPerformed
         String itemSelec = String.valueOf(cbProveedores.getSelectedItem());
         int filasTabla = tablaPedido.getRowCount();
+        List<ItemImprimir> prodImprimir = new ArrayList();
         
         if(!itemSelec.equals("Seleccionar") && !itemSelec.equals("No hay proveedores") && filasTabla!=0 )
         {
             //código para imprimir
+            for (int i=0 ; i<filasTabla ; i++)   //recorre todas las filas del carrito
+            { 
+                String idProd = tablaPedido.getValueAt(i, 4).toString();                    
+                Producto elProd = prodDAO.buscarPorId(Integer.parseInt(idProd));
+                String cantidad = tablaPedido.getValueAt(i, 2).toString();
+                
+                ItemImprimir unItemImp = new ItemImprimir();
+                unItemImp.setProducto(elProd);
+                unItemImp.setCantidad(Integer.parseInt(cantidad));
+                
+                prodImprimir.add(unItemImp);                
+            }
+            
             
             Generar generarNotaPedido = new Generar();
-            //generarNotaPedido.notaPedido();     //aca debería pasarle por parametro lo que debe imprimir
+            generarNotaPedido.notaPedido(prodImprimir);     //aca debería pasarle por parametro lo que debe imprimir
         }
         else 
         {

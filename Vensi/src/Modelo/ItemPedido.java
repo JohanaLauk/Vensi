@@ -28,21 +28,21 @@ public class ItemPedido  implements java.io.Serializable
         this.producto = producto;
     }
 
-    public int getCantidad() {
+    public int getCantidad() 
+    {
         return cantidad;
     }
-
-    public void setCantidad(int cantidad) {
+    public void setCantidad(int cantidad) 
+    {
         this.cantidad = cantidad;
     }
 
-    public Pedido getPedido() {
+    public Pedido getPedido() 
+    {
         return pedido;
     }
-
-    public void setPedido(Pedido pedido) {
+    public void setPedido(Pedido pedido) 
+    {
         this.pedido = pedido;
-    }
-    
-    
+    }   
 }

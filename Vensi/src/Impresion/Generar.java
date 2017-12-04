@@ -1,7 +1,6 @@
 package Impresion;
 
-import Conexion.NewHibernateUtil;
-import Modelo.Producto;
+import Modelo.ItemImprimir;
 import java.sql.Connection;
 
 import java.sql.DriverManager;
@@ -14,23 +13,21 @@ import net.sf.jasperreports.engine.JasperPrint;
 import net.sf.jasperreports.engine.JasperReport;
 import net.sf.jasperreports.engine.util.JRLoader;
 import net.sf.jasperreports.view.JasperViewer;
-import org.hibernate.SessionFactory;
 
 public class Generar 
 {    
-    public void notaPedido(List<Producto> listaProdPedido)
+    public void notaPedido(List<ItemImprimir> listaProdImprimir)
     {
         try
         {
-            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/Vensi");
+            Connection con = DriverManager.getConnection("jdbc:postgresql://localhost:5445/Vensi");
                         
             JasperReport jr = (JasperReport)JRLoader.loadObject("notaPedido.jasper");
             Map parametro = new HashMap();
             
-            parametro.put("listaProdPedido", listaProdPedido);
+            parametro.put("listaProdImprimir", listaProdImprimir);
                         
-            JasperPrint jp = JasperFillManager.fillReport(jr, parametro,con);    //el 3° parametro es el del error
-            //JasperPrint jp = JasperFillManager.fillReport(jr, parametro, connection);
+            JasperPrint jp = JasperFillManager.fillReport(jr, parametro,con);   
             JasperViewer jv = new JasperViewer(jp, false);
             jv.setTitle("Nota de pedido");
             jv.setVisible(true);
