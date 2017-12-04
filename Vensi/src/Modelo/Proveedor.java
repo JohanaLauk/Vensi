@@ -8,6 +8,9 @@ public class Proveedor  implements java.io.Serializable
      private String direccion;
      private String contacto;
      private boolean estado = true;
+     private String localidad;
+     private String provincia;
+     private String pais;
      
 
     public Proveedor() 
@@ -66,13 +69,30 @@ public class Proveedor  implements java.io.Serializable
     {
         this.estado = estado;
     }
+
+    public String getLocalidad() {
+        return localidad;
+    }
+
+    public void setLocalidad(String localidad) {
+        this.localidad = localidad;
+    }
+
+    public String getProvincia() {
+        return provincia;
+    }
+
+    public void setProvincia(String provincia) {
+        this.provincia = provincia;
+    }
+
+    public String getPais() {
+        return pais;
+    }
+
+    public void setPais(String pais) {
+        this.pais = pais;
+    }
     
-    /*public Set getPedidos() 
-    {
-        return this.pedidos;
-    }    
-    public void setPedidos(Set pedidos) 
-    {
-        this.pedidos = pedidos;
-    }*/
+    
 }

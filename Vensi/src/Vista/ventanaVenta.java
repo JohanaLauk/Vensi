@@ -50,6 +50,7 @@ public class ventanaVenta extends javax.swing.JFrame
         txfdCantidad.setEnabled(false);
         btnQuitar.setEnabled(false);
         btnAgregar.setEnabled(false);
+        
                 
         //Al hacer click en el JFrame...
         this.addMouseListener(new MouseAdapter()
@@ -841,11 +842,11 @@ public class ventanaVenta extends javax.swing.JFrame
         tcm2.getColumn(2).setPreferredWidth(20);
         tcm2.getColumn(3).setPreferredWidth(30);
         tcm2.getColumn(4).setPreferredWidth(20);
-        /*tcm2.getColumn(4).setPreferredWidth(0);     
+        tcm2.getColumn(4).setPreferredWidth(0);     
         tcm2.getColumn(4).setMaxWidth(0);
         tcm2.getColumn(4).setMinWidth(0);
         tablaCarrito.getTableHeader().getColumnModel().getColumn(4).setMaxWidth(0);
-        tablaCarrito.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);*/
+        tablaCarrito.getTableHeader().getColumnModel().getColumn(4).setMinWidth(0);
         
         tablaCarrito.addFocusListener(new FocusListener() 
         {
@@ -873,8 +874,8 @@ public class ventanaVenta extends javax.swing.JFrame
         
                 if (filaSelec >= 0)
                 {
-                    String cod = tablaCarrito.getValueAt(filaSelec, 0).toString();
-                    String desc = tablaCarrito.getValueAt(filaSelec, 1).toString();
+                    String cod = tablaCarrito.getValueAt(filaSelec, 4).toString();
+                    String desc = tablaCarrito.getValueAt(filaSelec, 0).toString();
                     
                     modeloList = new DefaultListModel(); 
                     modeloList.clear();

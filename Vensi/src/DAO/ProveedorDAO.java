@@ -42,6 +42,9 @@ public class ProveedorDAO
         prov.setDireccion(p.getDireccion());
         prov.setEstado(p.isEstado());
         prov.setContacto(p.getContacto());
+        prov.setLocalidad(p.getLocalidad());
+        prov.setProvincia(p.getProvincia());
+        prov.setPais(p.getPais());
             
         Transaction tx = session.beginTransaction();
         try

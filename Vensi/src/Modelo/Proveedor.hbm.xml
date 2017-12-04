@@ -23,5 +23,14 @@
         <property name="estado" type="boolean">
             <column name="estado" not-null="true" />
         </property>
+        <property name="localidad" type="string">
+            <column name="localidad" />
+        </property>
+        <property name="provincia" type="string">
+            <column name="provincia" />
+        </property>
+        <property name="pais" type="string">
+            <column name="pais" />
+        </property>
     </class>
 </hibernate-mapping>
