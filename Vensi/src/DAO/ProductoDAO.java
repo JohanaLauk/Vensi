@@ -484,11 +484,11 @@ public class ProductoDAO
                     {
                          if (tipoOrden.equals("ASC"))
                          {
-                             query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY descripcion");
+                             query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY descripcion");
                          }
                          else
                          {
-                             query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY descripcion DESC");
+                             query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY descripcion DESC");
                          }
                     } break;
                     
@@ -496,11 +496,11 @@ public class ProductoDAO
                     {
                         if (tipoOrden.equals("ASC"))
                         {
-                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY codigo");
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY codigo");
                         }
                         else
                         {
-                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY codigo DESC");
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY codigo DESC");
                         }
                     } break;
                     
@@ -508,11 +508,11 @@ public class ProductoDAO
                     {
                         if (tipoOrden.equals("ASC"))
                         {
-                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY precio_costo");
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY precio_costo");
                         }
                         else
                         {
-                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY precio_costo DESC");
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY precio_costo DESC");
                         }
                     } break;
                     
@@ -520,11 +520,11 @@ public class ProductoDAO
                     {
                         if (tipoOrden.equals("ASC"))
                         {
-                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY precio_venta");
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY precio_venta");
                         }
                         else
                         {
-                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY precio_venta DESC");
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY precio_venta DESC");
                         }
                     } break;
                     
@@ -532,11 +532,11 @@ public class ProductoDAO
                     {
                         if (tipoOrden.equals("ASC"))
                         {
-                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY stock");
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY stock");
                         }
                         else
                         {
-                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY stock DESC");
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY stock DESC");
                         }
                     } break;
                     
@@ -544,11 +544,11 @@ public class ProductoDAO
                     {
                         if (tipoOrden.equals("ASC"))
                         {
-                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY stock_minimo");
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY stock_minimo");
                         }
                         else
                         {
-                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY stock_minimo DESC");
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY stock_minimo DESC");
                         }
                     } break;
                     
@@ -556,11 +556,11 @@ public class ProductoDAO
                     {
                         if (tipoOrden.equals("ASC"))
                         {
-                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY peso_envase");
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY peso_envase");
                         }
                         else
                         {
-                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id = :proveedor ORDER BY peso_envase DESC");
+                            query = session.createQuery("FROM Producto p WHERE p.proveedor.id_proveedor = :proveedor ORDER BY peso_envase DESC");
                         }
                     } break;
                 }
@@ -575,11 +575,11 @@ public class ProductoDAO
                         {
                              if (tipoOrden.equals("ASC"))
                              {
-                                 query = session.createQuery("FROM Producto p WHERE p.estado = true AND p.proveedor.id = :proveedor ORDER BY descripcion");
+                                 query = session.createQuery("FROM Producto p WHERE p.estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY descripcion");
                              }
                              else
                              {
-                                 query = session.createQuery("FROM Producto p WHERE p.estado = true AND p.proveedor.id = :proveedor ORDER BY descripcion DESC");
+                                 query = session.createQuery("FROM Producto p WHERE p.estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY descripcion DESC");
                              }
                         } break;
 
@@ -587,11 +587,11 @@ public class ProductoDAO
                         {
                             if (tipoOrden.equals("ASC"))
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY codigo");
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY codigo");
                             }
                             else
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY codigo DESC");
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY codigo DESC");
                             }
                         } break;
 
@@ -599,11 +599,11 @@ public class ProductoDAO
                         {
                             if (tipoOrden.equals("ASC"))
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY precio_costo");
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY precio_costo");
                             }
                             else
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY precio_costo DESC");
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY precio_costo DESC");
                             }
                         } break;
 
@@ -611,11 +611,11 @@ public class ProductoDAO
                         {
                             if (tipoOrden.equals("ASC"))
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY precio_venta");
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY precio_venta");
                             }
                             else
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY precio_venta DESC");
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY precio_venta DESC");
                             }
                         } break;
 
@@ -623,11 +623,11 @@ public class ProductoDAO
                         {
                             if (tipoOrden.equals("ASC"))
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY stock");
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY stock");
                             }
                             else
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY stock DESC");
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY stock DESC");
                             }
                         } break;
 
@@ -635,11 +635,11 @@ public class ProductoDAO
                         {
                             if (tipoOrden.equals("ASC"))
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY stock_minimo");
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY stock_minimo");
                             }
                             else
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY stock_minimo DESC");
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY stock_minimo DESC");
                             }
                         } break;
 
@@ -647,11 +647,11 @@ public class ProductoDAO
                         {
                             if (tipoOrden.equals("ASC"))
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY peso_envase");
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY peso_envase");
                             }
                             else
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id = :proveedor ORDER BY peso_envase DESC");
+                                query = session.createQuery("FROM Producto p WHERE estado = true AND p.proveedor.id_proveedor = :proveedor ORDER BY peso_envase DESC");
                             }
                         } break;
                     }
@@ -664,11 +664,11 @@ public class ProductoDAO
                         {
                              if (tipoOrden.equals("ASC"))
                              {
-                                 query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY descripcion");
+                                 query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY descripcion");
                              }
                              else
                              {
-                                 query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY descripcion DESC");
+                                 query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY descripcion DESC");
                              }
                         } break;
 
@@ -676,11 +676,11 @@ public class ProductoDAO
                         {
                             if (tipoOrden.equals("ASC"))
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY codigo");
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY codigo");
                             }
                             else
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY codigo DESC");
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY codigo DESC");
                             }
                         } break;
 
@@ -688,11 +688,11 @@ public class ProductoDAO
                         {
                             if (tipoOrden.equals("ASC"))
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY precio_costo");
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY precio_costo");
                             }
                             else
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY precio_costo DESC");
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY precio_costo DESC");
                             }
                         } break;
 
@@ -700,11 +700,11 @@ public class ProductoDAO
                         {
                             if (tipoOrden.equals("ASC"))
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY precio_venta");
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY precio_venta");
                             }
                             else
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY precio_venta DESC");
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY precio_venta DESC");
                             }
                         } break;
 
@@ -712,11 +712,11 @@ public class ProductoDAO
                         {
                             if (tipoOrden.equals("ASC"))
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY stock");
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY stock");
                             }
                             else
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY stock DESC");
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY stock DESC");
                             }
                         } break;
 
@@ -724,11 +724,11 @@ public class ProductoDAO
                         {
                             if (tipoOrden.equals("ASC"))
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY stock_minimo");
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY stock_minimo");
                             }
                             else
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY stock_minimo DESC");
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY stock_minimo DESC");
                             }
                         } break;
 
@@ -736,11 +736,11 @@ public class ProductoDAO
                         {
                             if (tipoOrden.equals("ASC"))
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY peso_envase");
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY peso_envase");
                             }
                             else
                             {
-                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id = :proveedor ORDER BY peso_envase DESC");
+                                query = session.createQuery("FROM Producto p WHERE estado = false AND p.proveedor.id_proveedor = :proveedor ORDER BY peso_envase DESC");
                             }
                         } break;
                     }

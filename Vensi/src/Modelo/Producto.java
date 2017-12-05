@@ -1,6 +1,6 @@
 package Modelo;
 
-import java.util.List;
+import java.util.*;
 
 public class Producto  implements java.io.Serializable 
 {
@@ -15,7 +15,7 @@ public class Producto  implements java.io.Serializable
      private int pesoEnvase;
      private boolean porPeso = false;   //es por unidad
      private boolean estado = true;
-     private List<Proveedor> proveedor;
+     private Set<Proveedor> proveedor = new HashSet<Proveedor>();
 
     public Producto() 
     { }
@@ -119,13 +119,19 @@ public class Producto  implements java.io.Serializable
         this.porPeso = porPeso;
     }
 
-    public List<Proveedor> getProveedor() {
+    public Set<Proveedor> getProveedor() {
         return proveedor;
     }
 
-    public void setProveedor(List<Proveedor> proveedor) {
+    public void setProveedor(Set<Proveedor> proveedor) {
         this.proveedor = proveedor;
     }
+    
+    public void addProveedor(Proveedor p){
+        this.proveedor.add(p);
+    }
+
+    
     
     
 }

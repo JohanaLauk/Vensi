@@ -5,7 +5,7 @@
 <hibernate-mapping>
     <class name="Modelo.Producto" table="producto" schema="public" optimistic-lock="version">
         <id name="id" type="int">
-            <column name="id" />
+            <column name="id_producto" />
             <generator class="identity" />
         </id>
         <property name="codigo" type="string">
@@ -38,10 +38,15 @@
         <property name="porPeso"  type="boolean" >
             <column name="por_peso" not-null="false" />
         </property>
-        <list name="proveedor" table="proveedor" inverse="true" lazy="true" fetch="select">
+        <!--<list name="proveedor" table="producto_proveedor" inverse="false" lazy="true" fetch="select">
             <key column="id" not-null="false"/>  
             <index column="orden" />
-            <one-to-many class="Modelo.Proveedor" />
-         </list>
+            <many-to-many column="id" class="Modelo.Proveedor" />
+         </list> -->
+        <set name="proveedor" table="producto_proveedor" >
+            <key column="id_producto"/>
+            <many-to-many column="id_proveedor" class="Modelo.Proveedor" />
+        </set>
+         
     </class>
 </hibernate-mapping>

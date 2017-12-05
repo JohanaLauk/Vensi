@@ -3,7 +3,7 @@
 "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
 
 <hibernate-mapping>
-  <class name="Modelo.ItemImprimir" table="itema_imprimir" schema="public" optimistic-lock="version">
+  <class name="Modelo.ItemImprimir" table="item_imprimir" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
             <generator class="identity" />
