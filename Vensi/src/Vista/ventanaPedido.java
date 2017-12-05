@@ -647,7 +647,7 @@ public class ventanaPedido extends javax.swing.JFrame
             }            
             
             Generar generarNotaPedido = new Generar();
-            generarNotaPedido.notaPedido(listaProdImprimir, datosProv);     //aca debería pasarle por parametro lo que debe imprimir
+            generarNotaPedido.notaPedido();//listaProdImprimir, datosProv);     //aca debería pasarle por parametro lo que debe imprimir
         }
         else 
         {
