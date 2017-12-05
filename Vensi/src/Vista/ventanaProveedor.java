@@ -256,7 +256,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
         {
             //GUARDAMOS EL ID EN LA VARIABLE DE LA VENTANA_EDITAR_PROV, DEL PROVEEDOR SELECCIONADO EN LA TABLA
-            ventanaEditarProv.id_recibido = Integer.parseInt((String) tablaProv.getValueAt(filaSelec, 5));
+            ventanaEditarProv.id_recibido = Integer.parseInt((String) tablaProv.getValueAt(filaSelec, 6));
 
             ventanaEditarProv vEditarProv = new ventanaEditarProv();
             vEditarProv.setVisible(true);
@@ -338,11 +338,12 @@ public class ventanaProveedor extends javax.swing.JFrame
     {        
         modelo = new DefaultTableModel();
         List<Proveedor> lista = pDAO.listar(filtroSelec);  
-        String[] datos = new String[6]; 
+        String[] datos = new String[7]; 
         
         modelo.addColumn("Razón social");
         modelo.addColumn("Cuit");
         modelo.addColumn("Direción");
+        modelo.addColumn("Lugar");        
         modelo.addColumn("Contacto");
         modelo.addColumn("Estado");
         modelo.addColumn("ID");
@@ -352,17 +353,18 @@ public class ventanaProveedor extends javax.swing.JFrame
             datos[0] = p.getRazonSocial();
             datos[1] = p.getCuit();
             datos[2] = String.valueOf(p.getDireccion());
-            datos[3] = String.valueOf(p.getContacto());
+            datos[3] = String.valueOf(p.getLocalidad() + ", " + p.getProvincia() + " (" + p.getPais() + ")");
+            datos[4] = String.valueOf(p.getContacto());
 
             if (p.isEstado())
             {
-                datos[4] = "Habilitado";
+                datos[5] = "Habilitado";
             }
             else
             {
-                datos[4] = "Deshabilitado";
+                datos[5] = "Deshabilitado";
             }
-            datos[5] = String.valueOf(p.getId());   
+            datos[6] = String.valueOf(p.getId());   
             
             modelo.addRow(datos);
         }    
@@ -373,13 +375,14 @@ public class ventanaProveedor extends javax.swing.JFrame
         tcm.getColumn(0).setPreferredWidth(250);
         tcm.getColumn(1).setPreferredWidth(120);
         tcm.getColumn(2).setPreferredWidth(250);
-        tcm.getColumn(3).setPreferredWidth(250);
-        tcm.getColumn(4).setPreferredWidth(50);
-        tcm.getColumn(5).setPreferredWidth(0);
-        tcm.getColumn(5).setMaxWidth(0);
-        tcm.getColumn(5).setMinWidth(0);
-        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
-        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+        tcm.getColumn(3).setPreferredWidth(200);
+        tcm.getColumn(4).setPreferredWidth(150);
+        tcm.getColumn(5).setPreferredWidth(50);
+        tcm.getColumn(6).setPreferredWidth(0);
+        tcm.getColumn(6).setMaxWidth(0);
+        tcm.getColumn(6).setMinWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(6).setMinWidth(0);
         
         tablaProv.addFocusListener(new FocusListener() 
         {
@@ -409,11 +412,12 @@ public class ventanaProveedor extends javax.swing.JFrame
     public void llenarTablaBusqueda(List<Proveedor> listaBusqueda)
     {        
         modelo2 = new DefaultTableModel();
-        String [] datos = new String[6]; 
+        String [] datos = new String[7]; 
         
         modelo2.addColumn("Razón social");
         modelo2.addColumn("Cuit");
         modelo2.addColumn("Direción");
+        modelo2.addColumn("Lugar");
         modelo2.addColumn("Contacto");
         modelo2.addColumn("Estado");
         modelo2.addColumn("ID");
@@ -423,17 +427,18 @@ public class ventanaProveedor extends javax.swing.JFrame
             datos[0] = p.getRazonSocial();
             datos[1] = p.getCuit();
             datos[2] = String.valueOf(p.getDireccion());
-            datos[3] = String.valueOf(p.getContacto());
+            datos[3] = String.valueOf(p.getLocalidad() + ", " + p.getProvincia() + " (" + p.getPais() + ")");
+            datos[4] = String.valueOf(p.getContacto());
 
             if (p.isEstado())
             {
-                datos[4] = "Habilitado";
+                datos[5] = "Habilitado";
             }
             else
             {
-                datos[4] = "Deshabilitado";
+                datos[5] = "Deshabilitado";
             }
-            datos[5] = String.valueOf(p.getId());   
+            datos[6] = String.valueOf(p.getId());
             
             modelo2.addRow(datos);
         }        
@@ -443,13 +448,14 @@ public class ventanaProveedor extends javax.swing.JFrame
         tcm2.getColumn(0).setPreferredWidth(250);
         tcm2.getColumn(1).setPreferredWidth(120);
         tcm2.getColumn(2).setPreferredWidth(250);
-        tcm2.getColumn(3).setPreferredWidth(250);
-        tcm2.getColumn(4).setPreferredWidth(50);
-        tcm2.getColumn(5).setPreferredWidth(0);
-        tcm2.getColumn(5).setMaxWidth(0);
-        tcm2.getColumn(5).setMinWidth(0);
-        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
-        tablaProv.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+        tcm2.getColumn(3).setPreferredWidth(200);
+        tcm2.getColumn(4).setPreferredWidth(150);
+        tcm2.getColumn(5).setPreferredWidth(50);
+        tcm2.getColumn(6).setPreferredWidth(0);
+        tcm2.getColumn(6).setMaxWidth(0);
+        tcm2.getColumn(6).setMinWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(6).setMaxWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(6).setMinWidth(0);
 
         //tablaProv.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS);
     }

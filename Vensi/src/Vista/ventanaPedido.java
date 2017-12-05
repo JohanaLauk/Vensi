@@ -30,6 +30,9 @@ public class ventanaPedido extends javax.swing.JFrame
     String ordenSelec = null;
     String tipoSelec = null;
     
+    Proveedor elProv = null;
+    String provSelec = null;
+    
     public ventanaPedido() 
     {
         initComponents();
@@ -64,9 +67,9 @@ public class ventanaPedido extends javax.swing.JFrame
         
         listarAlarma();
         
-        llenarTabla();        
-        llenarTablaPedido();
-        llenarCBBProveedor(); 
+        llenarCBBProveedor();
+        mostrarTablaVacia();
+        llenarTablaPedido();         
     }
     
     @SuppressWarnings("unchecked")
@@ -548,8 +551,24 @@ public class ventanaPedido extends javax.swing.JFrame
     }//GEN-LAST:event_txfdBuscarProdKeyReleased
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed
-        String itemSelec = String.valueOf(cbProveedores.getSelectedItem());
-        cbProveedores.setSelectedItem(itemSelec);       
+        String provSelec = String.valueOf(cbProveedores.getSelectedItem());
+        List<Proveedor> listaTotalProv = provDAO.listar("Habilitados");
+                
+        if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
+        {  
+            for (Proveedor p : listaTotalProv)
+            {
+                if (p.getRazonSocial().equals(provSelec))
+                {
+                    elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
+                    llenarTabla();
+                }
+            }
+        }
+        else
+        {
+            mostrarTablaVacia();      
+        }
     }//GEN-LAST:event_cbProveedoresActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -612,8 +631,9 @@ public class ventanaPedido extends javax.swing.JFrame
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void btnImprimirPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirPedidoActionPerformed
-        String provSelec = String.valueOf(cbProveedores.getSelectedItem());
+        //String provSelec = String.valueOf(cbProveedores.getSelectedItem());
         int filasTabla = tablaPedido.getRowCount();
+        
         List<ItemImprimir> listaProdImprimir = new ArrayList();
         List<String> datosProv = new ArrayList();
         
@@ -676,7 +696,7 @@ public class ventanaPedido extends javax.swing.JFrame
     public void llenarTabla()
     {        
         modelo = new DefaultTableModel();
-        List<Producto> listaInicial = prodDAO.listar(OrdenarTabla());
+        List<Producto> listaInicial = prodDAO.listar(OrdenarTabla(), elProv.getId());
         String[] datos = new String[6];
  
         modelo.addColumn("Código");
@@ -854,6 +874,31 @@ public class ventanaPedido extends javax.swing.JFrame
         tcm3.getColumn(5).setPreferredWidth(0);  
         tcm3.getColumn(5).setMaxWidth(0);
         tcm3.getColumn(5).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+    }
+    
+    public void mostrarTablaVacia()
+    {
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Código");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio costo");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Stock mínimo");
+        modelo.addColumn("ID");
+
+        tablaProd.setModel(modelo);
+
+        tcm = tablaProd.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(80);
+        tcm.getColumn(1).setPreferredWidth(400);
+        tcm.getColumn(2).setPreferredWidth(50);
+        tcm.getColumn(3).setPreferredWidth(40);
+        tcm.getColumn(4).setPreferredWidth(50);         
+        tcm.getColumn(5).setPreferredWidth(0);  
+        tcm.getColumn(5).setMaxWidth(0);
+        tcm.getColumn(5).setMinWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
     }

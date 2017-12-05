@@ -50,6 +50,11 @@ public class ventanaProducto extends javax.swing.JFrame
             } 
         });
         
+        if (proveedorSelec == null)
+        {
+            proveedorSelec = "Proveedores";
+        }
+        
         llenarTabla();        
         llenarComboBoxProv();
     }
@@ -387,7 +392,18 @@ public class ventanaProducto extends javax.swing.JFrame
 
     private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
         String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+        List<Producto> listaBusqueda = null;
+        
+        if (proveedorSelec.equals("Proveedores") || proveedorSelec == null)
+        {
+            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+        }
+        else
+        {
+            Proveedor prov = prDAO.buscarPorCuitNombre(proveedorSelec, "Habilitados").get(0);
+            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec, prov.getId());
+        }
+        
         llenarTablaBusqueda(listaBusqueda);
         
         if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
@@ -408,9 +424,13 @@ public class ventanaProducto extends javax.swing.JFrame
     private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
         String cadena = txfdBuscarProd.getText();
         List<Producto> listaBusqueda = null;
-        if(proveedorSelec == null){
+        
+        if (proveedorSelec.equals("Proveedores") || proveedorSelec == null)
+        {
             listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec);
-        }else{
+        }
+        else
+        {
             Proveedor prov = prDAO.buscarPorCuitNombre(proveedorSelec, "Habilitados").get(0);
             listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec, prov.getId());
         }
@@ -434,11 +454,13 @@ public class ventanaProducto extends javax.swing.JFrame
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed
         
-        if(!cbProveedores.getSelectedItem().equals("Proveedores")){
+        if (!cbProveedores.getSelectedItem().equals("Proveedores"))
+        {
             proveedorSelec = cbProveedores.getSelectedItem().toString();
         }
-        else{
-            
+        else
+        {
+            proveedorSelec = "Proveedores";
         }
         llenarTabla();
     }//GEN-LAST:event_cbProveedoresActionPerformed
@@ -458,11 +480,15 @@ public class ventanaProducto extends javax.swing.JFrame
     {        
         modelo = new DefaultTableModel();
         List<Producto> lista = null;
-        if(proveedorSelec == null){
+        
+        if (proveedorSelec.equals("Proveedores") || proveedorSelec == null)
+        {
             lista = pDAO.listar(OrdenarTabla());
-        }else{
+        }
+        else
+        {
             Proveedor prov = prDAO.buscarPorCuitNombre(proveedorSelec, "Habilitados").get(0);
-            lista = pDAO.listar(OrdenarTabla(),prov.getId());
+            lista = pDAO.listar(OrdenarTabla(), prov.getId());
         }
         
         String[] datos = new String[11];
@@ -499,7 +525,7 @@ public class ventanaProducto extends javax.swing.JFrame
                 datos[7] = "---";
             }                      
             
-            if(p.isEstado())
+            if (p.isEstado())
             {
                 datos[8] = "Habilitado";
             }
@@ -509,14 +535,16 @@ public class ventanaProducto extends javax.swing.JFrame
             }
             Set<Proveedor> listaProv = p.getProveedor();
             String provs = "";
-            for(Proveedor pr : listaProv)
+            
+            for (Proveedor pr : listaProv)
             {
-                provs += pr.getRazonSocial() + "\n";
+                provs += pr.getRazonSocial() + ", ";
             }
+            
             datos[9] = provs;
             datos[10] = String.valueOf(p.getId());
            
-           modelo.addRow(datos);
+            modelo.addRow(datos);
         }
         
         tablaProd.setModel(modelo);
@@ -608,11 +636,13 @@ public class ventanaProducto extends javax.swing.JFrame
             {
                 datos[8] = "Deshabilitado";
             }
+            
             Set<Proveedor> listaProv = p.getProveedor();
             String provs = "";
-            for(Proveedor pr : listaProv)
+            
+            for (Proveedor pr : listaProv)
             {
-                provs += pr.getRazonSocial() + "\n";
+                provs += pr.getRazonSocial() + ", ";
             }
             datos[9] = provs;
             datos[10] = String.valueOf(p.getId());
@@ -663,6 +693,18 @@ public class ventanaProducto extends javax.swing.JFrame
                 
         return ordenamiento;
     }
+    
+    private void llenarComboBoxProv() 
+    {
+        List<Proveedor> lista = prDAO.listar("Habilitados");
+        
+        cbProveedores.addItem("Proveedores");
+        
+        for (Proveedor p : lista)
+        {
+            cbProveedores.addItem(p.getRazonSocial());
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnBuscarProd;
@@ -683,14 +725,4 @@ public class ventanaProducto extends javax.swing.JFrame
     private javax.swing.JTable tablaProd;
     private org.jdesktop.swingx.JXTextField txfdBuscarProd;
     // End of variables declaration//GEN-END:variables
-
-    
-
-    private void llenarComboBoxProv() {
-        List<Proveedor> lista = prDAO.listar("Habilitados");
-        cbProveedores.addItem("Proveedores");
-        for(Proveedor p : lista){
-            cbProveedores.addItem(p.getRazonSocial());
-        }
-    }
 }

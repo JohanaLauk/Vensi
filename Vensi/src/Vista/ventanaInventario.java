@@ -30,6 +30,9 @@ public class ventanaInventario extends javax.swing.JFrame
     String ordenSelec = null;
     String tipoSelec = null;
     
+    Proveedor elProv = null;
+    String provSelec = null;
+    
     public ventanaInventario() 
     {
         initComponents();
@@ -59,9 +62,9 @@ public class ventanaInventario extends javax.swing.JFrame
             } 
         });
         
-        llenarTabla();
-        llenarTablaInventario();
         llenarCBBProveedor();
+        mostrarTablaVacia();
+        llenarTablaInventario();        
     }
     
     @SuppressWarnings("unchecked")
@@ -497,8 +500,24 @@ public class ventanaInventario extends javax.swing.JFrame
     }//GEN-LAST:event_btnCargarInventarioActionPerformed
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed
-        String itemSelec = String.valueOf(cbProveedores.getSelectedItem());
-        cbProveedores.setSelectedItem(itemSelec);
+        String provSelec = String.valueOf(cbProveedores.getSelectedItem());
+        List<Proveedor> listaTotalProv = provDAO.listar("Habilitados");
+                
+        if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
+        {  
+            for (Proveedor p : listaTotalProv)
+            {
+                if (p.getRazonSocial().equals(provSelec))
+                {
+                    elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
+                    llenarTabla();
+                }
+            }
+        }
+        else
+        {
+            mostrarTablaVacia();      
+        }
     }//GEN-LAST:event_cbProveedoresActionPerformed
 
     private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
@@ -621,7 +640,7 @@ public class ventanaInventario extends javax.swing.JFrame
     public void llenarTabla()
     {        
         modelo = new DefaultTableModel();
-        List<Producto> listaReponer = prodDAO.listar(OrdenarTabla());
+        List<Producto> listaReponer = prodDAO.listar(OrdenarTabla(), elProv.getId());
         String[] datos = new String[6];
  
         modelo.addColumn("Código");
@@ -807,6 +826,31 @@ public class ventanaInventario extends javax.swing.JFrame
         tcm3.getColumn(5).setMinWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
+    }
+    
+    public void mostrarTablaVacia()
+    {
+        modelo = new DefaultTableModel();        
+        modelo.addColumn("Código");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Stock mínimo");
+        modelo.addColumn("Tipo venta");
+        modelo.addColumn("ID");
+        
+        tablaProd.setModel(modelo);
+        
+        tcm = tablaProd.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(100);
+        tcm.getColumn(1).setPreferredWidth(300);
+        tcm.getColumn(2).setPreferredWidth(80);
+        tcm.getColumn(3).setPreferredWidth(80);
+        tcm.getColumn(4).setPreferredWidth(150);         
+        tcm.getColumn(5).setPreferredWidth(0);  
+        tcm.getColumn(5).setMaxWidth(0);
+        tcm.getColumn(5).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);    
     }
     
     public String[] OrdenarTabla()

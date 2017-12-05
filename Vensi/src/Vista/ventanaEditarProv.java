@@ -15,9 +15,9 @@ public class ventanaEditarProv extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);     //centra la ventana  
         
-        this.setMinimumSize(new Dimension(520, 240));  //al minimizar la ventana no permite que sea mas chico que esa medida
+        this.setMinimumSize(new Dimension(520, 350));  //al minimizar la ventana no permite que sea mas chico que esa medida
        
-        this.setPreferredSize(new Dimension(520,240));    //al minimizar la ventana aparece con esa medida
+        this.setPreferredSize(new Dimension(520,350));    //al minimizar la ventana aparece con esa medida
         
         this.setResizable(false);   //No permite modificar el tamaño de la ventana
         
@@ -42,13 +42,19 @@ public class ventanaEditarProv extends javax.swing.JFrame
         txfdEditarDireccion = new javax.swing.JTextField();
         txfdEditarContacto = new javax.swing.JTextField();
         labIdSelec = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        txfdLocalidad = new javax.swing.JTextField();
+        jLabel7 = new javax.swing.JLabel();
+        txfdProvincia = new javax.swing.JTextField();
+        jLabel8 = new javax.swing.JLabel();
+        txfdPais = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnAceptarEditar = new javax.swing.JButton();
         btnCancelarEditar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Editar proveedor");
-        setPreferredSize(new java.awt.Dimension(520, 240));
+        setPreferredSize(new java.awt.Dimension(520, 350));
 
         jLabel1.setText("Razon social:");
 
@@ -64,29 +70,55 @@ public class ventanaEditarProv extends javax.swing.JFrame
 
         labIdSelec.setText("ID_Prov");
 
+        jLabel6.setText("Localidad:");
+
+        jLabel7.setText("Provincia:");
+
+        jLabel8.setText("País:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addComponent(jLabel2)
-                    .addComponent(jLabel3)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel5))
+                .addComponent(jLabel5)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(labIdSelec)
+                .addGap(29, 29, 29))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(labIdSelec)
-                        .addGap(38, 38, 38))
-                    .addComponent(txfdEditarDireccion, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
-                    .addComponent(txfdEditarCuit)
-                    .addComponent(txfdEditarRazonSocial)
-                    .addComponent(txfdEditarContacto))
-                .addGap(0, 6, Short.MAX_VALUE))
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txfdPais))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txfdProvincia))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel2)
+                        .addGap(14, 14, 14)
+                        .addComponent(txfdEditarCuit))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel1)
+                                .addComponent(jLabel4))
+                            .addGap(18, 18, 18)
+                            .addComponent(txfdEditarRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createSequentialGroup()
+                            .addComponent(jLabel3)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                .addComponent(txfdEditarContacto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 288, Short.MAX_VALUE)
+                                .addComponent(txfdEditarDireccion, javax.swing.GroupLayout.Alignment.TRAILING))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel6)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txfdLocalidad)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -108,9 +140,22 @@ public class ventanaEditarProv extends javax.swing.JFrame
                     .addComponent(txfdEditarContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6)
+                    .addComponent(txfdLocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel7)
+                    .addComponent(txfdProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(txfdPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labIdSelec)))
+                    .addComponent(labIdSelec))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         btnAceptarEditar.setText("Aceptar");
@@ -148,10 +193,10 @@ public class ventanaEditarProv extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -178,6 +223,9 @@ public class ventanaEditarProv extends javax.swing.JFrame
         prov.setRazonSocial(txfdEditarRazonSocial.getText().toUpperCase());
         prov.setCuit(txfdEditarCuit.getText());
         prov.setDireccion(txfdEditarDireccion.getText().toUpperCase());
+        prov.setLocalidad(txfdLocalidad.getText().toUpperCase());
+        prov.setProvincia(txfdProvincia.getText().toUpperCase());
+        prov.setPais(txfdPais.getText().toUpperCase());
         prov.setContacto(txfdEditarContacto.getText());
         
         if(cbEditarEstado.getSelectedItem().equals("Habilitado"))
@@ -215,6 +263,9 @@ public class ventanaEditarProv extends javax.swing.JFrame
         txfdEditarRazonSocial.setText(String.valueOf(elProv.getRazonSocial()));
         txfdEditarCuit.setText(String.valueOf(elProv.getCuit()));
         txfdEditarDireccion.setText(String.valueOf(elProv.getDireccion()));
+        txfdLocalidad.setText(String.valueOf(elProv.getLocalidad()));
+        txfdProvincia.setText(String.valueOf(elProv.getProvincia()));
+        txfdPais.setText(String.valueOf(elProv.getPais()));
         txfdEditarContacto.setText(String.valueOf(elProv.getContacto()));
         
         if(elProv.isEstado())
@@ -236,6 +287,9 @@ public class ventanaEditarProv extends javax.swing.JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labIdSelec;
@@ -243,5 +297,8 @@ public class ventanaEditarProv extends javax.swing.JFrame
     private javax.swing.JTextField txfdEditarCuit;
     private javax.swing.JTextField txfdEditarDireccion;
     private javax.swing.JTextField txfdEditarRazonSocial;
+    private javax.swing.JTextField txfdLocalidad;
+    private javax.swing.JTextField txfdPais;
+    private javax.swing.JTextField txfdProvincia;
     // End of variables declaration//GEN-END:variables
 }
