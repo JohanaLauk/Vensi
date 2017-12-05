@@ -612,13 +612,13 @@ public class ventanaPedido extends javax.swing.JFrame
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void btnImprimirPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirPedidoActionPerformed
-        String itemSelec = String.valueOf(cbProveedores.getSelectedItem());
+        String provSelec = String.valueOf(cbProveedores.getSelectedItem());
         int filasTabla = tablaPedido.getRowCount();
-        List<ItemImprimir> prodImprimir = new ArrayList();
+        List<ItemImprimir> listaProdImprimir = new ArrayList();
+        List<String> datosProv = new ArrayList();
         
-        if(!itemSelec.equals("Seleccionar") && !itemSelec.equals("No hay proveedores") && filasTabla!=0 )
+        if(!provSelec.equals("Seleccionar") && !provSelec.equals("No hay proveedores") && filasTabla!=0 )
         {
-            //código para imprimir
             for (int i=0 ; i<filasTabla ; i++)   //recorre todas las filas del carrito
             { 
                 String idProd = tablaPedido.getValueAt(i, 4).toString();                    
@@ -629,16 +629,29 @@ public class ventanaPedido extends javax.swing.JFrame
                 unItemImp.setProducto(elProd);
                 unItemImp.setCantidad(Integer.parseInt(cantidad));
                 
-                prodImprimir.add(unItemImp);                
+                listaProdImprimir.add(unItemImp);                
             }
             
+            List<Proveedor> listaTotalProv = provDAO.listar("Habilitados");
+            
+            for (Proveedor p : listaTotalProv)
+            {
+                if (p.getRazonSocial().equals(provSelec))
+                {
+                    datosProv.add(p.getRazonSocial());
+                    datosProv.add(p.getCuit());
+                    datosProv.add(p.getDireccion());
+                    datosProv.add(p.getLocalidad() + ", " + p.getProvincia() + " (" + p.getPais() + ")");
+                    datosProv.add(p.getContacto());
+                }
+            }            
             
             Generar generarNotaPedido = new Generar();
-            generarNotaPedido.notaPedido(prodImprimir);     //aca debería pasarle por parametro lo que debe imprimir
+            generarNotaPedido.notaPedido(listaProdImprimir, datosProv);     //aca debería pasarle por parametro lo que debe imprimir
         }
         else 
         {
-            if(itemSelec.equals("Seleccionar") || itemSelec.equals("No hay proveedores"))
+            if(provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
             {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar un proveedor");
             }

@@ -16,7 +16,7 @@ import net.sf.jasperreports.view.JasperViewer;
 
 public class Generar 
 {    
-    public void notaPedido(List<ItemImprimir> listaProdImprimir)
+    public void notaPedido(List<ItemImprimir> listaProdImprimir, List<String> datosProv)
     {
         try
         {
@@ -26,6 +26,7 @@ public class Generar
             Map parametro = new HashMap();
             
             parametro.put("listaProdImprimir", listaProdImprimir);
+            parametro.put("datosProv", datosProv);
                         
             JasperPrint jp = JasperFillManager.fillReport(jr, parametro,con);   
             JasperViewer jv = new JasperViewer(jp, false);
