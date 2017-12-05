@@ -407,7 +407,14 @@ public class ventanaProducto extends javax.swing.JFrame
 
     private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
         String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+        List<Producto> listaBusqueda = null;
+        if(proveedorSelec == null){
+            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+        }else{
+            Proveedor prov = prDAO.buscarPorCuitNombre(proveedorSelec, "Habilitados").get(0);
+            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec, prov.getId());
+        }
+        
         llenarTablaBusqueda(listaBusqueda);
         
         if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
