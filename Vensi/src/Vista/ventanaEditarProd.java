@@ -1,13 +1,21 @@
 package Vista;
 
 import DAO.ProductoDAO;
+import DAO.ProveedorDAO;
 import Modelo.Producto;
+import Modelo.Proveedor;
 import java.awt.Dimension;
+import java.util.*;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 
 public class ventanaEditarProd extends javax.swing.JFrame 
 {
     ProductoDAO pDAO = new ProductoDAO();
     public static int id_recibido;
+    ProveedorDAO prDAO = new ProveedorDAO();
+    DefaultTableModel modelo;
+    TableColumnModel tcm;
     
     public ventanaEditarProd() 
     {
@@ -25,6 +33,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         txfdEditarPesoEnvase.setEnabled(false); 
         
         mostrarProdSelec();        
+        llenarTablaProv();
     }
     
     @SuppressWarnings("unchecked")
@@ -51,6 +60,8 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel5 = new javax.swing.JLabel();
         rbUnidad = new javax.swing.JRadioButton();
         rbPeso = new javax.swing.JRadioButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaProveedores = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         btnAceptarEditar = new javax.swing.JButton();
         btnCancelarEditar = new javax.swing.JButton();
@@ -119,6 +130,20 @@ public class ventanaEditarProd extends javax.swing.JFrame
             }
         });
 
+        tablaProveedores.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        tablaProveedores.setSelectionMode(javax.swing.ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
+        jScrollPane1.setViewportView(tablaProveedores);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -163,7 +188,11 @@ public class ventanaEditarProd extends javax.swing.JFrame
                             .addComponent(rbUnidad)
                             .addGap(18, 18, 18)
                             .addComponent(rbPeso))))
-                .addGap(0, 57, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(14, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -202,7 +231,9 @@ public class ventanaEditarProd extends javax.swing.JFrame
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel8)
                         .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         btnAceptarEditar.setText("Aceptar");
@@ -224,7 +255,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnAceptarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnCancelarEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
+            .addComponent(btnCancelarEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -245,15 +276,18 @@ public class ventanaEditarProd extends javax.swing.JFrame
                 .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(12, 12, 12)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGap(13, 13, 13))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 102, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         pack();
@@ -292,6 +326,12 @@ public class ventanaEditarProd extends javax.swing.JFrame
         else
         {
             prod.setEstado(false);
+        }
+        int[] filasSelec = tablaProveedores.getSelectedRows();
+        int idSelec;
+        for(int i = 0; i<tablaProveedores.getSelectedRowCount(); i++ ){
+            idSelec = Integer.parseInt(tablaProveedores.getValueAt(filasSelec[i], 1).toString());
+            prod.addProveedor(prDAO.buscarPorId(idSelec));
         }
         
         pDAO.modificar(prod, id_recibido);
@@ -398,9 +438,11 @@ public class ventanaEditarProd extends javax.swing.JFrame
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JLabel labIdSelec;
     private javax.swing.JRadioButton rbPeso;
     private javax.swing.JRadioButton rbUnidad;
+    private javax.swing.JTable tablaProveedores;
     private javax.swing.JTextField txfdEditarCodigo;
     private javax.swing.JTextField txfdEditarDescripcion;
     private javax.swing.JTextField txfdEditarPesoEnvase;
@@ -408,4 +450,30 @@ public class ventanaEditarProd extends javax.swing.JFrame
     private javax.swing.JTextField txfdEditarPrecioVenta;
     private javax.swing.JTextField txfdEditarStockMinimo;
     // End of variables declaration//GEN-END:variables
+
+    private void llenarTablaProv() {
+        
+        String[] datos = new String[2];
+        List<Proveedor> lista = prDAO.listar("Habilitados");
+        modelo = new DefaultTableModel();
+        
+        modelo.addColumn("Proveedor");
+        modelo.addColumn("ID");
+        
+        for(Proveedor p : lista){
+            datos[0] = p.getRazonSocial();
+            datos[1] = String.valueOf(p.getId());
+            modelo.addRow(datos);
+        }
+        
+        tablaProveedores.setModel(modelo);
+        
+        tcm = tablaProveedores.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(50);
+        tcm.getColumn(1).setPreferredWidth(0);  
+        tcm.getColumn(1).setMaxWidth(0);
+        tcm.getColumn(1).setMinWidth(0);
+        tablaProveedores.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
+        tablaProveedores.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);
+    }
 }
