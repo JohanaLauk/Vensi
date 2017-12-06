@@ -3,6 +3,7 @@ package Vista;
 import DAO.TurnoDAO;
 import Modelo.Turno;
 import java.util.Date;
+import javax.swing.JOptionPane;
 
 public class ventanaCierreTurno extends javax.swing.JFrame 
 {
@@ -590,14 +591,17 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     }
     
     private void btnCancelarCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCerrarTurnoActionPerformed
-        ventanaVenta vVenta = new ventanaVenta();
-        vVenta.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarCerrarTurnoActionPerformed
 
     private void btnAceptarCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarCerrarTurnoActionPerformed
         elTurno = tDAO.obtenerUltimo();
         elTurno.setFechaHoraFin(new Date());
+        tDAO.modificar(elTurno, elTurno.getId());
+        
+        JOptionPane.showMessageDialog(null, "Se ha cerrado el turno correctamente.");
+              
+        dispose();        
     }//GEN-LAST:event_btnAceptarCerrarTurnoActionPerformed
 
     private void txfd500KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd500KeyReleased

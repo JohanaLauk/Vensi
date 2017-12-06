@@ -273,9 +273,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarNuevoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarNuevoProdActionPerformed
-        ventanaProducto vProducto = new ventanaProducto();
-        vProducto.setVisible(true);
-        dispose();
+        dispose();        
     }//GEN-LAST:event_btnCancelarNuevoProdActionPerformed
 
     private void btnAceptarNuevoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarNuevoProdActionPerformed
@@ -317,15 +315,14 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         
         int[] filasSelec = tablaProveedores.getSelectedRows();
         int idSelec;
-        for(int i = 0; i<tablaProveedores.getSelectedRowCount(); i++ ){
+        for (int i = 0; i<tablaProveedores.getSelectedRowCount(); i++ )
+        {
             idSelec = Integer.parseInt(tablaProveedores.getValueAt(filasSelec[i], 1).toString());
             unProd.addProveedor(prDAO.buscarPorId(idSelec));
         }
         
         pDAO.alta(unProd);
-        
-        ventanaProducto vProducto = new ventanaProducto();
-        vProducto.setVisible(true);
+                
         dispose();
     }//GEN-LAST:event_btnAceptarNuevoProdActionPerformed
 

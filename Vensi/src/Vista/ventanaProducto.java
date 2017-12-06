@@ -83,6 +83,11 @@ public class ventanaProducto extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administración del producto");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel1.setText("Buscar:");
@@ -303,7 +308,6 @@ public class ventanaProducto extends javax.swing.JFrame
     private void btnNuevoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProdActionPerformed
         ventanaNuevoProd vNuevoProd = new ventanaNuevoProd();
         vNuevoProd.setVisible(true);
-        dispose();
     }//GEN-LAST:event_btnNuevoProdActionPerformed
 
     private void btnEditarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProdActionPerformed
@@ -315,8 +319,7 @@ public class ventanaProducto extends javax.swing.JFrame
             ventanaEditarProd.id_recibido = Integer.parseInt(tablaProd.getValueAt(filaSelec, 10).toString());   
         
             ventanaEditarProd vEditarProd = new ventanaEditarProd();
-            vEditarProd.setVisible(true);
-            dispose();
+            vEditarProd.setVisible(true);            
         }
         else
         {
@@ -464,6 +467,10 @@ public class ventanaProducto extends javax.swing.JFrame
         }
         llenarTabla();
     }//GEN-LAST:event_cbProveedoresActionPerformed
+
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        llenarTabla();
+    }//GEN-LAST:event_formWindowActivated
     
     public static void main(String args[]) 
     {

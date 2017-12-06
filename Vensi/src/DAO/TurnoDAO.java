@@ -30,6 +30,34 @@ public class TurnoDAO
         JOptionPane.showMessageDialog(null, "Turno creado");
     }
     
+    public void modificar(Turno t, int id)
+    {
+        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
+        Session session = sesion.openSession();
+               
+        Turno turno = null;
+                   
+        turno = (Turno)session.get(Turno.class, id);
+        turno.setFechaHoraInicio(t.getFechaHoraInicio());
+        turno.setFechaHoraFin(t.getFechaHoraFin());
+            
+        Transaction tx = session.beginTransaction();
+        try
+        {
+            session.merge(turno);
+            tx.commit();
+        }
+        catch(Exception e)
+        {
+            if (tx.isActive())
+		tx.rollback();
+                    e.printStackTrace();
+		throw e;
+        }        
+        session.close();
+        JOptionPane.showMessageDialog(null, "Turno modificado");
+    }
+    
     public List<Turno> listar()
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();

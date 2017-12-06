@@ -247,7 +247,6 @@ public class ventanaProveedor extends javax.swing.JFrame
     private void btnNuevoProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNuevoProvActionPerformed
         ventanaNuevoProv vNuevoProv = new ventanaNuevoProv();
         vNuevoProv.setVisible(true);
-        dispose(); 
     }//GEN-LAST:event_btnNuevoProvActionPerformed
 
     private void btnEditarProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEditarProvActionPerformed
@@ -260,7 +259,6 @@ public class ventanaProveedor extends javax.swing.JFrame
 
             ventanaEditarProv vEditarProv = new ventanaEditarProv();
             vEditarProv.setVisible(true);
-            dispose(); 
         }
         else
         {

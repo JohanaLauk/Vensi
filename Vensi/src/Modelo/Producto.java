@@ -4,18 +4,18 @@ import java.util.*;
 
 public class Producto  implements java.io.Serializable 
 {
-     private int id;
-     private String codigo;
-     private String descripcion;
-     private double precioCosto;
-     private double precioVenta;
-     private double precioVentaXPeso;
-     private double stock;
-     private double stockMinimo;
-     private int pesoEnvase;
-     private boolean porPeso = false;   //es por unidad
-     private boolean estado = true;
-     private Set<Proveedor> proveedor = new HashSet<Proveedor>();
+    private int id;
+    private String codigo;
+    private String descripcion;
+    private double precioCosto;
+    private double precioVenta;
+    private double precioVentaXPeso;
+    private double stock;
+    private double stockMinimo;
+    private int pesoEnvase;
+    private boolean porPeso = false;   //es por unidad
+    private boolean estado = true;
+    private Set<Proveedor> proveedor = new HashSet<Proveedor>();
 
     public Producto() 
     { }
@@ -119,19 +119,16 @@ public class Producto  implements java.io.Serializable
         this.porPeso = porPeso;
     }
 
-    public Set<Proveedor> getProveedor() {
+    public Set<Proveedor> getProveedor() 
+    {
         return proveedor;
     }
-
-    public void setProveedor(Set<Proveedor> proveedor) {
+    public void setProveedor(Set<Proveedor> proveedor) 
+    {
         this.proveedor = proveedor;
-    }
-    
-    public void addProveedor(Proveedor p){
+    }    
+    public void addProveedor(Proveedor p)
+    {
         this.proveedor.add(p);
-    }
-
-    
-    
-    
+    }   
 }

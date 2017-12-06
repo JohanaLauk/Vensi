@@ -203,15 +203,14 @@ public class ventanaEditarProd extends javax.swing.JFrame
                         .addComponent(jLabel2)
                         .addGap(18, 18, 18)
                         .addComponent(txfdEditarDescripcion, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel4)
-                            .addGap(18, 18, 18)
-                            .addComponent(txfdEditarPrecioVenta))
-                        .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addGap(18, 18, 18)
-                            .addComponent(txfdEditarPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addGap(18, 18, 18)
+                        .addComponent(txfdEditarPrecioVenta))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel3)
+                        .addGap(18, 18, 18)
+                        .addComponent(txfdEditarPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 89, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
@@ -303,8 +302,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEditarActionPerformed
-        ventanaProducto vProducto = new ventanaProducto();
-        vProducto.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarEditarActionPerformed
 
@@ -344,9 +341,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         }
         
         pDAO.modificar(prod, id_recibido);
-        
-        ventanaProducto vProducto = new ventanaProducto();
-        vProducto.setVisible(true);
+                
         dispose();        
     }//GEN-LAST:event_btnAceptarEditarActionPerformed
 

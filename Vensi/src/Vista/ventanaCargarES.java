@@ -206,8 +206,6 @@ public class ventanaCargarES extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        ventanaDetalleCaja vDetalleCaja = new ventanaDetalleCaja();
-        vDetalleCaja.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
@@ -261,8 +259,6 @@ public class ventanaCargarES extends javax.swing.JFrame
     }//GEN-LAST:event_cbTipoESActionPerformed
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        ventanaDetalleCaja vDetalleCaja = new ventanaDetalleCaja();
-        vDetalleCaja.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
 
@@ -308,6 +304,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         unaES.setTurno(turnoActual);
         
         esDAO.alta(unaES);     
+        JOptionPane.showMessageDialog(null, "Se ha registrado la E/S.");
         
         cbTipoES.setSelectedItem("Ninguno");
         txfdMonto.setText("");
@@ -363,21 +360,21 @@ public class ventanaCargarES extends javax.swing.JFrame
 
     private void txfdMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdMontoKeyTyped
         char c = evt.getKeyChar();
-        if((c < '1' || c > '9') && 
+        if((c < '0' || c > '9') && 
                 (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfdMontoKeyTyped
 
     private void txfdCantidadProdAnularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadProdAnularKeyTyped
         char c = evt.getKeyChar();
-        if((c < '1' || c > '9') && 
+        if((c < '0' || c > '9') && 
                 (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfdCantidadProdAnularKeyTyped
 
     private void txfdCodigoProdAnularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCodigoProdAnularKeyTyped
        char c = evt.getKeyChar();
-        if((c < '1' || c > '9') && 
+        if((c < '0' || c > '9') && 
                 (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfdCodigoProdAnularKeyTyped

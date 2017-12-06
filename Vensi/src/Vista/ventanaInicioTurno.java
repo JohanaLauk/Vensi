@@ -143,15 +143,11 @@ public class ventanaInicioTurno extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        ventanaVenta vVenta = new ventanaVenta();
-        vVenta.setVisible(true);    //hace visible una ventana
-        dispose();  //cierra la ventana que deja
+        dispose();
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnNOiniciarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNOiniciarTurnoActionPerformed
-        ventanaVenta vVenta = new ventanaVenta();
-        vVenta.setVisible(true);    //hace visible una ventana
-        dispose();  //cierra la ventana que deja
+        dispose();
     }//GEN-LAST:event_btnNOiniciarTurnoActionPerformed
 
     private void txfdPinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPinKeyPressed
@@ -176,9 +172,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
             unTurno.setFechaHoraInicio(fechaHoraInicio);
                         
             tDAO.alta(unTurno);
-            
-            ventanaVenta vVenta = new ventanaVenta();
-            vVenta.setVisible(true);    
+                            
             dispose();            
         }
         else
@@ -190,7 +184,6 @@ public class ventanaInicioTurno extends javax.swing.JFrame
     }//GEN-LAST:event_btnSIiniciarTurnoActionPerformed
 
     private void txfdPinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPinKeyTyped
-        
         char c = evt.getKeyChar();
         if((c < '0' || c > '9') && 
                 (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 

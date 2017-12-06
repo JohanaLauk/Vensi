@@ -54,6 +54,13 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setUndecorated(true);
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
@@ -155,16 +162,19 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnVolverDCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverDCActionPerformed
-        ventanaVenta vVenta = new ventanaVenta();
-        vVenta.setVisible(true);    //hace visible una ventana
-        dispose();  //cierra la ventana que deja
+        dispose();
     }//GEN-LAST:event_btnVolverDCActionPerformed
 
     private void btnCargarESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarESActionPerformed
         ventanaCargarES vCargarES = new ventanaCargarES();
-        vCargarES.setVisible(true);    //hace visible una ventana
-        dispose();  //cierra la ventana que deja
+        vCargarES.setVisible(true);
     }//GEN-LAST:event_btnCargarESActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        llenarTabla();
+        calcularVenta();
+        calcularTotalCaja();
+    }//GEN-LAST:event_formWindowGainedFocus
     
     public static void main(String args[]) 
     {

@@ -1,6 +1,5 @@
 package Vista;
 
-import Impresion.Generar;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -37,8 +36,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnAdministracion = new javax.swing.JButton();
         btnVentas = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
-        btnInventario = new javax.swing.JButton();
-        imprimirNP = new javax.swing.JButton();
+        btnCompras = new javax.swing.JButton();
         labImagenDerecha = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -141,21 +139,13 @@ public class ventanaPrincipal extends javax.swing.JFrame
         });
         panelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, 30));
 
-        btnInventario.setText("Inventario");
-        btnInventario.addActionListener(new java.awt.event.ActionListener() {
+        btnCompras.setText("Compras");
+        btnCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnInventarioActionPerformed(evt);
+                btnComprasActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnInventario, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 313, -1, 120));
-
-        imprimirNP.setText("Imprimir notaP");
-        imprimirNP.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                imprimirNPActionPerformed(evt);
-            }
-        });
-        panelPrincipal.add(imprimirNP, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 250, -1, 50));
+        panelPrincipal.add(btnCompras, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 313, -1, 120));
 
         labImagenDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/imagen_fondo_derecho.jpg"))); // NOI18N
         panelPrincipal.add(labImagenDerecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 480));
@@ -193,17 +183,11 @@ public class ventanaPrincipal extends javax.swing.JFrame
         dispose();  //cierra la ventana que deja
     }//GEN-LAST:event_btnPedidosActionPerformed
 
-    private void btnInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInventarioActionPerformed
+    private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
         ventanaInventario vInventario = new ventanaInventario();
         vInventario.setVisible(true);    //hace visible una ventana
         dispose();  //cierra la ventana que deja
-    }//GEN-LAST:event_btnInventarioActionPerformed
-
-    private void imprimirNPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_imprimirNPActionPerformed
-        Generar generarNotaPedido = new Generar();
-        generarNotaPedido.notaPedido();
-        //NO ANDA
-    }//GEN-LAST:event_imprimirNPActionPerformed
+    }//GEN-LAST:event_btnComprasActionPerformed
 
     public static void main(String args[]) 
     {               
@@ -218,12 +202,11 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAdministracion;
+    private javax.swing.JButton btnCompras;
     private javax.swing.JButton btnHistorial;
-    private javax.swing.JButton btnInventario;
     private javax.swing.JButton btnPedidos;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVentas;
-    private javax.swing.JButton imprimirNP;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JLabel labImagenDerecha;

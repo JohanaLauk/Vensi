@@ -129,6 +129,12 @@ public class ventanaHistorial extends javax.swing.JFrame
 
         labNro.setText("Ingrese el n°:");
 
+        txfdNro.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdNroKeyTyped(evt);
+            }
+        });
+
         labFecha.setText("Ingrese la fecha:");
 
         LabFechaHasta.setText("hasta");
@@ -347,6 +353,13 @@ public class ventanaHistorial extends javax.swing.JFrame
         vVisualizarHistorial.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnVisualizarHistorialActionPerformed
+
+    private void txfdNroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdNroKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume(); 
+    }//GEN-LAST:event_txfdNroKeyTyped
 
     public static void main(String args[]) 
     {
