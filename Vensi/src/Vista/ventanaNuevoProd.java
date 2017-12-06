@@ -300,7 +300,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             unProd.setPrecioVenta(Double.parseDouble(txfdPrecioVenta.getText()));
         }
         
-        unProd.setStockMinimo(Double.parseDouble(txfdStockMinimo.getText()));
+        unProd.setStockMinimo(Integer.parseInt(txfdStockMinimo.getText()));
                 
         if (rbPeso.isSelected())
         {

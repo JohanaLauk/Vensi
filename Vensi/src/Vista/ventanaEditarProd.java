@@ -312,7 +312,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         prod.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());        
         prod.setPrecioCosto(Double.parseDouble(txfdEditarPrecioCosto.getText()));
         prod.setPrecioVenta(Double.parseDouble(txfdEditarPrecioVenta.getText()));
-        prod.setStockMinimo(Double.parseDouble(txfdEditarStockMinimo.getText()));
+        prod.setStockMinimo(Integer.parseInt(txfdEditarStockMinimo.getText()));
                 
         if (rbPeso.isSelected())
         {

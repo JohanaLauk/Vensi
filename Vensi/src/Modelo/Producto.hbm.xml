@@ -23,11 +23,11 @@
         <property name="precioVentaXPeso" type="double">
             <column name="precio_venta_x_peso" precision="8" not-null="false" />
         </property>
-        <property name="stock" type="double">
-            <column name="stock" precision="8" scale="3" not-null="true" />
+        <property name="stock" type="int">
+            <column name="stock" not-null="true" />
         </property>
-        <property name="stockMinimo" type="double">
-            <column name="stock_minimo" precision="8" scale="3" not-null="true" />
+        <property name="stockMinimo" type="int">
+            <column name="stock_minimo" not-null="true" />
         </property>
         <property name="pesoEnvase" type="int">
             <column name="peso_envase" not-null="false" />

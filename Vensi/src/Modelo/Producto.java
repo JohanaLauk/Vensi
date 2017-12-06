@@ -10,8 +10,8 @@ public class Producto  implements java.io.Serializable
     private double precioCosto;
     private double precioVenta;
     private double precioVentaXPeso;
-    private double stock;
-    private double stockMinimo;
+    private int stock;
+    private int stockMinimo;
     private int pesoEnvase;
     private boolean porPeso = false;   //es por unidad
     private boolean estado = true;
@@ -73,25 +73,23 @@ public class Producto  implements java.io.Serializable
     {
         this.precioVentaXPeso = precioVentaXPeso;
     }
-    
-    public double getStock() 
-    {
-        return this.stock;
-    }    
-    public void setStock(double stock)
-    {
+
+    public int getStock() {
+        return stock;
+    }
+
+    public void setStock(int stock) {
         this.stock = stock;
     }
-    
-    public double getStockMinimo() 
-    {
-        return this.stockMinimo;
-    }    
-    public void setStockMinimo(double stockMinimo) 
-    {
+
+    public int getStockMinimo() {
+        return stockMinimo;
+    }
+
+    public void setStockMinimo(int stockMinimo) {
         this.stockMinimo = stockMinimo;
     }
-    
+            
     public int getPesoEnvase() 
     {
         return this.pesoEnvase;
