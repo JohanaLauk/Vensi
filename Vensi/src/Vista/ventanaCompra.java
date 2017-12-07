@@ -1,7 +1,6 @@
 package Vista;
 
 import DAO.*;
-
 import Modelo.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -15,7 +14,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-public class ventanaInventario extends javax.swing.JFrame 
+public class ventanaCompra extends javax.swing.JFrame 
 {
     ProductoDAO prodDAO = new ProductoDAO();
     ProveedorDAO provDAO = new ProveedorDAO();
@@ -33,7 +32,7 @@ public class ventanaInventario extends javax.swing.JFrame
     Proveedor elProv = null;
     String provSelec = null;
     
-    public ventanaInventario() 
+    public ventanaCompra() 
     {
         initComponents();
         
@@ -500,7 +499,7 @@ public class ventanaInventario extends javax.swing.JFrame
     }//GEN-LAST:event_btnCargarInventarioActionPerformed
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed
-        String provSelec = String.valueOf(cbProveedores.getSelectedItem());
+        provSelec = String.valueOf(cbProveedores.getSelectedItem());
         List<Proveedor> listaTotalProv = provDAO.listar("Habilitados");
                 
         if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
@@ -513,6 +512,24 @@ public class ventanaInventario extends javax.swing.JFrame
                     llenarTabla();
                 }
             }
+            
+            String cadena = txfdBuscarProd.getText();        
+            List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
+            llenarTablaBusqueda(listaBusqueda);
+            
+            if (cadena.equals("") || cadena == null)
+            {
+                cbFiltro.setEnabled(true);
+                cbOrdenCampo.setEnabled(true);
+                cbTipoOrden.setEnabled(true); 
+                llenarTabla();
+            }
+            else
+            {
+                cbFiltro.setEnabled(false);
+                cbOrdenCampo.setEnabled(false);
+                cbTipoOrden.setEnabled(false);
+            }
         }
         else
         {
@@ -522,42 +539,56 @@ public class ventanaInventario extends javax.swing.JFrame
 
     private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
         String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
         llenarTablaBusqueda(listaBusqueda);
 
-        if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
+        if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
         {
-            cbFiltro.setEnabled(true);
-            cbOrdenCampo.setEnabled(true);
-            cbTipoOrden.setEnabled(true);
-            llenarTabla();
-        }
+            if (cadena.equals("") || cadena == null)
+            {
+                cbFiltro.setEnabled(true);
+                cbOrdenCampo.setEnabled(true);
+                cbTipoOrden.setEnabled(true); 
+                llenarTabla();
+            }
+            else
+            {
+                cbFiltro.setEnabled(false);
+                cbOrdenCampo.setEnabled(false);
+                cbTipoOrden.setEnabled(false);
+            }
+        } 
         else
         {
-            cbFiltro.setEnabled(false);
-            cbOrdenCampo.setEnabled(false);
-            cbTipoOrden.setEnabled(false);
+            mostrarTablaVacia();
         }
     }//GEN-LAST:event_txfdBuscarProdKeyReleased
 
     private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
-        if (cbFiltro.getSelectedItem().equals("Todos"))
+        if (cbProveedores.getSelectedItem().equals("Seleccionar"))
         {
-            filtroSelec = "Todos";
+            mostrarTablaVacia();
         }
         else
         {
-            if (cbFiltro.getSelectedItem().equals("Habilitados"))
+            if (cbFiltro.getSelectedItem().equals("Todos"))
             {
-                filtroSelec = "Habilitados";
+                filtroSelec = "Todos";
             }
             else
             {
-                filtroSelec = "Deshabilitados";
+                if (cbFiltro.getSelectedItem().equals("Habilitados"))
+                {
+                    filtroSelec = "Habilitados";                
+                }
+                else
+                {
+                    filtroSelec = "Deshabilitados";
+                }
             }
-        }
 
-        llenarTabla();
+            llenarTabla();
+        } 
     }//GEN-LAST:event_cbFiltroActionPerformed
 
     private void cbOrdenCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrdenCampoActionPerformed
@@ -608,21 +639,28 @@ public class ventanaInventario extends javax.swing.JFrame
 
     private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
         String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
         llenarTablaBusqueda(listaBusqueda);
 
-        if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
+        if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
         {
-            cbFiltro.setEnabled(true);
-            cbOrdenCampo.setEnabled(true);
-            cbTipoOrden.setEnabled(true);
-            llenarTabla();
-        }
+            if (cadena.equals("") || cadena == null)
+            {
+                cbFiltro.setEnabled(true);
+                cbOrdenCampo.setEnabled(true);
+                cbTipoOrden.setEnabled(true); 
+                llenarTabla();
+            }
+            else
+            {
+                cbFiltro.setEnabled(false);
+                cbOrdenCampo.setEnabled(false);
+                cbTipoOrden.setEnabled(false);
+            }
+        } 
         else
         {
-            cbFiltro.setEnabled(false);
-            cbOrdenCampo.setEnabled(false);
-            cbTipoOrden.setEnabled(false);
+            mostrarTablaVacia();
         }
     }//GEN-LAST:event_btnBuscarProdActionPerformed
 
@@ -632,7 +670,7 @@ public class ventanaInventario extends javax.swing.JFrame
         {
             public void run() 
             {
-                new ventanaInventario().setVisible(true);
+                new ventanaCompra().setVisible(true);
             }
         });
     }

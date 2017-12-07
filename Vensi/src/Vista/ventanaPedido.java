@@ -445,23 +445,30 @@ public class ventanaPedido extends javax.swing.JFrame
     }//GEN-LAST:event_btnVolverMPActionPerformed
 
     private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
-        if (cbFiltro.getSelectedItem().equals("Todos"))
+        if (cbProveedores.getSelectedItem().equals("Seleccionar"))
         {
-            filtroSelec = "Todos";
+            mostrarTablaVacia();
         }
         else
         {
-            if (cbFiltro.getSelectedItem().equals("Habilitados"))
+            if (cbFiltro.getSelectedItem().equals("Todos"))
             {
-                filtroSelec = "Habilitados";                
+                filtroSelec = "Todos";
             }
             else
             {
-                filtroSelec = "Deshabilitados";
+                if (cbFiltro.getSelectedItem().equals("Habilitados"))
+                {
+                    filtroSelec = "Habilitados";                
+                }
+                else
+                {
+                    filtroSelec = "Deshabilitados";
+                }
             }
-        }
-        
-        llenarTabla();
+
+            llenarTabla();
+        }   
     }//GEN-LAST:event_cbFiltroActionPerformed
 
     private void cbOrdenCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrdenCampoActionPerformed
@@ -511,47 +518,61 @@ public class ventanaPedido extends javax.swing.JFrame
     }//GEN-LAST:event_cbTipoOrdenActionPerformed
 
     private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
-        String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+        String cadena = txfdBuscarProd.getText();        
+        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
         llenarTablaBusqueda(listaBusqueda);
         
-        if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
+        if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
         {
-            cbFiltro.setEnabled(true);
-            cbOrdenCampo.setEnabled(true);
-            cbTipoOrden.setEnabled(true); 
-            llenarTabla();
-        }
+            if (cadena.equals("") || cadena == null)
+            {
+                cbFiltro.setEnabled(true);
+                cbOrdenCampo.setEnabled(true);
+                cbTipoOrden.setEnabled(true); 
+                llenarTabla();
+            }
+            else
+            {
+                cbFiltro.setEnabled(false);
+                cbOrdenCampo.setEnabled(false);
+                cbTipoOrden.setEnabled(false);
+            }
+        } 
         else
         {
-            cbFiltro.setEnabled(false);
-            cbOrdenCampo.setEnabled(false);
-            cbTipoOrden.setEnabled(false);
+            mostrarTablaVacia();
         }  
     }//GEN-LAST:event_btnBuscarProdActionPerformed
 
     private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
-        String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+        String cadena = txfdBuscarProd.getText();        
+        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
         llenarTablaBusqueda(listaBusqueda);
         
-        if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
+        if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
         {
-            cbFiltro.setEnabled(true);
-            cbOrdenCampo.setEnabled(true);
-            cbTipoOrden.setEnabled(true); 
-            llenarTabla();
-        }
+            if (cadena.equals("") || cadena == null)
+            {
+                cbFiltro.setEnabled(true);
+                cbOrdenCampo.setEnabled(true);
+                cbTipoOrden.setEnabled(true); 
+                llenarTabla();
+            }
+            else
+            {
+                cbFiltro.setEnabled(false);
+                cbOrdenCampo.setEnabled(false);
+                cbTipoOrden.setEnabled(false);
+            }
+        } 
         else
         {
-            cbFiltro.setEnabled(false);
-            cbOrdenCampo.setEnabled(false);
-            cbTipoOrden.setEnabled(false);
+            mostrarTablaVacia();
         }
     }//GEN-LAST:event_txfdBuscarProdKeyReleased
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed
-        String provSelec = String.valueOf(cbProveedores.getSelectedItem());
+        provSelec = String.valueOf(cbProveedores.getSelectedItem());
         List<Proveedor> listaTotalProv = provDAO.listar("Habilitados");
                 
         if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
@@ -563,6 +584,24 @@ public class ventanaPedido extends javax.swing.JFrame
                     elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
                     llenarTabla();
                 }
+            }
+            
+            String cadena = txfdBuscarProd.getText();        
+            List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
+            llenarTablaBusqueda(listaBusqueda);
+            
+            if (cadena.equals("") || cadena == null)
+            {
+                cbFiltro.setEnabled(true);
+                cbOrdenCampo.setEnabled(true);
+                cbTipoOrden.setEnabled(true); 
+                llenarTabla();
+            }
+            else
+            {
+                cbFiltro.setEnabled(false);
+                cbOrdenCampo.setEnabled(false);
+                cbTipoOrden.setEnabled(false);
             }
         }
         else
@@ -694,7 +733,7 @@ public class ventanaPedido extends javax.swing.JFrame
     }
 
     public void llenarTabla()
-    {        
+    {   
         modelo = new DefaultTableModel();
         List<Producto> listaInicial = prodDAO.listar(OrdenarTabla(), elProv.getId());
         String[] datos = new String[6];
