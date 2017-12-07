@@ -10,15 +10,16 @@ import javax.swing.JOptionPane;
 
 public class ventanaCargarES extends javax.swing.JFrame 
 {
+    ItemVentaDAO itDAO = new ItemVentaDAO();
     EntradaSalidaDAO esDAO = new EntradaSalidaDAO();
     TurnoDAO tDAO = new TurnoDAO();
     ProductoDAO pDAO = new ProductoDAO();
     DefaultListModel modeloList;
-    Producto productoSelec = null;
-    Turno turnoSelec = null;
-    ItemVentaDAO iDAO = new ItemVentaDAO();
-            
-    String nombre="";
+    
+    Turno turnoActual = null;    
+    Producto prodSelec = null; 
+    ItemVenta item = null;
+    String nombre = "";
     
     public ventanaCargarES() 
     {
@@ -33,6 +34,8 @@ public class ventanaCargarES extends javax.swing.JFrame
             nombre = "Ninguno";
             habDeshabComponentes(nombre);            
         }        
+        
+        turnoActual = tDAO.obtenerUltimo();
     }
     
     @SuppressWarnings("unchecked")
@@ -54,8 +57,8 @@ public class ventanaCargarES extends javax.swing.JFrame
         panelidentificarProd = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        txfdCantidadProdAnular = new javax.swing.JTextField();
-        txfdCodigoProdAnular = new javax.swing.JTextField();
+        txfdCantProdAnular = new javax.swing.JTextField();
+        txfdCodNomProdAnular = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         listaInfoProdAnular = new javax.swing.JList<>();
@@ -84,7 +87,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         panelES.setBackground(new java.awt.Color(0, 0, 0));
         panelES.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        cbTipoES.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Apertura de caja", "Retiro", "Anulación de venta", "Sueldo", "Mantenimiento", "Gasto vario", "Proveedor", "Alquiler", "Impuesto", "Cambio" }));
+        cbTipoES.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Apertura de caja", "Retiro", "Anulación de venta", "Sueldo" }));
         cbTipoES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoESActionPerformed(evt);
@@ -145,43 +148,32 @@ public class ventanaCargarES extends javax.swing.JFrame
         getContentPane().add(labTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -3, -1, 50));
 
         panelidentificarProd.setBackground(new java.awt.Color(0, 0, 0));
-        panelidentificarProd.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Ingrese el código del producto:");
-        panelidentificarProd.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 40, -1, 20));
+        jLabel1.setText("Busque el producto:");
 
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setText("Cantidad:");
-        panelidentificarProd.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, -1, 20));
+        jLabel5.setText("Ingerese la cantidad:");
 
-        txfdCantidadProdAnular.addKeyListener(new java.awt.event.KeyAdapter() {
+        txfdCantProdAnular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txfdCantidadProdAnularKeyReleased(evt);
+                txfdCantProdAnularKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
-                txfdCantidadProdAnularKeyTyped(evt);
+                txfdCantProdAnularKeyTyped(evt);
             }
         });
-        panelidentificarProd.add(txfdCantidadProdAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 80, 90, -1));
 
-        txfdCodigoProdAnular.addKeyListener(new java.awt.event.KeyAdapter() {
+        txfdCodNomProdAnular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txfdCodigoProdAnularKeyReleased(evt);
-            }
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txfdCodigoProdAnularKeyTyped(evt);
+                txfdCodNomProdAnularKeyReleased(evt);
             }
         });
-        panelidentificarProd.add(txfdCodigoProdAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 40, 130, -1));
 
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Informacíon del producto:");
-        panelidentificarProd.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 120, -1, -1));
 
         jScrollPane1.setViewportView(listaInfoProdAnular);
-
-        panelidentificarProd.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 140, 310, 140));
 
         btnAnular.setText("Anular");
         btnAnular.addActionListener(new java.awt.event.ActionListener() {
@@ -189,12 +181,60 @@ public class ventanaCargarES extends javax.swing.JFrame
                 btnAnularActionPerformed(evt);
             }
         });
-        panelidentificarProd.add(btnAnular, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 310, 100, 30));
 
         labTituloPanelAnularProd.setForeground(new java.awt.Color(255, 255, 255));
         labTituloPanelAnularProd.setText("ANULACIÓN DE PRODUCTO");
         labTituloPanelAnularProd.setToolTipText("");
-        panelidentificarProd.add(labTituloPanelAnularProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
+
+        javax.swing.GroupLayout panelidentificarProdLayout = new javax.swing.GroupLayout(panelidentificarProd);
+        panelidentificarProd.setLayout(panelidentificarProdLayout);
+        panelidentificarProdLayout.setHorizontalGroup(
+            panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelidentificarProdLayout.createSequentialGroup()
+                .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(panelidentificarProdLayout.createSequentialGroup()
+                        .addGap(150, 150, 150)
+                        .addComponent(labTituloPanelAnularProd))
+                    .addGroup(panelidentificarProdLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jLabel2))
+                    .addGroup(panelidentificarProdLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelidentificarProdLayout.createSequentialGroup()
+                        .addGap(180, 180, 180)
+                        .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelidentificarProdLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel1))
+                        .addGap(18, 18, 18)
+                        .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txfdCodNomProdAnular)
+                            .addComponent(txfdCantProdAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(50, 50, 50))
+        );
+        panelidentificarProdLayout.setVerticalGroup(
+            panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelidentificarProdLayout.createSequentialGroup()
+                .addGap(10, 10, 10)
+                .addComponent(labTituloPanelAnularProd)
+                .addGap(36, 36, 36)
+                .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfdCodNomProdAnular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(10, 10, 10)
+                .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfdCantProdAnular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
+                .addComponent(jLabel2)
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(30, 30, 30)
+                .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         getContentPane().add(panelidentificarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 420, 370));
 
@@ -229,31 +269,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         if (cbTipoES.getSelectedItem().equals("Sueldo"))
         {
             nombre = "Sueldo";
-        }
-        if (cbTipoES.getSelectedItem().equals("Mantenimiento"))
-        {
-            nombre = "Mantenimiento";
-        }
-        if (cbTipoES.getSelectedItem().equals("Gasto vario"))
-        {
-            nombre = "Gasto vario";
-        }
-        if (cbTipoES.getSelectedItem().equals("Proveedor"))
-        {
-            nombre = "Proveedor";
-        }
-        if (cbTipoES.getSelectedItem().equals("Alquiler"))
-        {
-            nombre = "Alquiler";
-        }
-        if (cbTipoES.getSelectedItem().equals("Impuesto"))
-        {
-            nombre = "Impuesto";
-        }   
-        if (cbTipoES.getSelectedItem().equals("Cambio"))
-        {
-            nombre = "Cambio";
-        }
+        }        
         
         habDeshabComponentes(nombre);
     }//GEN-LAST:event_cbTipoESActionPerformed
@@ -271,7 +287,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         }
         else
         {
-            if (nombre.equals("Apertura de caja") || nombre.equals("Cambio"))
+            if (nombre.equals("Apertura de caja"))
             {
                 tipo = true;    //entrada
             }
@@ -298,9 +314,8 @@ public class ventanaCargarES extends javax.swing.JFrame
         
         unaES.setMonto(montoES);
         unaES.setTipo(tipo);
-        unaES.setFechaHora(new Date());
-        
-        Turno turnoActual = tDAO.obtenerUltimo();
+        unaES.setFechaHora(new Date());        
+       
         unaES.setTurno(turnoActual);
         
         esDAO.alta(unaES);     
@@ -311,37 +326,55 @@ public class ventanaCargarES extends javax.swing.JFrame
         txAreaDescripcion.setText("");
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
-    private void txfdCodigoProdAnularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCodigoProdAnularKeyReleased
-        String cadena = txfdCodigoProdAnular.getText();
-        llenarListBusqueda(cadena);  
-    }//GEN-LAST:event_txfdCodigoProdAnularKeyReleased
+    private void txfdCodNomProdAnularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCodNomProdAnularKeyReleased
+        String cadena = txfdCodNomProdAnular.getText();
+        
+        if (!cadena.equals(""))
+        {
+            item = itDAO.buscar(cadena);
+            if (item != null)
+            {
+                llenarListBusqueda(item.getProducto());
+            }
+            else
+            {
+                llenarListBusqueda(null);
+            }            
+        }
+        else
+        {
+            llenarListBusqueda(null);
+        }
+    }//GEN-LAST:event_txfdCodNomProdAnularKeyReleased
 
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
-        int cantidad = Integer.parseInt(txfdCantidadProdAnular.getText());
-        turnoSelec = tDAO.obtenerUltimo();
-        List<ItemVenta> lista = iDAO.listar(turnoSelec.getId());
+        int cantidad = Integer.parseInt(txfdCantProdAnular.getText());
+        turnoActual = tDAO.obtenerUltimo();
+        List<ItemVenta> lista = itDAO.listar(turnoActual.getId());
         
-        for(ItemVenta i : lista)
+        for (ItemVenta i : lista)
         {
-            if(i.getProducto().getId() == productoSelec.getId())
+            if(i.getProducto().getId() == prodSelec.getId())
             {
                 if(cantidad <= i.getCantidad())
                 {
-                    pDAO.sumarStock(productoSelec.getId(),cantidad);
-                    EntradaSalida es = new EntradaSalida();
-                    es.setDescripcion(productoSelec.getDescripcion());
-                    es.setFechaHora(new Date());
-                    es.setNombre("Anulación de venta.");
-                    es.setTipo(true);
-                    es.setTurno(turnoSelec);
+                    pDAO.sumarStock(prodSelec.getId(),cantidad);
                     
-                    if(productoSelec.isPorPeso())
+                    EntradaSalida es = new EntradaSalida();
+                    
+                    es.setDescripcion(prodSelec.getDescripcion());
+                    es.setFechaHora(new Date());
+                    es.setNombre("Anulación de venta");
+                    es.setTipo(true);
+                    es.setTurno(turnoActual);
+                    
+                    if(prodSelec.isPorPeso())
                     {
-                        es.setMonto(productoSelec.getPrecioVentaXPeso()*cantidad);
+                        es.setMonto(prodSelec.getPrecioVentaXPeso()*cantidad);
                     }
                     else
                     {
-                        es.setMonto(productoSelec.getPrecioVenta()*cantidad);
+                        es.setMonto(prodSelec.getPrecioVenta()*cantidad);
                     }
                     esDAO.alta(es);
                     JOptionPane.showMessageDialog(null, "Venta anulada.");
@@ -365,19 +398,12 @@ public class ventanaCargarES extends javax.swing.JFrame
             evt.consume();
     }//GEN-LAST:event_txfdMontoKeyTyped
 
-    private void txfdCantidadProdAnularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadProdAnularKeyTyped
+    private void txfdCantProdAnularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantProdAnularKeyTyped
         char c = evt.getKeyChar();
         if((c < '0' || c > '9') && 
                 (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
-    }//GEN-LAST:event_txfdCantidadProdAnularKeyTyped
-
-    private void txfdCodigoProdAnularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCodigoProdAnularKeyTyped
-       char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
-            evt.consume();
-    }//GEN-LAST:event_txfdCodigoProdAnularKeyTyped
+    }//GEN-LAST:event_txfdCantProdAnularKeyTyped
 
     private void txfdMontoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdMontoKeyReleased
         if (!txfdMonto.getText().equals(""))
@@ -390,19 +416,19 @@ public class ventanaCargarES extends javax.swing.JFrame
         }
     }//GEN-LAST:event_txfdMontoKeyReleased
 
-    private void txfdCantidadProdAnularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadProdAnularKeyReleased
-        String cadena = txfdCodigoProdAnular.getText();
+    private void txfdCantProdAnularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantProdAnularKeyReleased
+        String cadena = txfdCodNomProdAnular.getText();
         
         if (cadena == null)
         {
-            if (txfdCantidadProdAnular.getText().equals(""))
+            if (txfdCantProdAnular.getText().equals(""))
             {                  
                 btnAnular.setEnabled(false);
             } 
         }
         else
         {
-            if (txfdCantidadProdAnular.getText().equals(""))
+            if (txfdCantProdAnular.getText().equals(""))
             {                  
                 btnAnular.setEnabled(false);
             }            
@@ -411,7 +437,7 @@ public class ventanaCargarES extends javax.swing.JFrame
                 btnAnular.setEnabled(true);
             }
         }
-    }//GEN-LAST:event_txfdCantidadProdAnularKeyReleased
+    }//GEN-LAST:event_txfdCantProdAnularKeyReleased
 
     public void habDeshabComponentes(String nombre)
     {
@@ -479,38 +505,33 @@ public class ventanaCargarES extends javax.swing.JFrame
         });
     }
     
-    private void llenarListBusqueda(String cadena) 
-    {
-        productoSelec = pDAO.buscarPorCodigo(cadena);
-        
-        if (productoSelec == null)
+    private void llenarListBusqueda(Producto elProd) 
+    {      
+        if (elProd == null)
         {
             modeloList = new DefaultListModel();
             modeloList.clear();
-            
-            listaInfoProdAnular.setModel(modeloList);
             btnAnular.setEnabled(false);
         }
         else
         {
             modeloList = new DefaultListModel();
-            modeloList.addElement("Código: "+productoSelec.getCodigo());
-            modeloList.addElement("Descripción: "+productoSelec.getDescripcion());
-            modeloList.addElement("Stock: "+String.valueOf(productoSelec.getStock()));
+            modeloList.addElement("Código:  " + elProd.getCodigo());
+            modeloList.addElement("Descripción:  " + elProd.getDescripcion());
+            modeloList.addElement("Stock:  " + String.valueOf(elProd.getStock()));
 
-            if (productoSelec.isPorPeso())
+            if (elProd.isPorPeso())
             {
-                modeloList.addElement("Tipo: Por peso");
-                modeloList.addElement("Precio de venta: "+String.valueOf(productoSelec.getPrecioVentaXPeso()));
+                modeloList.addElement("Tipo:  Por peso");
+                modeloList.addElement("Precio de venta:  " + String.valueOf(elProd.getPrecioVentaXPeso()));
             }
             else
             {
-                modeloList.addElement("Tipo: Por unidad");
-                modeloList.addElement("Precio de venta: "+String.valueOf(productoSelec.getPrecioVenta()));
+                modeloList.addElement("Tipo:  Por unidad");
+                modeloList.addElement("Precio de venta:  " + String.valueOf(elProd.getPrecioVenta()));
             }
-            
-            listaInfoProdAnular.setModel(modeloList);
-        }        
+        }   
+        listaInfoProdAnular.setModel(modeloList);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -534,8 +555,8 @@ public class ventanaCargarES extends javax.swing.JFrame
     private javax.swing.JPanel panelES;
     private javax.swing.JPanel panelidentificarProd;
     private javax.swing.JTextArea txAreaDescripcion;
-    private javax.swing.JTextField txfdCantidadProdAnular;
-    private javax.swing.JTextField txfdCodigoProdAnular;
+    private javax.swing.JTextField txfdCantProdAnular;
+    private javax.swing.JTextField txfdCodNomProdAnular;
     private javax.swing.JTextField txfdMonto;
     // End of variables declaration//GEN-END:variables
 }

@@ -4,7 +4,6 @@ import DAO.ProductoDAO;
 import DAO.ProveedorDAO;
 import java.awt.Dimension;
 import java.util.List;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import Modelo.Producto;
