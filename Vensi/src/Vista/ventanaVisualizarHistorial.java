@@ -178,34 +178,37 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
             
-            List<ItemVenta> lista = iVentaDAO.listar(idSelec);
+            List<EntradaSalida> listaES = esDAO.listar(idSelec);
+            List<ItemVenta> listaIT = iVentaDAO.listar(idSelec);
             
-            for (ItemVenta i : lista) 
+            for (EntradaSalida es : listaES)            
+            {
+                datos[0] = String.valueOf(es.getNombre());
+                datos[1] = String.valueOf("---");
+                
+                if (es.isTipo())    // entrada
+                {
+                    datos[2] = String.valueOf(es.getMonto());
+                    datos[3] = String.valueOf("---"); 
+                }
+                else    //salida
+                {
+                    datos[2] = String.valueOf("---"); 
+                    datos[3] = String.valueOf(es.getMonto());
+                }
+                
+                modelo.addRow(datos);
+            }        
+            
+            for (ItemVenta i : listaIT) 
             {
                 datos[0] = i.getProducto().getDescripcion();
                 datos[1] = String.valueOf(i.getCantidad());
+                datos[2] = String.valueOf(i.getCantidad() * i.getProducto().getPrecioVenta());
+                datos[3] = String.valueOf("---");
+                
                 modelo.addRow(datos);
             }
-            
-            List<EntradaSalida> listaES = esDAO.listar(idSelec);
-            if (listaES != null) 
-            {
-                for (EntradaSalida e : listaES) 
-                {
-                    if (e.isTipo()) 
-                    {
-                        datos[2] = "✔";
-                        datos[3] = "---";
-                    } 
-                    else 
-                    {
-                        datos[2] = "---";
-                        datos[3] = "✔";
-                    }
-                }
-            }
-
-            //falta las entradas y salidas
         }
         else
         {
@@ -221,6 +224,9 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             {
                 datos[0] = i.getProducto().getDescripcion();
                 datos[1] = String.valueOf(i.getCantidad());
+                datos[2] = String.valueOf("---");
+                datos[3] = String.valueOf(i.getCantidad() * i.getProducto().getPrecioCosto());
+                
                 modelo.addRow(datos);
             }
         }
