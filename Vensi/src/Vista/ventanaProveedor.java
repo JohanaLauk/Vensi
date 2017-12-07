@@ -66,6 +66,13 @@ public class ventanaProveedor extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Administración del Proveedor");
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
         jLabel1.setText("Buscar:");
@@ -320,6 +327,10 @@ public class ventanaProveedor extends javax.swing.JFrame
         }
         llenarTabla();
     }//GEN-LAST:event_cbFiltroCampoProvActionPerformed
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        llenarTabla();
+    }//GEN-LAST:event_formWindowGainedFocus
 
     public static void main(String args[]) 
     {

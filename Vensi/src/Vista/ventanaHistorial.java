@@ -12,7 +12,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.List;
 import javax.swing.JOptionPane;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
@@ -29,7 +28,7 @@ public class ventanaHistorial extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);   //centra la ventana
         
-        cbBuscarPor.addItem("");
+        cbBuscarPor.addItem("Seleccionar");
         cbBuscarPor.addItem("Número");
         cbBuscarPor.addItem("Fecha");
         
@@ -82,6 +81,13 @@ public class ventanaHistorial extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Historial");
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
         bgTipo.add(rbTurno);
         rbTurno.setText("Turno");
@@ -301,7 +307,7 @@ public class ventanaHistorial extends javax.swing.JFrame
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cbBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBuscarPorActionPerformed
-        if (cbBuscarPor.getSelectedItem().equals(""))
+        if (cbBuscarPor.getSelectedItem().equals("Seleccionar"))
         {
             labNro.setEnabled(false);
             txfdNro.setEnabled(false);         
@@ -349,9 +355,9 @@ public class ventanaHistorial extends javax.swing.JFrame
             ventanaVisualizarHistorial.tablaSelec = "Pedido";
         }       
         ventanaVisualizarHistorial.idSelec = Integer.parseInt(tablaHistorial.getValueAt(tablaHistorial.getSelectedRow(),0).toString());
+        
         ventanaVisualizarHistorial vVisualizarHistorial = new ventanaVisualizarHistorial();
-        vVisualizarHistorial.setVisible(true);
-        dispose();
+        vVisualizarHistorial.setVisible(true);        
     }//GEN-LAST:event_btnVisualizarHistorialActionPerformed
 
     private void txfdNroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdNroKeyTyped
@@ -360,6 +366,10 @@ public class ventanaHistorial extends javax.swing.JFrame
                 (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume(); 
     }//GEN-LAST:event_txfdNroKeyTyped
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        llenarTabla(null);
+    }//GEN-LAST:event_formWindowGainedFocus
 
     public static void main(String args[]) 
     {
@@ -374,7 +384,7 @@ public class ventanaHistorial extends javax.swing.JFrame
     
     public void llenarTabla(String clase)
     {
-        if(clase == null)
+        if (clase == null)
         {
             modelo = new DefaultTableModel();
             modelo.addColumn("");
@@ -398,11 +408,16 @@ public class ventanaHistorial extends javax.swing.JFrame
             if(cbBuscarPor.getSelectedItem().equals("Fecha"))
             {
                 List<Turno> lista = tDAO.buscarPorFecha(dateDesde.getDate(), dateHasta.getDate());
-                if (lista.isEmpty()) {
+                if (lista.isEmpty()) 
+                {
                     JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
-                } else {
+                } 
+                else 
+                {
                     String[] datos = new String[3];
-                    for (Turno t : lista) {
+                    
+                    for (Turno t : lista) 
+                    {
                         datos[0] = String.valueOf(t.getId());
                         datos[1] = String.valueOf(t.getFechaHoraInicio());
                         datos[2] = String.valueOf(t.getFechaHoraFin());
@@ -414,9 +429,12 @@ public class ventanaHistorial extends javax.swing.JFrame
             else
             {
                 Turno t = tDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
-                if (t == null) {
+                if (t == null) 
+                {
                     JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
-                } else {
+                } 
+                else 
+                {
                     String[] datos = new String[3];
 
                     datos[0] = String.valueOf(t.getId());
@@ -424,8 +442,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                     datos[2] = String.valueOf(t.getFechaHoraFin());
                     modelo.addRow(datos);
                 }
-            }
-                
+            }                
             
             this.tablaHistorial.setModel(modelo);
 
@@ -441,14 +458,20 @@ public class ventanaHistorial extends javax.swing.JFrame
             modelo.addColumn("Fecha y hora");
             modelo.addColumn("Proveedor");
             
-            if(cbBuscarPor.getSelectedItem().equals("Fecha"))
+            if (cbBuscarPor.getSelectedItem().equals("Fecha"))
             {
                 List<Pedido> lista = pDAO.buscarPorFecha(dateDesde.getDate(), dateHasta.getDate());
-                if (lista.isEmpty()) {
+                
+                if (lista.isEmpty()) 
+                {
                     JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
-                } else {
+                } 
+                else 
+                {
                     String[] datos = new String[3];
-                    for (Pedido p : lista) {
+                    
+                    for (Pedido p : lista) 
+                    {
                         datos[0] = String.valueOf(p.getId());
                         datos[1] = String.valueOf(p.getFechaHora());
                         datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
@@ -460,9 +483,13 @@ public class ventanaHistorial extends javax.swing.JFrame
             else
             {
                 Pedido p = pDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
-                if (p == null) {
+                
+                if (p == null) 
+                {
                     JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
-                } else {
+                } 
+                else 
+                {
                     String[] datos = new String[3];
 
                     datos[0] = String.valueOf(p.getId());
@@ -470,7 +497,6 @@ public class ventanaHistorial extends javax.swing.JFrame
                     datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
 
                     modelo.addRow(datos);
-
                 }
             }
             this.tablaHistorial.setModel(modelo);

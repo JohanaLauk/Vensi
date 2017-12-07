@@ -8,14 +8,18 @@
             <column name="id" />
             <generator class="identity" />
         </id>
+        
         <many-to-one name = "producto" column = "id_producto" 
          class="Modelo.Producto" not-null="true"/>
+        
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />
         </property>
         <property name="fecha_hora"  type="time">
             <column name="hora" />
         </property>
-        <many-to-one name="turno" class="Modelo.Turno" column="id_turno" not-null="true" />             
+        
+        <many-to-one name = "turno" column = "id_turno" 
+         class="Modelo.Turno" not-null="true" />             
     </class>
 </hibernate-mapping>

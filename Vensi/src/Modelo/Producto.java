@@ -15,6 +15,7 @@ public class Producto  implements java.io.Serializable
     private int pesoEnvase;
     private boolean porPeso = false;   //es por unidad
     private boolean estado = true;
+    private boolean baja = false;   
     private Set<Proveedor> proveedor = new HashSet<Proveedor>();
 
     public Producto() 
@@ -106,6 +107,15 @@ public class Producto  implements java.io.Serializable
     public void setEstado(boolean estado) 
     {
         this.estado = estado;
+    }
+    
+    public boolean isBaja() 
+    {
+        return this.baja;
+    }    
+    public void setBaja(boolean baja) 
+    {
+        this.baja = baja;
     }
     
     public boolean isPorPeso() 

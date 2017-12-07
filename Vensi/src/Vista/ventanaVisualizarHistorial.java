@@ -12,22 +12,22 @@ import Modelo.Turno;
 import Modelo.EntradaSalida;
 import java.util.List;
 import javax.swing.DefaultListModel;
-import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 public class ventanaVisualizarHistorial extends javax.swing.JFrame 
-{
-    DefaultTableModel modelo;    
-    DefaultListModel modeloList;
-    public static String tablaSelec;
-    public static int idSelec;
+{       
     TurnoDAO tDAO = new TurnoDAO();
     PedidoDAO pDAO = new PedidoDAO();
     ItemVentaDAO iVentaDAO = new ItemVentaDAO();
     ItemPedidoDAO iPedidoDAO = new ItemPedidoDAO();
     EntradaSalidaDAO esDAO = new EntradaSalidaDAO();
     
+    DefaultTableModel modelo;    
+    DefaultListModel modeloList; 
+    
+    public static String tablaSelec;
+    public static int idSelec;
     
     public ventanaVisualizarHistorial() 
     {
@@ -36,7 +36,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         this.setLocationRelativeTo(null);   //centra la ventana
         
        
-       llenarDatos();
+        llenarDatos();
     }
 
     @SuppressWarnings("unchecked")
@@ -98,9 +98,9 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 78, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         btnVolverVerHistorial.setText("Volver");
@@ -142,9 +142,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVolverVerHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverVerHistorialActionPerformed
-        ventanaHistorial vHistorial = new ventanaHistorial();
-        vHistorial.setVisible(true);    //hace visible una ventana
-        dispose();  //cierra la ventana que deja
+        dispose();
     }//GEN-LAST:event_btnVolverVerHistorialActionPerformed
 
     public static void main(String args[]) 
@@ -168,29 +166,40 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         
         this.tablaTurno.setModel(modelo);
         
-        if (tablaSelec.equals("Turno")) {
-            
+        if (tablaSelec.equals("Turno")) 
+        {            
             Turno t = tDAO.buscarPorID(idSelec);
             modeloList = new DefaultListModel();
-            modeloList.addElement("Número: " + String.valueOf(t.getId()));
-            modeloList.addElement("Fecha de inicio: " + String.valueOf(t.getFechaHoraInicio()));
-            modeloList.addElement("Fecha de cierre: " + String.valueOf(t.getFechaHoraFin()));
-            listDatos.setModel(modeloList);
+            modeloList.addElement("NÚMERO:  " + String.valueOf(t.getId()));
+            modeloList.addElement("FECHA DE INICIO:  " + String.valueOf(t.getFechaHoraInicio()));
+            modeloList.addElement("FECHA DE CIERRE:  " + String.valueOf(t.getFechaHoraFin()));
+            modeloList.addElement("USUARIO:  " + String.valueOf(t.getUsuario().getNombreUsuario()));            
             
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
+            
             List<ItemVenta> lista = iVentaDAO.listar(idSelec);
-            for (ItemVenta i : lista) {
+            
+            for (ItemVenta i : lista) 
+            {
                 datos[0] = i.getProducto().getDescripcion();
                 datos[1] = String.valueOf(i.getCantidad());
                 modelo.addRow(datos);
             }
+            
             List<EntradaSalida> listaES = esDAO.listar(idSelec);
-            if (listaES != null) {
-                for (EntradaSalida e : listaES) {
-                    if (e.isTipo()) {
+            if (listaES != null) 
+            {
+                for (EntradaSalida e : listaES) 
+                {
+                    if (e.isTipo()) 
+                    {
                         datos[2] = "✔";
-                    } else {
+                        datos[3] = "---";
+                    } 
+                    else 
+                    {
+                        datos[2] = "---";
                         datos[3] = "✔";
                     }
                 }
@@ -205,10 +214,11 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             modeloList.addElement("Número: " + String.valueOf(p.getId()));
             modeloList.addElement("Proveedor: " + p.getProveedor().getRazonSocial());
             modeloList.addElement("Fecha: " + String.valueOf(p.getFechaHora()));
-            listDatos.setModel(modeloList);
-            
+                        
             List<ItemPedido> lista = iPedidoDAO.listar(idSelec);
-            for(ItemPedido i : lista){
+            
+            for(ItemPedido i : lista)
+            {
                 datos[0] = i.getProducto().getDescripcion();
                 datos[1] = String.valueOf(i.getCantidad());
                 modelo.addRow(datos);
@@ -218,14 +228,11 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         listDatos.setModel(modeloList);
         tablaTurno.setModel(modelo);
         
-        TableColumnModel tcm = tablaTurno.getColumnModel();
-        
+        TableColumnModel tcm = tablaTurno.getColumnModel();        
         tcm.getColumn(0).setPreferredWidth(200);
         tcm.getColumn(1).setPreferredWidth(100);
         tcm.getColumn(2).setPreferredWidth(100);
         tcm.getColumn(3).setPreferredWidth(100);
-        
-        tablaTurno.setAutoResizeMode(JTable.AUTO_RESIZE_SUBSEQUENT_COLUMNS); //no sé que opcion dejar, ¿que conviene?
     }
     
 

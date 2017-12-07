@@ -47,11 +47,6 @@ public class ventanaVenta extends javax.swing.JFrame
         
         this.setPreferredSize(new Dimension(1200, 500));    //al ejecutarse, la ventana aparece con esa medida
         
-        txfdCantidad.setEnabled(false);
-        btnQuitar.setEnabled(false);
-        btnAgregar.setEnabled(false);
-        
-                
         //Al hacer click en el JFrame...
         this.addMouseListener(new MouseAdapter()
         {
@@ -969,10 +964,11 @@ public class ventanaVenta extends javax.swing.JFrame
         List<Turno> listaTurno = tDAO.listar();
         
         if (listaTurno.isEmpty())  //lista vacía
-        {
-            btnDetalleCaja.setEnabled(false);
-            btnCerrarTurno.setEnabled(false);
-            
+        {   
+            for (int i=0 ; i < panelBotonesArriba.getComponents().length ; i++)
+            {
+                panelBotonesArriba.getComponent(i).setEnabled(false);
+            }
             for (int i=0 ; i < panelBusqueda.getComponents().length ; i++)
             {
                 panelBusqueda.getComponent(i).setEnabled(false);
@@ -981,10 +977,17 @@ public class ventanaVenta extends javax.swing.JFrame
             {
                 panelTablaProd.getComponent(i).setEnabled(false);
             }
+            for (int i=0 ; i < panelDatosProd.getComponents().length ; i++)
+            {
+                panelDatosProd.getComponent(i).setEnabled(false);
+            }
             for (int i=0 ; i < panelTablaCarrito.getComponents().length ; i++)
             {
                 panelTablaCarrito.getComponent(i).setEnabled(false);
             }
+            tablaProd.setEnabled(false);
+            btnIniciarTurno.setEnabled(true);  
+            btnMenuPrincipal.setEnabled(true);
         }
         else    //lista con turnos
         {      //turno abierto
@@ -994,62 +997,54 @@ public class ventanaVenta extends javax.swing.JFrame
                 {
                     panelBotonesArriba.getComponent(i).setEnabled(true);
                 }
-                btnIniciarTurno.setEnabled(false); 
-                
                 for (int i=0 ; i < panelBusqueda.getComponents().length ; i++)
                 {
                     panelBusqueda.getComponent(i).setEnabled(true);
                 }
-                
                 for (int i=0 ; i < panelTablaProd.getComponents().length ; i++)
                 {
                     panelTablaProd.getComponent(i).setEnabled(true);
                 }
-                tablaProd.setEnabled(true);
-                
                 for (int i=0 ; i < panelDatosProd.getComponents().length ; i++)
                 {
                     panelDatosProd.getComponent(i).setEnabled(true);
                 }
-                btnAgregar.setEnabled(false);
-                btnQuitar.setEnabled(false);
-                
                 for (int i=0 ; i < panelTablaCarrito.getComponents().length ; i++)
                 {
                     panelTablaCarrito.getComponent(i).setEnabled(true);
                 }
+                tablaProd.setEnabled(true);
+                btnIniciarTurno.setEnabled(false);
+                btnAgregar.setEnabled(false);
+                btnQuitar.setEnabled(false);                
             }
             else    //turno cerrado
             {      
-                if (tDAO.obtenerUltimo().getFechaHoraInicio() == null && tDAO.obtenerUltimo().getFechaHoraFin() == null)
+                if (tDAO.obtenerUltimo().getFechaHoraInicio() != null && tDAO.obtenerUltimo().getFechaHoraFin() != null)
                 {
                     for (int i=0 ; i < panelBotonesArriba.getComponents().length ; i++)
                     {
                         panelBotonesArriba.getComponent(i).setEnabled(false);
                     }
-                    btnIniciarTurno.setEnabled(true);  
-                    btnMenuPrincipal.setEnabled(true);
-
                     for (int i=0 ; i < panelBusqueda.getComponents().length ; i++)
                     {
                         panelBusqueda.getComponent(i).setEnabled(false);                    
                     }
-
                     for (int i=0 ; i < panelTablaProd.getComponents().length ; i++)
                     {
                         panelTablaProd.getComponent(i).setEnabled(false);
                     }
-                    tablaProd.setEnabled(false);
-
                     for (int i=0 ; i < panelDatosProd.getComponents().length ; i++)
                     {
                         panelDatosProd.getComponent(i).setEnabled(false);
                     }
-
                     for (int i=0 ; i < panelTablaCarrito.getComponents().length ; i++)
                     {
                         panelTablaCarrito.getComponent(i).setEnabled(false);
                     }
+                    tablaProd.setEnabled(false);
+                    btnIniciarTurno.setEnabled(true);  
+                    btnMenuPrincipal.setEnabled(true);
                 }                
             }
         }

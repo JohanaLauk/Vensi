@@ -3,7 +3,9 @@ package Vista;
 import DAO.TurnoDAO;
 import DAO.UsuarioDAO;
 import Modelo.Turno;
+import Modelo.Usuario;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ventanaInicioTurno extends javax.swing.JFrame 
@@ -163,13 +165,25 @@ public class ventanaInicioTurno extends javax.swing.JFrame
     }//GEN-LAST:event_txfdPinKeyPressed
 
     private void btnSIiniciarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSIiniciarTurnoActionPerformed
-        if(uDAO.verificar("Propietario", Integer.parseInt(txfdPin.getText())) || uDAO.verificar("Empleado", Integer.parseInt(txfdPin.getText())))
+        int pin = Integer.parseInt(txfdPin.getText());
+        
+        if(uDAO.verificar("Propietario", pin) || uDAO.verificar("Empleado", pin))
         {         
-            Turno unTurno = new Turno();            
-                    
-            Date fechaHoraInicio = new Date();   
+            Turno unTurno = new Turno(); 
+            Date fechaHoraInicio = new Date();  
+                        
+            List<Usuario> listaUsuarios = uDAO.listar();
+            
+            for (Usuario u : listaUsuarios)
+            {
+                if (u.getPin() == pin)
+                {
+                    unTurno.setUsuario(u);
+                }
+            }
             
             unTurno.setFechaHoraInicio(fechaHoraInicio);
+            
                         
             tDAO.alta(unTurno);
                             

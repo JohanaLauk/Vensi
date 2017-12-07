@@ -53,12 +53,6 @@ public class ventanaNuevoProv extends javax.swing.JFrame
 
         jLabel4.setText("Contacto:");
 
-        txfdContacto.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txfdContactoActionPerformed(evt);
-            }
-        });
-
         jLabel5.setText("Localidad:");
 
         jLabel6.setText("Provincia:");
@@ -199,14 +193,8 @@ public class ventanaNuevoProv extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
-        ventanaProveedor vProveedor = new ventanaProveedor();
-        vProveedor.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnCancelarActionPerformed
-
-    private void txfdContactoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txfdContactoActionPerformed
-       
-    }//GEN-LAST:event_txfdContactoActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         Proveedor unProv = new Proveedor();
@@ -214,15 +202,13 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         unProv.setRazonSocial(txfdRazonSocial.getText().toUpperCase());
         unProv.setCuit(txfdCuit.getText());
         unProv.setDireccion(txfdDireccion.getText().toUpperCase());
-        unProv.setLocalidad(txfdLocalidad.getText());
-        unProv.setProvincia(txfdProvincia.getText());
-        unProv.setPais(txfdPais.getText());
+        unProv.setLocalidad(txfdLocalidad.getText().toUpperCase());
+        unProv.setProvincia(txfdProvincia.getText().toUpperCase());
+        unProv.setPais(txfdPais.getText().toUpperCase());
         unProv.setContacto(txfdContacto.getText());
         
         pDAO.alta(unProv);      
         
-        ventanaProveedor vProveedor = new ventanaProveedor();
-        vProveedor.setVisible(true);
         dispose();
     }//GEN-LAST:event_btnAceptarActionPerformed
 

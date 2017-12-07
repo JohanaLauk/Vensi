@@ -14,11 +14,15 @@
             <index column="orden" />
             <one-to-many class="Modelo.ItemVenta" />
          </list> -->
+         
         <property name="fechaHoraInicio" type="date">
             <column name="fecha_hora_inicio" length="13" not-null="true" />
         </property>
         <property name="fechaHoraFin" type="date">
             <column name="fecha_hora_fin" length="13" not-null="false" />
         </property>
+        
+        <many-to-one name = "usuario" column = "id_usuario"  
+         class="Modelo.Usuario" not-null="true" />
     </class>
 </hibernate-mapping>

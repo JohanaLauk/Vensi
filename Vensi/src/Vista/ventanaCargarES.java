@@ -285,7 +285,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         double montoES = Double.parseDouble(txfdMonto.getText());
         
         EntradaSalida unaES = new EntradaSalida();
-        unaES.setNombre(nombre);       
+        unaES.setNombre(nombre.toUpperCase());       
         
         if (descripcion.equals(""))
         {

@@ -1,14 +1,21 @@
 package Vista;
 
+import DAO.EntradaSalidaDAO;
+import DAO.ItemVentaDAO;
 import DAO.TurnoDAO;
+import Modelo.EntradaSalida;
+import Modelo.ItemVenta;
 import Modelo.Turno;
 import java.util.Date;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class ventanaCierreTurno extends javax.swing.JFrame 
 {
     TurnoDAO tDAO = new TurnoDAO();    
     Turno elTurno = new Turno();
+    ItemVentaDAO itDAO = new ItemVentaDAO();
+    EntradaSalidaDAO esDAO = new EntradaSalidaDAO();
     
     public ventanaCierreTurno() 
     {
@@ -570,10 +577,32 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     }
     
     public double calcularMontoEsperado()
-    {
+    {        
+        Turno turnoActual = tDAO.obtenerUltimo();
+        List<ItemVenta> listaIT = itDAO.listar(turnoActual.getId());
+        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
+        
+        double montoVenta = 0;
+        double montoES = 0;
         double montoEsperado=0;
         
-        montoEsperado = ventanaDetalleCaja.totalCajaEsperado;        
+        for (ItemVenta iv : listaIT)
+        {
+            montoVenta = montoVenta + (iv.getProducto().getPrecioVenta() * iv.getCantidad());
+        }
+        
+        for (EntradaSalida es : listaES)
+        {
+            if (es.isTipo()) //entrada
+            {
+                montoES = montoES + es.getMonto();
+            }
+            else    //salida
+            {
+                montoES = montoES - es.getMonto();
+            }            
+        }         
+        montoEsperado = montoVenta + montoES;
         
         return montoEsperado;
     }
