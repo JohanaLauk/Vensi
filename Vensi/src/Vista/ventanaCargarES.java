@@ -339,7 +339,8 @@ public class ventanaCargarES extends javax.swing.JFrame
             else
             {
                 llenarListBusqueda(null);
-            }            
+            }    
+            
         }
         else
         {
