@@ -332,13 +332,13 @@ public class ventanaCargarES extends javax.swing.JFrame
         if (!cadena.equals(""))
         {
             item = itDAO.buscar(cadena);
-            if (item != null)
+            if (item == null)
             {
-                llenarListBusqueda(item.getProducto());
+                llenarListBusqueda(null);
             }
             else
             {
-                llenarListBusqueda(null);
+                llenarListBusqueda(item.getProducto());
             }    
             
         }
