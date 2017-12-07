@@ -57,19 +57,21 @@ public class ItemVentaDAO
         JOptionPane.showMessageDialog(null, "ItemVenta modificado");
     }
     
-    public ItemVenta buscar(String cadena)
+    public List<ItemVenta> buscar(String cadena)
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
         
-        ItemVenta it = null;
+        //ItemVenta it = null;
+        List<ItemVenta> lista = null;
         
         try
         {            
             Transaction tx = session.beginTransaction();
             Query query = session.createQuery("FROM ItemVenta it WHERE it.producto.codigo LIKE :cadena OR it.producto.descripcion LIKE :cadena");
             query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
-            it = (ItemVenta)query.uniqueResult();
+            //it = (ItemVenta)query.uniqueResult();
+            lista = query.list();
             tx.commit();
         }
         catch(Exception e)
@@ -77,7 +79,8 @@ public class ItemVentaDAO
             JOptionPane.showMessageDialog(null, "Error. Buscar itemVenta");
         }
         
-        return it;
+        //return it;
+        return lista;
     }
     
     public List<ItemVenta> listar(int nroTurno)

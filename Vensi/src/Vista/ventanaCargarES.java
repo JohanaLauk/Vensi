@@ -331,7 +331,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         
         if (!cadena.equals(""))
         {
-            item = itDAO.buscar(cadena);
+            item = itDAO.buscar(cadena).get(0);
             if (item == null)
             {
                 llenarListBusqueda(null);

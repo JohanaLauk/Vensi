@@ -592,6 +592,7 @@ public class ventanaVenta extends javax.swing.JFrame
         totalCarrito = 0;
         llenarTabla();
         llenarTablaCarrito();
+        labPrecioTotalCompra.setText("$" + totalCarrito);
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
