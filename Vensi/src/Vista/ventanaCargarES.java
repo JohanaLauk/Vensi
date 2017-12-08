@@ -329,22 +329,14 @@ public class ventanaCargarES extends javax.swing.JFrame
     private void txfdCodNomProdAnularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCodNomProdAnularKeyReleased
         String cadena = txfdCodNomProdAnular.getText();
         
-        if (!cadena.equals(""))
+        if (cadena.equals(""))
         {
-            item = itDAO.buscar(cadena).get(0);
-            if (item == null)
-            {
-                llenarListBusqueda(null);
-            }
-            else
-            {
-                llenarListBusqueda(item.getProducto());
-            }    
-            
+            llenarListBusqueda(null);            
         }
         else
         {
-            llenarListBusqueda(null);
+            List<ItemVenta> listaIV = itDAO.buscar(cadena);            
+            llenarListBusqueda(listaIV); 
         }
     }//GEN-LAST:event_txfdCodNomProdAnularKeyReleased
 
@@ -506,9 +498,11 @@ public class ventanaCargarES extends javax.swing.JFrame
         });
     }
     
-    private void llenarListBusqueda(Producto elProd) 
-    {      
-        if (elProd == null)
+    private void llenarListBusqueda(List<ItemVenta> listaIV) 
+    {     
+        modeloList = new DefaultListModel();
+        
+        if (listaIV == null)
         {
             modeloList = new DefaultListModel();
             modeloList.clear();
@@ -516,20 +510,23 @@ public class ventanaCargarES extends javax.swing.JFrame
         }
         else
         {
-            modeloList = new DefaultListModel();
-            modeloList.addElement("Código:  " + elProd.getCodigo());
-            modeloList.addElement("Descripción:  " + elProd.getDescripcion());
-            modeloList.addElement("Stock:  " + String.valueOf(elProd.getStock()));
+            for (ItemVenta x : listaIV)
+            {                
+                modeloList.addElement("Código:  " + x.getProducto().getCodigo());
+                modeloList.addElement("Descripción:  " + x.getProducto().getDescripcion());
+                modeloList.addElement("Stock:  " + String.valueOf(x.getProducto().getStock()));
 
-            if (elProd.isPorPeso())
-            {
-                modeloList.addElement("Tipo:  Por peso");
-                modeloList.addElement("Precio de venta:  " + String.valueOf(elProd.getPrecioVentaXPeso()));
-            }
-            else
-            {
-                modeloList.addElement("Tipo:  Por unidad");
-                modeloList.addElement("Precio de venta:  " + String.valueOf(elProd.getPrecioVenta()));
+                if (x.getProducto().isPorPeso())
+                {
+                    modeloList.addElement("Tipo:  Por peso");
+                    modeloList.addElement("Precio de venta:  " + String.valueOf(x.getProducto().getPrecioVentaXPeso()));
+                }
+                else
+                {
+                    modeloList.addElement("Tipo:  Por unidad");
+                    modeloList.addElement("Precio de venta:  " + String.valueOf(x.getProducto().getPrecioVenta()));
+                }
+                modeloList.addElement("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
         }   
         listaInfoProdAnular.setModel(modeloList);
