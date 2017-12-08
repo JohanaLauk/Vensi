@@ -62,15 +62,13 @@ public class ItemVentaDAO
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
         
-        //ItemVenta it = null;
         List<ItemVenta> lista = null;
         
         try
         {            
             Transaction tx = session.beginTransaction();
             Query query = session.createQuery("FROM ItemVenta it WHERE it.producto.codigo LIKE :cadena OR it.producto.descripcion LIKE :cadena");
-            query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
-            //it = (ItemVenta)query.uniqueResult();
+            query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");            
             lista = query.list();
             tx.commit();
         }
@@ -79,7 +77,6 @@ public class ItemVentaDAO
             JOptionPane.showMessageDialog(null, "Error. Buscar itemVenta");
         }
         
-        //return it;
         return lista;
     }
     

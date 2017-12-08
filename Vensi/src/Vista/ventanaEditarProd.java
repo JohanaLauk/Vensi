@@ -11,17 +11,18 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import javax.swing.JOptionPane;
 
-
 public class ventanaEditarProd extends javax.swing.JFrame {
-
-    ProductoDAO pDAO = new ProductoDAO();
-    public static int id_recibido;
     ProveedorDAO prDAO = new ProveedorDAO();
+    ProductoDAO pDAO = new ProductoDAO();
     DefaultTableModel modelo;
     TableColumnModel tcm;
+    
+    public static int id_recibido;
+    
     List<JCheckBox> checkProv = new ArrayList<>();
 
-    public ventanaEditarProd() {
+    public ventanaEditarProd() 
+    {
         initComponents();
 
         this.setLocationRelativeTo(null);     //centra la ventana  
@@ -37,10 +38,13 @@ public class ventanaEditarProd extends javax.swing.JFrame {
 
         Producto elProd = pDAO.buscarPorId(id_recibido);
 
-        if (elProd.isPorPeso() == true) {
+        if (elProd.isPorPeso() == true) 
+        {
             rbPeso.setSelected(true);
             rbUnidad.setSelected(false);
-        } else {
+        } 
+        else 
+        {
             rbUnidad.setSelected(true);
             rbPeso.setSelected(false);
         }
@@ -69,7 +73,7 @@ public class ventanaEditarProd extends javax.swing.JFrame {
         txfdEditarPrecioVenta = new javax.swing.JTextField();
         txfdEditarStockMinimo = new javax.swing.JTextField();
         txfdEditarPesoEnvase = new javax.swing.JTextField();
-        cbEditarEstado = new javax.swing.JComboBox<>();
+        cbEstado = new javax.swing.JComboBox<>();
         labIdSelec = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         rbUnidad = new javax.swing.JRadioButton();
@@ -79,6 +83,8 @@ public class ventanaEditarProd extends javax.swing.JFrame {
         btnAceptarEditar = new javax.swing.JButton();
         btnCancelarEditar = new javax.swing.JButton();
         panelProveedor = new javax.swing.JPanel();
+        jLabel10 = new javax.swing.JLabel();
+        cbSituacion = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Editar producto");
@@ -122,7 +128,7 @@ public class ventanaEditarProd extends javax.swing.JFrame {
             }
         });
 
-        cbEditarEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "Deshabilitado" }));
+        cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "Deshabilitado" }));
 
         labIdSelec.setText("ID_Prod");
 
@@ -188,6 +194,10 @@ public class ventanaEditarProd extends javax.swing.JFrame {
             .addGap(0, 163, Short.MAX_VALUE)
         );
 
+        jLabel10.setText("Situación:");
+
+        cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Suspendido", "Oferta" }));
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -215,25 +225,32 @@ public class ventanaEditarProd extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel7)
                         .addGap(18, 18, 18)
-                        .addComponent(txfdEditarStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel9)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txfdEditarPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel5)
-                            .addGap(18, 18, 18)
-                            .addComponent(rbUnidad)
-                            .addGap(18, 18, 18)
-                            .addComponent(rbPeso)))
+                        .addComponent(txfdEditarStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(labIdSelec)
+                        .addGap(62, 62, 62))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
-                        .addGap(18, 18, 18)
-                        .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 131, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(39, 39, 39)
-                        .addComponent(labIdSelec))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
+                                .addComponent(jLabel8)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(jLabel10))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel9)
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(txfdEditarPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(jPanel1Layout.createSequentialGroup()
+                                    .addComponent(jLabel5)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(rbUnidad)
+                                    .addGap(18, 18, 18)
+                                    .addComponent(rbPeso))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -257,7 +274,8 @@ public class ventanaEditarProd extends javax.swing.JFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
-                    .addComponent(txfdEditarStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfdEditarStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labIdSelec))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
@@ -268,11 +286,11 @@ public class ventanaEditarProd extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(txfdEditarPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labIdSelec)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel8)
-                        .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel8)
+                    .addComponent(cbEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10)
+                    .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addComponent(jLabel6)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -314,34 +332,57 @@ public class ventanaEditarProd extends javax.swing.JFrame {
         prod.setPrecioVenta(Double.parseDouble(txfdEditarPrecioVenta.getText()));
         prod.setStockMinimo(Integer.parseInt(txfdEditarStockMinimo.getText()));
 
-        if (rbPeso.isSelected()) {
+        if (rbPeso.isSelected()) 
+        {
             prod.setPorPeso(true);
             prod.setPesoEnvase(Integer.parseInt(txfdEditarPesoEnvase.getText()));
-        } else {
+        } 
+        else 
+        {
             prod.setPorPeso(false);
             prod.setPesoEnvase(0);
         }
 
-        if (cbEditarEstado.getSelectedItem().equals("Habilitado")) {
+        if (cbEstado.getSelectedItem().equals("Habilitado")) 
+        {
             prod.setEstado(true);
-        } else {
+        } 
+        else 
+        {
             prod.setEstado(false);
         }
+        
+        if (cbSituacion.getSelectedItem().equals("Suspendido")) 
+        {
+            prod.setSituacion(false);
+        } 
+        else 
+        {
+            if (cbSituacion.getSelectedItem().equals("Oferta")) 
+            {
+                prod.setSituacion(true);
+            }
+        }
+        
         boolean alMenosUnCheck = false;
-        for(JCheckBox c : checkProv){
-            if(c.isSelected()){
+        
+        for(JCheckBox c : checkProv)
+        {
+            if (c.isSelected())
+            {
                 prod.addProveedor(prDAO.buscarPorCuitNombre(c.getText(), "Habilitados").get(0));
                 alMenosUnCheck = true;
             }
         }
-        if (alMenosUnCheck) {
+        if (alMenosUnCheck) 
+        {
             pDAO.modificar(prod, id_recibido);
             dispose();
-        } else {
+        } 
+        else 
+        {
             JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor");
-        }
-        
-        
+        }     
     }//GEN-LAST:event_btnAceptarEditarActionPerformed
 
     private void txfdEditarPrecioCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPrecioCostoKeyTyped
@@ -393,15 +434,19 @@ public class ventanaEditarProd extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_rbPesoActionPerformed
 
-    public static void main(String args[]) {
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
+    public static void main(String args[]) 
+    {
+        java.awt.EventQueue.invokeLater(new Runnable() 
+        {
+            public void run() 
+            {
                 new ventanaEditarProd().setVisible(true);
             }
         });
     }
 
-    public void mostrarProdSelec() {
+    public void mostrarProdSelec() 
+    {
         Producto elProd = pDAO.buscarPorId(id_recibido);
 
         //MOSTRAMOS LOS DATOS GUARDADOS DEL PRODUCTO SELECCIONADO. PARA LUEGO PODER MODIFICAR
@@ -412,11 +457,41 @@ public class ventanaEditarProd extends javax.swing.JFrame {
         txfdEditarStockMinimo.setText(String.valueOf(elProd.getStockMinimo()));
         txfdEditarPesoEnvase.setText(String.valueOf(elProd.getPesoEnvase()));
 
-        if (elProd.isEstado()) {
-            cbEditarEstado.setSelectedItem("Habilitado");
-        } else {
-            cbEditarEstado.setSelectedItem("Deshabilitado");
+        if (elProd.isEstado()) 
+        {
+            cbEstado.setSelectedItem("Habilitado");
+        } 
+        else 
+        {
+            cbEstado.setSelectedItem("Deshabilitado");
         }
+    }
+    
+    private void llenarCheckBoxProv() 
+    {
+        List<Proveedor> lista = prDAO.listar("Habilitados");
+        Set<Proveedor> listaProvDelProducto = pDAO.buscarPorId(id_recibido).getProveedor();       
+        int altura = 0;
+        for (Proveedor p : lista) 
+        {
+            JCheckBox c = new JCheckBox(p.getRazonSocial());
+            c.setSize(500, 20);
+            c.setLocation(0, altura);
+            c.setVisible(true);
+            
+            for(Proveedor pr : listaProvDelProducto)
+            {
+                if(p.getId() == pr.getId())
+                {
+                    c.setSelected(true);
+                }
+            }
+            checkProv.add(c);
+            this.panelProveedor.add(c);
+            this.validate();
+            altura += 20;
+        }
+        this.panelProveedor.setVisible(true);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -424,8 +499,10 @@ public class ventanaEditarProd extends javax.swing.JFrame {
     private javax.swing.ButtonGroup bgroupProv;
     private javax.swing.JButton btnAceptarEditar;
     private javax.swing.JButton btnCancelarEditar;
-    private javax.swing.JComboBox<String> cbEditarEstado;
+    private javax.swing.JComboBox<String> cbEstado;
+    private javax.swing.JComboBox<String> cbSituacion;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -447,29 +524,4 @@ public class ventanaEditarProd extends javax.swing.JFrame {
     private javax.swing.JTextField txfdEditarPrecioVenta;
     private javax.swing.JTextField txfdEditarStockMinimo;
     // End of variables declaration//GEN-END:variables
-
-    private void llenarCheckBoxProv() {
-
-        List<Proveedor> lista = prDAO.listar("Habilitados");
-        Set<Proveedor> listaProvDelProducto = pDAO.buscarPorId(id_recibido).getProveedor();       
-        int altura = 0;
-        for (Proveedor p : lista) {
-            JCheckBox c = new JCheckBox(p.getRazonSocial());
-            c.setSize(500, 20);
-            c.setLocation(0, altura);
-            c.setVisible(true);
-            for(Proveedor pr : listaProvDelProducto)
-            {
-                if(p.getId() == pr.getId())
-                {
-                    c.setSelected(true);
-                }
-            }
-            checkProv.add(c);
-            this.panelProveedor.add(c);
-            this.validate();
-            altura += 20;
-        }
-        this.panelProveedor.setVisible(true);
-    }
 }

@@ -18,21 +18,16 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     EntradaSalidaDAO esDAO = new EntradaSalidaDAO();
     DefaultTableModel modelo;
     TableColumnModel tcm;
-    
-    static double totalCajaEsperado=0;
-            
+                
     public ventanaDetalleCaja() 
     {
         initComponents();
         
         this.setLocationRelativeTo(null);   //centra la ventana  
         
-        llenarTabla();
-                
-        txfdTotalVenta.setText("$" + String.valueOf(calcularVenta()));
-        
-        totalCajaEsperado = calcularTotalCaja();
-        txfdTotalCaja.setText("$" + String.valueOf(totalCajaEsperado));        
+        llenarTabla();                
+        txfdTotalVenta.setText("$" + String.valueOf(calcularVenta()));        
+        txfdTotalCaja.setText("$" + String.valueOf(calcularTotalCaja()));        
     }
 
     @SuppressWarnings("unchecked")
@@ -170,8 +165,8 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         llenarTabla();
-        calcularVenta();
-        calcularTotalCaja();
+        txfdTotalVenta.setText("$" + String.valueOf(calcularVenta()));        
+        txfdTotalCaja.setText("$" + String.valueOf(calcularTotalCaja())); 
     }//GEN-LAST:event_formWindowGainedFocus
     
     public static void main(String args[]) 
@@ -219,18 +214,33 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
 
             for (EntradaSalida es : listaES)            
             {
-                datos[0] = String.valueOf(es.getNombre());
-                datos[1] = String.valueOf("---");
+                if (es.getDescripcion() != null)
+                {
+                    datos[0] = String.valueOf(es.getNombre() + "   (" + es.getDescripcion() + ")");
+                }
+                else
+                {
+                    datos[0] = String.valueOf(es.getNombre());
+                }  
+                
+                if (es.getCantProd() == 0)
+                {
+                    datos[1] = String.valueOf("---");
+                }
+                else
+                {
+                    datos[1] = String.valueOf(es.getCantProd());
+                }                
                 
                 if (es.isTipo())    // entrada
                 {
-                    datos[2] = String.valueOf(es.getMonto());
+                    datos[2] = String.valueOf("$"+es.getMonto());
                     datos[3] = String.valueOf("---"); 
                 }
                 else    //salida
                 {
                     datos[2] = String.valueOf("---"); 
-                    datos[3] = String.valueOf(es.getMonto());
+                    datos[3] = String.valueOf("$"+es.getMonto());
                 }
                 
                 modelo.addRow(datos);
@@ -240,7 +250,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             {
                 datos[0] = String.valueOf(v.getProducto().getDescripcion());
                 datos[1] = String.valueOf(v.getCantidad());
-                datos[2] = String.valueOf(v.getCantidad() * v.getProducto().getPrecioVenta()); 
+                datos[2] = String.valueOf("$"+v.getCantidad() * v.getProducto().getPrecioVenta()); 
                 datos[3] = String.valueOf("---"); 
 
                 modelo.addRow(datos);

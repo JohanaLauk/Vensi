@@ -59,6 +59,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 
                 limpiarList();
                 
+                txfdCantidad.setText("");
                 txfdCantidad.setEnabled(false);
                 btnQuitar.setEnabled(false);
                 btnAgregar.setEnabled(false);

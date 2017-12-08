@@ -15,10 +15,9 @@ public class ventanaCargarES extends javax.swing.JFrame
     TurnoDAO tDAO = new TurnoDAO();
     ProductoDAO pDAO = new ProductoDAO();
     DefaultListModel modeloList;
+    List<ItemVenta> listaIV =  null;
     
-    Turno turnoActual = null;    
-    Producto prodSelec = null; 
-    ItemVenta item = null;
+    Turno turnoActual = null; 
     String nombre = "";
     
     public ventanaCargarES() 
@@ -305,25 +304,23 @@ public class ventanaCargarES extends javax.swing.JFrame
         
         if (descripcion.equals(""))
         {
-            unaES.setDescripcion("Sin descripción.");
+            unaES.setDescripcion("Sin descripción".toUpperCase());
         }
         else
         {
-            unaES.setDescripcion(descripcion);
-        }
+            unaES.setDescripcion(descripcion.toUpperCase());
+        }        
         
+        unaES.setCantProd(0);        
         unaES.setMonto(montoES);
         unaES.setTipo(tipo);
         unaES.setFechaHora(new Date());        
        
         unaES.setTurno(turnoActual);
         
-        esDAO.alta(unaES);     
-        JOptionPane.showMessageDialog(null, "Se ha registrado la E/S.");
+        esDAO.alta(unaES);
         
-        cbTipoES.setSelectedItem("Ninguno");
-        txfdMonto.setText("");
-        txAreaDescripcion.setText("");
+        dispose();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void txfdCodNomProdAnularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCodNomProdAnularKeyReleased
@@ -335,53 +332,87 @@ public class ventanaCargarES extends javax.swing.JFrame
         }
         else
         {
-            List<ItemVenta> listaIV = itDAO.buscar(cadena);            
+            listaIV = itDAO.buscar(cadena);   //lista de productos que se vendieron segun la BUSQUEDA         
             llenarListBusqueda(listaIV); 
+            
+            if (listaIV.size() == 1)
+            {
+                if (txfdCantProdAnular.getText().equals(""))
+                {
+                    btnAnular.setEnabled(false);
+                }
+                else
+                {
+                    btnAnular.setEnabled(true);
+                }
+            }
+            else 
+            {
+                btnAnular.setEnabled(false);
+            }
         }
     }//GEN-LAST:event_txfdCodNomProdAnularKeyReleased
 
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         int cantidad = Integer.parseInt(txfdCantProdAnular.getText());
+        boolean repetido = false;
         turnoActual = tDAO.obtenerUltimo();
-        List<ItemVenta> lista = itDAO.listar(turnoActual.getId());
+        List<ItemVenta> listaVentas = itDAO.listar(turnoActual.getId());
+        ItemVenta item = null;
         
-        for (ItemVenta i : lista)
+        for (ItemVenta v : listaVentas) //lista de ventas
         {
-            if(i.getProducto().getId() == prodSelec.getId())
+            for (ItemVenta i : listaIV) //contiene 1 sólo prod
             {
-                if(cantidad <= i.getCantidad())
+                if (v.getProducto().getId() == i.getProducto().getId())     //El prod buscado se encuentra en las ventas. 
                 {
-                    pDAO.sumarStock(prodSelec.getId(),cantidad);
-                    
-                    EntradaSalida es = new EntradaSalida();
-                    
-                    es.setDescripcion(prodSelec.getDescripcion());
-                    es.setFechaHora(new Date());
-                    es.setNombre("Anulación de venta");
-                    es.setTipo(true);
-                    es.setTurno(turnoActual);
-                    
-                    if(prodSelec.isPorPeso())
-                    {
-                        es.setMonto(prodSelec.getPrecioVentaXPeso()*cantidad);
-                    }
-                    else
-                    {
-                        es.setMonto(prodSelec.getPrecioVenta()*cantidad);
-                    }
-                    esDAO.alta(es);
-                    JOptionPane.showMessageDialog(null, "Venta anulada.");
+                    repetido = true; 
+                    item = v;
+                }   
+            }
+        } 
+        if (repetido)
+        {
+            if (item.getCantidad() >= cantidad)
+            {
+                pDAO.sumarStock(item.getProducto().getId(), cantidad);   //actualizo el stock del producto
+                item.setCantidad(item.getCantidad() - cantidad);  //resto la cantidad del itemVenta
+
+                EntradaSalida unES = new EntradaSalida();
+
+                unES.setNombre("Anulación de venta".toUpperCase());
+                unES.setDescripcion(item.getProducto().getDescripcion().toUpperCase());
+                unES.setCantProd(cantidad);                        
+
+                if (item.getProducto().isPorPeso())
+                {
+                    unES.setMonto(item.getProducto().getPrecioVentaXPeso() * cantidad);
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "La cantidad ingresada debe ser menor o igual a la cantidad comprada.");
-                }                
+                    unES.setMonto(item.getProducto().getPrecioVenta() * cantidad);
+                }
+
+                unES.setTipo(true);
+                unES.setFechaHora(new Date());
+                unES.setTurno(turnoActual);
+
+                esDAO.alta(unES);
+                itDAO.modificar(item, item.getId());
+
+                JOptionPane.showMessageDialog(null, "Venta anulada.");
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "No se han realizado compras de este producto.");
-            }
+                JOptionPane.showMessageDialog(null, "La cantidad ingresada debe ser menor o igual a la cantidad que se ha vendido.");
+            }  
         }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "No se han realizado compras de este producto.");
+        }
+        
+        dispose();
     }//GEN-LAST:event_btnAnularActionPerformed
 
     private void txfdMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdMontoKeyTyped
@@ -399,35 +430,32 @@ public class ventanaCargarES extends javax.swing.JFrame
     }//GEN-LAST:event_txfdCantProdAnularKeyTyped
 
     private void txfdMontoKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdMontoKeyReleased
-        if (!txfdMonto.getText().equals(""))
+        if (txfdMonto.getText().equals(""))
         {
-            btnConfirmar.setEnabled(true);
+            btnConfirmar.setEnabled(false);
         }
         else
         {
-            btnConfirmar.setEnabled(false);
+            btnConfirmar.setEnabled(true);
         }
     }//GEN-LAST:event_txfdMontoKeyReleased
 
     private void txfdCantProdAnularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantProdAnularKeyReleased
-        String cadena = txfdCodNomProdAnular.getText();
+        String cadena = txfdCantProdAnular.getText();
         
-        if (cadena == null)
+        if (cadena.equals("") || cadena == null)
         {
-            if (txfdCantProdAnular.getText().equals(""))
-            {                  
-                btnAnular.setEnabled(false);
-            } 
+            btnAnular.setEnabled(false);
         }
         else
-        {
-            if (txfdCantProdAnular.getText().equals(""))
-            {                  
-                btnAnular.setEnabled(false);
-            }            
-            else
-            {            
+        {    
+            if (listaIV.size() == 1)
+            {
                 btnAnular.setEnabled(true);
+            }
+            else 
+            {
+                btnAnular.setEnabled(false);
             }
         }
     }//GEN-LAST:event_txfdCantProdAnularKeyReleased

@@ -7,6 +7,7 @@ public class EntradaSalida
     private int id;
     private String nombre;
     private String descripcion;
+    private int cantProd;
     private double monto;
     private boolean tipo;
     private Date fechaHora;
@@ -40,6 +41,15 @@ public class EntradaSalida
     public void setDescripcion(String descripcion) 
     {
         this.descripcion = descripcion;
+    }
+    
+    public int getCantProd() 
+    {
+        return cantProd;
+    }
+    public void setCantProd (int cantProd) 
+    {
+        this.cantProd = cantProd;
     }
 
     public double getMonto() 

@@ -361,8 +361,71 @@ public class ventanaProveedor extends javax.swing.JFrame
         {
             datos[0] = p.getRazonSocial();
             datos[1] = p.getCuit();
-            datos[2] = String.valueOf(p.getDireccion());
-            datos[3] = String.valueOf(p.getLocalidad() + ", " + p.getProvincia() + " (" + p.getPais() + ")");
+            
+            if (p.getDireccion().equals(""))
+            {
+                datos[2] = String.valueOf("---");
+            }
+            else
+            {
+                datos[2] = String.valueOf(p.getDireccion());
+            }
+            
+            
+            if (p.getLocalidad().equals("") && p.getProvincia().equals("") && p.getPais().equals(""))
+            {
+                datos[3] = String.valueOf("---");                
+            }
+            else
+            {   
+                if (!p.getLocalidad().equals("") && !p.getProvincia().equals("") && !p.getPais().equals(""))
+                {
+                    datos[3] = String.valueOf(p.getLocalidad() + ", " + p.getProvincia() + " (" + p.getPais() + ")");
+                }
+                else
+                {
+                    if (!p.getLocalidad().equals("") && p.getProvincia().equals("") && p.getPais().equals("")) //localidad
+                    {
+                        datos[3] = String.valueOf(p.getLocalidad());
+                    }
+                    if (p.getLocalidad().equals("") && !p.getProvincia().equals("") && p.getPais().equals("")) //localidad
+                    {
+                        datos[3] = String.valueOf(p.getProvincia());
+                    }
+                    if (p.getLocalidad().equals("") && p.getProvincia().equals("") && !p.getPais().equals("")) //localidad
+                    {
+                        datos[3] = String.valueOf(p.getPais());
+                    }
+                    
+                    if (!p.getLocalidad().equals("") && !p.getProvincia().equals("") && p.getPais().equals(""))
+                    {
+                        datos[3] = String.valueOf(p.getLocalidad() + ", " + p.getProvincia());
+                    }
+                    if (!p.getLocalidad().equals("") && p.getProvincia().equals("") && !p.getPais().equals(""))
+                    {
+                        datos[3] = String.valueOf(p.getLocalidad() + ", " + p.getPais());
+                    }
+                    
+                    if (!p.getLocalidad().equals("") && !p.getProvincia().equals("") && p.getPais().equals(""))
+                    {
+                        datos[3] = String.valueOf(p.getLocalidad() + ", " + p.getProvincia());
+                    }
+                    if (p.getLocalidad().equals("") && !p.getProvincia().equals("") && !p.getPais().equals(""))
+                    {
+                        datos[3] = String.valueOf(p.getProvincia() + " (" + p.getPais() + ")");
+                    }                    
+                    
+                    if (!p.getLocalidad().equals("") && p.getProvincia().equals("") && !p.getPais().equals(""))
+                    {
+                        datos[3] = String.valueOf(p.getLocalidad() + " (" + p.getPais() + ")");
+                    }
+                    if (p.getLocalidad().equals("") && !p.getProvincia().equals("") && !p.getPais().equals(""))
+                    {
+                        datos[3] = String.valueOf(p.getProvincia() + " (" + p.getPais() + ")");
+                    }
+                }    
+            }
+            
             datos[4] = String.valueOf(p.getContacto());
 
             if (p.isEstado())

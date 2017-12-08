@@ -128,28 +128,6 @@ public class ProductoDAO
         return p;
     }
     
-    /*public Producto buscarPorCodigoNombre(String cadena)
-    {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
-        
-        Producto p = null;
-        try
-        {            
-            Transaction tx = session.beginTransaction();
-            
-            Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena");
-            query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
-            p = (Producto)query.uniqueResult();
-            tx.commit();
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "Error. Producto por codigoNombre");
-        }        
-        return p;
-    }*/
-    
     public List<Producto> buscarPorCodigoNombre(String cadena, String filtro)  //para ventanaProducto
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
@@ -870,7 +848,9 @@ public class ProductoDAO
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
+        
         Producto p = null;
+        
         p = (Producto)session.get(Producto.class, id);
         p.setStock(p.getStock() - cantidad); 
         
@@ -895,7 +875,9 @@ public class ProductoDAO
     {
         SessionFactory sesion = NewHibernateUtil.getSessionFactory();
         Session session = sesion.openSession();
+        
         Producto p = null;
+        
         p = (Producto)session.get(Producto.class, id);
         p.setStock(p.getStock() + cantidad); 
         
