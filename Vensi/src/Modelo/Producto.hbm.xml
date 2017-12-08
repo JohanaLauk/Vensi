@@ -46,7 +46,7 @@
             <index column="orden" />
             <many-to-many column="id" class="Modelo.Proveedor" />
          </list> -->
-        <set name="proveedor" table="producto_proveedor" >
+        <set name="proveedor" table="producto_proveedor" lazy="false" >
             <key column="id_producto"/>
             <many-to-many column="id_proveedor" class="Modelo.Proveedor" />
         </set>

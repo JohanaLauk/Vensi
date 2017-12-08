@@ -9,52 +9,52 @@ import java.util.*;
 import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import javax.swing.JOptionPane;
 
-public class ventanaEditarProd extends javax.swing.JFrame 
-{
+
+public class ventanaEditarProd extends javax.swing.JFrame {
+
     ProductoDAO pDAO = new ProductoDAO();
     public static int id_recibido;
     ProveedorDAO prDAO = new ProveedorDAO();
     DefaultTableModel modelo;
     TableColumnModel tcm;
-    
-    public ventanaEditarProd() 
-    {
+    List<JCheckBox> checkProv = new ArrayList<>();
+
+    public ventanaEditarProd() {
         initComponents();
-        
+
         this.setLocationRelativeTo(null);     //centra la ventana  
-        
+
         this.setMinimumSize(new Dimension(390, 590));  //al minimizar la ventana no permite que sea mas chico que esa medida
-       
+
         this.setPreferredSize(new Dimension(390, 590));    //al minimizar la ventana aparece con esa medida
-        
+
         this.setResizable(false);   //No permite modificar el tamaño de la ventana
-        
+
         labIdSelec.setVisible(false);   //label que contiene el id
-        txfdEditarPesoEnvase.setEnabled(false); 
-        
+        txfdEditarPesoEnvase.setEnabled(false);
+
         Producto elProd = pDAO.buscarPorId(id_recibido);
-        
-        if (elProd.isPorPeso() == true)
-        {
+
+        if (elProd.isPorPeso() == true) {
             rbPeso.setSelected(true);
             rbUnidad.setSelected(false);
-        }
-        else
-        {
+        } else {
             rbUnidad.setSelected(true);
             rbPeso.setSelected(false);
         }
-        
-        mostrarProdSelec();        
-        llenarTablaProv();
+
+        mostrarProdSelec();
+        llenarCheckBoxProv();
     }
-    
+
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
         bgTipoVenta = new javax.swing.ButtonGroup();
+        bgroupProv = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -307,108 +307,103 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
     private void btnAceptarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarActionPerformed
         Producto prod = new Producto();
-        
+
         prod.setCodigo(txfdEditarCodigo.getText().toUpperCase());
-        prod.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());        
+        prod.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());
         prod.setPrecioCosto(Double.parseDouble(txfdEditarPrecioCosto.getText()));
         prod.setPrecioVenta(Double.parseDouble(txfdEditarPrecioVenta.getText()));
         prod.setStockMinimo(Integer.parseInt(txfdEditarStockMinimo.getText()));
-                
-        if (rbPeso.isSelected())
-        {
+
+        if (rbPeso.isSelected()) {
             prod.setPorPeso(true);
             prod.setPesoEnvase(Integer.parseInt(txfdEditarPesoEnvase.getText()));
-        }
-        else
-        {
+        } else {
             prod.setPorPeso(false);
             prod.setPesoEnvase(0);
         }
-        
-        if(cbEditarEstado.getSelectedItem().equals("Habilitado"))
-        {
+
+        if (cbEditarEstado.getSelectedItem().equals("Habilitado")) {
             prod.setEstado(true);
-        }
-        else
-        {
+        } else {
             prod.setEstado(false);
         }
-        /*int[] filasSelec = tablaProveedores.getSelectedRows();
-        int idSelec;
-        for(int i = 0; i<tablaProveedores.getSelectedRowCount(); i++ ){
-            idSelec = Integer.parseInt(tablaProveedores.getValueAt(filasSelec[i], 1).toString());
-            prod.addProveedor(prDAO.buscarPorId(idSelec));
-        }*/
+        boolean alMenosUnCheck = false;
+        for(JCheckBox c : checkProv){
+            if(c.isSelected()){
+                prod.addProveedor(prDAO.buscarPorCuitNombre(c.getText(), "Habilitados").get(0));
+                alMenosUnCheck = true;
+            }
+        }
+        if (alMenosUnCheck) {
+            pDAO.modificar(prod, id_recibido);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor");
+        }
         
-        pDAO.modificar(prod, id_recibido);
-                
-        dispose();        
+        
     }//GEN-LAST:event_btnAceptarEditarActionPerformed
 
     private void txfdEditarPrecioCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPrecioCostoKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
-                (c != '.' || txfdEditarPrecioCosto.getText().contains("."))) 
-            evt.consume();       
-        
+        if ((c < '0' || c > '9')
+                && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)
+                && (c != '.' || txfdEditarPrecioCosto.getText().contains("."))) {
+            evt.consume();
+        }
+
     }//GEN-LAST:event_txfdEditarPrecioCostoKeyTyped
 
     private void txfdEditarPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPrecioVentaKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
-                (c != '.' || txfdEditarPrecioVenta.getText().contains("."))) 
+        if ((c < '0' || c > '9')
+                && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)
+                && (c != '.' || txfdEditarPrecioVenta.getText().contains("."))) {
             evt.consume();
+        }
     }//GEN-LAST:event_txfdEditarPrecioVentaKeyTyped
 
     private void txfdEditarStockMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarStockMinimoKeyTyped
         char c = evt.getKeyChar();
-        if(c < '0' || c > '9') evt.consume();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_txfdEditarStockMinimoKeyTyped
 
     private void txfdEditarPesoEnvaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPesoEnvaseKeyTyped
         char c = evt.getKeyChar();
-        if(c < '0' || c > '9') evt.consume();
+        if (c < '0' || c > '9') {
+            evt.consume();
+        }
     }//GEN-LAST:event_txfdEditarPesoEnvaseKeyTyped
 
     private void rbUnidadActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbUnidadActionPerformed
-        if (rbUnidad.isSelected())
-        {
+        if (rbUnidad.isSelected()) {
             txfdEditarPesoEnvase.setEnabled(false);
-        }
-        else
-        {
+        } else {
             txfdEditarPesoEnvase.setEnabled(true);
         }
     }//GEN-LAST:event_rbUnidadActionPerformed
 
     private void rbPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPesoActionPerformed
-        if (rbPeso.isSelected())
-        {
+        if (rbPeso.isSelected()) {
             txfdEditarPesoEnvase.setEnabled(true);
-        }
-        else
-        {
+        } else {
             txfdEditarPesoEnvase.setEnabled(false);
         }
     }//GEN-LAST:event_rbPesoActionPerformed
 
-    public static void main(String args[]) 
-    {
-        java.awt.EventQueue.invokeLater(new Runnable() 
-        {
-            public void run() 
-            {
+    public static void main(String args[]) {
+        java.awt.EventQueue.invokeLater(new Runnable() {
+            public void run() {
                 new ventanaEditarProd().setVisible(true);
             }
         });
     }
-    
-    public void mostrarProdSelec()
-    {
-        Producto elProd = pDAO.buscarPorId(id_recibido);                
-           
+
+    public void mostrarProdSelec() {
+        Producto elProd = pDAO.buscarPorId(id_recibido);
+
         //MOSTRAMOS LOS DATOS GUARDADOS DEL PRODUCTO SELECCIONADO. PARA LUEGO PODER MODIFICAR
         txfdEditarCodigo.setText(String.valueOf(elProd.getCodigo()));
         txfdEditarDescripcion.setText(String.valueOf(elProd.getDescripcion()));
@@ -416,19 +411,17 @@ public class ventanaEditarProd extends javax.swing.JFrame
         txfdEditarPrecioVenta.setText(String.valueOf(elProd.getPrecioVenta()));
         txfdEditarStockMinimo.setText(String.valueOf(elProd.getStockMinimo()));
         txfdEditarPesoEnvase.setText(String.valueOf(elProd.getPesoEnvase()));
-        
-        if(elProd.isEstado())
-        {
+
+        if (elProd.isEstado()) {
             cbEditarEstado.setSelectedItem("Habilitado");
-        }
-        else
-        {
+        } else {
             cbEditarEstado.setSelectedItem("Deshabilitado");
-        }         
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgTipoVenta;
+    private javax.swing.ButtonGroup bgroupProv;
     private javax.swing.JButton btnAceptarEditar;
     private javax.swing.JButton btnCancelarEditar;
     private javax.swing.JComboBox<String> cbEditarEstado;
@@ -455,37 +448,27 @@ public class ventanaEditarProd extends javax.swing.JFrame
     private javax.swing.JTextField txfdEditarStockMinimo;
     // End of variables declaration//GEN-END:variables
 
-    private void llenarTablaProv() {
-        
-        String[] datos = new String[2];
+    private void llenarCheckBoxProv() {
+
         List<Proveedor> lista = prDAO.listar("Habilitados");
-        /*modelo = new DefaultTableModel();
-        
-        modelo.addColumn("Proveedor");
-        modelo.addColumn("ID");
-        
-        for(Proveedor p : lista){
-            datos[0] = p.getRazonSocial();
-            datos[1] = String.valueOf(p.getId());
-            modelo.addRow(datos);
-        }
-        
-        tablaProveedores.setModel(modelo);
-        
-        tcm = tablaProveedores.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(50);
-        tcm.getColumn(1).setPreferredWidth(0);  
-        tcm.getColumn(1).setMaxWidth(0);
-        tcm.getColumn(1).setMinWidth(0);
-        tablaProveedores.getTableHeader().getColumnModel().getColumn(1).setMaxWidth(0);
-        tablaProveedores.getTableHeader().getColumnModel().getColumn(1).setMinWidth(0);*/
-        
-        for(Proveedor p : lista){
+        Set<Proveedor> listaProvDelProducto = pDAO.buscarPorId(id_recibido).getProveedor();       
+        int altura = 0;
+        for (Proveedor p : lista) {
             JCheckBox c = new JCheckBox(p.getRazonSocial());
-            c.setVisible(true);
             c.setSize(500, 20);
+            c.setLocation(0, altura);
+            c.setVisible(true);
+            for(Proveedor pr : listaProvDelProducto)
+            {
+                if(p.getId() == pr.getId())
+                {
+                    c.setSelected(true);
+                }
+            }
+            checkProv.add(c);
             this.panelProveedor.add(c);
             this.validate();
+            altura += 20;
         }
         this.panelProveedor.setVisible(true);
     }
