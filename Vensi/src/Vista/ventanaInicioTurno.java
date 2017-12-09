@@ -182,8 +182,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
                 }
             }
             
-            unTurno.setFechaHoraInicio(fechaHoraInicio);
-            
+            unTurno.setFechaHoraInicio(fechaHoraInicio);            
                         
             tDAO.alta(unTurno);
                             

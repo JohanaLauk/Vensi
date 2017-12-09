@@ -29,6 +29,8 @@ public class ventanaCompra extends javax.swing.JFrame
     String ordenSelec = null;
     String tipoSelec = null;
     
+    List<Producto> listaBusqueda = null;
+    
     Proveedor elProv = null;
     String provSelec = null;
     
@@ -493,7 +495,9 @@ public class ventanaCompra extends javax.swing.JFrame
         }
         
         txfdCantidad.setText(null);
-        tablaListaInventario.removeAll();
+        cbProveedores.setSelectedIndex(0); //probar si anda
+        llenarTablaInventario();
+        mostrarTablaVacia();
     }//GEN-LAST:event_btnCargarInventarioActionPerformed
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed
@@ -512,7 +516,7 @@ public class ventanaCompra extends javax.swing.JFrame
             }
             
             String cadena = txfdBuscarProd.getText();        
-            List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
+            listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
             llenarTablaBusqueda(listaBusqueda);
             
             if (cadena.equals(""))
@@ -537,7 +541,7 @@ public class ventanaCompra extends javax.swing.JFrame
 
     private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
         String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
+        listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
         llenarTablaBusqueda(listaBusqueda);
 
         if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
@@ -637,7 +641,7 @@ public class ventanaCompra extends javax.swing.JFrame
 
     private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
         String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
+        listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
         llenarTablaBusqueda(listaBusqueda);
 
         if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
