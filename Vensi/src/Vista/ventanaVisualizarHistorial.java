@@ -45,28 +45,28 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
 
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        listDatos = new javax.swing.JList<>();
+        listDatosTP = new javax.swing.JList<>();
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        tablaTurno = new javax.swing.JTable();
+        tablaTP = new javax.swing.JTable();
         btnVolverVerHistorial = new javax.swing.JButton();
         btnImprimir = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Visualización del historial");
 
-        jScrollPane1.setViewportView(listDatos);
+        jScrollPane1.setViewportView(listDatosTP);
 
         jLabel1.setText("Información");
 
-        tablaTurno = new javax.swing.JTable()
+        tablaTP = new javax.swing.JTable()
         {
             public boolean isCellEditable(int rowIndex, int colIndex)
             {
                 return false;
             }
         };
-        tablaTurno.setModel(new javax.swing.table.DefaultTableModel(
+        tablaTP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -77,10 +77,10 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        tablaTurno.setFocusable(false);
-        tablaTurno.getTableHeader().setResizingAllowed(false);
-        tablaTurno.getTableHeader().setReorderingAllowed(false);
-        jScrollPane2.setViewportView(tablaTurno);
+        tablaTP.setFocusable(false);
+        tablaTP.getTableHeader().setResizingAllowed(false);
+        tablaTP.getTableHeader().setReorderingAllowed(false);
+        jScrollPane2.setViewportView(tablaTP);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -164,7 +164,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         modelo.addColumn("Descripción");
         modelo.addColumn("Cantidad");
         
-        this.tablaTurno.setModel(modelo);
+        this.tablaTP.setModel(modelo);
         
         if (tablaSelec.equals("Turno")) 
         {            
@@ -231,10 +231,10 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             }
         }
         
-        listDatos.setModel(modeloList);
-        tablaTurno.setModel(modelo);
+        listDatosTP.setModel(modeloList);
+        tablaTP.setModel(modelo);
         
-        TableColumnModel tcm = tablaTurno.getColumnModel();        
+        TableColumnModel tcm = tablaTP.getColumnModel();        
         tcm.getColumn(0).setPreferredWidth(200);
         tcm.getColumn(1).setPreferredWidth(100);
         tcm.getColumn(2).setPreferredWidth(100);
@@ -249,7 +249,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JList<String> listDatos;
-    private javax.swing.JTable tablaTurno;
+    private javax.swing.JList<String> listDatosTP;
+    private javax.swing.JTable tablaTP;
     // End of variables declaration//GEN-END:variables
 }

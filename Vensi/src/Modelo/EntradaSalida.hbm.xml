@@ -9,7 +9,7 @@
             <generator class="identity" />
         </id>
         <property name="nombre" type="string">
-            <column name="nombre" length="150" not-null="true" />
+            <column name="nombre" length="150" not-null="true" unique="true"/>
         </property>
         <property name="descripcion" type="string">
             <column name="descripcion" length="150" not-null="false" />
@@ -23,8 +23,8 @@
         <property name="tipo"  type="boolean" >
             <column name="tipo" not-null="true" />
         </property>
-        <property name="fechaHora" type="date">
-            <column name="fecha_hora" length="13" not-null="true" />
+        <property name="hora" type="time">
+            <column name="hora" length="13" not-null="true" />
         </property>
         <many-to-one name="turno" class="Modelo.Turno" column="id_turno" not-null="true" />
     </class>

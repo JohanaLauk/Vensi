@@ -12,7 +12,7 @@
             <column name="razon_social" length="50" not-null="true" />
         </property>
         <property name="cuit" type="string">
-            <column name="cuit" length="11" not-null="true" />
+            <column name="cuit" length="11" not-null="true" unique="true"/>
         </property>
         <property name="direccion" type="string">
             <column name="direccion" length="50" />

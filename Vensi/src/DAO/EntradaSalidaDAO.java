@@ -12,16 +12,20 @@ import org.hibernate.Transaction;
 
 public class EntradaSalidaDAO 
 {    
+    SessionFactory sesion = null;
+    Session session = null;
+    
     public void alta(EntradaSalida es)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Transaction tx = session.beginTransaction();
         try
         {
             session.save(es);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -29,22 +33,21 @@ public class EntradaSalidaDAO
 		tx.rollback();
                     e.printStackTrace();
 		throw e;
-        }        
-        session.close();
-        JOptionPane.showMessageDialog(null, "Entrada/Salida agregada");
+        } 
+        //JOptionPane.showMessageDialog(null, "Entrada/Salida agregada");
     }
     
     public void modificar(EntradaSalida es, int id) //creo que no lo vamos a necesitar
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
                
         EntradaSalida ensa = null;
                    
         ensa = (EntradaSalida)session.get(EntradaSalida.class, id);
         ensa.setMonto(es.getMonto());
         ensa.setDescripcion(es.getDescripcion());
-        ensa.setFechaHora(es.getFechaHora());
+        ensa.setHora(es.getHora());
         ensa.setTipo(es.isTipo());
         ensa.setTurno(es.getTurno());
             
@@ -53,6 +56,7 @@ public class EntradaSalidaDAO
         {
             session.merge(ensa);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -60,35 +64,35 @@ public class EntradaSalidaDAO
 		tx.rollback();
                     e.printStackTrace();
 		throw e;
-        }        
-        session.close();
-        JOptionPane.showMessageDialog(null, "Entrada/Salida modificada");
+        }      
+        //JOptionPane.showMessageDialog(null, "Entrada/Salida modificada");
     }    
        
     public EntradaSalida buscarPorId(int id)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         EntradaSalida ensa = null;
         try
         {                       
             Transaction tx = session.beginTransaction();
             ensa = (EntradaSalida)session.get(EntradaSalida.class,id);            
-            tx.commit();
+            tx.commit(); 
             session.close();
         } 
         catch(HibernateException e)
         {
             JOptionPane.showMessageDialog(null, "Entrada/Salida no encontrada");
-        }        
-        return ensa;
+        } 
+        
+        return ensa;          
     }
     
     public List<EntradaSalida> listar(int nroTurno)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<EntradaSalida> lista = null;
         try

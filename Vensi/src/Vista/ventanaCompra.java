@@ -472,18 +472,17 @@ public class ventanaCompra extends javax.swing.JFrame
 
     private void btnCargarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarInventarioActionPerformed
         Producto producto = null;
-        //FALTA AGREGAR EL PROVEEDOR 
-        //Proveedor proveedor = (Proveedor)provDAO.buscarPorCuitNombre(cbProveedor.getSelectedItem(), "Habilitados").get(0);
-    
+        
         Pedido pedido = new Pedido();
-        pedido.setFechaHora(new Date());
-        //pedido.setProveedor(proveedor);
+        pedido.setFechaHora(new Date());        
+        pedido.setProveedor(elProv);
         pedidoDAO.alta(pedido);
 
-        int filasTabla = tablaListaInventario.getRowCount();
-        for(int i = 0; i<filasTabla; i++ )
+        int filasTablaInv = tablaListaInventario.getRowCount();
+        for (int i = 0 ; i<filasTablaInv ; i++ )
         {            
             producto = prodDAO.buscarPorId(Integer.parseInt(tablaListaInventario.getValueAt(i,3).toString()));
+            
             ItemPedido itemPedido = new ItemPedido();
             itemPedido.setProducto(producto);
             itemPedido.setCantidad(Integer.parseInt(tablaListaInventario.getValueAt(i,2).toString()));
@@ -493,7 +492,6 @@ public class ventanaCompra extends javax.swing.JFrame
             prodDAO.sumarStock(producto.getId(), Integer.parseInt(tablaListaInventario.getValueAt(i,2).toString()));
         }
         
-        //cbProveedor
         txfdCantidad.setText(null);
         tablaListaInventario.removeAll();
     }//GEN-LAST:event_btnCargarInventarioActionPerformed
@@ -517,7 +515,7 @@ public class ventanaCompra extends javax.swing.JFrame
             List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
             llenarTablaBusqueda(listaBusqueda);
             
-            if (cadena.equals("") || cadena == null)
+            if (cadena.equals(""))
             {
                 cbFiltro.setEnabled(true);
                 cbOrdenCampo.setEnabled(true);
@@ -544,7 +542,7 @@ public class ventanaCompra extends javax.swing.JFrame
 
         if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
         {
-            if (cadena.equals("") || cadena == null)
+            if (cadena.equals(""))
             {
                 cbFiltro.setEnabled(true);
                 cbOrdenCampo.setEnabled(true);
@@ -644,7 +642,7 @@ public class ventanaCompra extends javax.swing.JFrame
 
         if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
         {
-            if (cadena.equals("") || cadena == null)
+            if (cadena.equals(""))
             {
                 cbFiltro.setEnabled(true);
                 cbOrdenCampo.setEnabled(true);

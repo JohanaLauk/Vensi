@@ -8,16 +8,21 @@ import javax.swing.JOptionPane;
 
 public class ItemVentaDAO 
 {        
+    SessionFactory sesion = null;
+    Session session = null;
+            
     public void alta(ItemVenta i)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Transaction tx = session.beginTransaction();
         try
         {
             session.save(i);
             tx.commit();
+            session.close();
+
         }
         catch(Exception e)
         {
@@ -26,14 +31,13 @@ public class ItemVentaDAO
                     e.printStackTrace();
 		throw e;
         }
-        session.close();
-        JOptionPane.showMessageDialog(null, "ItemVenta agregado");
+        //JOptionPane.showMessageDialog(null, "ItemVenta agregado");
     }
     
     public void modificar(ItemVenta i, int id)  //i = recibe la fecha y la cantidad nueva   |   id = id_ItemVenta existente
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         ItemVenta item = null;
         item = (ItemVenta)session.get(ItemVenta.class, id);
@@ -45,6 +49,7 @@ public class ItemVentaDAO
         {
             session.merge(item);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -53,14 +58,13 @@ public class ItemVentaDAO
                     e.printStackTrace();
 		throw e;
         }            
-        session.close();
-        JOptionPane.showMessageDialog(null, "ItemVenta modificado");
+        //JOptionPane.showMessageDialog(null, "ItemVenta modificado");
     }
     
     public List<ItemVenta> buscar(String cadena)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<ItemVenta> lista = null;
         
@@ -71,19 +75,19 @@ public class ItemVentaDAO
             query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");            
             lista = query.list();
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error. Buscar itemVenta");
-        }
-        
+        }        
         return lista;
     }
     
     public List<ItemVenta> listar(int nroTurno)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<ItemVenta> lista = null;
         try
@@ -93,6 +97,7 @@ public class ItemVentaDAO
             query.setParameter("nroTurno", nroTurno);
             lista = query.list();
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {

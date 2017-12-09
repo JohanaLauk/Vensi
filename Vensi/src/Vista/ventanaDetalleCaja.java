@@ -16,6 +16,11 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     TurnoDAO tDAO = new TurnoDAO();
     ItemVentaDAO itDAO = new ItemVentaDAO();
     EntradaSalidaDAO esDAO = new EntradaSalidaDAO();
+    
+    Turno turnoActual = tDAO.obtenerUltimo();
+    List<ItemVenta> listaIT = null;
+    List<EntradaSalida> listaES = null;
+    
     DefaultTableModel modelo;
     TableColumnModel tcm;
                 
@@ -183,10 +188,9 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     public void llenarTabla()
     {        
         modelo = new DefaultTableModel();
-        Turno turnoActual = tDAO.obtenerUltimo();
         
-        List<ItemVenta> listaIT = itDAO.listar(turnoActual.getId());   //lista tabla item_venta
-        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());   //lista tabla entrada_salida
+        listaIT = itDAO.listar(turnoActual.getId());   //lista tabla item_venta
+        listaES = esDAO.listar(turnoActual.getId());   //lista tabla entrada_salida
         
         String[] datos = new String[4];
         
@@ -268,8 +272,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     
     public double calcularVenta()
     {
-        Turno turnoActual = tDAO.obtenerUltimo();
-        List<ItemVenta> listaIT = itDAO.listar(turnoActual.getId());
+        listaIT = itDAO.listar(turnoActual.getId());
         double montoVenta = 0;
         
         for (ItemVenta x : listaIT)
@@ -281,8 +284,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     
     public double calcularTotalCaja()
     {
-        Turno turnoActual = tDAO.obtenerUltimo();
-        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
+        listaES = esDAO.listar(turnoActual.getId());
         
         double montoEntradaSalida=0;  
         double totalCaja=0;

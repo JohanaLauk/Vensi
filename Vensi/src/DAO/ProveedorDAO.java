@@ -7,16 +7,22 @@ import javax.swing.JOptionPane;
 import org.hibernate.*;
 
 public class ProveedorDAO 
-{            
+{      
+    SessionFactory sesion = null;
+    Session session = null;
+                
     public void alta(Proveedor p)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
+        
         Transaction tx = session.beginTransaction();
+        
         try
         {
             session.save(p);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -25,14 +31,13 @@ public class ProveedorDAO
                     e.printStackTrace();
 		throw e;
         }
-        session.close();
-        JOptionPane.showMessageDialog(null, "Proveedor agregado");
+        //JOptionPane.showMessageDialog(null, "Proveedor agregado");
     }
     
     public void modificar(Proveedor p, int id)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Proveedor prov = null;
                     
@@ -51,6 +56,7 @@ public class ProveedorDAO
         {
             session.merge(prov);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -59,14 +65,13 @@ public class ProveedorDAO
                     e.printStackTrace();
 		throw e;
         }
-        session.close();
-        JOptionPane.showMessageDialog(null, "Proveedor modificado");
+        //JOptionPane.showMessageDialog(null, "Proveedor modificado");
     }  
     
     public List<Proveedor> listar(String filtro)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<Proveedor> lista = null;
         try
@@ -89,6 +94,7 @@ public class ProveedorDAO
             }
             
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -99,18 +105,14 @@ public class ProveedorDAO
     
     public Proveedor buscarPorId(int id)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Proveedor p = null;
         try
         { 
             Transaction tx = session.beginTransaction();
-            p = (Proveedor)session.get(Proveedor.class,id);
-            /*if(p != null)
-            {
-                JOptionPane.showMessageDialog(null, "Proveedor encontrado");
-            }*/
+            p = (Proveedor)session.get(Proveedor.class,id);            
             tx.commit();
             session.close();
         } 
@@ -123,8 +125,8 @@ public class ProveedorDAO
     
     public List<Proveedor> buscarPorCuit(String cuit)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<Proveedor> lista = null;
         try
@@ -134,6 +136,7 @@ public class ProveedorDAO
             query.setParameter("cuit", "%"+cuit+"%");
             lista = query.list();
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -141,12 +144,11 @@ public class ProveedorDAO
         }
         return lista;
     }
-    
-   
+       
     public List<Proveedor> buscarPorCuitNombre(String cadena, String filtro)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<Proveedor> lista = null;
         try
@@ -175,6 +177,7 @@ public class ProveedorDAO
             }
             
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {

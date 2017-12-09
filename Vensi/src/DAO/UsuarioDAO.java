@@ -8,16 +8,20 @@ import javax.swing.JOptionPane;
 
 public class UsuarioDAO 
 {        
+    SessionFactory sesion = null;
+    Session session = null;
+    
     public void alta(Usuario u)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Transaction tx = session.beginTransaction();
         try
         {
             session.save(u);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -25,15 +29,14 @@ public class UsuarioDAO
 		tx.rollback();
                     e.printStackTrace();
 		throw e;
-        }
-        session.close();
-        JOptionPane.showMessageDialog(null, "Usuario creado");
+        }        
+        //JOptionPane.showMessageDialog(null, "Usuario creado");
     }
     
     public void modificarContraseña(String usuario, int pin)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Usuario u = null;
         
@@ -48,6 +51,7 @@ public class UsuarioDAO
         {
             session.merge(u);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -56,14 +60,13 @@ public class UsuarioDAO
                     e.printStackTrace();
 		throw e;
         }
-        session.close();
-        JOptionPane.showMessageDialog(null,"Contraseña modificada");
+        //JOptionPane.showMessageDialog(null, "Contraseña modificada");
     }
     
     public boolean verificar(String usuario, int pin )
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         boolean verificado = false;
         Usuario u;
@@ -76,14 +79,15 @@ public class UsuarioDAO
         {
             verificado = true;
         }
+        session.close();
         
         return verificado;        
     }
     
     public List<Usuario> listar()
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<Usuario> lista = null;
         
@@ -93,6 +97,7 @@ public class UsuarioDAO
             Query query = session.createQuery("FROM Usuario");            
             lista = query.list();
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {

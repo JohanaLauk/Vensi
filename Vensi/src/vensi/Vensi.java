@@ -9,15 +9,16 @@ public class Vensi
     public static void main(String[] args) 
     {
         UsuarioDAO uDAO = new UsuarioDAO();
+        
         if(uDAO.listar().isEmpty())
         {
             Usuario propietario = new Usuario();
             propietario.setNombreUsuario("Propietario");
-            propietario.setPin(0000);
+            propietario.setPin(0);
             
             Usuario empleado = new Usuario();
             empleado.setNombreUsuario("Empleado");
-            empleado.setPin(0000);
+            empleado.setPin(0);
             
             uDAO.alta(propietario); 
             uDAO.alta(empleado);

@@ -1,6 +1,5 @@
 package DAO;
 
-
 import Conexion.NewHibernateUtil;
 import org.hibernate.*;
 import Modelo.ItemPedido;
@@ -9,17 +8,20 @@ import javax.swing.JOptionPane;
 
 public class ItemPedidoDAO 
 {
-        
+    SessionFactory sesion = null;
+    Session session = null;
+    
     public void alta(ItemPedido i)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession(); 
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession(); 
         
         Transaction tx = session.beginTransaction();
         try
         {
             session.save(i);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -27,15 +29,14 @@ public class ItemPedidoDAO
 		tx.rollback();
                     e.printStackTrace();
 		throw e;
-        }
-        session.close();
+        }        
         //JOptionPane.showMessageDialog(null, "Item agregado");
     }
     
     public void modificar(ItemPedido i, int id)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession(); 
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession(); 
         
         ItemPedido item = null;
         item = (ItemPedido)session.get(ItemPedido.class, id);
@@ -46,6 +47,7 @@ public class ItemPedidoDAO
         {
             session.merge(item);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -54,14 +56,13 @@ public class ItemPedidoDAO
                     e.printStackTrace();
 		throw e;
         }
-        session.close();
         //JOptionPane.showMessageDialog(null, "Item de pedido modificado");
     }
     
     public void borrar(int id)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         ItemPedido item = null;                    
         item = (ItemPedido)session.get(ItemPedido.class, id);
@@ -74,6 +75,7 @@ public class ItemPedidoDAO
                 session.delete(item);
             }            
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -82,14 +84,13 @@ public class ItemPedidoDAO
                     e.printStackTrace();
 		throw e;
         }        
-        session.close();
         //JOptionPane.showMessageDialog(null, "Item eliminado");
     }
     
     public List<ItemPedido> listar(int nroPedido)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<ItemPedido> lista = null;
         try
@@ -99,6 +100,7 @@ public class ItemPedidoDAO
             query.setParameter("nroPedido", nroPedido);
             lista = query.list(); 
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {

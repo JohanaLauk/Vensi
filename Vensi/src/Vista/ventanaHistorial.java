@@ -1,7 +1,5 @@
 package Vista;
 
-import DAO.ItemPedidoDAO;
-import DAO.ItemVentaDAO;
 import DAO.PedidoDAO;
 import DAO.TurnoDAO;
 import Modelo.Pedido;
@@ -10,6 +8,9 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -21,6 +22,8 @@ public class ventanaHistorial extends javax.swing.JFrame
     TableColumnModel tcm ;
     TurnoDAO tDAO = new TurnoDAO();
     PedidoDAO pDAO = new PedidoDAO();    
+    
+    DateFormat fechaHoraFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     
     public ventanaHistorial() 
     {
@@ -406,7 +409,7 @@ public class ventanaHistorial extends javax.swing.JFrame
             modelo.addColumn("Fecha y hora fin");
 
             if(cbBuscarPor.getSelectedItem().equals("Fecha"))
-            {
+            {           
                 List<Turno> lista = tDAO.buscarPorFecha(dateDesde.getDate(), dateHasta.getDate());
                 if (lista.isEmpty()) 
                 {
@@ -419,7 +422,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                     for (Turno t : lista) 
                     {
                         datos[0] = String.valueOf(t.getId());
-                        datos[1] = String.valueOf(t.getFechaHoraInicio());
+                        datos[1] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio()));
                         datos[2] = String.valueOf(t.getFechaHoraFin());
 
                         modelo.addRow(datos);
@@ -438,8 +441,8 @@ public class ventanaHistorial extends javax.swing.JFrame
                     String[] datos = new String[3];
 
                     datos[0] = String.valueOf(t.getId());
-                    datos[1] = String.valueOf(t.getFechaHoraInicio());
-                    datos[2] = String.valueOf(t.getFechaHoraFin());
+                    datos[1] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio()));
+                    datos[2] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraFin()));
                     modelo.addRow(datos);
                 }
             }                
@@ -473,7 +476,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                     for (Pedido p : lista) 
                     {
                         datos[0] = String.valueOf(p.getId());
-                        datos[1] = String.valueOf(p.getFechaHora());
+                        datos[1] = String.valueOf(fechaHoraFormat.format(p.getFechaHora()));
                         datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
 
                         modelo.addRow(datos);
@@ -493,7 +496,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                     String[] datos = new String[3];
 
                     datos[0] = String.valueOf(p.getId());
-                    datos[1] = String.valueOf(p.getFechaHora());
+                    datos[1] = String.valueOf(fechaHoraFormat.format(p.getFechaHora()));
                     datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
 
                     modelo.addRow(datos);

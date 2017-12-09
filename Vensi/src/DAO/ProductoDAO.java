@@ -7,17 +7,21 @@ import javax.swing.JOptionPane;
 import org.hibernate.*;
 
 public class ProductoDAO 
-{            
+{           
+    SessionFactory sesion = null;
+    Session session = null;
+    
     public void alta(Producto p)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Transaction tx = session.beginTransaction();
         try
         {
             session.save(p);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -25,15 +29,14 @@ public class ProductoDAO
 		tx.rollback();
                     e.printStackTrace();
 		throw e;
-        }        
-        session.close();
-        JOptionPane.showMessageDialog(null, "Producto agregado");
+        }
+        //JOptionPane.showMessageDialog(null, "Producto agregado");
     }
     
     public void modificar(Producto p, int id)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
                
         Producto prod = null;
                    
@@ -48,11 +51,12 @@ public class ProductoDAO
         prod.setEstado(p.isEstado());
         prod.setProveedor(p.getProveedor());
             
-         Transaction tx = session.beginTransaction();
+        Transaction tx = session.beginTransaction();
         try
         {
             session.merge(prod);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -61,14 +65,13 @@ public class ProductoDAO
                     e.printStackTrace();
 		throw e;
         }        
-        session.close();
-        JOptionPane.showMessageDialog(null, "Producto modificado");
+        //JOptionPane.showMessageDialog(null, "Producto modificado");
     }    
        
     public Producto buscarPorId(int id)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Producto p = null;
         try
@@ -87,8 +90,8 @@ public class ProductoDAO
     
     public Producto buscarPorCodigo(String codigo)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Producto p = null;
         try
@@ -98,6 +101,7 @@ public class ProductoDAO
             query.setParameter("codigo", codigo);
             p = (Producto)query.uniqueResult();
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -108,8 +112,8 @@ public class ProductoDAO
     
     public Producto buscarPorCodigo(String codigo, int proveedor)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Producto p = null;
         try
@@ -120,6 +124,7 @@ public class ProductoDAO
             query.setParameter("proveedor", proveedor);
             p = (Producto)query.uniqueResult();
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -130,8 +135,8 @@ public class ProductoDAO
     
     public List<Producto> buscarPorCodigoNombre(String cadena, String filtro)  //para ventanaProducto
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<Producto> lista = null;
     
@@ -161,6 +166,7 @@ public class ProductoDAO
             }
             
             tx.commit();
+            session.close();
         }
         catch (Exception e)
         {
@@ -171,8 +177,8 @@ public class ProductoDAO
     
     public List<Producto> buscarPorCodigoNombre(String cadena, String filtro, int idProveedor)  //para ventanaProducto
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<Producto> lista = null;
     
@@ -204,19 +210,21 @@ public class ProductoDAO
                 }
             }
             
-            tx.commit();
+            tx.commit();  
+            session.close();
         }
         catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error. Producto por codigo o descripcion");
-        }        
-        return lista;
+        }
+        
+        return lista;        
     }
             
     public List<Producto> listar(String[] datos)  //ordenado por descripcio ASC
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         String filtro = datos[0];
         String ordenCampo = datos[1];
@@ -497,19 +505,21 @@ public class ProductoDAO
                     }
                 }
             }            
-            tx.commit();
+            tx.commit();      
+            session.close();
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error. Listar productos");
-        }        
-        return lista;
+        }
+        
+        return lista;        
     }
     
     public List<Producto> listar(String[] datos, int idProveedor) //ordenado por descripcio ASC
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
 
         String filtro = datos[0];
         String ordenCampo = datos[1];
@@ -816,6 +826,7 @@ public class ProductoDAO
             query.setParameter("proveedor", idProveedor);
             lista = query.list();
             tx.commit();
+            session.close();
         } 
         catch (Exception e) 
         {
@@ -826,8 +837,8 @@ public class ProductoDAO
     
     public List<Producto> alarma() 
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
 
         List<Producto> lista = null;
         try 
@@ -836,6 +847,7 @@ public class ProductoDAO
             Query query = session.createQuery("FROM Producto p WHERE p.stock <= p.stockMinimo AND p.estado = TRUE");
             lista = query.list();
             tx.commit();
+            session.close();
         } 
         catch (Exception e) 
         {
@@ -846,8 +858,8 @@ public class ProductoDAO
     
     public void restarStock(int id, int cantidad)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Producto p = null;
         
@@ -859,6 +871,7 @@ public class ProductoDAO
         {
             session.merge(p);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -866,15 +879,14 @@ public class ProductoDAO
 		tx.rollback();
                     e.printStackTrace();
 		throw e;
-        }        
-        session.close();
-        JOptionPane.showMessageDialog(null, "Stock de producto modificado");
+        }
+        //JOptionPane.showMessageDialog(null, "Stock de producto modificado");
     }
     
     public void sumarStock(int id, int cantidad)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Producto p = null;
         
@@ -886,6 +898,7 @@ public class ProductoDAO
         {
             session.merge(p);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -894,7 +907,6 @@ public class ProductoDAO
                     e.printStackTrace();
 		throw e;
         }        
-        session.close();
-        JOptionPane.showMessageDialog(null, "Stock de producto modificado");
+        //JOptionPane.showMessageDialog(null, "Stock de producto modificado");
     }
 }

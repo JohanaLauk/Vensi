@@ -7,17 +7,21 @@ import java.util.*;
 import javax.swing.*;
 
 public class TurnoDAO 
-{            
+{         
+    SessionFactory sesion = null;
+    Session session = null;
+    
     public void alta(Turno t)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Transaction tx = session.beginTransaction();
         try
         {
             session.save(t);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -26,14 +30,13 @@ public class TurnoDAO
                     e.printStackTrace();
 		throw e;
         }
-        session.close();
-        JOptionPane.showMessageDialog(null, "Turno creado");
+        //JOptionPane.showMessageDialog(null, "Turno creado");
     }
     
     public void modificar(Turno t, int id)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
                
         Turno turno = null;
                    
@@ -46,6 +49,7 @@ public class TurnoDAO
         {
             session.merge(turno);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -54,14 +58,13 @@ public class TurnoDAO
                     e.printStackTrace();
 		throw e;
         }        
-        session.close();
-        JOptionPane.showMessageDialog(null, "Turno modificado");
+        //JOptionPane.showMessageDialog(null, "Turno modificado");
     }
     
     public List<Turno> listar()
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<Turno> lista = null;
         try
@@ -69,6 +72,7 @@ public class TurnoDAO
             Transaction tx = session.beginTransaction();
             lista = session.createQuery("FROM Turno").list();
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -79,8 +83,8 @@ public class TurnoDAO
     
     public List<Turno> buscarPorFecha(Date fechaInicio, Date fechaFin)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<Turno> lista = null;
         Query query;
@@ -101,6 +105,7 @@ public class TurnoDAO
             
             lista = query.list();
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -111,8 +116,8 @@ public class TurnoDAO
     
     /*public List<Turno> buscarPorNumero(int nro)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<Turno> lista = null;
         try
@@ -122,6 +127,7 @@ public class TurnoDAO
             query.setParameter("nro", "%"+nro+"%");
             lista = query.list();
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -132,8 +138,8 @@ public class TurnoDAO
     
     public Turno buscarPorID(int nro)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Turno t = null;
         try
@@ -141,6 +147,7 @@ public class TurnoDAO
             Transaction tx = session.beginTransaction();
             t = (Turno)session.get(Turno.class, nro);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -151,8 +158,8 @@ public class TurnoDAO
     
     public Turno obtenerUltimo()
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Turno t = null;
         try
@@ -162,6 +169,7 @@ public class TurnoDAO
             query.setMaxResults(1);
             t = (Turno)query.uniqueResult();
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {

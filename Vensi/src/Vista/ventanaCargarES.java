@@ -314,7 +314,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         unaES.setCantProd(0);        
         unaES.setMonto(montoES);
         unaES.setTipo(tipo);
-        unaES.setFechaHora(new Date());        
+        unaES.setHora(new Date());        
        
         unaES.setTurno(turnoActual);
         
@@ -394,7 +394,7 @@ public class ventanaCargarES extends javax.swing.JFrame
                 }
 
                 unES.setTipo(true);
-                unES.setFechaHora(new Date());
+                unES.setHora(new Date());
                 unES.setTurno(turnoActual);
 
                 esDAO.alta(unES);

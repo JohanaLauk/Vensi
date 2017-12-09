@@ -352,15 +352,22 @@ public class ventanaEditarProd extends javax.swing.JFrame {
             prod.setEstado(false);
         }
         
-        if (cbSituacion.getSelectedItem().equals("Suspendido")) 
+        if (cbSituacion.getSelectedItem().equals("Ninguno")) 
         {
-            prod.setSituacion(false);
+            prod.setSuspendido(false);
+            prod.setOferta(false);
         } 
         else 
         {
             if (cbSituacion.getSelectedItem().equals("Oferta")) 
             {
-                prod.setSituacion(true);
+                prod.setOferta(true);
+                prod.setSuspendido(false);
+            }
+            else
+            {                
+                prod.setSuspendido(true);
+                prod.setOferta(false);
             }
         }
         

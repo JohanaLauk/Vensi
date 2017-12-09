@@ -1,5 +1,7 @@
  package Modelo;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Turno  implements java.io.Serializable 
@@ -8,7 +10,7 @@ public class Turno  implements java.io.Serializable
     private Date fechaHoraInicio;
     private Date fechaHoraFin;
     private Usuario usuario;
-
+    
     public Turno() 
     { }
    
@@ -22,7 +24,7 @@ public class Turno  implements java.io.Serializable
     }
         
     public Date getFechaHoraInicio() 
-    {
+    { 
         return this.fechaHoraInicio;
     }    
     public void setFechaHoraInicio(Date fechaHoraInicio) 

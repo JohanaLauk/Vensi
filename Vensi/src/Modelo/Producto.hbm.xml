@@ -35,8 +35,11 @@
         <property name="estado"  type="boolean" >
             <column name="estado" not-null="true" />
         </property>
-        <property name="situacion"  type="boolean" >
-            <column name="situacion" not-null="false" />
+        <property name="suspendido"  type="boolean" >
+            <column name="suspendido" not-null="false" />
+        </property>
+        <property name="oferta"  type="boolean" >
+            <column name="oferta" not-null="false" />
         </property>
         <property name="porPeso"  type="boolean" >
             <column name="por_peso" not-null="false" />

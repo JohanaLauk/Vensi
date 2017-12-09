@@ -15,10 +15,10 @@
             <one-to-many class="Modelo.ItemVenta" />
          </list> -->
          
-        <property name="fechaHoraInicio" type="date">
+        <property name="fechaHoraInicio" type="timestamp">
             <column name="fecha_hora_inicio" length="13" not-null="true" />
         </property>
-        <property name="fechaHoraFin" type="date">
+        <property name="fechaHoraFin" type="timestamp">
             <column name="fecha_hora_fin" length="13" not-null="false" />
         </property>
         

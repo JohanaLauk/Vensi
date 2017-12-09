@@ -10,7 +10,7 @@ public class EntradaSalida
     private int cantProd;
     private double monto;
     private boolean tipo;
-    private Date fechaHora;
+    private Date hora;
     private Turno turno;
 
     public EntradaSalida() 
@@ -70,13 +70,13 @@ public class EntradaSalida
         this.tipo = tipo;
     }
 
-    public Date getFechaHora() 
+    public Date getHora() 
     {
-        return fechaHora;
+        return hora;
     }
-    public void setFechaHora(Date fechaHora) 
+    public void setHora(Date hora) 
     {
-        this.fechaHora = fechaHora;
+        this.hora = hora;
     }
 
     public Turno getTurno() 

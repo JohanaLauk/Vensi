@@ -8,16 +8,20 @@ import javax.swing.*;
 
 public class PedidoDAO 
 {            
+    SessionFactory sesion = null;
+    Session session = null;
+    
     public void alta(Pedido p)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Transaction tx = session.beginTransaction();
         try
         {
             session.save(p);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -25,15 +29,14 @@ public class PedidoDAO
 		tx.rollback();
                     e.printStackTrace();
 		throw e;
-        }        
-        session.close();
-        JOptionPane.showMessageDialog(null, "Pedido creado");
+        }
+        //JOptionPane.showMessageDialog(null, "Pedido creado");
     }
     
     public List<Pedido> listar()
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<Pedido> lista = null;
         try
@@ -41,6 +44,7 @@ public class PedidoDAO
             Transaction tx = session.beginTransaction();
             lista = session.createQuery("FROM Pedido").list();
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -51,8 +55,8 @@ public class PedidoDAO
     
     public List<Pedido> buscarPorFecha(Date fechaInicio, Date fechaFin)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<Pedido> lista = null;
         Query query;
@@ -73,6 +77,7 @@ public class PedidoDAO
     
             lista = query.list();
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -83,8 +88,8 @@ public class PedidoDAO
     
     /*public List<Pedido> buscarPorNumero(int nro)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         List<Pedido> lista = null;
         try
@@ -94,6 +99,7 @@ public class PedidoDAO
             query.setParameter("nro", "%"+nro+"%");
             lista = query.list();
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
@@ -104,8 +110,8 @@ public class PedidoDAO
     
     public Pedido buscarPorID(int nro)
     {
-        SessionFactory sesion = NewHibernateUtil.getSessionFactory();
-        Session session = sesion.openSession();
+        sesion = NewHibernateUtil.getSessionFactory();
+        session = sesion.openSession();
         
         Pedido p = null;
         try
@@ -113,6 +119,7 @@ public class PedidoDAO
             Transaction tx = session.beginTransaction();
             p = (Pedido)session.get(Pedido.class, nro);
             tx.commit();
+            session.close();
         }
         catch(Exception e)
         {
