@@ -23,6 +23,6 @@
         </property>
         
         <many-to-one name = "usuario" column = "id_usuario"  
-         class="Modelo.Usuario" not-null="true" />
+         class="Modelo.Usuario" not-null="true" lazy="false" />
     </class>
 </hibernate-mapping>

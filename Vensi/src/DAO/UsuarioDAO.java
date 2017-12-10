@@ -8,20 +8,18 @@ import javax.swing.JOptionPane;
 
 public class UsuarioDAO 
 {        
-    SessionFactory sesion = null;
-    Session session = null;
+    Session session;
+    Transaction tx;
     
     public void alta(Usuario u)
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-        
-        Transaction tx = session.beginTransaction();
+        session = NewHibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
         try
         {
             session.save(u);
             tx.commit();
-            session.close();
+            
         }
         catch(Exception e)
         {
@@ -30,14 +28,15 @@ public class UsuarioDAO
                     e.printStackTrace();
 		throw e;
         }        
+        finally{
+            session.close();
+        }
         //JOptionPane.showMessageDialog(null, "Usuario creado");
     }
     
     public void modificarContraseña(String usuario, int pin)
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-        
+        session = NewHibernateUtil.getSessionFactory().openSession();
         Usuario u = null;
         
         Query query = session.createQuery("FROM Usuario u WHERE u.nombreUsuario LIKE :usuario");
@@ -46,12 +45,12 @@ public class UsuarioDAO
             
         u.setPin(pin);
         
-        Transaction tx = session.beginTransaction();
+        tx = session.beginTransaction();
         try
         {
             session.merge(u);
             tx.commit();
-            session.close();
+            
         }
         catch(Exception e)
         {
@@ -60,17 +59,18 @@ public class UsuarioDAO
                     e.printStackTrace();
 		throw e;
         }
+        finally{
+            session.close();
+        }
         //JOptionPane.showMessageDialog(null, "Contraseña modificada");
     }
     
     public boolean verificar(String usuario, int pin )
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-        
+        session = NewHibernateUtil.getSessionFactory().openSession();
         boolean verificado = false;
         Usuario u;
-        
+        try{
         Query query = session.createQuery("FROM Usuario u WHERE u.nombreUsuario LIKE :usuario");
         query.setParameter("usuario", usuario+"%");
         u = (Usuario) query.uniqueResult();
@@ -79,30 +79,41 @@ public class UsuarioDAO
         {
             verificado = true;
         }
-        session.close();
+        }
+        catch(Exception e){
+            if (tx.isActive())
+		tx.rollback();
+                    e.printStackTrace();
+		throw e;
+        }
+        finally{
+            session.close();
+        }
+        
         
         return verificado;        
     }
     
     public List<Usuario> listar()
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-        
+        session = NewHibernateUtil.getSessionFactory().openSession();
         List<Usuario> lista = null;
         
         try
         {            
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             Query query = session.createQuery("FROM Usuario");            
             lista = query.list();
             tx.commit();
-            session.close();
+            
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error. Listar usuarios");
         }        
+        finally{
+            session.close();
+        }
         return lista;
     }
 }

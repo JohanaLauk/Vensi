@@ -12,12 +12,12 @@
             <column name="producto" not-null="true" />
         </property> -->
         <many-to-one name = "producto" column = "id_producto" 
-         class="Modelo.Producto" not-null="true"/>
+         class="Modelo.Producto" not-null="true" lazy="false" />
         <!--<one-to-one name="producto" class="Modelo.Producto" cascade="none"> 
         </one-to-one> -->
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />
         </property>
-        <many-to-one name="pedido" class="Modelo.Pedido" column="id_pedido" not-null="true" />    
+        <many-to-one name="pedido" class="Modelo.Pedido" column="id_pedido" not-null="true" lazy="false" />    
     </class>
 </hibernate-mapping>

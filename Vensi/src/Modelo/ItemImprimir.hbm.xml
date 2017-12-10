@@ -10,8 +10,7 @@
         </id>
         
         <many-to-one name = "producto" column = "id_producto" 
-         class="Modelo.Producto" not-null="true"/>
-        
+         class="Modelo.Producto" not-null="true" lazy="false" />      
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />
         </property>  

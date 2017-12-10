@@ -8,20 +8,18 @@ import javax.swing.*;
 
 public class PedidoDAO 
 {            
-    SessionFactory sesion = null;
-    Session session = null;
+    Session session;
+    Transaction tx;
     
     public void alta(Pedido p)
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-        
-        Transaction tx = session.beginTransaction();
+        session = NewHibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
         try
         {
             session.save(p);
             tx.commit();
-            session.close();
+            
         }
         catch(Exception e)
         {
@@ -30,39 +28,41 @@ public class PedidoDAO
                     e.printStackTrace();
 		throw e;
         }
+        finally{
+            session.close();
+        }
         //JOptionPane.showMessageDialog(null, "Pedido creado");
     }
     
     public List<Pedido> listar()
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-        
+        session = NewHibernateUtil.getSessionFactory().openSession();
         List<Pedido> lista = null;
         try
         {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             lista = session.createQuery("FROM Pedido").list();
             tx.commit();
-            session.close();
+            
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error");
         }        
+        finally{
+            session.close();
+        }
         return lista;
     }
     
     public List<Pedido> buscarPorFecha(Date fechaInicio, Date fechaFin)
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-        
+        session = NewHibernateUtil.getSessionFactory().openSession();
         List<Pedido> lista = null;
         Query query;
         try
         {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             if(fechaFin == null)
             {
                 query = session.createQuery("FROM Pedido p WHERE p.fechaHora = fechaInicio");
@@ -77,12 +77,15 @@ public class PedidoDAO
     
             lista = query.list();
             tx.commit();
-            session.close();
+            
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error"+e.getMessage());
         }        
+        finally{
+            session.close();
+        }
         return lista;
     }
     
@@ -110,21 +113,22 @@ public class PedidoDAO
     
     public Pedido buscarPorID(int nro)
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-        
+        session = NewHibernateUtil.getSessionFactory().openSession();
         Pedido p = null;
         try
         {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             p = (Pedido)session.get(Pedido.class, nro);
             tx.commit();
-            session.close();
+            
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error");
         }        
+        finally{
+            session.close();
+        }
         return p;
     }
 }

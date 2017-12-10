@@ -26,6 +26,6 @@
         <property name="hora" type="time">
             <column name="hora" length="13" not-null="true" />
         </property>
-        <many-to-one name="turno" class="Modelo.Turno" column="id_turno" not-null="true" />
+        <many-to-one name="turno" class="Modelo.Turno" column="id_turno" not-null="true" lazy="false" />
     </class>
 </hibernate-mapping>

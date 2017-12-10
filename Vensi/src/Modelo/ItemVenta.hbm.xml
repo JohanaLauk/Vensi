@@ -10,7 +10,7 @@
         </id>
         
         <many-to-one name = "producto" column = "id_producto" 
-         class="Modelo.Producto" not-null="true"/>
+         class="Modelo.Producto" not-null="true" lazy="false"/>
         
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />
@@ -20,6 +20,6 @@
         </property>
         
         <many-to-one name = "turno" column = "id_turno" 
-         class="Modelo.Turno" not-null="true" />             
+         class="Modelo.Turno" not-null="true" lazy="false"/>             
     </class>
 </hibernate-mapping>

@@ -8,20 +8,20 @@ import javax.swing.*;
 
 public class TurnoDAO 
 {         
-    SessionFactory sesion = null;
-    Session session = null;
+    
+    Session session;
+    Transaction tx;
     
     public void alta(Turno t)
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
+        session = NewHibernateUtil.getSessionFactory().openSession();
+        tx = session.beginTransaction();
         
-        Transaction tx = session.beginTransaction();
         try
         {
             session.save(t);
             tx.commit();
-            session.close();
+            
         }
         catch(Exception e)
         {
@@ -30,26 +30,27 @@ public class TurnoDAO
                     e.printStackTrace();
 		throw e;
         }
+        finally{
+            session.close();
+        }
         //JOptionPane.showMessageDialog(null, "Turno creado");
     }
     
     public void modificar(Turno t, int id)
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-               
+        session = NewHibernateUtil.getSessionFactory().openSession();               
         Turno turno = null;
                    
         turno = (Turno)session.get(Turno.class, id);
         turno.setFechaHoraInicio(t.getFechaHoraInicio());
         turno.setFechaHoraFin(t.getFechaHoraFin());
             
-        Transaction tx = session.beginTransaction();
+        tx = session.beginTransaction();
         try
         {
             session.merge(turno);
             tx.commit();
-            session.close();
+            
         }
         catch(Exception e)
         {
@@ -58,39 +59,40 @@ public class TurnoDAO
                     e.printStackTrace();
 		throw e;
         }        
+        finally{
+            session.close();
+        }
         //JOptionPane.showMessageDialog(null, "Turno modificado");
     }
     
     public List<Turno> listar()
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-        
+        session = NewHibernateUtil.getSessionFactory().openSession();       
         List<Turno> lista = null;
         try
         {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             lista = session.createQuery("FROM Turno").list();
             tx.commit();
-            session.close();
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error");
+        }
+        finally{
+            session.close();
         }
         return lista;
     }
     
     public List<Turno> buscarPorFecha(Date fechaInicio, Date fechaFin)
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-        
+        session = NewHibernateUtil.getSessionFactory().openSession();        
         List<Turno> lista = null;
         Query query;
         try
         {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             if(fechaFin == null)
             {
                 query = session.createQuery("FROM Turno t WHERE t.fechaHoraInicio = :fechaInicio");
@@ -105,11 +107,14 @@ public class TurnoDAO
             
             lista = query.list();
             tx.commit();
-            session.close();
+            
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error");
+        }
+        finally{
+            session.close();
         }
         return lista;
     }
@@ -138,42 +143,43 @@ public class TurnoDAO
     
     public Turno buscarPorID(int nro)
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-        
+        session = NewHibernateUtil.getSessionFactory().openSession();      
         Turno t = null;
         try
         {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             t = (Turno)session.get(Turno.class, nro);
             tx.commit();
-            session.close();
+            
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error al buscar por ID");
-        }        
+        }       
+        finally{
+            session.close();
+        }
         return t;
     }
     
     public Turno obtenerUltimo()
     {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-        
+        session = NewHibernateUtil.getSessionFactory().openSession();        
         Turno t = null;
         try
         {
-            Transaction tx = session.beginTransaction();
+            tx = session.beginTransaction();
             Query query = session.createQuery("FROM Turno t ORDER BY t.id DESC");
             query.setMaxResults(1);
             t = (Turno)query.uniqueResult();
             tx.commit();
-            session.close();
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error al obtener último turno");
+        }
+        finally{
+            session.close();
         }
         
         return t;
