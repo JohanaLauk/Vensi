@@ -12,13 +12,11 @@ import javax.swing.table.TableColumnModel;
 
 public class ventanaDetalleCaja extends javax.swing.JFrame 
 {
-    //Turno elTurno = new Turno();
     TurnoDAO tDAO = new TurnoDAO();
     ItemVentaDAO itDAO = new ItemVentaDAO();
-    EntradaSalidaDAO esDAO = new EntradaSalidaDAO();
+    EntradaSalidaDAO esDAO = new EntradaSalidaDAO();   
     
-    static int id_TurnoActualDC;
-    Turno turnoActual = tDAO.buscarPorID(id_TurnoActualDC);
+    Turno turnoActual = null;
     
     List<ItemVenta> listaIT = null;
     List<EntradaSalida> listaES = null;
@@ -32,7 +30,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);   //centra la ventana  
         
-        labIdTurno.setVisible(false);
+        turnoActual = tDAO.obtenerUltimo();
         
         llenarTabla();                
         txfdTotalVenta.setText("$" + String.valueOf(calcularVenta()));        
@@ -53,7 +51,6 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         txfdTotalVenta = new javax.swing.JTextField();
         txfdTotalCaja = new javax.swing.JTextField();
         btnCargarES = new javax.swing.JButton();
-        labIdTurno = new javax.swing.JLabel();
         btnVolverDC = new javax.swing.JButton();
         labImagenFondo = new javax.swing.JLabel();
 
@@ -144,10 +141,6 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         });
         jPanel1.add(btnCargarES, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 380, 240, 100));
 
-        labIdTurno.setForeground(new java.awt.Color(255, 255, 255));
-        labIdTurno.setText("lab_Id_turno");
-        jPanel1.add(labIdTurno, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 370, 70, 20));
-
         btnVolverDC.setText("Volver");
         btnVolverDC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -174,7 +167,6 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
 
     private void btnCargarESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarESActionPerformed
         ventanaCargarES vCargarES = new ventanaCargarES();
-        vCargarES.id_TurnoActualCES = id_TurnoActualDC;
         vCargarES.setVisible(true);
     }//GEN-LAST:event_btnCargarESActionPerformed
 
@@ -199,8 +191,8 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     {        
         modelo = new DefaultTableModel();
         
-        listaIT = itDAO.listar(id_TurnoActualDC);   //lista tabla item_venta
-        listaES = esDAO.listar(id_TurnoActualDC);   //lista tabla entrada_salida
+        listaIT = itDAO.listar(turnoActual.getId());   //lista tabla item_venta
+        listaES = esDAO.listar(turnoActual.getId());   //lista tabla entrada_salida
         
         String[] datos = new String[4];
         
@@ -251,7 +243,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
                     datos[2] = String.valueOf("$"+es.getMonto());
                     datos[3] = String.valueOf("---"); 
                 }
-                else    //salida
+                if (!es.isTipo())   //salida
                 {
                     datos[2] = String.valueOf("---"); 
                     datos[3] = String.valueOf("$"+es.getMonto());
@@ -282,7 +274,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     
     public double calcularVenta()
     {
-        listaIT = itDAO.listar(id_TurnoActualDC);
+        listaIT = itDAO.listar(turnoActual.getId());
         double montoVenta = 0;
         
         for (ItemVenta x : listaIT)
@@ -294,7 +286,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     
     public double calcularTotalCaja()
     {
-        listaES = esDAO.listar(id_TurnoActualDC);
+        listaES = esDAO.listar(turnoActual.getId());
         
         double montoEntradaSalida=0;  
         double totalCaja=0;
@@ -327,7 +319,6 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labIdTurno;
     private javax.swing.JLabel labImagenFondo;
     private javax.swing.JTable tablaDetalleCaja;
     private javax.swing.JTextField txfdTotalCaja;

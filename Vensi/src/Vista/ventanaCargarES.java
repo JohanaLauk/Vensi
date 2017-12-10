@@ -16,12 +16,7 @@ public class ventanaCargarES extends javax.swing.JFrame
     ProductoDAO pDAO = new ProductoDAO();
     DefaultListModel modeloList;
     
-    List<ItemVenta> listaIV =  null;
-    
-    static int id_TurnoActualCES;
-    Turno turnoActual = tDAO.buscarPorID(id_TurnoActualCES);
-    
-    //Turno turnoActual = null; 
+    List<ItemVenta> listaIV = null;
     String nombre = "";
     
     public ventanaCargarES() 
@@ -31,14 +26,8 @@ public class ventanaCargarES extends javax.swing.JFrame
         this.setLocationRelativeTo(null);   //centra la ventana
         
         this.setPreferredSize(new Dimension(780, 440));     //tamaño en la que aparecerá la ventana al ejecutar 
-              
-        if (nombre.equals(""))
-        {
-            nombre = "Ninguno";
-            habDeshabComponentes(nombre);            
-        }        
-        
-        //turnoActual = tDAO.obtenerUltimo();
+               
+        habDeshabComponentes("Ninguno");          
     }
     
     @SuppressWarnings("unchecked")
@@ -282,7 +271,8 @@ public class ventanaCargarES extends javax.swing.JFrame
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        boolean tipo = false;   //salida
+        EntradaSalida unaES = new EntradaSalida();
+        Turno turnoActual = tDAO.obtenerUltimo();
         
         if (nombre.equals("Ninguno"))
         {
@@ -292,18 +282,17 @@ public class ventanaCargarES extends javax.swing.JFrame
         {
             if (nombre.equals("Apertura de caja"))
             {
-                tipo = true;    //entrada
+                unaES.setTipo(true);    //entrada
             }
             else
             {
-                tipo = false;   //salida
+                unaES.setTipo(false);   //salida                             
             }            
         }
         
         String descripcion = txAreaDescripcion.getText();
         double montoES = Double.parseDouble(txfdMonto.getText());
-        
-        EntradaSalida unaES = new EntradaSalida();
+                
         unaES.setNombre(nombre.toUpperCase());       
         
         if (descripcion.equals(""))
@@ -316,10 +305,8 @@ public class ventanaCargarES extends javax.swing.JFrame
         }        
         
         unaES.setCantProd(0);        
-        unaES.setMonto(montoES);
-        unaES.setTipo(tipo);
-        unaES.setHora(new Date());   
-       
+        unaES.setMonto(montoES);        
+        unaES.setHora(new Date());       
         unaES.setTurno(turnoActual);
         
         esDAO.alta(unaES);
@@ -329,6 +316,7 @@ public class ventanaCargarES extends javax.swing.JFrame
 
     private void txfdCodNomProdAnularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCodNomProdAnularKeyReleased
         String cadena = txfdCodNomProdAnular.getText();
+        Turno turnoActual = tDAO.obtenerUltimo();
         
         if (cadena.equals(""))
         {
@@ -336,7 +324,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         }
         else
         {
-            listaIV = itDAO.buscar(cadena);   //lista de productos que se vendieron segun la BUSQUEDA         
+            listaIV = itDAO.buscar(cadena, turnoActual.getId());   //lista de productos que se vendieron segun la BUSQUEDA         
             llenarListBusqueda(listaIV); 
             
             if (listaIV.size() == 1)
@@ -360,8 +348,9 @@ public class ventanaCargarES extends javax.swing.JFrame
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         int cantidad = Integer.parseInt(txfdCantProdAnular.getText());
         boolean repetido = false;
+        Turno turnoActual = tDAO.obtenerUltimo();
         
-        List<ItemVenta> listaVentas = itDAO.listar(id_TurnoActualCES);
+        List<ItemVenta> listaVentas = itDAO.listar(turnoActual.getId());
         ItemVenta item = null;
         
         for (ItemVenta v : listaVentas) //lista de ventas
@@ -397,7 +386,7 @@ public class ventanaCargarES extends javax.swing.JFrame
                     unES.setMonto(item.getProducto().getPrecioVenta() * cantidad);
                 }
 
-                unES.setTipo(true);
+                unES.setTipo(false);
                 unES.setHora(new Date());
                 
                 unES.setTurno(turnoActual);

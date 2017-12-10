@@ -18,7 +18,7 @@
             <column name="direccion" length="50" />
         </property>
         <property name="contacto" type="string">
-            <column name="contacto" length="100" not-null="true" />
+            <column name="contacto" length="100" not-null="false" />
         </property>
         <property name="estado" type="boolean">
             <column name="estado" not-null="true" />

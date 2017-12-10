@@ -495,9 +495,8 @@ public class ventanaCompra extends javax.swing.JFrame
         }
         
         txfdCantidad.setText(null);
-        cbProveedores.setSelectedIndex(0); //probar si anda
         llenarTablaInventario();
-        mostrarTablaVacia();
+        llenarTabla();
     }//GEN-LAST:event_btnCargarInventarioActionPerformed
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed

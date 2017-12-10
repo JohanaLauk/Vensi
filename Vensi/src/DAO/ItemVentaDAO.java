@@ -60,7 +60,7 @@ public class ItemVentaDAO
         //JOptionPane.showMessageDialog(null, "ItemVenta modificado");
     }
     
-    public List<ItemVenta> buscar(String cadena)
+    public List<ItemVenta> buscar(String cadena, int nroTurno)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
         List<ItemVenta> lista = null;
@@ -68,8 +68,9 @@ public class ItemVentaDAO
         try
         {            
             tx = session.beginTransaction();
-            Query query = session.createQuery("FROM ItemVenta it WHERE it.producto.codigo LIKE :cadena OR it.producto.descripcion LIKE :cadena");
-            query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");            
+            Query query = session.createQuery("FROM ItemVenta iv WHERE iv.producto.codigo LIKE :cadena OR iv.producto.descripcion LIKE :cadena AND iv.turno.id = :nroTurno");
+            query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");        
+            query.setParameter("nroTurno", nroTurno);
             lista = query.list();
             tx.commit();
             

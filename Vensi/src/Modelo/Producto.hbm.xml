@@ -27,7 +27,7 @@
             <column name="stock" not-null="true" />
         </property>
         <property name="stockMinimo" type="int">
-            <column name="stock_minimo" not-null="true" />
+            <column name="stock_minimo" not-null="false" />
         </property>
         <property name="pesoEnvase" type="int">
             <column name="peso_envase" not-null="false" />

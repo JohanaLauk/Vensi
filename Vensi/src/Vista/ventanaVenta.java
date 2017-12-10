@@ -35,8 +35,7 @@ public class ventanaVenta extends javax.swing.JFrame
     String ordenSelec = null;
     String tipoSelec = null;
     
-    Turno turnoActual = null;  
-    int idTurnoActual;
+    Turno turnoActual = null;    
     static double totalCarrito = 0; //inicializa en 0 cada vez que se confirma la compra
     
     public ventanaVenta() 
@@ -68,9 +67,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 btnQuitar.setEnabled(false);
                 btnAgregar.setEnabled(false);
             } 
-        });
-        
-        turnoActual = tDAO.obtenerUltimo();       
+        });              
         
         llenarTabla();
         llenarTablaCarrito();        
@@ -483,15 +480,11 @@ public class ventanaVenta extends javax.swing.JFrame
 
     private void btnCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarTurnoActionPerformed
         ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
-        idTurnoActual = turnoActual.getId();
-        vCierreTurno.id_turnoActualCT = idTurnoActual;
         vCierreTurno.setVisible(true);
     }//GEN-LAST:event_btnCerrarTurnoActionPerformed
 
     private void btnDetalleCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleCajaActionPerformed
         ventanaDetalleCaja vDetalleCaja = new ventanaDetalleCaja();
-        idTurnoActual = turnoActual.getId();
-        ventanaDetalleCaja.id_TurnoActualDC =  idTurnoActual;  
         vDetalleCaja.setVisible(true);
     }//GEN-LAST:event_btnDetalleCajaActionPerformed
 
@@ -531,6 +524,7 @@ public class ventanaVenta extends javax.swing.JFrame
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
         int cantFilasCarrito = tablaCarrito.getRowCount();        
+        turnoActual = tDAO.obtenerUltimo();
         
         if (cantFilasCarrito != 0)     //carrito NO vacio
         {            
@@ -632,15 +626,19 @@ public class ventanaVenta extends javax.swing.JFrame
                 x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
                 precioTotal = String.valueOf(x);
             
-                String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();      
-                for(int i=0; i<tablaCarrito.getModel().getRowCount(); i++){
-                                
-                    if(Integer.parseInt(tablaCarrito.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido)){
+                String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();    
+                
+                for (int i=0; i<tablaCarrito.getModel().getRowCount(); i++)
+                {                                
+                    if(Integer.parseInt(tablaCarrito.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido))
+                    {
                         modificar = true;
                         filaModificar = i;                              
                     }
                 }
-                if(modificar){  
+                
+                if (modificar)
+                {  
                     cantidad = String.valueOf(Integer.parseInt(cantidad)+Integer.parseInt(tablaCarrito.getValueAt(filaModificar,1).toString()));
                     x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
                     precioTotal = String.valueOf(x);
@@ -651,7 +649,8 @@ public class ventanaVenta extends javax.swing.JFrame
                 m.addRow(filaNueva); 
                 
                 totalCarrito = 0;
-                for(int i = 0; i < tablaCarrito.getRowCount(); i++){
+                for (int i = 0; i < tablaCarrito.getRowCount(); i++)
+                {
                     totalCarrito += Double.parseDouble(tablaCarrito.getValueAt(i, 3).toString());
                 }
                 labPrecioTotalCompra.setText(String.valueOf(totalCarrito));

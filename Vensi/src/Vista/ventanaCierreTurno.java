@@ -16,17 +16,15 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     ItemVentaDAO itDAO = new ItemVentaDAO();
     EntradaSalidaDAO esDAO = new EntradaSalidaDAO();
     
-    Turno elTurno = new Turno();
     Turno turnoActual = null;
-    static int id_turnoActualCT;
     
     public ventanaCierreTurno() 
     {
         initComponents();
         
         this.setLocationRelativeTo(null);   //centra la ventana  
-        
-        //turnoActual = tDAO.obtenerUltimo();
+          
+        turnoActual = tDAO.obtenerUltimo();
         
         //el HAY se calcula automaticamente a medida que va ingresando los billetes
         txfdMontoEsperado.setText("$" + String.valueOf(calcularMontoEsperado()));
@@ -582,14 +580,13 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     }
     
     public double calcularMontoEsperado()
-    {        
-        
-        List<ItemVenta> listaIT = itDAO.listar(id_turnoActualCT);
-        List<EntradaSalida> listaES = esDAO.listar(id_turnoActualCT);
+    {       
+        List<ItemVenta> listaIT = itDAO.listar(turnoActual.getId());
+        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
         
         double montoVenta = 0;
         double montoES = 0;
-        double montoEsperado=0;
+        double montoEsperado = 0;
         
         for (ItemVenta iv : listaIT)
         {
@@ -629,9 +626,9 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     }//GEN-LAST:event_btnCancelarCerrarTurnoActionPerformed
 
     private void btnAceptarCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarCerrarTurnoActionPerformed
-        elTurno.setFechaHoraFin(new Date());
-        elTurno = tDAO.buscarPorID(id_turnoActualCT);
-        tDAO.modificar(elTurno, id_turnoActualCT);
+        turnoActual.setFechaHoraFin(new Date());
+        
+        tDAO.modificar(turnoActual, turnoActual.getId());
         
         JOptionPane.showMessageDialog(null, "Se ha cerrado el turno correctamente.");
               

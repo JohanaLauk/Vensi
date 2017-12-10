@@ -7,8 +7,7 @@ import java.util.*;
 import javax.swing.*;
 
 public class TurnoDAO 
-{         
-    
+{     
     Session session;
     Transaction tx;
     

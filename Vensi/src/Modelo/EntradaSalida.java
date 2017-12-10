@@ -9,7 +9,7 @@ public class EntradaSalida
     private String descripcion;
     private int cantProd;
     private double monto;
-    private boolean tipo;
+    private boolean tipo = false;
     private Date hora;
     private Turno turno;
 
