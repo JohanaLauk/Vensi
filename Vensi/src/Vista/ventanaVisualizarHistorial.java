@@ -10,6 +10,8 @@ import Modelo.ItemVenta;
 import Modelo.Pedido;
 import Modelo.Turno;
 import Modelo.EntradaSalida;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
@@ -28,14 +30,14 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
     
     public static String tablaSelec;
     public static int idSelec;
+    DateFormat fechaHoraFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
     
     public ventanaVisualizarHistorial() 
     {
         initComponents();
         
         this.setLocationRelativeTo(null);   //centra la ventana
-        
-       
+               
         llenarDatos();
     }
 
@@ -171,8 +173,16 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             Turno t = tDAO.buscarPorID(idSelec);
             modeloList = new DefaultListModel();
             modeloList.addElement("NÚMERO:  " + String.valueOf(t.getId()));
-            modeloList.addElement("FECHA DE INICIO:  " + String.valueOf(t.getFechaHoraInicio()));
-            modeloList.addElement("FECHA DE CIERRE:  " + String.valueOf(t.getFechaHoraFin()));
+            modeloList.addElement("FECHA DE INICIO:  " + String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio())));
+            if (t.getFechaHoraFin() != null)
+            {
+                modeloList.addElement("FECHA DE CIERRE:  " + String.valueOf(fechaHoraFormat.format(t.getFechaHoraFin())));
+            }
+            else
+            {
+                modeloList.addElement("FECHA DE CIERRE:  " + String.valueOf("Pendiente"));
+            }
+            
             modeloList.addElement("USUARIO:  " + String.valueOf(t.getUsuario().getNombreUsuario()));            
             
             modelo.addColumn("Entrada");
@@ -212,6 +222,9 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         }
         else
         {
+            modelo.addColumn("Entrada");
+            modelo.addColumn("Salida");
+            
             Pedido p = pDAO.buscarPorID(idSelec);
             modeloList = new DefaultListModel();
             modeloList.addElement("Número: " + String.valueOf(p.getId()));

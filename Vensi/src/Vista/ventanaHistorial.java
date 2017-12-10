@@ -10,7 +10,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
-import java.util.Calendar;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -442,7 +441,14 @@ public class ventanaHistorial extends javax.swing.JFrame
 
                     datos[0] = String.valueOf(t.getId());
                     datos[1] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio()));
-                    datos[2] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraFin()));
+                    if (t.getFechaHoraFin() != null)
+                    {
+                        datos[2] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraFin()));
+                    }
+                    else
+                    {
+                        datos[2] = String.valueOf("Pendiente");
+                    }
                     modelo.addRow(datos);
                 }
             }                
