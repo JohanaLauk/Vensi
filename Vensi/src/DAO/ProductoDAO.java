@@ -26,7 +26,9 @@ public class ProductoDAO
             if (tx.isActive())
 		tx.rollback();
                     e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Código de producto repetido.");
 		throw e;
+            
         }
         finally{
             session.close();
@@ -62,6 +64,7 @@ public class ProductoDAO
             if (tx.isActive())
 		tx.rollback();
                     e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "Código de producto repetido.");
 		throw e;
         }        
         finally{
