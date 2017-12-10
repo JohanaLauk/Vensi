@@ -12,16 +12,21 @@ import javax.swing.JOptionPane;
 
 public class ventanaCierreTurno extends javax.swing.JFrame 
 {
-    TurnoDAO tDAO = new TurnoDAO();    
-    Turno elTurno = new Turno();
+    TurnoDAO tDAO = new TurnoDAO();   
     ItemVentaDAO itDAO = new ItemVentaDAO();
     EntradaSalidaDAO esDAO = new EntradaSalidaDAO();
+    
+    Turno elTurno = new Turno();
+    Turno turnoActual = null;
+    static int id_turnoActualCT;
     
     public ventanaCierreTurno() 
     {
         initComponents();
         
         this.setLocationRelativeTo(null);   //centra la ventana  
+        
+        //turnoActual = tDAO.obtenerUltimo();
         
         //el HAY se calcula automaticamente a medida que va ingresando los billetes
         txfdMontoEsperado.setText("$" + String.valueOf(calcularMontoEsperado()));
@@ -578,9 +583,9 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     
     public double calcularMontoEsperado()
     {        
-        Turno turnoActual = tDAO.obtenerUltimo();
-        List<ItemVenta> listaIT = itDAO.listar(turnoActual.getId());
-        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
+        
+        List<ItemVenta> listaIT = itDAO.listar(id_turnoActualCT);
+        List<EntradaSalida> listaES = esDAO.listar(id_turnoActualCT);
         
         double montoVenta = 0;
         double montoES = 0;
@@ -624,9 +629,9 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     }//GEN-LAST:event_btnCancelarCerrarTurnoActionPerformed
 
     private void btnAceptarCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarCerrarTurnoActionPerformed
-        elTurno = tDAO.obtenerUltimo();
         elTurno.setFechaHoraFin(new Date());
-        tDAO.modificar(elTurno, elTurno.getId());
+        elTurno = tDAO.buscarPorID(id_turnoActualCT);
+        tDAO.modificar(elTurno, id_turnoActualCT);
         
         JOptionPane.showMessageDialog(null, "Se ha cerrado el turno correctamente.");
               

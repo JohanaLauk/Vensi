@@ -29,10 +29,14 @@ public class ventanaVenta extends javax.swing.JFrame
     TableColumnModel tcm, tcm2, tcm3;   
     DefaultListModel modeloList;
     
+    List<Producto> listaBusqueda = null;
+    
     String filtroSelec = null;
     String ordenSelec = null;
     String tipoSelec = null;
     
+    Turno turnoActual = null;  
+    int idTurnoActual;
     static double totalCarrito = 0; //inicializa en 0 cada vez que se confirma la compra
     
     public ventanaVenta() 
@@ -65,6 +69,8 @@ public class ventanaVenta extends javax.swing.JFrame
                 btnAgregar.setEnabled(false);
             } 
         });
+        
+        turnoActual = tDAO.obtenerUltimo();       
         
         llenarTabla();
         llenarTablaCarrito();        
@@ -477,11 +483,15 @@ public class ventanaVenta extends javax.swing.JFrame
 
     private void btnCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarTurnoActionPerformed
         ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
+        idTurnoActual = turnoActual.getId();
+        vCierreTurno.id_turnoActualCT = idTurnoActual;
         vCierreTurno.setVisible(true);
     }//GEN-LAST:event_btnCerrarTurnoActionPerformed
 
     private void btnDetalleCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleCajaActionPerformed
         ventanaDetalleCaja vDetalleCaja = new ventanaDetalleCaja();
+        idTurnoActual = turnoActual.getId();
+        ventanaDetalleCaja.id_TurnoActualDC =  idTurnoActual;  
         vDetalleCaja.setVisible(true);
     }//GEN-LAST:event_btnDetalleCajaActionPerformed
 
@@ -528,8 +538,7 @@ public class ventanaVenta extends javax.swing.JFrame
             {               
                 String idProd = tablaCarrito.getValueAt(i, 4).toString();                    
                 Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
-                String cantPeso = tablaCarrito.getValueAt(i, 1).toString();
-                Turno turnoActual = tDAO.obtenerUltimo();                
+                String cantPeso = tablaCarrito.getValueAt(i, 1).toString();                             
                 
                 List<ItemVenta> listaItemVenta = itDAO.listar(turnoActual.getId());
                 
@@ -672,7 +681,6 @@ public class ventanaVenta extends javax.swing.JFrame
         {
             String cantidad = tablaCarrito.getValueAt(filaSelec, 1).toString();
             String precioU = tablaCarrito.getValueAt(filaSelec, 2).toString();
-            String precioTotal = tablaCarrito.getValueAt(filaSelec, 3).toString();
             
             double x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
             totalCarrito = totalCarrito - x;
@@ -695,7 +703,7 @@ public class ventanaVenta extends javax.swing.JFrame
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, "Habilitados");
+        listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, "Habilitados");
         llenarTablaBusqueda(listaBusqueda);
         
         if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
@@ -713,7 +721,7 @@ public class ventanaVenta extends javax.swing.JFrame
 
     private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
         String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, "Habilitados");
+        listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, "Habilitados");
         llenarTablaBusqueda(listaBusqueda);
         
         if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)

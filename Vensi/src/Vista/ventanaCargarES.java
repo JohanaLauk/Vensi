@@ -15,9 +15,13 @@ public class ventanaCargarES extends javax.swing.JFrame
     TurnoDAO tDAO = new TurnoDAO();
     ProductoDAO pDAO = new ProductoDAO();
     DefaultListModel modeloList;
+    
     List<ItemVenta> listaIV =  null;
     
-    Turno turnoActual = null; 
+    static int id_TurnoActualCES;
+    Turno turnoActual = tDAO.buscarPorID(id_TurnoActualCES);
+    
+    //Turno turnoActual = null; 
     String nombre = "";
     
     public ventanaCargarES() 
@@ -34,7 +38,7 @@ public class ventanaCargarES extends javax.swing.JFrame
             habDeshabComponentes(nombre);            
         }        
         
-        turnoActual = tDAO.obtenerUltimo();
+        //turnoActual = tDAO.obtenerUltimo();
     }
     
     @SuppressWarnings("unchecked")
@@ -314,7 +318,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         unaES.setCantProd(0);        
         unaES.setMonto(montoES);
         unaES.setTipo(tipo);
-        unaES.setHora(new Date());        
+        unaES.setHora(new Date());   
        
         unaES.setTurno(turnoActual);
         
@@ -356,15 +360,15 @@ public class ventanaCargarES extends javax.swing.JFrame
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         int cantidad = Integer.parseInt(txfdCantProdAnular.getText());
         boolean repetido = false;
-        turnoActual = tDAO.obtenerUltimo();
-        List<ItemVenta> listaVentas = itDAO.listar(turnoActual.getId());
+        
+        List<ItemVenta> listaVentas = itDAO.listar(id_TurnoActualCES);
         ItemVenta item = null;
         
         for (ItemVenta v : listaVentas) //lista de ventas
         {
             for (ItemVenta i : listaIV) //contiene 1 sólo prod
             {
-                if (v.getProducto().getId() == i.getProducto().getId())     //El prod buscado se encuentra en las ventas. 
+                if (v.getProducto().getId() == i.getProducto().getId()) //El prod buscado se encuentra en las ventas. 
                 {
                     repetido = true; 
                     item = v;
@@ -395,6 +399,7 @@ public class ventanaCargarES extends javax.swing.JFrame
 
                 unES.setTipo(true);
                 unES.setHora(new Date());
+                
                 unES.setTurno(turnoActual);
 
                 esDAO.alta(unES);
@@ -443,7 +448,7 @@ public class ventanaCargarES extends javax.swing.JFrame
     private void txfdCantProdAnularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantProdAnularKeyReleased
         String cadena = txfdCantProdAnular.getText();
         
-        if (cadena.equals("") || cadena == null)
+        if (cadena.equals(""))
         {
             btnAnular.setEnabled(false);
         }
