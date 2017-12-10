@@ -26,7 +26,8 @@ public class ProductoDAO
             if (tx.isActive())
 		tx.rollback();
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Código de producto repetido.");
+                    JOptionPane.showMessageDialog(null, "El código del nuevo producto que desea registrar ya existe.\n" +
+                                                        "Corrobore en el inventario para mayor seguridad y control.");
 		throw e;
             
         }
@@ -64,7 +65,8 @@ public class ProductoDAO
             if (tx.isActive())
 		tx.rollback();
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "Código de producto repetido.");
+                    JOptionPane.showMessageDialog(null, "El código del nuevo producto que desea registrar ya existe.\n" +
+                                                        "Corrobore en el inventario para mayor seguridad y control.");
 		throw e;
         }        
         finally{

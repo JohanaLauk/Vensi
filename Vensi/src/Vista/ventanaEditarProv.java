@@ -3,6 +3,7 @@ package Vista;
 import DAO.ProveedorDAO;
 import Modelo.Proveedor;
 import java.awt.Dimension;
+import javax.swing.JOptionPane;
 
 public class ventanaEditarProv extends javax.swing.JFrame 
 {
@@ -58,7 +59,7 @@ public class ventanaEditarProv extends javax.swing.JFrame
 
         jLabel1.setText("Razon social:");
 
-        jLabel2.setText("Cuit:");
+        jLabel2.setText("CUIT:");
 
         jLabel3.setText("Dirección:");
 
@@ -182,9 +183,9 @@ public class ventanaEditarProv extends javax.swing.JFrame
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(btnAceptarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addComponent(btnAceptarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnCancelarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 140, Short.MAX_VALUE))
+                .addComponent(btnCancelarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -219,27 +220,28 @@ public class ventanaEditarProv extends javax.swing.JFrame
 
     private void btnAceptarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarActionPerformed
         Proveedor prov = new Proveedor();
-        
-        prov.setRazonSocial(txfdEditarRazonSocial.getText().toUpperCase());
-        prov.setCuit(txfdEditarCuit.getText());
-        prov.setDireccion(txfdEditarDireccion.getText().toUpperCase());
-        prov.setLocalidad(txfdLocalidad.getText().toUpperCase());
-        prov.setProvincia(txfdProvincia.getText().toUpperCase());
-        prov.setPais(txfdPais.getText().toUpperCase());
-        prov.setContacto(txfdEditarContacto.getText());
-        
-        if(cbEditarEstado.getSelectedItem().equals("Habilitado"))
-        {
-            prov.setEstado(true);
+        if (!(txfdEditarRazonSocial.getText().equals("") || txfdEditarRazonSocial.getText() == null)
+                && !(txfdEditarCuit.getText().equals("") || txfdEditarCuit.getText() == null)) {
+            prov.setRazonSocial(txfdEditarRazonSocial.getText().toUpperCase());
+            prov.setCuit(txfdEditarCuit.getText());
+            prov.setDireccion(txfdEditarDireccion.getText().toUpperCase());
+            prov.setLocalidad(txfdLocalidad.getText().toUpperCase());
+            prov.setProvincia(txfdProvincia.getText().toUpperCase());
+            prov.setPais(txfdPais.getText().toUpperCase());
+            prov.setContacto(txfdEditarContacto.getText());
+
+            if (cbEditarEstado.getSelectedItem().equals("Habilitado")) {
+                prov.setEstado(true);
+            } else {
+                prov.setEstado(false);
+            }
+
+            pDAO.modificar(prov, id_recibido);
+
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
         }
-        else
-        {
-            prov.setEstado(false);
-        }
-        
-        pDAO.modificar(prov, id_recibido);
-        
-        dispose();
     }//GEN-LAST:event_btnAceptarEditarActionPerformed
     
     public static void main(String args[]) 

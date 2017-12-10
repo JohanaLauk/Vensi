@@ -3,6 +3,7 @@ package Vista;
 import DAO.ProveedorDAO;
 import Modelo.Proveedor;
 import java.awt.Dimension;
+import javax.swing.JOptionPane;
 
 public class ventanaNuevoProv extends javax.swing.JFrame 
 {
@@ -47,11 +48,20 @@ public class ventanaNuevoProv extends javax.swing.JFrame
 
         jLabel1.setText("Razón social:");
 
-        jLabel2.setText("Cuit:");
+        jLabel2.setText("CUIT:");
 
         jLabel3.setText("Dirección:");
 
         jLabel4.setText("Contacto:");
+
+        txfdCuit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfdCuitKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdCuitKeyTyped(evt);
+            }
+        });
 
         jLabel5.setText("Localidad:");
 
@@ -198,19 +208,36 @@ public class ventanaNuevoProv extends javax.swing.JFrame
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         Proveedor unProv = new Proveedor();
-        
-        unProv.setRazonSocial(txfdRazonSocial.getText().toUpperCase());
-        unProv.setCuit(txfdCuit.getText());
-        unProv.setDireccion(txfdDireccion.getText().toUpperCase());
-        unProv.setLocalidad(txfdLocalidad.getText().toUpperCase());
-        unProv.setProvincia(txfdProvincia.getText().toUpperCase());
-        unProv.setPais(txfdPais.getText().toUpperCase());
-        unProv.setContacto(txfdContacto.getText());
-        
-        pDAO.alta(unProv);      
-        
-        dispose();
+        if (!(txfdRazonSocial.getText().equals("") || txfdRazonSocial.getText() == null)
+                && !(txfdCuit.getText().equals("") || txfdCuit.getText() == null)) {
+            unProv.setRazonSocial(txfdRazonSocial.getText().toUpperCase());
+            unProv.setCuit(txfdCuit.getText());
+            unProv.setDireccion(txfdDireccion.getText().toUpperCase());
+            unProv.setLocalidad(txfdLocalidad.getText().toUpperCase());
+            unProv.setProvincia(txfdProvincia.getText().toUpperCase());
+            unProv.setPais(txfdPais.getText().toUpperCase());
+            unProv.setContacto(txfdContacto.getText());
+
+            pDAO.alta(unProv);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
+        }
+
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void txfdCuitKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCuitKeyReleased
+        
+    }//GEN-LAST:event_txfdCuitKeyReleased
+
+    private void txfdCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCuitKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
+                (c != '-' || txfdCuit.getText().contains("-")) &&
+                (String.valueOf(txfdCuit.getText().charAt(0)).equals("-"))) 
+            evt.consume();
+    }//GEN-LAST:event_txfdCuitKeyTyped
 
     public static void main(String args[]) 
     {

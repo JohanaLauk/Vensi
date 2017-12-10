@@ -383,7 +383,7 @@ public class ventanaEditarProd extends javax.swing.JFrame {
             }
 
         } else {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar completar los campos obligatorios");
+            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
         }
 
 

@@ -27,6 +27,7 @@ public class ProveedorDAO
             if (tx.isActive())
 		tx.rollback();
                     e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "El CUIT del nuevo proveedor que desea registrar ya existe.");
 		throw e;
         }
         finally{
@@ -62,6 +63,7 @@ public class ProveedorDAO
             if (tx.isActive())
 		tx.rollback();
                     e.printStackTrace();
+                    JOptionPane.showMessageDialog(null, "El CUIT del nuevo proveedor que desea registrar ya existe.");
 		throw e;
         }
         finally{

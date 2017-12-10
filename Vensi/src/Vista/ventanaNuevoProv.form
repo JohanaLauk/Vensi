@@ -162,7 +162,7 @@
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Cuit:"/>
+            <Property name="text" type="java.lang.String" value="CUIT:"/>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel3">
@@ -178,6 +178,10 @@
         <Component class="javax.swing.JTextField" name="txfdRazonSocial">
         </Component>
         <Component class="javax.swing.JTextField" name="txfdCuit">
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdCuitKeyReleased"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdCuitKeyTyped"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdDireccion">
         </Component>
