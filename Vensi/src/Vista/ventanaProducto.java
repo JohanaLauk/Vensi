@@ -553,16 +553,16 @@ public class ventanaProducto extends javax.swing.JFrame
             }    
     
             Set<Proveedor> listaProv = p.getProveedor(); 
-            /*String provs = "";            
-            
-            for (Proveedor pr : listaProv)
+            //String provs = "";          
+           
+            /*for (Proveedor pr : listaProv)
             {
                 provs += pr.getRazonSocial() + ", ";
             }            
-            datos[9] = provs;*/
+            datos[9] = provs;
             
             datos[9] = "ver";            
-            datos[10] = String.valueOf(p.getId());
+            datos[10] = String.valueOf(p.getId());*/
            
             modelo.addRow(datos);
                
@@ -634,7 +634,127 @@ public class ventanaProducto extends javax.swing.JFrame
                 tablaProd.setRowSelectionAllowed(true);
             } 
         });
-    }   
+    }  
+    
+    /*public void llenarTabla ()
+    {
+        modelo = new DefaultTableModel();
+        List<Producto> lista = null;
+        if (proveedorSelec.equals("Proveedores") || proveedorSelec == null)
+        {
+            lista = pDAO.listar(OrdenarTabla());
+        }
+        else
+        {
+            Proveedor prov = prDAO.buscarPorCuitNombre(proveedorSelec, "Habilitados").get(0);
+            lista = pDAO.listar(OrdenarTabla(), prov.getId());
+        }
+        
+        String[] datos = new String[10];
+ 
+        modelo.addColumn("Código");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio costo");
+        modelo.addColumn("Precio venta");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Stock mínimo");
+        modelo.addColumn("Tipo de venta");
+        modelo.addColumn("Peso del envase");
+        modelo.addColumn("Estado");
+        modelo.addColumn("ID");
+        modelo.addColumn("Proveedores");
+        
+        for (Producto p : lista)
+        {
+            datos[0] = p.getCodigo();
+            datos[1] = p.getDescripcion();
+            datos[2] = String.valueOf(p.getPrecioCosto());
+            datos[3] = String.valueOf(p.getPrecioVenta());
+            datos[4] = String.valueOf(p.getStock());
+            datos[5] = String.valueOf(p.getStockMinimo());
+            
+            if (p.isPorPeso())
+            {
+                datos[6] = "Por peso";
+            }
+            else
+            {
+                datos[6] = "Por unidad";
+            }
+            
+            datos[7] = String.valueOf(p.getPesoEnvase());
+            
+            if(p.isEstado())
+            {
+                datos[8] = "Habilitado";
+            }
+            else
+            {
+                datos[8] = "Deshabilitado";
+            }
+	    datos[9] = String.valueOf(p.getId());
+	    modelo.addRow(datos);
+            tablaProd.setModel(modelo);
+            Set<Proveedor> listaProveedor = p.getProveedor();
+            String [] nombresProv = new String[listaProveedor.size()];
+            int i = 0;
+    
+            for(Proveedor pr : listaProveedor){
+                nombresProv[i] = pr.getRazonSocial();
+                i++;
+            }
+            JComboBox cb = new JComboBox(nombresProv);
+	    TableColumn col = tablaProd.getColumnModel().getColumn(10);
+	    TableCellEditor colEdit = new DefaultCellEditor(cb);
+	    col.setCellEditor(colEdit);   
+            
+  
+        }
+        
+        tablaProd.setModel(modelo);
+        
+        tcm = tablaProd.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(100);
+        tcm.getColumn(1).setPreferredWidth(300);
+        tcm.getColumn(2).setPreferredWidth(50);
+        tcm.getColumn(3).setPreferredWidth(50);
+        tcm.getColumn(4).setPreferredWidth(50);
+        tcm.getColumn(5).setPreferredWidth(50);
+        tcm.getColumn(6).setPreferredWidth(80);
+        tcm.getColumn(7).setPreferredWidth(50);
+        tcm.getColumn(8).setPreferredWidth(50);   
+        tcm.getColumn(9).setPreferredWidth(70);
+        tcm.getColumn(9).setPreferredWidth(0);  
+        tcm.getColumn(9).setMaxWidth(0);
+        tcm.getColumn(9).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(9).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(9).setMinWidth(0);
+	tcm.getColumn(10).setPreferredWidth(70);
+        
+        tablaProd.addFocusListener(new FocusListener() 
+        {
+            @Override
+            public void focusGained(FocusEvent fe) 
+            {
+                tablaProd.setRowSelectionAllowed(true);
+            }
+
+            @Override
+            public void focusLost(FocusEvent fe) 
+            {                
+                tablaProd.setRowSelectionAllowed(false);
+            } 
+        });
+        
+        tablaProd.addMouseListener(new MouseAdapter() 
+        {
+            @Override
+            public void mouseClicked(MouseEvent me) 
+            {
+                tablaProd.setRowSelectionAllowed(true);
+            } 
+        });
+    }*/
     
     public void llenarTablaBusqueda (List<Producto> listaBusqueda)
     {
