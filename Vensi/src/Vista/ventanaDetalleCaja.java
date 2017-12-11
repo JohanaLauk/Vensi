@@ -112,6 +112,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             }
         ));
         tablaDetalleCaja.setFocusable(false);
+        tablaDetalleCaja.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaDetalleCaja.getTableHeader().setResizingAllowed(false);
         tablaDetalleCaja.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaDetalleCaja);

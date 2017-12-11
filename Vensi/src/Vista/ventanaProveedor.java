@@ -183,6 +183,7 @@ public class ventanaProveedor extends javax.swing.JFrame
             }
         ));
         tablaProv.setFocusable(false);
+        tablaProv.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaProv.getTableHeader().setResizingAllowed(false);
         tablaProv.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tablaProv);

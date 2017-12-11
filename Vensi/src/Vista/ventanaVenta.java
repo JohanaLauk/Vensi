@@ -317,6 +317,7 @@ public class ventanaVenta extends javax.swing.JFrame
             }
         ));
         tablaCarrito.setFocusable(false);
+        tablaCarrito.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaCarrito.getTableHeader().setResizingAllowed(false);
         tablaCarrito.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaCarrito);

@@ -2,12 +2,14 @@ package Vista;
 
 import DAO.ProveedorDAO;
 import Modelo.Proveedor;
+import Validacion.Validar;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
 public class ventanaEditarProv extends javax.swing.JFrame 
 {
     ProveedorDAO pDAO = new ProveedorDAO();
+    Validar validar = new Validar();
     public static int id_recibido;
     
     public ventanaEditarProv() 
@@ -66,6 +68,12 @@ public class ventanaEditarProv extends javax.swing.JFrame
         jLabel5.setText("Estado:");
 
         cbEditarEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "Deshabilitado" }));
+
+        txfdEditarCuit.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdEditarCuitKeyTyped(evt);
+            }
+        });
 
         labIdSelec.setText("ID_Prov");
 
@@ -222,27 +230,39 @@ public class ventanaEditarProv extends javax.swing.JFrame
         Proveedor prov = new Proveedor();
         if (!(txfdEditarRazonSocial.getText().equals("") || txfdEditarRazonSocial.getText() == null)
                 && !(txfdEditarCuit.getText().equals("") || txfdEditarCuit.getText() == null)) {
-            prov.setRazonSocial(txfdEditarRazonSocial.getText().toUpperCase());
-            prov.setCuit(txfdEditarCuit.getText());
-            prov.setDireccion(txfdEditarDireccion.getText().toUpperCase());
-            prov.setLocalidad(txfdLocalidad.getText().toUpperCase());
-            prov.setProvincia(txfdProvincia.getText().toUpperCase());
-            prov.setPais(txfdPais.getText().toUpperCase());
-            prov.setContacto(txfdEditarContacto.getText());
+            if (validar.validarCUIT(txfdEditarCuit.getText())) {
+                prov.setRazonSocial(txfdEditarRazonSocial.getText().toUpperCase());
+                prov.setCuit(txfdEditarCuit.getText());
+                prov.setDireccion(txfdEditarDireccion.getText().toUpperCase());
+                prov.setLocalidad(txfdLocalidad.getText().toUpperCase());
+                prov.setProvincia(txfdProvincia.getText().toUpperCase());
+                prov.setPais(txfdPais.getText().toUpperCase());
+                prov.setContacto(txfdEditarContacto.getText());
 
-            if (cbEditarEstado.getSelectedItem().equals("Habilitado")) {
-                prov.setEstado(true);
+                if (cbEditarEstado.getSelectedItem().equals("Habilitado")) {
+                    prov.setEstado(true);
+                } else {
+                    prov.setEstado(false);
+                }
+
+                pDAO.modificar(prov, id_recibido);
+
+                dispose();
             } else {
-                prov.setEstado(false);
+                JOptionPane.showMessageDialog(null, "CUIT debe tener tener el formato dd-dddddddd-d");
             }
-
-            pDAO.modificar(prov, id_recibido);
-
-            dispose();
         } else {
             JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
         }
     }//GEN-LAST:event_btnAceptarEditarActionPerformed
+
+    private void txfdEditarCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarCuitKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) &&
+                (c != '-'))
+            evt.consume();
+    }//GEN-LAST:event_txfdEditarCuitKeyTyped
     
     public static void main(String args[]) 
     {

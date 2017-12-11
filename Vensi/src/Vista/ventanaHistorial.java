@@ -208,6 +208,7 @@ public class ventanaHistorial extends javax.swing.JFrame
             }
         ));
         tablaHistorial.setFocusable(false);
+        tablaHistorial.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaHistorial.getTableHeader().setResizingAllowed(false);
         tablaHistorial.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaHistorial);

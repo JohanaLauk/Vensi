@@ -4,6 +4,7 @@ import DAO.ProductoDAO;
 import DAO.ProveedorDAO;
 import Modelo.Producto;
 import Modelo.Proveedor;
+import Validacion.Validar;
 import java.awt.Dimension;
 import java.util.*;
 import javax.swing.JCheckBox;
@@ -14,6 +15,7 @@ import javax.swing.JOptionPane;
 public class ventanaEditarProd extends javax.swing.JFrame {
     ProveedorDAO prDAO = new ProveedorDAO();
     ProductoDAO pDAO = new ProductoDAO();
+    Validar validar = new Validar();
     DefaultTableModel modelo;
     TableColumnModel tcm;
     
@@ -333,53 +335,62 @@ public class ventanaEditarProd extends javax.swing.JFrame {
                 JOptionPane.showMessageDialog(null, "Debe seleccionar completar los campos obligatorios");
             } else {
 
-            prod.setCodigo(txfdEditarCodigo.getText().toUpperCase());
-            prod.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());
-            prod.setPrecioCosto(Double.parseDouble(txfdEditarPrecioCosto.getText()));
-            prod.setPrecioVenta(Double.parseDouble(txfdEditarPrecioVenta.getText()));
-            prod.setStockMinimo(Integer.parseInt(txfdEditarStockMinimo.getText()));
-
-            if (rbPeso.isSelected()) {
-                prod.setPorPeso(true);
-                prod.setPesoEnvase(Integer.parseInt(txfdEditarPesoEnvase.getText()));
-            } else {
-                prod.setPorPeso(false);
-                prod.setPesoEnvase(0);
-            }
-
-            if (cbEstado.getSelectedItem().equals("Habilitado")) {
-                prod.setEstado(true);
-            } else {
-                prod.setEstado(false);
-            }
-
-            if (cbSituacion.getSelectedItem().equals("Ninguno")) {
-                prod.setSuspendido(false);
-                prod.setOferta(false);
-            } else {
-                if (cbSituacion.getSelectedItem().equals("Oferta")) {
-                    prod.setOferta(true);
-                    prod.setSuspendido(false);
+                prod.setCodigo(txfdEditarCodigo.getText().toUpperCase());
+                prod.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());
+                if (validar.validarPrecio(txfdEditarPrecioCosto.getText())) {
+                    prod.setPrecioCosto(Double.parseDouble(txfdEditarPrecioCosto.getText()));
                 } else {
-                    prod.setSuspendido(true);
+                    JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio costo");
+                }
+                if (validar.validarPrecio(txfdEditarPrecioVenta.getText())) {
+                    prod.setPrecioVenta(Double.parseDouble(txfdEditarPrecioVenta.getText()));
+                } else {
+                    JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio venta");
+                }
+
+                prod.setStockMinimo(Integer.parseInt(txfdEditarStockMinimo.getText()));
+
+                if (rbPeso.isSelected()) {
+                    prod.setPorPeso(true);
+                    prod.setPesoEnvase(Integer.parseInt(txfdEditarPesoEnvase.getText()));
+                } else {
+                    prod.setPorPeso(false);
+                    prod.setPesoEnvase(0);
+                }
+
+                if (cbEstado.getSelectedItem().equals("Habilitado")) {
+                    prod.setEstado(true);
+                } else {
+                    prod.setEstado(false);
+                }
+
+                if (cbSituacion.getSelectedItem().equals("Ninguno")) {
+                    prod.setSuspendido(false);
                     prod.setOferta(false);
+                } else {
+                    if (cbSituacion.getSelectedItem().equals("Oferta")) {
+                        prod.setOferta(true);
+                        prod.setSuspendido(false);
+                    } else {
+                        prod.setSuspendido(true);
+                        prod.setOferta(false);
+                    }
                 }
-            }
 
-            boolean alMenosUnCheck = false;
+                boolean alMenosUnCheck = false;
 
-            for (JCheckBox c : checkProv) {
-                if (c.isSelected()) {
-                    prod.addProveedor(prDAO.buscarPorCuitNombre(c.getText(), "Habilitados").get(0));
-                    alMenosUnCheck = true;
+                for (JCheckBox c : checkProv) {
+                    if (c.isSelected()) {
+                        prod.addProveedor(prDAO.buscarPorCuitNombre(c.getText(), "Habilitados").get(0));
+                        alMenosUnCheck = true;
+                    }
                 }
-            }
-            if (alMenosUnCheck) {
-                pDAO.modificar(prod, id_recibido);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor");
-            }
+                if (alMenosUnCheck) {
+                    pDAO.modificar(prod, id_recibido);
+                    dispose();
+                } else {
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor");
+                }
             }
 
         } else {
@@ -387,7 +398,6 @@ public class ventanaEditarProd extends javax.swing.JFrame {
         }
 
 
-        
     }//GEN-LAST:event_btnAceptarEditarActionPerformed
 
     private void txfdEditarPrecioCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPrecioCostoKeyTyped

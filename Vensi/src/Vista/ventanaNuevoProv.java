@@ -2,12 +2,14 @@ package Vista;
 
 import DAO.ProveedorDAO;
 import Modelo.Proveedor;
+import Validacion.Validar;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
 public class ventanaNuevoProv extends javax.swing.JFrame 
 {
     ProveedorDAO pDAO = new ProveedorDAO();
+    Validar validar = new Validar();
     
     public ventanaNuevoProv() 
     {
@@ -210,16 +212,20 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         Proveedor unProv = new Proveedor();
         if (!(txfdRazonSocial.getText().equals("") || txfdRazonSocial.getText() == null)
                 && !(txfdCuit.getText().equals("") || txfdCuit.getText() == null)) {
-            unProv.setRazonSocial(txfdRazonSocial.getText().toUpperCase());
-            unProv.setCuit(txfdCuit.getText());
-            unProv.setDireccion(txfdDireccion.getText().toUpperCase());
-            unProv.setLocalidad(txfdLocalidad.getText().toUpperCase());
-            unProv.setProvincia(txfdProvincia.getText().toUpperCase());
-            unProv.setPais(txfdPais.getText().toUpperCase());
-            unProv.setContacto(txfdContacto.getText());
+            if (validar.validarCUIT(txfdCuit.getText())) {
+                unProv.setRazonSocial(txfdRazonSocial.getText().toUpperCase());
+                unProv.setCuit(txfdCuit.getText());
+                unProv.setDireccion(txfdDireccion.getText().toUpperCase());
+                unProv.setLocalidad(txfdLocalidad.getText().toUpperCase());
+                unProv.setProvincia(txfdProvincia.getText().toUpperCase());
+                unProv.setPais(txfdPais.getText().toUpperCase());
+                unProv.setContacto(txfdContacto.getText());
 
-            pDAO.alta(unProv);
-            dispose();
+                pDAO.alta(unProv);
+                dispose();
+            } else {
+                JOptionPane.showMessageDialog(null, "CUIT debe tener tener el formato dd-dddddddd-d");
+            }
         } else {
             JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
         }
@@ -233,9 +239,8 @@ public class ventanaNuevoProv extends javax.swing.JFrame
     private void txfdCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCuitKeyTyped
         char c = evt.getKeyChar();
         if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
-                (c != '-' || txfdCuit.getText().contains("-")) &&
-                (String.valueOf(txfdCuit.getText().charAt(0)).equals("-"))) 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) &&
+                (c != '-'))
             evt.consume();
     }//GEN-LAST:event_txfdCuitKeyTyped
 

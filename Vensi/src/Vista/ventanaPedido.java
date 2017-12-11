@@ -153,6 +153,7 @@ public class ventanaPedido extends javax.swing.JFrame
             }
         ));
         tablaProd.setFocusable(false);
+        tablaProd.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaProd.getTableHeader().setResizingAllowed(false);
         tablaProd.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaProd);
@@ -343,6 +344,7 @@ public class ventanaPedido extends javax.swing.JFrame
             }
         ));
         tablaPedido.setFocusable(false);
+        tablaPedido.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaPedido.getTableHeader().setResizingAllowed(false);
         tablaPedido.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tablaPedido);

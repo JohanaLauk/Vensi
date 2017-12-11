@@ -80,6 +80,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             }
         ));
         tablaTP.setFocusable(false);
+        tablaTP.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaTP.getTableHeader().setResizingAllowed(false);
         tablaTP.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaTP);

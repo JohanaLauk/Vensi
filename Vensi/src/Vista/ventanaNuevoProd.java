@@ -3,6 +3,7 @@ package Vista;
 import DAO.ProductoDAO;
 import DAO.ProveedorDAO;
 import Modelo.*;
+import Validacion.Validar;
 import static Vista.ventanaEditarProd.id_recibido;
 import java.util.*;
 import javax.swing.JCheckBox;
@@ -14,6 +15,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 {
     ProductoDAO pDAO = new ProductoDAO();
     ProveedorDAO prDAO = new ProveedorDAO();
+    Validar validar = new Validar();
     DefaultTableModel modelo;
     TableColumnModel tcm;
     List<JCheckBox> checkProv = new ArrayList<>();
@@ -309,21 +311,30 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                 && !(txfdDescripcion.getText().equals("") || txfdDescripcion.getText() == null)
                 && (rbPeso.isSelected() || rbUnidad.isSelected())) {
             if (rbPeso.isSelected() && ((txfdPesoEnvase.getText().equals("") || txfdPesoEnvase.getText() == null))) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar completar los campos obligatorios");
+                JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
             } else {
+
                 unProd.setCodigo(txfdCodigo.getText().toUpperCase());
                 unProd.setDescripcion(txfdDescripcion.getText().toUpperCase());
 
                 if (txfdPrecioCosto.getText().equals("") || txfdPrecioCosto.getText() == null) {
                     unProd.setPrecioCosto(0.00);
                 } else {
-                    unProd.setPrecioCosto(Double.parseDouble(txfdPrecioCosto.getText()));
+                    if (validar.validarPrecio(txfdPrecioCosto.getText())) {
+                        unProd.setPrecioCosto(Double.parseDouble(txfdPrecioCosto.getText()));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio costo");
+                    }
                 }
 
                 if (txfdPrecioVenta.getText().equals("") || txfdPrecioVenta.getText() == null) {
                     unProd.setPrecioVenta(0.00);
                 } else {
-                    unProd.setPrecioVenta(Double.parseDouble(txfdPrecioVenta.getText()));
+                    if (validar.validarPrecio(txfdPrecioVenta.getText())) {
+                        unProd.setPrecioVenta(Double.parseDouble(txfdPrecioVenta.getText()));
+                    } else {
+                        JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio venta");
+                    }
                 }
 
                 unProd.setStockMinimo(Integer.parseInt(txfdStockMinimo.getText()));
@@ -357,7 +368,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
         }
 
-        
+
     }//GEN-LAST:event_btnAceptarNuevoProdActionPerformed
 
     private void txfdPrecioCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioCostoKeyTyped

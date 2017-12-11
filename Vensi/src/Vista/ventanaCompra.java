@@ -120,6 +120,7 @@ public class ventanaCompra extends javax.swing.JFrame
             }
         ));
         tablaProd.setFocusable(false);
+        tablaProd.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaProd.getTableHeader().setResizingAllowed(false);
         tablaProd.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaProd);
@@ -155,6 +156,7 @@ public class ventanaCompra extends javax.swing.JFrame
             }
         ));
         tablaListaInventario.setFocusable(false);
+        tablaListaInventario.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaListaInventario.getTableHeader().setResizingAllowed(false);
         tablaListaInventario.getTableHeader().setReorderingAllowed(false);
         jScrollPane3.setViewportView(tablaListaInventario);
