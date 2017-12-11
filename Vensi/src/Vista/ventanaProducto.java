@@ -8,24 +8,33 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import Modelo.Producto;
 import Modelo.Proveedor;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.util.Set;
+import javax.swing.DefaultCellEditor;
+import javax.swing.DefaultComboBoxModel;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableCellEditor;
+import javax.swing.table.TableColumn;
 
 public class ventanaProducto extends javax.swing.JFrame 
 {    
+    ProveedorDAO prDAO = new ProveedorDAO();
     ProductoDAO pDAO = new ProductoDAO();
     DefaultTableModel modelo, modelo2, modelo3;    
-    TableColumnModel tcm, tcm2, tcm3;
-    ProveedorDAO prDAO = new ProveedorDAO();
+    TableColumnModel tcm, tcm2, tcm3;    
+    JComboBox cbProv;
+    DefaultComboBoxModel modeloCB;
     
     String filtroSelec = null;
     String ordenSelec = null;
     String tipoSelec = null;
-    String proveedorSelec = null;
+    String proveedorSelec = null;                 
     
     public ventanaProducto() 
     {
@@ -54,7 +63,7 @@ public class ventanaProducto extends javax.swing.JFrame
             proveedorSelec = "Proveedores";
         }
         
-        llenarTabla();        
+        llenarTabla(); 
         llenarComboBoxProv();
     }
     
@@ -512,6 +521,8 @@ public class ventanaProducto extends javax.swing.JFrame
         modelo.addColumn("Proveedor");
         modelo.addColumn("ID");
         
+        tablaProd.setModel(modelo);
+        
         for (Producto p : lista)
         {
             datos[0] = p.getCodigo();
@@ -539,22 +550,49 @@ public class ventanaProducto extends javax.swing.JFrame
             else
             {
                 datos[8] = "Deshabilitado";
-            }
-            Set<Proveedor> listaProv = p.getProveedor();
-            String provs = "";
+            }    
+    
+            Set<Proveedor> listaProv = p.getProveedor(); 
+            /*String provs = "";            
             
             for (Proveedor pr : listaProv)
             {
                 provs += pr.getRazonSocial() + ", ";
-            }
+            }            
+            datos[9] = provs;*/
             
-            datos[9] = provs;
+            datos[9] = "ver";            
             datos[10] = String.valueOf(p.getId());
            
             modelo.addRow(datos);
+               
+            //pueba JOHA
+            //cbProv = new JComboBox();
+            int cantProv = listaProv.size();
+            String[] provs = new String[cantProv+1];
+
+            provs[0] = "Ver [" + cantProv + "]";
+            //cbProv.addItem("Ver [" + cantProv + "]");
+                             
+            for (int i=1 ; i<cantProv ; i++)
+            {
+                for (Proveedor x : listaProv)
+                {
+                    provs[i] = String.valueOf(x.getRazonSocial());                    
+                    //cbProv.addItem(String.valueOf(x.getRazonSocial()));
+                }
+            }
+            
+            cbProv = new JComboBox(provs);            
+            TableColumn columna = tablaProd.getColumnModel().getColumn(9);            
+            //TableCellEditor colEdit = new DefaultCellEditor(cbProv);
+            //columna.setCellEditor(colEdit);
+            columna.setCellEditor(new DefaultCellEditor(cbProv));   //esto es lo mismo que las 2 lineas anteriores        
+            //columna.setCellRenderer(new ... (cbProv));
+            
         }
         
-        tablaProd.setModel(modelo);
+        tablaProd.setModel(modelo);       
         
         tcm = tablaProd.getColumnModel();
         tcm.getColumn(0).setPreferredWidth(100);

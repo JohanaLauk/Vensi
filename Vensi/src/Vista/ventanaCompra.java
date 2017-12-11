@@ -54,6 +54,7 @@ public class ventanaCompra extends javax.swing.JFrame
                 tablaProd.clearSelection();
                 tablaListaInventario.clearSelection();
                 listInfoProd.clearSelection();
+                txfdCantidad.setText("");
                 
                 limpiarList();
                 

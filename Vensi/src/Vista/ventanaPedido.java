@@ -51,11 +51,10 @@ public class ventanaPedido extends javax.swing.JFrame
             @Override
             public void mouseClicked(MouseEvent me) 
             {
-                //tablaProd.setRowSelectionAllowed(false);
-                //tablaPedidoProvisoria.setRowSelectionAllowed(false);
                 tablaProd.clearSelection();
                 tablaPedido.clearSelection();
                 listInfoProd.clearSelection();
+                txfdCantidad.setText("");
                 
                 limpiarList();
                 
