@@ -602,74 +602,69 @@ public class ventanaVenta extends javax.swing.JFrame
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int filaSelec = tablaProd.getSelectedRow();
-        
-        if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
+
+        if (filaSelec >= 0) //corrobotamos si seleccionó una fila
         {
             double x = 0;
-            String precioTotal = null;        
-            String cantidad;            
+            String precioTotal = null;
+            String cantidad;
             boolean modificar = false;
             int filaModificar = -1;
-            
-            
+            String stock;
+
             String descrip = tablaProd.getValueAt(filaSelec, 1).toString();
-            
+            stock = tablaProd.getValueAt(filaSelec, 4).toString();
             cantidad = txfdCantidad.getText();
-            if(cantidad.equals(""))
-            {
+            if (cantidad.equals("")) {
                 JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad");
-            }
-            else
-            {   
-                m = (DefaultTableModel) tablaCarrito.getModel();
-                String precioU = tablaProd.getValueAt(filaSelec, 2).toString();
-            
-                x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
-                precioTotal = String.valueOf(x);
-            
-                String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();    
-                
-                for (int i=0; i<tablaCarrito.getModel().getRowCount(); i++)
-                {                                
-                    if(Integer.parseInt(tablaCarrito.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido))
-                    {
-                        modificar = true;
-                        filaModificar = i;                              
-                    }
-                }
-                
-                if (modificar)
-                {  
-                    cantidad = String.valueOf(Integer.parseInt(cantidad)+Integer.parseInt(tablaCarrito.getValueAt(filaModificar,1).toString()));
+            } else {
+                if (Integer.parseInt(cantidad) > Integer.parseInt(stock)) {
+                    JOptionPane.showMessageDialog(null, "Stock insuficiente");
+                } else {
+                    m = (DefaultTableModel) tablaCarrito.getModel();
+                    String precioU = tablaProd.getValueAt(filaSelec, 2).toString();
+
                     x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
                     precioTotal = String.valueOf(x);
-                    m.removeRow(filaModificar);
-                }
 
-                String filaNueva[] = {descrip, cantidad, precioU, precioTotal, id_recibido};
-                m.addRow(filaNueva); 
-                
-                totalCarrito = 0;
-                for (int i = 0; i < tablaCarrito.getRowCount(); i++)
-                {
-                    totalCarrito += Double.parseDouble(tablaCarrito.getValueAt(i, 3).toString());
+                    String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();
+
+                    for (int i = 0; i < tablaCarrito.getModel().getRowCount(); i++) {
+                        if (Integer.parseInt(tablaCarrito.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido)) {
+                            modificar = true;
+                            filaModificar = i;
+                        }
+                    }
+
+                    if (modificar) {
+                        cantidad = String.valueOf(Integer.parseInt(cantidad) + Integer.parseInt(tablaCarrito.getValueAt(filaModificar, 1).toString()));
+                        x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
+                        precioTotal = String.valueOf(x);
+                        m.removeRow(filaModificar);
+                    }
+
+                    String filaNueva[] = {descrip, cantidad, precioU, precioTotal, id_recibido};
+                    m.addRow(filaNueva);
+
+                    totalCarrito = 0;
+                    for (int i = 0; i < tablaCarrito.getRowCount(); i++) {
+                        totalCarrito += Double.parseDouble(tablaCarrito.getValueAt(i, 3).toString());
+                    }
+                    labPrecioTotalCompra.setText(String.valueOf(totalCarrito));
+
+                    txfdCantidad.setText(null);
                 }
-                labPrecioTotalCompra.setText(String.valueOf(totalCarrito));
-            
-                txfdCantidad.setText(null);
             }
-        }
-        else
-        {
+        } else {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
         }
-        
+
         limpiarList();
-        
+
         tablaProd.setRowSelectionAllowed(false);
         tablaCarrito.setRowSelectionAllowed(false);
-        
-        txfdCantidad.setEnabled(false);        
+
+        txfdCantidad.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnQuitar.setEnabled(false);
     }//GEN-LAST:event_btnAgregarActionPerformed
