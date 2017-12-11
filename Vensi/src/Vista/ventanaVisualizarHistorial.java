@@ -28,9 +28,9 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
     DefaultTableModel modelo;    
     DefaultListModel modeloList; 
     
-    public static String tablaSelec;
-    public static int idSelec;
-    DateFormat fechaHoraFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    public static String tablaSelec;    //viene de la ventana anterior
+    public static int idSelec;   //viene de la ventana anterior
+    DateFormat fechaHoraFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     
     public ventanaVisualizarHistorial() 
     {
@@ -170,26 +170,26 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         
         if (tablaSelec.equals("Turno")) 
         {            
+            modelo.addColumn("Entrada");
+            modelo.addColumn("Salida");
+            
             Turno t = tDAO.buscarPorID(idSelec);
+            
             modeloList = new DefaultListModel();
             modeloList.addElement("NÚMERO:  " + String.valueOf(t.getId()));
-            modeloList.addElement("FECHA DE INICIO:  " + String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio())));
+            modeloList.addElement("FECHA DE INICIO:  " + String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio()) + "hs."));
             if (t.getFechaHoraFin() != null)
             {
-                modeloList.addElement("FECHA DE CIERRE:  " + String.valueOf(fechaHoraFormat.format(t.getFechaHoraFin())));
+                modeloList.addElement("FECHA DE CIERRE:  " + String.valueOf(fechaHoraFormat.format(t.getFechaHoraFin()) + "hs."));
             }
             else
             {
                 modeloList.addElement("FECHA DE CIERRE:  " + String.valueOf("Pendiente"));
-            }
-            
+            }            
             modeloList.addElement("USUARIO:  " + String.valueOf(t.getUsuario().getNombreUsuario()));            
-            
-            modelo.addColumn("Entrada");
-            modelo.addColumn("Salida");
-            
+                                   
             List<EntradaSalida> listaES = esDAO.listar(idSelec);
-            List<ItemVenta> listaIT = iVentaDAO.listar(idSelec);
+            List<ItemVenta> listaIV = iVentaDAO.listar(idSelec);
             
             for (EntradaSalida es : listaES)            
             {
@@ -210,7 +210,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                 modelo.addRow(datos);
             }        
             
-            for (ItemVenta i : listaIT) 
+            for (ItemVenta i : listaIV) 
             {
                 datos[0] = i.getProducto().getDescripcion();
                 datos[1] = String.valueOf(i.getCantidad());
@@ -220,20 +220,21 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                 modelo.addRow(datos);
             }
         }
-        else
+        else    //Pedido
         {
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
             
             Pedido p = pDAO.buscarPorID(idSelec);
-            modeloList = new DefaultListModel();
-            modeloList.addElement("Número: " + String.valueOf(p.getId()));
-            modeloList.addElement("Proveedor: " + p.getProveedor().getRazonSocial());
-            modeloList.addElement("Fecha: " + String.valueOf(p.getFechaHora()));
-                        
-            List<ItemPedido> lista = iPedidoDAO.listar(idSelec);
             
-            for(ItemPedido i : lista)
+            modeloList = new DefaultListModel();
+            modeloList.addElement("Número:  " + String.valueOf(p.getId()));
+            modeloList.addElement("Proveedor:  " + p.getProveedor().getRazonSocial());
+            modeloList.addElement("Fecha y hora:  " + String.valueOf(fechaHoraFormat.format(p.getFechaHora())+ "hs."));
+                        
+            List<ItemPedido> listaCompras = iPedidoDAO.listar(idSelec);
+            
+            for(ItemPedido i : listaCompras)
             {
                 datos[0] = i.getProducto().getDescripcion();
                 datos[1] = String.valueOf(i.getCantidad());

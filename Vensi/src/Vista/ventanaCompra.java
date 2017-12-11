@@ -494,6 +494,8 @@ public class ventanaCompra extends javax.swing.JFrame
             prodDAO.sumarStock(producto.getId(), Integer.parseInt(tablaListaInventario.getValueAt(i,2).toString()));
         }
         
+        JOptionPane.showMessageDialog(null, "Finalizado con éxito");
+        
         txfdCantidad.setText(null);
         llenarTablaInventario();
         llenarTabla();

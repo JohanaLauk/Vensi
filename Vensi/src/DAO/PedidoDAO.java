@@ -28,7 +28,8 @@ public class PedidoDAO
                     e.printStackTrace();
 		throw e;
         }
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Pedido creado");
@@ -49,13 +50,14 @@ public class PedidoDAO
         {
             JOptionPane.showMessageDialog(null, "Error");
         }        
-        finally{
+        finally
+        {
             session.close();
         }
         return lista;
     }
     
-    public List<Pedido> buscarPorFecha(Date fechaInicio, Date fechaFin)
+    public List<Pedido> buscarPorFecha(Date fechaDesde, Date fechaFin)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
         List<Pedido> lista = null;
@@ -65,13 +67,13 @@ public class PedidoDAO
             tx = session.beginTransaction();
             if(fechaFin == null)
             {
-                query = session.createQuery("FROM Pedido p WHERE p.fechaHora = fechaInicio");
-                query.setParameter("fechaInicio", fechaInicio);
+                query = session.createQuery("FROM Pedido p WHERE date(p.fechaHora) = :fechaDesde");
+                query.setParameter("fechaDesde", fechaDesde);
             }
             else
             {
-                query = session.createQuery("FROM Pedido p WHERE p.fechaHora BETWEEN :fechaInicio AND :fechaFin");
-                query.setParameter("fechaInicio", fechaInicio);
+                query = session.createQuery("FROM Pedido p WHERE p.fechaHora BETWEEN :fechaDesde AND :fechaFin");
+                query.setParameter("fechaDesde", fechaDesde);
                 query.setParameter("fechaFin", fechaFin);
             }
     
@@ -83,33 +85,12 @@ public class PedidoDAO
         {
             JOptionPane.showMessageDialog(null, "Error"+e.getMessage());
         }        
-        finally{
+        finally
+        {
             session.close();
         }
         return lista;
     }
-    
-    /*public List<Pedido> buscarPorNumero(int nro)
-    {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
-        
-        List<Pedido> lista = null;
-        try
-        {
-            Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Pedido p WHERE p.id = :nro");
-            query.setParameter("nro", "%"+nro+"%");
-            lista = query.list();
-            tx.commit();
-            session.close();
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "Error");
-        }        
-        return lista;
-    }*/
     
     public Pedido buscarPorID(int nro)
     {
@@ -126,7 +107,8 @@ public class PedidoDAO
         {
             JOptionPane.showMessageDialog(null, "Error");
         }        
-        finally{
+        finally
+        {
             session.close();
         }
         return p;

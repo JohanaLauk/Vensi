@@ -29,7 +29,8 @@ public class TurnoDAO
                     e.printStackTrace();
 		throw e;
         }
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Turno creado");
@@ -58,7 +59,8 @@ public class TurnoDAO
                     e.printStackTrace();
 		throw e;
         }        
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Turno modificado");
@@ -78,13 +80,14 @@ public class TurnoDAO
         {
             JOptionPane.showMessageDialog(null, "Error");
         }
-        finally{
+        finally
+        {
             session.close();
         }
         return lista;
     }
     
-    public List<Turno> buscarPorFecha(Date fechaInicio, Date fechaFin)
+    public List<Turno> buscarPorFecha(Date fechaDesde, Date fechaFin)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();        
         List<Turno> lista = null;
@@ -94,13 +97,13 @@ public class TurnoDAO
             tx = session.beginTransaction();
             if(fechaFin == null)
             {
-                query = session.createQuery("FROM Turno t WHERE t.fechaHoraInicio = :fechaInicio");
-                query.setParameter("fechaInicio", fechaInicio);
+                query = session.createQuery("FROM Turno t WHERE date(t.fechaHoraInicio) = :fechaDesde");
+                query.setParameter("fechaDesde", fechaDesde);
             }
             else
             {
-                query = session.createQuery("FROM Turno t WHERE t.fechaHoraInicio BETWEEN :fechaInicio AND :fechaFin");
-                query.setParameter("fechaInicio", fechaInicio);
+                query = session.createQuery("FROM Turno t WHERE t.fechaHoraInicio BETWEEN :fechaDesde AND :fechaFin");
+                query.setParameter("fechaDesde", fechaDesde);
                 query.setParameter("fechaFin", fechaFin);
             }
             
@@ -112,34 +115,13 @@ public class TurnoDAO
         {
             JOptionPane.showMessageDialog(null, "Error");
         }
-        finally{
+        finally
+        {
             session.close();
         }
         return lista;
     }
-    
-    /*public List<Turno> buscarPorNumero(int nro)
-    {
-        sesion = NewHibernateUtil.getSessionFactory();
-        session = sesion.openSession();
         
-        List<Turno> lista = null;
-        try
-        {
-            Transaction tx = session.beginTransaction();
-            Query query = session.createQuery("FROM Turno t WHERE t.nroTurno LIKE :nro");
-            query.setParameter("nro", "%"+nro+"%");
-            lista = query.list();
-            tx.commit();
-            session.close();
-        }
-        catch(Exception e)
-        {
-            JOptionPane.showMessageDialog(null, "Error");
-        }
-        return lista;
-    }*/
-    
     public Turno buscarPorID(int nro)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();      
@@ -155,7 +137,8 @@ public class TurnoDAO
         {
             JOptionPane.showMessageDialog(null, "Error al buscar por ID");
         }       
-        finally{
+        finally
+        {
             session.close();
         }
         return t;
@@ -177,10 +160,10 @@ public class TurnoDAO
         {
             JOptionPane.showMessageDialog(null, "Error al obtener último turno");
         }
-        finally{
+        finally
+        {
             session.close();
-        }
-        
+        }        
         return t;
     }
 }

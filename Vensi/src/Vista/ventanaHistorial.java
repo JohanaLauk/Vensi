@@ -406,29 +406,38 @@ public class ventanaHistorial extends javax.swing.JFrame
             modelo.addColumn("Número");
             modelo.addColumn("Fecha y hora inicio");
             modelo.addColumn("Fecha y hora fin");
+            modelo.addColumn("Usuario");
 
-            if(cbBuscarPor.getSelectedItem().equals("Fecha"))
+            if (cbBuscarPor.getSelectedItem().equals("Fecha"))
             {           
-                List<Turno> lista = tDAO.buscarPorFecha(dateDesde.getDate(), dateHasta.getDate());
-                if (lista.isEmpty()) 
+                List<Turno> listaTurnos = tDAO.buscarPorFecha(dateDesde.getDate(), dateHasta.getDate());
+                if (listaTurnos.isEmpty()) 
                 {
                     JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
                 } 
                 else 
                 {
-                    String[] datos = new String[3];
+                    String[] datos = new String[4];
                     
-                    for (Turno t : lista) 
+                    for (Turno t : listaTurnos) 
                     {
                         datos[0] = String.valueOf(t.getId());
-                        datos[1] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio()));
-                        datos[2] = String.valueOf(t.getFechaHoraFin());
+                        datos[1] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio()) + "hs.");
+                        if (t.getFechaHoraFin() != null)
+                        {
+                            datos[2] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraFin()) + "hs.");
+                        }
+                        else
+                        {
+                            datos[2] = String.valueOf("Pendiente");
+                        }
+                        datos[3] = String.valueOf(t.getUsuario().getNombreUsuario());
 
                         modelo.addRow(datos);
                     }
                 }
             }
-            else
+            else    //numero
             {
                 Turno t = tDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
                 if (t == null) 
@@ -440,15 +449,17 @@ public class ventanaHistorial extends javax.swing.JFrame
                     String[] datos = new String[3];
 
                     datos[0] = String.valueOf(t.getId());
-                    datos[1] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio()));
+                    datos[1] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio()) + "hs.");
+                    
                     if (t.getFechaHoraFin() != null)
                     {
-                        datos[2] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraFin()));
+                        datos[2] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraFin()) + "hs.");
                     }
                     else
                     {
                         datos[2] = String.valueOf("Pendiente");
                     }
+                    datos[3] = String.valueOf(t.getUsuario().getNombreUsuario());
                     modelo.addRow(datos);
                 }
             }                
@@ -458,10 +469,11 @@ public class ventanaHistorial extends javax.swing.JFrame
             tcm = tablaHistorial.getColumnModel();
             tcm.getColumn(0).setPreferredWidth(100);
             tcm.getColumn(1).setPreferredWidth(200);
-            tcm.getColumn(2).setPreferredWidth(200);            
+            tcm.getColumn(2).setPreferredWidth(200);
+            tcm.getColumn(3).setPreferredWidth(200);
         }
-        else
-        {   //acá es el de pedido
+        else    //pedido
+        {   
             modelo = new DefaultTableModel();
             modelo.addColumn("Número");
             modelo.addColumn("Fecha y hora");
@@ -469,9 +481,9 @@ public class ventanaHistorial extends javax.swing.JFrame
             
             if (cbBuscarPor.getSelectedItem().equals("Fecha"))
             {
-                List<Pedido> lista = pDAO.buscarPorFecha(dateDesde.getDate(), dateHasta.getDate());
+                List<Pedido> listaPedidos = pDAO.buscarPorFecha(dateDesde.getDate(), dateHasta.getDate());
                 
-                if (lista.isEmpty()) 
+                if (listaPedidos.isEmpty()) 
                 {
                     JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
                 } 
@@ -479,17 +491,17 @@ public class ventanaHistorial extends javax.swing.JFrame
                 {
                     String[] datos = new String[3];
                     
-                    for (Pedido p : lista) 
+                    for (Pedido p : listaPedidos) 
                     {
                         datos[0] = String.valueOf(p.getId());
-                        datos[1] = String.valueOf(fechaHoraFormat.format(p.getFechaHora()));
+                        datos[1] = String.valueOf(fechaHoraFormat.format(p.getFechaHora()) + "hs.");
                         datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
 
                         modelo.addRow(datos);
                     }
                 }
             }
-            else
+            else    //numero
             {
                 Pedido p = pDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
                 
@@ -502,7 +514,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                     String[] datos = new String[3];
 
                     datos[0] = String.valueOf(p.getId());
-                    datos[1] = String.valueOf(fechaHoraFormat.format(p.getFechaHora()));
+                    datos[1] = String.valueOf(fechaHoraFormat.format(p.getFechaHora()) + "hs.");
                     datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
 
                     modelo.addRow(datos);
