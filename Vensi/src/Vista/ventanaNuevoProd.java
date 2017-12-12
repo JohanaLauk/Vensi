@@ -416,7 +416,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         char c = evt.getKeyChar();
         if((c < '0' || c > '9') && 
                 (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
-                (c != '.' || txfdPrecioCosto.getText().contains("."))) 
+                (c != '.')) 
             evt.consume();       
         
     }//GEN-LAST:event_txfdPrecioCostoKeyTyped
@@ -435,7 +435,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         char c = evt.getKeyChar();
         if((c < '0' || c > '9') && 
                 (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
-                (c != '.' || txfdPrecioCosto.getText().contains("."))) 
+                (c != '.')) 
             evt.consume();
     }//GEN-LAST:event_txfdPrecioVentaKeyTyped
 

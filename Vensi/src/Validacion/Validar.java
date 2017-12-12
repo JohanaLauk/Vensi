@@ -29,7 +29,7 @@ public class Validar {
     
     public boolean validarPrecio(String cadena){
         boolean validado = false;
-        pat = Pattern.compile("^\\d+\\.\\d{2,2}");
+        pat = Pattern.compile("^\\d+\\.\\d{1,2}");
         mat = pat.matcher(cadena);
         if(mat.matches())
             validado = true;

@@ -462,7 +462,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         char c = evt.getKeyChar();
         if ((c < '0' || c > '9')
             && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)
-            && (c != '.' || txfdEditarPrecioVenta.getText().contains("."))) {
+            && (c != '.')) {
             evt.consume();
         }
     }//GEN-LAST:event_txfdEditarPrecioVentaKeyTyped
@@ -471,7 +471,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         char c = evt.getKeyChar();
         if ((c < '0' || c > '9')
             && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)
-            && (c != '.' || txfdEditarPrecioCosto.getText().contains("."))) {
+            && (c != '.')) {
             evt.consume();
         }
     }//GEN-LAST:event_txfdEditarPrecioCostoKeyTyped
