@@ -150,7 +150,7 @@ public class ProductoDAO
         return p;
     }
     
-    public List<Producto> buscarPorCodigoNombre(String cadena, String filtro)  //para ventanaProducto
+    public List<Producto> buscarPorCodigoNombre(String cadena, String filtro, String situacion)  //para ventanaProducto
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
         List<Producto> lista = null;
@@ -167,9 +167,27 @@ public class ProductoDAO
             {
                 if (filtro.equals("Habilitados"))
                 {
-                    Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena and estado = true ORDER BY descripcion");
-                    query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
-                    lista = query.list();
+                    if (situacion.equals("Todos"))
+                    {
+                        Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena AND estado = true ORDER BY descripcion");
+                        query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
+                        lista = query.list();
+                    }
+                    else
+                    {
+                        if (situacion.equals("Oferta"))
+                        {
+                            Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena AND estado = true AND oferta = true ORDER BY descripcion");
+                            query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
+                            lista = query.list();
+                        }
+                        else
+                        {
+                            Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :cadena OR p.descripcion LIKE :cadena AND estado = true AND suspendido = true ORDER BY descripcion");
+                            query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
+                            lista = query.list();
+                        }
+                    }
                 }
                 else
                 {
@@ -193,7 +211,7 @@ public class ProductoDAO
         return lista;
     }
     
-    public List<Producto> buscarPorCodigoNombre(String cadena, String filtro, int idProveedor)  //para ventanaProducto
+    public List<Producto> buscarPorCodigoNombre(String cadena, String filtro, String situacion, int idProveedor)  //para ventanaProducto
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
         List<Producto> lista = null;
@@ -212,10 +230,30 @@ public class ProductoDAO
             {
                 if (filtro.equals("Habilitados"))
                 {
-                    Query query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE pv.id = :proveedor AND (p.codigo LIKE :cadena OR p.descripcion LIKE :cadena) AND p.estado = true ORDER BY descripcion");
-                    query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
-                    query.setParameter("proveedor", idProveedor);
-                    lista = query.list();
+                    if (situacion.equals("Todos"))
+                    {
+                        Query query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE pv.id = :proveedor AND (p.codigo LIKE :cadena OR p.descripcion LIKE :cadena) AND p.estado = true ORDER BY descripcion");
+                        query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
+                        query.setParameter("proveedor", idProveedor);
+                        lista = query.list();
+                    }
+                    else
+                    {
+                        if (situacion.equals("Oferta"))
+                        {
+                            Query query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE pv.id = :proveedor AND (p.codigo LIKE :cadena OR p.descripcion LIKE :cadena) AND p.estado = true AND p.oferta = true ORDER BY descripcion");
+                            query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
+                            query.setParameter("proveedor", idProveedor);
+                            lista = query.list();
+                        }
+                        else
+                        {
+                            Query query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE pv.id = :proveedor AND (p.codigo LIKE :cadena OR p.descripcion LIKE :cadena) AND p.estado = true AND p.suspendido = true ORDER BY descripcion");
+                            query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
+                            query.setParameter("proveedor", idProveedor);
+                            lista = query.list();
+                        }
+                    }                    
                 }
                 else
                 {

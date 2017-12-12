@@ -26,12 +26,13 @@ public class ventanaPedido extends javax.swing.JFrame
     TableColumnModel tcm, tcm2, tcm3;
     DefaultListModel modeloList;
     
-    String filtroSelec = null;
-    String ordenSelec = null;
-    String tipoSelec = null;
+    String filtroSelec = "Todos";
+    String situacionSelec = "Todos";
+    String ordenSelec = "descripcion";
+    String tipoSelec = "ASC";
     
     Proveedor elProv = null;
-    String provSelec = null;
+    String provSelec = "Seleccionar";
     
     public ventanaPedido() 
     {
@@ -40,6 +41,14 @@ public class ventanaPedido extends javax.swing.JFrame
         this.setLocationRelativeTo(null);     //centra la ventana
         
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
+        
+        txfdBuscarProd.setEnabled(false);
+        btnBuscarProd.setEnabled(false);
+
+        cbFiltro.setEnabled(false);
+        cbSituacion.setEnabled(false);
+        cbOrdenCampo.setEnabled(false);
+        cbTipoOrden.setEnabled(false);
         
         btnQuitar.setEnabled(false);
         btnAgregar.setEnabled(false);
@@ -86,9 +95,10 @@ public class ventanaPedido extends javax.swing.JFrame
         cbFiltro = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         txfdBuscarProd = new org.jdesktop.swingx.JXTextField();
-        jPanel3 = new javax.swing.JPanel();
+        panelProv = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         cbProveedores = new javax.swing.JComboBox<>();
+        cbSituacion = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         jLabel5 = new javax.swing.JLabel();
         txfdCantidad = new javax.swing.JTextField();
@@ -181,24 +191,31 @@ public class ventanaPedido extends javax.swing.JFrame
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelProvLayout = new javax.swing.GroupLayout(panelProv);
+        panelProv.setLayout(panelProvLayout);
+        panelProvLayout.setHorizontalGroup(
+            panelProvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProvLayout.createSequentialGroup()
                 .addComponent(jLabel7)
                 .addGap(18, 18, 18)
                 .addComponent(cbProveedores, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+        panelProvLayout.setVerticalGroup(
+            panelProvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelProvLayout.createSequentialGroup()
+                .addGroup(panelProvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo ofertas", "Sólo suspendidos" }));
+        cbSituacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSituacionActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -207,21 +224,22 @@ public class ventanaPedido extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(45, 45, 45)
+                                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(18, 18, 18)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbOrdenCampo, 0, 80, Short.MAX_VALUE)
+                                .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbTipoOrden, 0, 80, Short.MAX_VALUE)
-                                .addGap(5, 5, 5))
+                                .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel1)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -234,7 +252,7 @@ public class ventanaPedido extends javax.swing.JFrame
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(panelProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(10, 10, 10)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -249,7 +267,8 @@ public class ventanaPedido extends javax.swing.JFrame
                     .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4)
                     .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
                 .addContainerGap())
@@ -367,7 +386,7 @@ public class ventanaPedido extends javax.swing.JFrame
         jPanel4Layout.setHorizontalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
-                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 141, Short.MAX_VALUE)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
                 .addGap(265, 265, 265))
             .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
@@ -416,7 +435,7 @@ public class ventanaPedido extends javax.swing.JFrame
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -446,30 +465,26 @@ public class ventanaPedido extends javax.swing.JFrame
     }//GEN-LAST:event_btnVolverMPActionPerformed
 
     private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
-        if (cbProveedores.getSelectedItem().equals("Seleccionar"))
+        if (cbFiltro.getSelectedItem().equals("Todos"))
         {
-            mostrarTablaVacia();
+            filtroSelec = "Todos";
+            cbSituacion.setEnabled(false);
         }
         else
         {
-            if (cbFiltro.getSelectedItem().equals("Todos"))
+            if (cbFiltro.getSelectedItem().equals("Habilitados"))
             {
-                filtroSelec = "Todos";
+                filtroSelec = "Habilitados";                
+                cbSituacion.setEnabled(true);
             }
             else
             {
-                if (cbFiltro.getSelectedItem().equals("Habilitados"))
-                {
-                    filtroSelec = "Habilitados";                
-                }
-                else
-                {
-                    filtroSelec = "Deshabilitados";
-                }
+                filtroSelec = "Deshabilitados";
+                cbSituacion.setEnabled(false);
             }
+        }
 
-            llenarTabla();
-        }   
+        llenarTabla();
     }//GEN-LAST:event_cbFiltroActionPerformed
 
     private void cbOrdenCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbOrdenCampoActionPerformed
@@ -520,7 +535,7 @@ public class ventanaPedido extends javax.swing.JFrame
 
     private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
         String cadena = txfdBuscarProd.getText();        
-        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
+        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, situacionSelec, elProv.getId());
         llenarTablaBusqueda(listaBusqueda);
         
         if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
@@ -528,6 +543,14 @@ public class ventanaPedido extends javax.swing.JFrame
             if (cadena.equals("") || cadena == null)
             {
                 cbFiltro.setEnabled(true);
+                if (cbFiltro.getSelectedItem().equals("Habilitados"))
+                {
+                    cbSituacion.setEnabled(true);
+                }
+                else
+                {
+                    cbSituacion.setEnabled(false);
+                }
                 cbOrdenCampo.setEnabled(true);
                 cbTipoOrden.setEnabled(true); 
                 llenarTabla();
@@ -535,6 +558,7 @@ public class ventanaPedido extends javax.swing.JFrame
             else
             {
                 cbFiltro.setEnabled(false);
+                cbSituacion.setEnabled(false);
                 cbOrdenCampo.setEnabled(false);
                 cbTipoOrden.setEnabled(false);
             }
@@ -547,7 +571,7 @@ public class ventanaPedido extends javax.swing.JFrame
 
     private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
         String cadena = txfdBuscarProd.getText();        
-        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
+        List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, situacionSelec, elProv.getId());
         llenarTablaBusqueda(listaBusqueda);
         
         if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
@@ -555,6 +579,14 @@ public class ventanaPedido extends javax.swing.JFrame
             if (cadena.equals("") || cadena == null)
             {
                 cbFiltro.setEnabled(true);
+                if (cbFiltro.getSelectedItem().equals("Habilitados"))
+                {
+                    cbSituacion.setEnabled(true);
+                }
+                else
+                {
+                    cbSituacion.setEnabled(false);
+                }
                 cbOrdenCampo.setEnabled(true);
                 cbTipoOrden.setEnabled(true); 
                 llenarTabla();
@@ -562,6 +594,7 @@ public class ventanaPedido extends javax.swing.JFrame
             else
             {
                 cbFiltro.setEnabled(false);
+                cbSituacion.setEnabled(false);
                 cbOrdenCampo.setEnabled(false);
                 cbTipoOrden.setEnabled(false);
             }
@@ -569,6 +602,10 @@ public class ventanaPedido extends javax.swing.JFrame
         else
         {
             mostrarTablaVacia();
+            cbFiltro.setEnabled(false);
+            cbSituacion.setEnabled(false);
+            cbOrdenCampo.setEnabled(false);
+            cbTipoOrden.setEnabled(false);
         }
     }//GEN-LAST:event_txfdBuscarProdKeyReleased
 
@@ -578,6 +615,21 @@ public class ventanaPedido extends javax.swing.JFrame
                 
         if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
         {  
+            txfdBuscarProd.setEnabled(true);
+            btnBuscarProd.setEnabled(true);
+            
+            cbFiltro.setEnabled(true);
+            if (filtroSelec.equals("Habilitados"))
+            {
+                cbSituacion.setEnabled(true);
+            }
+            else
+            {
+                cbSituacion.setEnabled(false);
+            }            
+            cbOrdenCampo.setEnabled(true);
+            cbTipoOrden.setEnabled(true);
+            
             for (Proveedor p : listaTotalProv)
             {
                 if (p.getRazonSocial().equals(provSelec))
@@ -588,26 +640,20 @@ public class ventanaPedido extends javax.swing.JFrame
             }
             
             String cadena = txfdBuscarProd.getText();        
-            List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, elProv.getId());
+            List<Producto> listaBusqueda = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, situacionSelec, elProv.getId());
             llenarTablaBusqueda(listaBusqueda);
-            
-            if (cadena.equals("") || cadena == null)
-            {
-                cbFiltro.setEnabled(true);
-                cbOrdenCampo.setEnabled(true);
-                cbTipoOrden.setEnabled(true); 
-                llenarTabla();
-            }
-            else
-            {
-                cbFiltro.setEnabled(false);
-                cbOrdenCampo.setEnabled(false);
-                cbTipoOrden.setEnabled(false);
-            }
         }
         else
         {
-            mostrarTablaVacia();      
+            mostrarTablaVacia();   
+            
+            txfdBuscarProd.setEnabled(false);
+            btnBuscarProd.setEnabled(false);
+            
+            cbFiltro.setEnabled(false);
+            cbSituacion.setEnabled(false);
+            cbOrdenCampo.setEnabled(false);
+            cbTipoOrden.setEnabled(false);
         }
     }//GEN-LAST:event_cbProveedoresActionPerformed
 
@@ -721,6 +767,25 @@ public class ventanaPedido extends javax.swing.JFrame
             }
         }        
     }//GEN-LAST:event_btnImprimirPedidoActionPerformed
+
+    private void cbSituacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSituacionActionPerformed
+        if (cbSituacion.getSelectedItem().equals("Todos"))
+        {
+            situacionSelec = "Todos";
+        }
+        else
+        {
+            if (cbSituacion.getSelectedItem().equals("Sólo ofertas"))
+            {
+                situacionSelec = "Oferta";
+            }
+            else
+            {
+                situacionSelec = "Suspendido";
+            }
+        }
+        llenarTabla();
+    }//GEN-LAST:event_cbSituacionActionPerformed
     
     public static void main(String args[]) 
     {
@@ -945,23 +1010,12 @@ public class ventanaPedido extends javax.swing.JFrame
     
     public String[] OrdenarTabla()
     {
-        String[] ordenamiento = new String[3];
-                
-        if (filtroSelec == null)
-        {
-            filtroSelec = "Todos";
-        }
-        if (ordenSelec == null)
-        {
-            ordenSelec = "descripcion";
-        }
-        if (tipoSelec == null)
-        {
-            tipoSelec = "ASC";
-        }
+        String[] ordenamiento = new String[4];
+                        
         ordenamiento[0] = filtroSelec;
-        ordenamiento[1] = ordenSelec;
-        ordenamiento[2] = tipoSelec;
+        ordenamiento[1] = situacionSelec;
+        ordenamiento[2] = ordenSelec;
+        ordenamiento[3] = tipoSelec;
                 
         return ordenamiento;
     }
@@ -1021,6 +1075,7 @@ public class ventanaPedido extends javax.swing.JFrame
     private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JComboBox<String> cbOrdenCampo;
     private javax.swing.JComboBox<String> cbProveedores;
+    private javax.swing.JComboBox<String> cbSituacion;
     private javax.swing.JComboBox<String> cbTipoOrden;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -1032,7 +1087,6 @@ public class ventanaPedido extends javax.swing.JFrame
     private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JScrollPane jScrollPane1;
@@ -1041,6 +1095,7 @@ public class ventanaPedido extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane4;
     private javax.swing.JList<String> listInfoProd;
     private javax.swing.JList<String> listProdAlarma;
+    private javax.swing.JPanel panelProv;
     private javax.swing.JTable tablaPedido;
     private javax.swing.JTable tablaProd;
     private org.jdesktop.swingx.JXTextField txfdBuscarProd;

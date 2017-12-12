@@ -282,10 +282,9 @@ public class ventanaProducto extends javax.swing.JFrame
                         .addComponent(cbCampoOrden)
                         .addComponent(cbTipoOrden))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cbSituacion)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cbFiltroProv)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(cbFiltroProv)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(cbSituacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(cbFiltroCampo, javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
@@ -427,12 +426,12 @@ public class ventanaProducto extends javax.swing.JFrame
         
         if (proveedorSelec.equals("Todos") || proveedorSelec == null)
         {
-            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec, situacionSelec);
         }
         else
         {
             Proveedor prov = prDAO.buscarPorCuitNombre(proveedorSelec, "Habilitados").get(0);
-            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec, prov.getId());
+            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec, situacionSelec, prov.getId());
         }
         
         llenarTablaBusqueda(listaBusqueda);
@@ -440,10 +439,18 @@ public class ventanaProducto extends javax.swing.JFrame
         if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
         {
             cbFiltroCampo.setEnabled(true);
-            cbSituacion.setEnabled(false);
+            if (cbFiltroCampo.getSelectedItem().equals("Habilitados"))
+            {
+                cbSituacion.setEnabled(true);
+            }
+            else
+            {
+                cbSituacion.setEnabled(false);
+            }
             cbFiltroProv.setEnabled(true);
             cbCampoOrden.setEnabled(true);
             cbTipoOrden.setEnabled(true);
+            llenarTabla();
         }
         else
         {
@@ -461,12 +468,12 @@ public class ventanaProducto extends javax.swing.JFrame
         
         if (proveedorSelec.equals("Todos") || proveedorSelec == null)
         {
-            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec);
+            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec, situacionSelec);
         }
         else
         {
             Proveedor prov = prDAO.buscarPorCuitNombre(proveedorSelec, "Habilitados").get(0);
-            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec, prov.getId());
+            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec, situacionSelec, prov.getId());
         }
         
         llenarTablaBusqueda(listaBusqueda);
@@ -474,10 +481,18 @@ public class ventanaProducto extends javax.swing.JFrame
         if (cadena.equals("") || cadena == null)
         {
             cbFiltroCampo.setEnabled(true);
-            cbSituacion.setEnabled(false);
+            if (cbFiltroCampo.getSelectedItem().equals("Habilitados"))
+            {
+                cbSituacion.setEnabled(true);
+            }
+            else
+            {
+                cbSituacion.setEnabled(false);
+            }
             cbFiltroProv.setEnabled(true);
             cbCampoOrden.setEnabled(true);
             cbTipoOrden.setEnabled(true); 
+            llenarTabla();
         }
         else
         {
@@ -768,24 +783,7 @@ public class ventanaProducto extends javax.swing.JFrame
     public String[] OrdenarTabla()
     {
         String[] ordenamiento = new String[4];
-                
-        if (filtroSelec == null || filtroSelec.equals("Todos"))
-        {
-            filtroSelec = "Todos";
-        }
-        if (situacionSelec == null || situacionSelec.equals("Todos"))
-        {
-            situacionSelec = "Todos";
-        }
-        if (ordenSelec == null || ordenSelec.equals("descripcion"))
-        {
-            ordenSelec = "descripcion";
-        }
-        if (tipoSelec == null || tipoSelec.equals("ASC"))
-        {
-            tipoSelec = "ASC";
-        }        
-        
+         
         ordenamiento[0] = filtroSelec;
         ordenamiento[1] = situacionSelec;
         ordenamiento[2] = ordenSelec;

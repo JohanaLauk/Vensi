@@ -31,9 +31,10 @@ public class ventanaVenta extends javax.swing.JFrame
     
     List<Producto> listaBusqueda = null;
     
-    String filtroSelec = null;
-    String ordenSelec = null;
-    String tipoSelec = null;
+    String filtroSelec = "Habilitados";
+    String situacionSelec = "Todos";
+    String ordenSelec = "descripcion";
+    String tipoSelec = "ASC";
     
     Turno turnoActual = null;    
     static double totalCarrito = 0; //inicializa en 0 cada vez que se confirma la compra
@@ -90,6 +91,8 @@ public class ventanaVenta extends javax.swing.JFrame
         cbTipoOrden = new javax.swing.JComboBox<>();
         txfdBuscarProd = new org.jdesktop.swingx.JXTextField();
         btnBuscar = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        cbFiltro = new javax.swing.JComboBox<>();
         panelTablaProd = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProd = new javax.swing.JTable();
@@ -206,6 +209,15 @@ public class ventanaVenta extends javax.swing.JFrame
             }
         });
 
+        jLabel4.setText("Filtrar por:");
+
+        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo ofertas" }));
+        cbFiltro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFiltroActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelBusquedaLayout = new javax.swing.GroupLayout(panelBusqueda);
         panelBusqueda.setLayout(panelBusquedaLayout);
         panelBusquedaLayout.setHorizontalGroup(
@@ -215,16 +227,20 @@ public class ventanaVenta extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBusquedaLayout.createSequentialGroup()
+                        .addComponent(txfdBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelBusquedaLayout.createSequentialGroup()
+                        .addComponent(jLabel4)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap())
-                    .addGroup(panelBusquedaLayout.createSequentialGroup()
-                        .addComponent(txfdBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(18, 18, 18)
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addContainerGap())))
         );
         panelBusquedaLayout.setVerticalGroup(
             panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -237,7 +253,9 @@ public class ventanaVenta extends javax.swing.JFrame
                 .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel3)
                     .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4)
+                    .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         tablaProd = new javax.swing.JTable()
@@ -272,7 +290,7 @@ public class ventanaVenta extends javax.swing.JFrame
         panelTablaProd.setLayout(panelTablaProdLayout);
         panelTablaProdLayout.setHorizontalGroup(
             panelTablaProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 538, Short.MAX_VALUE)
+            .addComponent(jScrollPane1)
         );
         panelTablaProdLayout.setVerticalGroup(
             panelTablaProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -329,7 +347,7 @@ public class ventanaVenta extends javax.swing.JFrame
         panelTablaCarritoLayout.setHorizontalGroup(
             panelTablaCarritoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 453, Short.MAX_VALUE)
+            .addComponent(jScrollPane2)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaCarritoLayout.createSequentialGroup()
                 .addGap(88, 88, 88)
                 .addComponent(LabMsjPC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -393,7 +411,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 .addGroup(panelDatosProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDatosProdLayout.createSequentialGroup()
                         .addGroup(panelDatosProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 353, Short.MAX_VALUE)
+                            .addComponent(jScrollPane3)
                             .addGroup(panelDatosProdLayout.createSequentialGroup()
                                 .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -698,7 +716,7 @@ public class ventanaVenta extends javax.swing.JFrame
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
         String cadena = txfdBuscarProd.getText();
-        listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, "Habilitados");
+        listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, "Habilitados", situacionSelec);
         llenarTablaBusqueda(listaBusqueda);
         
         if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
@@ -716,17 +734,19 @@ public class ventanaVenta extends javax.swing.JFrame
 
     private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
         String cadena = txfdBuscarProd.getText();
-        listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, "Habilitados");
+        listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, "Habilitados", situacionSelec);
         llenarTablaBusqueda(listaBusqueda);
         
         if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
         {
+            cbFiltro.setEnabled(true);
             cbOrdenCampo.setEnabled(true);
             cbTipoOrden.setEnabled(true); 
             llenarTabla();
         }
         else
         {
+            cbFiltro.setEnabled(false);
             cbOrdenCampo.setEnabled(false);
             cbTipoOrden.setEnabled(false);
         }
@@ -743,6 +763,18 @@ public class ventanaVenta extends javax.swing.JFrame
         llenarTabla(); 
         verificarTurno();
     }//GEN-LAST:event_formWindowGainedFocus
+
+    private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
+        if (cbFiltro.getSelectedItem().equals("Todos"))
+        {
+            situacionSelec = "Todos";
+        }
+        else
+        {
+            situacionSelec = "Oferta";
+        }
+        llenarTabla();
+    }//GEN-LAST:event_cbFiltroActionPerformed
     
     public static void main(String args[]) 
     {        
@@ -945,21 +977,12 @@ public class ventanaVenta extends javax.swing.JFrame
     
     public String[] OrdenarTabla()
     {
-        String[] ordenamiento = new String[3];
-                
-        filtroSelec = "Habilitados";
-        
-        if (ordenSelec == null)
-        {
-            ordenSelec = "descripcion";
-        }
-        if (tipoSelec == null)
-        {
-            tipoSelec = "ASC";
-        }
+        String[] ordenamiento = new String[4];
+              
         ordenamiento[0] = filtroSelec;
-        ordenamiento[1] = ordenSelec;
-        ordenamiento[2] = tipoSelec;
+        ordenamiento[1] = situacionSelec;
+        ordenamiento[2] = ordenSelec;
+        ordenamiento[3] = tipoSelec;
                 
         return ordenamiento;
     }
@@ -1074,11 +1097,13 @@ public class ventanaVenta extends javax.swing.JFrame
     private javax.swing.JButton btnIniciarTurno;
     private javax.swing.JButton btnMenuPrincipal;
     private javax.swing.JButton btnQuitar;
+    private javax.swing.JComboBox<String> cbFiltro;
     private javax.swing.JComboBox<String> cbOrdenCampo;
     private javax.swing.JComboBox<String> cbTipoOrden;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JMenu jMenu1;
