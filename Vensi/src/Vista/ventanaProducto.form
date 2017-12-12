@@ -218,8 +218,8 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cbFiltroCampo" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="cbSituacion" min="-2" pref="122" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="28" max="-2" attributes="0"/>
+                  <Component id="cbSituacion" min="-2" pref="140" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="cbFiltroProv" min="-2" pref="150" max="-2" attributes="0"/>
