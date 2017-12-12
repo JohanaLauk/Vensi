@@ -29,9 +29,9 @@ public class ProductoDAO
                     JOptionPane.showMessageDialog(null, "El código del nuevo producto que desea registrar ya existe.\n" +
                                                         "Corrobore en el inventario para mayor seguridad y control.");
 		throw e;
-            
         }
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Producto agregado");
@@ -51,6 +51,8 @@ public class ProductoDAO
         prod.setPesoEnvase(p.getPesoEnvase());
         prod.setStockMinimo(p.getStockMinimo());
         prod.setEstado(p.isEstado());
+        prod.setOferta(p.isOferta());
+        prod.setSuspendido(p.isSuspendido());
         prod.setProveedor(p.getProveedor());
             
         tx = session.beginTransaction();
@@ -69,7 +71,8 @@ public class ProductoDAO
                                                         "Corrobore en el inventario para mayor seguridad y control.");
 		throw e;
         }        
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Producto modificado");
@@ -91,7 +94,8 @@ public class ProductoDAO
         {
             JOptionPane.showMessageDialog(null, "Producto no encontrado");
         }       
-        finally{
+        finally
+        {
             session.close();
         }
         return p;
@@ -114,7 +118,8 @@ public class ProductoDAO
         {
             JOptionPane.showMessageDialog(null, "Error. Producto por codigo");
         }     
-        finally{
+        finally
+        {
             session.close();
         }
         return p;
@@ -138,7 +143,8 @@ public class ProductoDAO
         {
             JOptionPane.showMessageDialog(null, "Error. Producto por codigo");
         }        
-        finally{
+        finally
+        {
             session.close();
         }
         return p;
@@ -180,7 +186,8 @@ public class ProductoDAO
         {
             JOptionPane.showMessageDialog(null, "Error. Producto por codigo o descripcion");
         }        
-        finally{
+        finally
+        {
             session.close();
         }
         return lista;
@@ -226,7 +233,8 @@ public class ProductoDAO
         {
             JOptionPane.showMessageDialog(null, "Error. Producto por codigo o descripcion");
         }
-        finally{
+        finally
+        {
             session.close();
         }
         
@@ -236,9 +244,11 @@ public class ProductoDAO
     public List<Producto> listar(String[] datos)  //ordenado por descripcio ASC
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
+        
         String filtro = datos[0];
-        String ordenCampo = datos[1];
-        String tipoOrden = datos[2];
+        String situacion = datos[1];
+        String ordenCampo = datos[2];
+        String tipoOrden = datos[3];
         
         List<Producto> lista = null;
         try
@@ -338,91 +348,275 @@ public class ProductoDAO
             {
                 if (filtro.equals("Habilitados"))
                 {
-                    switch (ordenCampo)
+                    if (situacion.equals("Todos"))
                     {
-                        case "descripcion":
+                        switch (ordenCampo)
                         {
-                             if (tipoOrden.equals("ASC"))
-                             {
-                                 lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY descripcion").list();
-                             }
-                             else
-                             {
-                                 lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY descripcion DESC").list();
-                             }
-                        } break;
+                            case "descripcion":
+                            {
+                                 if (tipoOrden.equals("ASC"))
+                                 {
+                                     lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY descripcion").list();
+                                 }
+                                 else
+                                 {
+                                     lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY descripcion DESC").list();
+                                 }
+                            } break;
 
-                        case "codigo":
-                        {
-                            if (tipoOrden.equals("ASC"))
+                            case "codigo":
                             {
-                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY codigo").list();
-                            }
-                            else
-                            {
-                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY codigo DESC").list();
-                            }
-                        } break;
+                                if (tipoOrden.equals("ASC"))
+                                {
+                                    lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY codigo").list();
+                                }
+                                else
+                                {
+                                    lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY codigo DESC").list();
+                                }
+                            } break;
 
-                        case "precio_costo":
-                        {
-                            if (tipoOrden.equals("ASC"))
+                            case "precio_costo":
                             {
-                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY precio_costo").list();
-                            }
-                            else
-                            {
-                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY precio_costo DESC").list();
-                            }
-                        } break;
+                                if (tipoOrden.equals("ASC"))
+                                {
+                                    lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY precio_costo").list();
+                                }
+                                else
+                                {
+                                    lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY precio_costo DESC").list();
+                                }
+                            } break;
 
-                        case "precio_venta":
-                        {
-                            if (tipoOrden.equals("ASC"))
+                            case "precio_venta":
                             {
-                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY precio_venta").list();
-                            }
-                            else
-                            {
-                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY precio_venta DESC").list();
-                            }
-                        } break;
+                                if (tipoOrden.equals("ASC"))
+                                {
+                                    lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY precio_venta").list();
+                                }
+                                else
+                                {
+                                    lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY precio_venta DESC").list();
+                                }
+                            } break;
 
-                        case "stock":
-                        {
-                            if (tipoOrden.equals("ASC"))
+                            case "stock":
                             {
-                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY stock").list();
-                            }
-                            else
-                            {
-                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY stock DESC").list();
-                            }
-                        } break;
+                                if (tipoOrden.equals("ASC"))
+                                {
+                                    lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY stock").list();
+                                }
+                                else
+                                {
+                                    lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY stock DESC").list();
+                                }
+                            } break;
 
-                        case "stock_minimo":
-                        {
-                            if (tipoOrden.equals("ASC"))
+                            case "stock_minimo":
                             {
-                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY stock_minimo").list();
-                            }
-                            else
-                            {
-                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY stock_minimo DESC").list();
-                            }
-                        } break;
+                                if (tipoOrden.equals("ASC"))
+                                {
+                                    lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY stock_minimo").list();
+                                }
+                                else
+                                {
+                                    lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY stock_minimo DESC").list();
+                                }
+                            } break;
 
-                        case "peso_envase":
+                            case "peso_envase":
+                            {
+                                if (tipoOrden.equals("ASC"))
+                                {
+                                    lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY peso_envase").list();
+                                }
+                                else
+                                {
+                                    lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY peso_envase DESC").list();
+                                }
+                            } break;
+                        }
+                    }
+                    else
+                    {
+                        if (situacion.equals("Oferta"))                    
                         {
-                            if (tipoOrden.equals("ASC"))
+                            switch (ordenCampo)
                             {
-                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY peso_envase").list();
-                            }
-                            else
+                                case "descripcion":
+                                {
+                                     if (tipoOrden.equals("ASC"))
+                                     {
+                                         lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY descripcion").list();
+                                     }
+                                     else
+                                     {
+                                         lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY descripcion DESC").list();
+                                     }
+                                } break;
+
+                                case "codigo":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY codigo").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY codigo DESC").list();
+                                    }
+                                } break;
+
+                                case "precio_costo":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY precio_costo").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY precio_costo DESC").list();
+                                    }
+                                } break;
+
+                                case "precio_venta":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY precio_venta").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY precio_venta DESC").list();
+                                    }
+                                } break;
+
+                                case "stock":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY stock").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY stock DESC").list();
+                                    }
+                                } break;
+
+                                case "stock_minimo":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY stock_minimo").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY stock_minimo DESC").list();
+                                    }
+                                } break;
+
+                                case "peso_envase":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY peso_envase").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY peso_envase DESC").list();
+                                    }
+                                } break;
+                            }                            
+                        }
+                        else
+                        {
+                            switch (ordenCampo)
                             {
-                                lista = session.createQuery("FROM Producto WHERE estado = true ORDER BY peso_envase DESC").list();
+                                case "descripcion":
+                                {
+                                     if (tipoOrden.equals("ASC"))
+                                     {
+                                         lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY descripcion").list();
+                                     }
+                                     else
+                                     {
+                                         lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY descripcion DESC").list();
+                                     }
+                                } break;
+
+                                case "codigo":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY codigo").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY codigo DESC").list();
+                                    }
+                                } break;
+
+                                case "precio_costo":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY precio_costo").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY precio_costo DESC").list();
+                                    }
+                                } break;
+
+                                case "precio_venta":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY precio_venta").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY precio_venta DESC").list();
+                                    }
+                                } break;
+
+                                case "stock":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY stock").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY stock DESC").list();
+                                    }
+                                } break;
+
+                                case "stock_minimo":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY stock_minimo").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY stock_minimo DESC").list();
+                                    }
+                                } break;
+
+                                case "peso_envase":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY peso_envase").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY peso_envase DESC").list();
+                                    }
+                                } break;
                             }
-                        } break;
+                        }
                     }
                 }
                 else
@@ -518,11 +712,12 @@ public class ProductoDAO
             tx.commit();      
             
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error. Listar productos");
         }
-        finally{
+        finally
+        {
             session.close();
         }
         
@@ -534,8 +729,9 @@ public class ProductoDAO
         session = NewHibernateUtil.getSessionFactory().openSession();
  
         String filtro = datos[0];
-        String ordenCampo = datos[1];
-        String tipoOrden = datos[2];
+        String situacion = datos[1];
+        String ordenCampo = datos[2];
+        String tipoOrden = datos[3];
         
         Query query = null;
         List<Producto> lista = null;
@@ -644,98 +840,275 @@ public class ProductoDAO
             {
                 if (filtro.equals("Habilitados")) 
                 {
-                    switch (ordenCampo) 
+                    if (situacion.equals("Todos"))
                     {
-                        case "descripcion": 
+                        switch (ordenCampo)
                         {
-                            if (tipoOrden.equals("ASC")) 
+                            case "descripcion":
                             {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY descripcion");
-                            } 
-                            else 
-                            {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY descripcion DESC");
-                            }
-                        }
-                        break;
+                                 if (tipoOrden.equals("ASC"))
+                                 {
+                                     lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY descripcion").list();
+                                 }
+                                 else
+                                 {
+                                     lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY descripcion DESC").list();
+                                 }
+                            } break;
 
-                        case "codigo": 
-                        {
-                            if (tipoOrden.equals("ASC")) 
+                            case "codigo":
                             {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY codigo");
-                            } 
-                            else 
-                            {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY codigo DESC");
-                            }
-                        }
-                        break;
+                                if (tipoOrden.equals("ASC"))
+                                {
+                                    lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY codigo").list();
+                                }
+                                else
+                                {
+                                    lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY codigo DESC").list();
+                                }
+                            } break;
 
-                        case "precio_costo": 
-                        {
-                            if (tipoOrden.equals("ASC")) 
+                            case "precio_costo":
                             {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY precio_costo");
-                            } 
-                            else 
-                            {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY precio_costo DESC");
-                            }
-                        }
-                        break;
+                                if (tipoOrden.equals("ASC"))
+                                {
+                                    lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY precio_costo").list();
+                                }
+                                else
+                                {
+                                    lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY precio_costo DESC").list();
+                                }
+                            } break;
 
-                        case "precio_venta": 
-                        {
-                            if (tipoOrden.equals("ASC")) 
+                            case "precio_venta":
                             {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY precio_venta");
-                            } 
-                            else 
-                            {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY precio_venta DESC");
-                            }
-                        }
-                        break;
+                                if (tipoOrden.equals("ASC"))
+                                {
+                                    lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY precio_venta").list();
+                                }
+                                else
+                                {
+                                    lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY precio_venta DESC").list();
+                                }
+                            } break;
 
-                        case "stock": 
-                        {
-                            if (tipoOrden.equals("ASC")) 
+                            case "stock":
                             {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY stock");
-                            } 
-                            else 
-                            {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY stock DESC");
-                            }
-                        }
-                        break;
+                                if (tipoOrden.equals("ASC"))
+                                {
+                                    lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY stock").list();
+                                }
+                                else
+                                {
+                                    lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY stock DESC").list();
+                                }
+                            } break;
 
-                        case "stock_minimo": 
-                        {
-                            if (tipoOrden.equals("ASC")) 
+                            case "stock_minimo":
                             {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY stock_minimo");
-                            } 
-                            else 
-                            {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY stock_minimo DESC");
-                            }
-                        }
-                        break;
+                                if (tipoOrden.equals("ASC"))
+                                {
+                                    lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY stock_minimo").list();
+                                }
+                                else
+                                {
+                                    lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY stock_minimo DESC").list();
+                                }
+                            } break;
 
-                        case "peso_envase": 
+                            case "peso_envase":
+                            {
+                                if (tipoOrden.equals("ASC"))
+                                {
+                                    lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY peso_envase").list();
+                                }
+                                else
+                                {
+                                    lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY peso_envase DESC").list();
+                                }
+                            } break;
+                        }
+                    }
+                    else
+                    {
+                        if (situacion.equals("Oferta"))                    
                         {
-                            if (tipoOrden.equals("ASC")) 
+                            switch (ordenCampo)
                             {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY peso_envase");
-                            } 
-                            else 
+                                case "descripcion":
+                                {
+                                     if (tipoOrden.equals("ASC"))
+                                     {
+                                         lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY descripcion").list();
+                                     }
+                                     else
+                                     {
+                                         lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY descripcion DESC").list();
+                                     }
+                                } break;
+
+                                case "codigo":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY codigo").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY codigo DESC").list();
+                                    }
+                                } break;
+
+                                case "precio_costo":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY precio_costo").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY precio_costo DESC").list();
+                                    }
+                                } break;
+
+                                case "precio_venta":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY precio_venta").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY precio_venta DESC").list();
+                                    }
+                                } break;
+
+                                case "stock":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY stock").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY stock DESC").list();
+                                    }
+                                } break;
+
+                                case "stock_minimo":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY stock_minimo").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY stock_minimo DESC").list();
+                                    }
+                                } break;
+
+                                case "peso_envase":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY peso_envase").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.oferta = true AND pv.id = :proveedor ORDER BY peso_envase DESC").list();
+                                    }
+                                } break;
+                            }                            
+                        }
+                        else
+                        {
+                            switch (ordenCampo)
                             {
-                                query = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND pv.id = :proveedor ORDER BY peso_envase DESC");
+                                case "descripcion":
+                                {
+                                     if (tipoOrden.equals("ASC"))
+                                     {
+                                         lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY descripcion").list();
+                                     }
+                                     else
+                                     {
+                                         lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY descripcion DESC").list();
+                                     }
+                                } break;
+
+                                case "codigo":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY codigo").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY codigo DESC").list();
+                                    }
+                                } break;
+
+                                case "precio_costo":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY precio_costo").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY precio_costo DESC").list();
+                                    }
+                                } break;
+
+                                case "precio_venta":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY precio_venta").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY precio_venta DESC").list();
+                                    }
+                                } break;
+
+                                case "stock":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY stock").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY stock DESC").list();
+                                    }
+                                } break;
+
+                                case "stock_minimo":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY stock_minimo").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY stock_minimo DESC").list();
+                                    }
+                                } break;
+
+                                case "peso_envase":
+                                {
+                                    if (tipoOrden.equals("ASC"))
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY peso_envase").list();
+                                    }
+                                    else
+                                    {
+                                        lista = session.createQuery("FROM Producto p JOIN FETCH p.proveedor pv WHERE p.estado = true AND p.suspendido = true AND pv.id = :proveedor ORDER BY peso_envase DESC").list();
+                                    }
+                                } break;
                             }
                         }
-                        break;
                     }
                 } 
                 else 
@@ -844,7 +1217,8 @@ public class ProductoDAO
         {
             JOptionPane.showMessageDialog(null, "Error. Listar productos");
         }
-        finally{
+        finally
+        {
             session.close();
         }
         return lista;
@@ -866,7 +1240,8 @@ public class ProductoDAO
         {
             JOptionPane.showMessageDialog(null, "Error. Lista stock minimo");
         }
-        finally{
+        finally
+        {
             session.close();
         }
         return lista;
@@ -895,7 +1270,8 @@ public class ProductoDAO
                     e.printStackTrace();
 		throw e;
         }
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Stock de producto modificado");
@@ -916,14 +1292,15 @@ public class ProductoDAO
             tx.commit();
             
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             if (tx.isActive())
 		tx.rollback();
                     e.printStackTrace();
 		throw e;
         }       
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Stock de producto modificado");
@@ -946,7 +1323,7 @@ public class ProductoDAO
             tx.commit();
             
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             if (tx.isActive())
 		tx.rollback();

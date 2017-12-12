@@ -30,7 +30,8 @@ public class ProveedorDAO
                     JOptionPane.showMessageDialog(null, "El CUIT del nuevo proveedor que desea registrar ya existe.");
 		throw e;
         }
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Proveedor agregado");
@@ -66,7 +67,8 @@ public class ProveedorDAO
                     JOptionPane.showMessageDialog(null, "El CUIT del nuevo proveedor que desea registrar ya existe.");
 		throw e;
         }
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Proveedor modificado");
@@ -103,7 +105,8 @@ public class ProveedorDAO
         {
             JOptionPane.showMessageDialog(null, "Error. ListarPredeterminado proveedor");
         }
-        finally{
+        finally
+        {
             session.close();
         }
         return lista;
@@ -124,7 +127,8 @@ public class ProveedorDAO
         {
             JOptionPane.showMessageDialog(null, "Proveedor no encontrado");
         }    
-        finally{
+        finally
+        {
             session.close();
         }
         
@@ -148,7 +152,8 @@ public class ProveedorDAO
         {
             JOptionPane.showMessageDialog(null, "Error");
         }
-        finally{
+        finally
+        {
             session.close();
         }
         return lista;
@@ -182,16 +187,15 @@ public class ProveedorDAO
                     query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
                     lista = query.list();
                 }
-            }
-            
-            tx.commit();
-            
+            }            
+            tx.commit();            
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error");
         }
-        finally{
+        finally
+        {
             session.close();
         }
         return lista;
