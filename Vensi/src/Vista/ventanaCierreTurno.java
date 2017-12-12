@@ -626,13 +626,17 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     }//GEN-LAST:event_btnCancelarCerrarTurnoActionPerformed
 
     private void btnAceptarCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarCerrarTurnoActionPerformed
-        turnoActual.setFechaHoraFin(new Date());
+        int cerrar = JOptionPane.showConfirmDialog(null, "¿Está seguro de cerrar el turno?", "Cerrar turno", JOptionPane.YES_NO_OPTION);
+        if (cerrar == 0)
+        {
+            turnoActual.setFechaHoraFin(new Date());
         
-        tDAO.modificar(turnoActual, turnoActual.getId());
-        
-        JOptionPane.showMessageDialog(null, "Se ha cerrado el turno correctamente.");
+            tDAO.modificar(turnoActual, turnoActual.getId());
+            
+            JOptionPane.showMessageDialog(null, "Se ha cerrado el turno correctamente.");
               
-        dispose();        
+            dispose();
+        }               
     }//GEN-LAST:event_btnAceptarCerrarTurnoActionPerformed
 
     private void txfd500KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd500KeyReleased

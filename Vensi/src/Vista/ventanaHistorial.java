@@ -318,7 +318,7 @@ public class ventanaHistorial extends javax.swing.JFrame
         if (cbBuscarPor.getSelectedItem().equals("Seleccionar"))
         {
             txfdNro.setEnabled(false);  
-            txfdNro.setText("");
+            txfdNro.setText(null);
         
             dateDesde.setEnabled(false);
             dateHasta.setEnabled(false);
@@ -340,7 +340,7 @@ public class ventanaHistorial extends javax.swing.JFrame
             dateHasta.setEnabled(true);            
                         
             txfdNro.setEnabled(false); 
-            txfdNro.setText("");
+            txfdNro.setText(null);
         }
     }//GEN-LAST:event_cbBuscarPorActionPerformed
 
