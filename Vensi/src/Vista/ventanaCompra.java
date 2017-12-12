@@ -42,6 +42,8 @@ public class ventanaCompra extends javax.swing.JFrame
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
         
         txfdCantidad.setEnabled(false);
+        txfdPrecioCU.setEnabled(false);
+        txfdPrecioVU.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnQuitar.setEnabled(false);
                 
@@ -55,10 +57,14 @@ public class ventanaCompra extends javax.swing.JFrame
                 tablaListaInventario.clearSelection();
                 listInfoProd.clearSelection();
                 txfdCantidad.setText("");
+                txfdPrecioCU.setText("");
+                txfdPrecioVU.setText("");
                 
                 limpiarList();
                 
                 txfdCantidad.setEnabled(false);
+                txfdPrecioCU.setEnabled(false);
+                txfdPrecioVU.setEnabled(false);
                 btnAgregar.setEnabled(false);
                 btnQuitar.setEnabled(false);
             } 
@@ -90,6 +96,10 @@ public class ventanaCompra extends javax.swing.JFrame
         listInfoProd = new javax.swing.JList<>();
         txfdCantidad = new javax.swing.JTextField();
         btnQuitar = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        txfdPrecioCU = new javax.swing.JTextField();
+        jLabel9 = new javax.swing.JLabel();
+        txfdPrecioVU = new javax.swing.JTextField();
         jPanel4 = new javax.swing.JPanel();
         jLabel7 = new javax.swing.JLabel();
         cbProveedores = new javax.swing.JComboBox<>();
@@ -130,13 +140,11 @@ public class ventanaCompra extends javax.swing.JFrame
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(0, 0, 0)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
@@ -189,7 +197,7 @@ public class ventanaCompra extends javax.swing.JFrame
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 112, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnCargarInventario, javax.swing.GroupLayout.DEFAULT_SIZE, 211, Short.MAX_VALUE))
+                        .addComponent(btnCargarInventario, javax.swing.GroupLayout.DEFAULT_SIZE, 294, Short.MAX_VALUE))
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -237,6 +245,10 @@ public class ventanaCompra extends javax.swing.JFrame
             }
         });
 
+        jLabel1.setText("Precio costo:");
+
+        jLabel9.setText("Precio venta:");
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -246,11 +258,19 @@ public class ventanaCompra extends javax.swing.JFrame
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 251, Short.MAX_VALUE)
+                            .addComponent(jScrollPane2)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txfdPrecioCU, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jLabel9)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(txfdPrecioVU, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -270,7 +290,12 @@ public class ventanaCompra extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(txfdPrecioCU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(jLabel9)
+                                .addComponent(txfdPrecioVU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -341,11 +366,11 @@ public class ventanaCompra extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbOrdenCampo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbOrdenCampo, 0, 93, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbTipoOrden, 0, 83, Short.MAX_VALUE)
+                .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addComponent(jLabel7)
@@ -381,10 +406,8 @@ public class ventanaCompra extends javax.swing.JFrame
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(5, 5, 5)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -425,18 +448,21 @@ public class ventanaCompra extends javax.swing.JFrame
             String codigo = tablaProd.getValueAt(filaSelec, 0).toString();
             String descrip = tablaProd.getValueAt(filaSelec, 1).toString();
             String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();
-
-            String cantidad = null;
+            
+            String cantidad = null, precioCostoU = null, precioVentaU = null;
+            
             cantidad = txfdCantidad.getText();
+            precioCostoU = txfdPrecioCU.getText();
+            precioVentaU = txfdPrecioVU.getText();
 
-            if(cantidad.equals(""))
+            if(cantidad.equals("") || precioCostoU.equals("") || precioVentaU.equals(""))
             {
-                JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad");
+                JOptionPane.showMessageDialog(null, "Falta ingresar la cantidad y/o el precio costo unitario");
             }
             else
             {
                 m = (DefaultTableModel) tablaListaInventario.getModel();
-                String filaNueva[] = {codigo, descrip, cantidad, id_recibido};
+                String filaNueva[] = {codigo, descrip, cantidad, "$"+precioCostoU, "$"+precioVentaU, id_recibido};
                 m.addRow(filaNueva);
             }
         }
@@ -445,13 +471,17 @@ public class ventanaCompra extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
         }
         txfdCantidad.setText("");
+        txfdPrecioCU.setText("");
+        txfdPrecioVU.setText("");
         
         limpiarList();
         
         tablaProd.setRowSelectionAllowed(false);
         tablaListaInventario.setRowSelectionAllowed(false);
         
-        txfdCantidad.setEnabled(false);        
+        txfdCantidad.setEnabled(false);    
+        txfdPrecioCU.setEnabled(false);
+        txfdPrecioVU.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnQuitar.setEnabled(false);
     }//GEN-LAST:event_btnAgregarActionPerformed
@@ -471,6 +501,8 @@ public class ventanaCompra extends javax.swing.JFrame
         limpiarList();
         
         txfdCantidad.setEnabled(false);
+        txfdPrecioCU.setEnabled(false);
+        txfdPrecioVU.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnQuitar.setEnabled(false);
     }//GEN-LAST:event_btnQuitarActionPerformed
@@ -486,20 +518,34 @@ public class ventanaCompra extends javax.swing.JFrame
         int filasTablaInv = tablaListaInventario.getRowCount();
         for (int i = 0 ; i<filasTablaInv ; i++ )
         {            
-            producto = prodDAO.buscarPorId(Integer.parseInt(tablaListaInventario.getValueAt(i,3).toString()));
+            producto = prodDAO.buscarPorId(Integer.parseInt(tablaListaInventario.getValueAt(i,5).toString()));
             
             ItemPedido itemPedido = new ItemPedido();
             itemPedido.setProducto(producto);
             itemPedido.setCantidad(Integer.parseInt(tablaListaInventario.getValueAt(i,2).toString()));
             itemPedido.setPedido(pedido);
             
+            String cadena = tablaListaInventario.getValueAt(i,3).toString();
+            cadena = cadena.substring(1);
+            double precioCostoU = Double.parseDouble(cadena);
+            
+            String cadena2 = tablaListaInventario.getValueAt(i,4).toString();
+            cadena2 = cadena2.substring(1);
+            double precioVentaU = Double.parseDouble(cadena2);
+            
             iDAO.alta(itemPedido);
             prodDAO.sumarStock(producto.getId(), Integer.parseInt(tablaListaInventario.getValueAt(i,2).toString()));
+            
+            if (producto.getPrecioCosto() != precioCostoU || producto.getPrecioVenta() != precioVentaU)
+            {
+                prodDAO.setearPrecioCostoU(producto.getId(), precioCostoU, precioVentaU);
+            }
         }
         
         JOptionPane.showMessageDialog(null, "Finalizado con éxito");
         
         txfdCantidad.setText(null);
+        txfdPrecioCU.setText(null);        
         llenarTablaInventario();
         llenarTabla();
     }//GEN-LAST:event_btnCargarInventarioActionPerformed
@@ -592,7 +638,6 @@ public class ventanaCompra extends javax.swing.JFrame
                     filtroSelec = "Deshabilitados";
                 }
             }
-
             llenarTabla();
         } 
     }//GEN-LAST:event_cbFiltroActionPerformed
@@ -763,6 +808,8 @@ public class ventanaCompra extends javax.swing.JFrame
                     listInfoProd.setModel(modeloList);
                     
                     txfdCantidad.setEnabled(true);
+                    txfdPrecioCU.setEnabled(true);
+                    txfdPrecioVU.setEnabled(true);
                     btnAgregar.setEnabled(true);
                     btnQuitar.setEnabled(false);
                 }
@@ -776,6 +823,8 @@ public class ventanaCompra extends javax.swing.JFrame
         modelo2.addColumn("Código");
         modelo2.addColumn("Descripción");
         modelo2.addColumn("Cantidad");
+        modelo2.addColumn("Precio costo");
+        modelo2.addColumn("Precio venta");
         modelo2.addColumn("ID");       
                 
         tablaListaInventario.setModel(modelo2);
@@ -783,12 +832,14 @@ public class ventanaCompra extends javax.swing.JFrame
         tcm2 = tablaListaInventario.getColumnModel();        
         tcm2.getColumn(0).setPreferredWidth(100);
         tcm2.getColumn(1).setPreferredWidth(300);
-        tcm2.getColumn(2).setPreferredWidth(50);  
-        tcm2.getColumn(3).setPreferredWidth(0);  
-        tcm2.getColumn(3).setMaxWidth(0);
-        tcm2.getColumn(3).setMinWidth(0);
-        tablaListaInventario.getTableHeader().getColumnModel().getColumn(3).setMaxWidth(0);
-        tablaListaInventario.getTableHeader().getColumnModel().getColumn(3).setMinWidth(0);
+        tcm2.getColumn(2).setPreferredWidth(50); 
+        tcm2.getColumn(3).setPreferredWidth(100); 
+        tcm2.getColumn(4).setPreferredWidth(100);
+        tcm2.getColumn(5).setPreferredWidth(0);  
+        tcm2.getColumn(5).setMaxWidth(0);
+        tcm2.getColumn(5).setMinWidth(0);
+        tablaListaInventario.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaListaInventario.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
         
         tablaListaInventario.addFocusListener(new FocusListener() 
         {
@@ -826,6 +877,8 @@ public class ventanaCompra extends javax.swing.JFrame
                     listInfoProd.setModel(modeloList);
                     
                     txfdCantidad.setEnabled(false);
+                    txfdPrecioCU.setEnabled(false);
+                    txfdPrecioVU.setEnabled(false);
                     btnAgregar.setEnabled(false);
                     btnQuitar.setEnabled(true);
                 }
@@ -961,6 +1014,7 @@ public class ventanaCompra extends javax.swing.JFrame
     private javax.swing.JComboBox<String> cbOrdenCampo;
     private javax.swing.JComboBox<String> cbProveedores;
     private javax.swing.JComboBox<String> cbTipoOrden;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -968,6 +1022,7 @@ public class ventanaCompra extends javax.swing.JFrame
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
@@ -980,5 +1035,7 @@ public class ventanaCompra extends javax.swing.JFrame
     private javax.swing.JTable tablaProd;
     private org.jdesktop.swingx.JXTextField txfdBuscarProd;
     private javax.swing.JTextField txfdCantidad;
+    private javax.swing.JTextField txfdPrecioCU;
+    private javax.swing.JTextField txfdPrecioVU;
     // End of variables declaration//GEN-END:variables
 }

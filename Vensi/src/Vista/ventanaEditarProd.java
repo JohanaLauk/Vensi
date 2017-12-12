@@ -332,7 +332,7 @@ public class ventanaEditarProd extends javax.swing.JFrame {
                 && !(txfdEditarDescripcion.getText().equals("") || txfdEditarDescripcion.getText() == null)
                 && (rbPeso.isSelected() || rbUnidad.isSelected())) {
             if (rbPeso.isSelected() && ((txfdEditarPesoEnvase.getText().equals("") || txfdEditarPesoEnvase.getText() == null))) {
-                JOptionPane.showMessageDialog(null, "Debe seleccionar completar los campos obligatorios");
+                JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
             } else {
 
                 prod.setCodigo(txfdEditarCodigo.getText().toUpperCase());

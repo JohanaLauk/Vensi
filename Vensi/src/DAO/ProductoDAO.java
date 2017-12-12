@@ -928,4 +928,34 @@ public class ProductoDAO
         }
         //JOptionPane.showMessageDialog(null, "Stock de producto modificado");
     }
+    
+    public void setearPrecioCostoU(int id, double precioCostoU, double precioVentaU)
+    {
+        session = NewHibernateUtil.getSessionFactory().openSession();
+        
+        Producto p = null;
+        
+        p = (Producto)session.get(Producto.class, id);
+        p.setPrecioCosto(precioCostoU);
+        p.setPrecioVenta(precioVentaU);
+        
+        tx = session.beginTransaction();
+        try
+        {
+            session.merge(p);
+            tx.commit();
+            
+        }
+        catch(Exception e)
+        {
+            if (tx.isActive())
+		tx.rollback();
+                    e.printStackTrace();
+		throw e;
+        }
+        finally
+        {
+            session.close();
+        }
+    }
 }

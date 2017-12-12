@@ -8,8 +8,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import Modelo.Producto;
 import Modelo.Proveedor;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
@@ -19,7 +17,6 @@ import javax.swing.DefaultCellEditor;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
-import javax.swing.table.TableCellEditor;
 import javax.swing.table.TableColumn;
 
 public class ventanaProducto extends javax.swing.JFrame 
@@ -518,7 +515,7 @@ public class ventanaProducto extends javax.swing.JFrame
         modelo.addColumn("Tipo de venta");
         modelo.addColumn("Peso del envase");
         modelo.addColumn("Estado");
-        modelo.addColumn("Proveedor");
+        modelo.addColumn("N° proveedores");
         modelo.addColumn("ID");
         
         tablaProd.setModel(modelo);
@@ -553,43 +550,19 @@ public class ventanaProducto extends javax.swing.JFrame
             }    
     
             Set<Proveedor> listaProv = p.getProveedor(); 
-            //String provs = "";          
+            
+            /*String provs = "";          
            
-            /*for (Proveedor pr : listaProv)
+            for (Proveedor pr : listaProv)
             {
                 provs += pr.getRazonSocial() + ", ";
             }            
-            datos[9] = provs;
+            datos[9] = provs;*/
             
-            datos[9] = "ver";            
-            datos[10] = String.valueOf(p.getId());*/
+            datos[9] = String.valueOf(listaProv.size());            
+            datos[10] = String.valueOf(p.getId());            
            
             modelo.addRow(datos);
-               
-            //pueba JOHA
-            //cbProv = new JComboBox();
-            int cantProv = listaProv.size();
-            String[] provs = new String[cantProv+1];
-
-            provs[0] = "Ver [" + cantProv + "]";
-            //cbProv.addItem("Ver [" + cantProv + "]");
-                             
-            for (int i=1 ; i<cantProv ; i++)
-            {
-                for (Proveedor x : listaProv)
-                {
-                    provs[i] = String.valueOf(x.getRazonSocial());                    
-                    //cbProv.addItem(String.valueOf(x.getRazonSocial()));
-                }
-            }
-            
-            cbProv = new JComboBox(provs);            
-            TableColumn columna = tablaProd.getColumnModel().getColumn(9);            
-            //TableCellEditor colEdit = new DefaultCellEditor(cbProv);
-            //columna.setCellEditor(colEdit);
-            columna.setCellEditor(new DefaultCellEditor(cbProv));   //esto es lo mismo que las 2 lineas anteriores        
-            //columna.setCellRenderer(new ... (cbProv));
-            
         }
         
         tablaProd.setModel(modelo);       
