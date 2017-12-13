@@ -46,12 +46,9 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel4 = new javax.swing.JLabel();
         txfdCodigo = new javax.swing.JTextField();
         txfdDescripcion = new javax.swing.JTextField();
-        txfdPrecioVenta = new javax.swing.JTextField();
-        txfdStockMinimo = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txfdPesoEnvase = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
-        txfdPrecioCosto = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
         rbUnidad = new javax.swing.JRadioButton();
         rbPeso = new javax.swing.JRadioButton();
@@ -60,10 +57,13 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         btnAceptarNuevoProd = new javax.swing.JButton();
         btnCancelarNuevoProd = new javax.swing.JButton();
         jLabel9 = new javax.swing.JLabel();
-        txfdStockInicial = new javax.swing.JTextField();
         panelProveedor = new javax.swing.JPanel();
         jLabel10 = new javax.swing.JLabel();
         cbSituación = new javax.swing.JComboBox<>();
+        txfdPrecioVenta = new org.jdesktop.swingx.JXTextField();
+        txfdStockInicial = new org.jdesktop.swingx.JXTextField();
+        txfdStockMinimo = new org.jdesktop.swingx.JXTextField();
+        txfdPrecioCosto = new org.jdesktop.swingx.JXTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo producto");
@@ -76,18 +76,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
         jLabel4.setText("Stock mínimo:");
 
-        txfdPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txfdPrecioVentaKeyTyped(evt);
-            }
-        });
-
-        txfdStockMinimo.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txfdStockMinimoKeyTyped(evt);
-            }
-        });
-
         jLabel6.setText("Peso del envase (gramos):");
 
         txfdPesoEnvase.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -97,12 +85,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         });
 
         jLabel7.setText("Precio costo:");
-
-        txfdPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txfdPrecioCostoKeyTyped(evt);
-            }
-        });
 
         jLabel5.setText("Se vende por:");
 
@@ -157,12 +139,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
         jLabel9.setText("Stock inicial:");
 
-        txfdStockInicial.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txfdStockInicialKeyTyped(evt);
-            }
-        });
-
         javax.swing.GroupLayout panelProveedorLayout = new javax.swing.GroupLayout(panelProveedor);
         panelProveedor.setLayout(panelProveedorLayout);
         panelProveedorLayout.setHorizontalGroup(
@@ -183,29 +159,61 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             }
         });
 
+        txfdPrecioVenta.setPrompt("Ej: \"00\" o \"00.00\"");
+        txfdPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdPrecioVentaKeyTyped(evt);
+            }
+        });
+
+        txfdStockInicial.setPrompt("Ingrese la cantidad en unidades");
+        txfdStockInicial.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdStockInicialKeyTyped(evt);
+            }
+        });
+
+        txfdStockMinimo.setPrompt("Ingrese la cantidad en unidades");
+        txfdStockMinimo.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdStockMinimoKeyTyped(evt);
+            }
+        });
+
+        txfdPrecioCosto.setPrompt("Ej: \"00\" o \"00.00\"");
+        txfdPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdPrecioCostoKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1)
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(txfdPrecioVenta, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addComponent(txfdDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel7)
-                                .addComponent(txfdPrecioCosto))
-                            .addComponent(jLabel3)))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(jLabel4)
-                        .addComponent(txfdStockMinimo, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                        .addComponent(jLabel9)
-                        .addComponent(txfdStockInicial))
-                    .addComponent(txfdCodigo, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE)
+                            .addComponent(txfdCodigo)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(jLabel1)
+                                    .addComponent(txfdDescripcion, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel7)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel4)
+                                    .addComponent(jLabel9)
+                                    .addComponent(txfdStockMinimo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 44, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txfdPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfdPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfdStockInicial, javax.swing.GroupLayout.PREFERRED_SIZE, 276, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -350,19 +358,30 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                         JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio venta");
                     }
                 }
-
-                unProd.setStockMinimo(Integer.parseInt(txfdStockMinimo.getText()));
-
+                                
                 if (rbPeso.isSelected()) 
                 {
                     unProd.setPorPeso(true);    //por peso
-                    unProd.setPesoEnvase(Integer.parseInt(txfdPesoEnvase.getText()));
+                    
+                    int pesoEnv = Integer.parseInt(txfdPesoEnvase.getText());
+                    unProd.setPesoEnvase(pesoEnv);  //gramos
+                    
+                    int stockMin = Integer.parseInt(txfdStockMinimo.getText());  //unidades
+                    int total = stockMin * pesoEnv;    //convierto las unidades en gramos                  
+                    unProd.setStockMinimo(total);   //guardo en gramos
+                    
+                    int stock = Integer.parseInt(txfdStockInicial.getText());   //unidades
+                    int total2 = stock * pesoEnv;   //convierto las unidades en gramos
+                    unProd.setStock(total2);   //guardo en gramos
                 } 
                 else 
                 {
                     unProd.setPorPeso(false);   //por unidad
                     unProd.setPesoEnvase(0);
+                    unProd.setStockMinimo(Integer.parseInt(txfdStockMinimo.getText()));
+                    unProd.setStock(Integer.parseInt(txfdStockInicial.getText()));
                 }
+                
                 boolean alMenosUnCheck = false;
                 
                 for (JCheckBox c : checkProv) 
@@ -372,8 +391,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                         unProd.addProveedor(prDAO.buscarPorCuitNombre(c.getText(), "Habilitados").get(0));
                         alMenosUnCheck = true;
                     }
-                }
-                unProd.setStock(Integer.parseInt(txfdStockInicial.getText()));
+                }                
                 
                 if (situacion.equals("Ninguno"))
                 {
@@ -404,7 +422,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                     JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor");
                 }
             }
-
         } 
         else 
         {
@@ -412,32 +429,10 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         }
     }//GEN-LAST:event_btnAceptarNuevoProdActionPerformed
 
-    private void txfdPrecioCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioCostoKeyTyped
-        char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
-                (c != '.')) 
-            evt.consume();       
-        
-    }//GEN-LAST:event_txfdPrecioCostoKeyTyped
-
-    private void txfdStockMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdStockMinimoKeyTyped
-        char c = evt.getKeyChar();
-        if(c < '0' || c > '9') evt.consume();
-    }//GEN-LAST:event_txfdStockMinimoKeyTyped
-
     private void txfdPesoEnvaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPesoEnvaseKeyTyped
         char c = evt.getKeyChar();
         if(c < '0' || c > '9') evt.consume();
     }//GEN-LAST:event_txfdPesoEnvaseKeyTyped
-
-    private void txfdPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioVentaKeyTyped
-        char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
-                (c != '.')) 
-            evt.consume();
-    }//GEN-LAST:event_txfdPrecioVentaKeyTyped
 
     private void rbPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPesoActionPerformed
         if (rbPeso.isSelected())
@@ -461,11 +456,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         }
     }//GEN-LAST:event_rbUnidadActionPerformed
 
-    private void txfdStockInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdStockInicialKeyTyped
-        char c = evt.getKeyChar();
-        if(c < '0' || c > '9') evt.consume();
-    }//GEN-LAST:event_txfdStockInicialKeyTyped
-
     private void cbSituaciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSituaciónActionPerformed
         if (cbSituación.getSelectedItem().equals("Ninguno"))
         {
@@ -483,6 +473,32 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             }
         }
     }//GEN-LAST:event_cbSituaciónActionPerformed
+
+    private void txfdPrecioCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioCostoKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
+                (c != '.')) 
+            evt.consume();
+    }//GEN-LAST:event_txfdPrecioCostoKeyTyped
+
+    private void txfdPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioVentaKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && 
+                (c != '.')) 
+            evt.consume();
+    }//GEN-LAST:event_txfdPrecioVentaKeyTyped
+
+    private void txfdStockInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdStockInicialKeyTyped
+        char c = evt.getKeyChar();
+        if(c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_txfdStockInicialKeyTyped
+
+    private void txfdStockMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdStockMinimoKeyTyped
+        char c = evt.getKeyChar();
+        if(c < '0' || c > '9') evt.consume();
+    }//GEN-LAST:event_txfdStockMinimoKeyTyped
 
     public static void main(String args[]) 
     {        
@@ -537,9 +553,9 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     private javax.swing.JTextField txfdCodigo;
     private javax.swing.JTextField txfdDescripcion;
     private javax.swing.JTextField txfdPesoEnvase;
-    private javax.swing.JTextField txfdPrecioCosto;
-    private javax.swing.JTextField txfdPrecioVenta;
-    private javax.swing.JTextField txfdStockInicial;
-    private javax.swing.JTextField txfdStockMinimo;
+    private org.jdesktop.swingx.JXTextField txfdPrecioCosto;
+    private org.jdesktop.swingx.JXTextField txfdPrecioVenta;
+    private org.jdesktop.swingx.JXTextField txfdStockInicial;
+    private org.jdesktop.swingx.JXTextField txfdStockMinimo;
     // End of variables declaration//GEN-END:variables
 }

@@ -585,21 +585,37 @@ public class ventanaProducto extends javax.swing.JFrame
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf(p.getPrecioCosto());
-            datos[3] = String.valueOf(p.getPrecioVenta());
-            datos[4] = String.valueOf(p.getStock());
-            datos[5] = String.valueOf(p.getStockMinimo());
+            datos[2] = String.valueOf("$" + p.getPrecioCosto());
+            datos[3] = String.valueOf("$" + p.getPrecioVenta());
             
             if (p.isPorPeso())
             {
-                datos[6] = "Por peso";
-                datos[7] = String.valueOf((p.getPesoEnvase()) / 1000 + "kg");
+                int pesoEnv1 = p.getPesoEnvase();
+                double pesoEnv2 = p.getPesoEnvase();
+                datos[7] = String.valueOf(pesoEnv2 / 1000 + "Kg");
+                
+                int stockGR1 = p.getStock();    //gr
+                double stockGR2 = p.getStock();
+                int stockU = stockGR1 / pesoEnv1;  // u = gr / peso gr
+                double stockKG = stockGR2 / 1000;   //kg =  gr / 1000            
+                datos[4] = String.valueOf(stockU+" u" + "  ("+stockKG + "Kg)");
+                
+                int stockMinGR1 = p.getStockMinimo();
+                double stockMinGR2 = p.getStockMinimo();
+                int stockMinU = stockMinGR1 / pesoEnv1;
+                double stockMinKG = stockMinGR2 / 1000;          
+                
+                datos[5] = String.valueOf(stockMinU+" u" + "  ("+stockMinKG + "Kg)");
+                                
+                datos[6] = "Por peso";   
             }
             else
             {
+                datos[4] = String.valueOf(p.getStock()+" u");
+                datos[5] = String.valueOf(p.getStockMinimo()+" u");
                 datos[6] = "Por unidad";
                 datos[7] = "---";
-            }                      
+            }
             
             if (p.isEstado())   //habilitado
             {
@@ -698,38 +714,54 @@ public class ventanaProducto extends javax.swing.JFrame
         modelo2.addColumn("Tipo de venta");
         modelo2.addColumn("Peso del envase");
         modelo2.addColumn("Estado");
-        modelo2.addColumn("Proveedor");
+        modelo2.addColumn("N° proveedor");
         modelo2.addColumn("ID");
         
         for (Producto p : listaBusqueda)
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf(p.getPrecioCosto());
-            datos[3] = String.valueOf(p.getPrecioVenta());
-            datos[4] = String.valueOf(p.getStock());
-            datos[5] = String.valueOf(p.getStockMinimo());
+            datos[2] = String.valueOf("$" + p.getPrecioCosto());
+            datos[3] = String.valueOf("$" + p.getPrecioVenta());
             
             if (p.isPorPeso())
             {
+                int pesoEnv1 = p.getPesoEnvase();
+                double pesoEnv2 = p.getPesoEnvase();
+                datos[7] = String.valueOf(pesoEnv2 / 1000 + "Kg");
+                
+                int stockGR1 = p.getStock();    //gr
+                double stockGR2 = p.getStock();
+                int stockU = stockGR1 / pesoEnv1;  // u = gr / peso gr
+                double stockKG = stockGR2 / 1000;   //kg =  gr / 1000            
+                datos[4] = String.valueOf(stockU+" u" + "  ("+stockKG + "Kg)");
+                
+                int stockMinGR1 = p.getStockMinimo();
+                double stockMinGR2 = p.getStockMinimo();
+                int stockMinU = stockMinGR1 / pesoEnv1;
+                double stockMinKG = stockMinGR2 / 1000;          
+                
+                datos[5] = String.valueOf(stockMinU+" u" + "  ("+stockMinKG + "Kg)");
+                                
                 datos[6] = "Por peso";
             }
             else
             {
+                datos[4] = String.valueOf(p.getStock());
+                datos[5] = String.valueOf(p.getStockMinimo());
                 datos[6] = "Por unidad";
+                datos[7] = "---";
             }
-            
-            datos[7] = String.valueOf(p.getPesoEnvase());
             
             if (p.isEstado())   //habilitado
             {
-                if (p.isOferta())
+                if (p.isOferta() && !p.isSuspendido())
                 {
                     datos[8] = "Habilitado - Oferta";
                 }
                 else
                 {
-                    if (p.isSuspendido())
+                    if (p.isSuspendido() && !p.isOferta())
                     {
                         datos[8] = "Habilitado - Suspendido";
                     }
@@ -754,8 +786,8 @@ public class ventanaProducto extends javax.swing.JFrame
             }            
             datos[9] = provs;*/
             
-            datos[9] = String.valueOf(listaProv.size());
-            datos[10] = String.valueOf(p.getId());
+            datos[9] = String.valueOf(listaProv.size());            
+            datos[10] = String.valueOf(p.getId());            
            
             modelo2.addRow(datos);
         }

@@ -53,28 +53,34 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
-                      <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="txfdPrecioVenta" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="txfdDescripcion" alignment="0" pref="276" max="32767" attributes="0"/>
-                                  <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
-                                  <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
-                                  <Component id="txfdPrecioCosto" alignment="0" max="32767" attributes="0"/>
+                              <Component id="txfdCodigo" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="jLabel1" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txfdDescripcion" alignment="0" pref="276" max="32767" attributes="0"/>
+                                      <Component id="jLabel2" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
+                                      <Component id="txfdStockMinimo" alignment="1" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
-                              <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                           </Group>
+                          <EmptySpace pref="44" max="32767" attributes="0"/>
                       </Group>
-                      <Group type="103" alignment="0" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel4" alignment="0" min="-2" max="-2" attributes="0"/>
-                          <Component id="txfdStockMinimo" alignment="0" pref="276" max="32767" attributes="0"/>
-                          <Component id="jLabel9" min="-2" max="-2" attributes="0"/>
-                          <Component id="txfdStockInicial" alignment="0" max="32767" attributes="0"/>
+                      <Group type="102" attributes="0">
+                          <Group type="103" groupAlignment="0" attributes="0">
+                              <Component id="txfdPrecioCosto" min="-2" pref="276" max="-2" attributes="0"/>
+                              <Component id="txfdPrecioVenta" min="-2" pref="276" max="-2" attributes="0"/>
+                              <Component id="txfdStockInicial" min="-2" pref="276" max="-2" attributes="0"/>
+                          </Group>
+                          <EmptySpace max="32767" attributes="0"/>
                       </Group>
-                      <Component id="txfdCodigo" pref="276" max="32767" attributes="0"/>
                   </Group>
-                  <EmptySpace pref="44" max="32767" attributes="0"/>
                   <Group type="103" groupAlignment="0" max="-2" attributes="0">
                       <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                       <Group type="102" alignment="1" attributes="0">
@@ -187,16 +193,6 @@
         </Component>
         <Component class="javax.swing.JTextField" name="txfdDescripcion">
         </Component>
-        <Component class="javax.swing.JTextField" name="txfdPrecioVenta">
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdPrecioVentaKeyTyped"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txfdStockMinimo">
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdStockMinimoKeyTyped"/>
-          </Events>
-        </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
             <Property name="text" type="java.lang.String" value="Peso del envase (gramos):"/>
@@ -211,11 +207,6 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="Precio costo:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txfdPrecioCosto">
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdPrecioCostoKeyTyped"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -294,11 +285,6 @@
             <Property name="text" type="java.lang.String" value="Stock inicial:"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="txfdStockInicial">
-          <Events>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdStockInicialKeyTyped"/>
-          </Events>
-        </Component>
         <Container class="javax.swing.JPanel" name="panelProveedor">
 
           <Layout>
@@ -335,6 +321,38 @@
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
           </AuxValues>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="txfdPrecioVenta">
+          <Properties>
+            <Property name="prompt" type="java.lang.String" value="Ej: &quot;00&quot; o &quot;00.00&quot;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdPrecioVentaKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="txfdStockInicial">
+          <Properties>
+            <Property name="prompt" type="java.lang.String" value="Ingrese la cantidad en unidades"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdStockInicialKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="txfdStockMinimo">
+          <Properties>
+            <Property name="prompt" type="java.lang.String" value="Ingrese la cantidad en unidades"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdStockMinimoKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="txfdPrecioCosto">
+          <Properties>
+            <Property name="prompt" type="java.lang.String" value="Ej: &quot;00&quot; o &quot;00.00&quot;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdPrecioCostoKeyTyped"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

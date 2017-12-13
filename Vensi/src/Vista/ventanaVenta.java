@@ -633,12 +633,18 @@ public class ventanaVenta extends javax.swing.JFrame
             String descrip = tablaProd.getValueAt(filaSelec, 1).toString();
             stock = tablaProd.getValueAt(filaSelec, 4).toString();
             cantidad = txfdCantidad.getText();
-            if (cantidad.equals("")) {
+            if (cantidad.equals("")) 
+            {
                 JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad");
-            } else {
-                if (Integer.parseInt(cantidad) > Integer.parseInt(stock)) {
+            } 
+            else 
+            {
+                if (Integer.parseInt(cantidad) > Integer.parseInt(stock)) 
+                {
                     JOptionPane.showMessageDialog(null, "Stock insuficiente");
-                } else {
+                } 
+                else 
+                {
                     m = (DefaultTableModel) tablaCarrito.getModel();
                     String precioU = tablaProd.getValueAt(filaSelec, 2).toString();
 
@@ -647,14 +653,16 @@ public class ventanaVenta extends javax.swing.JFrame
 
                     String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();
 
-                    for (int i = 0; i < tablaCarrito.getModel().getRowCount(); i++) {
+                    for (int i = 0; i < tablaCarrito.getModel().getRowCount(); i++) 
+                    {
                         if (Integer.parseInt(tablaCarrito.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido)) {
                             modificar = true;
                             filaModificar = i;
                         }
                     }
 
-                    if (modificar) {
+                    if (modificar) 
+                    {
                         cantidad = String.valueOf(Integer.parseInt(cantidad) + Integer.parseInt(tablaCarrito.getValueAt(filaModificar, 1).toString()));
                         x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
                         precioTotal = String.valueOf(x);
@@ -665,7 +673,8 @@ public class ventanaVenta extends javax.swing.JFrame
                     m.addRow(filaNueva);
 
                     totalCarrito = 0;
-                    for (int i = 0; i < tablaCarrito.getRowCount(); i++) {
+                    for (int i = 0; i < tablaCarrito.getRowCount(); i++) 
+                    {
                         totalCarrito += Double.parseDouble(tablaCarrito.getValueAt(i, 3).toString());
                     }
                     labPrecioTotalCompra.setText(String.valueOf(totalCarrito));
@@ -673,7 +682,9 @@ public class ventanaVenta extends javax.swing.JFrame
                     txfdCantidad.setText(null);
                 }
             }
-        } else {
+        } 
+        else 
+        {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
         }
 
