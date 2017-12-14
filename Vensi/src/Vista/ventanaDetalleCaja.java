@@ -256,8 +256,17 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             for (ItemVenta v : listaIT)            
             {
                 datos[0] = String.valueOf(v.getProducto().getDescripcion());
-                datos[1] = String.valueOf(v.getCantidad());
-                datos[2] = String.valueOf("$"+v.getCantidad() * v.getProducto().getPrecioVenta()); 
+                if (v.getProducto().isPorPeso())
+                {
+                    double cantGR = v.getCantidad();
+                    double cantKG = cantGR / 1000;
+                    datos[1] = String.valueOf(cantKG + "kg");
+                }
+                else
+                {
+                    datos[1] = String.valueOf(v.getCantidad());
+                }
+                datos[2] = String.valueOf("$"+v.getMonto());
                 datos[3] = String.valueOf("---"); 
 
                 modelo.addRow(datos);
@@ -280,7 +289,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         
         for (ItemVenta x : listaIT)
         {
-            montoVenta = montoVenta + (x.getProducto().getPrecioVenta() * x.getCantidad());
+            montoVenta = montoVenta + (x.getMonto());
         }
         return montoVenta;
     }

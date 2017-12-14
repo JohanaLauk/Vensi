@@ -590,7 +590,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         
         for (ItemVenta iv : listaIT)
         {
-            montoVenta = montoVenta + (iv.getProducto().getPrecioVenta() * iv.getCantidad());
+            montoVenta = montoVenta + (iv.getMonto());
         }
         
         for (EntradaSalida es : listaES)

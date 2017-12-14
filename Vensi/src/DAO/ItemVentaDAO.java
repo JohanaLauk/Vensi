@@ -39,7 +39,8 @@ public class ItemVentaDAO
         ItemVenta item = null;
         item = (ItemVenta)session.get(ItemVenta.class, id);
         item.setCantidad(i.getCantidad());  //guarda la nueva cantidad
-        item.setFecha_hora(i.getFecha_hora());  //guarda la nueva fechaHora
+        item.setMonto(i.getMonto());
+        item.setHora(i.getHora());  //guarda la nueva fechaHora
                   
         tx = session.beginTransaction();
         try

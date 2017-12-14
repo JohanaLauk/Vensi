@@ -110,7 +110,7 @@ public class ventanaVenta extends javax.swing.JFrame
         jLabel5 = new javax.swing.JLabel();
         btnAgregar = new javax.swing.JButton();
         btnQuitar = new javax.swing.JButton();
-        txfdCantidad = new javax.swing.JTextField();
+        txfdCantidad = new org.jdesktop.swingx.JXTextField();
 
         jMenu1.setText("jMenu1");
 
@@ -397,6 +397,7 @@ public class ventanaVenta extends javax.swing.JFrame
             }
         });
 
+        txfdCantidad.setPrompt("unidad / gramos");
         txfdCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdCantidadKeyTyped(evt);
@@ -413,9 +414,9 @@ public class ventanaVenta extends javax.swing.JFrame
                         .addGroup(panelDatosProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jScrollPane3)
                             .addGroup(panelDatosProdLayout.createSequentialGroup()
-                                .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, Short.MAX_VALUE)))
                         .addGap(18, 18, 18)
                         .addGroup(panelDatosProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -437,13 +438,15 @@ public class ventanaVenta extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelDatosProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelDatosProdLayout.createSequentialGroup()
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btnQuitar, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(0, 4, Short.MAX_VALUE))
         );
+
+        txfdCantidad.getAccessibleContext().setAccessibleDescription("   unidad / gramos");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -551,7 +554,20 @@ public class ventanaVenta extends javax.swing.JFrame
             {               
                 String idProd = tablaCarrito.getValueAt(i, 4).toString();                    
                 Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
-                String cantPeso = tablaCarrito.getValueAt(i, 1).toString();                             
+                String cantPeso = null;
+                
+                if (elProd.isPorPeso())
+                {
+                    String cadena = tablaCarrito.getValueAt(i, 1).toString();
+                    cantPeso = cadena.substring(0, cadena.length()-2);                    
+                }
+                else
+                {
+                    cantPeso = tablaCarrito.getValueAt(i, 1).toString();
+                }
+                
+                String cadena2 = tablaCarrito.getValueAt(i, 3).toString();       
+                String precioT = cadena2.substring(1);
                 
                 List<ItemVenta> listaItemVenta = itDAO.listar(turnoActual.getId());
                 
@@ -560,12 +576,13 @@ public class ventanaVenta extends javax.swing.JFrame
                     ItemVenta unItemVenta = new ItemVenta();
                     unItemVenta.setProducto(elProd);    
                     unItemVenta.setCantidad(Integer.parseInt(cantPeso));
-                    unItemVenta.setFecha_hora(new Date());
+                    unItemVenta.setMonto(Double.parseDouble(precioT));
+                    unItemVenta.setHora(new Date());
                     unItemVenta.setTurno(turnoActual);
                                         
                     itDAO.alta(unItemVenta);                     
                     
-                    JOptionPane.showMessageDialog(null, "Tabla vacía, 1° ItemVenta agregado.");
+                    //JOptionPane.showMessageDialog(null, "Tabla vacía, 1° ItemVenta agregado.");
                 }
                 else //tabla item_venta NO VACÍA
                 {
@@ -584,7 +601,8 @@ public class ventanaVenta extends javax.swing.JFrame
                     {
                         ItemVenta elItemVenta = new ItemVenta();
                         elItemVenta.setCantidad(itemModificar.getCantidad() + Integer.parseInt(cantPeso));
-                        elItemVenta.setFecha_hora(new Date());
+                        elItemVenta.setMonto(Double.parseDouble(precioT));
+                        elItemVenta.setHora(new Date());
 
                         itDAO.modificar(elItemVenta, itemModificar.getId());
 
@@ -595,7 +613,8 @@ public class ventanaVenta extends javax.swing.JFrame
                         ItemVenta unItemVenta = new ItemVenta();
                         unItemVenta.setProducto(elProd);
                         unItemVenta.setCantidad(Integer.parseInt(cantPeso));
-                        unItemVenta.setFecha_hora(new Date());
+                        unItemVenta.setMonto(Double.parseDouble(precioT));
+                        unItemVenta.setHora(new Date());
                         unItemVenta.setTurno(turnoActual);
 
                         itDAO.alta(unItemVenta);
@@ -621,41 +640,58 @@ public class ventanaVenta extends javax.swing.JFrame
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int filaSelec = tablaProd.getSelectedRow();
 
-        if (filaSelec >= 0) //corrobotamos si seleccionó una fila
+        if (filaSelec >= 0)  //corrobotamos si seleccionó una fila
         {
-            double x = 0;
-            String precioTotal = null;
-            String cantidad;
+            String precioTotal = null;            
             boolean modificar = false;
-            int filaModificar = -1;
-            String stock;
-
-            String descrip = tablaProd.getValueAt(filaSelec, 1).toString();
-            stock = tablaProd.getValueAt(filaSelec, 4).toString();
-            cantidad = txfdCantidad.getText();
+            int filaModificar = -1;  
+            
+            String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();
+            Producto elProd = pDAO.buscarPorId(Integer.parseInt(id_recibido));
+                                  
+            String descrip = elProd.getDescripcion();
+            int stock = elProd.getStock();
+            
+            String cantidad = txfdCantidad.getText();            
+                    
             if (cantidad.equals("")) 
             {
                 JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad");
             } 
             else 
             {
-                if (Integer.parseInt(cantidad) > Integer.parseInt(stock)) 
+                if (Integer.parseInt(cantidad) > stock) 
                 {
                     JOptionPane.showMessageDialog(null, "Stock insuficiente");
                 } 
                 else 
                 {
-                    m = (DefaultTableModel) tablaCarrito.getModel();
-                    String precioU = tablaProd.getValueAt(filaSelec, 2).toString();
-
-                    x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
-                    precioTotal = String.valueOf(x);
-
-                    String id_recibido = tablaProd.getValueAt(filaSelec, 5).toString();
-
+                    m = (DefaultTableModel) tablaCarrito.getModel();                    
+                    double precioU = 0;
+                    String precioUnitario = null;
+                    double x = 0;
+                        
+                    if (elProd.isPorPeso())
+                    {
+                        int pesoEnv = elProd.getPesoEnvase();
+                        double precioVenta = elProd.getPrecioVenta();
+                        precioU = (Integer.parseInt(cantidad) * precioVenta) / pesoEnv; 
+                        x = precioU;
+                        precioUnitario = String.valueOf("---");
+                        precioTotal = String.valueOf(x);
+                    }
+                    else
+                    {
+                        precioU = elProd.getPrecioVenta();
+                        x = precioU * Integer.parseInt(cantidad);
+                        precioUnitario = String.valueOf(precioU);
+                        precioTotal = String.valueOf(x);
+                    }                    
+                    
                     for (int i = 0; i < tablaCarrito.getModel().getRowCount(); i++) 
                     {
-                        if (Integer.parseInt(tablaCarrito.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido)) {
+                        if (Integer.parseInt(tablaCarrito.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido)) 
+                        {
                             modificar = true;
                             filaModificar = i;
                         }
@@ -663,19 +699,46 @@ public class ventanaVenta extends javax.swing.JFrame
 
                     if (modificar) 
                     {
-                        cantidad = String.valueOf(Integer.parseInt(cantidad) + Integer.parseInt(tablaCarrito.getValueAt(filaModificar, 1).toString()));
-                        x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
-                        precioTotal = String.valueOf(x);
+                        String cadena = tablaCarrito.getValueAt(filaModificar, 1).toString();
+                        String gramos = cadena.substring(0, cadena.length()-2); 
+                        cantidad = String.valueOf(Integer.parseInt(cantidad) + Integer.parseInt(gramos));
+                        
+                        if (elProd.isPorPeso())
+                        {
+                            int pesoEnv = elProd.getPesoEnvase();
+                            double precioVenta = elProd.getPrecioVenta();
+                            precioU = (Integer.parseInt(cantidad) * precioVenta) / pesoEnv; 
+                            x = precioU;
+                            precioUnitario = String.valueOf("---");
+                            precioTotal = String.valueOf(x);
+                        }
+                        else
+                        {
+                            precioU = elProd.getPrecioVenta();
+                            x = precioU * Integer.parseInt(cantidad); 
+                            precioUnitario = String.valueOf(precioU);
+                            precioTotal = String.valueOf(x);
+                        }                   
+                        
                         m.removeRow(filaModificar);
                     }
-
-                    String filaNueva[] = {descrip, cantidad, precioU, precioTotal, id_recibido};
-                    m.addRow(filaNueva);
-
+                    if (elProd.isPorPeso())
+                    {
+                        String filaNueva[] = {descrip, cantidad + "gr", precioUnitario, "$"+precioTotal, id_recibido};
+                        m.addRow(filaNueva);
+                    }
+                    else
+                    {
+                        String filaNueva[] = {descrip, cantidad, "$"+precioUnitario, "$"+precioTotal, id_recibido};
+                        m.addRow(filaNueva);
+                    }
+                    
                     totalCarrito = 0;
                     for (int i = 0; i < tablaCarrito.getRowCount(); i++) 
                     {
-                        totalCarrito += Double.parseDouble(tablaCarrito.getValueAt(i, 3).toString());
+                        String cadena = tablaCarrito.getValueAt(i, 3).toString();
+                        String precioT = cadena.substring(1);
+                        totalCarrito += Double.parseDouble(precioT);
                     }
                     labPrecioTotalCompra.setText(String.valueOf(totalCarrito));
 
@@ -702,11 +765,11 @@ public class ventanaVenta extends javax.swing.JFrame
         int filaSelec = tablaCarrito.getSelectedRow();
         
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
-        {
-            String cantidad = tablaCarrito.getValueAt(filaSelec, 1).toString();
-            String precioU = tablaCarrito.getValueAt(filaSelec, 2).toString();
+        {            
+            String cadena = tablaCarrito.getValueAt(filaSelec, 3).toString();
+            String precioT = cadena.substring(1);                                
+            double x = Double.parseDouble(precioT);
             
-            double x = Double.parseDouble(precioU) * Double.parseDouble(cantidad);
             totalCarrito = totalCarrito - x;
             labPrecioTotalCompra.setText(String.valueOf(totalCarrito));
             
@@ -763,13 +826,6 @@ public class ventanaVenta extends javax.swing.JFrame
         }
     }//GEN-LAST:event_txfdBuscarProdKeyReleased
 
-    private void txfdCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadKeyTyped
-        char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
-            evt.consume();
-    }//GEN-LAST:event_txfdCantidadKeyTyped
-
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         llenarTabla(); 
         verificarTurno();
@@ -786,6 +842,13 @@ public class ventanaVenta extends javax.swing.JFrame
         }
         llenarTabla();
     }//GEN-LAST:event_cbFiltroActionPerformed
+
+    private void txfdCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && 
+                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+            evt.consume();
+    }//GEN-LAST:event_txfdCantidadKeyTyped
     
     public static void main(String args[]) 
     {        
@@ -817,7 +880,15 @@ public class ventanaVenta extends javax.swing.JFrame
             datos[1] = p.getDescripcion();
             datos[2] = String.valueOf(p.getPrecioVenta());            
             datos[3] = String.valueOf(p.getPrecioVentaXPeso());
-            datos[4] = String.valueOf(p.getStock());
+            if (p.isPorPeso())
+            {
+                double stockKG = p.getStock() / 1000;
+                datos[4] = String.valueOf(stockKG + " kg");
+            }
+            else
+            {
+                datos[4] = String.valueOf(p.getStock()+ " u");
+            }            
             datos[5] = String.valueOf(p.getId());
            
             modelo.addRow(datos);
@@ -965,7 +1036,15 @@ public class ventanaVenta extends javax.swing.JFrame
             datos[1] = p.getDescripcion();
             datos[2] = String.valueOf(p.getPrecioVenta());            
             datos[3] = String.valueOf(p.getPrecioVentaXPeso());
-            datos[4] = String.valueOf(p.getStock());
+            if (p.isPorPeso())
+            {
+                double stockKG = p.getStock() / 1000;
+                datos[4] = String.valueOf(stockKG + "kg");
+            }
+            else
+            {
+                datos[4] = String.valueOf(p.getStock());
+            }
             datos[5] = String.valueOf(p.getId());
                        
             modelo3.addRow(datos);
@@ -1131,6 +1210,6 @@ public class ventanaVenta extends javax.swing.JFrame
     private javax.swing.JTable tablaCarrito;
     private javax.swing.JTable tablaProd;
     private org.jdesktop.swingx.JXTextField txfdBuscarProd;
-    private javax.swing.JTextField txfdCantidad;
+    private org.jdesktop.swingx.JXTextField txfdCantidad;
     // End of variables declaration//GEN-END:variables
 }

@@ -15,7 +15,10 @@
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />
         </property>
-        <property name="fecha_hora"  type="time">
+        <property name="monto" type="double">
+            <column name="monto" precision="8" not-null="true" />
+        </property>
+        <property name="hora"  type="time">
             <column name="hora" />
         </property>
         
