@@ -340,7 +340,7 @@ public class ventanaProducto extends javax.swing.JFrame
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
         {
             //GUARDAMOS EL ID EN LA VARIABLE DE LA VENTANA_EDITAR_PROD, DEL PRODUCTO SELECCIONADO EN LA TABLA
-            ventanaEditarProd.id_recibido = Integer.parseInt(tablaProd.getValueAt(filaSelec, 10).toString());   
+            ventanaEditarProd.id_recibido = Integer.parseInt(tablaProd.getValueAt(filaSelec, 11).toString());   
         
             ventanaEditarProd vEditarProd = new ventanaEditarProd();
             vEditarProd.setVisible(true);            
@@ -565,19 +565,20 @@ public class ventanaProducto extends javax.swing.JFrame
             lista = pDAO.listar(OrdenarTabla(), prov.getId());  //modificar
         }
         
-        String[] datos = new String[11];
+        String[] datos = new String[12];
  
         modelo.addColumn("Código");         //0
         modelo.addColumn("Descripción");    //1 
         modelo.addColumn("Precio costo");   //2
         modelo.addColumn("Precio venta");   //3
-        modelo.addColumn("Stock");          //4 
-        modelo.addColumn("Stock mínimo");   //5
-        modelo.addColumn("Tipo de venta");  //6
-        modelo.addColumn("Peso del envase");//7
-        modelo.addColumn("Estado");         //8
-        modelo.addColumn("N° proveedor");   //9
-        modelo.addColumn("ID");             //10
+        modelo.addColumn("$ por kg");       //4
+        modelo.addColumn("Stock");          //5 
+        modelo.addColumn("Stock mínimo");   //6
+        modelo.addColumn("Tipo de venta");  //7
+        modelo.addColumn("Peso del envase");//8
+        modelo.addColumn("Estado");         //9
+        modelo.addColumn("N° proveedor");   //10
+        modelo.addColumn("ID");             //11
         
         tablaProd.setModel(modelo);
         
@@ -586,58 +587,61 @@ public class ventanaProducto extends javax.swing.JFrame
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
             datos[2] = String.valueOf("$" + p.getPrecioCosto());
-            datos[3] = String.valueOf("$" + p.getPrecioVenta());
+            datos[3] = String.valueOf("$" + p.getPrecioVenta());            
             
             if (p.isPorPeso())
             {
+                datos[4] = String.valueOf("$" + p.getPrecioVentaXKilo());
+                
                 int pesoEnv1 = p.getPesoEnvase();
                 double pesoEnv2 = p.getPesoEnvase();
-                datos[7] = String.valueOf(pesoEnv2 / 1000 + "kg");
+                datos[8] = String.valueOf(pesoEnv2 / 1000 + "kg");
                 
                 int stockGR1 = p.getStock();    //gr
                 double stockGR2 = p.getStock();
                 int stockU = stockGR1 / pesoEnv1;  // u = gr / peso gr
                 double stockKG = stockGR2 / 1000;   //kg =  gr / 1000            
-                datos[4] = String.valueOf(stockU+" u" + "  ("+stockKG + "kg)");
+                datos[5] = String.valueOf(stockU+" u" + "  ("+stockKG + "kg)");
                 
                 int stockMinGR1 = p.getStockMinimo();
                 double stockMinGR2 = p.getStockMinimo();
                 int stockMinU = stockMinGR1 / pesoEnv1;
                 double stockMinKG = stockMinGR2 / 1000;          
                 
-                datos[5] = String.valueOf(stockMinU+" u" + "  ("+stockMinKG + "kg)");
+                datos[6] = String.valueOf(stockMinU+" u" + "  ("+stockMinKG + "kg)");
                                 
-                datos[6] = "Por peso";   
+                datos[7] = "Por peso";   
             }
             else
             {
-                datos[4] = String.valueOf(p.getStock()+" u");
-                datos[5] = String.valueOf(p.getStockMinimo()+" u");
-                datos[6] = "Por unidad";
-                datos[7] = "---";
+                datos[4] = String.valueOf("---");
+                datos[5] = String.valueOf(p.getStock());
+                datos[6] = String.valueOf(p.getStockMinimo());
+                datos[7] = "Por unidad";
+                datos[8] = "---";
             }
             
             if (p.isEstado())   //habilitado
             {
                 if (p.isOferta() && !p.isSuspendido())
                 {
-                    datos[8] = "Habilitado - Oferta";
+                    datos[9] = "Habilitado - Oferta";
                 }
                 else
                 {
                     if (p.isSuspendido() && !p.isOferta())
                     {
-                        datos[8] = "Habilitado - Suspendido";
+                        datos[9] = "Habilitado - Suspendido";
                     }
                     else
                     {
-                        datos[8] = "Habilitado";
+                        datos[9] = "Habilitado";
                     }                         
                 }                
             }
             else
             {
-                datos[8] = "Deshabilitado";
+                datos[9] = "Deshabilitado";
             }    
     
             Set<Proveedor> listaProv = p.getProveedor(); 
@@ -648,10 +652,10 @@ public class ventanaProducto extends javax.swing.JFrame
             {
                 provs += pr.getRazonSocial() + ", ";
             }            
-            datos[9] = provs;*/
+            datos[10] = provs;*/
             
-            datos[9] = String.valueOf(listaProv.size());            
-            datos[10] = String.valueOf(p.getId());            
+            datos[10] = String.valueOf(listaProv.size());            
+            datos[11] = String.valueOf(p.getId());            
            
             modelo.addRow(datos);
         }
@@ -665,15 +669,16 @@ public class ventanaProducto extends javax.swing.JFrame
         tcm.getColumn(3).setPreferredWidth(20);
         tcm.getColumn(4).setPreferredWidth(20);
         tcm.getColumn(5).setPreferredWidth(20);
-        tcm.getColumn(6).setPreferredWidth(30);
+        tcm.getColumn(6).setPreferredWidth(20);
         tcm.getColumn(7).setPreferredWidth(30);
-        tcm.getColumn(8).setPreferredWidth(80);   
-        tcm.getColumn(9).setPreferredWidth(20);
-        tcm.getColumn(10).setPreferredWidth(0);  
-        tcm.getColumn(10).setMaxWidth(0);
-        tcm.getColumn(10).setMinWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(10).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(10).setMinWidth(0);
+        tcm.getColumn(8).setPreferredWidth(50);
+        tcm.getColumn(9).setPreferredWidth(80);   
+        tcm.getColumn(10).setPreferredWidth(20);
+        tcm.getColumn(11).setPreferredWidth(0);  
+        tcm.getColumn(11).setMaxWidth(0);
+        tcm.getColumn(11).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(11).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(11).setMinWidth(0);
         
         tablaProd.addFocusListener(new FocusListener() 
         {
@@ -703,19 +708,20 @@ public class ventanaProducto extends javax.swing.JFrame
     public void llenarTablaBusqueda (List<Producto> listaBusqueda)
     {
         modelo2 = new DefaultTableModel();
-        String[] datos = new String[11];
+        String[] datos = new String[12];
  
-        modelo2.addColumn("Código");
-        modelo2.addColumn("Descripción");
-        modelo2.addColumn("Precio costo");
-        modelo2.addColumn("Precio venta");
-        modelo2.addColumn("Stock");
-        modelo2.addColumn("Stock mínimo");
-        modelo2.addColumn("Tipo de venta");
-        modelo2.addColumn("Peso del envase");
-        modelo2.addColumn("Estado");
-        modelo2.addColumn("N° proveedor");
-        modelo2.addColumn("ID");
+        modelo2.addColumn("Código");            //0
+        modelo2.addColumn("Descripción");       //1
+        modelo2.addColumn("Precio costo");      //2
+        modelo2.addColumn("Precio venta");      //3
+        modelo2.addColumn("$ por kg");          //4
+        modelo2.addColumn("Stock");             //5
+        modelo2.addColumn("Stock mínimo");      //6
+        modelo2.addColumn("Tipo de venta");     //7
+        modelo2.addColumn("Peso del envase");   //8
+        modelo2.addColumn("Estado");            //9
+        modelo2.addColumn("N° proveedor");      //10
+        modelo2.addColumn("ID");                //11
         
         for (Producto p : listaBusqueda)
         {
@@ -726,54 +732,56 @@ public class ventanaProducto extends javax.swing.JFrame
             
             if (p.isPorPeso())
             {
+                datos[4] = String.valueOf("$" + p.getPrecioVentaXKilo());
+                
                 int pesoEnv1 = p.getPesoEnvase();
                 double pesoEnv2 = p.getPesoEnvase();
-                datos[7] = String.valueOf(pesoEnv2 / 1000 + "Kg");
+                datos[8] = String.valueOf(pesoEnv2 / 1000 + "Kg");
                 
                 int stockGR1 = p.getStock();    //gr
                 double stockGR2 = p.getStock();
                 int stockU = stockGR1 / pesoEnv1;  // u = gr / peso gr
                 double stockKG = stockGR2 / 1000;   //kg =  gr / 1000            
-                datos[4] = String.valueOf(stockU+" u" + "  ("+stockKG + "Kg)");
+                datos[5] = String.valueOf(stockU+" u" + "  ("+stockKG + "Kg)");
                 
                 int stockMinGR1 = p.getStockMinimo();
                 double stockMinGR2 = p.getStockMinimo();
                 int stockMinU = stockMinGR1 / pesoEnv1;
-                double stockMinKG = stockMinGR2 / 1000;          
-                
-                datos[5] = String.valueOf(stockMinU+" u" + "  ("+stockMinKG + "Kg)");
+                double stockMinKG = stockMinGR2 / 1000;               
+                datos[6] = String.valueOf(stockMinU+" u" + "  ("+stockMinKG + "Kg)");
                                 
-                datos[6] = "Por peso";
+                datos[7] = "Por peso";
             }
             else
             {
-                datos[4] = String.valueOf(p.getStock());
-                datos[5] = String.valueOf(p.getStockMinimo());
-                datos[6] = "Por unidad";
-                datos[7] = "---";
+                datos[4] = String.valueOf("---");
+                datos[5] = String.valueOf(p.getStock());
+                datos[6] = String.valueOf(p.getStockMinimo());
+                datos[7] = "Por unidad";
+                datos[8] = "---";
             }
             
             if (p.isEstado())   //habilitado
             {
                 if (p.isOferta() && !p.isSuspendido())
                 {
-                    datos[8] = "Habilitado - Oferta";
+                    datos[9] = "Habilitado - Oferta";
                 }
                 else
                 {
                     if (p.isSuspendido() && !p.isOferta())
                     {
-                        datos[8] = "Habilitado - Suspendido";
+                        datos[9] = "Habilitado - Suspendido";
                     }
                     else
                     {
-                        datos[8] = "Habilitado";
+                        datos[9] = "Habilitado";
                     }                         
                 }                
             }
             else
             {
-                datos[8] = "Deshabilitado";
+                datos[9] = "Deshabilitado";
             }    
     
             Set<Proveedor> listaProv = p.getProveedor(); 
@@ -784,10 +792,10 @@ public class ventanaProducto extends javax.swing.JFrame
             {
                 provs += pr.getRazonSocial() + ", ";
             }            
-            datos[9] = provs;*/
+            datos[10] = provs;*/
             
-            datos[9] = String.valueOf(listaProv.size());            
-            datos[10] = String.valueOf(p.getId());            
+            datos[10] = String.valueOf(listaProv.size());            
+            datos[11] = String.valueOf(p.getId());            
            
             modelo2.addRow(datos);
         }
@@ -801,15 +809,16 @@ public class ventanaProducto extends javax.swing.JFrame
         tcm2.getColumn(3).setPreferredWidth(20);
         tcm2.getColumn(4).setPreferredWidth(20);
         tcm2.getColumn(5).setPreferredWidth(20);
-        tcm2.getColumn(6).setPreferredWidth(30);
+        tcm2.getColumn(6).setPreferredWidth(20);
         tcm2.getColumn(7).setPreferredWidth(30);
-        tcm2.getColumn(8).setPreferredWidth(80);   
-        tcm2.getColumn(9).setPreferredWidth(20);
-        tcm2.getColumn(10).setPreferredWidth(0);  
-        tcm2.getColumn(10).setMaxWidth(0);
-        tcm2.getColumn(10).setMinWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(10).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(10).setMinWidth(0);
+        tcm2.getColumn(8).setPreferredWidth(50);
+        tcm2.getColumn(9).setPreferredWidth(80);   
+        tcm2.getColumn(10).setPreferredWidth(20);
+        tcm2.getColumn(11).setPreferredWidth(0);  
+        tcm2.getColumn(11).setMaxWidth(0);
+        tcm2.getColumn(11).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(11).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(11).setMinWidth(0);
     }
     
     public String[] OrdenarTabla()

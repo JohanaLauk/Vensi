@@ -9,7 +9,7 @@ public class Producto  implements java.io.Serializable
     private String descripcion;
     private double precioCosto;
     private double precioVenta;
-    private double precioVentaXPeso;
+    private double precioVentaXKilo;
     private int stock;
     private int stockMinimo;
     private int pesoEnvase;
@@ -67,13 +67,13 @@ public class Producto  implements java.io.Serializable
         this.precioVenta = precioVenta;
     }   
     
-    public double getPrecioVentaXPeso() 
+    public double getPrecioVentaXKilo() 
     {
-        return precioVentaXPeso;
+        return precioVentaXKilo;
     }
-    public void setPrecioVentaXPeso(double precioVentaXPeso) 
+    public void setPrecioVentaXKilo(double precioVentaXKilo) 
     {
-        this.precioVentaXPeso = precioVentaXPeso;
+        this.precioVentaXKilo = precioVentaXKilo;
     }
 
     public int getStock() 

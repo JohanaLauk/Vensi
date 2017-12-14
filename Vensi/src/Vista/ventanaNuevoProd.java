@@ -25,8 +25,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     public ventanaNuevoProd() 
     {
         initComponents();
-        
-        
+                
         this.setLocationRelativeTo(null);     //centra la ventana
         
         //this.setPreferredSize(new Dimension(600, 200));    //al minimizar la ventana aparece con esa medida
@@ -36,7 +35,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         
         txfdPesoEnvase.setEnabled(false); 
         llenarCheckBoxProv();
-        //this.setUndecorated(true);  //quitamos los bordes de la ventana, incluyendo los botones
+        //this.setUndecorated(true);  //quita los bordes de la ventana, incluyendo los botones
     }
     
     @SuppressWarnings("unchecked")
@@ -347,6 +346,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                     else 
                     {
                         JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio costo");
+                        unProd.setPrecioVenta(0.00);
                     }
                 }
 
@@ -361,13 +361,14 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                         unProd.setPrecioVenta(Double.parseDouble(txfdPrecioVenta.getText()));
                     } 
                     else 
-                    {
+                    {                        
                         JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio venta");
+                        unProd.setPrecioVenta(0.00);
                     }
                 }
                                 
                 if (rbPeso.isSelected()) 
-                {
+                {                    
                     unProd.setPorPeso(true);    //por peso
                     
                     int pesoEnv = Integer.parseInt(txfdPesoEnvase.getText());
@@ -380,6 +381,8 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                     int stock = Integer.parseInt(txfdStockInicial.getText());   //unidades
                     int total2 = stock * pesoEnv;   //convierto las unidades en gramos
                     unProd.setStock(total2);   //guardo en gramos
+                    
+                    unProd.setPrecioVentaXKilo((1000*Double.parseDouble(txfdPrecioVenta.getText())) / pesoEnv);
                 } 
                 else 
                 {
@@ -519,8 +522,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     }
     
     private void llenarCheckBoxProv() 
-    {
-        
+    {        
         List<Proveedor> lista = prDAO.listar("Habilitados");  
         int altura = 0;
         
@@ -535,8 +537,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             this.validate();
             altura += 20;
         }
-        this.panelProveedor.setVisible(true);
-        
+        this.panelProveedor.setVisible(true);        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

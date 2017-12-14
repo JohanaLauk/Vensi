@@ -878,16 +878,19 @@ public class ventanaVenta extends javax.swing.JFrame
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf(p.getPrecioVenta());            
-            datos[3] = String.valueOf(p.getPrecioVentaXPeso());
+            datos[2] = String.valueOf("$"+p.getPrecioVenta());            
+            
             if (p.isPorPeso())
             {
+                datos[3] = String.valueOf("$"+p.getPrecioVentaXKilo());
+                
                 double stockKG = p.getStock() / 1000;
                 datos[4] = String.valueOf(stockKG + " kg");
             }
             else
             {
-                datos[4] = String.valueOf(p.getStock()+ " u");
+                datos[3] = String.valueOf("---");
+                datos[4] = String.valueOf(p.getStock());
             }            
             datos[5] = String.valueOf(p.getId());
            
@@ -1026,7 +1029,7 @@ public class ventanaVenta extends javax.swing.JFrame
         modelo3.addColumn("Código");
         modelo3.addColumn("Descripción");
         modelo3.addColumn("Precio");
-        modelo3.addColumn("Precio por kilo");
+        modelo3.addColumn("$ por kilo");
         modelo3.addColumn("Stock");
         modelo3.addColumn("ID");
         
@@ -1034,15 +1037,18 @@ public class ventanaVenta extends javax.swing.JFrame
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf(p.getPrecioVenta());            
-            datos[3] = String.valueOf(p.getPrecioVentaXPeso());
+            datos[2] = String.valueOf("$"+p.getPrecioVenta());            
+            
             if (p.isPorPeso())
             {
+                datos[3] = String.valueOf("$"+p.getPrecioVentaXKilo());
+                
                 double stockKG = p.getStock() / 1000;
                 datos[4] = String.valueOf(stockKG + "kg");
             }
             else
             {
+                datos[3] = String.valueOf("---");
                 datos[4] = String.valueOf(p.getStock());
             }
             datos[5] = String.valueOf(p.getId());

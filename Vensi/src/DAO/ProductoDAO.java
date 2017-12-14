@@ -47,7 +47,7 @@ public class ProductoDAO
         prod.setDescripcion(p.getDescripcion());
         prod.setPrecioCosto(p.getPrecioCosto());
         prod.setPrecioVenta(p.getPrecioVenta());
-        prod.setPrecioVentaXPeso(p.getPrecioVentaXPeso());
+        prod.setPrecioVentaXKilo(p.getPrecioVentaXKilo());
         prod.setPesoEnvase(p.getPesoEnvase());
         prod.setStock(p.getStock());
         prod.setStockMinimo(p.getStockMinimo());

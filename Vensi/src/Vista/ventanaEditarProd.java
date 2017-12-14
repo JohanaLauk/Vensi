@@ -397,7 +397,9 @@ public class ventanaEditarProd extends javax.swing.JFrame
                     prod.setStockMinimo(total);
                     
                     int total2 = stockU * pesoEnv;  //convierto la unidad en gramos
-                    prod.setStock(total2);  //guardo el nuevo stock en gramos                   
+                    prod.setStock(total2);  //guardo el nuevo stock en gramos  
+                    
+                    prod.setPrecioVentaXKilo((1000*Double.parseDouble(txfdEditarPrecioVenta.getText())) / pesoEnv);
                 } 
                 else 
                 {

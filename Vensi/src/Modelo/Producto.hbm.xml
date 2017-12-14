@@ -20,8 +20,8 @@
         <property name="precioVenta" type="double">
             <column name="precio_venta" precision="8" not-null="false" />
         </property>
-        <property name="precioVentaXPeso" type="double">
-            <column name="precio_venta_x_peso" precision="8" not-null="false" />
+        <property name="precioVentaXKilo" type="double">
+            <column name="precio_venta_x_kilo" precision="8" not-null="false" />
         </property>
         <property name="stock" type="int">
             <column name="stock" not-null="true" />
