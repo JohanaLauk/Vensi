@@ -236,7 +236,22 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
                 }
                 else
                 {
-                    datos[1] = String.valueOf(es.getCantProd());
+                    for (ItemVenta v : listaIT)            
+                    {
+                        if (es.getDescripcion().equals(v.getProducto().getDescripcion()))
+                        {
+                            if (v.getProducto().isPorPeso())
+                            {
+                                double cantGR = es.getCantProd();
+                                double cantKG = cantGR / 1000;
+                                datos[1] = String.valueOf(cantKG + "kg");
+                            }
+                            else
+                            {
+                                datos[1] = String.valueOf(es.getCantProd());
+                            }                            
+                        }
+                    }                    
                 }                
                 
                 if (es.isTipo())    // entrada
@@ -246,8 +261,8 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
                 }
                 if (!es.isTipo())   //salida
                 {
-                    datos[2] = String.valueOf("---"); 
-                    datos[3] = String.valueOf("$"+es.getMonto());
+                    datos[2] = String.valueOf("---");
+                    datos[3] = String.valueOf("$"+es.getMonto());                                       
                 }
                 
                 modelo.addRow(datos);
@@ -308,10 +323,6 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             if (x.isTipo()) //entrada
             {
                 montoEntradaSalida = montoEntradaSalida + x.getMonto();
-            }
-            else
-            {
-                montoEntradaSalida = montoEntradaSalida - x.getMonto();
             }            
         }        
         

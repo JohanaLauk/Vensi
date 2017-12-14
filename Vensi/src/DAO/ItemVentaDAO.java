@@ -55,7 +55,8 @@ public class ItemVentaDAO
                     e.printStackTrace();
 		throw e;
         }            
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "ItemVenta modificado");
@@ -80,7 +81,8 @@ public class ItemVentaDAO
         {
             JOptionPane.showMessageDialog(null, "Error. Buscar itemVenta");
         }        
-        finally{
+        finally
+        {
             session.close();
         }
         return lista;
@@ -103,7 +105,8 @@ public class ItemVentaDAO
         {
             JOptionPane.showMessageDialog(null, "Error al listar los ItemVenta del turno");
         }        
-        finally{
+        finally
+        {
             session.close();
         }
         return lista;

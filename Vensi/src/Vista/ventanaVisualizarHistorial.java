@@ -195,7 +195,30 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             for (EntradaSalida es : listaES)            
             {
                 datos[0] = String.valueOf(es.getNombre());
-                datos[1] = String.valueOf("---");
+                
+                if (es.getCantProd() == 0)
+                {
+                    datos[1] = String.valueOf("---");
+                }
+                else
+                {
+                    for (ItemVenta v : listaIV)            
+                    {
+                        if (es.getDescripcion().equals(v.getProducto().getDescripcion()))
+                        {
+                            if (v.getProducto().isPorPeso())
+                            {
+                                double cantGR = es.getCantProd();
+                                double cantKG = cantGR / 1000;
+                                datos[1] = String.valueOf(cantKG + "kg");
+                            }
+                            else
+                            {
+                                datos[1] = String.valueOf(es.getCantProd());
+                            }                            
+                        }
+                    }                    
+                }
                 
                 if (es.isTipo())    // entrada
                 {

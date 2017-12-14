@@ -38,9 +38,6 @@
           <Image iconType="3" name="/Recursos/Icono_salir_blanco.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Salir"/>
-        <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-          <Border info="null"/>
-        </Property>
         <Property name="borderPainted" type="boolean" value="false"/>
         <Property name="contentAreaFilled" type="boolean" value="false"/>
       </Properties>
@@ -223,24 +220,8 @@
       <Layout>
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
-              <Group type="102" attributes="0">
-                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="150" pref="150" max="-2" attributes="0"/>
-                          <Component id="labTituloPanelAnularProd" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
-                          <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
-                          <Component id="jScrollPane1" min="-2" pref="310" max="-2" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <EmptySpace min="180" pref="180" max="-2" attributes="0"/>
-                          <Component id="btnAnular" min="-2" pref="100" max="-2" attributes="0"/>
-                      </Group>
+              <Group type="102" alignment="0" attributes="0">
+                  <Group type="103" groupAlignment="1" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
@@ -249,12 +230,30 @@
                           </Group>
                           <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
-                              <Component id="txfdCodNomProdAnular" max="32767" attributes="0"/>
-                              <Component id="txfdCantProdAnular" min="-2" pref="80" max="-2" attributes="0"/>
+                              <Component id="txfdCantProdAnular" max="32767" attributes="0"/>
+                              <Component id="txfdCodNomProdAnular" pref="193" max="32767" attributes="0"/>
+                          </Group>
+                      </Group>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="150" pref="150" max="-2" attributes="0"/>
+                              <Component id="labTituloPanelAnularProd" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
+                              <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="60" pref="60" max="-2" attributes="0"/>
+                              <Component id="jScrollPane1" min="-2" pref="310" max="-2" attributes="0"/>
+                          </Group>
+                          <Group type="102" attributes="0">
+                              <EmptySpace min="180" pref="180" max="-2" attributes="0"/>
+                              <Component id="btnAnular" min="-2" pref="100" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                   </Group>
-                  <EmptySpace min="-2" pref="50" max="-2" attributes="0"/>
+                  <EmptySpace min="-2" pref="47" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -269,9 +268,9 @@
                       <Component id="txfdCodNomProdAnular" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="10" pref="10" max="-2" attributes="0"/>
-                  <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel5" min="-2" pref="20" max="-2" attributes="0"/>
-                      <Component id="txfdCantProdAnular" min="-2" max="-2" attributes="0"/>
+                  <Group type="103" groupAlignment="3" attributes="0">
+                      <Component id="jLabel5" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="txfdCantProdAnular" alignment="3" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace min="20" pref="20" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
@@ -299,17 +298,6 @@
             </Property>
             <Property name="text" type="java.lang.String" value="Ingerese la cantidad:"/>
           </Properties>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txfdCantProdAnular">
-          <Events>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdCantProdAnularKeyReleased"/>
-            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdCantProdAnularKeyTyped"/>
-          </Events>
-        </Component>
-        <Component class="javax.swing.JTextField" name="txfdCodNomProdAnular">
-          <Events>
-            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdCodNomProdAnularKeyReleased"/>
-          </Events>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel2">
           <Properties>
@@ -354,6 +342,23 @@
             <Property name="text" type="java.lang.String" value="ANULACI&#xd3;N DE PRODUCTO"/>
             <Property name="toolTipText" type="java.lang.String" value=""/>
           </Properties>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="txfdCantProdAnular">
+          <Properties>
+            <Property name="prompt" type="java.lang.String" value="unidad / gramos"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdCantProdAnularKeyReleased"/>
+            <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdCantProdAnularKeyTyped"/>
+          </Events>
+        </Component>
+        <Component class="org.jdesktop.swingx.JXTextField" name="txfdCodNomProdAnular">
+          <Properties>
+            <Property name="prompt" type="java.lang.String" value="Por c&#xf3;digo o descripci&#xf3;n"/>
+          </Properties>
+          <Events>
+            <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdCodNomProdAnularKeyReleased"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

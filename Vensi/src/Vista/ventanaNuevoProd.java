@@ -8,7 +8,6 @@ import java.awt.Dimension;
 import java.util.*;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
-import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 

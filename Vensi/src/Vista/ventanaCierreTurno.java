@@ -598,10 +598,6 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             if (es.isTipo()) //entrada
             {
                 montoES = montoES + es.getMonto();
-            }
-            else    //salida
-            {
-                montoES = montoES - es.getMonto();
             }            
         }         
         montoEsperado = montoVenta + montoES;

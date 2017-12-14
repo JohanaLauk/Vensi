@@ -601,7 +601,7 @@ public class ventanaVenta extends javax.swing.JFrame
                     {
                         ItemVenta elItemVenta = new ItemVenta();
                         elItemVenta.setCantidad(itemModificar.getCantidad() + Integer.parseInt(cantPeso));
-                        elItemVenta.setMonto(Double.parseDouble(precioT));
+                        elItemVenta.setMonto(itemModificar.getMonto() + Double.parseDouble(precioT));
                         elItemVenta.setHora(new Date());
 
                         itDAO.modificar(elItemVenta, itemModificar.getId());
