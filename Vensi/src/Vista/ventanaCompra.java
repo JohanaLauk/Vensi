@@ -104,12 +104,12 @@ public class ventanaCompra extends javax.swing.JFrame
         jLabel2 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         listInfoProd = new javax.swing.JList<>();
-        txfdCantidad = new javax.swing.JTextField();
         btnQuitar = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
-        txfdPrecioCU = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txfdPrecioVU = new javax.swing.JTextField();
+        txfdCantidad = new org.jdesktop.swingx.JXTextField();
+        txfdPrecioCU = new org.jdesktop.swingx.JXTextField();
+        txfdPrecioVU = new org.jdesktop.swingx.JXTextField();
         panelBusqueda = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txfdBuscarProd = new org.jdesktop.swingx.JXTextField();
@@ -159,7 +159,7 @@ public class ventanaCompra extends javax.swing.JFrame
             panelTablaProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaProdLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 270, Short.MAX_VALUE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
 
         tablaListaInventario = new javax.swing.JTable()
@@ -217,7 +217,7 @@ public class ventanaCompra extends javax.swing.JFrame
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addComponent(jLabel3)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 215, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -243,12 +243,6 @@ public class ventanaCompra extends javax.swing.JFrame
         });
         jScrollPane2.setViewportView(listInfoProd);
 
-        txfdCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txfdCantidadKeyTyped(evt);
-            }
-        });
-
         btnQuitar.setText("Quitar");
         btnQuitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,6 +254,30 @@ public class ventanaCompra extends javax.swing.JFrame
 
         jLabel9.setText("Precio venta:");
 
+        txfdCantidad.setToolTipText("Ingrese la cantidad en unidades");
+        txfdCantidad.setPrompt("Unidades");
+        txfdCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdCantidadKeyTyped(evt);
+            }
+        });
+
+        txfdPrecioCU.setToolTipText("Ingrese el precio costo unitario");
+        txfdPrecioCU.setPrompt("Ej: \"00\" o \"00.00\"");
+        txfdPrecioCU.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdPrecioCUKeyTyped(evt);
+            }
+        });
+
+        txfdPrecioVU.setToolTipText("Ingrese el precio venta unitario");
+        txfdPrecioVU.setPrompt("Ej: \"00\" o \"00.00\"");
+        txfdPrecioVU.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdPrecioVUKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -269,43 +287,43 @@ public class ventanaCompra extends javax.swing.JFrame
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(2, 2, 2)
                         .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(5, 5, 5)
+                        .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1)
-                        .addGap(2, 2, 2)
-                        .addComponent(txfdPrecioCU, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfdPrecioCU, javax.swing.GroupLayout.DEFAULT_SIZE, 42, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel9)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txfdPrecioVU, javax.swing.GroupLayout.PREFERRED_SIZE, 42, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(txfdPrecioVU, javax.swing.GroupLayout.DEFAULT_SIZE, 41, Short.MAX_VALUE)
+                        .addGap(6, 6, 6))
                     .addComponent(jScrollPane2))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnQuitar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(btnAgregar, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE))
                 .addGap(7, 7, 7))
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addComponent(jLabel2)
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGap(12, 12, 12)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12)
+                        .addGap(9, 9, 9)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
-                            .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txfdPrecioCU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel1)
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txfdPrecioVU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                            .addComponent(txfdCantidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1)
+                            .addComponent(txfdPrecioCU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfdPrecioVU, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(btnAgregar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -397,8 +415,9 @@ public class ventanaCompra extends javax.swing.JFrame
                 .addComponent(jLabel8)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
-                .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(29, Short.MAX_VALUE))
         );
         panelComboBoxLayout.setVerticalGroup(
             panelComboBoxLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -468,30 +487,25 @@ public class ventanaCompra extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(panelComboBox, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 96, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(8, 8, 8)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addGap(8, 8, 8)
                         .addComponent(panelTablaProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addContainerGap())
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void txfdCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadKeyTyped
-        char c = evt.getKeyChar();
-        if((c < '0' || c > '9') &&
-            (c != java.awt.event.KeyEvent.VK_BACK_SPACE))
-        evt.consume();
-    }//GEN-LAST:event_txfdCantidadKeyTyped
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int filaSelec = tablaProd.getSelectedRow();
 
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
         {
-            String id_recibido = tablaProd.getValueAt(filaSelec, 8).toString();
+            String id_recibido = tablaProd.getValueAt(filaSelec, 7).toString();
             elProd = prodDAO.buscarPorId(Integer.parseInt(id_recibido));
                         
             String descrip = elProd.getDescripcion();
@@ -511,55 +525,26 @@ public class ventanaCompra extends javax.swing.JFrame
             {
                 if (precioCostoU.equals("") && precioVentaU.equals("")) //Ninguno
                 {
-                    if (elProd.isPorPeso())
-                    {
-                        String filaNueva[] = {descrip, cantidad+"gr", "---", "---", id_recibido};
-                        m.addRow(filaNueva);
-                    }
-                    else
-                    {
-                        String filaNueva[] = {descrip, cantidad, "---", "---", id_recibido};
-                        m.addRow(filaNueva);
-                    }
+                    String filaNueva[] = {descrip, cantidad, "---", "---", id_recibido};
+                    m.addRow(filaNueva);
                 }
+                
                 if (!precioCostoU.equals("") && !precioVentaU.equals(""))   //Todos 
                 {                        
-                    if (elProd.isPorPeso())
-                    {
-                        String filaNueva[] = {descrip, cantidad+"gr", "$"+precioCostoU, "$"+precioVentaU, id_recibido};
-                        m.addRow(filaNueva);
-                    }
-                    else
-                    {
-                        String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "$"+precioVentaU, id_recibido};
-                        m.addRow(filaNueva);
-                    }
+                    String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "$"+precioVentaU, id_recibido};
+                    m.addRow(filaNueva);
                 }
+                
                 if (!precioCostoU.equals("") && precioVentaU.equals("")) //solo precio costo
                 {                        
-                    if (elProd.isPorPeso())
-                    {
-                        String filaNueva[] = {descrip, cantidad+"gr", "$"+precioCostoU, "---", id_recibido};
-                        m.addRow(filaNueva);
-                    }
-                    else
-                    {
-                        String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "---", id_recibido};
-                        m.addRow(filaNueva);
-                    }
+                    String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "---", id_recibido};
+                    m.addRow(filaNueva);
                 }
+                
                 if (precioCostoU.equals("") && !precioVentaU.equals("")) //solo precio venta
                 {                        
-                    if (elProd.isPorPeso())
-                    {
-                        String filaNueva[] = {descrip, cantidad+"gr", "---", "$"+precioVentaU, id_recibido};
-                        m.addRow(filaNueva);
-                    }
-                    else
-                    {
-                        String filaNueva[] = {descrip, cantidad, "---", "$"+precioVentaU, id_recibido};
-                        m.addRow(filaNueva);
-                    }
+                    String filaNueva[] = {descrip, cantidad, "---", "$"+precioVentaU, id_recibido};
+                    m.addRow(filaNueva);
                 }
             }
         }
@@ -621,9 +606,9 @@ public class ventanaCompra extends javax.swing.JFrame
             itemPedido.setProducto(producto);                       
             if (producto.isPorPeso())
             {
-                String cadenaCant = tablaListaInventario.getValueAt(i,1).toString();
-                String cantidad = cadenaCant.substring(0, cadenaCant.length()-2);
-                itemPedido.setCantidad(Integer.parseInt(cantidad));
+                int cantU = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
+                int cantGR = cantU * producto.getPesoEnvase();
+                itemPedido.setCantidad(cantGR);
             }
             else
             {
@@ -633,8 +618,7 @@ public class ventanaCompra extends javax.swing.JFrame
             iDAO.alta(itemPedido);
                         
             String cadenaPC = tablaListaInventario.getValueAt(i,2).toString();
-            double precioCostoU = 0;
-            double precioVentaU = 0;
+            double precioCostoU = 0;            
             
             if (cadenaPC.equals("---"))
             {
@@ -647,6 +631,8 @@ public class ventanaCompra extends javax.swing.JFrame
             }
             
             String cadenaPV = tablaListaInventario.getValueAt(i,3).toString();
+            double precioVentaU = 0;
+            
             if (cadenaPV.equals("---"))
             {
                 precioVentaU = 0;
@@ -658,10 +644,10 @@ public class ventanaCompra extends javax.swing.JFrame
             }               
             
             if (producto.isPorPeso())
-            {               
-                String cadenaCant = tablaListaInventario.getValueAt(i,1).toString();
-                String cantidad = cadenaCant.substring(0, cadenaCant.length()-2);
-                prodDAO.sumarStock(producto.getId(), Integer.parseInt(cantidad));
+            {    
+                int cantU = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
+                int cantGR = cantU * producto.getPesoEnvase();
+                prodDAO.sumarStock(producto.getId(), cantGR);
             }
             else
             {
@@ -692,20 +678,17 @@ public class ventanaCompra extends javax.swing.JFrame
             for (int i=0 ; i < panelComboBox.getComponents().length ; i++)
             {
                 panelComboBox.getComponent(i).setEnabled(true);
-            }            
+            } 
+            cbSituacion.setEnabled(false);
             
             for (Proveedor p : listaProvHab)
             {
                 if (p.getRazonSocial().equals(provSelec))
                 {
                     elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
-                    //llenarTabla();
+                    llenarTabla();
                 }
-            }
-            
-            String cadena = txfdBuscarProd.getText();        
-            List<Producto> listaProdProv = prodDAO.buscarPorCodigoNombre(cadena, filtroSelec, situacionSelec, elProv.getId());
-            llenarTablaBusqueda(listaProdProv);            
+            }            
         }
         else
         {
@@ -881,6 +864,21 @@ public class ventanaCompra extends javax.swing.JFrame
         llenarTabla();
     }//GEN-LAST:event_cbSituacionActionPerformed
 
+    private void txfdCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadKeyTyped
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') &&
+            (c != java.awt.event.KeyEvent.VK_BACK_SPACE))
+        evt.consume();
+    }//GEN-LAST:event_txfdCantidadKeyTyped
+
+    private void txfdPrecioCUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioCUKeyTyped
+        
+    }//GEN-LAST:event_txfdPrecioCUKeyTyped
+
+    private void txfdPrecioVUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioVUKeyTyped
+        
+    }//GEN-LAST:event_txfdPrecioVUKeyTyped
+
     public static void main(String args[]) 
     {
         java.awt.EventQueue.invokeLater(new Runnable() 
@@ -896,17 +894,16 @@ public class ventanaCompra extends javax.swing.JFrame
     {        
         modelo = new DefaultTableModel();
         List<Producto> listaProdProv = prodDAO.listar(OrdenarTabla(), elProv.getId());
-        String[] datos = new String[9];
+        String[] datos = new String[8];
  
         modelo.addColumn("Código");         //0
         modelo.addColumn("Descripción");    //1
-        modelo.addColumn("Precio costo");   //2
-        modelo.addColumn("Precio venta");   //3
+        modelo.addColumn("$ costo");        //2
+        modelo.addColumn("$ venta");        //3
         modelo.addColumn("Stock");          //4
         modelo.addColumn("Stock mínimo");   //5
-        modelo.addColumn("Tipo venta");     //6
-        modelo.addColumn("Peso envase");    //7
-        modelo.addColumn("ID");             //8
+        modelo.addColumn("Peso envase");    //6
+        modelo.addColumn("ID");             //7
         
         for (Producto p : listaProdProv)
         {
@@ -917,19 +914,29 @@ public class ventanaCompra extends javax.swing.JFrame
             
             if (p.isPorPeso())  //por peso
             {
-                datos[4] = String.valueOf(p.getStock() / 1000 + "kg");
-                datos[5] = String.valueOf(p.getStockMinimo() / 1000 + "kg");            
-                datos[6] = String.valueOf("Por peso");
-                datos[7] = String.valueOf(p.getPesoEnvase() / 1000 + "kg");
+                int pesoEnvGR1 = p.getPesoEnvase();
+                double pesoEnvGR2 = p.getPesoEnvase();               
+                datos[6] = String.valueOf(pesoEnvGR2 / 1000 + "kg");
+                
+                int stockGR1 = p.getStock();
+                double stockGR2 = p.getStock();
+                int stockU = stockGR1 / pesoEnvGR1;
+                double stockKG = stockGR2 / 1000;
+                datos[4] = String.valueOf(stockU + "  (" + stockKG + "kg)");
+                
+                int stockMinGR1 = p.getStockMinimo();
+                double stockMinGR2 = p.getStockMinimo();
+                int stockMinU = stockMinGR1 / pesoEnvGR1;
+                double stockMinKG = stockMinGR2 / 1000;
+                datos[5] = String.valueOf(stockMinU + "  (" + stockMinKG + "kg)");
             }
             else    //por unidad
             {
                 datos[4] = String.valueOf(p.getStock());
                 datos[5] = String.valueOf(p.getStockMinimo());
-                datos[6] = String.valueOf("Por unidad");
-                datos[7] = String.valueOf("---");
+                datos[6] = String.valueOf("---");
             }            
-            datos[8] = String.valueOf(p.getId());
+            datos[7] = String.valueOf(p.getId());
            
             modelo.addRow(datos);
         }
@@ -937,19 +944,18 @@ public class ventanaCompra extends javax.swing.JFrame
         tablaProd.setModel(modelo);
         
         tcm = tablaProd.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(100);
+        tcm.getColumn(0).setPreferredWidth(80);
         tcm.getColumn(1).setPreferredWidth(300);
         tcm.getColumn(2).setPreferredWidth(30);
         tcm.getColumn(3).setPreferredWidth(30);
-        tcm.getColumn(4).setPreferredWidth(30);  
-        tcm.getColumn(5).setPreferredWidth(50);
-        tcm.getColumn(6).setPreferredWidth(50);
-        tcm.getColumn(7).setPreferredWidth(50);
-        tcm.getColumn(8).setPreferredWidth(0);  
-        tcm.getColumn(8).setMaxWidth(0);
-        tcm.getColumn(8).setMinWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);       
+        tcm.getColumn(4).setPreferredWidth(60);  
+        tcm.getColumn(5).setPreferredWidth(60);
+        tcm.getColumn(6).setPreferredWidth(60);
+        tcm.getColumn(7).setPreferredWidth(0);  
+        tcm.getColumn(7).setMaxWidth(0);
+        tcm.getColumn(7).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);       
         
         tablaProd.addFocusListener(new FocusListener() 
         {
@@ -1067,17 +1073,16 @@ public class ventanaCompra extends javax.swing.JFrame
     public void llenarTablaBusqueda (List<Producto> listaBusqueda)
     {
         modelo3 = new DefaultTableModel();
-        String[] datos = new String[9];
+        String[] datos = new String[8];
  
         modelo3.addColumn("Código");         //0
         modelo3.addColumn("Descripción");    //1
-        modelo3.addColumn("Precio costo");   //2
-        modelo3.addColumn("Precio venta");   //3
+        modelo3.addColumn("$ costo");   //2
+        modelo3.addColumn("$ venta");   //3
         modelo3.addColumn("Stock");          //4
         modelo3.addColumn("Stock mínimo");   //5
-        modelo3.addColumn("Tipo venta");     //6
-        modelo3.addColumn("Peso envase");//7
-        modelo3.addColumn("ID");             //8
+        modelo3.addColumn("Peso envase");    //6
+        modelo3.addColumn("ID");             //7
         
         for (Producto p : listaBusqueda)
         {
@@ -1088,20 +1093,29 @@ public class ventanaCompra extends javax.swing.JFrame
             
             if (p.isPorPeso())  //por peso
             {
-                datos[4] = String.valueOf(p.getStock() / 1000 + "kg");
-                datos[5] = String.valueOf(p.getStockMinimo() / 1000 + "kg");
-            
-                datos[6] = String.valueOf("Por peso");
-                datos[7] = String.valueOf(p.getPesoEnvase() / 1000 + "kg");
+                int pesoEnvGR1 = p.getPesoEnvase();
+                double pesoEnvGR2 = p.getPesoEnvase();               
+                datos[6] = String.valueOf(pesoEnvGR2 / 1000 + "kg");
+                
+                int stockGR1 = p.getStock();
+                double stockGR2 = p.getStock();
+                int stockU = stockGR1 / pesoEnvGR1;
+                double stockKG = stockGR2 / 1000;
+                datos[4] = String.valueOf(stockU + "  (" + stockKG + "kg)");
+                
+                int stockMinGR1 = p.getStockMinimo();
+                double stockMinGR2 = p.getStockMinimo();
+                int stockMinU = stockMinGR1 / pesoEnvGR1;
+                double stockMinKG = stockMinGR2 / 1000;
+                datos[5] = String.valueOf(stockMinU + "  (" + stockMinKG + "kg)");                
             }
             else    //por unidad
             {
                 datos[4] = String.valueOf(p.getStock());
-                datos[5] = String.valueOf(p.getStockMinimo());
-                datos[6] = String.valueOf("Por unidad");
-                datos[7] = String.valueOf("---");
+                datos[5] = String.valueOf(p.getStockMinimo());                
+                datos[6] = String.valueOf("---");
             }            
-            datos[8] = String.valueOf(p.getId());
+            datos[7] = String.valueOf(p.getId());
            
             modelo3.addRow(datos);
         }
@@ -1109,19 +1123,18 @@ public class ventanaCompra extends javax.swing.JFrame
         tablaProd.setModel(modelo3);
         
         tcm3 = tablaProd.getColumnModel();
-        tcm3.getColumn(0).setPreferredWidth(100);
+        tcm3.getColumn(0).setPreferredWidth(80);
         tcm3.getColumn(1).setPreferredWidth(300);
         tcm3.getColumn(2).setPreferredWidth(30);
         tcm3.getColumn(3).setPreferredWidth(30);
-        tcm3.getColumn(4).setPreferredWidth(30);  
-        tcm3.getColumn(5).setPreferredWidth(50);
-        tcm3.getColumn(6).setPreferredWidth(50);
-        tcm3.getColumn(7).setPreferredWidth(50);
-        tcm3.getColumn(8).setPreferredWidth(0);  
-        tcm3.getColumn(8).setMaxWidth(0);
-        tcm3.getColumn(8).setMinWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);
+        tcm3.getColumn(4).setPreferredWidth(60);  
+        tcm3.getColumn(5).setPreferredWidth(60);
+        tcm3.getColumn(6).setPreferredWidth(60);
+        tcm3.getColumn(7).setPreferredWidth(0);  
+        tcm3.getColumn(7).setMaxWidth(0);
+        tcm3.getColumn(7).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);
     }
     
     public void mostrarTablaVacia()
@@ -1129,30 +1142,28 @@ public class ventanaCompra extends javax.swing.JFrame
         modelo = new DefaultTableModel();        
         modelo.addColumn("Código");         //0
         modelo.addColumn("Descripción");    //1
-        modelo.addColumn("Precio costo");   //2
-        modelo.addColumn("Precio venta");   //3
+        modelo.addColumn("$ costo");   //2
+        modelo.addColumn("$ venta");   //3
         modelo.addColumn("Stock");          //4
         modelo.addColumn("Stock mínimo");   //5
-        modelo.addColumn("Tipo venta");     //6
-        modelo.addColumn("Peso envase");    //7
-        modelo.addColumn("ID");             //8
+        modelo.addColumn("Peso envase");    //6
+        modelo.addColumn("ID");             //7
         
         tablaProd.setModel(modelo);
         
         tcm = tablaProd.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(100);
+        tcm.getColumn(0).setPreferredWidth(80);
         tcm.getColumn(1).setPreferredWidth(300);
         tcm.getColumn(2).setPreferredWidth(30);
         tcm.getColumn(3).setPreferredWidth(30);
-        tcm.getColumn(4).setPreferredWidth(20);  
-        tcm.getColumn(5).setPreferredWidth(50);
-        tcm.getColumn(6).setPreferredWidth(50);
-        tcm.getColumn(7).setPreferredWidth(50);
-        tcm.getColumn(8).setPreferredWidth(0);  
-        tcm.getColumn(8).setMaxWidth(0);
-        tcm.getColumn(8).setMinWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(8).setMinWidth(0);    
+        tcm.getColumn(4).setPreferredWidth(60);  
+        tcm.getColumn(5).setPreferredWidth(60);
+        tcm.getColumn(6).setPreferredWidth(60);
+        tcm.getColumn(7).setPreferredWidth(0);  
+        tcm.getColumn(7).setMaxWidth(0);
+        tcm.getColumn(7).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);    
     }
     
     public String[] OrdenarTabla()
@@ -1231,8 +1242,8 @@ public class ventanaCompra extends javax.swing.JFrame
     private javax.swing.JTable tablaListaInventario;
     private javax.swing.JTable tablaProd;
     private org.jdesktop.swingx.JXTextField txfdBuscarProd;
-    private javax.swing.JTextField txfdCantidad;
-    private javax.swing.JTextField txfdPrecioCU;
-    private javax.swing.JTextField txfdPrecioVU;
+    private org.jdesktop.swingx.JXTextField txfdCantidad;
+    private org.jdesktop.swingx.JXTextField txfdPrecioCU;
+    private org.jdesktop.swingx.JXTextField txfdPrecioVU;
     // End of variables declaration//GEN-END:variables
 }

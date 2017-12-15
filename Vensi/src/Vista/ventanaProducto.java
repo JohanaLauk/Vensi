@@ -601,14 +601,14 @@ public class ventanaProducto extends javax.swing.JFrame
                 double stockGR2 = p.getStock();
                 int stockU = stockGR1 / pesoEnv1;  // u = gr / peso gr
                 double stockKG = stockGR2 / 1000;   //kg =  gr / 1000            
-                datos[5] = String.valueOf(stockU+" u" + "  ("+stockKG + "kg)");
+                datos[5] = String.valueOf(stockU+"  ("+stockKG + "kg)");
                 
                 int stockMinGR1 = p.getStockMinimo();
                 double stockMinGR2 = p.getStockMinimo();
                 int stockMinU = stockMinGR1 / pesoEnv1;
                 double stockMinKG = stockMinGR2 / 1000;          
                 
-                datos[6] = String.valueOf(stockMinU+" u" + "  ("+stockMinKG + "kg)");
+                datos[6] = String.valueOf(stockMinU+"  ("+stockMinKG + "kg)");
                                 
                 datos[7] = "Por peso";   
             }
@@ -742,13 +742,13 @@ public class ventanaProducto extends javax.swing.JFrame
                 double stockGR2 = p.getStock();
                 int stockU = stockGR1 / pesoEnv1;  // u = gr / peso gr
                 double stockKG = stockGR2 / 1000;   //kg =  gr / 1000            
-                datos[5] = String.valueOf(stockU+" u" + "  ("+stockKG + "Kg)");
+                datos[5] = String.valueOf(stockU + "  ("+stockKG + "Kg)");
                 
                 int stockMinGR1 = p.getStockMinimo();
                 double stockMinGR2 = p.getStockMinimo();
                 int stockMinU = stockMinGR1 / pesoEnv1;
                 double stockMinKG = stockMinGR2 / 1000;               
-                datos[6] = String.valueOf(stockMinU+" u" + "  ("+stockMinKG + "Kg)");
+                datos[6] = String.valueOf(stockMinU + "  ("+stockMinKG + "Kg)");
                                 
                 datos[7] = "Por peso";
             }
