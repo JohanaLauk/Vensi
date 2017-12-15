@@ -1352,8 +1352,14 @@ public class ProductoDAO
         Producto p = null;
         
         p = (Producto)session.get(Producto.class, id);
-        p.setPrecioCosto(precioCostoU);
-        p.setPrecioVenta(precioVentaU);
+        if (precioCostoU != 0)
+        {
+            p.setPrecioCosto(precioCostoU);
+        }
+        if (precioVentaU != 0)
+        {
+            p.setPrecioVenta(precioVentaU);
+        }        
         
         tx = session.beginTransaction();
         try

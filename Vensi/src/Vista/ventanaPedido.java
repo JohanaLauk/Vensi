@@ -38,8 +38,7 @@ public class ventanaPedido extends javax.swing.JFrame
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);     //centra la ventana
-        
+        this.setLocationRelativeTo(null);     //centra la ventana        
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
         
         txfdBuscarProd.setEnabled(false);
@@ -73,8 +72,7 @@ public class ventanaPedido extends javax.swing.JFrame
             } 
         });    
         
-        listarAlarma();
-        
+        listarAlarma();        
         llenarCBBProveedor();
         mostrarTablaVacia();
         llenarTablaPedido();         
@@ -866,7 +864,7 @@ public class ventanaPedido extends javax.swing.JFrame
                     String cod = tablaProd.getValueAt(filaSelec, 0).toString();
                     String desc = tablaProd.getValueAt(filaSelec, 1).toString();
                     
-                    DefaultListModel modeloList = new DefaultListModel(); 
+                    modeloList = new DefaultListModel(); 
                     modeloList.clear();
                     modeloList.addElement("Código: " + cod);
                     modeloList.addElement("Descripcion: " + desc);
