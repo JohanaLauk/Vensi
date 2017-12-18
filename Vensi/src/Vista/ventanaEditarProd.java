@@ -4,7 +4,8 @@ import DAO.ProductoDAO;
 import DAO.ProveedorDAO;
 import Modelo.Producto;
 import Modelo.Proveedor;
-import Validacion.Validar;
+import Utils.Redondear;
+import Utils.Validar;
 import java.awt.Dimension;
 import java.util.*;
 import javax.swing.JCheckBox;
@@ -19,6 +20,8 @@ public class ventanaEditarProd extends javax.swing.JFrame
     Validar validar = new Validar();
     DefaultTableModel modelo;
     TableColumnModel tcm;
+    
+    Redondear r = new Redondear();    
     
     public static int id_recibido;
     Producto elProd = null;
@@ -370,7 +373,8 @@ public class ventanaEditarProd extends javax.swing.JFrame
                 
                 if (validar.validarPrecio(txfdEditarPrecioCosto.getText())) 
                 {
-                    prod.setPrecioCosto(Double.parseDouble(txfdEditarPrecioCosto.getText()));
+                    double precioC = Double.parseDouble(txfdEditarPrecioCosto.getText());
+                    prod.setPrecioCosto(r.RedondearCentavos(precioC));
                 } 
                 else 
                 {
@@ -378,7 +382,8 @@ public class ventanaEditarProd extends javax.swing.JFrame
                 }
                 if (validar.validarPrecio(txfdEditarPrecioVenta.getText())) 
                 {
-                    prod.setPrecioVenta(Double.parseDouble(txfdEditarPrecioVenta.getText()));
+                    double precioV = Double.parseDouble(txfdEditarPrecioVenta.getText());
+                    prod.setPrecioVenta(r.RedondearCentavos(precioV));
                 } 
                 else 
                 {
@@ -399,7 +404,10 @@ public class ventanaEditarProd extends javax.swing.JFrame
                     int total2 = stockU * pesoEnv;  //convierto la unidad en gramos
                     prod.setStock(total2);  //guardo el nuevo stock en gramos  
                     
-                    prod.setPrecioVentaXKilo((1000*Double.parseDouble(txfdEditarPrecioVenta.getText())) / pesoEnv);
+                    double precioV = Double.parseDouble(txfdEditarPrecioVenta.getText());
+                    precioV = r.RedondearCentavos(precioV);
+                    double precioKilo = (1000 * precioV) / pesoEnv;
+                    prod.setPrecioVentaXKilo(precioKilo);
                 } 
                 else 
                 {

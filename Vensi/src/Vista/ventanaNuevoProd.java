@@ -3,7 +3,8 @@ package Vista;
 import DAO.ProductoDAO;
 import DAO.ProveedorDAO;
 import Modelo.*;
-import Validacion.Validar;
+import Utils.Redondear;
+import Utils.Validar;
 import java.awt.Dimension;
 import java.util.*;
 import javax.swing.JCheckBox;
@@ -18,7 +19,9 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     Validar validar = new Validar();
     DefaultTableModel modelo;
     TableColumnModel tcm;
-    List<JCheckBox> checkProv = new ArrayList<>();
+    List<JCheckBox> checkProv = new ArrayList<>();   
+    
+    Redondear r = new Redondear();
     
     String situacion = "Ninguno";
             
@@ -26,12 +29,10 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     {
         initComponents();
                 
-        this.setLocationRelativeTo(null);     //centra la ventana
-        
+        this.setLocationRelativeTo(null);     //centra la ventana        
         //this.setPreferredSize(new Dimension(600, 200));    //al minimizar la ventana aparece con esa medida
         
-        panelProveedor.setPreferredSize(new Dimension(200,170));
-        
+        panelProveedor.setPreferredSize(new Dimension(200,170));        
         
         txfdPesoEnvase.setEnabled(false); 
         llenarCheckBoxProv();
@@ -341,12 +342,13 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                 {
                     if (validar.validarPrecio(txfdPrecioCosto.getText())) 
                     {
-                        unProd.setPrecioCosto(Double.parseDouble(txfdPrecioCosto.getText()));
+                        double precioC = Double.parseDouble(txfdPrecioCosto.getText());                        
+                        unProd.setPrecioCosto(r.RedondearCentavos(precioC));
                     } 
                     else 
                     {
                         JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio costo");
-                        unProd.setPrecioVenta(0.00);
+                        unProd.setPrecioCosto(0.00);
                     }
                 }
 
@@ -358,7 +360,8 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                 {
                     if (validar.validarPrecio(txfdPrecioVenta.getText())) 
                     {
-                        unProd.setPrecioVenta(Double.parseDouble(txfdPrecioVenta.getText()));
+                        double precioV = Double.parseDouble(txfdPrecioVenta.getText());
+                        unProd.setPrecioVenta(r.RedondearCentavos(precioV));
                     } 
                     else 
                     {                        
@@ -382,7 +385,10 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                     int total2 = stock * pesoEnv;   //convierto las unidades en gramos
                     unProd.setStock(total2);   //guardo en gramos
                     
-                    unProd.setPrecioVentaXKilo((1000*Double.parseDouble(txfdPrecioVenta.getText())) / pesoEnv);
+                    double precioV = Double.parseDouble(txfdPrecioVenta.getText());
+                    precioV = r.RedondearCentavos(precioV);
+                    double precioKilo = (1000 * precioV) / pesoEnv;
+                    unProd.setPrecioVentaXKilo(r.RedondearCentavos(precioKilo));
                 } 
                 else 
                 {

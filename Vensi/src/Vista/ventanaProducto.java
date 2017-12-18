@@ -12,6 +12,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -25,6 +26,9 @@ public class ventanaProducto extends javax.swing.JFrame
     TableColumnModel tcm, tcm2, tcm3;    
     JComboBox cbProv;
     DefaultComboBoxModel modeloCB;
+    
+    DecimalFormat formatoPrecios = new DecimalFormat("0.00");
+    DecimalFormat formatoKilos = new DecimalFormat("0.000");
     
     String filtroSelec = "Todos";
     String situacionSelec = "Todos";
@@ -586,29 +590,29 @@ public class ventanaProducto extends javax.swing.JFrame
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf("$" + p.getPrecioCosto());
-            datos[3] = String.valueOf("$" + p.getPrecioVenta());            
+            datos[2] = String.valueOf("$" + formatoPrecios.format(p.getPrecioCosto()));
+            datos[3] = String.valueOf("$" + formatoPrecios.format(p.getPrecioVenta()));            
             
             if (p.isPorPeso())
             {
-                datos[4] = String.valueOf("$" + p.getPrecioVentaXKilo());
+                datos[4] = String.valueOf("$" + formatoPrecios.format(p.getPrecioVentaXKilo()));
                 
                 int pesoEnv1 = p.getPesoEnvase();
                 double pesoEnv2 = p.getPesoEnvase();
-                datos[8] = String.valueOf(pesoEnv2 / 1000 + "kg");
+                datos[8] = String.valueOf(formatoKilos.format(pesoEnv2 / 1000) + "kg");
                 
                 int stockGR1 = p.getStock();    //gr
                 double stockGR2 = p.getStock();
                 int stockU = stockGR1 / pesoEnv1;  // u = gr / peso gr
                 double stockKG = stockGR2 / 1000;   //kg =  gr / 1000            
-                datos[5] = String.valueOf(stockU+"  ("+stockKG + "kg)");
+                datos[5] = String.valueOf(stockU+"  ("+ formatoKilos.format(stockKG) + "kg)");
                 
                 int stockMinGR1 = p.getStockMinimo();
                 double stockMinGR2 = p.getStockMinimo();
                 int stockMinU = stockMinGR1 / pesoEnv1;
                 double stockMinKG = stockMinGR2 / 1000;          
                 
-                datos[6] = String.valueOf(stockMinU+"  ("+stockMinKG + "kg)");
+                datos[6] = String.valueOf(stockMinU+"  ("+ formatoKilos.format(stockMinKG) + "kg)");
                                 
                 datos[7] = "Por peso";   
             }
@@ -668,7 +672,7 @@ public class ventanaProducto extends javax.swing.JFrame
         tcm.getColumn(2).setPreferredWidth(20);
         tcm.getColumn(3).setPreferredWidth(20);
         tcm.getColumn(4).setPreferredWidth(20);
-        tcm.getColumn(5).setPreferredWidth(20);
+        tcm.getColumn(5).setPreferredWidth(30);
         tcm.getColumn(6).setPreferredWidth(20);
         tcm.getColumn(7).setPreferredWidth(30);
         tcm.getColumn(8).setPreferredWidth(50);
@@ -727,28 +731,28 @@ public class ventanaProducto extends javax.swing.JFrame
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf("$" + p.getPrecioCosto());
-            datos[3] = String.valueOf("$" + p.getPrecioVenta());
+            datos[2] = String.valueOf("$" + formatoPrecios.format(p.getPrecioCosto()));
+            datos[3] = String.valueOf("$" + formatoPrecios.format(p.getPrecioVenta()));
             
             if (p.isPorPeso())
             {
-                datos[4] = String.valueOf("$" + p.getPrecioVentaXKilo());
+                datos[4] = String.valueOf("$" + formatoPrecios.format(p.getPrecioVentaXKilo()));
                 
                 int pesoEnv1 = p.getPesoEnvase();
                 double pesoEnv2 = p.getPesoEnvase();
-                datos[8] = String.valueOf(pesoEnv2 / 1000 + "Kg");
+                datos[8] = String.valueOf(pesoEnv2 / 1000 + "00kg");
                 
                 int stockGR1 = p.getStock();    //gr
                 double stockGR2 = p.getStock();
                 int stockU = stockGR1 / pesoEnv1;  // u = gr / peso gr
                 double stockKG = stockGR2 / 1000;   //kg =  gr / 1000            
-                datos[5] = String.valueOf(stockU + "  ("+stockKG + "Kg)");
+                datos[5] = String.valueOf(stockU + "  ("+ formatoKilos.format(stockKG) + "kg)");
                 
                 int stockMinGR1 = p.getStockMinimo();
                 double stockMinGR2 = p.getStockMinimo();
                 int stockMinU = stockMinGR1 / pesoEnv1;
                 double stockMinKG = stockMinGR2 / 1000;               
-                datos[6] = String.valueOf(stockMinU + "  ("+stockMinKG + "Kg)");
+                datos[6] = String.valueOf(stockMinU + "  ("+ formatoKilos.format(stockMinKG) + "kg)");
                                 
                 datos[7] = "Por peso";
             }
@@ -808,7 +812,7 @@ public class ventanaProducto extends javax.swing.JFrame
         tcm2.getColumn(2).setPreferredWidth(20);
         tcm2.getColumn(3).setPreferredWidth(20);
         tcm2.getColumn(4).setPreferredWidth(20);
-        tcm2.getColumn(5).setPreferredWidth(20);
+        tcm2.getColumn(5).setPreferredWidth(30);
         tcm2.getColumn(6).setPreferredWidth(20);
         tcm2.getColumn(7).setPreferredWidth(30);
         tcm2.getColumn(8).setPreferredWidth(50);

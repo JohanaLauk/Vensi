@@ -2,7 +2,7 @@ package Vista;
 
 import DAO.ProveedorDAO;
 import Modelo.Proveedor;
-import Validacion.Validar;
+import Utils.Validar;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 

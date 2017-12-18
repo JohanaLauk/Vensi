@@ -2,7 +2,7 @@ package Vista;
 
 import DAO.ProveedorDAO;
 import Modelo.Proveedor;
-import Validacion.Validar;
+import Utils.Validar;
 import java.awt.Dimension;
 import javax.swing.JOptionPane;
 
@@ -57,9 +57,6 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         jLabel4.setText("Contacto:");
 
         txfdCuit.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txfdCuitKeyReleased(evt);
-            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdCuitKeyTyped(evt);
             }
@@ -231,10 +228,6 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         }
 
     }//GEN-LAST:event_btnAceptarActionPerformed
-
-    private void txfdCuitKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCuitKeyReleased
-        
-    }//GEN-LAST:event_txfdCuitKeyReleased
 
     private void txfdCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCuitKeyTyped
         char c = evt.getKeyChar();

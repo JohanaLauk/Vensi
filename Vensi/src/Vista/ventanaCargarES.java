@@ -2,7 +2,7 @@ package Vista;
 
 import DAO.*;
 import Modelo.*;
-import Validacion.Validar;
+import Utils.Validar;
 import java.awt.Dimension;
 import java.util.Date;
 import java.util.List;

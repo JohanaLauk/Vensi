@@ -1,8 +1,10 @@
 package Vista;
 
+import Utils.Redondear;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.text.DecimalFormat;
 
 public class ventanaPrincipal extends javax.swing.JFrame 
 {
@@ -10,14 +12,11 @@ public class ventanaPrincipal extends javax.swing.JFrame
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);     //centra la ventana  
-        
+        this.setLocationRelativeTo(null);     //centra la ventana          
         //this.setPreferredSize(new Dimension(836, 520));    //al ejecutarse, la ventana aparece con esa medida
-        this.setPreferredSize(new Dimension(820, 480));
-        
-        //this.setUndecorated(true);  //sin bordes ni botones
-        
-        //this.setOpacity(0.95f);
+        this.setPreferredSize(new Dimension(820, 480));        
+        //this.setUndecorated(true);  //sin bordes ni botones        
+        //this.setOpacity(0.95f);                               
         
         Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/Vensi.png"));
         this.setIconImage(ico);
