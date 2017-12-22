@@ -66,5 +66,6 @@ public class ItemVenta  implements java.io.Serializable
     public void setTurno(Turno turno) 
     {
         this.turno = turno;
-    }    
+    }
+    
 }
