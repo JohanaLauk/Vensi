@@ -654,10 +654,22 @@ public class ventanaPedido extends javax.swing.JFrame
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int filaSelec = tablaProd.getSelectedRow();
+        boolean repetido = false;
         
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
         {
             String id_recibido = tablaProd.getValueAt(filaSelec, 6).toString();
+            for(int i = 0; i < tablaPedido.getModel().getRowCount(); i++){
+                if(Integer.parseInt(tablaPedido.getValueAt(i, 3).toString()) == Integer.parseInt(id_recibido))
+                {
+                    repetido = true;
+                }
+            }
+            if(repetido){
+                JOptionPane.showMessageDialog(null, "Producto repetido.");
+            }
+            else{
+                            
             elProd = prodDAO.buscarPorId(Integer.parseInt(id_recibido));
             
             String codigo = elProd.getCodigo();
@@ -675,6 +687,7 @@ public class ventanaPedido extends javax.swing.JFrame
                 String filaNueva[] = {codigo, descrip, cantidad, id_recibido};
                 m.addRow(filaNueva);                   
             }
+            }
         }
         else
         {
@@ -690,6 +703,7 @@ public class ventanaPedido extends javax.swing.JFrame
         btnAgregar.setEnabled(false);
         btnQuitar.setEnabled(false);
         txfdCantidad.setEnabled(false);
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
