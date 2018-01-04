@@ -502,10 +502,19 @@ public class ventanaCompra extends javax.swing.JFrame
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int filaSelec = tablaProd.getSelectedRow();
+        boolean repetido = false;
 
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
         {
             String id_recibido = tablaProd.getValueAt(filaSelec, 7).toString();
+            for(int i = 0; i < tablaListaInventario.getModel().getRowCount(); i++){
+                if(Integer.parseInt(tablaListaInventario.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido)){
+                    repetido = true;
+                }
+            }
+            if(repetido){
+                JOptionPane.showMessageDialog(null, "Producto repetido.");
+            }else{
             elProd = prodDAO.buscarPorId(Integer.parseInt(id_recibido));
                         
             String descrip = elProd.getDescripcion();
@@ -546,6 +555,7 @@ public class ventanaCompra extends javax.swing.JFrame
                     String filaNueva[] = {descrip, cantidad, "---", "$"+precioVentaU, id_recibido};
                     m.addRow(filaNueva);
                 }
+            }
             }
         }
         else
