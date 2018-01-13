@@ -217,7 +217,7 @@ public class ventanaVenta extends javax.swing.JFrame
 
         jLabel4.setText("Filtrar por:");
 
-        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo ofertas" }));
+        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo habilitados", "Sólo ofertas" }));
         cbFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFiltroActionPerformed(evt);
@@ -239,8 +239,8 @@ public class ventanaVenta extends javax.swing.JFrame
                     .addGroup(panelBusquedaLayout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(15, 15, 15)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -871,12 +871,16 @@ public class ventanaVenta extends javax.swing.JFrame
     private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
         if (cbFiltro.getSelectedItem().equals("Todos"))
         {
-            situacionSelec = "Todos";
+            situacionSelec = "HabOferta";
         }
-        else
+        if (cbFiltro.getSelectedItem().equals("Sólo habilitados"))
+        {
+            situacionSelec = "Habilitado";
+        }
+        if (cbFiltro.getSelectedItem().equals("Sólo ofertas"))
         {
             situacionSelec = "Oferta";
-        }
+        }        
         llenarTabla();
     }//GEN-LAST:event_cbFiltroActionPerformed
 
@@ -1120,7 +1124,7 @@ public class ventanaVenta extends javax.swing.JFrame
     {
         String[] ordenamiento = new String[4];
               
-        ordenamiento[0] = filtroSelec;
+        ordenamiento[0] = filtroSelec;        
         ordenamiento[1] = situacionSelec;
         ordenamiento[2] = ordenSelec;
         ordenamiento[3] = tipoSelec;

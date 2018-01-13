@@ -247,7 +247,7 @@ public class ventanaProducto extends javax.swing.JFrame
             }
         });
 
-        cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo ofertas", "Sólo suspendidos" }));
+        cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo habilitados", "Sólo ofertas", "Sólo suspendidos" }));
         cbSituacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSituacionActionPerformed(evt);
@@ -529,17 +529,19 @@ public class ventanaProducto extends javax.swing.JFrame
         {
             situacionSelec = "Todos";
         }
-        else
+        if (cbSituacion.getSelectedItem().equals("Sólo habilitados"))
         {
-            if (cbSituacion.getSelectedItem().equals("Sólo ofertas"))
-            {
-                situacionSelec = "Oferta";
-            }
-            else
-            {
-                situacionSelec = "Suspendido";
-            }
+            situacionSelec = "Habilitado";
         }
+        if (cbSituacion.getSelectedItem().equals("Sólo ofertas"))
+        {
+            situacionSelec = "Oferta";
+        }    
+        if (cbSituacion.getSelectedItem().equals("Sólo suspendidos"))
+        {
+            situacionSelec = "Suspendido";        
+        }
+    
         llenarTabla();
     }//GEN-LAST:event_cbSituacionActionPerformed
     

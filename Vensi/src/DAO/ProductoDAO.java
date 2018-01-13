@@ -280,7 +280,7 @@ public class ProductoDAO
         return lista;        
     }
             
-    public List<Producto> listar(String[] datos)  //ordenado por descripcio ASC
+    public List<Producto> listar(String[] datos)  //ordenado por descripcion ASC
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
         
@@ -478,96 +478,7 @@ public class ProductoDAO
                     }
                     else
                     {
-                        if (situacion.equals("Oferta"))                    
-                        {
-                            switch (ordenCampo)
-                            {
-                                case "descripcion":
-                                {
-                                     if (tipoOrden.equals("ASC"))
-                                     {
-                                         lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY descripcion").list();
-                                     }
-                                     else
-                                     {
-                                         lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY descripcion DESC").list();
-                                     }
-                                } break;
-
-                                case "codigo":
-                                {
-                                    if (tipoOrden.equals("ASC"))
-                                    {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY codigo").list();
-                                    }
-                                    else
-                                    {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY codigo DESC").list();
-                                    }
-                                } break;
-
-                                case "precio_costo":
-                                {
-                                    if (tipoOrden.equals("ASC"))
-                                    {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY precio_costo").list();
-                                    }
-                                    else
-                                    {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY precio_costo DESC").list();
-                                    }
-                                } break;
-
-                                case "precio_venta":
-                                {
-                                    if (tipoOrden.equals("ASC"))
-                                    {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY precio_venta").list();
-                                    }
-                                    else
-                                    {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY precio_venta DESC").list();
-                                    }
-                                } break;
-
-                                case "stock":
-                                {
-                                    if (tipoOrden.equals("ASC"))
-                                    {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY stock").list();
-                                    }
-                                    else
-                                    {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY stock DESC").list();
-                                    }
-                                } break;
-
-                                case "stock_minimo":
-                                {
-                                    if (tipoOrden.equals("ASC"))
-                                    {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY stock_minimo").list();
-                                    }
-                                    else
-                                    {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY stock_minimo DESC").list();
-                                    }
-                                } break;
-
-                                case "peso_envase":
-                                {
-                                    if (tipoOrden.equals("ASC"))
-                                    {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY peso_envase").list();
-                                    }
-                                    else
-                                    {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY peso_envase DESC").list();
-                                    }
-                                } break;
-                            }                            
-                        }
-                        else
+                        if (situacion.equals("Habilitado"))
                         {
                             switch (ordenCampo)
                             {
@@ -575,11 +486,11 @@ public class ProductoDAO
                                 {
                                     if (tipoOrden.equals("ASC"))
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY descripcion").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY descripcion").list();
                                     }
                                     else
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY descripcion DESC").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY descripcion DESC").list();
                                     }
                                 } break;
 
@@ -587,11 +498,11 @@ public class ProductoDAO
                                 {
                                     if (tipoOrden.equals("ASC"))
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY codigo").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY codigo").list();
                                     }
                                     else
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY codigo DESC").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY codigo DESC").list();
                                     }
                                 } break;
 
@@ -599,11 +510,11 @@ public class ProductoDAO
                                 {
                                     if (tipoOrden.equals("ASC"))
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY precio_costo").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY precio_costo").list();
                                     }
                                     else
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY precio_costo DESC").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY precio_costo DESC").list();
                                     }
                                 } break;
 
@@ -611,11 +522,11 @@ public class ProductoDAO
                                 {
                                     if (tipoOrden.equals("ASC"))
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY precio_venta").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY precio_venta").list();
                                     }
                                     else
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY precio_venta DESC").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY precio_venta DESC").list();
                                     }
                                 } break;
 
@@ -623,11 +534,11 @@ public class ProductoDAO
                                 {
                                     if (tipoOrden.equals("ASC"))
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY stock").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY stock").list();
                                     }
                                     else
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY stock DESC").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY stock DESC").list();
                                     }
                                 } break;
 
@@ -635,11 +546,11 @@ public class ProductoDAO
                                 {
                                     if (tipoOrden.equals("ASC"))
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY stock_minimo").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY stock_minimo").list();
                                     }
                                     else
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY stock_minimo DESC").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY stock_minimo DESC").list();
                                     }
                                 } break;
 
@@ -647,15 +558,288 @@ public class ProductoDAO
                                 {
                                     if (tipoOrden.equals("ASC"))
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY peso_envase").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY peso_envase").list();
                                     }
                                     else
                                     {
-                                        lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY peso_envase DESC").list();
+                                        lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = false AND suspendido = false ORDER BY peso_envase DESC").list();
                                     }
                                 } break;
                             }
                         }
+                        else
+                        {
+                            if (situacion.equals("Oferta"))                    
+                            {
+                                switch (ordenCampo)
+                                {
+                                    case "descripcion":
+                                    {
+                                         if (tipoOrden.equals("ASC"))
+                                         {
+                                             lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY descripcion").list();
+                                         }
+                                         else
+                                         {
+                                             lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY descripcion DESC").list();
+                                         }
+                                    } break;
+
+                                    case "codigo":
+                                    {
+                                        if (tipoOrden.equals("ASC"))
+                                        {
+                                            lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY codigo").list();
+                                        }
+                                        else
+                                        {
+                                            lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY codigo DESC").list();
+                                        }
+                                    } break;
+
+                                    case "precio_costo":
+                                    {
+                                        if (tipoOrden.equals("ASC"))
+                                        {
+                                            lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY precio_costo").list();
+                                        }
+                                        else
+                                        {
+                                            lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY precio_costo DESC").list();
+                                        }
+                                    } break;
+
+                                    case "precio_venta":
+                                    {
+                                        if (tipoOrden.equals("ASC"))
+                                        {
+                                            lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY precio_venta").list();
+                                        }
+                                        else
+                                        {
+                                            lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY precio_venta DESC").list();
+                                        }
+                                    } break;
+
+                                    case "stock":
+                                    {
+                                        if (tipoOrden.equals("ASC"))
+                                        {
+                                            lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY stock").list();
+                                        }
+                                        else
+                                        {
+                                            lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY stock DESC").list();
+                                        }
+                                    } break;
+
+                                    case "stock_minimo":
+                                    {
+                                        if (tipoOrden.equals("ASC"))
+                                        {
+                                            lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY stock_minimo").list();
+                                        }
+                                        else
+                                        {
+                                            lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY stock_minimo DESC").list();
+                                        }
+                                    } break;
+
+                                    case "peso_envase":
+                                    {
+                                        if (tipoOrden.equals("ASC"))
+                                        {
+                                            lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY peso_envase").list();
+                                        }
+                                        else
+                                        {
+                                            lista = session.createQuery("FROM Producto WHERE estado = true AND oferta = true ORDER BY peso_envase DESC").list();
+                                        }
+                                    } break;
+                                }                            
+                            }
+                            else
+                            {
+                                if (situacion.equals("Suspendido"))
+                                {
+                                    switch (ordenCampo)
+                                    {
+                                        case "descripcion":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY descripcion").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY descripcion DESC").list();
+                                            }
+                                        } break;
+
+                                        case "codigo":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY codigo").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY codigo DESC").list();
+                                            }
+                                        } break;
+
+                                        case "precio_costo":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY precio_costo").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY precio_costo DESC").list();
+                                            }
+                                        } break;
+
+                                        case "precio_venta":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY precio_venta").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY precio_venta DESC").list();
+                                            }
+                                        } break;
+
+                                        case "stock":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY stock").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY stock DESC").list();
+                                            }
+                                        } break;
+
+                                        case "stock_minimo":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY stock_minimo").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY stock_minimo DESC").list();
+                                            }
+                                        } break;
+
+                                        case "peso_envase":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY peso_envase").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = true ORDER BY peso_envase DESC").list();
+                                            }
+                                        } break;
+                                    }
+                                }
+                                else
+                                {   //"HabOferta"
+                                    switch (ordenCampo)
+                                    {
+                                        case "descripcion":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY descripcion").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY descripcion DESC").list();
+                                            }
+                                        } break;
+
+                                        case "codigo":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY codigo").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY codigo DESC").list();
+                                            }
+                                        } break;
+
+                                        case "precio_costo":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY precio_costo").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY precio_costo DESC").list();
+                                            }
+                                        } break;
+
+                                        case "precio_venta":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY precio_venta").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY precio_venta DESC").list();
+                                            }
+                                        } break;
+
+                                        case "stock":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY stock").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY stock DESC").list();
+                                            }
+                                        } break;
+
+                                        case "stock_minimo":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY stock_minimo").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY stock_minimo DESC").list();
+                                            }
+                                        } break;
+
+                                        case "peso_envase":
+                                        {
+                                            if (tipoOrden.equals("ASC"))
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY peso_envase").list();
+                                            }
+                                            else
+                                            {
+                                                lista = session.createQuery("FROM Producto WHERE estado = true AND suspendido = false ORDER BY peso_envase DESC").list();
+                                            }
+                                        } break;
+                                    }
+                                }
+                            }
+                        }                        
                     }
                 }
                 else

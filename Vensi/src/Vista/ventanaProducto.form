@@ -341,10 +341,11 @@
         <Component class="javax.swing.JComboBox" name="cbSituacion">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
-              <StringArray count="3">
+              <StringArray count="4">
                 <StringItem index="0" value="Todos"/>
-                <StringItem index="1" value="S&#xf3;lo ofertas"/>
-                <StringItem index="2" value="S&#xf3;lo suspendidos"/>
+                <StringItem index="1" value="S&#xf3;lo habilitados"/>
+                <StringItem index="2" value="S&#xf3;lo ofertas"/>
+                <StringItem index="3" value="S&#xf3;lo suspendidos"/>
               </StringArray>
             </Property>
           </Properties>
