@@ -6,6 +6,7 @@ import Modelo.*;
 import Utils.Redondear;
 import Utils.Validar;
 import java.awt.Dimension;
+import java.text.DecimalFormat;
 import java.util.*;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -20,10 +21,11 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     Validar validar = new Validar();
     DefaultTableModel modelo;
     TableColumnModel tcm;
+    
     List<JCheckBox> checkProv = new ArrayList<>();
     JScrollPane scrollPane;
     
-    Redondear r = new Redondear();
+    Redondear r = new Redondear();    
     
     String situacion = "Ninguno";
             
@@ -369,8 +371,8 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                 {
                     if (validar.validarPrecio(txfdPrecioCosto.getText()))
                     {
-                        double precioC = Double.parseDouble(txfdPrecioCosto.getText());
-                        unProd.setPrecioCosto(r.RedondearCentavos(precioC));
+                        double precioC = Double.parseDouble(txfdPrecioCosto.getText());                       
+                        unProd.setPrecioCosto(precioC);//r.RedondearCentavos(precioC));
                     }
                     else
                     {
@@ -388,7 +390,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                     if (validar.validarPrecio(txfdPrecioVenta.getText()))
                     {
                         double precioV = Double.parseDouble(txfdPrecioVenta.getText());
-                        unProd.setPrecioVenta(r.RedondearCentavos(precioV));
+                        unProd.setPrecioVenta(precioV); //r.RedondearCentavos(precioV));
                     }
                     else
                     {
@@ -413,9 +415,10 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                     unProd.setStock(total2);   //guardo en gramos
 
                     double precioV = Double.parseDouble(txfdPrecioVenta.getText());
-                    precioV = r.RedondearCentavos(precioV);
+                    //precioV = r.RedondearCentavos(precioV);
                     double precioKilo = (1000 * precioV) / pesoEnv;
-                    unProd.setPrecioVentaXKilo(r.RedondearCentavos(precioKilo));
+                    r.RedondearCentavos(precioKilo);
+                    unProd.setPrecioVentaXKilo(precioKilo);
                 }
                 else
                 {

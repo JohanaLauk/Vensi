@@ -7,6 +7,7 @@ import Modelo.Proveedor;
 import Utils.Redondear;
 import Utils.Validar;
 import java.awt.Dimension;
+import java.text.DecimalFormat;
 import java.util.*;
 import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
@@ -21,14 +22,14 @@ public class ventanaEditarProd extends javax.swing.JFrame
     DefaultTableModel modelo;
     TableColumnModel tcm;
     
-    Redondear r = new Redondear();    
+    Redondear r = new Redondear();   
     
     public static int id_recibido;
     Producto elProd = null;
     String estado = null;
     String situacion = "Ninguno";
     
-    int stockU;    
+    int stockU;    //variable usada en mostrarProdSelec()
     List<JCheckBox> checkProv = new ArrayList<>();
 
     public ventanaEditarProd() 
@@ -374,16 +375,17 @@ public class ventanaEditarProd extends javax.swing.JFrame
                 if (validar.validarPrecio(txfdEditarPrecioCosto.getText())) 
                 {
                     double precioC = Double.parseDouble(txfdEditarPrecioCosto.getText());
-                    prod.setPrecioCosto(r.RedondearCentavos(precioC));
+                    prod.setPrecioCosto(precioC); //r.RedondearCentavos(precioC));
                 } 
                 else 
                 {
                     JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio costo");
                 }
+                
                 if (validar.validarPrecio(txfdEditarPrecioVenta.getText())) 
                 {
                     double precioV = Double.parseDouble(txfdEditarPrecioVenta.getText());
-                    prod.setPrecioVenta(r.RedondearCentavos(precioV));
+                    prod.setPrecioVenta(precioV); //r.RedondearCentavos(precioV));
                 } 
                 else 
                 {
@@ -394,7 +396,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
                 {
                     prod.setPorPeso(true);
                                        
-                    int pesoEnv = Integer.parseInt(txfdEditarPesoEnvase.getText());
+                    int pesoEnv = Integer.parseInt(txfdEditarPesoEnvase.getText());                    
                     prod.setPesoEnvase(pesoEnv);
                                        
                     int stockMin = Integer.parseInt(txfdEditarStockMinimo.getText());
@@ -405,15 +407,18 @@ public class ventanaEditarProd extends javax.swing.JFrame
                     prod.setStock(total2);  //guardo el nuevo stock en gramos  
                     
                     double precioV = Double.parseDouble(txfdEditarPrecioVenta.getText());
-                    precioV = r.RedondearCentavos(precioV);
+                    //precioV = r.RedondearCentavos(precioV);
                     double precioKilo = (1000 * precioV) / pesoEnv;
+                    r.RedondearCentavos(precioKilo);
                     prod.setPrecioVentaXKilo(precioKilo);
                 } 
                 else 
                 {
+                    prod.setStock(stockU);
                     prod.setPorPeso(false);
                     prod.setPesoEnvase(0);                    
                     prod.setStockMinimo(Integer.parseInt(txfdEditarStockMinimo.getText()));
+                    prod.setPrecioVentaXKilo(0);
                 }
 
                 if (cbEstado.getSelectedItem().equals("Habilitado")) 
@@ -464,7 +469,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
                     JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor");
                 }
             }
-
         } 
         else 
         {
@@ -549,7 +553,14 @@ public class ventanaEditarProd extends javax.swing.JFrame
         txfdEditarPrecioCosto.setText(String.valueOf(elProd.getPrecioCosto()));
         txfdEditarPrecioVenta.setText(String.valueOf(elProd.getPrecioVenta()));
         
-        stockU = elProd.getStock() / elProd.getPesoEnvase();  //convertimos los gramos en unidades
+        if (elProd.isPorPeso())
+        {
+            stockU = elProd.getStock() / elProd.getPesoEnvase();  //convertimos los gramos en unidades
+        }        
+        else
+        {
+            stockU = elProd.getStock();
+        }
         
         if (elProd.isPorPeso())
         {   //convertimos los gramos en unidades

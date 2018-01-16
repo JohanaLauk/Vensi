@@ -32,19 +32,17 @@ public class ventanaVenta extends javax.swing.JFrame
     DefaultListModel modeloList;
     
     List<Producto> listaBusqueda = null;
+    Turno turnoActual = null; 
     
     String filtroSelec = "Habilitados";
-    String situacionSelec = "Todos";
+    String situacionSelec = "HabOferta";
     String ordenSelec = "descripcion";
     String tipoSelec = "ASC";
     
     Redondear r = new Redondear();
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
-    
-    Turno turnoActual = null;    
-    static double totalCarrito = 0; //inicializa en 0 cada vez que se confirma la compra
-    
+        
     public ventanaVenta() 
     {
         initComponents();
@@ -635,20 +633,18 @@ public class ventanaVenta extends javax.swing.JFrame
         else
         {
             JOptionPane.showMessageDialog(null, "El carrito está vacío.");
-        }        
-        labPrecioTotalCompra.setText("$" + totalCarrito);
-        totalCarrito = 0;
+        }
+        
+        labPrecioTotalCompra.setText("$0");
         llenarTabla();
         llenarTablaCarrito();
-        labPrecioTotalCompra.setText("$" + totalCarrito);
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int filaSelec = tablaProd.getSelectedRow();
 
-        if (filaSelec >= 0)  //corrobotamos si seleccionó una fila
-        {
-            String precioTotal = null;            
+        if (filaSelec >= 0)  //corroboramos si seleccionó una fila
+        {                        
             boolean modificar = false;
             int filaModificar = -1;  
             
@@ -672,29 +668,11 @@ public class ventanaVenta extends javax.swing.JFrame
                 } 
                 else 
                 {
-                    m = (DefaultTableModel) tablaCarrito.getModel();                    
-                    double precioU = 0;
+                    m = (DefaultTableModel) tablaCarrito.getModel();
                     String precioUnitario = null;
-                    double x = 0;
+                    String precioTotal = null;
+                    double precioU = 0, x = 0;
                         
-                    if (elProd.isPorPeso())
-                    {
-                        int pesoEnv = elProd.getPesoEnvase();
-                        
-                        double precioVenta = elProd.getPrecioVenta();
-                        precioU = (Integer.parseInt(cantidad) * precioVenta) / pesoEnv; 
-                        x = r.RedondearCentavos(precioU);
-                        precioUnitario = String.valueOf("---");
-                        precioTotal = String.valueOf(formatoPrecios.format(x));
-                    }
-                    else
-                    {
-                        precioU = elProd.getPrecioVenta();
-                        x = precioU * Integer.parseInt(cantidad);
-                        precioUnitario = String.valueOf(formatoPrecios.format(precioU));
-                        precioTotal = String.valueOf(formatoPrecios.format(x));
-                    }                    
-                    
                     for (int i = 0; i < tablaCarrito.getModel().getRowCount(); i++) 
                     {
                         if (Integer.parseInt(tablaCarrito.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido)) 
@@ -703,67 +681,67 @@ public class ventanaVenta extends javax.swing.JFrame
                             filaModificar = i;
                         }
                     }
-
-                    if (modificar) 
-                    {
-                        String cadena = tablaCarrito.getValueAt(filaModificar, 1).toString();
-                        String gramos = cadena.substring(0, cadena.length()-2); 
-                        cantidad = String.valueOf(Integer.parseInt(cantidad) + Integer.parseInt(gramos));
-                        
+                    
+                    if (modificar)  //producto repetido
+                    {   
                         if (elProd.isPorPeso())
                         {
+                            String cadena = tablaCarrito.getValueAt(filaModificar, 1).toString();
+                            String gramos = cadena.substring(0, cadena.length()-2); 
+                            cantidad = String.valueOf(Integer.parseInt(cantidad) + Integer.parseInt(gramos));
+                        
                             int pesoEnv = elProd.getPesoEnvase();
                             
                             double precioVenta = elProd.getPrecioVenta();
                             precioU = (Integer.parseInt(cantidad) * precioVenta) / pesoEnv; 
-                            x = r.RedondearCentavos(precioU);
-                            precioUnitario = String.valueOf("---");                            
-                            precioTotal = String.valueOf(formatoPrecios.format(x));
+                            x = r.RedondearCentavos(precioU); 
+                            precioTotal = String.valueOf(formatoPrecios.format(x));   
+                            
+                            tablaCarrito.setValueAt(cantidad+"gr", filaModificar, 1);
                         }
                         else
                         {
-                            precioU = elProd.getPrecioVenta();
-                            x = precioU * Integer.parseInt(cantidad); 
-                            precioUnitario = String.valueOf(formatoPrecios.format(precioU));
+                            String cantHay = tablaCarrito.getValueAt(filaModificar, 1).toString();
+                            int canti = Integer.parseInt(cantHay) + Integer.parseInt(cantidad);
+                            cantidad = String.valueOf(canti);
+                            
+                            precioU = elProd.getPrecioVenta();  
+                            x = precioU * Integer.parseInt(cantidad);
                             precioTotal = String.valueOf(formatoPrecios.format(x));
+                            
+                            tablaCarrito.setValueAt(cantidad, filaModificar, 1);
                         }                   
                         
-                        m.removeRow(filaModificar);
+                        tablaCarrito.setValueAt("$"+precioTotal, filaModificar, 3);
                     }
-                    if (elProd.isPorPeso())
+                    else    //producto nuevo
                     {
-                        String filaNueva[] = {descrip, cantidad + "gr", precioUnitario, "$"+precioTotal, id_recibido};
-                        m.addRow(filaNueva);
-                    }
-                    else
-                    {
-                        String filaNueva[] = {descrip, cantidad, "$"+precioUnitario, "$"+precioTotal, id_recibido};
-                        m.addRow(filaNueva);
-                    }
-                    
-                    totalCarrito = 0;
-                    for (int i = 0; i < tablaCarrito.getRowCount(); i++) 
-                    {
-                        int id = Integer.parseInt(tablaCarrito.getValueAt(i, 4).toString());
-                        Producto p = pDAO.buscarPorId(id);
-                        double precioT = 0;
-                        
-                        if (p.isPorPeso())
+                        if (elProd.isPorPeso())
                         {
-                            String cadena = tablaCarrito.getValueAt(i, 1).toString();
-                            String cant = cadena.substring(0, cadena.length()-2);
+                            int pesoEnv = elProd.getPesoEnvase();
+
+                            double precioVenta = elProd.getPrecioVenta();
+                            precioU = (Integer.parseInt(cantidad) * precioVenta) / pesoEnv; 
+                            x = r.RedondearCentavos(precioU);
+                            precioUnitario = String.valueOf("---");
+                            precioTotal = String.valueOf(formatoPrecios.format(x));
                             
-                            precioT = (Integer.parseInt(cant) * p.getPrecioVenta()) / p.getPesoEnvase();
-                            precioT = r.RedondearCentavos(precioT);
+                            String filaNueva[] = {descrip, cantidad + "gr", precioUnitario, "$"+precioTotal, id_recibido};
+                            m.addRow(filaNueva);
                         }
                         else
-                        {                            
-                            int cant = Integer.parseInt(tablaCarrito.getValueAt(i, 1).toString());
-                            precioT = p.getPrecioVenta() * cant;
-                        }
-                        totalCarrito += precioT;
-                    }
-                    labPrecioTotalCompra.setText(String.valueOf(totalCarrito));
+                        {
+                            precioU = elProd.getPrecioVenta();                        
+                            precioUnitario = String.valueOf(formatoPrecios.format(precioU));
+                            x = precioU * Integer.parseInt(cantidad);
+                            precioTotal = String.valueOf(formatoPrecios.format(x));
+                            
+                            String filaNueva[] = {descrip, cantidad, "$"+precioUnitario, "$"+precioTotal, id_recibido};
+                            m.addRow(filaNueva);
+                        } 
+                    } 
+                    
+                    labPrecioTotalCompra.setText(String.valueOf("$"+calcularTotalCarrito()));
 
                     txfdCantidad.setText(null);
                 }
@@ -787,31 +765,12 @@ public class ventanaVenta extends javax.swing.JFrame
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
         int filaSelec = tablaCarrito.getSelectedRow();
         
-        if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
+        if (filaSelec >= 0)   //corroboramos si seleccionó una fila
         {    
-            int id = Integer.parseInt(tablaCarrito.getValueAt(filaSelec, 4).toString());
-            Producto p = pDAO.buscarPorId(id);
-            double precioT = 0;
-
-            if (p.isPorPeso())
-            {
-                String cadena = tablaCarrito.getValueAt(filaSelec, 1).toString();
-                String cant = cadena.substring(0, cadena.length()-2);
-
-                precioT = (Integer.parseInt(cant) * p.getPrecioVenta()) / p.getPesoEnvase();
-                precioT = r.RedondearCentavos(precioT);
-            }
-            else
-            {                            
-                int cant = Integer.parseInt(tablaCarrito.getValueAt(filaSelec, 1).toString());
-                precioT = p.getPrecioVenta() * cant;
-            }
-            
-            totalCarrito = totalCarrito - precioT;
-            labPrecioTotalCompra.setText(String.valueOf(totalCarrito));
-            
             m = (DefaultTableModel) tablaCarrito.getModel();
             m.removeRow(filaSelec);
+            
+            labPrecioTotalCompra.setText(String.valueOf("$"+calcularTotalCarrito()));
         }
         else
         {
@@ -919,10 +878,12 @@ public class ventanaVenta extends javax.swing.JFrame
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf("$"+ formatoPrecios.format(p.getPrecioVenta()));            
+                        
             
             if (p.isPorPeso())
             {
+                datos[2] = String.valueOf("---");
+                
                 datos[3] = String.valueOf("$"+ formatoPrecios.format(p.getPrecioVentaXKilo()));
                 
                 int pesoEnv1 = p.getPesoEnvase();
@@ -934,6 +895,7 @@ public class ventanaVenta extends javax.swing.JFrame
             }
             else
             {
+                datos[2] = String.valueOf("$"+ formatoPrecios.format(p.getPrecioVenta()));
                 datos[3] = String.valueOf("---");
                 datos[4] = String.valueOf(p.getStock());
             }            
@@ -949,7 +911,7 @@ public class ventanaVenta extends javax.swing.JFrame
         tcm.getColumn(1).setPreferredWidth(400);
         tcm.getColumn(2).setPreferredWidth(30);
         tcm.getColumn(3).setPreferredWidth(30);
-        tcm.getColumn(4).setPreferredWidth(50);
+        tcm.getColumn(4).setPreferredWidth(60);
         tcm.getColumn(5).setPreferredWidth(0);     
         tcm.getColumn(5).setMaxWidth(0);
         tcm.getColumn(5).setMinWidth(0);
@@ -1082,10 +1044,12 @@ public class ventanaVenta extends javax.swing.JFrame
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf("$"+ formatoPrecios.format(p.getPrecioVenta()));            
+                        
             
             if (p.isPorPeso())
             {
+                datos[2] = String.valueOf("---");
+                
                 datos[3] = String.valueOf("$"+ formatoPrecios.format(p.getPrecioVentaXKilo()));
                 
                 int pesoEnv1 = p.getPesoEnvase();
@@ -1097,6 +1061,7 @@ public class ventanaVenta extends javax.swing.JFrame
             }
             else
             {
+                datos[2] = String.valueOf("$"+ formatoPrecios.format(p.getPrecioVenta()));
                 datos[3] = String.valueOf("---");
                 datos[4] = String.valueOf(p.getStock());
             }
@@ -1112,7 +1077,7 @@ public class ventanaVenta extends javax.swing.JFrame
         tcm3.getColumn(1).setPreferredWidth(400);
         tcm3.getColumn(2).setPreferredWidth(30);
         tcm3.getColumn(3).setPreferredWidth(30);
-        tcm3.getColumn(4).setPreferredWidth(50);
+        tcm3.getColumn(4).setPreferredWidth(60);
         tcm3.getColumn(5).setPreferredWidth(0);     
         tcm3.getColumn(5).setMaxWidth(0);
         tcm3.getColumn(5).setMinWidth(0);
@@ -1221,6 +1186,37 @@ public class ventanaVenta extends javax.swing.JFrame
                 }                
             }
         }
+    }
+    
+    public double calcularTotalCarrito()
+    {
+        double totalCarrito = 0;
+        double precioT = 0;
+        
+        for (int i = 0; i < tablaCarrito.getRowCount(); i++) 
+        {
+            int id = Integer.parseInt(tablaCarrito.getValueAt(i, 4).toString());
+            Producto p = pDAO.buscarPorId(id);            
+
+            if (p.isPorPeso())
+            {
+                String cadena = tablaCarrito.getValueAt(i, 1).toString();
+                String cant = cadena.substring(0, cadena.length()-2);   //cantidad en gramos de la tabla
+
+                precioT = (Integer.parseInt(cant) * p.getPrecioVenta()) / p.getPesoEnvase();
+                precioT = r.RedondearCentavos(precioT);
+                //formatoPrecios.format(precioT);
+            }
+            else
+            {                            
+                int cant = Integer.parseInt(tablaCarrito.getValueAt(i, 1).toString());
+                precioT = p.getPrecioVenta() * cant;
+            }      
+            
+            totalCarrito += precioT;
+        }
+        
+        return totalCarrito;
     }
     
     public void limpiarList()

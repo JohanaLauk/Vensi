@@ -482,7 +482,7 @@ public class ventanaProducto extends javax.swing.JFrame
         
         llenarTablaBusqueda(listaBusqueda);
         
-        if (cadena.equals("") || cadena == null)
+        if (cadena.equals(""))
         {
             cbFiltroCampo.setEnabled(true);
             if (cbFiltroCampo.getSelectedItem().equals("Habilitados"))
