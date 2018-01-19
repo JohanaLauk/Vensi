@@ -28,6 +28,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     Redondear r = new Redondear();    
     
     String situacion = "Ninguno";
+    
             
     public ventanaNuevoProd() 
     {
@@ -38,7 +39,8 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         //this.setUndecorated(true);  //quita los bordes de la ventana, incluyendo los botones
         
         txfdPesoEnvase.setEnabled(false); 
-        llenarCheckBoxProv();             
+        llenarCheckBoxProv();          
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -183,7 +185,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             }
         });
 
-        panelProveedor.setAutoscrolls(true);
         panelProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         panelProveedor.setLayout(null);
 
@@ -526,17 +527,21 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             c.setVisible(true);
             checkProv.add(c);   //lista de checkBox con los Prov habilitados
             this.panelProveedor.add(c);  //panel que contiene los checkBox de Prov
-            this.validate();    //que es this? que componente?
+            //this.validate();    //que es this? que componente?
             altura += 20;
         }       
         
-        this.panelProveedor.setPreferredSize(new Dimension(220,600));
-        //this.panelProveedor.setAutoscrolls(true);
+        this.panelProveedor.setPreferredSize(new Dimension(220,600));     
         
         scrollPane = new JScrollPane();
         scrollPane.setBounds(300,180,240,200);
         scrollPane.setViewportView(this.panelProveedor);
-        this.add(scrollPane);   
+                
+        this.add(scrollPane);  
+        
+        
+        
+        
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
