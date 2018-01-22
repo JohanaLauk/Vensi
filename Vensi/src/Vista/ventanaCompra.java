@@ -6,6 +6,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -33,6 +34,9 @@ public class ventanaCompra extends javax.swing.JFrame
     Producto elProd = null;
     Proveedor elProv = null;
     String provSelec = null;
+    
+    DecimalFormat formatoPrecios = new DecimalFormat("0.00");
+    DecimalFormat formatoKilos = new DecimalFormat("0.000");
     
     public ventanaCompra() 
     {
@@ -507,55 +511,60 @@ public class ventanaCompra extends javax.swing.JFrame
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
         {
             String id_recibido = tablaProd.getValueAt(filaSelec, 7).toString();
-            for(int i = 0; i < tablaListaInventario.getModel().getRowCount(); i++){
-                if(Integer.parseInt(tablaListaInventario.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido)){
+            for (int i = 0; i < tablaListaInventario.getModel().getRowCount(); i++)
+            {
+                if (Integer.parseInt(tablaListaInventario.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido))
+                {
                     repetido = true;
                 }
             }
-            if(repetido){
-                JOptionPane.showMessageDialog(null, "Producto repetido.");
-            }else{
-            elProd = prodDAO.buscarPorId(Integer.parseInt(id_recibido));
-                        
-            String descrip = elProd.getDescripcion();
-            
-            String cantidad = null, precioCostoU = null, precioVentaU = null;
-            
-            cantidad = txfdCantidad.getText();
-            precioCostoU = txfdPrecioCU.getText();
-            precioVentaU = txfdPrecioVU.getText();
-            m = (DefaultTableModel) tablaListaInventario.getModel();
-            
-            if(cantidad.equals(""))
+            if (repetido)
             {
-                JOptionPane.showMessageDialog(null, "Es obligatorio ingresar una cantidad");
+                JOptionPane.showMessageDialog(null, "Producto repetido.");
             }
             else
             {
-                if (precioCostoU.equals("") && precioVentaU.equals("")) //Ninguno
+                elProd = prodDAO.buscarPorId(Integer.parseInt(id_recibido));
+
+                String descrip = elProd.getDescripcion();
+
+                String cantidad = null, precioCostoU = null, precioVentaU = null;
+
+                cantidad = txfdCantidad.getText();
+                precioCostoU = txfdPrecioCU.getText();
+                precioVentaU = txfdPrecioVU.getText();
+                m = (DefaultTableModel) tablaListaInventario.getModel();
+
+                if(cantidad.equals(""))
                 {
-                    String filaNueva[] = {descrip, cantidad, "---", "---", id_recibido};
-                    m.addRow(filaNueva);
+                    JOptionPane.showMessageDialog(null, "Es obligatorio ingresar una cantidad");
                 }
-                
-                if (!precioCostoU.equals("") && !precioVentaU.equals(""))   //Todos 
-                {                        
-                    String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "$"+precioVentaU, id_recibido};
-                    m.addRow(filaNueva);
+                else
+                {
+                    if (precioCostoU.equals("") && precioVentaU.equals("")) //Ninguno
+                    {
+                        String filaNueva[] = {descrip, cantidad, "---", "---", id_recibido};
+                        m.addRow(filaNueva);
+                    }
+
+                    if (!precioCostoU.equals("") && !precioVentaU.equals(""))   //Todos 
+                    {                        
+                        String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "$"+precioVentaU, id_recibido};
+                        m.addRow(filaNueva);
+                    }
+
+                    if (!precioCostoU.equals("") && precioVentaU.equals("")) //solo precio costo
+                    {                        
+                        String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "---", id_recibido};
+                        m.addRow(filaNueva);
+                    }
+
+                    if (precioCostoU.equals("") && !precioVentaU.equals("")) //solo precio venta
+                    {                        
+                        String filaNueva[] = {descrip, cantidad, "---", "$"+precioVentaU, id_recibido};
+                        m.addRow(filaNueva);
+                    }
                 }
-                
-                if (!precioCostoU.equals("") && precioVentaU.equals("")) //solo precio costo
-                {                        
-                    String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "---", id_recibido};
-                    m.addRow(filaNueva);
-                }
-                
-                if (precioCostoU.equals("") && !precioVentaU.equals("")) //solo precio venta
-                {                        
-                    String filaNueva[] = {descrip, cantidad, "---", "$"+precioVentaU, id_recibido};
-                    m.addRow(filaNueva);
-                }
-            }
             }
         }
         else
@@ -908,8 +917,8 @@ public class ventanaCompra extends javax.swing.JFrame
  
         modelo.addColumn("Código");         //0
         modelo.addColumn("Descripción");    //1
-        modelo.addColumn("$ costo");        //2
-        modelo.addColumn("$ venta");        //3
+        modelo.addColumn("Precio costo");   //2
+        modelo.addColumn("Precio venta");   //3
         modelo.addColumn("Stock");          //4
         modelo.addColumn("Stock mínimo");   //5
         modelo.addColumn("Peso envase");    //6
@@ -919,26 +928,26 @@ public class ventanaCompra extends javax.swing.JFrame
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf("$"+p.getPrecioCosto());
-            datos[3] = String.valueOf("$"+p.getPrecioVenta());
+            datos[2] = String.valueOf("$" + formatoPrecios.format(p.getPrecioCosto()));
+            datos[3] = String.valueOf("$" + formatoPrecios.format(p.getPrecioVenta()));
             
             if (p.isPorPeso())  //por peso
             {
                 int pesoEnvGR1 = p.getPesoEnvase();
                 double pesoEnvGR2 = p.getPesoEnvase();               
-                datos[6] = String.valueOf(pesoEnvGR2 / 1000 + "kg");
+                datos[6] = String.valueOf(formatoKilos.format(pesoEnvGR2 / 1000) + "kg");
                 
                 int stockGR1 = p.getStock();
-                double stockGR2 = p.getStock();
+                //double stockGR2 = p.getStock();
                 int stockU = stockGR1 / pesoEnvGR1;
-                double stockKG = stockGR2 / 1000;
-                datos[4] = String.valueOf(stockU + "  (" + stockKG + "kg)");
+                //double stockKG = stockGR2 / 1000;
+                datos[4] = String.valueOf(stockU); //+ "  (" + formatoKilos.format(stockKG) + "kg)");
                 
                 int stockMinGR1 = p.getStockMinimo();
-                double stockMinGR2 = p.getStockMinimo();
+                //double stockMinGR2 = p.getStockMinimo();
                 int stockMinU = stockMinGR1 / pesoEnvGR1;
-                double stockMinKG = stockMinGR2 / 1000;
-                datos[5] = String.valueOf(stockMinU + "  (" + stockMinKG + "kg)");
+                //double stockMinKG = stockMinGR2 / 1000;
+                datos[5] = String.valueOf(stockMinU); //+ "  (" + formatoKilos.format(stockMinKG) + "kg)");
             }
             else    //por unidad
             {
@@ -956,10 +965,10 @@ public class ventanaCompra extends javax.swing.JFrame
         tcm = tablaProd.getColumnModel();
         tcm.getColumn(0).setPreferredWidth(80);
         tcm.getColumn(1).setPreferredWidth(300);
-        tcm.getColumn(2).setPreferredWidth(30);
-        tcm.getColumn(3).setPreferredWidth(30);
-        tcm.getColumn(4).setPreferredWidth(60);  
-        tcm.getColumn(5).setPreferredWidth(60);
+        tcm.getColumn(2).setPreferredWidth(60);
+        tcm.getColumn(3).setPreferredWidth(60);
+        tcm.getColumn(4).setPreferredWidth(30);  
+        tcm.getColumn(5).setPreferredWidth(50);
         tcm.getColumn(6).setPreferredWidth(60);
         tcm.getColumn(7).setPreferredWidth(0);  
         tcm.getColumn(7).setMaxWidth(0);
@@ -1087,8 +1096,8 @@ public class ventanaCompra extends javax.swing.JFrame
  
         modelo3.addColumn("Código");         //0
         modelo3.addColumn("Descripción");    //1
-        modelo3.addColumn("$ costo");   //2
-        modelo3.addColumn("$ venta");   //3
+        modelo3.addColumn("Precio costo");   //2
+        modelo3.addColumn("Precio venta");   //3
         modelo3.addColumn("Stock");          //4
         modelo3.addColumn("Stock mínimo");   //5
         modelo3.addColumn("Peso envase");    //6
@@ -1098,26 +1107,26 @@ public class ventanaCompra extends javax.swing.JFrame
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf("$"+p.getPrecioCosto());
-            datos[3] = String.valueOf("$"+p.getPrecioVenta());
+            datos[2] = String.valueOf("$" + formatoPrecios.format(p.getPrecioCosto()));
+            datos[3] = String.valueOf("$" + formatoPrecios.format(p.getPrecioVenta()));
             
             if (p.isPorPeso())  //por peso
             {
                 int pesoEnvGR1 = p.getPesoEnvase();
                 double pesoEnvGR2 = p.getPesoEnvase();               
-                datos[6] = String.valueOf(pesoEnvGR2 / 1000 + "kg");
+                datos[6] = String.valueOf(formatoKilos.format(pesoEnvGR2 / 1000) + "kg");
                 
                 int stockGR1 = p.getStock();
-                double stockGR2 = p.getStock();
+                //double stockGR2 = p.getStock();
                 int stockU = stockGR1 / pesoEnvGR1;
-                double stockKG = stockGR2 / 1000;
-                datos[4] = String.valueOf(stockU + "  (" + stockKG + "kg)");
+                //double stockKG = stockGR2 / 1000;
+                datos[4] = String.valueOf(stockU); //+ "  (" + stockKG + "kg)");
                 
                 int stockMinGR1 = p.getStockMinimo();
-                double stockMinGR2 = p.getStockMinimo();
+                //double stockMinGR2 = p.getStockMinimo();
                 int stockMinU = stockMinGR1 / pesoEnvGR1;
-                double stockMinKG = stockMinGR2 / 1000;
-                datos[5] = String.valueOf(stockMinU + "  (" + stockMinKG + "kg)");                
+                //double stockMinKG = stockMinGR2 / 1000;
+                datos[5] = String.valueOf(stockMinU); //+ "  (" + stockMinKG + "kg)");                
             }
             else    //por unidad
             {
@@ -1135,10 +1144,10 @@ public class ventanaCompra extends javax.swing.JFrame
         tcm3 = tablaProd.getColumnModel();
         tcm3.getColumn(0).setPreferredWidth(80);
         tcm3.getColumn(1).setPreferredWidth(300);
-        tcm3.getColumn(2).setPreferredWidth(30);
-        tcm3.getColumn(3).setPreferredWidth(30);
-        tcm3.getColumn(4).setPreferredWidth(60);  
-        tcm3.getColumn(5).setPreferredWidth(60);
+        tcm3.getColumn(2).setPreferredWidth(60);
+        tcm3.getColumn(3).setPreferredWidth(60);
+        tcm3.getColumn(4).setPreferredWidth(30);  
+        tcm3.getColumn(5).setPreferredWidth(50);
         tcm3.getColumn(6).setPreferredWidth(60);
         tcm3.getColumn(7).setPreferredWidth(0);  
         tcm3.getColumn(7).setMaxWidth(0);
@@ -1152,8 +1161,8 @@ public class ventanaCompra extends javax.swing.JFrame
         modelo = new DefaultTableModel();        
         modelo.addColumn("Código");         //0
         modelo.addColumn("Descripción");    //1
-        modelo.addColumn("$ costo");   //2
-        modelo.addColumn("$ venta");   //3
+        modelo.addColumn("Precio costo");   //2
+        modelo.addColumn("Precio venta");   //3
         modelo.addColumn("Stock");          //4
         modelo.addColumn("Stock mínimo");   //5
         modelo.addColumn("Peso envase");    //6
@@ -1164,10 +1173,10 @@ public class ventanaCompra extends javax.swing.JFrame
         tcm = tablaProd.getColumnModel();
         tcm.getColumn(0).setPreferredWidth(80);
         tcm.getColumn(1).setPreferredWidth(300);
-        tcm.getColumn(2).setPreferredWidth(30);
-        tcm.getColumn(3).setPreferredWidth(30);
-        tcm.getColumn(4).setPreferredWidth(60);  
-        tcm.getColumn(5).setPreferredWidth(60);
+        tcm.getColumn(2).setPreferredWidth(60);
+        tcm.getColumn(3).setPreferredWidth(60);
+        tcm.getColumn(4).setPreferredWidth(30);  
+        tcm.getColumn(5).setPreferredWidth(50);
         tcm.getColumn(6).setPreferredWidth(60);
         tcm.getColumn(7).setPreferredWidth(0);  
         tcm.getColumn(7).setMaxWidth(0);

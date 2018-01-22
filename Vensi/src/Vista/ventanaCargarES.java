@@ -4,6 +4,7 @@ import DAO.*;
 import Modelo.*;
 import Utils.Validar;
 import java.awt.Dimension;
+import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -20,6 +21,9 @@ public class ventanaCargarES extends javax.swing.JFrame
     
     List<ItemVenta> listaIV = null;
     String nombre = "";
+    
+    DecimalFormat formatoPrecios = new DecimalFormat("0.00");
+    DecimalFormat formatoKilos = new DecimalFormat("0.000");
     
     public ventanaCargarES() 
     {
@@ -188,14 +192,14 @@ public class ventanaCargarES extends javax.swing.JFrame
             .addGroup(panelidentificarProdLayout.createSequentialGroup()
                 .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelidentificarProdLayout.createSequentialGroup()
-                        .addGap(60, 60, 60)
+                        .addGap(63, 63, 63)
                         .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel5)
                             .addComponent(jLabel1))
                         .addGap(18, 18, 18)
                         .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txfdCantProdAnular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txfdCodNomProdAnular, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)))
+                            .addComponent(txfdCodNomProdAnular, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
                     .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                         .addGroup(panelidentificarProdLayout.createSequentialGroup()
                             .addGap(150, 150, 150)
@@ -334,7 +338,7 @@ public class ventanaCargarES extends javax.swing.JFrame
 
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
         int cantidad = Integer.parseInt(txfdCantProdAnular.getText());
-        boolean repetido = false;
+        boolean esta = false;
         Turno turnoActual = tDAO.obtenerUltimo();
         
         List<ItemVenta> listaVentas = itDAO.listar(turnoActual.getId());
@@ -346,12 +350,12 @@ public class ventanaCargarES extends javax.swing.JFrame
             {
                 if (v.getProducto().getId() == i.getProducto().getId()) //El prod buscado se encuentra en las ventas. 
                 {
-                    repetido = true; 
+                    esta = true; 
                     item = v;
                 }   
             }
         } 
-        if (repetido)
+        if (esta)
         {
             if (item.getCantidad() >= cantidad)
             {                
@@ -390,18 +394,22 @@ public class ventanaCargarES extends javax.swing.JFrame
                 itDAO.modificar(item, item.getId());
 
                 JOptionPane.showMessageDialog(null, "Venta anulada.");
+                dispose();
             }
             else
             {
                 JOptionPane.showMessageDialog(null, "La cantidad ingresada debe ser menor o igual a la cantidad que se ha vendido.");
             }  
+            
+            if (item.getCantidad() == 0)
+            {                
+                itDAO.borrar(item.getId());     //borrar Item_venta
+            }
         }
         else
         {
             JOptionPane.showMessageDialog(null, "No se han realizado compras de este producto.");
-        }
-        
-        dispose();
+        }      
     }//GEN-LAST:event_btnAnularActionPerformed
 
     private void txfdMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdMontoKeyTyped
@@ -565,15 +573,15 @@ public class ventanaCargarES extends javax.swing.JFrame
 
                 if (x.getProducto().isPorPeso())
                 {
-                    modeloList.addElement("Stock:  " + String.valueOf(x.getProducto().getStock() / 1000 + "kg"));
+                    modeloList.addElement("Stock:  " + String.valueOf(formatoKilos.format(x.getProducto().getStock() / 1000) + "kg"));
                     modeloList.addElement("Tipo:  Por peso");
-                    modeloList.addElement("Precio de venta:  $" + String.valueOf(x.getProducto().getPrecioVenta()));
+                    modeloList.addElement("Precio de venta:  $" + String.valueOf(formatoPrecios.format(x.getProducto().getPrecioVenta())));
                 }
                 else
                 {
                     modeloList.addElement("Stock:  " + String.valueOf(x.getProducto().getStock()));
                     modeloList.addElement("Tipo:  Por unidad");
-                    modeloList.addElement("Precio de venta:  $" + String.valueOf(x.getProducto().getPrecioVenta()));
+                    modeloList.addElement("Precio de venta:  $" + String.valueOf(formatoPrecios.format(x.getProducto().getPrecioVenta())));
                 }
                 modeloList.addElement("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }

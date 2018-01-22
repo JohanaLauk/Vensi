@@ -38,9 +38,9 @@ public class ItemVentaDAO
         session = NewHibernateUtil.getSessionFactory().openSession();
         ItemVenta item = null;
         item = (ItemVenta)session.get(ItemVenta.class, id);
-        item.setCantidad(i.getCantidad());  //guarda la nueva cantidad
+        item.setCantidad(i.getCantidad());
         item.setMonto(i.getMonto());
-        item.setHora(i.getHora());  //guarda la nueva fechaHora
+        item.setHora(i.getHora());
                   
         tx = session.beginTransaction();
         try
@@ -60,6 +60,35 @@ public class ItemVentaDAO
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "ItemVenta modificado");
+    }
+    
+    public void borrar(int id)
+    {
+        session = NewHibernateUtil.getSessionFactory().openSession();
+        ItemVenta item = null;                    
+        item = (ItemVenta)session.get(ItemVenta.class, id);
+        
+        tx = session.beginTransaction();
+        try
+        {
+            if(item != null)
+            {
+                session.delete(item);
+            }            
+            tx.commit();            
+        }
+        catch(Exception e)
+        {
+            if (tx.isActive())
+		tx.rollback();
+                    e.printStackTrace();
+		throw e;
+        }        
+        finally
+        {
+            session.close();
+        }
+        //JOptionPane.showMessageDialog(null, "Item eliminado");
     }
     
     public List<ItemVenta> buscar(String cadena, int nroTurno)

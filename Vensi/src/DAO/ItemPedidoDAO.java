@@ -71,8 +71,7 @@ public class ItemPedidoDAO
             {
                 session.delete(item);
             }            
-            tx.commit();
-            
+            tx.commit();            
         }
         catch(Exception e)
         {
@@ -81,7 +80,8 @@ public class ItemPedidoDAO
                     e.printStackTrace();
 		throw e;
         }        
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Item eliminado");

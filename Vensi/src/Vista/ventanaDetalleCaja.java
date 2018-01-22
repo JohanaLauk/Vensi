@@ -2,16 +2,20 @@ package Vista;
 
 import DAO.EntradaSalidaDAO;
 import DAO.ItemVentaDAO;
+import DAO.ProductoDAO;
 import DAO.TurnoDAO;
 import Modelo.EntradaSalida;
 import Modelo.ItemVenta;
+import Modelo.Producto;
 import Modelo.Turno;
+import java.text.DecimalFormat;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
 public class ventanaDetalleCaja extends javax.swing.JFrame 
 {
+    ProductoDAO pDAO = new ProductoDAO();
     TurnoDAO tDAO = new TurnoDAO();
     ItemVentaDAO itDAO = new ItemVentaDAO();
     EntradaSalidaDAO esDAO = new EntradaSalidaDAO();   
@@ -20,9 +24,13 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     
     List<ItemVenta> listaIT = null;
     List<EntradaSalida> listaES = null;
+    List<Producto> listaProds = null;
     
     DefaultTableModel modelo;
     TableColumnModel tcm;
+        
+    DecimalFormat formatoPrecios = new DecimalFormat("0.00");
+    DecimalFormat formatoKilos = new DecimalFormat("0.000");
                 
     public ventanaDetalleCaja() 
     {
@@ -32,9 +40,13 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         
         turnoActual = tDAO.obtenerUltimo();
         
-        llenarTabla();                
-        txfdTotalVenta.setText("$" + String.valueOf(calcularVenta()));        
-        txfdTotalCaja.setText("$" + String.valueOf(calcularTotalCaja()));        
+        llenarTabla();  
+               
+        txfdTotalVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));  //cambiar a LABEL
+        txfdTotalCaja.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));   //cambiar a LABEL     
+        
+        labVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
+        labCajaT.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));        
     }
 
     @SuppressWarnings("unchecked")
@@ -52,6 +64,8 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         txfdTotalCaja = new javax.swing.JTextField();
         btnCargarES = new javax.swing.JButton();
         btnVolverDC = new javax.swing.JButton();
+        labVenta = new javax.swing.JLabel();
+        labCajaT = new org.jdesktop.swingx.JXLabel();
         labImagenFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -150,6 +164,20 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         });
         jPanel1.add(btnVolverDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 380, 240, 100));
 
+        labVenta.setBackground(new java.awt.Color(0, 153, 0));
+        labVenta.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        labVenta.setForeground(new java.awt.Color(255, 255, 255));
+        labVenta.setText("$");
+        labVenta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.add(labVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, 80, 30));
+
+        labCajaT.setBackground(new java.awt.Color(0, 0, 204));
+        labCajaT.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        labCajaT.setForeground(new java.awt.Color(255, 255, 255));
+        labCajaT.setText("$");
+        labCajaT.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        jPanel1.add(labCajaT, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 80, 30));
+
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 950, 490));
 
         labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo 2 grande.png"))); // NOI18N
@@ -173,8 +201,12 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         llenarTabla();
-        txfdTotalVenta.setText("$" + String.valueOf(calcularVenta()));        
-        txfdTotalCaja.setText("$" + String.valueOf(calcularTotalCaja())); 
+        
+        txfdTotalVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));  //cambiar a LABEL
+        txfdTotalCaja.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));   //cambiar a LABEL     
+        
+        labVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
+        labCajaT.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja()))); 
     }//GEN-LAST:event_formWindowGainedFocus
     
     public static void main(String args[]) 
@@ -219,6 +251,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
 
+            //Entrada_salida
             for (EntradaSalida es : listaES)            
             {
                 if (es.getDescripcion() != null)
@@ -230,44 +263,44 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
                     datos[0] = String.valueOf(es.getNombre());
                 }  
                 
-                if (es.getCantProd() == 0)
+                if (es.getCantProd() == 0) //Si ES una APERTURA DE CAJA
                 {
                     datos[1] = String.valueOf("---");
                 }
                 else
-                {
-                    for (ItemVenta v : listaIT)            
+                {   
+                    listaProds = pDAO.buscarPorCodigoNombre(es.getDescripcion(), "Habilitados", "HabOferta");
+                    
+                    for (Producto p : listaProds)
                     {
-                        if (es.getDescripcion().equals(v.getProducto().getDescripcion()))
+                        if (p.isPorPeso())
                         {
-                            if (v.getProducto().isPorPeso())
-                            {
-                                double cantGR = es.getCantProd();
-                                double cantKG = cantGR / 1000;
-                                datos[1] = String.valueOf(cantKG + "kg");
-                            }
-                            else
-                            {
-                                datos[1] = String.valueOf(es.getCantProd());
-                            }                            
+                            double cantGR = es.getCantProd();
+                            double cantKG = cantGR / 1000;
+                            datos[1] = String.valueOf(formatoKilos.format(cantKG) + "kg");
                         }
-                    }                    
+                        else
+                        {
+                            datos[1] = String.valueOf(es.getCantProd());
+                        }
+                    }
                 }                
                 
                 if (es.isTipo())    // entrada
                 {
-                    datos[2] = String.valueOf("$"+es.getMonto());
+                    datos[2] = String.valueOf("$" + formatoPrecios.format(es.getMonto()));
                     datos[3] = String.valueOf("---"); 
                 }
                 if (!es.isTipo())   //salida
                 {
                     datos[2] = String.valueOf("---");
-                    datos[3] = String.valueOf("$"+es.getMonto());                                       
+                    datos[3] = String.valueOf("$" + formatoPrecios.format(es.getMonto()));                                       
                 }
                 
                 modelo.addRow(datos);
             }
             
+            //Item_venta 
             for (ItemVenta v : listaIT)            
             {
                 datos[0] = String.valueOf(v.getProducto().getDescripcion());
@@ -275,13 +308,13 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
                 {
                     double cantGR = v.getCantidad();
                     double cantKG = cantGR / 1000;
-                    datos[1] = String.valueOf(cantKG + "kg");
+                    datos[1] = String.valueOf(formatoKilos.format(cantKG) + "kg");
                 }
                 else
                 {
                     datos[1] = String.valueOf(v.getCantidad());
                 }
-                datos[2] = String.valueOf("$"+v.getMonto());
+                datos[2] = String.valueOf("$" + formatoPrecios.format(v.getMonto()));
                 datos[3] = String.valueOf("---"); 
 
                 modelo.addRow(datos);
@@ -305,7 +338,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         for (ItemVenta x : listaIT)
         {
             montoVenta = montoVenta + (x.getMonto());
-        }
+        }        
         return montoVenta;
     }
     
@@ -324,8 +357,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             {
                 montoEntradaSalida = montoEntradaSalida + x.getMonto();
             }            
-        }        
-        
+        }                
         totalCaja = montoVenta + montoEntradaSalida;
         
         return totalCaja;
@@ -340,7 +372,9 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
+    private org.jdesktop.swingx.JXLabel labCajaT;
     private javax.swing.JLabel labImagenFondo;
+    private javax.swing.JLabel labVenta;
     private javax.swing.JTable tablaDetalleCaja;
     private javax.swing.JTextField txfdTotalCaja;
     private javax.swing.JTextField txfdTotalVenta;

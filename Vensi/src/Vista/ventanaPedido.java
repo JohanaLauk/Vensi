@@ -10,6 +10,7 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.DefaultComboBoxModel;
@@ -34,6 +35,9 @@ public class ventanaPedido extends javax.swing.JFrame
     Producto elProd = null;
     Proveedor elProv = null;
     String provSelec = "Seleccionar";
+    
+    DecimalFormat formatoPrecios = new DecimalFormat("0.00");
+    DecimalFormat formatoKilos = new DecimalFormat("0.000");
     
     public ventanaPedido() 
     {
@@ -826,25 +830,25 @@ public class ventanaPedido extends javax.swing.JFrame
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf("$" + p.getPrecioCosto());
+            datos[2] = String.valueOf("$" + formatoPrecios.format(p.getPrecioCosto()));
             
             if (p.isPorPeso())
             {
                 int pesoEnvGR1 = p.getPesoEnvase();
                 double pesoEnvGR2 = p.getPesoEnvase();
-                datos[5] = String.valueOf(pesoEnvGR2 / 1000 + "kg");
+                datos[5] = String.valueOf(formatoKilos.format(pesoEnvGR2 / 1000) + "kg");
                 
                 int stockGR1 = p.getStock();
-                double stockGR2 = p.getStock();
+                //double stockGR2 = p.getStock();
                 int stockU = stockGR1 / pesoEnvGR1;
-                double stockKG = stockGR2 / 1000;
-                datos[3] = String.valueOf(stockU + "  (" + stockKG + "kg)");
+                //double stockKG = stockGR2 / 1000;
+                datos[3] = String.valueOf(stockU); //+ "  (" + stockKG + "kg)");
                 
                 int stockMinGR1 = p.getStockMinimo();
-                double stockMinGR2 = p.getStockMinimo();
+                //double stockMinGR2 = p.getStockMinimo();
                 int stockMinU = stockMinGR1 / pesoEnvGR1;
-                double stockMinKG = stockMinGR2 / 1000;
-                datos[4] = String.valueOf(stockMinU + "  (" + stockMinKG + "kg)");                
+                //double stockMinKG = stockMinGR2 / 1000;
+                datos[4] = String.valueOf(stockMinU); //+ "  (" + stockMinKG + "kg)");                
             }
             else
             {
@@ -997,25 +1001,25 @@ public class ventanaPedido extends javax.swing.JFrame
         {
             datos[0] = p.getCodigo();
             datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf(p.getPrecioCosto());
+            datos[2] = String.valueOf(formatoPrecios.format(p.getPrecioCosto()));
             
             if (p.isPorPeso())
             {
                 int pesoEnvGR1 = p.getPesoEnvase();
                 double pesoEnvGR2 = p.getPesoEnvase();
-                datos[5] = String.valueOf(pesoEnvGR2 / 1000 + "gr");
+                datos[5] = String.valueOf(formatoKilos.format(pesoEnvGR2 / 1000) + "kg");
                 
                 int stockGR1 = p.getStock();
-                double stockGR2 = p.getStock();
+                //double stockGR2 = p.getStock();
                 int stockU = stockGR1 / pesoEnvGR1;
-                double stockKG = stockGR2 / 1000;
-                datos[3] = String.valueOf(stockU + "  (" + stockKG + "kg)");
+                //double stockKG = stockGR2 / 1000;
+                datos[3] = String.valueOf(stockU); //+ "  (" + stockKG + "kg)");
                 
                 int stockMinGR1 = p.getStockMinimo();
-                double stockMinGR2 = p.getStockMinimo();
+                //double stockMinGR2 = p.getStockMinimo();
                 int stockMinU = stockMinGR1 / pesoEnvGR1;
-                double stockMinKG = stockMinGR2 / 1000;
-                datos[4] = String.valueOf(stockMinU + "  (" + stockMinKG + "kg)");
+                //double stockMinKG = stockMinGR2 / 1000;
+                datos[4] = String.valueOf(stockMinU); //+ "  (" + stockMinKG + "kg)");
             }
             else
             {

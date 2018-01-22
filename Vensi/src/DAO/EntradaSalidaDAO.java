@@ -41,11 +41,12 @@ public class EntradaSalidaDAO
         session = NewHibernateUtil.getSessionFactory().openSession();               
         EntradaSalida ensa = null;
                    
-        ensa = (EntradaSalida)session.get(EntradaSalida.class, id);
-        ensa.setMonto(es.getMonto());
+        ensa = (EntradaSalida)session.get(EntradaSalida.class, id);        
         ensa.setDescripcion(es.getDescripcion());
-        ensa.setHora(es.getHora());
+        ensa.setCantProd(es.getCantProd());
+        ensa.setMonto(es.getMonto());        
         ensa.setTipo(es.isTipo());
+        ensa.setHora(es.getHora());
         ensa.setTurno(es.getTurno());
             
         tx = session.beginTransaction();
@@ -61,7 +62,8 @@ public class EntradaSalidaDAO
                     e.printStackTrace();
 		throw e;
         }      
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Entrada/Salida modificada");

@@ -558,29 +558,32 @@ public class ventanaVenta extends javax.swing.JFrame
             {               
                 String idProd = tablaCarrito.getValueAt(i, 4).toString();                    
                 Producto elProd = pDAO.buscarPorId(Integer.parseInt(idProd));
-                String cantPeso = null;
+                int cantidad = 0;
+                double precioT = 0;
                 
                 if (elProd.isPorPeso())
                 {
                     String cadena = tablaCarrito.getValueAt(i, 1).toString();
-                    cantPeso = cadena.substring(0, cadena.length()-2);                    
+                    cantidad = Integer.parseInt(cadena.substring(0, cadena.length()-2));
+                    
+                    precioT = (cantidad * elProd.getPrecioVenta()) / elProd.getPesoEnvase();
+                    r.RedondearCentavos(precioT);                    
                 }
                 else
                 {
-                    cantPeso = tablaCarrito.getValueAt(i, 1).toString();
-                }
-                
-                String cadena2 = tablaCarrito.getValueAt(i, 3).toString();       
-                String precioT = cadena2.substring(1);
-                
+                    cantidad = Integer.parseInt(tablaCarrito.getValueAt(i, 1).toString());
+                    
+                    precioT = cantidad * elProd.getPrecioVenta();
+                }              
+                               
                 List<ItemVenta> listaItemVenta = itDAO.listar(turnoActual.getId());
                 
                 if (listaItemVenta.isEmpty())   //tabla item_venta VACÍA
                 {         
                     ItemVenta unItemVenta = new ItemVenta();
                     unItemVenta.setProducto(elProd);    
-                    unItemVenta.setCantidad(Integer.parseInt(cantPeso));
-                    unItemVenta.setMonto(Double.parseDouble(precioT));
+                    unItemVenta.setCantidad(cantidad);
+                    unItemVenta.setMonto(precioT);
                     unItemVenta.setHora(new Date());
                     unItemVenta.setTurno(turnoActual);
                                         
@@ -604,8 +607,8 @@ public class ventanaVenta extends javax.swing.JFrame
                     if (repetido) 
                     {
                         ItemVenta elItemVenta = new ItemVenta();
-                        elItemVenta.setCantidad(itemModificar.getCantidad() + Integer.parseInt(cantPeso));
-                        elItemVenta.setMonto(itemModificar.getMonto() + Double.parseDouble(precioT));
+                        elItemVenta.setCantidad(itemModificar.getCantidad() + cantidad);
+                        elItemVenta.setMonto(itemModificar.getMonto() + precioT);
                         elItemVenta.setHora(new Date());
 
                         itDAO.modificar(elItemVenta, itemModificar.getId());
@@ -616,8 +619,8 @@ public class ventanaVenta extends javax.swing.JFrame
                     {
                         ItemVenta unItemVenta = new ItemVenta();
                         unItemVenta.setProducto(elProd);
-                        unItemVenta.setCantidad(Integer.parseInt(cantPeso));
-                        unItemVenta.setMonto(Double.parseDouble(precioT));
+                        unItemVenta.setCantidad(cantidad);
+                        unItemVenta.setMonto(precioT);
                         unItemVenta.setHora(new Date());
                         unItemVenta.setTurno(turnoActual);
 
@@ -625,9 +628,8 @@ public class ventanaVenta extends javax.swing.JFrame
 
                         JOptionPane.showMessageDialog(null, "Producto nuevo, ItemVenta agregado.");
                     }
-                }    
-                
-                pDAO.restarStock(Integer.parseInt(idProd), Integer.parseInt(cantPeso));//Descuenta stock
+                }                    
+                pDAO.restarStock(Integer.parseInt(idProd), cantidad);   //Descuenta stock
             }            
         }
         else
