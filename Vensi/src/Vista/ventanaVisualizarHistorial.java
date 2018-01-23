@@ -11,6 +11,7 @@ import Modelo.Pedido;
 import Modelo.Turno;
 import Modelo.EntradaSalida;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -30,7 +31,10 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
     
     public static String tablaSelec;    //viene de la ventana anterior
     public static int idSelec;   //viene de la ventana anterior
+    
     DateFormat fechaHoraFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    DecimalFormat formatoPrecios = new DecimalFormat("0.00");
+    DecimalFormat formatoKilos = new DecimalFormat("0.000");
     
     public ventanaVisualizarHistorial() 
     {
@@ -210,7 +214,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                             {
                                 double cantGR = es.getCantProd();
                                 double cantKG = cantGR / 1000;
-                                datos[1] = String.valueOf(cantKG + "kg");
+                                datos[1] = String.valueOf(formatoKilos.format(cantKG) + "kg");
                             }
                             else
                             {
@@ -222,13 +226,13 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                 
                 if (es.isTipo())    // entrada
                 {
-                    datos[2] = String.valueOf(es.getMonto());
+                    datos[2] = String.valueOf("$" + formatoPrecios.format(es.getMonto()));
                     datos[3] = String.valueOf("---"); 
                 }
                 else    //salida
                 {
                     datos[2] = String.valueOf("---"); 
-                    datos[3] = String.valueOf(es.getMonto());
+                    datos[3] = String.valueOf("$" + formatoPrecios.format(es.getMonto()));
                 }
                 
                 modelo.addRow(datos);
@@ -241,13 +245,13 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                 {
                     double cantGR = i.getCantidad();
                     double cantKG = cantGR / 1000;
-                    datos[1] = String.valueOf(cantKG + "kg");
+                    datos[1] = String.valueOf(formatoKilos.format(cantKG) + "kg");
                 }
                 else
                 {
                     datos[1] = String.valueOf(i.getCantidad());
                 }
-                datos[2] = String.valueOf(i.getMonto());
+                datos[2] = String.valueOf("$" + formatoPrecios.format(i.getMonto()));
                 datos[3] = String.valueOf("---");
                 
                 modelo.addRow(datos);
@@ -272,7 +276,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                 datos[0] = i.getProducto().getDescripcion();
                 datos[1] = String.valueOf(i.getCantidad());
                 datos[2] = String.valueOf("---");
-                datos[3] = String.valueOf(i.getCantidad() * i.getProducto().getPrecioCosto());
+                datos[3] = String.valueOf("$" + formatoPrecios.format(i.getCantidad() * i.getProducto().getPrecioCosto()));
                 
                 modelo.addRow(datos);
             }

@@ -931,8 +931,7 @@ public class ventanaVenta extends javax.swing.JFrame
             @Override
             public void focusLost(FocusEvent fe) 
             {                
-                tablaProd.setRowSelectionAllowed(false);
-                
+                tablaProd.setRowSelectionAllowed(false);                
             } 
         });
         

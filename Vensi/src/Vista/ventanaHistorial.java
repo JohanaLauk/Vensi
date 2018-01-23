@@ -10,6 +10,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
@@ -22,7 +23,7 @@ public class ventanaHistorial extends javax.swing.JFrame
     TurnoDAO tDAO = new TurnoDAO();
     PedidoDAO pDAO = new PedidoDAO();    
     
-    DateFormat fechaHoraFormat = new SimpleDateFormat("dd-MM-yyyy HH:mm");
+    DateFormat fechaHoraFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     
     public ventanaHistorial() 
     {
@@ -33,20 +34,21 @@ public class ventanaHistorial extends javax.swing.JFrame
         cbBuscarPor.addItem("Seleccionar");
         cbBuscarPor.addItem("Número");
         cbBuscarPor.addItem("Fecha");
-        
+        btnVisualizarHistorial.setEnabled(false);
         txfdNro.setEnabled(false);        
         dateDesde.setEnabled(false);
         dateHasta.setEnabled(false);
-                
+                       
         //Al hacer click en el JFrame se quita la seleccion en el JTable
         this.addMouseListener(new MouseAdapter()
         {
             @Override
             public void mouseClicked(MouseEvent me) 
-            {                
+            {               
                 tablaHistorial.clearSelection();
+                btnVisualizarHistorial.setEnabled(false);
             } 
-        });
+        });        
         
         llenarTabla(null);
     }
@@ -304,19 +306,35 @@ public class ventanaHistorial extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if (rbTurno.isSelected())
+        if (!rbTurno.isSelected() && !rbPedido.isSelected())
         {
-            llenarTabla("Turno");
+            JOptionPane.showMessageDialog(null, "Debe marcar el tipo de registro que desea buscar.");
+            llenarTabla(null);     
         }
-        if (rbPedido.isSelected())
+        else
         {
-            llenarTabla("Pedido");
-        }      
+            if (cbBuscarPor.getSelectedItem().equals("Seleccionar"))
+            {
+                JOptionPane.showMessageDialog(null, "Debe seleccionar el tipo de búsqueda.");
+                llenarTabla(null);            
+            }
+            else
+            { 
+                if (rbTurno.isSelected())
+                {
+                    llenarTabla("Turno");
+                }   
+                if (rbPedido.isSelected())
+                {
+                    llenarTabla("Pedido");
+                }
+            }
+        }  
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void cbBuscarPorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbBuscarPorActionPerformed
         if (cbBuscarPor.getSelectedItem().equals("Seleccionar"))
-        {
+        {           
             txfdNro.setEnabled(false);  
             txfdNro.setText(null);
         
@@ -324,6 +342,8 @@ public class ventanaHistorial extends javax.swing.JFrame
             dateHasta.setEnabled(false);
             dateDesde.setDate(null);
             dateHasta.setDate(null);
+            
+            llenarTabla(null);
         }       
         if (cbBuscarPor.getSelectedItem().equals("Número"))   
         {
@@ -353,16 +373,17 @@ public class ventanaHistorial extends javax.swing.JFrame
     private void btnVisualizarHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarHistorialActionPerformed
         if (rbTurno.isSelected())
         {
-            ventanaVisualizarHistorial.tablaSelec = "Turno";
+            ventanaVisualizarHistorial.tablaSelec = "Turno";         
         }
         if (rbPedido.isSelected())
         {
             ventanaVisualizarHistorial.tablaSelec = "Pedido";
-        }       
+        }
+        
         ventanaVisualizarHistorial.idSelec = Integer.parseInt(tablaHistorial.getValueAt(tablaHistorial.getSelectedRow(),0).toString());
         
         ventanaVisualizarHistorial vVisualizarHistorial = new ventanaVisualizarHistorial();
-        vVisualizarHistorial.setVisible(true);        
+        vVisualizarHistorial.setVisible(true);
     }//GEN-LAST:event_btnVisualizarHistorialActionPerformed
 
     private void txfdNroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdNroKeyTyped
@@ -373,7 +394,7 @@ public class ventanaHistorial extends javax.swing.JFrame
     }//GEN-LAST:event_txfdNroKeyTyped
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        llenarTabla(null);
+        btnVisualizarHistorial.setEnabled(false);
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void btnVaciarFechaHastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciarFechaHastaActionPerformed
@@ -393,159 +414,205 @@ public class ventanaHistorial extends javax.swing.JFrame
     
     public void llenarTabla(String clase)
     {
+        String nro = txfdNro.getText();
+        Date fechaDesde = dateDesde.getDate();
+        Date fechaHasta = dateHasta.getDate();
+        
         if (clase == null)
         {
-            modelo = new DefaultTableModel();
-            modelo.addColumn("");
-            modelo.addColumn("");
-            modelo.addColumn("");
-        
-            tablaHistorial.setModel(modelo);   
-        
-            tcm = tablaHistorial.getColumnModel();        
-            tcm.getColumn(0).setPreferredWidth(100);
-            tcm.getColumn(1).setPreferredWidth(200);
-            tcm.getColumn(2).setPreferredWidth(200);        
+            tablaVacia();
         }
-        else if(clase.equals("Turno"))
-        {   
-            modelo = new DefaultTableModel();
-            modelo.addColumn("Número");
-            modelo.addColumn("Fecha y hora inicio");
-            modelo.addColumn("Fecha y hora fin");
-            modelo.addColumn("Usuario");
+        else 
+        {            
+            if (clase.equals("Turno"))
+            {   
+                modelo = new DefaultTableModel();
+                modelo.addColumn("Número");
+                modelo.addColumn("Fecha y hora inicio");
+                modelo.addColumn("Fecha y hora fin");
+                modelo.addColumn("Usuario");
 
-            if (cbBuscarPor.getSelectedItem().equals("Fecha"))
-            {           
-                List<Turno> listaTurnos = tDAO.buscarPorFecha(dateDesde.getDate(), dateHasta.getDate());
-                if (listaTurnos.isEmpty()) 
-                {
-                    JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
-                } 
-                else 
-                {
-                    String[] datos = new String[4];
-                    
-                    for (Turno t : listaTurnos) 
-                    {
-                        datos[0] = String.valueOf(t.getId());
-                        datos[1] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio()) + "hs.");
-                        if (t.getFechaHoraFin() != null)
+                if (cbBuscarPor.getSelectedItem().equals("Fecha"))
+                {   
+                    if (nro.equals("") && fechaDesde != null)
+                    {        
+                        List<Turno> listaTurnos = tDAO.buscarPorFecha(fechaDesde, fechaHasta);
+                        if (listaTurnos.isEmpty()) 
                         {
-                            datos[2] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraFin()) + "hs.");
-                        }
-                        else
+                            JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
+                        } 
+                        else 
                         {
-                            datos[2] = String.valueOf("Pendiente");
+                            String[] datos = new String[4];
+
+                            for (Turno t : listaTurnos) 
+                            {
+                                datos[0] = String.valueOf(t.getId());
+                                datos[1] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio()) + "hs.");
+                                if (t.getFechaHoraFin() != null)
+                                {
+                                    datos[2] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraFin()) + "hs.");
+                                }
+                                else
+                                {
+                                    datos[2] = String.valueOf("Pendiente");
+                                }
+                                datos[3] = String.valueOf(t.getUsuario().getNombreUsuario());
+
+                                modelo.addRow(datos);  
+                                this.tablaHistorial.setModel(modelo);
+                                tcm = tablaHistorial.getColumnModel();
+                                tcm.getColumn(0).setPreferredWidth(100);
+                                tcm.getColumn(1).setPreferredWidth(200);
+                                tcm.getColumn(2).setPreferredWidth(200);
+                                tcm.getColumn(3).setPreferredWidth(200);
+                            }
                         }
-                        datos[3] = String.valueOf(t.getUsuario().getNombreUsuario());
-
-                        modelo.addRow(datos);
-                    }
-                }
-            }
-            else    //numero
-            {
-                Turno t = tDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
-                if (t == null) 
-                {
-                    JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
-                } 
-                else 
-                {
-                    String[] datos = new String[4];
-
-                    datos[0] = String.valueOf(t.getId());
-                    datos[1] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio()) + "hs.");
-                    
-                    if (t.getFechaHoraFin() != null)
-                    {
-                        datos[2] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraFin()) + "hs.");
                     }
                     else
                     {
-                        datos[2] = String.valueOf("Pendiente");
+                        JOptionPane.showMessageDialog(null, "Debe asignar un intervalo de tiempo para la búsqueda.");
+                        tablaVacia();
                     }
-                    datos[3] = String.valueOf(t.getUsuario().getNombreUsuario());
-                    modelo.addRow(datos);
                 }
-            }                
-            
-            this.tablaHistorial.setModel(modelo);
-
-            tcm = tablaHistorial.getColumnModel();
-            tcm.getColumn(0).setPreferredWidth(100);
-            tcm.getColumn(1).setPreferredWidth(200);
-            tcm.getColumn(2).setPreferredWidth(200);
-            tcm.getColumn(3).setPreferredWidth(200);
-        }
-        else    //pedido
-        {   
-            modelo = new DefaultTableModel();
-            modelo.addColumn("Número");
-            modelo.addColumn("Fecha y hora");
-            modelo.addColumn("Proveedor");
-            
-            if (cbBuscarPor.getSelectedItem().equals("Fecha"))
-            {
-                List<Pedido> listaPedidos = pDAO.buscarPorFecha(dateDesde.getDate(), dateHasta.getDate());
-                
-                if (listaPedidos.isEmpty()) 
-                {
-                    JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
-                } 
-                else 
-                {
-                    String[] datos = new String[3];
-                    
-                    for (Pedido p : listaPedidos) 
+                else    //numero
+                {                    
+                    if (cbBuscarPor.getSelectedItem().equals("Número"))
                     {
-                        datos[0] = String.valueOf(p.getId());
-                        datos[1] = String.valueOf(fechaHoraFormat.format(p.getFechaHora()) + "hs.");
-                        datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
+                        if (!nro.equals("") && fechaDesde == null)
+                        {
+                            Turno t = tDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
+                            if (t == null) 
+                            {
+                                JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
+                            } 
+                            else 
+                            {
+                                String[] datos = new String[4];
 
-                        modelo.addRow(datos);
+                                datos[0] = String.valueOf(t.getId());
+                                datos[1] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraInicio()) + "hs.");
+
+                                if (t.getFechaHoraFin() != null)
+                                {
+                                    datos[2] = String.valueOf(fechaHoraFormat.format(t.getFechaHoraFin()) + "hs.");
+                                }
+                                else
+                                {
+                                    datos[2] = String.valueOf("Pendiente");
+                                }
+                                datos[3] = String.valueOf(t.getUsuario().getNombreUsuario());
+
+                                modelo.addRow(datos);       
+                                this.tablaHistorial.setModel(modelo);
+                                tcm = tablaHistorial.getColumnModel();
+                                tcm.getColumn(0).setPreferredWidth(100);
+                                tcm.getColumn(1).setPreferredWidth(200);
+                                tcm.getColumn(2).setPreferredWidth(200);
+                                tcm.getColumn(3).setPreferredWidth(200);
+                            }
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Debe ingresar el número del registro que desea buscar.");
+                            tablaVacia();
+                        }
+                    }                
+                }  
+            }
+            else    //pedido
+            {   
+                if (clase.equals("Pedido"))
+                {
+                    modelo = new DefaultTableModel();
+                    modelo.addColumn("Número");
+                    modelo.addColumn("Fecha y hora");
+                    modelo.addColumn("Proveedor");
+
+                    if (cbBuscarPor.getSelectedItem().equals("Fecha"))
+                    {
+                        if (nro.equals("") && fechaDesde != null)
+                        {
+                            List<Pedido> listaPedidos = pDAO.buscarPorFecha(fechaDesde, fechaHasta);
+
+                            if (listaPedidos.isEmpty()) 
+                            {
+                                JOptionPane.showMessageDialog(null, "No hay pedidos registrados.");
+                            } 
+                            else 
+                            {
+                                String[] datos = new String[3];
+
+                                for (Pedido p : listaPedidos) 
+                                {
+                                    datos[0] = String.valueOf(p.getId());
+                                    datos[1] = String.valueOf(fechaHoraFormat.format(p.getFechaHora()) + "hs.");
+                                    datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
+
+                                    modelo.addRow(datos);
+                                    this.tablaHistorial.setModel(modelo);
+                                    tcm.getColumn(0).setPreferredWidth(100);
+                                    tcm.getColumn(1).setPreferredWidth(200);
+                                    tcm.getColumn(2).setPreferredWidth(200);
+                                }
+                            }
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Debe asignar un intervalo de tiempo para la búsqueda.");
+                            tablaVacia();
+                        }                        
                     }
+                    else    //numero
+                    {
+                        if (cbBuscarPor.getSelectedItem().equals("Número"))
+                        {
+                            if (!nro.equals("") && fechaDesde == null)
+                            {
+                                Pedido p = pDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
+
+                                if (p == null) 
+                                {
+                                    JOptionPane.showMessageDialog(null, "No hay pedidos registrados.");
+                                } 
+                                else 
+                                {
+                                    String[] datos = new String[3];
+
+                                    datos[0] = String.valueOf(p.getId());
+                                    datos[1] = String.valueOf(fechaHoraFormat.format(p.getFechaHora()) + "hs.");
+                                    datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
+
+                                    modelo.addRow(datos);
+                                    this.tablaHistorial.setModel(modelo);
+                                    tcm.getColumn(0).setPreferredWidth(100);
+                                    tcm.getColumn(1).setPreferredWidth(200);
+                                    tcm.getColumn(2).setPreferredWidth(200);
+                                }
+                            }
+                            else
+                            {
+                                JOptionPane.showMessageDialog(null, "Debe ingresar el número del registro que desea buscar.");
+                                tablaVacia();
+                            }
+                        }
+                    }                                
                 }
             }
-            else    //numero
-            {
-                Pedido p = pDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
-                
-                if (p == null) 
-                {
-                    JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
-                } 
-                else 
-                {
-                    String[] datos = new String[3];
-
-                    datos[0] = String.valueOf(p.getId());
-                    datos[1] = String.valueOf(fechaHoraFormat.format(p.getFechaHora()) + "hs.");
-                    datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
-
-                    modelo.addRow(datos);
-                }
-            }
-            this.tablaHistorial.setModel(modelo);
-        
-            tcm.getColumn(0).setPreferredWidth(100);
-            tcm.getColumn(1).setPreferredWidth(200);
-            tcm.getColumn(2).setPreferredWidth(200);
         }
         
         tablaHistorial.addFocusListener(new FocusListener() 
         {
             @Override
-            public void focusGained(FocusEvent fe) 
+            public void focusGained(FocusEvent fe) //recupera el foco
             {
-                tablaHistorial.setRowSelectionAllowed(true);
+                tablaHistorial.setRowSelectionAllowed(true);                
             }
 
             @Override
-            public void focusLost(FocusEvent fe) 
+            public void focusLost(FocusEvent fe) //pierde el foco
             {                
-                tablaHistorial.setRowSelectionAllowed(false);
+                tablaHistorial.setRowSelectionAllowed(true);
             } 
         });
         
@@ -555,9 +622,35 @@ public class ventanaHistorial extends javax.swing.JFrame
             public void mouseClicked(MouseEvent me) 
             {
                 tablaHistorial.setRowSelectionAllowed(true);
+                
+                int filaSelec = tablaHistorial.getSelectedRow();
+        
+                if (filaSelec >= 0)
+                {
+                    btnVisualizarHistorial.setEnabled(true);
+                }
+                else
+                {
+                    btnVisualizarHistorial.setEnabled(false);
+                }
             } 
         });
     }   
+    
+    public void tablaVacia()
+    {
+        modelo = new DefaultTableModel();
+        modelo.addColumn("");
+        modelo.addColumn("");
+        modelo.addColumn("");
+
+        tablaHistorial.setModel(modelo);   
+
+        tcm = tablaHistorial.getColumnModel();        
+        tcm.getColumn(0).setPreferredWidth(100);
+        tcm.getColumn(1).setPreferredWidth(200);
+        tcm.getColumn(2).setPreferredWidth(200);    
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel LabFechaHasta;
