@@ -31,6 +31,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
     
     int stockU;    //variable usada en mostrarProdSelec()
     List<JCheckBox> checkProv = new ArrayList<>();
+    DecimalFormat formatoPrecios = new DecimalFormat("0.00");
 
     public ventanaEditarProd() 
     {
@@ -165,7 +166,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         jLabel10.setText("Situación:");
 
-        cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Suspendido", "Oferta" }));
+        cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Oferta", "Suspendido" }));
         cbSituacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSituacionActionPerformed(evt);
@@ -328,25 +329,24 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
     private void txfdEditarStockMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarStockMinimoKeyTyped
         char c = evt.getKeyChar();
-        if (c < '0' || c > '9') {
+        if (c < '0' || c > '9') 
+        {
             evt.consume();
         }
     }//GEN-LAST:event_txfdEditarStockMinimoKeyTyped
 
     private void txfdEditarPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPrecioVentaKeyTyped
         char c = evt.getKeyChar();
-        if ((c < '0' || c > '9')
-            && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)
-            && (c != '.')) {
+        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.')) 
+        {
             evt.consume();
         }
     }//GEN-LAST:event_txfdEditarPrecioVentaKeyTyped
 
     private void txfdEditarPrecioCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPrecioCostoKeyTyped
         char c = evt.getKeyChar();
-        if ((c < '0' || c > '9')
-            && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)
-            && (c != '.')) {
+        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.')) 
+        {
             evt.consume();
         }
     }//GEN-LAST:event_txfdEditarPrecioCostoKeyTyped
@@ -385,7 +385,8 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
     private void txfdEditarPesoEnvaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPesoEnvaseKeyTyped
         char c = evt.getKeyChar();
-        if (c < '0' || c > '9') {
+        if (c < '0' || c > '9') 
+        {
             evt.consume();
         }
     }//GEN-LAST:event_txfdEditarPesoEnvaseKeyTyped
@@ -421,118 +422,153 @@ public class ventanaEditarProd extends javax.swing.JFrame
     }//GEN-LAST:event_btnCancelarEditarActionPerformed
 
     private void btnAceptarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarActionPerformed
-        Producto prod = new Producto();
+        Producto prodEditar = new Producto();
+        String codigoInput = txfdEditarCodigo.getText();
+        boolean listo = false;        
 
-        if (!(txfdEditarCodigo.getText().equals("") || txfdEditarCodigo.getText() == null)
-            && !(txfdEditarDescripcion.getText().equals("") || txfdEditarDescripcion.getText() == null)
-            && (rbPeso.isSelected() || rbUnidad.isSelected()))
-        {
-            if (rbPeso.isSelected() && ((txfdEditarPesoEnvase.getText().equals("") || txfdEditarPesoEnvase.getText() == null)))
+        if (!codigoInput.equals("") && !txfdEditarDescripcion.getText().equals("") && (rbPeso.isSelected() || rbUnidad.isSelected()))
+        {   //Ingresó CODIGO, DESCRIPCION y marcó el TIPO DE VENTA                        
+            Producto prodRepetido = pDAO.buscarPorCodigo(codigoInput);
+            
+            if (prodRepetido == null || elProd.getCodigo().equals(codigoInput))
             {
-                JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
-            }
-            else
-            {
-                prod.setCodigo(txfdEditarCodigo.getText().toUpperCase());
-                prod.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());
-
-                if (validar.validarPrecio(txfdEditarPrecioCosto.getText()))
+                if (txfdEditarPrecioCosto.getText().equals("") || txfdEditarPrecioVenta.getText().equals(""))
                 {
-                    double precioC = Double.parseDouble(txfdEditarPrecioCosto.getText());
-                    prod.setPrecioCosto(precioC); //r.RedondearCentavos(precioC));
-            }
+                    prodEditar.setPrecioCosto(0.00);
+                    prodEditar.setPrecioVenta(0.00);
+                    listo = true;
+                }
+                else
+                {
+                    if (validar.validarPrecio(txfdEditarPrecioCosto.getText()) && validar.validarPrecio(txfdEditarPrecioVenta.getText()))
+                    {
+                        double precioC = Double.parseDouble(txfdEditarPrecioCosto.getText());
+                        prodEditar.setPrecioCosto(precioC); //r.RedondearCentavos(precioC));
+
+                        double precioV = Double.parseDouble(txfdEditarPrecioVenta.getText());
+                        prodEditar.setPrecioVenta(precioV); //r.RedondearCentavos(precioV));
+
+                        prodEditar.setCodigo(txfdEditarCodigo.getText().toUpperCase());
+                        prodEditar.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());
+
+                        if (rbPeso.isSelected())    //TIPO DE VENTA por PESO
+                        {
+                            if (txfdEditarPesoEnvase.getText().equals(""))   //marcó PESO pero no ingresó el PESO DEL ENVASE
+                            {
+                                JOptionPane.showMessageDialog(null, "Debe ingresar el PESO DEL ENVASE (en gramos).");
+                                listo = false;
+                            }
+                            else
+                            {
+                                prodEditar.setPorPeso(true);
+
+                                int pesoEnv = Integer.parseInt(txfdEditarPesoEnvase.getText());
+                                prodEditar.setPesoEnvase(pesoEnv);
+
+                                String stockMin = txfdEditarStockMinimo.getText();
+                                if (stockMin.equals(""))
+                                {
+                                    prodEditar.setStockMinimo(0);
+                                }   
+                                else
+                                {
+                                    int total = Integer.parseInt(stockMin) * pesoEnv;
+                                    prodEditar.setStockMinimo(total);
+                                }               
+
+                                int total2 = stockU * pesoEnv;  //convierto la unidad en gramos
+                                prodEditar.setStock(total2);  //guardo el nuevo stock en gramos
+                                
+                                double precioKilo = (1000 * precioV) / pesoEnv;
+                                r.RedondearCentavos(precioKilo);
+                                prodEditar.setPrecioVentaXKilo(precioKilo);
+
+                                listo = true;
+                            }
+                        }
+                        else    //TIPO DE VENTA por UNIDAD
+                        {
+                            prodEditar.setStock(stockU);
+                            prodEditar.setPorPeso(false);
+                            prodEditar.setPesoEnvase(0);
+                            String stockMin = txfdEditarStockMinimo.getText();
+                            if (stockMin.equals(""))
+                            {
+                                prodEditar.setStockMinimo(0);
+                            }   
+                            else
+                            {
+                                prodEditar.setStockMinimo(Integer.parseInt(stockMin));
+                            }
+                            prodEditar.setStock(stockU);
+                            prodEditar.setPrecioVentaXKilo(0);
+
+                            listo = true;
+                        }
+
+
+                        if (cbEstado.getSelectedItem().equals("Habilitado"))
+                        {
+                            prodEditar.setEstado(true);
+                        }
+                        else
+                        {
+                            prodEditar.setEstado(false);
+                        }
+
+                        if (cbSituacion.getSelectedItem().equals("Ninguno"))
+                        {
+                            prodEditar.setSuspendido(false);
+                            prodEditar.setOferta(false);
+                        }
+                        else
+                        {
+                            if (cbSituacion.getSelectedItem().equals("Oferta"))
+                            {
+                                prodEditar.setOferta(true);
+                                prodEditar.setSuspendido(false);
+                            }
+                            else //suspendido
+                            {
+                                prodEditar.setSuspendido(true);
+                                prodEditar.setOferta(false);
+                            }
+                        }
+
+                        boolean alMenosUnCheck = false;
+
+                        for (JCheckBox c : checkProv)
+                        {
+                            if (c.isSelected())
+                            {
+                                prodEditar.addProveedor(prDAO.buscarPorCuitNombre(c.getText(), "Habilitados").get(0));
+                                alMenosUnCheck = true;
+                            }
+                        }
+                        if (alMenosUnCheck)
+                        {
+                            if (listo)
+                            {
+                                pDAO.modificar(prodEditar, id_recibido);
+                                dispose();
+                            }
+                        }
+                        else
+                        {
+                            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor.");
+                        }
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Utilice el siguiente formato para los precios \"00.00\"");
+                    }
+                }                
+            }     
             else
             {
-                JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio costo");
+                JOptionPane.showMessageDialog(null, "El nuevo CÓDIGO del producto que ingresó ya existe.\n" +
+                                                    "Corrobore en el inventario para mayor seguridad y control.");
             }
-
-            if (validar.validarPrecio(txfdEditarPrecioVenta.getText()))
-            {
-                double precioV = Double.parseDouble(txfdEditarPrecioVenta.getText());
-                prod.setPrecioVenta(precioV); //r.RedondearCentavos(precioV));
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio venta");
-        }
-
-        if (rbPeso.isSelected())
-        {
-            prod.setPorPeso(true);
-
-            int pesoEnv = Integer.parseInt(txfdEditarPesoEnvase.getText());
-            prod.setPesoEnvase(pesoEnv);
-
-            int stockMin = Integer.parseInt(txfdEditarStockMinimo.getText());
-            int total = stockMin * pesoEnv;
-            prod.setStockMinimo(total);
-
-            int total2 = stockU * pesoEnv;  //convierto la unidad en gramos
-            prod.setStock(total2);  //guardo el nuevo stock en gramos
-
-            double precioV = Double.parseDouble(txfdEditarPrecioVenta.getText());
-            //precioV = r.RedondearCentavos(precioV);
-            double precioKilo = (1000 * precioV) / pesoEnv;
-            r.RedondearCentavos(precioKilo);
-            prod.setPrecioVentaXKilo(precioKilo);
-        }
-        else
-        {
-            prod.setStock(stockU);
-            prod.setPorPeso(false);
-            prod.setPesoEnvase(0);
-            prod.setStockMinimo(Integer.parseInt(txfdEditarStockMinimo.getText()));
-            prod.setPrecioVentaXKilo(0);
-        }
-
-        if (cbEstado.getSelectedItem().equals("Habilitado"))
-        {
-            prod.setEstado(true);
-        }
-        else
-        {
-            prod.setEstado(false);
-        }
-
-        if (cbSituacion.getSelectedItem().equals("Ninguno"))
-        {
-            prod.setSuspendido(false);
-            prod.setOferta(false);
-        }
-        else
-        {
-            if (cbSituacion.getSelectedItem().equals("Oferta"))
-            {
-                prod.setOferta(true);
-                prod.setSuspendido(false);
-            }
-            else //suspendido
-            {
-                prod.setSuspendido(true);
-                prod.setOferta(false);
-            }
-        }
-
-        boolean alMenosUnCheck = false;
-
-        for (JCheckBox c : checkProv)
-        {
-            if (c.isSelected())
-            {
-                prod.addProveedor(prDAO.buscarPorCuitNombre(c.getText(), "Habilitados").get(0));
-                alMenosUnCheck = true;
-            }
-        }
-        if (alMenosUnCheck)
-        {
-            pDAO.modificar(prod, id_recibido);
-            dispose();
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor");
-        }
-        }
         }
         else
         {

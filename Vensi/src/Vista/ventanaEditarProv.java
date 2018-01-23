@@ -11,6 +11,7 @@ public class ventanaEditarProv extends javax.swing.JFrame
     ProveedorDAO pDAO = new ProveedorDAO();
     Validar validar = new Validar();
     public static int id_recibido;
+    Proveedor elProv = null;          
     
     public ventanaEditarProv() 
     {
@@ -25,6 +26,8 @@ public class ventanaEditarProv extends javax.swing.JFrame
         this.setResizable(false);   //No permite modificar el tamaño de la ventana
         
         labIdSelec.setVisible(false);   //label que contiene el id
+        
+        elProv = pDAO.buscarPorId(id_recibido);
         
         mostrarProvSelec();
     }
@@ -228,40 +231,60 @@ public class ventanaEditarProv extends javax.swing.JFrame
 
     private void btnAceptarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarActionPerformed
         Proveedor prov = new Proveedor();
-        if (!(txfdEditarRazonSocial.getText().equals("") || txfdEditarRazonSocial.getText() == null)
-                && !(txfdEditarCuit.getText().equals("") || txfdEditarCuit.getText() == null)) {
-            if (validar.validarCUIT(txfdEditarCuit.getText())) {
-                prov.setRazonSocial(txfdEditarRazonSocial.getText().toUpperCase());
-                prov.setCuit(txfdEditarCuit.getText());
-                prov.setDireccion(txfdEditarDireccion.getText().toUpperCase());
-                prov.setLocalidad(txfdLocalidad.getText().toUpperCase());
-                prov.setProvincia(txfdProvincia.getText().toUpperCase());
-                prov.setPais(txfdPais.getText().toUpperCase());
-                prov.setContacto(txfdEditarContacto.getText());
+        String cuitInput = txfdEditarCuit.getText();        
+        
+        if (!txfdEditarRazonSocial.getText().equals("") && !cuitInput.equals("")) 
+        {
+            if (validar.validarCUIT(cuitInput)) 
+            {
+                Proveedor provRepetido = pDAO.buscar1PorCuit(cuitInput);
+                
+                if (provRepetido == null || elProv.getCuit().equals(cuitInput))                    
+                {                
+                    prov.setRazonSocial(txfdEditarRazonSocial.getText().toUpperCase());
+                    prov.setCuit(cuitInput);
+                    prov.setDireccion(txfdEditarDireccion.getText().toUpperCase());
+                    prov.setLocalidad(txfdLocalidad.getText().toUpperCase());
+                    prov.setProvincia(txfdProvincia.getText().toUpperCase());
+                    prov.setPais(txfdPais.getText().toUpperCase());
+                    prov.setContacto(txfdEditarContacto.getText());
 
-                if (cbEditarEstado.getSelectedItem().equals("Habilitado")) {
-                    prov.setEstado(true);
-                } else {
-                    prov.setEstado(false);
+                    if (cbEditarEstado.getSelectedItem().equals("Habilitado")) 
+                    {
+                        prov.setEstado(true);
+                    } 
+                    else 
+                    {
+                        prov.setEstado(false);
+                    }
+
+                    pDAO.modificar(prov, id_recibido);
+
+                    dispose();
                 }
-
-                pDAO.modificar(prov, id_recibido);
-
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "CUIT debe tener tener el formato dd-dddddddd-d");
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "El nuevo CUIT del proveedor que ingresó ya existe.\n" +
+                                                        "Corrobore en el inventario para mayor seguridad y control.");
+                }
+            } 
+            else 
+            {
+                JOptionPane.showMessageDialog(null, "El CUIT debe tener el siguiente formato \"xx-xxxxxxxx-x\"");
             }
-        } else {
+        } 
+        else 
+        {
             JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
         }
     }//GEN-LAST:event_btnAceptarEditarActionPerformed
 
     private void txfdEditarCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarCuitKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) &&
-                (c != '-'))
+        if((c < '0' || c > '9') &&  (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '-'))
+        {
             evt.consume();
+        }
     }//GEN-LAST:event_txfdEditarCuitKeyTyped
     
     public static void main(String args[]) 
@@ -276,9 +299,7 @@ public class ventanaEditarProv extends javax.swing.JFrame
     }
     
     public void mostrarProvSelec()
-    {
-        Proveedor elProv = pDAO.buscarPorId(id_recibido);                
-           
+    {               
         //MOSTRAMOS LOS DATOS GUARDADOS DEL PROVEEDOR SELECCIONADO. PARA LUEGO PODER MODIFICAR
         txfdEditarRazonSocial.setText(String.valueOf(elProv.getRazonSocial()));
         txfdEditarCuit.setText(String.valueOf(elProv.getCuit()));

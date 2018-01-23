@@ -19,15 +19,14 @@ public class ProveedorDAO
         try
         {
             session.save(p);
-            tx.commit();
-            
+            tx.commit();            
         }
         catch(Exception e)
         {
             if (tx.isActive())
 		tx.rollback();
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "El CUIT del nuevo proveedor que desea registrar ya existe.");
+                    //JOptionPane.showMessageDialog(null, "El CUIT del nuevo proveedor que desea registrar ya existe.");
 		throw e;
         }
         finally
@@ -64,7 +63,7 @@ public class ProveedorDAO
             if (tx.isActive())
 		tx.rollback();
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "El CUIT del nuevo proveedor que desea registrar ya existe.");
+                    //JOptionPane.showMessageDialog(null, "El CUIT del nuevo proveedor que desea registrar ya existe.");
 		throw e;
         }
         finally
@@ -126,6 +125,30 @@ public class ProveedorDAO
         catch(HibernateException e)
         {
             JOptionPane.showMessageDialog(null, "Proveedor no encontrado");
+        }    
+        finally
+        {
+            session.close();
+        }
+        
+        return p;
+    }
+    
+    public Proveedor buscar1PorCuit(String cuit)
+    {
+        session = NewHibernateUtil.getSessionFactory().openSession();        
+        Proveedor p = null;
+        try
+        { 
+            tx = session.beginTransaction();
+            Query query = session.createQuery("FROM Proveedor p WHERE p.cuit LIKE :cuit");
+            query.setParameter("cuit", cuit);
+            p = (Proveedor)query.uniqueResult();
+            tx.commit();
+        } 
+        catch(HibernateException e)
+        {
+            JOptionPane.showMessageDialog(null, "Error. Proveedor por cuit");
         }    
         finally
         {

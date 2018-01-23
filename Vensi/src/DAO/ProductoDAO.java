@@ -18,16 +18,15 @@ public class ProductoDAO
         try
         {
             session.save(p);
-            tx.commit();
-            
+            tx.commit();            
         }
         catch(Exception e)
         {
             if (tx.isActive())
 		tx.rollback();
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "El código del nuevo producto que desea registrar ya existe.\n" +
-                                                        "Corrobore en el inventario para mayor seguridad y control.");
+                    //JOptionPane.showMessageDialog(null, "El código del nuevo producto que desea registrar ya existe.\n" +
+                    //                                    "Corrobore en el inventario para mayor seguridad y control.");
 		throw e;
         }
         finally
@@ -60,16 +59,15 @@ public class ProductoDAO
         try
         {
             session.merge(prod);
-            tx.commit();
-            
+            tx.commit();            
         }
         catch(Exception e)
         {
             if (tx.isActive())
 		tx.rollback();
                     e.printStackTrace();
-                    JOptionPane.showMessageDialog(null, "El código del nuevo producto que desea registrar ya existe.\n" +
-                                                        "Corrobore en el inventario para mayor seguridad y control.");
+                    //JOptionPane.showMessageDialog(null, "El código del nuevo producto que desea registrar ya existe.\n" +
+                    //                                    "Corrobore en el inventario para mayor seguridad y control.");
 		throw e;
         }        
         finally
@@ -112,10 +110,9 @@ public class ProductoDAO
             Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :codigo AND p.estado = TRUE");
             query.setParameter("codigo", codigo);
             p = (Producto)query.uniqueResult();
-            tx.commit();
-            
+            tx.commit();            
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error. Producto por codigo");
         }     

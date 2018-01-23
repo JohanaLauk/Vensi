@@ -92,9 +92,19 @@ public class ventanaHistorial extends javax.swing.JFrame
 
         bgTipo.add(rbTurno);
         rbTurno.setText("Turno");
+        rbTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbTurnoActionPerformed(evt);
+            }
+        });
 
         bgTipo.add(rbPedido);
         rbPedido.setText("Pedido");
+        rbPedido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbPedidoActionPerformed(evt);
+            }
+        });
 
         jLabel1.setText("Tipo:");
 
@@ -400,6 +410,24 @@ public class ventanaHistorial extends javax.swing.JFrame
     private void btnVaciarFechaHastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciarFechaHastaActionPerformed
         dateHasta.setDate(null);
     }//GEN-LAST:event_btnVaciarFechaHastaActionPerformed
+
+    private void rbTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTurnoActionPerformed
+        txfdNro.setText("");
+        dateDesde.setDate(null);
+        dateHasta.setDate(null);        
+        cbBuscarPor.setSelectedItem("Seleccionar");        
+
+        tablaVacia();
+    }//GEN-LAST:event_rbTurnoActionPerformed
+
+    private void rbPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPedidoActionPerformed
+        txfdNro.setText("");
+        dateDesde.setDate(null);
+        dateHasta.setDate(null);        
+        cbBuscarPor.setSelectedItem("Seleccionar");        
+
+        tablaVacia();
+    }//GEN-LAST:event_rbPedidoActionPerformed
 
     public static void main(String args[]) 
     {

@@ -207,34 +207,50 @@ public class ventanaNuevoProv extends javax.swing.JFrame
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
         Proveedor unProv = new Proveedor();
-        if (!(txfdRazonSocial.getText().equals("") || txfdRazonSocial.getText() == null)
-                && !(txfdCuit.getText().equals("") || txfdCuit.getText() == null)) {
-            if (validar.validarCUIT(txfdCuit.getText())) {
-                unProv.setRazonSocial(txfdRazonSocial.getText().toUpperCase());
-                unProv.setCuit(txfdCuit.getText());
-                unProv.setDireccion(txfdDireccion.getText().toUpperCase());
-                unProv.setLocalidad(txfdLocalidad.getText().toUpperCase());
-                unProv.setProvincia(txfdProvincia.getText().toUpperCase());
-                unProv.setPais(txfdPais.getText().toUpperCase());
-                unProv.setContacto(txfdContacto.getText());
+        String cuitInput = txfdCuit.getText();        
+        
+        if (!txfdRazonSocial.getText().equals("") && !cuitInput.equals("")) 
+        {          
+            if (validar.validarCUIT(cuitInput))
+            {
+                Proveedor provRepetido = pDAO.buscar1PorCuit(cuitInput);
+                
+                if (provRepetido == null)
+                {
+                    unProv.setRazonSocial(txfdRazonSocial.getText().toUpperCase());
+                    unProv.setCuit(cuitInput);
+                    unProv.setDireccion(txfdDireccion.getText().toUpperCase());
+                    unProv.setLocalidad(txfdLocalidad.getText().toUpperCase());
+                    unProv.setProvincia(txfdProvincia.getText().toUpperCase());
+                    unProv.setPais(txfdPais.getText().toUpperCase());
+                    unProv.setContacto(txfdContacto.getText());
 
-                pDAO.alta(unProv);
-                dispose();
-            } else {
-                JOptionPane.showMessageDialog(null, "CUIT debe tener tener el formato dd-dddddddd-d");
+                    pDAO.alta(unProv);
+                    dispose();
+                } 
+                else 
+                {
+                    JOptionPane.showMessageDialog(null, "El CUIT del proveedor que desea crear ya existe.\n" +
+                                                        "Corrobore en el inventario para mayor seguridad y control.");
+                }
             }
-        } else {
+            else
+            {
+                JOptionPane.showMessageDialog(null, "El CUIT debe tener el siguiente formato \"xx-xxxxxxxx-x\"");                                                    
+            }
+        } 
+        else 
+        {
             JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
         }
-
     }//GEN-LAST:event_btnAceptarActionPerformed
 
     private void txfdCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCuitKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE) &&
-                (c != '-'))
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '-'))
+        {
             evt.consume();
+        }
     }//GEN-LAST:event_txfdCuitKeyTyped
 
     public static void main(String args[]) 
