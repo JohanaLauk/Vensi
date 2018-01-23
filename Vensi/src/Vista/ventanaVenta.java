@@ -231,7 +231,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelBusquedaLayout.createSequentialGroup()
-                        .addComponent(txfdBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, 382, Short.MAX_VALUE)
+                        .addComponent(txfdBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(panelBusquedaLayout.createSequentialGroup()

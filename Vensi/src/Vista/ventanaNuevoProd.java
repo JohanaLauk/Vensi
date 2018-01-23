@@ -9,6 +9,7 @@ import java.awt.Dimension;
 import java.text.DecimalFormat;
 import java.util.*;
 import javax.swing.JCheckBox;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 import javax.swing.table.DefaultTableModel;
@@ -39,8 +40,8 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         //this.setUndecorated(true);  //quita los bordes de la ventana, incluyendo los botones
         
         txfdPesoEnvase.setEnabled(false); 
-        llenarCheckBoxProv();          
-        
+        //llenarCheckBoxProv();          
+        llenarTabla();
     }
     
     @SuppressWarnings("unchecked")
@@ -48,6 +49,8 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     private void initComponents() {
 
         bgTipoVenta = new javax.swing.ButtonGroup();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -74,6 +77,21 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         txfdPrecioCosto = new org.jdesktop.swingx.JXTextField();
         panelProveedor = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tablaProv = new javax.swing.JTable();
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nuevo producto");
@@ -137,14 +155,15 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addGap(77, 77, 77)
                 .addComponent(btnCancelarNuevoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAceptarNuevoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(51, 51, 51))
+                .addGap(104, 104, 104)
+                .addComponent(btnAceptarNuevoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 136, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnCancelarNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
-            .addComponent(btnAceptarNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                .addComponent(btnCancelarNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                .addComponent(btnAceptarNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         jLabel9.setText("Stock inicial:");
@@ -187,9 +206,40 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         });
 
         panelProveedor.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        panelProveedor.setFocusable(false);
         panelProveedor.setLayout(null);
 
         jLabel11.setText("gramos.");
+
+        tablaProv.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Proveedor", "", "ID"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Boolean.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tablaProv);
+        if (tablaProv.getColumnModel().getColumnCount() > 0) {
+            tablaProv.getColumnModel().getColumn(0).setResizable(false);
+            tablaProv.getColumnModel().getColumn(1).setResizable(false);
+            tablaProv.getColumnModel().getColumn(2).setResizable(false);
+        }
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -225,7 +275,10 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                                 .addGap(18, 18, 18)
                                 .addComponent(rbPeso))
                             .addComponent(jLabel8)
-                            .addComponent(panelProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 239, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(223, 223, 223)
+                                .addComponent(panelProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 212, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(23, 23, 23)
                                 .addComponent(jLabel6)
@@ -241,6 +294,28 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel5)
+                            .addComponent(rbUnidad)
+                            .addComponent(rbPeso))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel6)
+                            .addComponent(txfdPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel10)
+                            .addComponent(cbSituación, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(26, 26, 26)
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(panelProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, 200, Short.MAX_VALUE)
+                                .addGap(104, 104, 104))
+                            .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -264,26 +339,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txfdStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(rbUnidad)
-                            .addComponent(rbPeso))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txfdPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel11))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel10)
-                            .addComponent(cbSituación, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(26, 26, 26)
-                        .addComponent(jLabel8)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelProveedor, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGap(198, 198, 198)))
+                        .addComponent(txfdStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(11, 11, 11)
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -381,103 +437,103 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                 {
                     if (validar.validarPrecio(txfdPrecioCosto.getText()))
                     {
-                        double precioC = Double.parseDouble(txfdPrecioCosto.getText());                       
+                        double precioC = Double.parseDouble(txfdPrecioCosto.getText());
                         unProd.setPrecioCosto(precioC);//r.RedondearCentavos(precioC));
-                    }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio costo");
-                        unProd.setPrecioCosto(0.00);
-                    }
-                }
-
-                if (txfdPrecioVenta.getText().equals("") || txfdPrecioVenta.getText() == null)
-                {
-                    unProd.setPrecioVenta(0.00);
                 }
                 else
                 {
-                    if (validar.validarPrecio(txfdPrecioVenta.getText()))
-                    {
-                        double precioV = Double.parseDouble(txfdPrecioVenta.getText());
-                        unProd.setPrecioVenta(precioV); //r.RedondearCentavos(precioV));
-                    }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio venta");
-                        unProd.setPrecioVenta(0.00);
-                    }
-                }
-
-                if (rbPeso.isSelected())
-                {
-                    unProd.setPorPeso(true);    //por peso
-
-                    int pesoEnv = Integer.parseInt(txfdPesoEnvase.getText());
-                    unProd.setPesoEnvase(pesoEnv);  //gramos
-
-                    int stockMin = Integer.parseInt(txfdStockMinimo.getText());  //unidades
-                    int total = stockMin * pesoEnv;    //convierto las unidades en gramos
-                    unProd.setStockMinimo(total);   //guardo en gramos
-
-                    int stock = Integer.parseInt(txfdStockInicial.getText());   //unidades
-                    int total2 = stock * pesoEnv;   //convierto las unidades en gramos
-                    unProd.setStock(total2);   //guardo en gramos
-
-                    double precioV = Double.parseDouble(txfdPrecioVenta.getText());
-                    //precioV = r.RedondearCentavos(precioV);
-                    double precioKilo = (1000 * precioV) / pesoEnv;
-                    r.RedondearCentavos(precioKilo);
-                    unProd.setPrecioVentaXKilo(precioKilo);
-                }
-                else
-                {
-                    unProd.setPorPeso(false);   //por unidad
-                    unProd.setPesoEnvase(0);
-                    unProd.setStockMinimo(Integer.parseInt(txfdStockMinimo.getText()));
-                    unProd.setStock(Integer.parseInt(txfdStockInicial.getText()));
-                }
-
-                boolean alMenosUnCheck = false;
-
-                for (JCheckBox c : checkProv)
-                {
-                    if (c.isSelected())
-                    {
-                        unProd.addProveedor(prDAO.buscarPorCuitNombre(c.getText(), "Habilitados").get(0));
-                        alMenosUnCheck = true;
-                    }
-                }
-
-                if (situacion.equals("Ninguno"))
-                {
-                    unProd.setOferta(false);
-                    unProd.setSuspendido(false);
-                }
-                else
-                {
-                    if (situacion.equals("Oferta"))
-                    {
-                        unProd.setOferta(true);
-                        unProd.setSuspendido(false);
-                    }
-                    else
-                    {
-                        unProd.setOferta(false);
-                        unProd.setSuspendido(true);
-                    }
-                }
-
-                if (alMenosUnCheck)
-                {
-                    pDAO.alta(unProd);
-                    dispose();
-                }
-                else
-                {
-                    JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor");
+                    JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio costo");
+                    unProd.setPrecioCosto(0.00);
                 }
             }
+
+            if (txfdPrecioVenta.getText().equals("") || txfdPrecioVenta.getText() == null)
+            {
+                unProd.setPrecioVenta(0.00);
+            }
+            else
+            {
+                if (validar.validarPrecio(txfdPrecioVenta.getText()))
+                {
+                    double precioV = Double.parseDouble(txfdPrecioVenta.getText());
+                    unProd.setPrecioVenta(precioV); //r.RedondearCentavos(precioV));
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Utilice punto en el campo Precio venta");
+                unProd.setPrecioVenta(0.00);
+            }
+        }
+
+        if (rbPeso.isSelected())
+        {
+            unProd.setPorPeso(true);    //por peso
+
+            int pesoEnv = Integer.parseInt(txfdPesoEnvase.getText());
+            unProd.setPesoEnvase(pesoEnv);  //gramos
+
+            int stockMin = Integer.parseInt(txfdStockMinimo.getText());  //unidades
+            int total = stockMin * pesoEnv;    //convierto las unidades en gramos
+            unProd.setStockMinimo(total);   //guardo en gramos
+
+            int stock = Integer.parseInt(txfdStockInicial.getText());   //unidades
+            int total2 = stock * pesoEnv;   //convierto las unidades en gramos
+            unProd.setStock(total2);   //guardo en gramos
+
+            double precioV = Double.parseDouble(txfdPrecioVenta.getText());
+            //precioV = r.RedondearCentavos(precioV);
+            double precioKilo = (1000 * precioV) / pesoEnv;
+            r.RedondearCentavos(precioKilo);
+            unProd.setPrecioVentaXKilo(precioKilo);
+        }
+        else
+        {
+            unProd.setPorPeso(false);   //por unidad
+            unProd.setPesoEnvase(0);
+            unProd.setStockMinimo(Integer.parseInt(txfdStockMinimo.getText()));
+            unProd.setStock(Integer.parseInt(txfdStockInicial.getText()));
+        }
+
+        boolean alMenosUnCheck = false;
+
+        for (JCheckBox c : checkProv)
+        {
+            if (c.isSelected())
+            {
+                unProd.addProveedor(prDAO.buscarPorCuitNombre(c.getText(), "Habilitados").get(0));
+                alMenosUnCheck = true;
+            }
+        }
+
+        if (situacion.equals("Ninguno"))
+        {
+            unProd.setOferta(false);
+            unProd.setSuspendido(false);
+        }
+        else
+        {
+            if (situacion.equals("Oferta"))
+            {
+                unProd.setOferta(true);
+                unProd.setSuspendido(false);
+            }
+            else
+            {
+                unProd.setOferta(false);
+                unProd.setSuspendido(true);
+            }
+        }
+
+        if (alMenosUnCheck)
+        {
+            pDAO.alta(unProd);
+            dispose();
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor");
+        }
+        }
         }
         else
         {
@@ -525,6 +581,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     
     private void llenarCheckBoxProv() 
     {        
+        
         List<Proveedor> lista = prDAO.listar("Habilitados");  
         int altura = 0;      
         
@@ -535,23 +592,49 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             c.setLocation(0, altura);
             c.setVisible(true);
             checkProv.add(c);   //lista de checkBox con los Prov habilitados
-            this.panelProveedor.add(c);  //panel que contiene los checkBox de Prov
-            //this.validate();    //que es this? que componente?
+            panelProveedor.add(c);  //panel que contiene los checkBox de Prov
+            panelProveedor.validate();    //que es this? que componente?
             altura += 20;
         }       
         
-        this.panelProveedor.setPreferredSize(new Dimension(220,600));     
+        panelProveedor.setPreferredSize(new Dimension(220,600));     
         
         scrollPane = new JScrollPane();
         scrollPane.setBounds(300,180,240,200);
-        scrollPane.setViewportView(this.panelProveedor);
-                
-        this.add(scrollPane);  
-        
-        
-        
+        scrollPane.setViewportView(panelProveedor);
+        panelProveedor.revalidate();
+
+        this.add(scrollPane);
         
     }
+    
+    public void llenarTabla(){
+        
+        List<Proveedor> lista = prDAO.listar("Habilitados");
+        modelo = new DefaultTableModel();
+        modelo.addColumn("Proveedor");
+        modelo.addColumn("");
+        modelo.addColumn("ID");
+        
+        for(Proveedor p : lista){
+            
+            Object datos[] = {p.getRazonSocial(), false, p.getId()};
+            modelo.addRow(datos);
+        }
+        tablaProv.setModel(modelo);
+        
+        tcm = tablaProv.getColumnModel();   
+        tcm.getColumn(1).set
+        tcm.getColumn(0).setPreferredWidth(170);
+        tcm.getColumn(1).setPreferredWidth(20);
+        tcm.getColumn(2).setPreferredWidth(0);     
+        tcm.getColumn(2).setMaxWidth(0);
+        tcm.getColumn(2).setMinWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(2).setMaxWidth(0);
+        tablaProv.getTableHeader().getColumnModel().getColumn(2).setMinWidth(0);
+    }
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.ButtonGroup bgTipoVenta;
@@ -571,9 +654,13 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JPanel panelProveedor;
     private javax.swing.JRadioButton rbPeso;
     private javax.swing.JRadioButton rbUnidad;
+    private javax.swing.JTable tablaProv;
     private javax.swing.JTextField txfdCodigo;
     private javax.swing.JTextField txfdDescripcion;
     private javax.swing.JTextField txfdPesoEnvase;
