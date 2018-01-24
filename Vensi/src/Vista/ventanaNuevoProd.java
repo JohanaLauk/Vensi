@@ -38,7 +38,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         //this.setUndecorated(true);  //quita los bordes de la ventana, incluyendo los botones
         
         txfdPesoEnvase.setEnabled(false); 
-        llenarCheckBoxProv();          
+        //llenarCheckBoxProv();          
         llenarTabla();
     }
     
@@ -420,7 +420,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         Producto unProd = new Producto();
         String codigoInput = txfdCodigo.getText();
         
-        //boolean listo = false;
         boolean preciosOK = false;
         boolean rbOK = false;
         boolean alMenosUnCheck = false;
@@ -513,8 +512,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                                     double precioKilo = (1000 * Double.parseDouble(precioV)) / pesoEnv;
                                     r.RedondearCentavos(precioKilo);
                                     unProd.setPrecioVentaXKilo(precioKilo);
-                                }                               
-
+                                }            
                                 rbOK = true;
                             }
                         }
@@ -529,7 +527,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                             }
                             else
                             {
-                                unProd.setStockMinimo(Integer.parseInt(txfdStockMinimo.getText()));
+                                unProd.setStockMinimo(Integer.parseInt(stockMin));
                             }
                             String stock = txfdStockInicial.getText();
                             if (stock.equals(""))
@@ -560,7 +558,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                                 unProd.setOferta(true);
                                 unProd.setSuspendido(false);
                             }
-                            else
+                            else    //suspendido
                             {
                                 unProd.setOferta(false);
                                 unProd.setSuspendido(true);
@@ -593,6 +591,10 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                 JOptionPane.showMessageDialog(null, "El CÓDIGO del producto que desea crear ya existe.\n" +
                                                     "Corrobore en el inventario para mayor seguridad y control.");                
             }                   
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
         }
     }//GEN-LAST:event_btnAceptarNuevoProdActionPerformed
 

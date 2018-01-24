@@ -330,7 +330,7 @@ public class ventanaProveedor extends javax.swing.JFrame
     }//GEN-LAST:event_cbFiltroCampoProvActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        llenarTabla();
+        //acciones para cuando vuelve a la ventana
     }//GEN-LAST:event_formWindowGainedFocus
 
     public static void main(String args[]) 
@@ -370,8 +370,7 @@ public class ventanaProveedor extends javax.swing.JFrame
             else
             {
                 datos[2] = String.valueOf(p.getDireccion());
-            }
-            
+            }            
             
             if (p.getLocalidad().equals("") && p.getProvincia().equals("") && p.getPais().equals(""))
             {
@@ -460,15 +459,15 @@ public class ventanaProveedor extends javax.swing.JFrame
         tablaProv.addFocusListener(new FocusListener() 
         {
             @Override
-            public void focusGained(FocusEvent fe) 
+            public void focusGained(FocusEvent fe)  //recupera el foco
             {
-                tablaProv.setRowSelectionAllowed(true);
+                tablaProv.setRowSelectionAllowed(true);     //permitir seleccion
             }
 
             @Override
-            public void focusLost(FocusEvent fe) 
+            public void focusLost(FocusEvent fe)    //pierde el foco
             {                
-                tablaProv.setRowSelectionAllowed(false);
+                tablaProv.setRowSelectionAllowed(false);    //no permitir seleccion
             } 
         });
         

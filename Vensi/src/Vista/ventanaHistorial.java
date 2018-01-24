@@ -398,13 +398,23 @@ public class ventanaHistorial extends javax.swing.JFrame
 
     private void txfdNroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdNroKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
-            evt.consume(); 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        {
+            evt.consume();
+        } 
     }//GEN-LAST:event_txfdNroKeyTyped
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        btnVisualizarHistorial.setEnabled(false);
+        int filaSelec = tablaHistorial.getSelectedRow();
+        
+        if (filaSelec >= 0)
+        {
+            btnVisualizarHistorial.setEnabled(true);
+        }
+        else
+        {
+            btnVisualizarHistorial.setEnabled(false);
+        }                
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void btnVaciarFechaHastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciarFechaHastaActionPerformed
@@ -640,7 +650,7 @@ public class ventanaHistorial extends javax.swing.JFrame
             @Override
             public void focusLost(FocusEvent fe) //pierde el foco
             {                
-                tablaHistorial.setRowSelectionAllowed(true);
+                tablaHistorial.setRowSelectionAllowed(false);
             } 
         });
         

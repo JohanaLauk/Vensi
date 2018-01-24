@@ -8,6 +8,7 @@ import Utils.Redondear;
 import Utils.Validar;
 import java.awt.Dimension;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.*;
 import javax.swing.JCheckBox;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +33,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
     int stockU;    //variable usada en mostrarProdSelec()
     List<JCheckBox> checkProv = new ArrayList<>();
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
+    //NumberFormat formatoPrec = new DecimalFormat("0.00");
 
     public ventanaEditarProd() 
     {
@@ -395,12 +397,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         if (rbPeso.isSelected())
         {
             txfdEditarPesoEnvase.setEnabled(true);
-            txfdEditarPesoEnvase.setText(String.valueOf(elProd.getPesoEnvase()));
-        }
-        else
-        {
-            txfdEditarPesoEnvase.setEnabled(false);
-            txfdEditarPesoEnvase.setText("0");
+            txfdEditarPesoEnvase.setText(null);
         }
     }//GEN-LAST:event_rbPesoActionPerformed
 
@@ -408,12 +405,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         if (rbUnidad.isSelected())
         {
             txfdEditarPesoEnvase.setEnabled(false);
-            txfdEditarPesoEnvase.setText("0");
-        }
-        else
-        {
-            txfdEditarPesoEnvase.setEnabled(true);
-            txfdEditarPesoEnvase.setText(String.valueOf(elProd.getPesoEnvase()));
+            txfdEditarPesoEnvase.setText(null);
         }
     }//GEN-LAST:event_rbUnidadActionPerformed
 
@@ -424,7 +416,10 @@ public class ventanaEditarProd extends javax.swing.JFrame
     private void btnAceptarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarActionPerformed
         Producto prodEditar = new Producto();
         String codigoInput = txfdEditarCodigo.getText();
-        boolean listo = false;        
+        
+        boolean preciosOK = false;
+        boolean rbOK = false;
+        boolean alMenosUnCheck = false;      
 
         if (!codigoInput.equals("") && !txfdEditarDescripcion.getText().equals("") && (rbPeso.isSelected() || rbUnidad.isSelected()))
         {   //Ingresó CODIGO, DESCRIPCION y marcó el TIPO DE VENTA                        
@@ -432,11 +427,14 @@ public class ventanaEditarProd extends javax.swing.JFrame
             
             if (prodRepetido == null || elProd.getCodigo().equals(codigoInput))
             {
+                prodEditar.setCodigo(txfdEditarCodigo.getText().toUpperCase());
+                prodEditar.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());
+                
                 if (txfdEditarPrecioCosto.getText().equals("") || txfdEditarPrecioVenta.getText().equals(""))
                 {
                     prodEditar.setPrecioCosto(0.00);
                     prodEditar.setPrecioVenta(0.00);
-                    listo = true;
+                    preciosOK = true;
                 }
                 else
                 {
@@ -447,16 +445,31 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
                         double precioV = Double.parseDouble(txfdEditarPrecioVenta.getText());
                         prodEditar.setPrecioVenta(precioV); //r.RedondearCentavos(precioV));
-
-                        prodEditar.setCodigo(txfdEditarCodigo.getText().toUpperCase());
-                        prodEditar.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());
-
+                        
+                        preciosOK = true;
+                    }
+                    else
+                    {
+                        JOptionPane.showMessageDialog(null, "Utilice el siguiente formato para los precios \"00.00\"");
+                        preciosOK = false;
+                    }
+                }
+                
+                if (preciosOK)
+                {
+                    if (!rbPeso.isSelected() && !rbUnidad.isSelected())    //TIPO DE VENTA por PESO
+                    {
+                        JOptionPane.showMessageDialog(null, "Debe marcar si el producto se vende por PESO o por UNIDAD.");
+                        rbOK = false;
+                    }
+                    else
+                    {
                         if (rbPeso.isSelected())    //TIPO DE VENTA por PESO
                         {
                             if (txfdEditarPesoEnvase.getText().equals(""))   //marcó PESO pero no ingresó el PESO DEL ENVASE
                             {
-                                JOptionPane.showMessageDialog(null, "Debe ingresar el PESO DEL ENVASE (en gramos).");
-                                listo = false;
+                                JOptionPane.showMessageDialog(null, "Debe ingresar el PESO DEL ENVASE (en gramos).");   
+                                rbOK = false;
                             }
                             else
                             {
@@ -479,16 +492,22 @@ public class ventanaEditarProd extends javax.swing.JFrame
                                 int total2 = stockU * pesoEnv;  //convierto la unidad en gramos
                                 prodEditar.setStock(total2);  //guardo el nuevo stock en gramos
                                 
-                                double precioKilo = (1000 * precioV) / pesoEnv;
-                                r.RedondearCentavos(precioKilo);
-                                prodEditar.setPrecioVentaXKilo(precioKilo);
-
-                                listo = true;
+                                String precioV = txfdEditarPrecioVenta.getText();
+                                if (precioV.equals(""))
+                                {
+                                    prodEditar.setPrecioVentaXKilo(0);
+                                }
+                                else
+                                {
+                                    double precioKilo = (1000 * Double.parseDouble(precioV)) / pesoEnv;
+                                    r.RedondearCentavos(precioKilo);
+                                    prodEditar.setPrecioVentaXKilo(precioKilo);
+                                }    
+                                rbOK = true;
                             }
                         }
-                        else    //TIPO DE VENTA por UNIDAD
-                        {
-                            prodEditar.setStock(stockU);
+                        if (rbUnidad.isSelected())    //TIPO DE VENTA por UNIDAD
+                        {                            
                             prodEditar.setPorPeso(false);
                             prodEditar.setPesoEnvase(0);
                             String stockMin = txfdEditarStockMinimo.getText();
@@ -502,11 +521,13 @@ public class ventanaEditarProd extends javax.swing.JFrame
                             }
                             prodEditar.setStock(stockU);
                             prodEditar.setPrecioVentaXKilo(0);
-
-                            listo = true;
+                            
+                            rbOK = true;
                         }
-
-
+                    }
+                    
+                    if (rbOK)
+                    {
                         if (cbEstado.getSelectedItem().equals("Habilitado"))
                         {
                             prodEditar.setEstado(true);
@@ -516,27 +537,25 @@ public class ventanaEditarProd extends javax.swing.JFrame
                             prodEditar.setEstado(false);
                         }
 
-                        if (cbSituacion.getSelectedItem().equals("Ninguno"))
-                        {
-                            prodEditar.setSuspendido(false);
+                        if (situacion.equals("Ninguno"))
+                        {                            
                             prodEditar.setOferta(false);
+                            prodEditar.setSuspendido(false);
                         }
                         else
                         {
-                            if (cbSituacion.getSelectedItem().equals("Oferta"))
+                            if (situacion.equals("Oferta"))
                             {
                                 prodEditar.setOferta(true);
                                 prodEditar.setSuspendido(false);
                             }
                             else //suspendido
-                            {
-                                prodEditar.setSuspendido(true);
+                            {                                
                                 prodEditar.setOferta(false);
+                                prodEditar.setSuspendido(true);
                             }
                         }
-
-                        boolean alMenosUnCheck = false;
-
+                        
                         for (JCheckBox c : checkProv)
                         {
                             if (c.isSelected())
@@ -545,24 +564,17 @@ public class ventanaEditarProd extends javax.swing.JFrame
                                 alMenosUnCheck = true;
                             }
                         }
-                        if (alMenosUnCheck)
-                        {
-                            if (listo)
-                            {
-                                pDAO.modificar(prodEditar, id_recibido);
-                                dispose();
-                            }
+                        if (preciosOK && rbOK && alMenosUnCheck)
+                        {                            
+                            pDAO.modificar(prodEditar, id_recibido);
+                            dispose();                            
                         }
                         else
                         {
                             JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor.");
                         }
                     }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(null, "Utilice el siguiente formato para los precios \"00.00\"");
-                    }
-                }                
+                }      
             }     
             else
             {
@@ -612,7 +624,15 @@ public class ventanaEditarProd extends javax.swing.JFrame
         {
             txfdEditarStockMinimo.setText(String.valueOf(elProd.getStockMinimo()));
         }
-        txfdEditarPesoEnvase.setText(String.valueOf(elProd.getPesoEnvase()));
+        
+        if (elProd.getPesoEnvase() == 0)
+        {
+            txfdEditarPesoEnvase.setText(null);
+        }
+        else
+        {
+            txfdEditarPesoEnvase.setText(String.valueOf(elProd.getPesoEnvase()));
+        }        
 
         if (elProd.isEstado()) 
         {

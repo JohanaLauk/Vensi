@@ -13,6 +13,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
+import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -39,7 +40,7 @@ public class ventanaVenta extends javax.swing.JFrame
     String ordenSelec = "descripcion";
     String tipoSelec = "ASC";
     
-    Redondear r = new Redondear();
+    Redondear r = new Redondear();    
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
         

@@ -50,7 +50,7 @@ public class ventanaProducto extends javax.swing.JFrame
         
         cbSituacion.setEnabled(false);
         
-        //Al hacer click en el JFrame se quita la seleccion en el JTable
+        //Al hacer click en el JFrame se quita la seleccion del JTable
         this.addMouseListener(new MouseAdapter()
         {
             @Override
@@ -383,8 +383,7 @@ public class ventanaProducto extends javax.swing.JFrame
         if (cbCampoOrden.getSelectedItem().equals("Peso del envase"))
         {
             ordenSelec = "peso_envase";
-        } 
-        
+        }         
         llenarTabla(); 
     }//GEN-LAST:event_cbCampoOrdenActionPerformed
        
@@ -396,8 +395,7 @@ public class ventanaProducto extends javax.swing.JFrame
         else
         {
             tipoSelec = "ASC";
-        }
-        
+        }        
         llenarTabla();
     }//GEN-LAST:event_cbTipoOrdenActionPerformed
 
@@ -419,8 +417,7 @@ public class ventanaProducto extends javax.swing.JFrame
                 filtroSelec = "Deshabilitados";
                 cbSituacion.setEnabled(false);
             }
-        }
-        
+        }        
         llenarTabla();
     }//GEN-LAST:event_cbFiltroCampoActionPerformed
 
@@ -440,7 +437,7 @@ public class ventanaProducto extends javax.swing.JFrame
         
         llenarTablaBusqueda(listaBusqueda);
         
-        if (txfdBuscarProd.getText().equals("") || txfdBuscarProd.getText() == null)
+        if (txfdBuscarProd.getText().equals(""))
         {
             cbFiltroCampo.setEnabled(true);
             if (cbFiltroCampo.getSelectedItem().equals("Habilitados"))
@@ -521,7 +518,7 @@ public class ventanaProducto extends javax.swing.JFrame
     }//GEN-LAST:event_cbFiltroProvActionPerformed
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        llenarTabla();
+        //acciones para cuando vuelve a la ventana
     }//GEN-LAST:event_formWindowActivated
 
     private void cbSituacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSituacionActionPerformed
@@ -540,8 +537,7 @@ public class ventanaProducto extends javax.swing.JFrame
         if (cbSituacion.getSelectedItem().equals("Sólo suspendidos"))
         {
             situacionSelec = "Suspendido";        
-        }
-    
+        }    
         llenarTabla();
     }//GEN-LAST:event_cbSituacionActionPerformed
     
@@ -689,15 +685,15 @@ public class ventanaProducto extends javax.swing.JFrame
         tablaProd.addFocusListener(new FocusListener() 
         {
             @Override
-            public void focusGained(FocusEvent fe) 
+            public void focusGained(FocusEvent fe)  //recupera el foco
             {
-                tablaProd.setRowSelectionAllowed(true);
+                tablaProd.setRowSelectionAllowed(true);     //permitir seleccion
             }
 
             @Override
-            public void focusLost(FocusEvent fe) 
+            public void focusLost(FocusEvent fe)    //pierde el foco
             {                
-                tablaProd.setRowSelectionAllowed(false);
+                tablaProd.setRowSelectionAllowed(false);    //no permitir seleccion
             } 
         });
         
