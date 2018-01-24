@@ -21,7 +21,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
     ProductoDAO pDAO = new ProductoDAO();
     Validar validar = new Validar();
     DefaultTableModel modelo;
-    TableColumnModel tcm;
     
     Redondear r = new Redondear();   
     
@@ -50,7 +49,8 @@ public class ventanaEditarProd extends javax.swing.JFrame
         elProd = pDAO.buscarPorId(id_recibido);
 
         mostrarProdSelec();
-        llenarCheckBoxProv();
+        //llenarCheckBoxProv();
+        llenarTabla();
     }
 
     @SuppressWarnings("unchecked")
@@ -67,9 +67,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel7 = new javax.swing.JLabel();
         txfdEditarCodigo = new javax.swing.JTextField();
         txfdEditarDescripcion = new javax.swing.JTextField();
-        jPanel2 = new javax.swing.JPanel();
-        btnAceptarEditar = new javax.swing.JButton();
-        btnCancelarEditar = new javax.swing.JButton();
         jLabel5 = new javax.swing.JLabel();
         rbUnidad = new javax.swing.JRadioButton();
         rbPeso = new javax.swing.JRadioButton();
@@ -80,11 +77,14 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel10 = new javax.swing.JLabel();
         cbSituacion = new javax.swing.JComboBox<>();
         jLabel6 = new javax.swing.JLabel();
-        panelProveedor = new javax.swing.JPanel();
         txfdEditarPrecioCosto = new org.jdesktop.swingx.JXTextField();
         txfdEditarPrecioVenta = new org.jdesktop.swingx.JXTextField();
         txfdEditarStockMinimo = new org.jdesktop.swingx.JXTextField();
         jLabel11 = new javax.swing.JLabel();
+        btnAceptarEditar = new javax.swing.JButton();
+        btnCancelarEditar = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaProv = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Editar producto");
@@ -99,37 +99,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel4.setText("Precio venta:");
 
         jLabel7.setText("Stock mínimo:");
-
-        btnAceptarEditar.setText("Aceptar");
-        btnAceptarEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnAceptarEditarActionPerformed(evt);
-            }
-        });
-
-        btnCancelarEditar.setText("Cancelar");
-        btnCancelarEditar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCancelarEditarActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                .addGap(71, 71, 71)
-                .addComponent(btnCancelarEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 182, Short.MAX_VALUE)
-                .addComponent(btnAceptarEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(53, 53, 53))
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnCancelarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-            .addComponent(btnAceptarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-        );
 
         jLabel5.setText("Se vende por:");
 
@@ -177,17 +146,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         jLabel6.setText("Proveedor/es:");
 
-        javax.swing.GroupLayout panelProveedorLayout = new javax.swing.GroupLayout(panelProveedor);
-        panelProveedor.setLayout(panelProveedorLayout);
-        panelProveedorLayout.setHorizontalGroup(
-            panelProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 222, Short.MAX_VALUE)
-        );
-        panelProveedorLayout.setVerticalGroup(
-            panelProveedorLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 126, Short.MAX_VALUE)
-        );
-
         txfdEditarPrecioCosto.setPrompt("Ej: \"00\" o \"00.00\"");
         txfdEditarPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -211,6 +169,54 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         jLabel11.setText("gramos.");
 
+        btnAceptarEditar.setText("Aceptar");
+        btnAceptarEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAceptarEditarActionPerformed(evt);
+            }
+        });
+
+        btnCancelarEditar.setText("Cancelar");
+        btnCancelarEditar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCancelarEditarActionPerformed(evt);
+            }
+        });
+
+        tablaProv.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "Proveedor", "", "ID"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.Boolean.class, java.lang.String.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, true, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(tablaProv);
+        if (tablaProv.getColumnModel().getColumnCount() > 0) {
+            tablaProv.getColumnModel().getColumn(0).setResizable(false);
+            tablaProv.getColumnModel().getColumn(1).setMinWidth(40);
+            tablaProv.getColumnModel().getColumn(1).setPreferredWidth(40);
+            tablaProv.getColumnModel().getColumn(1).setMaxWidth(40);
+            tablaProv.getColumnModel().getColumn(2).setMinWidth(0);
+            tablaProv.getColumnModel().getColumn(2).setPreferredWidth(0);
+            tablaProv.getColumnModel().getColumn(2).setMaxWidth(0);
+        }
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -226,7 +232,12 @@ public class ventanaEditarProd extends javax.swing.JFrame
                     .addComponent(jLabel7)
                     .addComponent(txfdEditarPrecioCosto, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txfdEditarPrecioVenta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txfdEditarStockMinimo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE))
+                    .addComponent(txfdEditarStockMinimo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnCancelarEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 21, Short.MAX_VALUE)
+                        .addComponent(btnAceptarEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(37, 37, 37)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
@@ -240,8 +251,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
                         .addGap(71, 71, 71))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6)
-                            .addComponent(panelProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                 .addGroup(jPanel1Layout.createSequentialGroup()
                                     .addComponent(jLabel9)
@@ -254,9 +263,10 @@ public class ventanaEditarProd extends javax.swing.JFrame
                                     .addGap(18, 18, 18)
                                     .addComponent(rbUnidad)
                                     .addGap(18, 18, 18)
-                                    .addComponent(rbPeso))))
-                        .addContainerGap(20, Short.MAX_VALUE))))
-            .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(rbPeso)))
+                            .addComponent(jLabel6)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(19, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -273,15 +283,9 @@ public class ventanaEditarProd extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txfdEditarPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel4)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txfdEditarPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txfdEditarStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(txfdEditarPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -299,14 +303,23 @@ public class ventanaEditarProd extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel6)
+                            .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(panelProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(11, 11, 11)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                        .addComponent(txfdEditarPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfdEditarStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCancelarEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAceptarEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -315,23 +328,203 @@ public class ventanaEditarProd extends javax.swing.JFrame
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addGap(0, 6, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnCancelarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEditarActionPerformed
+        dispose();
+    }//GEN-LAST:event_btnCancelarEditarActionPerformed
+
+    private void btnAceptarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarActionPerformed
+        Producto prodEditar = new Producto();
+        String codigoInput = txfdEditarCodigo.getText();
+
+        boolean preciosOK = false;
+        boolean rbOK = false;
+        boolean alMenosUnCheck = false;
+
+        if (!codigoInput.equals("") && !txfdEditarDescripcion.getText().equals("") && (rbPeso.isSelected() || rbUnidad.isSelected()))
+        {   //Ingresó CODIGO, DESCRIPCION y marcó el TIPO DE VENTA
+            Producto prodRepetido = pDAO.buscarPorCodigo(codigoInput);
+
+            if (prodRepetido == null || elProd.getCodigo().equals(codigoInput))
+            {
+                prodEditar.setCodigo(txfdEditarCodigo.getText().toUpperCase());
+                prodEditar.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());
+
+                if (txfdEditarPrecioCosto.getText().equals("") || txfdEditarPrecioVenta.getText().equals(""))
+                {
+                    prodEditar.setPrecioCosto(0.00);
+                    prodEditar.setPrecioVenta(0.00);
+                    preciosOK = true;
+                }
+                else
+                {
+                    if (validar.validarPrecio(txfdEditarPrecioCosto.getText()) && validar.validarPrecio(txfdEditarPrecioVenta.getText()))
+                    {
+                        double precioC = Double.parseDouble(txfdEditarPrecioCosto.getText());
+                        prodEditar.setPrecioCosto(precioC); //r.RedondearCentavos(precioC));
+
+                    double precioV = Double.parseDouble(txfdEditarPrecioVenta.getText());
+                    prodEditar.setPrecioVenta(precioV); //r.RedondearCentavos(precioV));
+
+                preciosOK = true;
+            }
+            else
+            {
+                JOptionPane.showMessageDialog(null, "Utilice el siguiente formato para los precios \"00.00\"");
+                preciosOK = false;
+            }
+        }
+
+        if (preciosOK)
+        {
+            if (!rbPeso.isSelected() && !rbUnidad.isSelected())    //TIPO DE VENTA por PESO
+            {
+                JOptionPane.showMessageDialog(null, "Debe marcar si el producto se vende por PESO o por UNIDAD.");
+                rbOK = false;
+            }
+            else
+            {
+                if (rbPeso.isSelected())    //TIPO DE VENTA por PESO
+                {
+                    if (txfdEditarPesoEnvase.getText().equals(""))   //marcó PESO pero no ingresó el PESO DEL ENVASE
+                    {
+                        JOptionPane.showMessageDialog(null, "Debe ingresar el PESO DEL ENVASE (en gramos).");
+                        rbOK = false;
+                    }
+                    else
+                    {
+                        prodEditar.setPorPeso(true);
+
+                        int pesoEnv = Integer.parseInt(txfdEditarPesoEnvase.getText());
+                        prodEditar.setPesoEnvase(pesoEnv);
+
+                        String stockMin = txfdEditarStockMinimo.getText();
+                        if (stockMin.equals(""))
+                        {
+                            prodEditar.setStockMinimo(0);
+                        }
+                        else
+                        {
+                            int total = Integer.parseInt(stockMin) * pesoEnv;
+                            prodEditar.setStockMinimo(total);
+                        }
+
+                        int total2 = stockU * pesoEnv;  //convierto la unidad en gramos
+                        prodEditar.setStock(total2);  //guardo el nuevo stock en gramos
+
+                        String precioV = txfdEditarPrecioVenta.getText();
+                        if (precioV.equals(""))
+                        {
+                            prodEditar.setPrecioVentaXKilo(0);
+                        }
+                        else
+                        {
+                            double precioKilo = (1000 * Double.parseDouble(precioV)) / pesoEnv;
+                            r.RedondearCentavos(precioKilo);
+                            prodEditar.setPrecioVentaXKilo(precioKilo);
+                        }
+                        rbOK = true;
+                    }
+                }
+                if (rbUnidad.isSelected())    //TIPO DE VENTA por UNIDAD
+                {
+                    prodEditar.setPorPeso(false);
+                    prodEditar.setPesoEnvase(0);
+                    String stockMin = txfdEditarStockMinimo.getText();
+                    if (stockMin.equals(""))
+                    {
+                        prodEditar.setStockMinimo(0);
+                    }
+                    else
+                    {
+                        prodEditar.setStockMinimo(Integer.parseInt(stockMin));
+                    }
+                    prodEditar.setStock(stockU);
+                    prodEditar.setPrecioVentaXKilo(0);
+
+                    rbOK = true;
+                }
+            }
+
+            if (rbOK)
+            {
+                if (cbEstado.getSelectedItem().equals("Habilitado"))
+                {
+                    prodEditar.setEstado(true);
+                }
+                else
+                {
+                    prodEditar.setEstado(false);
+                }
+
+                if (situacion.equals("Ninguno"))
+                {
+                    prodEditar.setOferta(false);
+                    prodEditar.setSuspendido(false);
+                }
+                else
+                {
+                    if (situacion.equals("Oferta"))
+                    {
+                        prodEditar.setOferta(true);
+                        prodEditar.setSuspendido(false);
+                    }
+                    else //suspendido
+                    {
+                        prodEditar.setOferta(false);
+                        prodEditar.setSuspendido(true);
+                    }
+                }
+                
+                for (int i = 0; i < tablaProv.getModel().getRowCount(); i++) {
+                    boolean seleccionado = Boolean.parseBoolean(tablaProv.getValueAt(i, 1).toString());
+                    if (seleccionado) {
+                        int idSelec = Integer.parseInt(tablaProv.getValueAt(i, 2).toString());
+                        prodEditar.addProveedor(prDAO.buscarPorId(idSelec));
+                        alMenosUnCheck = true;
+                    }
+                }
+                    
+                if (preciosOK && rbOK && alMenosUnCheck)
+                {
+                    pDAO.modificar(prodEditar, id_recibido);
+                    dispose();
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor.");
+                }
+            }
+        }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "El nuevo CÓDIGO del producto que ingresó ya existe.\n" +
+                "Corrobore en el inventario para mayor seguridad y control.");
+        }
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
+        }
+        
+    }//GEN-LAST:event_btnAceptarEditarActionPerformed
+
     private void txfdEditarStockMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarStockMinimoKeyTyped
         char c = evt.getKeyChar();
-        if (c < '0' || c > '9') 
+        if (c < '0' || c > '9')
         {
             evt.consume();
         }
@@ -339,7 +532,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
     private void txfdEditarPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPrecioVentaKeyTyped
         char c = evt.getKeyChar();
-        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.')) 
+        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))
         {
             evt.consume();
         }
@@ -347,7 +540,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
     private void txfdEditarPrecioCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPrecioCostoKeyTyped
         char c = evt.getKeyChar();
-        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.')) 
+        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))
         {
             evt.consume();
         }
@@ -387,7 +580,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
     private void txfdEditarPesoEnvaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPesoEnvaseKeyTyped
         char c = evt.getKeyChar();
-        if (c < '0' || c > '9') 
+        if (c < '0' || c > '9')
         {
             evt.consume();
         }
@@ -408,185 +601,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
             txfdEditarPesoEnvase.setText(null);
         }
     }//GEN-LAST:event_rbUnidadActionPerformed
-
-    private void btnCancelarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarEditarActionPerformed
-        dispose();
-    }//GEN-LAST:event_btnCancelarEditarActionPerformed
-
-    private void btnAceptarEditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarEditarActionPerformed
-        Producto prodEditar = new Producto();
-        String codigoInput = txfdEditarCodigo.getText();
-        
-        boolean preciosOK = false;
-        boolean rbOK = false;
-        boolean alMenosUnCheck = false;      
-
-        if (!codigoInput.equals("") && !txfdEditarDescripcion.getText().equals("") && (rbPeso.isSelected() || rbUnidad.isSelected()))
-        {   //Ingresó CODIGO, DESCRIPCION y marcó el TIPO DE VENTA                        
-            Producto prodRepetido = pDAO.buscarPorCodigo(codigoInput);
-            
-            if (prodRepetido == null || elProd.getCodigo().equals(codigoInput))
-            {
-                prodEditar.setCodigo(txfdEditarCodigo.getText().toUpperCase());
-                prodEditar.setDescripcion(txfdEditarDescripcion.getText().toUpperCase());
-                
-                if (txfdEditarPrecioCosto.getText().equals("") || txfdEditarPrecioVenta.getText().equals(""))
-                {
-                    prodEditar.setPrecioCosto(0.00);
-                    prodEditar.setPrecioVenta(0.00);
-                    preciosOK = true;
-                }
-                else
-                {
-                    if (validar.validarPrecio(txfdEditarPrecioCosto.getText()) && validar.validarPrecio(txfdEditarPrecioVenta.getText()))
-                    {
-                        double precioC = Double.parseDouble(txfdEditarPrecioCosto.getText());
-                        prodEditar.setPrecioCosto(precioC); //r.RedondearCentavos(precioC));
-
-                        double precioV = Double.parseDouble(txfdEditarPrecioVenta.getText());
-                        prodEditar.setPrecioVenta(precioV); //r.RedondearCentavos(precioV));
-                        
-                        preciosOK = true;
-                    }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(null, "Utilice el siguiente formato para los precios \"00.00\"");
-                        preciosOK = false;
-                    }
-                }
-                
-                if (preciosOK)
-                {
-                    if (!rbPeso.isSelected() && !rbUnidad.isSelected())    //TIPO DE VENTA por PESO
-                    {
-                        JOptionPane.showMessageDialog(null, "Debe marcar si el producto se vende por PESO o por UNIDAD.");
-                        rbOK = false;
-                    }
-                    else
-                    {
-                        if (rbPeso.isSelected())    //TIPO DE VENTA por PESO
-                        {
-                            if (txfdEditarPesoEnvase.getText().equals(""))   //marcó PESO pero no ingresó el PESO DEL ENVASE
-                            {
-                                JOptionPane.showMessageDialog(null, "Debe ingresar el PESO DEL ENVASE (en gramos).");   
-                                rbOK = false;
-                            }
-                            else
-                            {
-                                prodEditar.setPorPeso(true);
-
-                                int pesoEnv = Integer.parseInt(txfdEditarPesoEnvase.getText());
-                                prodEditar.setPesoEnvase(pesoEnv);
-
-                                String stockMin = txfdEditarStockMinimo.getText();
-                                if (stockMin.equals(""))
-                                {
-                                    prodEditar.setStockMinimo(0);
-                                }   
-                                else
-                                {
-                                    int total = Integer.parseInt(stockMin) * pesoEnv;
-                                    prodEditar.setStockMinimo(total);
-                                }               
-
-                                int total2 = stockU * pesoEnv;  //convierto la unidad en gramos
-                                prodEditar.setStock(total2);  //guardo el nuevo stock en gramos
-                                
-                                String precioV = txfdEditarPrecioVenta.getText();
-                                if (precioV.equals(""))
-                                {
-                                    prodEditar.setPrecioVentaXKilo(0);
-                                }
-                                else
-                                {
-                                    double precioKilo = (1000 * Double.parseDouble(precioV)) / pesoEnv;
-                                    r.RedondearCentavos(precioKilo);
-                                    prodEditar.setPrecioVentaXKilo(precioKilo);
-                                }    
-                                rbOK = true;
-                            }
-                        }
-                        if (rbUnidad.isSelected())    //TIPO DE VENTA por UNIDAD
-                        {                            
-                            prodEditar.setPorPeso(false);
-                            prodEditar.setPesoEnvase(0);
-                            String stockMin = txfdEditarStockMinimo.getText();
-                            if (stockMin.equals(""))
-                            {
-                                prodEditar.setStockMinimo(0);
-                            }   
-                            else
-                            {
-                                prodEditar.setStockMinimo(Integer.parseInt(stockMin));
-                            }
-                            prodEditar.setStock(stockU);
-                            prodEditar.setPrecioVentaXKilo(0);
-                            
-                            rbOK = true;
-                        }
-                    }
-                    
-                    if (rbOK)
-                    {
-                        if (cbEstado.getSelectedItem().equals("Habilitado"))
-                        {
-                            prodEditar.setEstado(true);
-                        }
-                        else
-                        {
-                            prodEditar.setEstado(false);
-                        }
-
-                        if (situacion.equals("Ninguno"))
-                        {                            
-                            prodEditar.setOferta(false);
-                            prodEditar.setSuspendido(false);
-                        }
-                        else
-                        {
-                            if (situacion.equals("Oferta"))
-                            {
-                                prodEditar.setOferta(true);
-                                prodEditar.setSuspendido(false);
-                            }
-                            else //suspendido
-                            {                                
-                                prodEditar.setOferta(false);
-                                prodEditar.setSuspendido(true);
-                            }
-                        }
-                        
-                        for (JCheckBox c : checkProv)
-                        {
-                            if (c.isSelected())
-                            {
-                                prodEditar.addProveedor(prDAO.buscarPorCuitNombre(c.getText(), "Habilitados").get(0));
-                                alMenosUnCheck = true;
-                            }
-                        }
-                        if (preciosOK && rbOK && alMenosUnCheck)
-                        {                            
-                            pDAO.modificar(prodEditar, id_recibido);
-                            dispose();                            
-                        }
-                        else
-                        {
-                            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor.");
-                        }
-                    }
-                }      
-            }     
-            else
-            {
-                JOptionPane.showMessageDialog(null, "El nuevo CÓDIGO del producto que ingresó ya existe.\n" +
-                                                    "Corrobore en el inventario para mayor seguridad y control.");
-            }
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
-        }
-    }//GEN-LAST:event_btnAceptarEditarActionPerformed
 
     public static void main(String args[]) 
     {
@@ -675,7 +689,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         }
     }
     
-    private void llenarCheckBoxProv() 
+    /*private void llenarCheckBoxProv() 
     {
         List<Proveedor> lista = prDAO.listar("Habilitados");
         Set<Proveedor> listaProvDelProducto = pDAO.buscarPorId(id_recibido).getProveedor();       
@@ -700,6 +714,27 @@ public class ventanaEditarProd extends javax.swing.JFrame
             altura += 20;
         }
         this.panelProveedor.setVisible(true);
+    }*/
+    
+    public void llenarTabla(){
+        
+        List<Proveedor> lista = prDAO.listar("Habilitados");
+        Set<Proveedor> listaProvDelProducto = pDAO.buscarPorId(id_recibido).getProveedor();
+        modelo = (DefaultTableModel) tablaProv.getModel();
+        Object datos[] = {"",false,""};
+        
+        for(Proveedor p : lista){
+            datos[0] = p.getRazonSocial();
+            datos[2] = String.valueOf(p.getId());
+            for(Proveedor pr : listaProvDelProducto){
+                if(p.getId() == pr.getId()){
+                    datos[1] = true;
+                }
+            }
+            modelo.addRow(datos);
+            datos[0] = "";  datos[1] = false; datos[2] = "";
+        }
+        tablaProv.setModel(modelo);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -721,10 +756,10 @@ public class ventanaEditarProd extends javax.swing.JFrame
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel panelProveedor;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JRadioButton rbPeso;
     private javax.swing.JRadioButton rbUnidad;
+    private javax.swing.JTable tablaProv;
     private javax.swing.JTextField txfdEditarCodigo;
     private javax.swing.JTextField txfdEditarDescripcion;
     private javax.swing.JTextField txfdEditarPesoEnvase;
