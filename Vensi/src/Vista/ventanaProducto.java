@@ -519,6 +519,7 @@ public class ventanaProducto extends javax.swing.JFrame
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         //acciones para cuando vuelve a la ventana
+        llenarTabla();
     }//GEN-LAST:event_formWindowActivated
 
     private void cbSituacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSituacionActionPerformed
