@@ -330,7 +330,7 @@ public class ventanaProveedor extends javax.swing.JFrame
     }//GEN-LAST:event_cbFiltroCampoProvActionPerformed
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        //acciones para cuando vuelve a la ventana
+        llenarTabla();
     }//GEN-LAST:event_formWindowGainedFocus
 
     public static void main(String args[]) 

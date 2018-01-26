@@ -207,7 +207,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
             },
             new String [] {
-                "Proveedor", "", "ID"
+                "Proveedor", "Provee", "ID"
             }
         ) {
             Class[] types = new Class [] {
@@ -228,9 +228,9 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jScrollPane3.setViewportView(tablaProv);
         if (tablaProv.getColumnModel().getColumnCount() > 0) {
             tablaProv.getColumnModel().getColumn(0).setResizable(false);
-            tablaProv.getColumnModel().getColumn(1).setMinWidth(40);
-            tablaProv.getColumnModel().getColumn(1).setPreferredWidth(40);
-            tablaProv.getColumnModel().getColumn(1).setMaxWidth(40);
+            tablaProv.getColumnModel().getColumn(1).setMinWidth(60);
+            tablaProv.getColumnModel().getColumn(1).setPreferredWidth(60);
+            tablaProv.getColumnModel().getColumn(1).setMaxWidth(60);
             tablaProv.getColumnModel().getColumn(2).setMinWidth(0);
             tablaProv.getColumnModel().getColumn(2).setPreferredWidth(0);
             tablaProv.getColumnModel().getColumn(2).setMaxWidth(0);
