@@ -2,6 +2,7 @@ package Vista;
 
 import DAO.*;
 import Modelo.*;
+import Utils.Redondear;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
@@ -35,6 +36,7 @@ public class ventanaCompra extends javax.swing.JFrame
     Proveedor elProv = null;
     String provSelec = null;
     
+    Redondear r = new Redondear();
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
     
@@ -511,6 +513,7 @@ public class ventanaCompra extends javax.swing.JFrame
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
         {
             String id_recibido = tablaProd.getValueAt(filaSelec, 7).toString();
+            
             for (int i = 0; i < tablaListaInventario.getModel().getRowCount(); i++)
             {
                 if (Integer.parseInt(tablaListaInventario.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido))
@@ -518,6 +521,7 @@ public class ventanaCompra extends javax.swing.JFrame
                     repetido = true;
                 }
             }
+            
             if (repetido)
             {
                 JOptionPane.showMessageDialog(null, "Producto repetido.");
@@ -609,7 +613,7 @@ public class ventanaCompra extends javax.swing.JFrame
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void btnCargarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarInventarioActionPerformed
-        Producto producto = null;     
+        Producto producto = null;    
         
         Pedido pedido = new Pedido();        
         pedido.setFechaHora(new Date());        
@@ -621,8 +625,10 @@ public class ventanaCompra extends javax.swing.JFrame
         {            
             producto = prodDAO.buscarPorId(Integer.parseInt(tablaListaInventario.getValueAt(i,4).toString()));
             
+            //<-----Pedido-------------------------------------------------------------------------------------
             ItemPedido itemPedido = new ItemPedido();
-            itemPedido.setProducto(producto);                       
+            itemPedido.setProducto(producto); 
+            
             if (producto.isPorPeso())
             {
                 int cantU = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
@@ -635,6 +641,7 @@ public class ventanaCompra extends javax.swing.JFrame
             }
             itemPedido.setPedido(pedido);
             iDAO.alta(itemPedido);
+            //-----Pedido------------------------------------------------------------------------------------->
                         
             String cadenaPC = tablaListaInventario.getValueAt(i,2).toString();
             double precioCostoU = 0;            
@@ -651,15 +658,20 @@ public class ventanaCompra extends javax.swing.JFrame
             
             String cadenaPV = tablaListaInventario.getValueAt(i,3).toString();
             double precioVentaU = 0;
+            double precioVentaXkilo = 0;
             
             if (cadenaPV.equals("---"))
             {
                 precioVentaU = 0;
+                precioVentaXkilo = 0;
             }
             else
             {
                 cadenaPV = cadenaPV.substring(1);
                 precioVentaU = Double.parseDouble(cadenaPV);
+                
+                precioVentaXkilo = (1000 * precioVentaU) / producto.getPesoEnvase();
+                precioVentaXkilo = r.RedondearAIntArriba(precioVentaXkilo);
             }               
             
             if (producto.isPorPeso())
@@ -673,7 +685,7 @@ public class ventanaCompra extends javax.swing.JFrame
                 prodDAO.sumarStock(producto.getId(), Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString()));
             }            
             
-            prodDAO.setearPrecioCostoU(producto.getId(), precioCostoU, precioVentaU);
+            prodDAO.setearPreciosUnidad(producto.getId(), precioCostoU, precioVentaU, precioVentaXkilo);
         }
         
         JOptionPane.showMessageDialog(null, "Finalizado con éxito");
@@ -885,26 +897,20 @@ public class ventanaCompra extends javax.swing.JFrame
 
     private void txfdCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE))
-        {
-            evt.consume();
-        }
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE))        
+            evt.consume();        
     }//GEN-LAST:event_txfdCantidadKeyTyped
 
     private void txfdPrecioCUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioCUKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))
-        {
-            evt.consume();
-        }
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))        
+            evt.consume();        
     }//GEN-LAST:event_txfdPrecioCUKeyTyped
 
     private void txfdPrecioVUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioVUKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))
-        {
-            evt.consume();
-        }
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))        
+            evt.consume();        
     }//GEN-LAST:event_txfdPrecioVUKeyTyped
 
     public static void main(String args[]) 
