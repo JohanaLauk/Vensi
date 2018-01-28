@@ -2,6 +2,7 @@ package Vista;
 
 import DAO.*;
 import Modelo.*;
+import Utils.Redondear;
 import Utils.Validar;
 import java.awt.Dimension;
 import java.text.DecimalFormat;
@@ -22,6 +23,7 @@ public class ventanaCargarES extends javax.swing.JFrame
     List<ItemVenta> listaIV = null;
     String nombre = "";
     
+    Redondear r = new Redondear(); 
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
     
@@ -337,7 +339,9 @@ public class ventanaCargarES extends javax.swing.JFrame
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
-        int cantidad = Integer.parseInt(txfdCantProdAnular.getText());
+        int cantInput = Integer.parseInt(txfdCantProdAnular.getText());
+        double cantDouble = Double.parseDouble(txfdCantProdAnular.getText());
+        
         boolean esta = false;
         Turno turnoActual = tDAO.obtenerUltimo();
         
@@ -357,32 +361,43 @@ public class ventanaCargarES extends javax.swing.JFrame
         } 
         if (esta)
         {
-            if (item.getCantidad() >= cantidad)
+            if (item.getCantidad() >= cantInput)    //si la cantidad ingresada es menor a la cantidad que hay vendido...
             {                
-                pDAO.sumarStock(item.getProducto().getId(), cantidad);   //actualizo el stock del producto
-                item.setCantidad(item.getCantidad() - cantidad);  //resto la cantidad del itemVenta
+                pDAO.sumarStock(item.getProducto().getId(), cantInput);   //actualizo el stock del producto
+                item.setCantidad(item.getCantidad() - cantInput);  //resto la cantidad del itemVenta
+                
                 if (item.getProducto().isPorPeso())
                 {
-                    item.setMonto(item.getMonto() - ((cantidad * item.getProducto().getPrecioVenta()) / item.getProducto().getPesoEnvase()));
+                    double cantKilo = cantDouble / 1000; 
+
+                    double precioRestar = cantKilo * item.getProducto().getPrecioVentaXKilo();
+                    precioRestar = r.RedondearAIntArriba(precioRestar); 
+                    
+                    item.setMonto(item.getMonto() - precioRestar);
                 }
                 else
                 {
-                    item.setMonto(item.getMonto() - (item.getProducto().getPrecioVenta() * cantidad));
+                    item.setMonto(item.getMonto() - (item.getProducto().getPrecioVenta() * cantInput));
                 }
                 
                 EntradaSalida unES = new EntradaSalida();
 
                 unES.setNombre("Anulación de venta".toUpperCase());
                 unES.setDescripcion(item.getProducto().getDescripcion().toUpperCase());
-                unES.setCantProd(cantidad);                        
+                unES.setCantProd(cantInput);                        
 
                 if (item.getProducto().isPorPeso())
                 {
-                    unES.setMonto((cantidad * item.getProducto().getPrecioVenta()) / item.getProducto().getPesoEnvase());
+                    double cantKilo = cantDouble / 1000; 
+
+                    double precioRestar = cantKilo * item.getProducto().getPrecioVentaXKilo();
+                    precioRestar = r.RedondearAIntArriba(precioRestar); 
+                    
+                    unES.setMonto(precioRestar);
                 }
                 else
                 {
-                    unES.setMonto(item.getProducto().getPrecioVenta() * cantidad);
+                    unES.setMonto(item.getProducto().getPrecioVenta() * cantInput);
                 }
 
                 unES.setTipo(false);
@@ -571,7 +586,6 @@ public class ventanaCargarES extends javax.swing.JFrame
 
                 if (x.getProducto().isPorPeso())
                 {
-                    modeloList.addElement("Stock:  " + String.valueOf(formatoKilos.format(x.getProducto().getStock() / 1000) + "kg"));
                     modeloList.addElement("Tipo venta:  Por peso");
                     modeloList.addElement("Precio de venta:  $" + String.valueOf(formatoPrecios.format(x.getProducto().getPrecioVenta())));
                     double cantGR2 = x.getCantidad();                    
@@ -580,10 +594,9 @@ public class ventanaCargarES extends javax.swing.JFrame
                 }
                 else
                 {
-                    modeloList.addElement("Stock:  " + String.valueOf(x.getProducto().getStock()));
                     modeloList.addElement("Tipo venta:  Por unidad");                    
                     modeloList.addElement("Precio de venta:  $" + String.valueOf(formatoPrecios.format(x.getProducto().getPrecioVenta())));
-                    modeloList.addElement("Cantidad vendidos:  $" + String.valueOf(x.getCantidad()));
+                    modeloList.addElement("Cantidad vendidos:  " + String.valueOf(x.getCantidad()));
                 }
                 modeloList.addElement("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }

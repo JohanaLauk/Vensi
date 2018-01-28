@@ -46,7 +46,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
         elProd = pDAO.buscarPorId(id_recibido);
 
         mostrarProdSelec();
-        //llenarCheckBoxProv();
         llenarTabla();
     }
 
@@ -372,10 +371,10 @@ public class ventanaEditarProd extends javax.swing.JFrame
                     if (validar.validarPrecio(txfdEditarPrecioCosto.getText()) && validar.validarPrecio(txfdEditarPrecioVenta.getText()))
                     {
                         double precioC = Double.parseDouble(txfdEditarPrecioCosto.getText());
-                        prodEditar.setPrecioCosto(precioC); //r.RedondearCentavos(precioC));
+                        prodEditar.setPrecioCosto(precioC); 
 
                         double precioV = Double.parseDouble(txfdEditarPrecioVenta.getText());
-                        prodEditar.setPrecioVenta(precioV); //r.RedondearCentavos(precioV));
+                        prodEditar.setPrecioVenta(precioV);
 
                         preciosOK = true;
                     }
@@ -416,12 +415,12 @@ public class ventanaEditarProd extends javax.swing.JFrame
                                 }
                                 else
                                 {
-                                    int total = Integer.parseInt(stockMin) * pesoEnv;
-                                    prodEditar.setStockMinimo(total);
+                                    int stockMinGR = Integer.parseInt(stockMin) * pesoEnv;
+                                    prodEditar.setStockMinimo(stockMinGR);
                                 }
 
-                                int total2 = stockU * pesoEnv;  //convierto la unidad en gramos
-                                prodEditar.setStock(total2);  //guardo el nuevo stock en gramos
+                                int stockGR = stockU * pesoEnv;  //convierto la unidad en gramos
+                                prodEditar.setStock(stockGR);  //guardo el nuevo stock en gramos
 
                                 String precioV = txfdEditarPrecioVenta.getText();
                                 if (precioV.equals(""))
@@ -431,7 +430,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
                                 else
                                 {
                                     double precioKilo = (1000 * Double.parseDouble(precioV)) / pesoEnv;
-                                    r.RedondearCentavos(precioKilo);
+                                    precioKilo = r.RedondearAIntArriba(precioKilo);
                                     prodEditar.setPrecioVentaXKilo(precioKilo);
                                 }
                                 rbOK = true;
