@@ -18,9 +18,6 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     
     Turno turnoActual = null;
     
-    double montoVenta = 0;
-    double montoES = 0;
-    
     public ventanaCierreTurno() 
     {
         initComponents();
@@ -581,26 +578,44 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         return hay;
     }
     
-    public double calcularMontoEsperado()
-    {       
+    public double calcularVenta()   //entrada de plata
+    {
+        double montoVenta = 0;
+    
         List<ItemVenta> listaIT = itDAO.listar(turnoActual.getId());
-        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
-                
-        double montoEsperado = 0;
         
         for (ItemVenta iv : listaIT)
         {
-            montoVenta = montoVenta + (iv.getMonto());
+            montoVenta = montoVenta + iv.getMonto();
         }
+        return montoVenta;
+    }
+    
+    public double calcularMontoES()     //apertuda=entrada   |    lo otro es salida de plata
+    {
+        double montoES = 0;
+        
+        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
         
         for (EntradaSalida es : listaES)
         {
-            if (es.isTipo()) //entrada
+            if (es.isTipo())  //entrada de plata
             {
                 montoES = montoES + es.getMonto();
-            }            
-        }         
-        montoEsperado = montoVenta + montoES;
+            }      
+            else    //salida de plata
+            {
+                montoES = montoES - es.getMonto();
+            }
+        }        
+        return montoES;
+    }
+    
+    public double calcularMontoEsperado()
+    {       
+        double montoEsperado = 0;
+                         
+        montoEsperado = calcularVenta() + calcularMontoES();
         
         return montoEsperado;
     }
@@ -626,8 +641,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         if (cerrar == 0)
         {
             turnoActual.setFechaHoraFin(new Date());
-            turnoActual.setMontoVenta(montoVenta);
-            turnoActual.setMontoES(montoES);
+            turnoActual.setMontoVenta(calcularVenta());
+            turnoActual.setMontoES(calcularMontoES());
             turnoActual.setEfectivoHay(calcularHay());            
                     
             tDAO.modificar(turnoActual, turnoActual.getId());
@@ -677,8 +692,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
     private void txfd200KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd200KeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfd200KeyTyped
 
@@ -699,8 +713,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
     private void txfd100KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd100KeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfd100KeyTyped
 
@@ -721,8 +734,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
     private void txfd50KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd50KeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfd50KeyTyped
 
@@ -743,8 +755,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
     private void txfd20KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd20KeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfd20KeyTyped
 
@@ -765,8 +776,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
     private void txfd10KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd10KeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfd10KeyTyped
 
@@ -787,8 +797,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
     private void txfd5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd5KeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfd5KeyTyped
 
@@ -809,8 +818,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
     private void txfd2KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd2KeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfd2KeyTyped
 
@@ -831,8 +839,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
     private void txfd1KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd1KeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfd1KeyTyped
 
@@ -853,8 +860,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
     private void txfd0050KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd0050KeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfd0050KeyTyped
 
@@ -875,8 +881,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
     private void txfd0025KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd0025KeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfd0025KeyTyped
 

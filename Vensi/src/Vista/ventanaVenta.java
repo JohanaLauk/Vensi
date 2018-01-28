@@ -668,6 +668,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 if (Integer.parseInt(cantidad) > stock) 
                 {
                     JOptionPane.showMessageDialog(null, "Stock insuficiente");
+                    txfdCantidad.setText(null);
                 } 
                 else 
                 {
@@ -1128,6 +1129,7 @@ public class ventanaVenta extends javax.swing.JFrame
             tablaProd.setEnabled(false);
             btnIniciarTurno.setEnabled(true);  
             btnMenuPrincipal.setEnabled(true);
+            tablaVacia();
         }
         else    //lista con turnos
         {      //turno abierto
@@ -1185,6 +1187,7 @@ public class ventanaVenta extends javax.swing.JFrame
                     tablaProd.setEnabled(false);
                     btnIniciarTurno.setEnabled(true);  
                     btnMenuPrincipal.setEnabled(true);
+                    tablaVacia();
                 }                
             }
         }
@@ -1228,6 +1231,32 @@ public class ventanaVenta extends javax.swing.JFrame
         modeloList.addElement("Código: ");
         modeloList.addElement("Descripcion: ");
         listInfoProd.setModel(modeloList);
+    }
+    
+    public void tablaVacia()
+    {
+        modelo = new DefaultTableModel();     
+ 
+        modelo.addColumn("Código");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio");
+        modelo.addColumn("$ por kilo");
+        modelo.addColumn("Stock");
+        modelo.addColumn("ID");
+        
+        tablaProd.setModel(modelo);
+        
+        tcm = tablaProd.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(80);
+        tcm.getColumn(1).setPreferredWidth(400);
+        tcm.getColumn(2).setPreferredWidth(30);
+        tcm.getColumn(3).setPreferredWidth(30);
+        tcm.getColumn(4).setPreferredWidth(60);
+        tcm.getColumn(5).setPreferredWidth(0);     
+        tcm.getColumn(5).setMaxWidth(0);
+        tcm.getColumn(5).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

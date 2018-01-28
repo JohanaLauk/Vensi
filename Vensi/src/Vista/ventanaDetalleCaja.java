@@ -42,11 +42,11 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         
         llenarTabla();  
                
-        txfdTotalVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));  //cambiar a LABEL
-        txfdTotalCaja.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));   //cambiar a LABEL     
+        txfdTotalVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
+        txfdTotalCaja.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));
         
-        labVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
-        labCajaT.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));        
+        //labVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
+        //labCajaT.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));        
     }
 
     @SuppressWarnings("unchecked")
@@ -202,11 +202,11 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         llenarTabla();
         
-        txfdTotalVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));  //cambiar a LABEL
-        txfdTotalCaja.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));   //cambiar a LABEL     
+        txfdTotalVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
+        txfdTotalCaja.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));    
         
-        labVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
-        labCajaT.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja()))); 
+        //labVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
+        //labCajaT.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja()))); 
     }//GEN-LAST:event_formWindowGainedFocus
     
     public static void main(String args[]) 
@@ -229,7 +229,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         
         String[] datos = new String[4];
         
-        if (listaIT.isEmpty())        
+        if (listaIT.isEmpty() && listaES.isEmpty())        
         {            
             modelo.addColumn("Detalle");
             modelo.addColumn("Cantidad");

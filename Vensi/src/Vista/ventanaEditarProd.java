@@ -29,8 +29,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
     
     int stockU;    //variable usada en mostrarProdSelec()
     List<JCheckBox> checkProv = new ArrayList<>();
-    DecimalFormat formatoPrecios = new DecimalFormat("#.00");
-    //NumberFormat formatoPrec = new DecimalFormat("0.00");
+    DecimalFormat formatoPrecios = new DecimalFormat("0.00");
 
     public ventanaEditarProd() 
     {
@@ -264,12 +263,12 @@ public class ventanaEditarProd extends javax.swing.JFrame
                                     .addComponent(rbPeso)))
                             .addComponent(jLabel6)
                             .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 251, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addContainerGap(20, Short.MAX_VALUE))))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -281,9 +280,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txfdEditarPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)))
+                        .addComponent(txfdEditarPrecioCosto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel5)
@@ -301,9 +298,11 @@ public class ventanaEditarProd extends javax.swing.JFrame
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(jLabel10)
-                            .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jLabel6)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel4)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -312,12 +311,13 @@ public class ventanaEditarProd extends javax.swing.JFrame
                         .addComponent(jLabel7)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txfdEditarStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(btnCancelarEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(btnAceptarEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(126, Short.MAX_VALUE))
+                            .addComponent(btnAceptarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -332,8 +332,9 @@ public class ventanaEditarProd extends javax.swing.JFrame
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addGap(0, 6, Short.MAX_VALUE)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         pack();
@@ -524,26 +525,20 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
     private void txfdEditarStockMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarStockMinimoKeyTyped
         char c = evt.getKeyChar();
-        if (c < '0' || c > '9')
-        {
-            evt.consume();
-        }
+        if (c < '0' || c > '9')        
+            evt.consume();        
     }//GEN-LAST:event_txfdEditarStockMinimoKeyTyped
 
     private void txfdEditarPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPrecioVentaKeyTyped
         char c = evt.getKeyChar();
-        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))
-        {
-            evt.consume();
-        }
+        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))        
+            evt.consume();        
     }//GEN-LAST:event_txfdEditarPrecioVentaKeyTyped
 
     private void txfdEditarPrecioCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPrecioCostoKeyTyped
         char c = evt.getKeyChar();
         if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))
-        {
             evt.consume();
-        }
     }//GEN-LAST:event_txfdEditarPrecioCostoKeyTyped
 
     private void cbSituacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSituacionActionPerformed
@@ -580,10 +575,8 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
     private void txfdEditarPesoEnvaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPesoEnvaseKeyTyped
         char c = evt.getKeyChar();
-        if (c < '0' || c > '9')
-        {
-            evt.consume();
-        }
+        if (c < '0' || c > '9')        
+            evt.consume();        
     }//GEN-LAST:event_txfdEditarPesoEnvaseKeyTyped
 
     private void rbPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPesoActionPerformed
@@ -618,8 +611,8 @@ public class ventanaEditarProd extends javax.swing.JFrame
         //MOSTRAMOS LOS DATOS GUARDADOS DEL PRODUCTO SELECCIONADO. PARA LUEGO PODER MODIFICAR
         txfdEditarCodigo.setText(String.valueOf(elProd.getCodigo()));
         txfdEditarDescripcion.setText(String.valueOf(elProd.getDescripcion()));
-        txfdEditarPrecioCosto.setText(String.valueOf(formatoPrecios.format(elProd.getPrecioCosto())));
-        txfdEditarPrecioVenta.setText(String.valueOf(formatoPrecios.format(elProd.getPrecioVenta())));
+        txfdEditarPrecioCosto.setText(String.valueOf(elProd.getPrecioCosto()));
+        txfdEditarPrecioVenta.setText(String.valueOf(elProd.getPrecioVenta()));
         
         if (elProd.isPorPeso())
         {
@@ -687,34 +680,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
             rbPeso.setSelected(false);
             txfdEditarPesoEnvase.setEnabled(false);
         }
-    }
-    
-    /*private void llenarCheckBoxProv() 
-    {
-        List<Proveedor> lista = prDAO.listar("Habilitados");
-        Set<Proveedor> listaProvDelProducto = pDAO.buscarPorId(id_recibido).getProveedor();       
-        int altura = 0;
-        for (Proveedor p : lista) 
-        {
-            JCheckBox c = new JCheckBox(p.getRazonSocial());
-            c.setSize(500, 20);
-            c.setLocation(0, altura);
-            c.setVisible(true);
-            
-            for(Proveedor pr : listaProvDelProducto)
-            {
-                if(p.getId() == pr.getId())
-                {
-                    c.setSelected(true);
-                }
-            }
-            checkProv.add(c);
-            this.panelProveedor.add(c);
-            this.validate();
-            altura += 20;
-        }
-        this.panelProveedor.setVisible(true);
-    }*/
+    }  
     
     public void llenarTabla()
     {        
