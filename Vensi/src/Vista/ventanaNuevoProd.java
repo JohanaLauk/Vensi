@@ -5,7 +5,6 @@ import DAO.ProveedorDAO;
 import Modelo.*;
 import Utils.Redondear;
 import Utils.Validar;
-import java.awt.Dimension;
 import java.util.*;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -625,10 +624,13 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         });
     }
     
-    public void llenarTabla() {
+    public void llenarTabla() 
+    {
         List<Proveedor> lista = prDAO.listar("Habilitados");
         modelo = (DefaultTableModel) tablaProv.getModel();
-        for (Proveedor p : lista) {
+        
+        for (Proveedor p : lista) 
+        {
             Object datos[] = {p.getRazonSocial(), false, String.valueOf(p.getId())};
             modelo.addRow(datos);
         }

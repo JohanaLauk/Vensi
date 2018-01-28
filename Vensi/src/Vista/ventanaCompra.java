@@ -885,17 +885,26 @@ public class ventanaCompra extends javax.swing.JFrame
 
     private void txfdCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') &&
-            (c != java.awt.event.KeyEvent.VK_BACK_SPACE))
-        evt.consume();
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE))
+        {
+            evt.consume();
+        }
     }//GEN-LAST:event_txfdCantidadKeyTyped
 
     private void txfdPrecioCUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioCUKeyTyped
-        
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))
+        {
+            evt.consume();
+        }
     }//GEN-LAST:event_txfdPrecioCUKeyTyped
 
     private void txfdPrecioVUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioVUKeyTyped
-        
+        char c = evt.getKeyChar();
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))
+        {
+            evt.consume();
+        }
     }//GEN-LAST:event_txfdPrecioVUKeyTyped
 
     public static void main(String args[]) 

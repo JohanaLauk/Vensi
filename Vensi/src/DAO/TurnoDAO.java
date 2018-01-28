@@ -44,7 +44,11 @@ public class TurnoDAO
         turno = (Turno)session.get(Turno.class, id);
         turno.setFechaHoraInicio(t.getFechaHoraInicio());
         turno.setFechaHoraFin(t.getFechaHoraFin());
-            
+        turno.setUsuario(t.getUsuario());
+        turno.setMontoVenta(t.getMontoVenta());
+        turno.setMontoES(t.getMontoES());
+        turno.setEfectivoHay(t.getEfectivoHay());        
+                    
         tx = session.beginTransaction();
         try
         {

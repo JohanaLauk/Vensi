@@ -414,8 +414,7 @@ public class ventanaCargarES extends javax.swing.JFrame
 
     private void txfdMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdMontoKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfdMontoKeyTyped
 
@@ -432,8 +431,7 @@ public class ventanaCargarES extends javax.swing.JFrame
 
     private void txfdCantProdAnularKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantProdAnularKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfdCantProdAnularKeyTyped
 
@@ -574,14 +572,18 @@ public class ventanaCargarES extends javax.swing.JFrame
                 if (x.getProducto().isPorPeso())
                 {
                     modeloList.addElement("Stock:  " + String.valueOf(formatoKilos.format(x.getProducto().getStock() / 1000) + "kg"));
-                    modeloList.addElement("Tipo:  Por peso");
+                    modeloList.addElement("Tipo venta:  Por peso");
                     modeloList.addElement("Precio de venta:  $" + String.valueOf(formatoPrecios.format(x.getProducto().getPrecioVenta())));
+                    double cantGR2 = x.getCantidad();                    
+                    double cantKG = cantGR2 / 1000;
+                    modeloList.addElement("Cantidad vendidos:  " + String.valueOf(formatoKilos.format(cantKG)) + "kg");
                 }
                 else
                 {
                     modeloList.addElement("Stock:  " + String.valueOf(x.getProducto().getStock()));
-                    modeloList.addElement("Tipo:  Por unidad");
+                    modeloList.addElement("Tipo venta:  Por unidad");                    
                     modeloList.addElement("Precio de venta:  $" + String.valueOf(formatoPrecios.format(x.getProducto().getPrecioVenta())));
+                    modeloList.addElement("Cantidad vendidos:  $" + String.valueOf(x.getCantidad()));
                 }
                 modeloList.addElement("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }

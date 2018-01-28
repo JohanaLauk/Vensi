@@ -9,12 +9,6 @@
             <generator class="identity" />
         </id>
         
-        <!--<list name="listaVentasTurno" table="item_venta" inverse="true" lazy="true" fetch="select">
-            <key column="id" not-null="false"/>  esto estaba en true en un principio 
-            <index column="orden" />
-            <one-to-many class="Modelo.ItemVenta" />
-         </list> -->
-         
         <property name="fechaHoraInicio" type="timestamp">
             <column name="fecha_hora_inicio" length="13" not-null="true" />
         </property>
@@ -24,5 +18,21 @@
         
         <many-to-one name = "usuario" column = "id_usuario"  
          class="Modelo.Usuario" not-null="true" lazy="false" />
+        
+        <property name="montoVenta" type="double">
+            <column name="monto_venta" precision="8" not-null="false" />
+        </property>
+        <property name="montoES" type="double">
+            <column name="monto_es" precision="8" not-null="false" />
+        </property>
+        <property name="efectivoHay" type="double">
+            <column name="efectivo_hay" precision="8" not-null="false" />
+        </property>
+                    
+        <!--<list name="listaVentasTurno" table="item_venta" inverse="true" lazy="true" fetch="select">
+            <key column="id" not-null="false"/>  esto estaba en true en un principio 
+            <index column="orden" />
+            <one-to-many class="Modelo.ItemVenta" />
+        </list> -->    
     </class>
 </hibernate-mapping>

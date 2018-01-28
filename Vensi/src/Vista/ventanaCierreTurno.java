@@ -18,6 +18,9 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     
     Turno turnoActual = null;
     
+    double montoVenta = 0;
+    double montoES = 0;
+    
     public ventanaCierreTurno() 
     {
         initComponents();
@@ -28,8 +31,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         
         //el HAY se calcula automaticamente a medida que va ingresando los billetes
         txfdMontoEsperado.setText("$" + String.valueOf(calcularMontoEsperado()));
-        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));
-        
+        txfdDiferencia.setText("$" + String.valueOf(calcularDiferencia()));        
     }
 
     @SuppressWarnings("unchecked")
@@ -583,9 +585,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     {       
         List<ItemVenta> listaIT = itDAO.listar(turnoActual.getId());
         List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
-        
-        double montoVenta = 0;
-        double montoES = 0;
+                
         double montoEsperado = 0;
         
         for (ItemVenta iv : listaIT)
@@ -626,7 +626,10 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         if (cerrar == 0)
         {
             turnoActual.setFechaHoraFin(new Date());
-        
+            turnoActual.setMontoVenta(montoVenta);
+            turnoActual.setMontoES(montoES);
+            turnoActual.setEfectivoHay(calcularHay());            
+                    
             tDAO.modificar(turnoActual, turnoActual.getId());
             
             JOptionPane.showMessageDialog(null, "Se ha cerrado el turno correctamente.");
