@@ -43,9 +43,11 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         llenarTabla();  
                
         txfdTotalVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
-        txfdTotalCaja.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));
+        txfdMontoES.setText("$" + String.valueOf(formatoPrecios.format(calcularSalidas())));
+        txfdTotalCaja.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));        
         
         //labVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
+        //labMontoES.setText("$" + String.valueOf(formatoPrecios.format(calcularSalidas())));
         //labCajaT.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));        
     }
 
@@ -57,7 +59,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         jLabel1 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaDetalleCaja = new javax.swing.JTable();
         txfdTotalVenta = new javax.swing.JTextField();
@@ -66,6 +68,9 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         btnVolverDC = new javax.swing.JButton();
         labVenta = new javax.swing.JLabel();
         labCajaT = new org.jdesktop.swingx.JXLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txfdMontoES = new javax.swing.JTextField();
+        labMontoES = new org.jdesktop.swingx.JXLabel();
         labImagenFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -103,12 +108,12 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Venta: ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 400, 80, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 80, -1));
 
-        jLabel3.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Total caja:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, 110, -1));
+        jLabel4.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Total caja:");
+        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 110, -1));
 
         tablaDetalleCaja = new javax.swing.JTable()
         {
@@ -139,14 +144,14 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         txfdTotalVenta.setForeground(new java.awt.Color(255, 255, 255));
         txfdTotalVenta.setText("$");
         txfdTotalVenta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(txfdTotalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 400, 80, 30));
+        jPanel1.add(txfdTotalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 80, 30));
 
         txfdTotalCaja.setBackground(new java.awt.Color(0, 0, 204));
         txfdTotalCaja.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfdTotalCaja.setForeground(new java.awt.Color(255, 255, 255));
         txfdTotalCaja.setText("$");
         txfdTotalCaja.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(txfdTotalCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 440, 80, 30));
+        jPanel1.add(txfdTotalCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 80, 30));
 
         btnCargarES.setText("Cargar entrada/salida");
         btnCargarES.addActionListener(new java.awt.event.ActionListener() {
@@ -169,19 +174,38 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         labVenta.setForeground(new java.awt.Color(255, 255, 255));
         labVenta.setText("$");
         labVenta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(labVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 400, 80, 30));
+        jPanel1.add(labVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 80, 30));
 
         labCajaT.setBackground(new java.awt.Color(0, 0, 204));
         labCajaT.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         labCajaT.setForeground(new java.awt.Color(255, 255, 255));
         labCajaT.setText("$");
         labCajaT.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
-        jPanel1.add(labCajaT, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 440, 80, 30));
+        jPanel1.add(labCajaT, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 80, 30));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 950, 490));
+        jLabel3.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Anulados:");
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 110, -1));
+
+        txfdMontoES.setBackground(new java.awt.Color(255, 0, 0));
+        txfdMontoES.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        txfdMontoES.setForeground(new java.awt.Color(255, 255, 255));
+        txfdMontoES.setText("$");
+        txfdMontoES.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.add(txfdMontoES, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 80, 30));
+
+        labMontoES.setBackground(new java.awt.Color(255, 0, 0));
+        labMontoES.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        labMontoES.setForeground(new java.awt.Color(255, 255, 255));
+        labMontoES.setText("$");
+        labMontoES.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        jPanel1.add(labMontoES, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 80, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 950, 500));
 
         labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo 2 grande.png"))); // NOI18N
-        getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 550));
+        getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 560));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -203,9 +227,11 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         llenarTabla();
         
         txfdTotalVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
+        txfdMontoES.setText("$" + String.valueOf(formatoPrecios.format(calcularSalidas())));
         txfdTotalCaja.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));    
         
         //labVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
+        //labMontoES.setText("$" + String.valueOf(formatoPrecios.format(calcularSalidas())));
         //labCajaT.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja()))); 
     }//GEN-LAST:event_formWindowGainedFocus
     
@@ -337,28 +363,42 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         
         for (ItemVenta x : listaIT)
         {
-            montoVenta = montoVenta + (x.getMonto());
+            montoVenta = montoVenta + x.getMonto();
         }        
         return montoVenta;
     }
     
-    public double calcularTotalCaja()
+    public double calcularSalidas()
     {
         listaES = esDAO.listar(turnoActual.getId());
+        double montoSalidas = 0;  
         
-        double montoEntradaSalida=0;  
-        double totalCaja=0;
-        
+        for (EntradaSalida x : listaES)
+        {
+            if (!x.isTipo()) //salida
+            {
+                montoSalidas = montoSalidas + x.getMonto();
+            }            
+        }
+        return montoSalidas;
+    }
+    
+    public double calcularTotalCaja()
+    {        
+        listaES = esDAO.listar(turnoActual.getId());
         double montoVenta = calcularVenta();
+        double montoEntradas = 0;
+        double totalCaja = 0;
         
         for (EntradaSalida x : listaES)
         {
             if (x.isTipo()) //entrada
             {
-                montoEntradaSalida = montoEntradaSalida + x.getMonto();
+                montoEntradas = montoEntradas + x.getMonto();
             }            
-        }                
-        totalCaja = montoVenta + montoEntradaSalida;
+        }  
+        
+        totalCaja = montoVenta + montoEntradas;
         
         return totalCaja;
     }
@@ -370,12 +410,15 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private org.jdesktop.swingx.JXLabel labCajaT;
     private javax.swing.JLabel labImagenFondo;
+    private org.jdesktop.swingx.JXLabel labMontoES;
     private javax.swing.JLabel labVenta;
     private javax.swing.JTable tablaDetalleCaja;
+    private javax.swing.JTextField txfdMontoES;
     private javax.swing.JTextField txfdTotalCaja;
     private javax.swing.JTextField txfdTotalVenta;
     // End of variables declaration//GEN-END:variables
