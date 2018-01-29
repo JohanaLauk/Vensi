@@ -5,7 +5,6 @@ import DAO.ProveedorDAO;
 import Modelo.*;
 import Utils.Redondear;
 import Utils.Validar;
-import java.awt.Dimension;
 import java.util.*;
 import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
@@ -349,34 +348,26 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
     private void txfdPrecioCostoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioCostoKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))
-        {
-            evt.consume();
-        }        
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))        
+            evt.consume();               
     }//GEN-LAST:event_txfdPrecioCostoKeyTyped
 
     private void txfdStockMinimoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdStockMinimoKeyTyped
         char c = evt.getKeyChar();
-        if(c < '0' || c > '9') 
-        {
-            evt.consume();
-        }
+        if(c < '0' || c > '9')         
+            evt.consume();        
     }//GEN-LAST:event_txfdStockMinimoKeyTyped
 
     private void txfdStockInicialKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdStockInicialKeyTyped
         char c = evt.getKeyChar();
-        if(c < '0' || c > '9') 
-        {
-            evt.consume();
-        }
+        if(c < '0' || c > '9')         
+            evt.consume();        
     }//GEN-LAST:event_txfdStockInicialKeyTyped
 
     private void txfdPrecioVentaKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioVentaKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))
-        {
-            evt.consume();
-        }
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))        
+            evt.consume();        
     }//GEN-LAST:event_txfdPrecioVentaKeyTyped
 
     private void cbSituaciónActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSituaciónActionPerformed
@@ -495,7 +486,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                                 else
                                 {
                                     double precioKilo = (1000 * Double.parseDouble(precioV)) / pesoEnv;
-                                    r.RedondearCentavos(precioKilo);
+                                    precioKilo = r.RedondearAIntArriba(precioKilo);
                                     unProd.setPrecioVentaXKilo(precioKilo);
                                 }            
                                 rbOK = true;
@@ -550,14 +541,15 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                             }
                         }
 
-                        for(int i = 0; i < tablaProv.getModel().getRowCount(); i++){
+                        for (int i = 0; i < tablaProv.getModel().getRowCount(); i++)
+                        {
                             boolean seleccionado = Boolean.parseBoolean(tablaProv.getValueAt(i, 1).toString());
-                            if(seleccionado){
+                            if (seleccionado)
+                            {
                                 int idSelec = Integer.parseInt(tablaProv.getValueAt(i, 2).toString());
                                 unProd.addProveedor(prDAO.buscarPorId(idSelec));
                                 alMenosUnCheck = true;
-                            }
-                            
+                            }                            
                         }
                         
                         if (preciosOK && rbOK && alMenosUnCheck)
@@ -608,10 +600,8 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
     private void txfdPesoEnvaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPesoEnvaseKeyTyped
         char c = evt.getKeyChar();
-        if(c < '0' || c > '9') 
-        {
-            evt.consume();
-        }
+        if(c < '0' || c > '9')         
+            evt.consume();        
     }//GEN-LAST:event_txfdPesoEnvaseKeyTyped
 
     public static void main(String args[]) 
@@ -625,10 +615,13 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         });
     }
     
-    public void llenarTabla() {
+    public void llenarTabla() 
+    {
         List<Proveedor> lista = prDAO.listar("Habilitados");
         modelo = (DefaultTableModel) tablaProv.getModel();
-        for (Proveedor p : lista) {
+        
+        for (Proveedor p : lista) 
+        {
             Object datos[] = {p.getRazonSocial(), false, String.valueOf(p.getId())};
             modelo.addRow(datos);
         }

@@ -1730,7 +1730,7 @@ public class ProductoDAO
         //JOptionPane.showMessageDialog(null, "Stock de producto modificado");
     }
     
-    public void setearPrecioCostoU(int id, double precioCostoU, double precioVentaU)
+    public void setearPreciosUnidad(int id, double precioCostoU, double precioVentaU, double precioVentaXkilo)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
         
@@ -1745,13 +1745,16 @@ public class ProductoDAO
         {
             p.setPrecioVenta(precioVentaU);
         }        
-        
+        if (precioVentaXkilo != 0)
+        {
+            p.setPrecioVentaXKilo(precioVentaXkilo);
+        }
+                
         tx = session.beginTransaction();
         try
         {
             session.merge(p);
-            tx.commit();
-            
+            tx.commit();            
         }
         catch (Exception e)
         {

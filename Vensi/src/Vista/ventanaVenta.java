@@ -13,7 +13,6 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
-import java.text.NumberFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -48,12 +47,9 @@ public class ventanaVenta extends javax.swing.JFrame
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);   //centra la ventana
-        
-        this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
-        
-        this.setMinimumSize(new Dimension(1200, 500));  //Indica que hasta esa medida se puede minimizar
-        
+        this.setLocationRelativeTo(null);   //centra la ventana        
+        this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir        
+        this.setMinimumSize(new Dimension(1200, 500));  //Indica que hasta esa medida se puede minimizar        
         this.setPreferredSize(new Dimension(1200, 500));    //al ejecutarse, la ventana aparece con esa medida
         
         //Al hacer click en el JFrame...
@@ -103,7 +99,7 @@ public class ventanaVenta extends javax.swing.JFrame
         tablaProd = new javax.swing.JTable();
         panelTablaCarrito = new javax.swing.JPanel();
         LabMsjPC = new javax.swing.JLabel();
-        labPrecioTotalCompra = new javax.swing.JLabel();
+        labMontoTotalCompra = new javax.swing.JLabel();
         btnConfirmar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaCarrito = new javax.swing.JTable();
@@ -304,9 +300,11 @@ public class ventanaVenta extends javax.swing.JFrame
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
 
+        LabMsjPC.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         LabMsjPC.setText("Total de la compra:");
 
-        labPrecioTotalCompra.setText("$0");
+        labMontoTotalCompra.setFont(new java.awt.Font("Calibri", 1, 25)); // NOI18N
+        labMontoTotalCompra.setText("$0");
 
         btnConfirmar.setText("Confirmar");
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
@@ -352,28 +350,28 @@ public class ventanaVenta extends javax.swing.JFrame
         panelTablaCarritoLayout.setHorizontalGroup(
             panelTablaCarritoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jScrollPane2)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaCarritoLayout.createSequentialGroup()
-                .addGap(88, 88, 88)
-                .addComponent(LabMsjPC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addComponent(labPrecioTotalCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(97, 97, 97))
+            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 458, Short.MAX_VALUE)
             .addGroup(panelTablaCarritoLayout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaCarritoLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(LabMsjPC)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(labMontoTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(79, 79, 79))
         );
         panelTablaCarritoLayout.setVerticalGroup(
             panelTablaCarritoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTablaCarritoLayout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelTablaCarritoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(LabMsjPC, javax.swing.GroupLayout.DEFAULT_SIZE, 28, Short.MAX_VALUE)
-                    .addComponent(labPrecioTotalCompra, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(panelTablaCarritoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labMontoTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(LabMsjPC, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(16, 16, 16)
                 .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -564,16 +562,19 @@ public class ventanaVenta extends javax.swing.JFrame
                 
                 if (elProd.isPorPeso())
                 {
+                    double cant = 0;
                     String cadena = tablaCarrito.getValueAt(i, 1).toString();
+                    cant = Double.parseDouble(cadena.substring(0, cadena.length()-2));
                     cantidad = Integer.parseInt(cadena.substring(0, cadena.length()-2));
                     
-                    precioT = (cantidad * elProd.getPrecioVenta()) / elProd.getPesoEnvase();
-                    r.RedondearCentavos(precioT);                    
+                    double cantKilo = cant / 1000; 
+                                    
+                    precioT = cantKilo * elProd.getPrecioVentaXKilo();
+                    precioT = r.RedondearAIntArriba(precioT);           
                 }
-                else
+                else    //por unidad
                 {
-                    cantidad = Integer.parseInt(tablaCarrito.getValueAt(i, 1).toString());
-                    
+                    cantidad = Integer.parseInt(tablaCarrito.getValueAt(i, 1).toString());                    
                     precioT = cantidad * elProd.getPrecioVenta();
                 }              
                                
@@ -614,7 +615,7 @@ public class ventanaVenta extends javax.swing.JFrame
 
                         itDAO.modificar(elItemVenta, itemModificar.getId());
 
-                        JOptionPane.showMessageDialog(null, "Producto repetido. ItemVenta modificado.");
+                        //JOptionPane.showMessageDialog(null, "Producto repetido. ItemVenta modificado.");
                     } 
                     else 
                     {
@@ -627,7 +628,7 @@ public class ventanaVenta extends javax.swing.JFrame
 
                         itDAO.alta(unItemVenta);
 
-                        JOptionPane.showMessageDialog(null, "Producto nuevo, ItemVenta agregado.");
+                        //JOptionPane.showMessageDialog(null, "Producto nuevo, ItemVenta agregado.");
                     }
                 }                    
                 pDAO.restarStock(Integer.parseInt(idProd), cantidad);   //Descuenta stock
@@ -638,9 +639,10 @@ public class ventanaVenta extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, "El carrito está vacío.");
         }
         
-        labPrecioTotalCompra.setText("$0");
+        labMontoTotalCompra.setText("$0,00");
         llenarTabla();
         llenarTablaCarrito();
+        limpiarList();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -657,17 +659,18 @@ public class ventanaVenta extends javax.swing.JFrame
             String descrip = elProd.getDescripcion();
             int stock = elProd.getStock();
             
-            String cantidad = txfdCantidad.getText();            
+            String cantInput = txfdCantidad.getText();            
                     
-            if (cantidad.equals("")) 
+            if (cantInput.equals("")) 
             {
                 JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad");
             } 
             else 
             {
-                if (Integer.parseInt(cantidad) > stock) 
+                if (Integer.parseInt(cantInput) > stock) 
                 {
                     JOptionPane.showMessageDialog(null, "Stock insuficiente");
+                    txfdCantidad.setText(null);
                 } 
                 else 
                 {
@@ -690,29 +693,28 @@ public class ventanaVenta extends javax.swing.JFrame
                         if (elProd.isPorPeso())
                         {
                             String cadena = tablaCarrito.getValueAt(filaModificar, 1).toString();
-                            String gramos = cadena.substring(0, cadena.length()-2); 
-                            cantidad = String.valueOf(Integer.parseInt(cantidad) + Integer.parseInt(gramos));
-                        
-                            int pesoEnv = elProd.getPesoEnvase();
+                            String gramosHay = cadena.substring(0, cadena.length()-2);                             
+                            String cantTotal = String.valueOf(Integer.parseInt(cantInput) + Integer.parseInt(gramosHay));
+                                                    
+                            double cantKilo = Double.parseDouble(cantTotal) / 1000; 
+                                    
+                            precioU = cantKilo * elProd.getPrecioVentaXKilo();
+                            precioU = r.RedondearAIntArriba(precioU); 
                             
-                            double precioVenta = elProd.getPrecioVenta();
-                            precioU = (Integer.parseInt(cantidad) * precioVenta) / pesoEnv; 
-                            x = r.RedondearCentavos(precioU); 
-                            precioTotal = String.valueOf(formatoPrecios.format(x));   
+                            precioTotal = String.valueOf(formatoPrecios.format(precioU));   
                             
-                            tablaCarrito.setValueAt(cantidad+"gr", filaModificar, 1);
+                            tablaCarrito.setValueAt(cantTotal+"gr", filaModificar, 1);
                         }
                         else
                         {
                             String cantHay = tablaCarrito.getValueAt(filaModificar, 1).toString();
-                            int canti = Integer.parseInt(cantHay) + Integer.parseInt(cantidad);
-                            cantidad = String.valueOf(canti);
+                            int cantTotal = Integer.parseInt(cantHay) + Integer.parseInt(cantInput);                            
                             
                             precioU = elProd.getPrecioVenta();  
-                            x = precioU * Integer.parseInt(cantidad);
+                            x = precioU * cantTotal;
                             precioTotal = String.valueOf(formatoPrecios.format(x));
                             
-                            tablaCarrito.setValueAt(cantidad, filaModificar, 1);
+                            tablaCarrito.setValueAt(cantTotal, filaModificar, 1);
                         }                   
                         
                         tablaCarrito.setValueAt("$"+precioTotal, filaModificar, 3);
@@ -721,32 +723,28 @@ public class ventanaVenta extends javax.swing.JFrame
                     {
                         if (elProd.isPorPeso())
                         {
-                            int pesoEnv = elProd.getPesoEnvase();
-
-                            double precioVenta = elProd.getPrecioVenta();
-                            precioU = (Integer.parseInt(cantidad) * precioVenta) / pesoEnv; 
-                            x = r.RedondearCentavos(precioU);
+                            double cantKilo = Double.parseDouble(cantInput) / 1000; 
+                                    
+                            precioU = cantKilo * elProd.getPrecioVentaXKilo();
+                            precioU = r.RedondearAIntArriba(precioU); 
+                                                        
                             precioUnitario = String.valueOf("---");
-                            precioTotal = String.valueOf(formatoPrecios.format(x));
+                            precioTotal = String.valueOf(formatoPrecios.format(precioU));
                             
-                            String filaNueva[] = {descrip, cantidad + "gr", precioUnitario, "$"+precioTotal, id_recibido};
+                            String filaNueva[] = {descrip, cantInput + "gr", precioUnitario, "$"+precioTotal, id_recibido};
                             m.addRow(filaNueva);
                         }
                         else
                         {
                             precioU = elProd.getPrecioVenta();                        
                             precioUnitario = String.valueOf(formatoPrecios.format(precioU));
-                            x = precioU * Integer.parseInt(cantidad);
+                            x = precioU * Integer.parseInt(cantInput);
                             precioTotal = String.valueOf(formatoPrecios.format(x));
                             
-                            String filaNueva[] = {descrip, cantidad, "$"+precioUnitario, "$"+precioTotal, id_recibido};
+                            String filaNueva[] = {descrip, cantInput, "$"+precioUnitario, "$"+precioTotal, id_recibido};
                             m.addRow(filaNueva);
                         } 
-                    } 
-                    
-                    labPrecioTotalCompra.setText(String.valueOf("$"+calcularTotalCarrito()));
-
-                    txfdCantidad.setText(null);
+                    }                    
                 }
             }
         } 
@@ -754,15 +752,19 @@ public class ventanaVenta extends javax.swing.JFrame
         {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
         }
-
+        
+        labMontoTotalCompra.setText(String.valueOf("$"+ formatoPrecios.format(calcularTotalCarrito())));
+        
         limpiarList();
 
         tablaProd.setRowSelectionAllowed(false);
         tablaCarrito.setRowSelectionAllowed(false);
-
+        
         txfdCantidad.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnQuitar.setEnabled(false);
+        
+        txfdCantidad.setText(null);
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
@@ -773,7 +775,8 @@ public class ventanaVenta extends javax.swing.JFrame
             m = (DefaultTableModel) tablaCarrito.getModel();
             m.removeRow(filaSelec);
             
-            labPrecioTotalCompra.setText(String.valueOf("$"+calcularTotalCarrito()));
+            double montoTotalCompra = calcularTotalCarrito();
+            labMontoTotalCompra.setText(String.valueOf("$"+ formatoPrecios.format(montoTotalCompra)));
         }
         else
         {
@@ -848,8 +851,7 @@ public class ventanaVenta extends javax.swing.JFrame
 
     private void txfdCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfdCantidadKeyTyped
     
@@ -1128,6 +1130,7 @@ public class ventanaVenta extends javax.swing.JFrame
             tablaProd.setEnabled(false);
             btnIniciarTurno.setEnabled(true);  
             btnMenuPrincipal.setEnabled(true);
+            tablaVacia();
         }
         else    //lista con turnos
         {      //turno abierto
@@ -1185,6 +1188,7 @@ public class ventanaVenta extends javax.swing.JFrame
                     tablaProd.setEnabled(false);
                     btnIniciarTurno.setEnabled(true);  
                     btnMenuPrincipal.setEnabled(true);
+                    tablaVacia();
                 }                
             }
         }
@@ -1204,10 +1208,11 @@ public class ventanaVenta extends javax.swing.JFrame
             {
                 String cadena = tablaCarrito.getValueAt(i, 1).toString();
                 String cant = cadena.substring(0, cadena.length()-2);   //cantidad en gramos de la tabla
-
-                precioT = (Integer.parseInt(cant) * p.getPrecioVenta()) / p.getPesoEnvase();
-                precioT = r.RedondearCentavos(precioT);
-                //formatoPrecios.format(precioT);
+                
+                double cantKilo = Double.parseDouble(cant) / 1000; 
+                                    
+                precioT = cantKilo * p.getPrecioVentaXKilo();
+                precioT = r.RedondearAIntArriba(precioT); 
             }
             else
             {                            
@@ -1228,6 +1233,32 @@ public class ventanaVenta extends javax.swing.JFrame
         modeloList.addElement("Código: ");
         modeloList.addElement("Descripcion: ");
         listInfoProd.setModel(modeloList);
+    }
+    
+    public void tablaVacia()
+    {
+        modelo = new DefaultTableModel();     
+ 
+        modelo.addColumn("Código");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio");
+        modelo.addColumn("$ por kilo");
+        modelo.addColumn("Stock");
+        modelo.addColumn("ID");
+        
+        tablaProd.setModel(modelo);
+        
+        tcm = tablaProd.getColumnModel();
+        tcm.getColumn(0).setPreferredWidth(80);
+        tcm.getColumn(1).setPreferredWidth(400);
+        tcm.getColumn(2).setPreferredWidth(30);
+        tcm.getColumn(3).setPreferredWidth(30);
+        tcm.getColumn(4).setPreferredWidth(60);
+        tcm.getColumn(5).setPreferredWidth(0);     
+        tcm.getColumn(5).setMaxWidth(0);
+        tcm.getColumn(5).setMinWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMaxWidth(0);
+        tablaProd.getTableHeader().getColumnModel().getColumn(5).setMinWidth(0);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1253,7 +1284,7 @@ public class ventanaVenta extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
-    private javax.swing.JLabel labPrecioTotalCompra;
+    private javax.swing.JLabel labMontoTotalCompra;
     private javax.swing.JList<String> listInfoProd;
     private javax.swing.JPanel panelBotonesArriba;
     private javax.swing.JPanel panelBusqueda;

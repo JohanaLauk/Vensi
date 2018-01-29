@@ -27,7 +27,8 @@ public class ItemVentaDAO
                     e.printStackTrace();
 		throw e;
         }
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "ItemVenta agregado");
@@ -37,6 +38,7 @@ public class ItemVentaDAO
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
         ItemVenta item = null;
+        
         item = (ItemVenta)session.get(ItemVenta.class, id);
         item.setCantidad(i.getCantidad());
         item.setMonto(i.getMonto());
@@ -103,8 +105,7 @@ public class ItemVentaDAO
             query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");        
             query.setParameter("nroTurno", nroTurno);
             lista = query.list();
-            tx.commit();
-            
+            tx.commit();            
         }
         catch(Exception e)
         {
@@ -127,8 +128,7 @@ public class ItemVentaDAO
             Query query = session.createQuery("FROM ItemVenta iv WHERE iv.turno.id = :nroTurno ORDER BY iv.producto.descripcion");
             query.setParameter("nroTurno", nroTurno);
             lista = query.list();
-            tx.commit();
-            
+            tx.commit();            
         }
         catch(Exception e)
         {

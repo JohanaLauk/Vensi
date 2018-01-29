@@ -1,7 +1,5 @@
  package Modelo;
 
-import java.text.DateFormat;
-import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class Turno  implements java.io.Serializable 
@@ -10,7 +8,10 @@ public class Turno  implements java.io.Serializable
     private Date fechaHoraInicio;
     private Date fechaHoraFin;
     private Usuario usuario;
-    
+    private double montoVenta;
+    private double montoES;
+    private double efectivoHay;
+           
     public Turno() 
     { }
    
@@ -22,7 +23,7 @@ public class Turno  implements java.io.Serializable
     {
         this.id = id;
     }
-        
+    
     public Date getFechaHoraInicio() 
     { 
         return this.fechaHoraInicio;
@@ -48,5 +49,32 @@ public class Turno  implements java.io.Serializable
     public void setUsuario(Usuario usuario) 
     {
         this.usuario = usuario;
+    }
+
+    public double getMontoVenta() 
+    {
+        return montoVenta;
+    }
+    public void setMontoVenta(double montoVenta) 
+    {
+        this.montoVenta = montoVenta;
+    }
+
+    public double getMontoES() 
+    {
+        return montoES;
+    }
+    public void setMontoES(double montoES) 
+    {
+        this.montoES = montoES;
+    }
+    
+    public double getEfectivoHay() 
+    {
+        return efectivoHay;
+    }
+    public void setEfectivoHay(double efectivoHay) 
+    {
+        this.efectivoHay = efectivoHay;
     }
 }

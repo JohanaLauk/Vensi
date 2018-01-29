@@ -153,7 +153,6 @@ public class ventanaInicioTurno extends javax.swing.JFrame
     }//GEN-LAST:event_btnNOiniciarTurnoActionPerformed
 
     private void txfdPinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPinKeyPressed
-        
         if (!txfdPin.equals("")) 
         {
             btnSIiniciarTurno.setEnabled(true);
@@ -198,8 +197,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
 
     private void txfdPinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPinKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume(); 
     }//GEN-LAST:event_txfdPinKeyTyped
     

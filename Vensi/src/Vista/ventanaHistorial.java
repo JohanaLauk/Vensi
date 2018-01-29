@@ -398,10 +398,8 @@ public class ventanaHistorial extends javax.swing.JFrame
 
     private void txfdNroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdNroKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
-        {
-            evt.consume();
-        } 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE))         
+            evt.consume();         
     }//GEN-LAST:event_txfdNroKeyTyped
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
@@ -425,7 +423,8 @@ public class ventanaHistorial extends javax.swing.JFrame
         txfdNro.setText("");
         dateDesde.setDate(null);
         dateHasta.setDate(null);        
-        cbBuscarPor.setSelectedItem("Seleccionar");        
+        cbBuscarPor.setSelectedItem("Seleccionar");      
+        btnVisualizarHistorial.setEnabled(false);
 
         tablaVacia();
     }//GEN-LAST:event_rbTurnoActionPerformed
@@ -434,7 +433,8 @@ public class ventanaHistorial extends javax.swing.JFrame
         txfdNro.setText("");
         dateDesde.setDate(null);
         dateHasta.setDate(null);        
-        cbBuscarPor.setSelectedItem("Seleccionar");        
+        cbBuscarPor.setSelectedItem("Seleccionar"); 
+        btnVisualizarHistorial.setEnabled(false);
 
         tablaVacia();
     }//GEN-LAST:event_rbPedidoActionPerformed

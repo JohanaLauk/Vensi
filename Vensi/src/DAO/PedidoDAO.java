@@ -35,6 +35,37 @@ public class PedidoDAO
         //JOptionPane.showMessageDialog(null, "Pedido creado");
     }
     
+    public void modificar(Pedido p, int id)
+    {
+        session = NewHibernateUtil.getSessionFactory().openSession();
+        Pedido ped = null;
+                   
+        ped = (Pedido)session.get(Pedido.class, id);
+        ped.setFechaHora(p.getFechaHora());
+        ped.setProveedor(p.getProveedor());
+        ped.setImporte(p.getImporte());
+            
+        tx = session.beginTransaction();
+        try
+        {
+            session.merge(ped);
+            tx.commit();            
+        }
+        catch(Exception e)
+        {
+            if (tx.isActive())
+		tx.rollback();
+                    e.printStackTrace();
+                    //JOptionPane.showMessageDialog(null, "Error al modificar el pedido");
+		throw e;
+        }        
+        finally
+        {
+            session.close();
+        }
+        //JOptionPane.showMessageDialog(null, "Pedido modificado");
+    }
+    
     public List<Pedido> listar()
     {
         session = NewHibernateUtil.getSessionFactory().openSession();

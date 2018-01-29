@@ -37,8 +37,10 @@ public class ItemPedidoDAO
     {
         session = NewHibernateUtil.getSessionFactory().openSession();        
         ItemPedido item = null;
+        
         item = (ItemPedido)session.get(ItemPedido.class, id);
-        item.setCantidad(i.getCantidad());
+        item.setCantidad(i.getCantidad());        
+        
         tx = session.beginTransaction();
         try
         {
