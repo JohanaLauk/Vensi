@@ -209,8 +209,18 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdEditarCodigo">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdEditarDescripcion"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdEditarDescripcion">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdEditarPrecioCosto"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
           <Properties>
@@ -299,6 +309,9 @@
         </Component>
         <Component class="org.jdesktop.swingx.JXTextField" name="txfdEditarPrecioCosto">
           <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdEditarPrecioVenta"/>
+            </Property>
             <Property name="prompt" type="java.lang.String" value="Ej: &quot;00&quot; o &quot;00.00&quot;"/>
           </Properties>
           <Events>
@@ -307,6 +320,9 @@
         </Component>
         <Component class="org.jdesktop.swingx.JXTextField" name="txfdEditarPrecioVenta">
           <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdEditarStockMinimo"/>
+            </Property>
             <Property name="prompt" type="java.lang.String" value="Ej: &quot;00&quot; o &quot;00.00&quot;"/>
           </Properties>
           <Events>

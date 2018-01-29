@@ -1,6 +1,8 @@
 package Vista;
 
-import java.awt.Dimension;
+import java.awt.Component;
+import java.awt.*;
+
 
 public class ventanaAdministracion extends javax.swing.JFrame 
 {
@@ -15,6 +17,8 @@ public class ventanaAdministracion extends javax.swing.JFrame
         this.setMinimumSize(new Dimension(900, 425));  //al minimizar la ventana no permite que sea mas chico que esa medida
         
         this.setPreferredSize(new Dimension(900, 425));    //al minimizar la ventana aparece con esa medida
+         
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -32,6 +36,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
 
         btnGestionProv.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnGestionProv.setText("Gestión del proveedor");
+        btnGestionProv.setNextFocusableComponent(btnGestionClave);
         btnGestionProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGestionProvActionPerformed(evt);
@@ -40,6 +45,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
 
         btnGestionProd.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnGestionProd.setText("Gestión del producto");
+        btnGestionProd.setNextFocusableComponent(btnGestionProv);
         btnGestionProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGestionProdActionPerformed(evt);
@@ -48,6 +54,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
 
         btnMenuPrincipal.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnMenuPrincipal.setText("Menú principal");
+        btnMenuPrincipal.setNextFocusableComponent(btnGestionProd);
         btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuPrincipalActionPerformed(evt);
@@ -56,6 +63,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
 
         btnGestionClave.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnGestionClave.setText("Gestión de claves");
+        btnGestionClave.setNextFocusableComponent(btnMenuPrincipal);
         btnGestionClave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGestionClaveActionPerformed(evt);

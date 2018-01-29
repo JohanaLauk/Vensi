@@ -188,6 +188,7 @@ public class ventanaCompra extends javax.swing.JFrame
         jScrollPane3.setViewportView(tablaListaInventario);
 
         btnCargarInventario.setText("Cargar al inventario");
+        btnCargarInventario.setNextFocusableComponent(btnVolver);
         btnCargarInventario.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCargarInventarioActionPerformed(evt);
@@ -195,6 +196,7 @@ public class ventanaCompra extends javax.swing.JFrame
         });
 
         btnVolver.setText("Volver");
+        btnVolver.setNextFocusableComponent(cbProveedores);
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverActionPerformed(evt);
@@ -232,6 +234,7 @@ public class ventanaCompra extends javax.swing.JFrame
         jLabel5.setText("Cantidad:");
 
         btnAgregar.setText("Agregar");
+        btnAgregar.setNextFocusableComponent(btnQuitar);
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -248,6 +251,7 @@ public class ventanaCompra extends javax.swing.JFrame
         jScrollPane2.setViewportView(listInfoProd);
 
         btnQuitar.setText("Quitar");
+        btnQuitar.setNextFocusableComponent(btnCargarInventario);
         btnQuitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuitarActionPerformed(evt);
@@ -259,6 +263,7 @@ public class ventanaCompra extends javax.swing.JFrame
         jLabel9.setText("Precio venta:");
 
         txfdCantidad.setToolTipText("Ingrese la cantidad en unidades");
+        txfdCantidad.setNextFocusableComponent(txfdPrecioCU);
         txfdCantidad.setPrompt("Unidades");
         txfdCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -267,6 +272,7 @@ public class ventanaCompra extends javax.swing.JFrame
         });
 
         txfdPrecioCU.setToolTipText("Ingrese el precio costo unitario");
+        txfdPrecioCU.setNextFocusableComponent(txfdPrecioVU);
         txfdPrecioCU.setPrompt("Ej: \"00\" o \"00.00\"");
         txfdPrecioCU.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -275,6 +281,7 @@ public class ventanaCompra extends javax.swing.JFrame
         });
 
         txfdPrecioVU.setToolTipText("Ingrese el precio venta unitario");
+        txfdPrecioVU.setNextFocusableComponent(btnAgregar);
         txfdPrecioVU.setPrompt("Ej: \"00\" o \"00.00\"");
         txfdPrecioVU.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -337,6 +344,7 @@ public class ventanaCompra extends javax.swing.JFrame
 
         jLabel4.setText("Buscar:");
 
+        txfdBuscarProd.setNextFocusableComponent(btnBuscarProd);
         txfdBuscarProd.setPrompt("Busque por código o por descripción");
         txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -345,6 +353,7 @@ public class ventanaCompra extends javax.swing.JFrame
         });
 
         btnBuscarProd.setText("Buscar");
+        btnBuscarProd.setNextFocusableComponent(cbFiltro);
         btnBuscarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarProdActionPerformed(evt);
@@ -375,6 +384,7 @@ public class ventanaCompra extends javax.swing.JFrame
         jLabel6.setText("Filtrar por:");
 
         cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
+        cbFiltro.setNextFocusableComponent(cbSituacion);
         cbFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFiltroActionPerformed(evt);
@@ -382,6 +392,7 @@ public class ventanaCompra extends javax.swing.JFrame
         });
 
         cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo ofertas", "Sólo suspendidos" }));
+        cbSituacion.setNextFocusableComponent(cbOrdenCampo);
         cbSituacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSituacionActionPerformed(evt);
@@ -391,6 +402,7 @@ public class ventanaCompra extends javax.swing.JFrame
         jLabel8.setText("Ordenar por:");
 
         cbOrdenCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripción", "Código", "Precio costo", "Stock", "Stock mínimo" }));
+        cbOrdenCampo.setNextFocusableComponent(cbTipoOrden);
         cbOrdenCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbOrdenCampoActionPerformed(evt);
@@ -398,6 +410,7 @@ public class ventanaCompra extends javax.swing.JFrame
         });
 
         cbTipoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        cbTipoOrden.setNextFocusableComponent(txfdCantidad);
         cbTipoOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoOrdenActionPerformed(evt);
@@ -438,6 +451,7 @@ public class ventanaCompra extends javax.swing.JFrame
 
         jLabel7.setText("Indique el proveedor:");
 
+        cbProveedores.setNextFocusableComponent(txfdBuscarProd);
         cbProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbProveedoresActionPerformed(evt);

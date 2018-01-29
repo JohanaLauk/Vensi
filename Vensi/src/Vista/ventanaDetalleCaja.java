@@ -85,6 +85,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
         btnSalir.setContentAreaFilled(false);
+        btnSalir.setNextFocusableComponent(btnCargarES);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -149,6 +150,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         jPanel1.add(txfdTotalCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 440, 80, 30));
 
         btnCargarES.setText("Cargar entrada/salida");
+        btnCargarES.setNextFocusableComponent(btnVolverDC);
         btnCargarES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCargarESActionPerformed(evt);
@@ -157,6 +159,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         jPanel1.add(btnCargarES, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 380, 240, 100));
 
         btnVolverDC.setText("Volver");
+        btnVolverDC.setNextFocusableComponent(btnSalir);
         btnVolverDC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverDCActionPerformed(evt);

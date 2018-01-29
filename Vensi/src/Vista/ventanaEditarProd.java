@@ -100,6 +100,10 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         jLabel7.setText("Stock mínimo:");
 
+        txfdEditarCodigo.setNextFocusableComponent(txfdEditarDescripcion);
+
+        txfdEditarDescripcion.setNextFocusableComponent(txfdEditarPrecioCosto);
+
         jLabel5.setText("Se vende por:");
 
         bgTipoVenta.add(rbUnidad);
@@ -146,6 +150,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         jLabel6.setText("Proveedor/es:");
 
+        txfdEditarPrecioCosto.setNextFocusableComponent(txfdEditarPrecioVenta);
         txfdEditarPrecioCosto.setPrompt("Ej: \"00\" o \"00.00\"");
         txfdEditarPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -153,6 +158,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
             }
         });
 
+        txfdEditarPrecioVenta.setNextFocusableComponent(txfdEditarStockMinimo);
         txfdEditarPrecioVenta.setPrompt("Ej: \"00\" o \"00.00\"");
         txfdEditarPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {

@@ -74,6 +74,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         btnSalir.setToolTipText("Salir");
         btnSalir.setBorderPainted(false);
         btnSalir.setContentAreaFilled(false);
+        btnSalir.setNextFocusableComponent(cbTipoES);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -85,6 +86,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         panelES.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         cbTipoES.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Apertura de caja", "Retiro", "Anulación de venta", "Sueldo" }));
+        cbTipoES.setNextFocusableComponent(txfdMonto);
         cbTipoES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoESActionPerformed(evt);
@@ -101,6 +103,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         panelES.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setNextFocusableComponent(btnConfirmar);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -109,6 +112,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         panelES.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 120, 30));
 
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.setNextFocusableComponent(txfdCodNomProdAnular);
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarActionPerformed(evt);
@@ -119,6 +123,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         txAreaDescripcion.setEditable(false);
         txAreaDescripcion.setColumns(20);
         txAreaDescripcion.setRows(5);
+        txAreaDescripcion.setNextFocusableComponent(btnCancelar);
         jScrollPane2.setViewportView(txAreaDescripcion);
 
         panelES.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 260, 130));
@@ -127,6 +132,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         jLabel6.setText("Monto:");
         panelES.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, 20));
 
+        txfdMonto.setNextFocusableComponent(txAreaDescripcion);
         txfdMonto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfdMontoKeyReleased(evt);
@@ -155,9 +161,11 @@ public class ventanaCargarES extends javax.swing.JFrame
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Informacíon del producto:");
 
+        listaInfoProdAnular.setNextFocusableComponent(btnAnular);
         jScrollPane1.setViewportView(listaInfoProdAnular);
 
         btnAnular.setText("Anular");
+        btnAnular.setNextFocusableComponent(btnSalir);
         btnAnular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnularActionPerformed(evt);
@@ -168,6 +176,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         labTituloPanelAnularProd.setText("ANULACIÓN DE PRODUCTO");
         labTituloPanelAnularProd.setToolTipText("");
 
+        txfdCantProdAnular.setNextFocusableComponent(listaInfoProdAnular);
         txfdCantProdAnular.setPrompt("unidad / gramos");
         txfdCantProdAnular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -178,6 +187,7 @@ public class ventanaCargarES extends javax.swing.JFrame
             }
         });
 
+        txfdCodNomProdAnular.setNextFocusableComponent(txfdCantProdAnular);
         txfdCodNomProdAnular.setPrompt("Por código o descripción");
         txfdCodNomProdAnular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
