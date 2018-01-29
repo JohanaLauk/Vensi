@@ -1754,8 +1754,7 @@ public class ProductoDAO
         try
         {
             session.merge(p);
-            tx.commit();
-            
+            tx.commit();            
         }
         catch (Exception e)
         {

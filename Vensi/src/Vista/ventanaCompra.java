@@ -614,35 +614,35 @@ public class ventanaCompra extends javax.swing.JFrame
 
     private void btnCargarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarInventarioActionPerformed
         Producto producto = null;    
+        double importe = 0;
         
+        //<-----Pedido-------------------------------------------------------------------------------------
         Pedido pedido = new Pedido();        
         pedido.setFechaHora(new Date());        
-        pedido.setProveedor(elProv);
+        pedido.setProveedor(elProv);        
         pedidoDAO.alta(pedido);
+        //------Pedido------------------------------------------------------------------------------------->
 
         int filasTablaInv = tablaListaInventario.getRowCount();
         for (int i = 0 ; i<filasTablaInv ; i++ )
         {            
             producto = prodDAO.buscarPorId(Integer.parseInt(tablaListaInventario.getValueAt(i,4).toString()));
             
-            //<-----Pedido-------------------------------------------------------------------------------------
+            //<-----ItemPedido-------------------------------------------------------------------------------------
             ItemPedido itemPedido = new ItemPedido();
-            itemPedido.setProducto(producto); 
-            
-            if (producto.isPorPeso())
-            {
-                int cantU = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
-                int cantGR = cantU * producto.getPesoEnvase();
-                itemPedido.setCantidad(cantGR);
-            }
-            else
-            {
-                itemPedido.setCantidad(Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString()));
-            }
+            itemPedido.setProducto(producto);
+            int canti = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
+            itemPedido.setCantidad(canti);
             itemPedido.setPedido(pedido);
+            itemPedido.setPrecioCostoItem(canti * producto.getPrecioCosto());
             iDAO.alta(itemPedido);
-            //-----Pedido------------------------------------------------------------------------------------->
+            //------ItemPedido------------------------------------------------------------------------------------->
+                      
+            importe += itemPedido.getPrecioCostoItem();
+            pedido.setImporte(importe);
+            pedidoDAO.modificar(pedido, pedido.getId());
                         
+            //<-----Producto--------------------------------------------------------------------------------------------
             String cadenaPC = tablaListaInventario.getValueAt(i,2).toString();
             double precioCostoU = 0;            
             
@@ -686,7 +686,10 @@ public class ventanaCompra extends javax.swing.JFrame
             }            
             
             prodDAO.setearPreciosUnidad(producto.getId(), precioCostoU, precioVentaU, precioVentaXkilo);
+            //------Producto-------------------------------------------------------------------------------------------->
         }
+        
+        pedido.setImporte(ABORT);
         
         JOptionPane.showMessageDialog(null, "Finalizado con éxito");
         
@@ -719,7 +722,9 @@ public class ventanaCompra extends javax.swing.JFrame
                     elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
                     llenarTabla();
                 }
-            }            
+            }      
+            
+            llenarTablaInventario();
         }
         else
         {
@@ -732,7 +737,12 @@ public class ventanaCompra extends javax.swing.JFrame
             for (int i=0 ; i < panelComboBox.getComponents().length ; i++)
             {
                 panelComboBox.getComponent(i).setEnabled(false);
-            }           
+            }  
+            
+            if (provSelec.equals("Seleccionar"))
+            {
+                llenarTablaInventario();
+            }
         }
     }//GEN-LAST:event_cbProveedoresActionPerformed
 
@@ -1198,6 +1208,11 @@ public class ventanaCompra extends javax.swing.JFrame
         tcm.getColumn(7).setMinWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);    
+    }
+    
+    public void mostrarTablaInvVacia()
+    {
+        
     }
     
     public String[] OrdenarTabla()

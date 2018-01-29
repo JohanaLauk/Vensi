@@ -423,7 +423,8 @@ public class ventanaHistorial extends javax.swing.JFrame
         txfdNro.setText("");
         dateDesde.setDate(null);
         dateHasta.setDate(null);        
-        cbBuscarPor.setSelectedItem("Seleccionar");        
+        cbBuscarPor.setSelectedItem("Seleccionar");      
+        btnVisualizarHistorial.setEnabled(false);
 
         tablaVacia();
     }//GEN-LAST:event_rbTurnoActionPerformed
@@ -432,7 +433,8 @@ public class ventanaHistorial extends javax.swing.JFrame
         txfdNro.setText("");
         dateDesde.setDate(null);
         dateHasta.setDate(null);        
-        cbBuscarPor.setSelectedItem("Seleccionar");        
+        cbBuscarPor.setSelectedItem("Seleccionar"); 
+        btnVisualizarHistorial.setEnabled(false);
 
         tablaVacia();
     }//GEN-LAST:event_rbPedidoActionPerformed

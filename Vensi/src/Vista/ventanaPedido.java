@@ -43,7 +43,7 @@ public class ventanaPedido extends javax.swing.JFrame
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);     //centra la ventana        
+        this.setLocationRelativeTo(null);       //centra la ventana        
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
         
         txfdBuscarProd.setEnabled(false);
@@ -640,11 +640,18 @@ public class ventanaPedido extends javax.swing.JFrame
                     elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
                     llenarTabla();
                 }
-            }           
+            }      
+            
+            llenarTablaPedido();
         }
         else
         {
             mostrarTablaVacia();   
+            
+            if (provSelec.equals("Seleccionar"))
+            {
+                llenarTablaPedido();
+            }
             
             txfdBuscarProd.setEnabled(false);
             btnBuscarProd.setEnabled(false);
@@ -796,8 +803,7 @@ public class ventanaPedido extends javax.swing.JFrame
 
     private void txfdCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') && 
-                (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
+        if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfdCantidadKeyTyped
     

@@ -8,16 +8,24 @@
             <column name="id" />
             <generator class="identity" />
         </id>
-        <!--<property name="producto" type="serializable">
-            <column name="producto" not-null="true" />
-        </property> -->
+       
         <many-to-one name = "producto" column = "id_producto" 
          class="Modelo.Producto" not-null="true" lazy="false" />
-        <!--<one-to-one name="producto" class="Modelo.Producto" cascade="none"> 
-        </one-to-one> -->
+        
+        <many-to-one name="pedido" class="Modelo.Pedido" column="id_pedido" not-null="true" lazy="false" />   
+        
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />
         </property>
-        <many-to-one name="pedido" class="Modelo.Pedido" column="id_pedido" not-null="true" lazy="false" />    
+        <property name="precioCostoItem" type="double">
+            <column name="precio_costo_item" precision="8" not-null="false" />
+        </property>
+        
+        <!--<property name="producto" type="serializable">
+            <column name="producto" not-null="true" />
+        </property> -->
+        
+        <!--<one-to-one name="producto" class="Modelo.Producto" cascade="none"> 
+        </one-to-one> --> 
     </class>
 </hibernate-mapping>

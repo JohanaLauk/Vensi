@@ -43,7 +43,6 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         this.setLocationRelativeTo(null);   //centra la ventana
                
         llenarDatos();
-        mostrarCalculos();
         
         listDatosTP.clearSelection();
     }
@@ -58,11 +57,11 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         jLabel1 = new javax.swing.JLabel();
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaTP = new javax.swing.JTable();
-        jLabel2 = new javax.swing.JLabel();
+        labVenta = new javax.swing.JLabel();
         txfdVenta = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
+        labTotalCaja = new javax.swing.JLabel();
         txfdTotalCaja = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
+        labDiferencia = new javax.swing.JLabel();
         txfdDiferencia = new javax.swing.JTextField();
         btnVolverVerHistorial = new javax.swing.JButton();
         btnImprimir = new javax.swing.JButton();
@@ -98,8 +97,8 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         tablaTP.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaTP);
 
-        jLabel2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel2.setText("Venta: ");
+        labVenta.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        labVenta.setText("Venta: ");
 
         txfdVenta.setEditable(false);
         txfdVenta.setBackground(new java.awt.Color(0, 153, 51));
@@ -108,8 +107,8 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         txfdVenta.setText("$");
         txfdVenta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel3.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel3.setText("Total caja:");
+        labTotalCaja.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        labTotalCaja.setText("Total caja:");
 
         txfdTotalCaja.setBackground(new java.awt.Color(0, 0, 204));
         txfdTotalCaja.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
@@ -117,8 +116,8 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         txfdTotalCaja.setText("$");
         txfdTotalCaja.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jLabel4.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel4.setText("Diferencia:");
+        labDiferencia.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        labDiferencia.setText("Diferencia:");
 
         txfdDiferencia.setBackground(new java.awt.Color(102, 0, 51));
         txfdDiferencia.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
@@ -136,13 +135,13 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 235, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4)
-                            .addComponent(jLabel3))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
+                            .addComponent(labVenta)
+                            .addComponent(labDiferencia)
+                            .addComponent(labTotalCaja))
+                        .addGap(11, 11, 11)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txfdTotalCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel1Layout.createSequentialGroup()
@@ -161,15 +160,15 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
+                            .addComponent(labVenta)
                             .addComponent(txfdVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
+                            .addComponent(labTotalCaja)
                             .addComponent(txfdTotalCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
+                            .addComponent(labDiferencia)
                             .addComponent(txfdDiferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
@@ -191,9 +190,9 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVolverVerHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
@@ -323,18 +322,28 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                 
                 modelo.addRow(datos);
             }
+            mostrarCalculos();
         }
         else    //Pedido
         {
+            labVenta.setVisible(false);
+            txfdVenta.setVisible(false);
+            labTotalCaja.setVisible(false);
+            txfdTotalCaja.setVisible(false);
+            labDiferencia.setVisible(false);
+            txfdDiferencia.setVisible(false);
+                        
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
             
             Pedido p = pDAO.buscarPorID(idSelec);
             
             modeloList = new DefaultListModel();
-            modeloList.addElement("Número:  " + String.valueOf(p.getId()));
-            modeloList.addElement("Proveedor:  " + p.getProveedor().getRazonSocial());
-            modeloList.addElement("Fecha y hora:  " + String.valueOf(fechaHoraFormat.format(p.getFechaHora())+ "hs."));
+            modeloList.addElement("NÚMERO:  " + String.valueOf(p.getId()));
+            modeloList.addElement("PROVEEDOR:  " + p.getProveedor().getRazonSocial());
+            modeloList.addElement("FECHA Y HORA:  " + String.valueOf(fechaHoraFormat.format(p.getFechaHora())+ "hs."));
+            modeloList.addElement(" ");
+            modeloList.addElement("IMPORTE:  $" + String.valueOf(formatoPrecios.format(p.getImporte())));
                         
             List<ItemPedido> listaCompras = iPedidoDAO.listar(idSelec);
             
@@ -343,7 +352,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                 datos[0] = i.getProducto().getDescripcion();
                 datos[1] = String.valueOf(i.getCantidad());
                 datos[2] = String.valueOf("---");
-                datos[3] = String.valueOf("$" + formatoPrecios.format(i.getCantidad() * i.getProducto().getPrecioCosto()));
+                datos[3] = String.valueOf("$" + formatoPrecios.format(i.getPrecioCostoItem()));               
                 
                 modelo.addRow(datos);
             }
@@ -383,12 +392,12 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
     private javax.swing.JButton btnImprimir;
     private javax.swing.JButton btnVolverVerHistorial;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labDiferencia;
+    private javax.swing.JLabel labTotalCaja;
+    private javax.swing.JLabel labVenta;
     private javax.swing.JList<String> listDatosTP;
     private javax.swing.JTable tablaTP;
     private javax.swing.JTextField txfdDiferencia;

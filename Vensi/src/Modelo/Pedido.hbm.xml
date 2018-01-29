@@ -8,11 +8,7 @@
             <column name="id" />
             <generator class="identity" />
         </id>     
-        <!-- <list name="itemPedido" table="item_pedido" inverse="true" lazy="true" fetch="select">
-            <key column="id" not-null="true"/>
-            <list-index column="orden" />
-            <one-to-many class="Modelo.ItemPedido" />
-        </list> -->
+        
         <many-to-one name = "proveedor" column = "id_proveedor" 
          class="Modelo.Proveedor" not-null="true" lazy="false" />
         
@@ -20,5 +16,14 @@
             <column name="fecha_hora" length="13" not-null="true" />
         </property>
         
+        <property name="importe" type="double">
+            <column name="importe" precision="8" not-null="false" />
+        </property>
+        
+        <!-- <list name="itemPedido" table="item_pedido" inverse="true" lazy="true" fetch="select">
+            <key column="id" not-null="true"/>
+            <list-index column="orden" />
+            <one-to-many class="Modelo.ItemPedido" />
+        </list> -->
     </class>
 </hibernate-mapping>

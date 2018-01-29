@@ -2,10 +2,11 @@ package Modelo;
 
 public class ItemPedido  implements java.io.Serializable 
 {
-     private int id;
-     private Producto producto;
-     private int cantidad;
-     private Pedido pedido;
+    private int id;
+    private Producto producto;
+    private int cantidad;
+    private Pedido pedido;
+    private double precioCostoItem;
 
     public ItemPedido() 
     { }    
@@ -45,4 +46,13 @@ public class ItemPedido  implements java.io.Serializable
     {
         this.pedido = pedido;
     }   
+
+    public double getPrecioCostoItem() 
+    {
+        return precioCostoItem;
+    }
+    public void setPrecioCostoItem(double precioCostoItem)
+    {
+        this.precioCostoItem = precioCostoItem;
+    }
 }

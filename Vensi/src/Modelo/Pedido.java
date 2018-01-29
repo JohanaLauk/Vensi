@@ -5,9 +5,9 @@ import java.util.*;
 public class Pedido  implements java.io.Serializable 
 {
     private int id;
-    //private List<ItemPedido> itemPedido;
     private Proveedor proveedor;
     private Date fechaHora;
+    private double importe;
 
     public Pedido() 
     { }
@@ -20,14 +20,6 @@ public class Pedido  implements java.io.Serializable
     {
         this.id = id;
     }
-
-    /*public List<ItemPedido> getItemPedido() {
-        return itemPedido;
-    }
-
-    public void setItemPedido(List<ItemPedido> itemPedido) {
-        this.itemPedido = itemPedido;
-    }*/
         
     public Proveedor getProveedor() 
     {
@@ -46,5 +38,13 @@ public class Pedido  implements java.io.Serializable
     {
         this.fechaHora = fechaHora;
     }
-    
+
+    public double getImporte() 
+    {
+        return importe;
+    }
+    public void setImporte(double importe) 
+    {
+        this.importe = importe;
+    }
 }
