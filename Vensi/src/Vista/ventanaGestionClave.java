@@ -45,6 +45,7 @@ public class ventanaGestionClave extends javax.swing.JFrame
         jLabel1.setText("Usuario:");
 
         cbTipoClave.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Propietario", "Empleado" }));
+        cbTipoClave.setNextFocusableComponent(passActual);
 
         btnVolver.setText("Volver");
         btnVolver.addActionListener(new java.awt.event.ActionListener() {
@@ -55,6 +56,7 @@ public class ventanaGestionClave extends javax.swing.JFrame
 
         jLabel5.setText("Pin nuevo: ");
 
+        passNuevo.setNextFocusableComponent(passVerif);
         passNuevo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 passNuevoKeyTyped(evt);
@@ -63,6 +65,7 @@ public class ventanaGestionClave extends javax.swing.JFrame
 
         jLabel6.setText("Pin verif:");
 
+        passVerif.setNextFocusableComponent(cbTipoClave);
         passVerif.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 passVerifKeyTyped(evt);
@@ -78,6 +81,7 @@ public class ventanaGestionClave extends javax.swing.JFrame
 
         jLabel3.setText("Pin actual:");
 
+        passActual.setNextFocusableComponent(passNuevo);
         passActual.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 passActualKeyTyped(evt);

@@ -126,6 +126,9 @@
         <Component class="javax.swing.JButton" name="btnAceptarCerrarTurno">
           <Properties>
             <Property name="text" type="java.lang.String" value="Aceptar"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="btnCancelarCerrarTurno"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAceptarCerrarTurnoActionPerformed"/>
@@ -134,6 +137,9 @@
         <Component class="javax.swing.JButton" name="btnCancelarCerrarTurno">
           <Properties>
             <Property name="text" type="java.lang.String" value="Cancelar"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdMontoEsperado"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarCerrarTurnoActionPerformed"/>
@@ -142,16 +148,25 @@
         <Component class="javax.swing.JTextField" name="txfdDiferencia">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd500"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdMontoEsperado">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdHay"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdHay">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdDiferencia"/>
+            </Property>
           </Properties>
         </Component>
       </SubComponents>
@@ -396,6 +411,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd500">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd500total"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd500KeyReleased"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd500KeyTyped"/>
@@ -407,36 +427,66 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd200">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd200total"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd200KeyReleased"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd200KeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd100">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd100total"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd100KeyReleased"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd100KeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd50">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd50total"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd50KeyReleased"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd50KeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd20">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd20total"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd20KeyReleased"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd20KeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd10">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd10total"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd10KeyReleased"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd10KeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd5">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd5total"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd5KeyReleased"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd5KeyTyped"/>
@@ -449,18 +499,33 @@
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd1">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd1total"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd1KeyReleased"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd1KeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd0050">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd0050total"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd0050KeyReleased"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd0050KeyTyped"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd0025">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd0025total"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd0025KeyReleased"/>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfd0025KeyTyped"/>
@@ -469,56 +534,89 @@
         <Component class="javax.swing.JTextField" name="txfd500total">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd200"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd200total">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd100"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd100total">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd50"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd50total">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd20"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd20total">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd10"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd10total">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd5"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd5total">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd2"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd2total">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd1"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd1total">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd0050"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd0050total">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfd0025"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfd0025total">
           <Properties>
             <Property name="editable" type="boolean" value="false"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="btnAceptarCerrarTurno"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel1">

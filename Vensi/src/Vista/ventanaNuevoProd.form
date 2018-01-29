@@ -196,8 +196,18 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdCodigo">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdDescripcion"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdDescripcion">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdPrecioCosto"/>
+            </Property>
+          </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel6">
           <Properties>
@@ -205,6 +215,11 @@
           </Properties>
         </Component>
         <Component class="javax.swing.JTextField" name="txfdPesoEnvase">
+          <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="cbSituaci&#xf3;n"/>
+            </Property>
+          </Properties>
           <Events>
             <EventHandler event="keyTyped" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdPesoEnvaseKeyTyped"/>
           </Events>
@@ -225,6 +240,9 @@
               <ComponentRef name="bgTipoVenta"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Unidad"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="rbPeso"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbUnidadActionPerformed"/>
@@ -236,6 +254,9 @@
               <ComponentRef name="bgTipoVenta"/>
             </Property>
             <Property name="text" type="java.lang.String" value="Peso"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdPesoEnvase"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="rbPesoActionPerformed"/>
@@ -271,6 +292,9 @@
             <Component class="javax.swing.JButton" name="btnAceptarNuevoProd">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Aceptar"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="btnCancelarNuevoProd"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnAceptarNuevoProdActionPerformed"/>
@@ -279,6 +303,9 @@
             <Component class="javax.swing.JButton" name="btnCancelarNuevoProd">
               <Properties>
                 <Property name="text" type="java.lang.String" value="Cancelar"/>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="txfdCodigo"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCancelarNuevoProdActionPerformed"/>
@@ -305,6 +332,9 @@
                 <StringItem index="2" value="Suspendido"/>
               </StringArray>
             </Property>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="btnAceptarNuevoProd"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbSituaci&#xf3;nActionPerformed"/>
@@ -315,6 +345,9 @@
         </Component>
         <Component class="org.jdesktop.swingx.JXTextField" name="txfdPrecioVenta">
           <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdStockInicial"/>
+            </Property>
             <Property name="prompt" type="java.lang.String" value="Ej: &quot;00&quot; o &quot;00.00&quot;"/>
           </Properties>
           <Events>
@@ -323,6 +356,9 @@
         </Component>
         <Component class="org.jdesktop.swingx.JXTextField" name="txfdStockInicial">
           <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdStockMinimo"/>
+            </Property>
             <Property name="prompt" type="java.lang.String" value="Ingrese la cantidad en unidades"/>
           </Properties>
           <Events>
@@ -331,6 +367,9 @@
         </Component>
         <Component class="org.jdesktop.swingx.JXTextField" name="txfdStockMinimo">
           <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="rbUnidad"/>
+            </Property>
             <Property name="prompt" type="java.lang.String" value="Ingrese la cantidad en unidades"/>
           </Properties>
           <Events>
@@ -339,6 +378,9 @@
         </Component>
         <Component class="org.jdesktop.swingx.JXTextField" name="txfdPrecioCosto">
           <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdPrecioVenta"/>
+            </Property>
             <Property name="prompt" type="java.lang.String" value="Ej: &quot;00&quot; o &quot;00.00&quot;"/>
           </Properties>
           <Events>

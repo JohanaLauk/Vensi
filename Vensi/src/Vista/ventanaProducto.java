@@ -101,12 +101,14 @@ public class ventanaProducto extends javax.swing.JFrame
         jLabel1.setText("Buscar:");
 
         btnBuscarProd.setText("Buscar");
+        btnBuscarProd.setNextFocusableComponent(cbFiltroCampo);
         btnBuscarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarProdActionPerformed(evt);
             }
         });
 
+        txfdBuscarProd.setNextFocusableComponent(btnBuscarProd);
         txfdBuscarProd.setPrompt("Busque por código o por descripción");
         txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -159,6 +161,7 @@ public class ventanaProducto extends javax.swing.JFrame
         jScrollPane1.setViewportView(tablaProd);
 
         btnNuevoProd.setText("Nuevo");
+        btnNuevoProd.setNextFocusableComponent(btnEditarProd);
         btnNuevoProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoProdActionPerformed(evt);
@@ -166,6 +169,7 @@ public class ventanaProducto extends javax.swing.JFrame
         });
 
         btnEditarProd.setText("Editar");
+        btnEditarProd.setNextFocusableComponent(btnVolverProd);
         btnEditarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarProdActionPerformed(evt);
@@ -173,6 +177,7 @@ public class ventanaProducto extends javax.swing.JFrame
         });
 
         btnMenuPrincipalProd.setText("Menú principal");
+        btnMenuPrincipalProd.setNextFocusableComponent(txfdBuscarProd);
         btnMenuPrincipalProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuPrincipalProdActionPerformed(evt);
@@ -180,6 +185,7 @@ public class ventanaProducto extends javax.swing.JFrame
         });
 
         btnVolverProd.setText("Volver");
+        btnVolverProd.setNextFocusableComponent(btnMenuPrincipalProd);
         btnVolverProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverProdActionPerformed(evt);
@@ -217,6 +223,7 @@ public class ventanaProducto extends javax.swing.JFrame
         jLabel4.setText("Filtrar por:");
 
         cbFiltroCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
+        cbFiltroCampo.setNextFocusableComponent(cbSituacion);
         cbFiltroCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFiltroCampoActionPerformed(evt);
@@ -225,6 +232,7 @@ public class ventanaProducto extends javax.swing.JFrame
 
         jLabel2.setText("Proveedor:");
 
+        cbFiltroProv.setNextFocusableComponent(cbCampoOrden);
         cbFiltroProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFiltroProvActionPerformed(evt);
@@ -234,6 +242,7 @@ public class ventanaProducto extends javax.swing.JFrame
         jLabel3.setText("Ordenar por:");
 
         cbCampoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripción", "Código", "Precio costo", "Precio venta", "Stock", "Stock mínimo", "Peso del envase" }));
+        cbCampoOrden.setNextFocusableComponent(cbTipoOrden);
         cbCampoOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCampoOrdenActionPerformed(evt);
@@ -241,6 +250,7 @@ public class ventanaProducto extends javax.swing.JFrame
         });
 
         cbTipoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        cbTipoOrden.setNextFocusableComponent(btnNuevoProd);
         cbTipoOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoOrdenActionPerformed(evt);
@@ -248,6 +258,7 @@ public class ventanaProducto extends javax.swing.JFrame
         });
 
         cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo habilitados", "Sólo ofertas", "Sólo suspendidos" }));
+        cbSituacion.setNextFocusableComponent(cbFiltroProv);
         cbSituacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSituacionActionPerformed(evt);

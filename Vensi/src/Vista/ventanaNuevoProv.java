@@ -56,17 +56,30 @@ public class ventanaNuevoProv extends javax.swing.JFrame
 
         jLabel4.setText("Contacto:");
 
+        txfdRazonSocial.setNextFocusableComponent(txfdCuit);
+
+        txfdCuit.setNextFocusableComponent(txfdDireccion);
         txfdCuit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdCuitKeyTyped(evt);
             }
         });
 
+        txfdDireccion.setNextFocusableComponent(txfdLocalidad);
+
+        txfdContacto.setNextFocusableComponent(btnAceptar);
+
         jLabel5.setText("Localidad:");
 
         jLabel6.setText("Provincia:");
 
         jLabel7.setText("País:");
+
+        txfdLocalidad.setNextFocusableComponent(txfdProvincia);
+
+        txfdProvincia.setNextFocusableComponent(txfdPais);
+
+        txfdPais.setNextFocusableComponent(txfdContacto);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -148,6 +161,7 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         );
 
         btnAceptar.setText("Aceptar");
+        btnAceptar.setNextFocusableComponent(btnCancelar);
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
@@ -155,6 +169,7 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         });
 
         btnCancelar.setText("Cancelar");
+        btnCancelar.setNextFocusableComponent(txfdRazonSocial);
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);

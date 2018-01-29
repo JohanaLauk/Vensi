@@ -104,6 +104,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         bgTipoVenta.add(rbUnidad);
         rbUnidad.setText("Unidad");
+        rbUnidad.setNextFocusableComponent(rbPeso);
         rbUnidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbUnidadActionPerformed(evt);
@@ -112,6 +113,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         bgTipoVenta.add(rbPeso);
         rbPeso.setText("Peso");
+        rbPeso.setNextFocusableComponent(txfdEditarPesoEnvase);
         rbPeso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbPesoActionPerformed(evt);
@@ -120,6 +122,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         jLabel9.setText("Peso del envase:");
 
+        txfdEditarPesoEnvase.setNextFocusableComponent(cbEstado);
         txfdEditarPesoEnvase.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdEditarPesoEnvaseKeyTyped(evt);
@@ -129,6 +132,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel8.setText("Estado:");
 
         cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "Deshabilitado" }));
+        cbEstado.setNextFocusableComponent(cbSituacion);
         cbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbEstadoActionPerformed(evt);
@@ -138,6 +142,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel10.setText("Situación:");
 
         cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Oferta", "Suspendido" }));
+        cbSituacion.setNextFocusableComponent(btnAceptarEditar);
         cbSituacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSituacionActionPerformed(evt);
@@ -162,6 +167,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
             }
         });
 
+        txfdEditarStockMinimo.setNextFocusableComponent(rbUnidad);
         txfdEditarStockMinimo.setPrompt("Ingrese la cantidad en unidades");
         txfdEditarStockMinimo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -172,6 +178,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel11.setText("gramos.");
 
         btnAceptarEditar.setText("Aceptar");
+        btnAceptarEditar.setNextFocusableComponent(btnCancelarEditar);
         btnAceptarEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarEditarActionPerformed(evt);
@@ -179,6 +186,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         });
 
         btnCancelarEditar.setText("Cancelar");
+        btnCancelarEditar.setNextFocusableComponent(txfdEditarCodigo);
         btnCancelarEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarEditarActionPerformed(evt);

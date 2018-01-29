@@ -45,6 +45,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         jPanel1.setForeground(new java.awt.Color(0, 0, 51));
 
         btnNOiniciarTurno.setText("NO");
+        btnNOiniciarTurno.setNextFocusableComponent(btnSalir);
         btnNOiniciarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNOiniciarTurnoActionPerformed(evt);
@@ -59,12 +60,14 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         lbPin.setText("Ingrese el pin:");
 
         btnSIiniciarTurno.setText("SI");
+        btnSIiniciarTurno.setNextFocusableComponent(btnNOiniciarTurno);
         btnSIiniciarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSIiniciarTurnoActionPerformed(evt);
             }
         });
 
+        txfdPin.setNextFocusableComponent(btnSIiniciarTurno);
         txfdPin.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 txfdPinKeyPressed(evt);
@@ -128,6 +131,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
         btnSalir.setContentAreaFilled(false);
+        btnSalir.setNextFocusableComponent(txfdPin);
         btnSalir.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnSalir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {

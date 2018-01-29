@@ -119,6 +119,9 @@
                 <StringItem index="2" value="Deshabilitados"/>
               </StringArray>
             </Property>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="btnNuevoProv"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cbFiltroCampoProvActionPerformed"/>
@@ -130,6 +133,9 @@
         <Component class="javax.swing.JButton" name="btnBuscarProv">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="cbFiltroCampoProv"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnBuscarProvActionPerformed"/>
@@ -142,6 +148,9 @@
         </Component>
         <Component class="org.jdesktop.swingx.JXTextField" name="txfdBuscarProv">
           <Properties>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="btnBuscarProv"/>
+            </Property>
             <Property name="prompt" type="java.lang.String" value="Busque por c&#xf3;digo o por descripci&#xf3;n"/>
           </Properties>
           <Events>
@@ -188,6 +197,9 @@
         <Component class="javax.swing.JButton" name="btnNuevoProv">
           <Properties>
             <Property name="text" type="java.lang.String" value="Nuevo"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="btnEditarProv"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnNuevoProvActionPerformed"/>
@@ -196,6 +208,9 @@
         <Component class="javax.swing.JButton" name="btnEditarProv">
           <Properties>
             <Property name="text" type="java.lang.String" value="Editar"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="btnVolverProv"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnEditarProvActionPerformed"/>
@@ -204,6 +219,9 @@
         <Component class="javax.swing.JButton" name="btnMenuPrincipalProv">
           <Properties>
             <Property name="text" type="java.lang.String" value="Men&#xfa; principal"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txfdBuscarProv"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnMenuPrincipalProvActionPerformed"/>
@@ -212,6 +230,9 @@
         <Component class="javax.swing.JButton" name="btnVolverProv">
           <Properties>
             <Property name="text" type="java.lang.String" value="Volver"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="btnMenuPrincipalProv"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVolverProvActionPerformed"/>

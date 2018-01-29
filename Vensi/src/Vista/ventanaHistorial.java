@@ -92,6 +92,7 @@ public class ventanaHistorial extends javax.swing.JFrame
 
         bgTipo.add(rbTurno);
         rbTurno.setText("Turno");
+        rbTurno.setNextFocusableComponent(rbPedido);
         rbTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbTurnoActionPerformed(evt);
@@ -100,6 +101,7 @@ public class ventanaHistorial extends javax.swing.JFrame
 
         bgTipo.add(rbPedido);
         rbPedido.setText("Pedido");
+        rbPedido.setNextFocusableComponent(cbBuscarPor);
         rbPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbPedidoActionPerformed(evt);
@@ -135,6 +137,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                 .addContainerGap())
         );
 
+        cbBuscarPor.setNextFocusableComponent(txfdNro);
         cbBuscarPor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbBuscarPorActionPerformed(evt);
@@ -145,6 +148,7 @@ public class ventanaHistorial extends javax.swing.JFrame
 
         labNro.setText("Ingrese el n°:");
 
+        txfdNro.setNextFocusableComponent(dateDesde);
         txfdNro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdNroKeyTyped(evt);
@@ -155,7 +159,12 @@ public class ventanaHistorial extends javax.swing.JFrame
 
         LabFechaHasta.setText("hasta");
 
+        dateDesde.setNextFocusableComponent(dateHasta);
+
+        dateHasta.setNextFocusableComponent(btnVaciarFechaHasta);
+
         btnVaciarFechaHasta.setText("X");
+        btnVaciarFechaHasta.setNextFocusableComponent(btnBuscar);
         btnVaciarFechaHasta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVaciarFechaHastaActionPerformed(evt);
@@ -235,6 +244,7 @@ public class ventanaHistorial extends javax.swing.JFrame
         jLabel6.setText("Resultados");
 
         btnMenuPrincipalHistorial.setText("Menú principal");
+        btnMenuPrincipalHistorial.setNextFocusableComponent(rbTurno);
         btnMenuPrincipalHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuPrincipalHistorialActionPerformed(evt);
@@ -242,6 +252,7 @@ public class ventanaHistorial extends javax.swing.JFrame
         });
 
         btnVisualizarHistorial.setText("Visualizar");
+        btnVisualizarHistorial.setNextFocusableComponent(btnMenuPrincipalHistorial);
         btnVisualizarHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVisualizarHistorialActionPerformed(evt);
@@ -277,6 +288,7 @@ public class ventanaHistorial extends javax.swing.JFrame
         );
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setNextFocusableComponent(btnVisualizarHistorial);
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);

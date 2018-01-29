@@ -80,6 +80,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnHistorial.setBorder(null);
         btnHistorial.setBorderPainted(false);
         btnHistorial.setContentAreaFilled(false);
+        btnHistorial.setNextFocusableComponent(btnPedidos);
         btnHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnHistorialActionPerformed(evt);
@@ -93,6 +94,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnPedidos.setBorder(null);
         btnPedidos.setBorderPainted(false);
         btnPedidos.setContentAreaFilled(false);
+        btnPedidos.setNextFocusableComponent(btnCompras);
         btnPedidos.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnPedidosActionPerformed(evt);
@@ -106,6 +108,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnAdministracion.setBorder(null);
         btnAdministracion.setBorderPainted(false);
         btnAdministracion.setContentAreaFilled(false);
+        btnAdministracion.setNextFocusableComponent(btnHistorial);
         btnAdministracion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAdministracionActionPerformed(evt);
@@ -119,6 +122,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnVentas.setBorder(null);
         btnVentas.setBorderPainted(false);
         btnVentas.setContentAreaFilled(false);
+        btnVentas.setNextFocusableComponent(btnAdministracion);
         btnVentas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVentasActionPerformed(evt);
@@ -131,6 +135,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
         btnSalir.setContentAreaFilled(false);
+        btnSalir.setNextFocusableComponent(btnVentas);
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -139,6 +144,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         panelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, 30));
 
         btnCompras.setText("Compras");
+        btnCompras.setNextFocusableComponent(btnSalir);
         btnCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnComprasActionPerformed(evt);

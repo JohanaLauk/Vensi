@@ -100,6 +100,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         jLabel14.setText("Diferencia");
 
         btnAceptarCerrarTurno.setText("Aceptar");
+        btnAceptarCerrarTurno.setNextFocusableComponent(btnCancelarCerrarTurno);
         btnAceptarCerrarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarCerrarTurnoActionPerformed(evt);
@@ -107,6 +108,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         });
 
         btnCancelarCerrarTurno.setText("Cancelar");
+        btnCancelarCerrarTurno.setNextFocusableComponent(txfdMontoEsperado);
         btnCancelarCerrarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarCerrarTurnoActionPerformed(evt);
@@ -114,10 +116,13 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         });
 
         txfdDiferencia.setEditable(false);
+        txfdDiferencia.setNextFocusableComponent(txfd500);
 
         txfdMontoEsperado.setEditable(false);
+        txfdMontoEsperado.setNextFocusableComponent(txfdHay);
 
         txfdHay.setEditable(false);
+        txfdHay.setNextFocusableComponent(txfdDiferencia);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -189,6 +194,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
         jButton11.setText("00,25 x");
 
+        txfd500.setNextFocusableComponent(txfd500total);
         txfd500.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd500KeyReleased(evt);
@@ -200,6 +206,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
         jButton4.setText("50 x");
 
+        txfd200.setNextFocusableComponent(txfd200total);
         txfd200.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd200KeyReleased(evt);
@@ -209,6 +216,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
+        txfd100.setNextFocusableComponent(txfd100total);
         txfd100.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd100KeyReleased(evt);
@@ -218,6 +226,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
+        txfd50.setNextFocusableComponent(txfd50total);
         txfd50.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd50KeyReleased(evt);
@@ -227,6 +236,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
+        txfd20.setNextFocusableComponent(txfd20total);
         txfd20.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd20KeyReleased(evt);
@@ -236,6 +246,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
+        txfd10.setNextFocusableComponent(txfd10total);
         txfd10.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd10KeyReleased(evt);
@@ -245,6 +256,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
+        txfd5.setNextFocusableComponent(txfd5total);
         txfd5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd5KeyReleased(evt);
@@ -263,6 +275,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
+        txfd1.setNextFocusableComponent(txfd1total);
         txfd1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd1KeyReleased(evt);
@@ -272,6 +285,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
+        txfd0050.setNextFocusableComponent(txfd0050total);
         txfd0050.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd0050KeyReleased(evt);
@@ -281,6 +295,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
+        txfd0025.setNextFocusableComponent(txfd0025total);
         txfd0025.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd0025KeyReleased(evt);
@@ -291,26 +306,37 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         });
 
         txfd500total.setEditable(false);
+        txfd500total.setNextFocusableComponent(txfd200);
 
         txfd200total.setEditable(false);
+        txfd200total.setNextFocusableComponent(txfd100);
 
         txfd100total.setEditable(false);
+        txfd100total.setNextFocusableComponent(txfd50);
 
         txfd50total.setEditable(false);
+        txfd50total.setNextFocusableComponent(txfd20);
 
         txfd20total.setEditable(false);
+        txfd20total.setNextFocusableComponent(txfd10);
 
         txfd10total.setEditable(false);
+        txfd10total.setNextFocusableComponent(txfd5);
 
         txfd5total.setEditable(false);
+        txfd5total.setNextFocusableComponent(txfd2);
 
         txfd2total.setEditable(false);
+        txfd2total.setNextFocusableComponent(txfd1);
 
         txfd1total.setEditable(false);
+        txfd1total.setNextFocusableComponent(txfd0050);
 
         txfd0050total.setEditable(false);
+        txfd0050total.setNextFocusableComponent(txfd0025);
 
         txfd0025total.setEditable(false);
+        txfd0025total.setNextFocusableComponent(btnAceptarCerrarTurno);
 
         jLabel1.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel1.setText("  =");

@@ -127,6 +127,7 @@ public class ventanaPedido extends javax.swing.JFrame
         jLabel1.setText("Buscar:");
 
         btnBuscarProd.setText("Buscar");
+        btnBuscarProd.setNextFocusableComponent(cbFiltro);
         btnBuscarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarProdActionPerformed(evt);
@@ -136,6 +137,7 @@ public class ventanaPedido extends javax.swing.JFrame
         jLabel2.setText("Ordenar por:");
 
         cbOrdenCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripción", "Código", "Precio costo", "Stock", "Stock mínimo" }));
+        cbOrdenCampo.setNextFocusableComponent(cbTipoOrden);
         cbOrdenCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbOrdenCampoActionPerformed(evt);
@@ -143,6 +145,7 @@ public class ventanaPedido extends javax.swing.JFrame
         });
 
         cbTipoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        cbTipoOrden.setNextFocusableComponent(txfdCantidad);
         cbTipoOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoOrdenActionPerformed(evt);
@@ -171,6 +174,7 @@ public class ventanaPedido extends javax.swing.JFrame
         jScrollPane1.setViewportView(tablaProd);
 
         cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
+        cbFiltro.setNextFocusableComponent(cbSituacion);
         cbFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFiltroActionPerformed(evt);
@@ -179,6 +183,7 @@ public class ventanaPedido extends javax.swing.JFrame
 
         jLabel4.setText("Filtrar por:");
 
+        txfdBuscarProd.setNextFocusableComponent(btnBuscarProd);
         txfdBuscarProd.setPrompt("Busque por código o por descripción");
         txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -188,6 +193,7 @@ public class ventanaPedido extends javax.swing.JFrame
 
         jLabel7.setText("Indique el proveedor:");
 
+        cbProveedores.setNextFocusableComponent(txfdBuscarProd);
         cbProveedores.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbProveedoresActionPerformed(evt);
@@ -214,6 +220,7 @@ public class ventanaPedido extends javax.swing.JFrame
         );
 
         cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo ofertas", "Sólo suspendidos" }));
+        cbSituacion.setNextFocusableComponent(cbOrdenCampo);
         cbSituacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSituacionActionPerformed(evt);
@@ -230,7 +237,7 @@ public class ventanaPedido extends javax.swing.JFrame
                     .addComponent(panelProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 551, Short.MAX_VALUE)
+                            .addComponent(jScrollPane1)
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -279,6 +286,7 @@ public class ventanaPedido extends javax.swing.JFrame
         jLabel5.setText("Cantidad:");
 
         btnAgregar.setText("Agregar");
+        btnAgregar.setNextFocusableComponent(btnQuitar);
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -295,12 +303,14 @@ public class ventanaPedido extends javax.swing.JFrame
         jLabel6.setText("Datos del producto:");
 
         btnQuitar.setText("Quitar");
+        btnQuitar.setNextFocusableComponent(btnImprimirPedido);
         btnQuitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuitarActionPerformed(evt);
             }
         });
 
+        txfdCantidad.setNextFocusableComponent(btnAgregar);
         txfdCantidad.setPrompt("Unidades");
         txfdCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -350,6 +360,7 @@ public class ventanaPedido extends javax.swing.JFrame
         jLabel3.setText("Lista pedido:");
 
         btnImprimirPedido.setText("Imprimir pedido");
+        btnImprimirPedido.setNextFocusableComponent(btnVolverMP);
         btnImprimirPedido.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnImprimirPedidoActionPerformed(evt);
@@ -357,6 +368,7 @@ public class ventanaPedido extends javax.swing.JFrame
         });
 
         btnVolverMP.setText("Volver al menú principal");
+        btnVolverMP.setNextFocusableComponent(cbProveedores);
         btnVolverMP.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverMPActionPerformed(evt);

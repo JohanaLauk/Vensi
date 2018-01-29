@@ -99,8 +99,13 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
         jLabel4.setText("Stock mínimo:");
 
+        txfdCodigo.setNextFocusableComponent(txfdDescripcion);
+
+        txfdDescripcion.setNextFocusableComponent(txfdPrecioCosto);
+
         jLabel6.setText("Peso del envase:");
 
+        txfdPesoEnvase.setNextFocusableComponent(cbSituación);
         txfdPesoEnvase.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdPesoEnvaseKeyTyped(evt);
@@ -113,6 +118,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
         bgTipoVenta.add(rbUnidad);
         rbUnidad.setText("Unidad");
+        rbUnidad.setNextFocusableComponent(rbPeso);
         rbUnidad.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbUnidadActionPerformed(evt);
@@ -121,6 +127,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
         bgTipoVenta.add(rbPeso);
         rbPeso.setText("Peso");
+        rbPeso.setNextFocusableComponent(txfdPesoEnvase);
         rbPeso.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbPesoActionPerformed(evt);
@@ -130,6 +137,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel8.setText("Seleccione el/los proveedor/es:");
 
         btnAceptarNuevoProd.setText("Aceptar");
+        btnAceptarNuevoProd.setNextFocusableComponent(btnCancelarNuevoProd);
         btnAceptarNuevoProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarNuevoProdActionPerformed(evt);
@@ -137,6 +145,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         });
 
         btnCancelarNuevoProd.setText("Cancelar");
+        btnCancelarNuevoProd.setNextFocusableComponent(txfdCodigo);
         btnCancelarNuevoProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarNuevoProdActionPerformed(evt);
@@ -165,12 +174,14 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel10.setText("Situación:");
 
         cbSituación.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Oferta", "Suspendido" }));
+        cbSituación.setNextFocusableComponent(btnAceptarNuevoProd);
         cbSituación.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSituaciónActionPerformed(evt);
             }
         });
 
+        txfdPrecioVenta.setNextFocusableComponent(txfdStockInicial);
         txfdPrecioVenta.setPrompt("Ej: \"00\" o \"00.00\"");
         txfdPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -178,6 +189,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             }
         });
 
+        txfdStockInicial.setNextFocusableComponent(txfdStockMinimo);
         txfdStockInicial.setPrompt("Ingrese la cantidad en unidades");
         txfdStockInicial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -185,6 +197,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             }
         });
 
+        txfdStockMinimo.setNextFocusableComponent(rbUnidad);
         txfdStockMinimo.setPrompt("Ingrese la cantidad en unidades");
         txfdStockMinimo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -192,6 +205,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             }
         });
 
+        txfdPrecioCosto.setNextFocusableComponent(txfdPrecioVenta);
         txfdPrecioCosto.setPrompt("Ej: \"00\" o \"00.00\"");
         txfdPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {

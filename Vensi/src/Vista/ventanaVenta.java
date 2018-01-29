@@ -127,6 +127,7 @@ public class ventanaVenta extends javax.swing.JFrame
         });
 
         btnIniciarTurno.setText("Iniciar turno");
+        btnIniciarTurno.setNextFocusableComponent(txfdBuscarProd);
         btnIniciarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarTurnoActionPerformed(evt);
@@ -134,6 +135,7 @@ public class ventanaVenta extends javax.swing.JFrame
         });
 
         btnDetalleCaja.setText("Detalle de caja");
+        btnDetalleCaja.setNextFocusableComponent(btnCerrarTurno);
         btnDetalleCaja.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnDetalleCajaActionPerformed(evt);
@@ -141,6 +143,7 @@ public class ventanaVenta extends javax.swing.JFrame
         });
 
         btnCerrarTurno.setText("Cerrar turno");
+        btnCerrarTurno.setNextFocusableComponent(btnMenuPrincipal);
         btnCerrarTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCerrarTurnoActionPerformed(evt);
@@ -148,6 +151,7 @@ public class ventanaVenta extends javax.swing.JFrame
         });
 
         btnMenuPrincipal.setText("Menú principal");
+        btnMenuPrincipal.setNextFocusableComponent(btnIniciarTurno);
         btnMenuPrincipal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuPrincipalActionPerformed(evt);
@@ -182,6 +186,7 @@ public class ventanaVenta extends javax.swing.JFrame
         jLabel3.setText("Ordenar por:");
 
         cbOrdenCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripción", "Código", "Precio", "Stock" }));
+        cbOrdenCampo.setNextFocusableComponent(cbTipoOrden);
         cbOrdenCampo.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbOrdenCampoActionPerformed(evt);
@@ -189,6 +194,7 @@ public class ventanaVenta extends javax.swing.JFrame
         });
 
         cbTipoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        cbTipoOrden.setNextFocusableComponent(txfdCantidad);
         cbTipoOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoOrdenActionPerformed(evt);
@@ -196,6 +202,7 @@ public class ventanaVenta extends javax.swing.JFrame
         });
 
         txfdBuscarProd.setToolTipText("");
+        txfdBuscarProd.setNextFocusableComponent(btnBuscar);
         txfdBuscarProd.setPrompt("Busque por código o por descripción");
         txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -204,6 +211,7 @@ public class ventanaVenta extends javax.swing.JFrame
         });
 
         btnBuscar.setText("Buscar");
+        btnBuscar.setNextFocusableComponent(cbFiltro);
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarActionPerformed(evt);
@@ -213,6 +221,7 @@ public class ventanaVenta extends javax.swing.JFrame
         jLabel4.setText("Filtrar por:");
 
         cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo habilitados", "Sólo ofertas" }));
+        cbFiltro.setNextFocusableComponent(cbOrdenCampo);
         cbFiltro.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFiltroActionPerformed(evt);
@@ -307,6 +316,7 @@ public class ventanaVenta extends javax.swing.JFrame
         labMontoTotalCompra.setText("$0");
 
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.setNextFocusableComponent(btnDetalleCaja);
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarActionPerformed(evt);
@@ -387,6 +397,7 @@ public class ventanaVenta extends javax.swing.JFrame
         jLabel5.setText("Cantidad:");
 
         btnAgregar.setText("Agregar");
+        btnAgregar.setNextFocusableComponent(btnQuitar);
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -394,12 +405,14 @@ public class ventanaVenta extends javax.swing.JFrame
         });
 
         btnQuitar.setText("Quitar");
+        btnQuitar.setNextFocusableComponent(btnConfirmar);
         btnQuitar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnQuitarActionPerformed(evt);
             }
         });
 
+        txfdCantidad.setNextFocusableComponent(btnAgregar);
         txfdCantidad.setPrompt("unidad / gramos");
         txfdCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {

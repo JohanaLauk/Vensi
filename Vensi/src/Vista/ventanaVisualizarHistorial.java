@@ -177,6 +177,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         );
 
         btnVolverVerHistorial.setText("Volver");
+        btnVolverVerHistorial.setNextFocusableComponent(btnImprimir);
         btnVolverVerHistorial.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverVerHistorialActionPerformed(evt);
@@ -184,6 +185,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         });
 
         btnImprimir.setText("Imprimir");
+        btnImprimir.setNextFocusableComponent(btnVolverVerHistorial);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);

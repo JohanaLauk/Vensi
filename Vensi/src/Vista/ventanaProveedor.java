@@ -78,6 +78,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         jLabel1.setText("Buscar:");
 
         cbFiltroCampoProv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
+        cbFiltroCampoProv.setNextFocusableComponent(btnNuevoProv);
         cbFiltroCampoProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFiltroCampoProvActionPerformed(evt);
@@ -85,6 +86,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         });
 
         btnBuscarProv.setText("Buscar");
+        btnBuscarProv.setNextFocusableComponent(cbFiltroCampoProv);
         btnBuscarProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnBuscarProvActionPerformed(evt);
@@ -93,6 +95,7 @@ public class ventanaProveedor extends javax.swing.JFrame
 
         jLabel4.setText("Filtrar por:");
 
+        txfdBuscarProv.setNextFocusableComponent(btnBuscarProv);
         txfdBuscarProv.setPrompt("Busque por código o por descripción");
         txfdBuscarProv.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -140,6 +143,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         );
 
         btnNuevoProv.setText("Nuevo");
+        btnNuevoProv.setNextFocusableComponent(btnEditarProv);
         btnNuevoProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoProvActionPerformed(evt);
@@ -147,6 +151,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         });
 
         btnEditarProv.setText("Editar");
+        btnEditarProv.setNextFocusableComponent(btnVolverProv);
         btnEditarProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarProvActionPerformed(evt);
@@ -154,6 +159,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         });
 
         btnMenuPrincipalProv.setText("Menú principal");
+        btnMenuPrincipalProv.setNextFocusableComponent(txfdBuscarProv);
         btnMenuPrincipalProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnMenuPrincipalProvActionPerformed(evt);
@@ -161,6 +167,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         });
 
         btnVolverProv.setText("Volver");
+        btnVolverProv.setNextFocusableComponent(btnMenuPrincipalProv);
         btnVolverProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverProvActionPerformed(evt);

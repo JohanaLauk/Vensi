@@ -265,6 +265,9 @@
     <Component class="javax.swing.JButton" name="btnVolverVerHistorial">
       <Properties>
         <Property name="text" type="java.lang.String" value="Volver"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="btnImprimir"/>
+        </Property>
       </Properties>
       <Events>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnVolverVerHistorialActionPerformed"/>
@@ -273,6 +276,9 @@
     <Component class="javax.swing.JButton" name="btnImprimir">
       <Properties>
         <Property name="text" type="java.lang.String" value="Imprimir"/>
+        <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+          <ComponentRef name="btnVolverVerHistorial"/>
+        </Property>
       </Properties>
     </Component>
   </SubComponents>

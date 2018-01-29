@@ -71,20 +71,34 @@ public class ventanaEditarProv extends javax.swing.JFrame
         jLabel5.setText("Estado:");
 
         cbEditarEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "Deshabilitado" }));
+        cbEditarEstado.setNextFocusableComponent(btnAceptarEditar);
 
+        txfdEditarRazonSocial.setNextFocusableComponent(txfdEditarCuit);
+
+        txfdEditarCuit.setNextFocusableComponent(txfdEditarDireccion);
         txfdEditarCuit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdEditarCuitKeyTyped(evt);
             }
         });
 
+        txfdEditarDireccion.setNextFocusableComponent(txfdLocalidad);
+
         labIdSelec.setText("ID_Prov");
 
         jLabel6.setText("Localidad:");
 
+        txfdLocalidad.setNextFocusableComponent(txfdProvincia);
+
         jLabel7.setText("Provincia:");
 
+        txfdProvincia.setNextFocusableComponent(txfdPais);
+
         jLabel8.setText("País:");
+
+        txfdPais.setNextFocusableComponent(txfdEditarContacto);
+
+        txfdEditarContacto.setNextFocusableComponent(cbEditarEstado);
 
         jLabel4.setText("Contacto:");
 
@@ -171,6 +185,7 @@ public class ventanaEditarProv extends javax.swing.JFrame
         );
 
         btnAceptarEditar.setText("Aceptar");
+        btnAceptarEditar.setNextFocusableComponent(btnCancelarEditar);
         btnAceptarEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarEditarActionPerformed(evt);
@@ -178,6 +193,7 @@ public class ventanaEditarProv extends javax.swing.JFrame
         });
 
         btnCancelarEditar.setText("Cancelar");
+        btnCancelarEditar.setNextFocusableComponent(txfdEditarRazonSocial);
         btnCancelarEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarEditarActionPerformed(evt);
