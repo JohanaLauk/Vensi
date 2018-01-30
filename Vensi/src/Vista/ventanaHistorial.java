@@ -16,6 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+
 public class ventanaHistorial extends javax.swing.JFrame 
 {
     DefaultTableModel modelo;

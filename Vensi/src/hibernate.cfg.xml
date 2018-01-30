@@ -55,5 +55,6 @@ Contributor(s):
     <mapping resource="Modelo/Usuario.hbm.xml"/>
     <mapping resource="Modelo/EntradaSalida.hbm.xml"/>
     <mapping resource="Modelo/ItemImprimir.hbm.xml"/>
+    
   </session-factory>
 </hibernate-configuration>

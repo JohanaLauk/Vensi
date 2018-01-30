@@ -50,4 +50,5 @@ Contributor(s):
   <table-filter match-name="item_venta"/>
   <table-filter match-name="turno"/>
   <table-filter match-name="pedido"/>
+  
 </hibernate-reverse-engineering>

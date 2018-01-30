@@ -18,6 +18,7 @@ import javax.swing.DefaultListModel;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
+
 public class ventanaVisualizarHistorial extends javax.swing.JFrame 
 {       
     TurnoDAO tDAO = new TurnoDAO();

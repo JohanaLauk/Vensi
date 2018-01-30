@@ -11,6 +11,7 @@ public class PedidoDAO
     Session session;
     Transaction tx;
     
+    
     public void alta(Pedido p)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
