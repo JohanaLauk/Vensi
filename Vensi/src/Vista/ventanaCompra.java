@@ -603,6 +603,7 @@ public class ventanaCompra extends javax.swing.JFrame
         txfdPrecioVU.setEnabled(false);
         btnAgregar.setEnabled(false);
         btnQuitar.setEnabled(false);
+        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed

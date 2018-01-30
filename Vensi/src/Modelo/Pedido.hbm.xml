@@ -25,5 +25,6 @@
             <list-index column="orden" />
             <one-to-many class="Modelo.ItemPedido" />
         </list> -->
+        
     </class>
 </hibernate-mapping>

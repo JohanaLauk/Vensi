@@ -27,5 +27,6 @@
         
         <!--<one-to-one name="producto" class="Modelo.Producto" cascade="none"> 
         </one-to-one> --> 
+        
     </class>
 </hibernate-mapping>
