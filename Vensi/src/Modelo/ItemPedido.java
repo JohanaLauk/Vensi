@@ -56,4 +56,5 @@ public class ItemPedido  implements java.io.Serializable
         this.precioCostoItem = precioCostoItem;
     }
     
+    
 }
