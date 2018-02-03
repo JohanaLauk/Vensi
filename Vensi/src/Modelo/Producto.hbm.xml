@@ -1,12 +1,12 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 07/09/2017 19:19:59 by Hibernate Tools 4.3.1 -->
+<!-- Generated 02/02/2018 22:50:04 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Modelo.Producto" table="producto" schema="public" optimistic-lock="version">
-        <id name="id" type="int">
+        <id name="idProducto" type="int">
             <column name="id_producto" />
-            <generator class="identity" />
+            <generator class="assigned" />
         </id>
         <property name="codigo" type="string">
             <column name="codigo" length="50" not-null="true" unique="true" />
@@ -14,45 +14,67 @@
         <property name="descripcion" type="string">
             <column name="descripcion" length="150" not-null="true" />
         </property>
-        <property name="precioCosto" type="double">
-            <column name="precio_costo" precision="8" not-null="false" />
+        <property name="precioCosto" type="big_decimal">
+            <column name="precio_costo" precision="8" />
         </property>
-        <property name="precioVenta" type="double">
-            <column name="precio_venta" precision="8" not-null="false" />
+        <property name="precioVenta" type="big_decimal">
+            <column name="precio_venta" precision="8" />
         </property>
-        <property name="precioVentaXKilo" type="double">
-            <column name="precio_venta_x_kilo" precision="8" not-null="false" />
+        <property name="precioVentaXKilo" type="big_decimal">
+            <column name="precio_venta_x_kilo" precision="8" />
         </property>
         <property name="stock" type="int">
             <column name="stock" not-null="true" />
         </property>
-        <property name="stockMinimo" type="int">
-            <column name="stock_minimo" not-null="false" />
+        <property name="stockMinimo" type="java.lang.Integer">
+            <column name="stock_minimo" />
         </property>
-        <property name="pesoEnvase" type="int">
-            <column name="peso_envase" not-null="false" />
+        <property name="pesoEnvase" type="java.lang.Integer">
+            <column name="peso_envase" />
         </property>
-        <property name="estado"  type="boolean" >
-            <column name="estado" not-null="true" />
+        <property name="estado" type="java.lang.Boolean">
+            <column name="estado" />
         </property>
-        <property name="suspendido"  type="boolean" >
-            <column name="suspendido" not-null="false" />
+        <property name="suspendido" type="java.lang.Boolean">
+            <column name="suspendido" />
         </property>
-        <property name="oferta"  type="boolean" >
-            <column name="oferta" not-null="false" />
+        <property name="oferta" type="java.lang.Boolean">
+            <column name="oferta" />
         </property>
-        <property name="porPeso"  type="boolean" >
-            <column name="por_peso" not-null="false" />
+        <property name="porPeso" type="java.lang.Boolean">
+            <column name="por_peso" />
         </property>
-        <!--<list name="proveedor" table="producto_proveedor" inverse="false" lazy="true" fetch="select">
-            <key column="id" not-null="false"/>  
-            <index column="orden" />
-            <many-to-many column="id" class="Modelo.Proveedor" />
-         </list> -->
-        <set name="proveedor" table="producto_proveedor" lazy="false" >
-            <key column="id_producto"/>
-            <many-to-many column="id_proveedor" class="Modelo.Proveedor" />
+        <set name="proveedors" table="producto_proveedor" inverse="false" lazy="true" fetch="select">
+            <key>
+                <column name="id_producto" not-null="true" />
+            </key>
+            <many-to-many entity-name="Modelo.Proveedor">
+                <column name="id_proveedor" not-null="true" />
+            </many-to-many>
         </set>
-         
+        <set name="itemVentas" table="item_venta" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_producto" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.ItemVenta" />
+        </set>
+        <set name="itemPedidos" table="item_pedido" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_producto" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.ItemPedido" />
+        </set>
+        <set name="itemEntradastocks" table="item_entradastock" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_producto" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.ItemEntradastock" />
+        </set>
+        <set name="itemImprimirs" table="item_imprimir" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="id_producto" not-null="true" />
+            </key>
+            <one-to-many class="Modelo.ItemImprimir" />
+        </set>
     </class>
 </hibernate-mapping>

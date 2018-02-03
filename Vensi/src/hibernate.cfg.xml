@@ -46,15 +46,16 @@ Contributor(s):
     <property name="hibernate.connection.url">jdbc:postgresql://localhost:5432/Vensi</property>
     <property name="hibernate.connection.username">postgres</property>
     <property name="hibernate.connection.password">123456</property>
+    <mapping resource="Modelo/EntradaSalida.hbm.xml"/>
     <mapping resource="Modelo/ItemPedido.hbm.xml"/>
+    <mapping resource="Modelo/ItemImprimir.hbm.xml"/>
     <mapping resource="Modelo/Proveedor.hbm.xml"/>
     <mapping resource="Modelo/ItemVenta.hbm.xml"/>
-    <mapping resource="Modelo/Pedido.hbm.xml"/>
     <mapping resource="Modelo/Turno.hbm.xml"/>
+    <mapping resource="Modelo/Pedido.hbm.xml"/>
     <mapping resource="Modelo/Producto.hbm.xml"/>
+    <mapping resource="Modelo/ItemEntradastock.hbm.xml"/>
+    <mapping resource="Modelo/Entradastock.hbm.xml"/>
     <mapping resource="Modelo/Usuario.hbm.xml"/>
-    <mapping resource="Modelo/EntradaSalida.hbm.xml"/>
-    <mapping resource="Modelo/ItemImprimir.hbm.xml"/>
-    
   </session-factory>
 </hibernate-configuration>

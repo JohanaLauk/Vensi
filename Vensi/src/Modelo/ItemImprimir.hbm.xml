@@ -1,18 +1,18 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" 
-"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
-
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 02/02/2018 22:50:04 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
-  <class name="Modelo.ItemImprimir" table="item_imprimir" schema="public" optimistic-lock="version">
+    <class name="Modelo.ItemImprimir" table="item_imprimir" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="identity" />
+            <generator class="assigned" />
         </id>
-        
-        <many-to-one name = "producto" column = "id_producto" 
-         class="Modelo.Producto" not-null="true" lazy="false" />      
+        <many-to-one name="producto" class="Modelo.Producto" fetch="select">
+            <column name="id_producto" not-null="true" />
+        </many-to-one>
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />
-        </property>  
+        </property>
     </class>
 </hibernate-mapping>

@@ -1,31 +1,33 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 07/09/2017 19:19:59 by Hibernate Tools 4.3.1 -->
+<!-- Generated 02/02/2018 22:50:04 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Modelo.EntradaSalida" table="entrada_salida" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="identity" />
+            <generator class="assigned" />
         </id>
+        <many-to-one name="turno" class="Modelo.Turno" fetch="select">
+            <column name="id_turno" not-null="true" />
+        </many-to-one>
         <property name="nombre" type="string">
-            <column name="nombre" length="150" not-null="true" />
+            <column name="nombre" not-null="true" />
         </property>
         <property name="descripcion" type="string">
-            <column name="descripcion" length="150" not-null="false" />
+            <column name="descripcion" />
         </property>
         <property name="cantProd" type="int">
             <column name="cant_prod" not-null="true" />
         </property>
-        <property name="monto" type="double">
-            <column name="monto" precision="8" scale="3" not-null="true" />
+        <property name="monto" type="big_decimal">
+            <column name="monto" precision="8" not-null="true" />
         </property>
-        <property name="tipo"  type="boolean" >
+        <property name="tipo" type="boolean">
             <column name="tipo" not-null="true" />
         </property>
         <property name="hora" type="time">
-            <column name="hora" length="13" not-null="true" />
+            <column name="hora" length="15" not-null="true" />
         </property>
-        <many-to-one name="turno" class="Modelo.Turno" column="id_turno" not-null="true" lazy="false" />
     </class>
 </hibernate-mapping>

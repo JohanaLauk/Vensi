@@ -1,28 +1,27 @@
 <?xml version="1.0"?>
 <!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
 "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
-<!-- Generated 07/09/2017 19:19:59 by Hibernate Tools 4.3.1 -->
+<!-- Generated 02/02/2018 22:50:04 by Hibernate Tools 4.3.1 -->
 <hibernate-mapping>
     <class name="Modelo.ItemVenta" table="item_venta" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="identity" />
+            <generator class="assigned" />
         </id>
-        
-        <many-to-one name = "producto" column = "id_producto" 
-         class="Modelo.Producto" not-null="true" lazy="false"/>
-        
+        <many-to-one name="producto" class="Modelo.Producto" fetch="select">
+            <column name="id_producto" not-null="true" />
+        </many-to-one>
+        <many-to-one name="turno" class="Modelo.Turno" fetch="select">
+            <column name="id_turno" not-null="true" />
+        </many-to-one>
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />
         </property>
-        <property name="monto" type="double">
+        <property name="monto" type="big_decimal">
             <column name="monto" precision="8" not-null="true" />
         </property>
-        <property name="hora"  type="time">
-            <column name="hora" />
+        <property name="hora" type="time">
+            <column name="hora" length="15" not-null="true" />
         </property>
-        
-        <many-to-one name = "turno" column = "id_turno" 
-         class="Modelo.Turno" not-null="true" lazy="false"/>             
     </class>
 </hibernate-mapping>
