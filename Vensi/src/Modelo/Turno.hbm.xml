@@ -45,5 +45,6 @@
             </key>
             <one-to-many class="Modelo.ItemVenta" />
         </set> -->
+        
     </class>
 </hibernate-mapping>

@@ -29,5 +29,6 @@
         <property name="precioCostoItem" type="double">
             <column name="precio_costo_item" precision="8" />
         </property>
+        
     </class>
 </hibernate-mapping>

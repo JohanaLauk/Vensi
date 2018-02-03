@@ -22,5 +22,6 @@
             </key>
             <one-to-many class="Modelo.Turno" />
         </set> -->
+        
     </class>
 </hibernate-mapping>

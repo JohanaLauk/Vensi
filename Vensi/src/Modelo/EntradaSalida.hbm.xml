@@ -33,5 +33,6 @@
         <property name="hora" type="time">
             <column name="hora" length="15" not-null="true" />
         </property>
+        
     </class>
 </hibernate-mapping>

@@ -29,5 +29,6 @@
             </key>
             <one-to-many class="Modelo.ItemEntradastock" />
         </set> -->
+        
     </class>
 </hibernate-mapping>

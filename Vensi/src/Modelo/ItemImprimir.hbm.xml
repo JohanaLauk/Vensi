@@ -19,5 +19,6 @@
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />
         </property>
+        
     </class>
 </hibernate-mapping>
