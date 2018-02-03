@@ -6,16 +6,22 @@
     <class name="Modelo.ItemEntradastock" table="item_entradastock" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         
-        <many-to-one name="entradastock" class="Modelo.Entradastock" fetch="select">
+        <!-- <many-to-one name="entradastock" class="Modelo.Entradastock" fetch="select">
             <column name="id_entradastock" not-null="true" />
         </many-to-one>
         
         <many-to-one name="producto" class="Modelo.Producto" fetch="select">
             <column name="id_producto" not-null="true" />
-        </many-to-one>
+        </many-to-one> -->
+        
+        <many-to-one name = "producto" class="Modelo.Producto"
+            column = "id_producto"   not-null="true" lazy="false" />
+        
+        <many-to-one name="entradastock" class="Modelo.Entradastock" 
+            column="id_entradastock" not-null="true" lazy="false" />
         
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />

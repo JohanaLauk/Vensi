@@ -8,7 +8,7 @@ public class Usuario  implements java.io.Serializable
     private int id;
     private String nombreUsuario;
     private int pin;
-    private Set turnos = new HashSet(0);
+    //private Set<Turno> turnos = new HashSet<Turno>(0);
 
     public Usuario() 
     { }
@@ -40,14 +40,14 @@ public class Usuario  implements java.io.Serializable
         this.pin = pin;
     }
     
-    public Set getTurnos() 
+    /*public Set<Turno> getTurnos() 
     {
         return this.turnos;
     }    
-    public void setTurnos(Set turnos) 
+    public void setTurnos(Set<Turno> turnos) 
     {
         this.turnos = turnos;
-    }
+    }*/
 }
 
 

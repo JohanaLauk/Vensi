@@ -61,7 +61,7 @@ public class ventanaHistorial extends javax.swing.JFrame
         bgTipo = new javax.swing.ButtonGroup();
         jPanel1 = new javax.swing.JPanel();
         rbTurno = new javax.swing.JRadioButton();
-        rbPedido = new javax.swing.JRadioButton();
+        rbCargaStock = new javax.swing.JRadioButton();
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         cbBuscarPor = new javax.swing.JComboBox<>();
@@ -93,50 +93,23 @@ public class ventanaHistorial extends javax.swing.JFrame
 
         bgTipo.add(rbTurno);
         rbTurno.setText("Turno");
-        rbTurno.setNextFocusableComponent(rbPedido);
+        rbTurno.setNextFocusableComponent(rbCargaStock);
         rbTurno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 rbTurnoActionPerformed(evt);
             }
         });
 
-        bgTipo.add(rbPedido);
-        rbPedido.setText("Pedido");
-        rbPedido.setNextFocusableComponent(cbBuscarPor);
-        rbPedido.addActionListener(new java.awt.event.ActionListener() {
+        bgTipo.add(rbCargaStock);
+        rbCargaStock.setText("Carga stock");
+        rbCargaStock.setNextFocusableComponent(cbBuscarPor);
+        rbCargaStock.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbPedidoActionPerformed(evt);
+                rbCargaStockActionPerformed(evt);
             }
         });
 
         jLabel1.setText("Tipo:");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(rbPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(rbTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
-                .addGap(2, 2, 2))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(rbPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
-        );
 
         cbBuscarPor.setNextFocusableComponent(txfdNro);
         cbBuscarPor.addActionListener(new java.awt.event.ActionListener() {
@@ -147,7 +120,7 @@ public class ventanaHistorial extends javax.swing.JFrame
 
         jLabel2.setText("Buscar por:");
 
-        labNro.setText("Ingrese el n°:");
+        labNro.setText("Ingrese el n° del registro:");
 
         txfdNro.setNextFocusableComponent(dateDesde);
         txfdNro.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -218,6 +191,35 @@ public class ventanaHistorial extends javax.swing.JFrame
                     .addComponent(btnVaciarFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(rbCargaStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(rbTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(rbCargaStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
         tablaHistorial = new javax.swing.JTable()
         {
             public boolean isCellEditable(int rowIndex, int colIndex)
@@ -264,15 +266,17 @@ public class ventanaHistorial extends javax.swing.JFrame
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addComponent(jLabel6)
                 .addGap(0, 0, Short.MAX_VALUE))
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(btnMenuPrincipalHistorial)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVisualizarHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnMenuPrincipalHistorial)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(btnVisualizarHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -304,20 +308,18 @@ public class ventanaHistorial extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
+                        .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(btnBuscar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnBuscar)
                 .addGap(18, 18, 18)
@@ -329,7 +331,7 @@ public class ventanaHistorial extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
-        if (!rbTurno.isSelected() && !rbPedido.isSelected())
+        if (!rbTurno.isSelected() && !rbCargaStock.isSelected())
         {
             JOptionPane.showMessageDialog(null, "Debe marcar el tipo de registro que desea buscar.");
             llenarTabla(null);     
@@ -347,9 +349,9 @@ public class ventanaHistorial extends javax.swing.JFrame
                 {
                     llenarTabla("Turno");
                 }   
-                if (rbPedido.isSelected())
+                if (rbCargaStock.isSelected())
                 {
-                    llenarTabla("Pedido");
+                    llenarTabla("CargaStock");
                 }
             }
         }  
@@ -398,9 +400,9 @@ public class ventanaHistorial extends javax.swing.JFrame
         {
             ventanaVisualizarHistorial.tablaSelec = "Turno";         
         }
-        if (rbPedido.isSelected())
+        if (rbCargaStock.isSelected())
         {
-            ventanaVisualizarHistorial.tablaSelec = "Pedido";
+            ventanaVisualizarHistorial.tablaSelec = "CargaStock";
         }
         
         ventanaVisualizarHistorial.idSelec = Integer.parseInt(tablaHistorial.getValueAt(tablaHistorial.getSelectedRow(),0).toString());
@@ -442,7 +444,7 @@ public class ventanaHistorial extends javax.swing.JFrame
         tablaVacia();
     }//GEN-LAST:event_rbTurnoActionPerformed
 
-    private void rbPedidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPedidoActionPerformed
+    private void rbCargaStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbCargaStockActionPerformed
         txfdNro.setText("");
         dateDesde.setDate(null);
         dateHasta.setDate(null);        
@@ -450,7 +452,7 @@ public class ventanaHistorial extends javax.swing.JFrame
         btnVisualizarHistorial.setEnabled(false);
 
         tablaVacia();
-    }//GEN-LAST:event_rbPedidoActionPerformed
+    }//GEN-LAST:event_rbCargaStockActionPerformed
 
     public static void main(String args[]) 
     {
@@ -573,7 +575,7 @@ public class ventanaHistorial extends javax.swing.JFrame
             }
             else    //Entradastock
             {   
-                if (clase.equals("Pedido"))
+                if (clase.equals("CargaStock"))
                 {
                     modelo = new DefaultTableModel();
                     modelo.addColumn("Número");
@@ -588,7 +590,7 @@ public class ventanaHistorial extends javax.swing.JFrame
 
                             if (listaEntradastocks.isEmpty()) 
                             {
-                                JOptionPane.showMessageDialog(null, "No hay pedidos registrados.");
+                                JOptionPane.showMessageDialog(null, "No hay cargas de stock registradas.");
                             } 
                             else 
                             {
@@ -624,7 +626,7 @@ public class ventanaHistorial extends javax.swing.JFrame
 
                                 if (es == null) 
                                 {
-                                    JOptionPane.showMessageDialog(null, "No hay pedidos registrados.");
+                                    JOptionPane.showMessageDialog(null, "No hay cargas de stock registradas.");
                                 } 
                                 else 
                                 {
@@ -722,7 +724,7 @@ public class ventanaHistorial extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labFecha;
     private javax.swing.JLabel labNro;
-    private javax.swing.JRadioButton rbPedido;
+    private javax.swing.JRadioButton rbCargaStock;
     private javax.swing.JRadioButton rbTurno;
     private javax.swing.JTable tablaHistorial;
     private javax.swing.JTextField txfdNro;

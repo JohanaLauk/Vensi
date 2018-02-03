@@ -631,7 +631,10 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }      
             else    //salida de plata
             {
-                montoES = montoES - es.getMonto();
+                if (!es.getNombre().equals("ANULACIÓN DE VENTA"))
+                {
+                    montoES = montoES - es.getMonto();
+                }
             }
         }        
         return montoES;

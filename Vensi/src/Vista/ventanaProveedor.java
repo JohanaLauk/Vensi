@@ -433,7 +433,14 @@ public class ventanaProveedor extends javax.swing.JFrame
                 }    
             }
             
-            datos[4] = String.valueOf(p.getContacto());
+            if (p.getContacto().equals(""))
+            {
+                datos[4] = String.valueOf("---");
+            }
+            else
+            {
+                datos[4] = String.valueOf(p.getContacto());
+            }            
 
             if (p.isEstado())
             {

@@ -6,7 +6,7 @@
     <class name="Modelo.Producto" table="producto" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id_producto" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         <property name="codigo" type="string">
             <column name="codigo" length="50" not-null="true" unique="true" />
@@ -45,7 +45,12 @@
             <column name="por_peso" />
         </property>
         
-        <set name="proveedors" table="producto_proveedor" inverse="false" lazy="true" fetch="select">
+        <set name="proveedors" table="producto_proveedor" lazy="false" >
+            <key column="id_producto"/>
+            <many-to-many column="id_proveedor" class="Modelo.Proveedor" />
+        </set>
+        
+        <!-- <set name="proveedors" table="producto_proveedor" inverse="false" lazy="false" fetch="select">
             <key>
                 <column name="id_producto" not-null="true" />
             </key>
@@ -80,6 +85,6 @@
                 <column name="id_producto" not-null="true" />
             </key>
             <one-to-many class="Modelo.ItemImprimir" />
-        </set>
+        </set> -->
     </class>
 </hibernate-mapping>

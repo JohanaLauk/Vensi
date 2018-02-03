@@ -98,7 +98,7 @@ public class ItemEntradaStockDAO
         try
         {
             tx = session.beginTransaction();
-            Query query = session.createQuery("FROM ItemEntradastock ies WHERE ies.pedido.id = :nroItemES");
+            Query query = session.createQuery("FROM ItemEntradastock ies WHERE ies.entradastock.id = :nroItemES");
             query.setParameter("nroItemES", nroItemES);
             lista = query.list(); 
             tx.commit();

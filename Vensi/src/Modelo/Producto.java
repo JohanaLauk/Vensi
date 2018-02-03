@@ -14,9 +14,9 @@ public class Producto  implements java.io.Serializable
     private int stock;
     private Integer stockMinimo;
     private Integer pesoEnvase;
-    private Boolean estado;
-    private Boolean suspendido;
-    private Boolean oferta;
+    private Boolean estado = true;
+    private Boolean suspendido = false;
+    private Boolean oferta = false;
     private Boolean porPeso;
     private Set<Proveedor> proveedors = new HashSet<Proveedor>(0);
     /*private Set<ItemVenta> itemVentas = new HashSet<ItemVenta>(0);
@@ -31,7 +31,7 @@ public class Producto  implements java.io.Serializable
     {
         return this.id;
     }    
-    public void setIdProducto(int id) 
+    public void setId(int id) 
     {
         this.id = id;
     }

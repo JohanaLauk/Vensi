@@ -6,7 +6,7 @@
     <class name="Modelo.Usuario" table="usuario" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         
         <property name="nombreUsuario" type="string">
@@ -16,11 +16,11 @@
             <column name="pin" not-null="true" />
         </property>
         
-        <set name="turnos" table="turno" inverse="true" lazy="true" fetch="select">
+        <!-- <set name="turnos" table="turno" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_usuario" not-null="true" />
             </key>
             <one-to-many class="Modelo.Turno" />
-        </set>
+        </set> -->
     </class>
 </hibernate-mapping>

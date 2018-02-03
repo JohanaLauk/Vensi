@@ -6,12 +6,15 @@
     <class name="Modelo.ItemImprimir" table="item_imprimir" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         
-        <many-to-one name="producto" class="Modelo.Producto" fetch="select">
+        <!-- <many-to-one name="producto" class="Modelo.Producto" fetch="select">
             <column name="id_producto" not-null="true" />
-        </many-to-one>
+        </many-to-one> -->
+        
+        <many-to-one name = "producto" column = "id_producto" 
+            class="Modelo.Producto" not-null="true" lazy="false" />
         
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />

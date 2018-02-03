@@ -10,7 +10,7 @@ public class Entradastock  implements java.io.Serializable
     private Proveedor proveedor;
     private Date fechaHora;
     private double importe;
-    private Set<ItemEntradastock> itemEntradastocks = new HashSet<ItemEntradastock>(0);
+    //private Set<ItemEntradastock> itemEntradastocks = new HashSet<ItemEntradastock>(0);
 
     public Entradastock() 
     { }
@@ -51,14 +51,14 @@ public class Entradastock  implements java.io.Serializable
         this.importe = importe;
     }
     
-    public Set<ItemEntradastock> getItemEntradastocks() 
+    /*public Set<ItemEntradastock> getItemEntradastocks() 
     {
         return this.itemEntradastocks;
     }    
     public void setItemEntradastocks(Set<ItemEntradastock> itemEntradastocks) 
     {
         this.itemEntradastocks = itemEntradastocks;
-    }
+    }*/
 }
 
 

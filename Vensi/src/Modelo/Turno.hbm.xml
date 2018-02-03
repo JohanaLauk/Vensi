@@ -6,12 +6,15 @@
     <class name="Modelo.Turno" table="turno" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         
-        <many-to-one name="usuario" class="Modelo.Usuario" fetch="select">
+        <!-- <many-to-one name="usuario" class="Modelo.Usuario" fetch="select">
             <column name="id_usuario" not-null="true" />
-        </many-to-one>
+        </many-to-one> -->
+        
+        <many-to-one name = "usuario" column = "id_usuario"  
+         class="Modelo.Usuario" not-null="true" lazy="false" />
         
         <property name="fechaHoraInicio" type="timestamp">
             <column name="fecha_hora_inicio" length="29" not-null="true" />
@@ -29,7 +32,7 @@
             <column name="efectivo_hay" precision="8" />
         </property>
         
-        <set name="entradaSalidas" table="entrada_salida" inverse="true" lazy="true" fetch="select">
+        <!-- <set name="entradaSalidas" table="entrada_salida" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_turno" not-null="true" />
             </key>
@@ -41,6 +44,6 @@
                 <column name="id_turno" not-null="true" />
             </key>
             <one-to-many class="Modelo.ItemVenta" />
-        </set>
+        </set> -->
     </class>
 </hibernate-mapping>

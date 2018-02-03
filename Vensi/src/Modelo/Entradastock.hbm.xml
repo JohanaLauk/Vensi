@@ -6,12 +6,15 @@
     <class name="Modelo.Entradastock" table="entradastock" schema="public" optimistic-lock="version">
         <id name="id" type="int">
             <column name="id" />
-            <generator class="assigned" />
+            <generator class="identity" />
         </id>
         
-        <many-to-one name="proveedor" class="Modelo.Proveedor" fetch="select">
+        <!-- <many-to-one name="proveedor" class="Modelo.Proveedor" fetch="select">
             <column name="id_proveedor" not-null="true" />
-        </many-to-one>
+        </many-to-one> -->
+        
+        <many-to-one name = "proveedor" column = "id_proveedor" 
+         class="Modelo.Proveedor" not-null="true" lazy="false" />
         
         <property name="fechaHora" type="timestamp">
             <column name="fecha_hora" length="29" not-null="true" />
@@ -20,11 +23,11 @@
             <column name="importe" precision="8" />
         </property>
         
-        <set name="itemEntradastocks" table="item_entradastock" inverse="true" lazy="true" fetch="select">
+        <!--<set name="itemEntradastocks" table="item_entradastock" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_entradastock" not-null="true" />
             </key>
             <one-to-many class="Modelo.ItemEntradastock" />
-        </set>
+        </set> -->
     </class>
 </hibernate-mapping>

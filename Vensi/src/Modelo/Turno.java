@@ -13,8 +13,8 @@ public class Turno  implements java.io.Serializable
     private double montoVenta;
     private double montoES;
     private double efectivoHay;
-    private Set entradaSalidas = new HashSet(0);
-    private Set itemVentas = new HashSet(0);
+    /*private Set<EntradaSalida> entradaSalidas = new HashSet<EntradaSalida>(0);
+    private Set<ItemVenta> itemVentas = new HashSet<ItemVenta>(0);*/
 
     public Turno() 
     { }
@@ -82,23 +82,23 @@ public class Turno  implements java.io.Serializable
         this.efectivoHay = efectivoHay;
     }
     
-    public Set getEntradaSalidas() 
+    /*public Set<EntradaSalida> getEntradaSalidas() 
     {
         return this.entradaSalidas;
     }    
-    public void setEntradaSalidas(Set entradaSalidas) 
+    public void setEntradaSalidas(Set<EntradaSalida> entradaSalidas) 
     {
         this.entradaSalidas = entradaSalidas;
     }
     
-    public Set getItemVentas() 
+    public Set<ItemVenta> getItemVentas() 
     {
         return this.itemVentas;
     }    
-    public void setItemVentas(Set itemVentas) 
+    public void setItemVentas(Set<ItemVenta> itemVentas) 
     {
         this.itemVentas = itemVentas;
-    }
+    }*/
 }
 
 

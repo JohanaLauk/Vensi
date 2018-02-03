@@ -22,9 +22,9 @@ import javax.swing.table.TableColumnModel;
 public class ventanaVisualizarHistorial extends javax.swing.JFrame 
 {       
     TurnoDAO tDAO = new TurnoDAO();
-    EntradaStockDAO pDAO = new EntradaStockDAO();
+    EntradaStockDAO eStockDAO = new EntradaStockDAO();
     ItemVentaDAO iVentaDAO = new ItemVentaDAO();
-    ItemEntradaStockDAO iPedidoDAO = new ItemEntradaStockDAO();
+    ItemEntradaStockDAO iEStockDAO = new ItemEntradaStockDAO();
     EntradaSalidaDAO esDAO = new EntradaSalidaDAO();
     
     DefaultTableModel modelo;    
@@ -339,18 +339,18 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
             
-            Entradastock p = pDAO.buscarPorID(idSelec);
+            Entradastock es = eStockDAO.buscarPorID(idSelec);
             
             modeloList = new DefaultListModel();
-            modeloList.addElement("NÚMERO:  " + String.valueOf(p.getId()));
-            modeloList.addElement("PROVEEDOR:  " + p.getProveedor().getRazonSocial());
-            modeloList.addElement("FECHA Y HORA:  " + String.valueOf(fechaHoraFormat.format(p.getFechaHora())+ "hs."));
+            modeloList.addElement("NÚMERO:  " + String.valueOf(es.getId()));
+            modeloList.addElement("PROVEEDOR:  " + es.getProveedor().getRazonSocial());
+            modeloList.addElement("FECHA Y HORA:  " + String.valueOf(fechaHoraFormat.format(es.getFechaHora())+ "hs."));
             modeloList.addElement(" ");
-            modeloList.addElement("IMPORTE:  $" + String.valueOf(formatoPrecios.format(p.getImporte())));
+            modeloList.addElement("IMPORTE:  $" + String.valueOf(formatoPrecios.format(es.getImporte())));
                         
-            List<ItemEntradastock> listaCompras = iPedidoDAO.listar(idSelec);
+            List<ItemEntradastock> listaEntradaStock = iEStockDAO.listar(idSelec);
             
-            for(ItemEntradastock i : listaCompras)
+            for (ItemEntradastock i : listaEntradaStock)
             {
                 datos[0] = i.getProducto().getDescripcion();
                 datos[1] = String.valueOf(i.getCantidad());

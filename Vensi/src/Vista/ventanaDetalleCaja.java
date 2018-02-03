@@ -188,7 +188,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Anulados:");
+        jLabel3.setText("Retiros:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 110, -1));
 
         txfdMontoES.setBackground(new java.awt.Color(255, 0, 0));
@@ -378,7 +378,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         
         for (EntradaSalida x : listaES)
         {
-            if (!x.isTipo()) //salida
+            if (!x.isTipo() && !x.getNombre().equals("ANULACIÓN DE VENTA")) //salidas
             {
                 montoSalidas = montoSalidas + x.getMonto();
             }            
@@ -386,22 +386,29 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         return montoSalidas;
     }
     
+    public double calcularEntradas()
+    {
+        double montoEntradas = 0;
+        
+        for (EntradaSalida x : listaES)
+        {
+            if (x.isTipo()) //entradas
+            {
+                montoEntradas = montoEntradas + x.getMonto();
+            }            
+        } 
+        return montoEntradas;
+    }
+    
     public double calcularTotalCaja()
     {        
         listaES = esDAO.listar(turnoActual.getId());
         double montoVenta = calcularVenta();
-        double montoEntradas = 0;
+        double montoEntradas = calcularEntradas();
+        double montoSalidas = calcularSalidas();
         double totalCaja = 0;
-        
-        for (EntradaSalida x : listaES)
-        {
-            if (x.isTipo()) //entrada
-            {
-                montoEntradas = montoEntradas + x.getMonto();
-            }            
-        }  
-        
-        totalCaja = montoVenta + montoEntradas;
+             
+        totalCaja = montoVenta + montoEntradas - montoSalidas;
         
         return totalCaja;
     }

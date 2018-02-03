@@ -13,7 +13,7 @@ public class Proveedor  implements java.io.Serializable
     private String provincia;
     private String pais;
     private String contacto;
-    private Boolean estado;
+    private Boolean estado = true;
     /*private Set<Producto> productos = new HashSet<Producto>(0);
     private Set<Pedido> pedidos = new HashSet<Pedido>(0);
     private Set<Entradastock> entradastocks = new HashSet<Entradastock>(0);*/
