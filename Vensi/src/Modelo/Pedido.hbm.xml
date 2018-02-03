@@ -8,15 +8,18 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
+        
         <many-to-one name="proveedor" class="Modelo.Proveedor" fetch="select">
             <column name="id_proveedor" not-null="true" />
         </many-to-one>
+        
         <property name="fechaHora" type="timestamp">
             <column name="fecha_hora" length="29" not-null="true" />
         </property>
-        <property name="importe" type="big_decimal">
+        <property name="importe" type="double">
             <column name="importe" precision="8" />
         </property>
+        
         <set name="itemPedidos" table="item_pedido" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_pedido" not-null="true" />

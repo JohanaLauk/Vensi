@@ -90,7 +90,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
         btnPedidos.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/icono_pedidos_color.png"))); // NOI18N
-        btnPedidos.setToolTipText("Pedidos");
+        btnPedidos.setToolTipText("Generar pedido");
         btnPedidos.setBorder(null);
         btnPedidos.setBorderPainted(false);
         btnPedidos.setContentAreaFilled(false);
@@ -143,7 +143,8 @@ public class ventanaPrincipal extends javax.swing.JFrame
         });
         panelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, -1, 30));
 
-        btnCompras.setText("Compras");
+        btnCompras.setText("Cargar stock");
+        btnCompras.setToolTipText("Cargar stock al Inventario");
         btnCompras.setNextFocusableComponent(btnSalir);
         btnCompras.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

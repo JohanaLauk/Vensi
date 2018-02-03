@@ -658,7 +658,7 @@ public class ventanaProducto extends javax.swing.JFrame
                 datos[9] = "Deshabilitado";
             }    
     
-            Set<Proveedor> listaProv = p.getProveedor(); 
+            Set<Proveedor> listaProv = p.getProveedors(); 
             
             /*String provs = "";          
            
@@ -798,7 +798,7 @@ public class ventanaProducto extends javax.swing.JFrame
                 datos[9] = "Deshabilitado";
             }    
     
-            Set<Proveedor> listaProv = p.getProveedor(); 
+            Set<Proveedor> listaProv = p.getProveedors(); 
             
             /*String provs = "";          
            

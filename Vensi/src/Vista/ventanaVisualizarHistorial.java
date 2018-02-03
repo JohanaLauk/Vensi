@@ -1,13 +1,13 @@
 package Vista;
 
 import DAO.EntradaSalidaDAO;
-import DAO.ItemPedidoDAO;
+import DAO.ItemEntradaStockDAO;
 import DAO.ItemVentaDAO;
-import DAO.PedidoDAO;
+import DAO.EntradaStockDAO;
 import DAO.TurnoDAO;
-import Modelo.ItemPedido;
+import Modelo.ItemEntradastock;
 import Modelo.ItemVenta;
-import Modelo.Pedido;
+import Modelo.Entradastock;
 import Modelo.Turno;
 import Modelo.EntradaSalida;
 import java.text.DateFormat;
@@ -22,9 +22,9 @@ import javax.swing.table.TableColumnModel;
 public class ventanaVisualizarHistorial extends javax.swing.JFrame 
 {       
     TurnoDAO tDAO = new TurnoDAO();
-    PedidoDAO pDAO = new PedidoDAO();
+    EntradaStockDAO pDAO = new EntradaStockDAO();
     ItemVentaDAO iVentaDAO = new ItemVentaDAO();
-    ItemPedidoDAO iPedidoDAO = new ItemPedidoDAO();
+    ItemEntradaStockDAO iPedidoDAO = new ItemEntradaStockDAO();
     EntradaSalidaDAO esDAO = new EntradaSalidaDAO();
     
     DefaultTableModel modelo;    
@@ -327,7 +327,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             }
             mostrarCalculos();
         }
-        else    //Pedido
+        else    //Entradastock
         {
             labVenta.setVisible(false);
             txfdVenta.setVisible(false);
@@ -339,7 +339,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
             
-            Pedido p = pDAO.buscarPorID(idSelec);
+            Entradastock p = pDAO.buscarPorID(idSelec);
             
             modeloList = new DefaultListModel();
             modeloList.addElement("NÚMERO:  " + String.valueOf(p.getId()));
@@ -348,9 +348,9 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             modeloList.addElement(" ");
             modeloList.addElement("IMPORTE:  $" + String.valueOf(formatoPrecios.format(p.getImporte())));
                         
-            List<ItemPedido> listaCompras = iPedidoDAO.listar(idSelec);
+            List<ItemEntradastock> listaCompras = iPedidoDAO.listar(idSelec);
             
-            for(ItemPedido i : listaCompras)
+            for(ItemEntradastock i : listaCompras)
             {
                 datos[0] = i.getProducto().getDescripcion();
                 datos[1] = String.valueOf(i.getCantidad());

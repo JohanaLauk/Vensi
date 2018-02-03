@@ -8,9 +8,11 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
+        
         <many-to-one name="producto" class="Modelo.Producto" fetch="select">
             <column name="id_producto" not-null="true" />
         </many-to-one>
+        
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />
         </property>

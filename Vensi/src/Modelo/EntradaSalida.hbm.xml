@@ -8,9 +8,11 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
+        
         <many-to-one name="turno" class="Modelo.Turno" fetch="select">
             <column name="id_turno" not-null="true" />
         </many-to-one>
+        
         <property name="nombre" type="string">
             <column name="nombre" not-null="true" />
         </property>
@@ -20,7 +22,7 @@
         <property name="cantProd" type="int">
             <column name="cant_prod" not-null="true" />
         </property>
-        <property name="monto" type="big_decimal">
+        <property name="monto" type="double">
             <column name="monto" precision="8" not-null="true" />
         </property>
         <property name="tipo" type="boolean">

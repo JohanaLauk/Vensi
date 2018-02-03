@@ -8,30 +8,34 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
+        
         <many-to-one name="usuario" class="Modelo.Usuario" fetch="select">
             <column name="id_usuario" not-null="true" />
         </many-to-one>
+        
         <property name="fechaHoraInicio" type="timestamp">
             <column name="fecha_hora_inicio" length="29" not-null="true" />
         </property>
         <property name="fechaHoraFin" type="timestamp">
             <column name="fecha_hora_fin" length="29" />
         </property>
-        <property name="montoVenta" type="big_decimal">
+        <property name="montoVenta" type="double">
             <column name="monto_venta" precision="8" />
         </property>
-        <property name="montoEs" type="big_decimal">
+        <property name="montoES" type="double">
             <column name="monto_es" precision="8" />
         </property>
-        <property name="efectivoHay" type="big_decimal">
+        <property name="efectivoHay" type="double">
             <column name="efectivo_hay" precision="8" />
         </property>
+        
         <set name="entradaSalidas" table="entrada_salida" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_turno" not-null="true" />
             </key>
             <one-to-many class="Modelo.EntradaSalida" />
         </set>
+        
         <set name="itemVentas" table="item_venta" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_turno" not-null="true" />

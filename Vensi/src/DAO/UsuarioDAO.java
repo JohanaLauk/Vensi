@@ -18,8 +18,7 @@ public class UsuarioDAO
         try
         {
             session.save(u);
-            tx.commit();
-            
+            tx.commit();            
         }
         catch(Exception e)
         {
@@ -28,7 +27,8 @@ public class UsuarioDAO
                     e.printStackTrace();
 		throw e;
         }        
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Usuario creado");
@@ -49,8 +49,7 @@ public class UsuarioDAO
         try
         {
             session.merge(u);
-            tx.commit();
-            
+            tx.commit();            
         }
         catch(Exception e)
         {
@@ -59,7 +58,8 @@ public class UsuarioDAO
                     e.printStackTrace();
 		throw e;
         }
-        finally{
+        finally
+        {
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Contraseña modificada");
@@ -68,29 +68,32 @@ public class UsuarioDAO
     public boolean verificar(String usuario, int pin )
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
+        
         boolean verificado = false;
         Usuario u;
-        try{
-        Query query = session.createQuery("FROM Usuario u WHERE u.nombreUsuario LIKE :usuario");
-        query.setParameter("usuario", usuario+"%");
-        u = (Usuario) query.uniqueResult();
         
-        if(u.getPin() == pin)
+        try
         {
-            verificado = true;
+            Query query = session.createQuery("FROM Usuario u WHERE u.nombreUsuario LIKE :usuario");
+            query.setParameter("usuario", usuario+"%");
+            u = (Usuario) query.uniqueResult();
+
+            if (u.getPin() == pin)
+            {
+                verificado = true;
+            }
         }
-        }
-        catch(Exception e){
+        catch (Exception e)
+        {
             if (tx.isActive())
 		tx.rollback();
                     e.printStackTrace();
 		throw e;
         }
-        finally{
+        finally
+        {
             session.close();
-        }
-        
-        
+        }     
         return verificado;        
     }
     
@@ -104,14 +107,14 @@ public class UsuarioDAO
             tx = session.beginTransaction();
             Query query = session.createQuery("FROM Usuario");            
             lista = query.list();
-            tx.commit();
-            
+            tx.commit();            
         }
         catch(Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error. Listar usuarios");
         }        
-        finally{
+        finally
+        {
             session.close();
         }
         return lista;

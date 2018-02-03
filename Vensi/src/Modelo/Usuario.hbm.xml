@@ -8,12 +8,14 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
+        
         <property name="nombreUsuario" type="string">
             <column name="nombre_usuario" length="50" not-null="true" unique="true" />
         </property>
         <property name="pin" type="int">
             <column name="pin" not-null="true" />
         </property>
+        
         <set name="turnos" table="turno" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_usuario" not-null="true" />

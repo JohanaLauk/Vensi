@@ -8,16 +8,19 @@
             <column name="id" />
             <generator class="assigned" />
         </id>
+        
         <many-to-one name="producto" class="Modelo.Producto" fetch="select">
             <column name="id_producto" not-null="true" />
         </many-to-one>
+        
         <many-to-one name="turno" class="Modelo.Turno" fetch="select">
             <column name="id_turno" not-null="true" />
         </many-to-one>
+        
         <property name="cantidad" type="int">
             <column name="cantidad" not-null="true" />
         </property>
-        <property name="monto" type="big_decimal">
+        <property name="monto" type="double">
             <column name="monto" precision="8" not-null="true" />
         </property>
         <property name="hora" type="time">

@@ -1,8 +1,8 @@
 package Vista;
 
-import DAO.PedidoDAO;
+import DAO.EntradaStockDAO;
 import DAO.TurnoDAO;
-import Modelo.Pedido;
+import Modelo.Entradastock;
 import Modelo.Turno;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -22,7 +22,7 @@ public class ventanaHistorial extends javax.swing.JFrame
     DefaultTableModel modelo;
     TableColumnModel tcm ;
     TurnoDAO tDAO = new TurnoDAO();
-    PedidoDAO pDAO = new PedidoDAO();    
+    EntradaStockDAO pDAO = new EntradaStockDAO();    
     
     DateFormat fechaHoraFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     
@@ -571,7 +571,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                     }                
                 }  
             }
-            else    //pedido
+            else    //Entradastock
             {   
                 if (clase.equals("Pedido"))
                 {
@@ -584,9 +584,9 @@ public class ventanaHistorial extends javax.swing.JFrame
                     {
                         if (nro.equals("") && fechaDesde != null)
                         {
-                            List<Pedido> listaPedidos = pDAO.buscarPorFecha(fechaDesde, fechaHasta);
+                            List<Entradastock> listaEntradastocks = pDAO.buscarPorFecha(fechaDesde, fechaHasta);
 
-                            if (listaPedidos.isEmpty()) 
+                            if (listaEntradastocks.isEmpty()) 
                             {
                                 JOptionPane.showMessageDialog(null, "No hay pedidos registrados.");
                             } 
@@ -594,11 +594,11 @@ public class ventanaHistorial extends javax.swing.JFrame
                             {
                                 String[] datos = new String[3];
 
-                                for (Pedido p : listaPedidos) 
+                                for (Entradastock es : listaEntradastocks) 
                                 {
-                                    datos[0] = String.valueOf(p.getId());
-                                    datos[1] = String.valueOf(fechaHoraFormat.format(p.getFechaHora()) + "hs.");
-                                    datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
+                                    datos[0] = String.valueOf(es.getId());
+                                    datos[1] = String.valueOf(fechaHoraFormat.format(es.getFechaHora()) + "hs.");
+                                    datos[2] = String.valueOf(es.getProveedor().getRazonSocial());
 
                                     modelo.addRow(datos);
                                     this.tablaHistorial.setModel(modelo);
@@ -620,9 +620,9 @@ public class ventanaHistorial extends javax.swing.JFrame
                         {
                             if (!nro.equals("") && fechaDesde == null)
                             {
-                                Pedido p = pDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
+                                Entradastock es = pDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
 
-                                if (p == null) 
+                                if (es == null) 
                                 {
                                     JOptionPane.showMessageDialog(null, "No hay pedidos registrados.");
                                 } 
@@ -630,9 +630,9 @@ public class ventanaHistorial extends javax.swing.JFrame
                                 {
                                     String[] datos = new String[3];
 
-                                    datos[0] = String.valueOf(p.getId());
-                                    datos[1] = String.valueOf(fechaHoraFormat.format(p.getFechaHora()) + "hs.");
-                                    datos[2] = String.valueOf(p.getProveedor().getRazonSocial());
+                                    datos[0] = String.valueOf(es.getId());
+                                    datos[1] = String.valueOf(fechaHoraFormat.format(es.getFechaHora()) + "hs.");
+                                    datos[2] = String.valueOf(es.getProveedor().getRazonSocial());
 
                                     modelo.addRow(datos);
                                     this.tablaHistorial.setModel(modelo);

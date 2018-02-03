@@ -53,7 +53,7 @@ public class ProductoDAO
         prod.setEstado(p.isEstado());
         prod.setOferta(p.isOferta());
         prod.setSuspendido(p.isSuspendido());
-        prod.setProveedor(p.getProveedor());
+        prod.setProveedors(p.getProveedors());
             
         tx = session.beginTransaction();
         try

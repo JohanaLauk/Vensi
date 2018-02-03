@@ -561,7 +561,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                             if (seleccionado)
                             {
                                 int idSelec = Integer.parseInt(tablaProv.getValueAt(i, 2).toString());
-                                unProd.addProveedor(prDAO.buscarPorId(idSelec));
+                                unProd.addProveedors(prDAO.buscarPorId(idSelec));
                                 alMenosUnCheck = true;
                             }                            
                         }

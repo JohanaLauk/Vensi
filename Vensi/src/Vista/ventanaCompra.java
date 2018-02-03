@@ -20,8 +20,8 @@ public class ventanaCompra extends javax.swing.JFrame
 {
     ProductoDAO prodDAO = new ProductoDAO();
     ProveedorDAO provDAO = new ProveedorDAO();
-    PedidoDAO pedidoDAO = new PedidoDAO();
-    ItemPedidoDAO iDAO = new ItemPedidoDAO();
+    EntradaStockDAO eStockDAO = new EntradaStockDAO();
+    ItemEntradaStockDAO iESDAO = new ItemEntradaStockDAO();
     
     DefaultTableModel modelo, modelo2, modelo3, m, m2;
     TableColumnModel tcm, tcm2, tcm3;
@@ -631,31 +631,31 @@ public class ventanaCompra extends javax.swing.JFrame
         Producto producto = null;    
         double importe = 0;
         
-        //<-----Pedido-------------------------------------------------------------------------------------
-        Pedido pedido = new Pedido();        
-        pedido.setFechaHora(new Date());        
-        pedido.setProveedor(elProv);        
-        pedidoDAO.alta(pedido);
-        //------Pedido------------------------------------------------------------------------------------->
+        //<-----EntradaStock-------------------------------------------------------------------------------------
+        Entradastock eStock = new Entradastock();        
+        eStock.setFechaHora(new Date());        
+        eStock.setProveedor(elProv);        
+        eStockDAO.alta(eStock);
+        //------EntradaStock------------------------------------------------------------------------------------->
 
         int filasTablaInv = tablaListaInventario.getRowCount();
         for (int i = 0 ; i<filasTablaInv ; i++ )
         {            
             producto = prodDAO.buscarPorId(Integer.parseInt(tablaListaInventario.getValueAt(i,4).toString()));
             
-            //<-----ItemPedido-------------------------------------------------------------------------------------
-            ItemPedido itemPedido = new ItemPedido();
-            itemPedido.setProducto(producto);
+            //<-----ItemEntradaStock-------------------------------------------------------------------------------------
+            ItemEntradastock itemES = new ItemEntradastock();
+            itemES.setProducto(producto);
             int canti = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
-            itemPedido.setCantidad(canti);
-            itemPedido.setPedido(pedido);
-            itemPedido.setPrecioCostoItem(canti * producto.getPrecioCosto());
-            iDAO.alta(itemPedido);
-            //------ItemPedido------------------------------------------------------------------------------------->
+            itemES.setCantidad(canti);
+            itemES.setEntradastock(eStock);
+            itemES.setPrecioCostoItem(canti * producto.getPrecioCosto());
+            iESDAO.alta(itemES);
+            //------ItemEntradaStock------------------------------------------------------------------------------------->
                       
-            importe += itemPedido.getPrecioCostoItem();
-            pedido.setImporte(importe);
-            pedidoDAO.modificar(pedido, pedido.getId());
+            importe += itemES.getPrecioCostoItem();
+            eStock.setImporte(importe);
+            eStockDAO.modificar(eStock, eStock.getId());
                         
             //<-----Producto--------------------------------------------------------------------------------------------
             String cadenaPC = tablaListaInventario.getValueAt(i,2).toString();
@@ -703,8 +703,6 @@ public class ventanaCompra extends javax.swing.JFrame
             prodDAO.setearPreciosUnidad(producto.getId(), precioCostoU, precioVentaU, precioVentaXkilo);
             //------Producto-------------------------------------------------------------------------------------------->
         }
-        
-        pedido.setImporte(ABORT);
         
         JOptionPane.showMessageDialog(null, "Finalizado con éxito");
         
@@ -1224,12 +1222,7 @@ public class ventanaCompra extends javax.swing.JFrame
         tablaProd.getTableHeader().getColumnModel().getColumn(7).setMaxWidth(0);
         tablaProd.getTableHeader().getColumnModel().getColumn(7).setMinWidth(0);    
     }
-    
-    public void mostrarTablaInvVacia()
-    {
         
-    }
-    
     public String[] OrdenarTabla()
     {
         String[] ordenamiento = new String[4];

@@ -24,7 +24,6 @@ public class Vensi
             uDAO.alta(empleado);
         }
         
-        new ventanaPrincipal().setVisible(true);
-        
+        new ventanaPrincipal().setVisible(true);        
     }    
 }

@@ -1,9 +1,7 @@
 package Impresion;
 
-import Modelo.ItemImprimir;
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.util.List;
 import javax.swing.JOptionPane;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;

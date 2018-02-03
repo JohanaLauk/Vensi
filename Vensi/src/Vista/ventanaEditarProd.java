@@ -507,7 +507,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
                             if (seleccionado) 
                             {
                                 int idSelec = Integer.parseInt(tablaProv.getValueAt(i, 2).toString());
-                                prodEditar.addProveedor(prDAO.buscarPorId(idSelec));
+                                prodEditar.addProveedors(prDAO.buscarPorId(idSelec));
                                 alMenosUnCheck = true;
                             }
                         }
@@ -698,7 +698,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
     public void llenarTabla()
     {        
         List<Proveedor> lista = prDAO.listar("Habilitados");
-        Set<Proveedor> listaProvDelProducto = pDAO.buscarPorId(id_recibido).getProveedor();
+        Set<Proveedor> listaProvDelProducto = pDAO.buscarPorId(id_recibido).getProveedors();
         modelo = (DefaultTableModel) tablaProv.getModel();
         Object datos[] = {"",false,""};
         
