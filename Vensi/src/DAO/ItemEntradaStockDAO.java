@@ -40,7 +40,11 @@ public class ItemEntradaStockDAO
         ItemEntradastock item = null;
         
         item = (ItemEntradastock)session.get(ItemEntradastock.class, id);
+        item.setProducto(i.getProducto());
+        item.setEntradastock(i.getEntradastock());        
         item.setCantidad(i.getCantidad());        
+        item.setPrecioCosto(i.getPrecioCosto());
+        item.setPrecioVenta(i.getPrecioVenta());        
         
         tx = session.beginTransaction();
         try

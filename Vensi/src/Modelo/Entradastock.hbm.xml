@@ -11,11 +11,15 @@
             <column name="id_proveedor" not-null="true" />
         </many-to-one> -->
     <many-to-one class="Modelo.Proveedor" column="id_proveedor" lazy="false" name="proveedor" not-null="true"/>
+    
     <property name="fechaHora" type="timestamp">
       <column length="29" name="fecha_hora" not-null="true"/>
     </property>
-    <property name="importe" type="double">
-      <column name="importe" precision="8"/>
+    <property name="cantidadTotal" type="int">
+      <column name="cantidad_total" not-null="true"/>
+    </property>
+    <property name="importeCostoTotal" type="double">
+      <column name="importe_costo_total" precision="8"/>
     </property>
     <!--<set name="itemEntradastocks" table="item_entradastock" inverse="true" lazy="true" fetch="select">
             <key>

@@ -7,20 +7,25 @@
       <column name="id"/>
       <generator class="identity"/>
     </id>
+    
     <!-- <many-to-one name="entradastock" class="Modelo.Entradastock" fetch="select">
-            <column name="id_entradastock" not-null="true" />
-        </many-to-one>
+        <column name="id_entradastock" not-null="true" />
+    </many-to-one>
+    <many-to-one name="producto" class="Modelo.Producto" fetch="select">
+        <column name="id_producto" not-null="true" />
+    </many-to-one> -->
         
-        <many-to-one name="producto" class="Modelo.Producto" fetch="select">
-            <column name="id_producto" not-null="true" />
-        </many-to-one> -->
     <many-to-one class="Modelo.Producto" column="id_producto" lazy="false" name="producto" not-null="true"/>
     <many-to-one class="Modelo.Entradastock" column="id_entradastock" lazy="false" name="entradastock" not-null="true"/>
+    
     <property name="cantidad" type="int">
       <column name="cantidad" not-null="true"/>
     </property>
-    <property name="precioCostoItem" type="double">
-      <column name="precio_costo_item" precision="8"/>
+    <property name="precioCosto" type="double">
+      <column name="precio_costo" precision="8"/>
+    </property>
+    <property name="precioVenta" type="double">
+      <column name="precio_venta" precision="8"/>
     </property>
   </class>
 </hibernate-mapping>

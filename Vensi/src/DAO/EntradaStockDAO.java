@@ -42,7 +42,8 @@ public class EntradaStockDAO
         nuevoEStock = (Entradastock)session.get(Entradastock.class, id);
         nuevoEStock.setFechaHora(es.getFechaHora());
         nuevoEStock.setProveedor(es.getProveedor());
-        nuevoEStock.setImporte(es.getImporte());
+        nuevoEStock.setCantidadTotal(es.getCantidadTotal());
+        nuevoEStock.setImporteCostoTotal(es.getImporteCostoTotal());
             
         tx = session.beginTransaction();
         try

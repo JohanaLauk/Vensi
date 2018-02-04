@@ -553,41 +553,50 @@ public class ventanaCargaStock extends javax.swing.JFrame
                 precioVentaU = txfdPrecioVU.getText();
                 m = (DefaultTableModel) tablaListaInventario.getModel();
 
-                if(cantidad.equals(""))
+                if (cantidad.equals("") && precioCostoU.equals("") && precioVentaU.equals(""))
                 {
-                    JOptionPane.showMessageDialog(null, "Es obligatorio ingresar una cantidad");
+                    JOptionPane.showMessageDialog(null, "Debe completar los campos");
                 }
                 else
                 {
-                    if (precioCostoU.equals("") && precioVentaU.equals("")) //Ninguno
+                    if (cantidad.equals(""))
                     {
-                        String filaNueva[] = {descrip, cantidad, "---", "---", id_recibido};
-                        m.addRow(filaNueva);
+                        JOptionPane.showMessageDialog(null, "¡Es obligatorio ingresar una cantidad!\n"
+                                + "Si sólo desea modificiar los precios,\n"
+                                + "hágalo desde la Administración del producto.");
                     }
+                    else
+                    {
+                        if (precioCostoU.equals("") && precioVentaU.equals("")) //Ninguno
+                        {
+                            String filaNueva[] = {descrip, cantidad, "---", "---", id_recibido};
+                            m.addRow(filaNueva);
+                        }
 
-                    if (!precioCostoU.equals("") && !precioVentaU.equals(""))   //Todos 
-                    {                        
-                        String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "$"+precioVentaU, id_recibido};
-                        m.addRow(filaNueva);
-                    }
+                        if (!precioCostoU.equals("") && !precioVentaU.equals(""))   //Todos 
+                        {                        
+                            String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "$"+precioVentaU, id_recibido};
+                            m.addRow(filaNueva);
+                        }
 
-                    if (!precioCostoU.equals("") && precioVentaU.equals("")) //solo precio costo
-                    {                        
-                        String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "---", id_recibido};
-                        m.addRow(filaNueva);
-                    }
+                        if (!precioCostoU.equals("") && precioVentaU.equals("")) //solo precio costo
+                        {                        
+                            String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "---", id_recibido};
+                            m.addRow(filaNueva);
+                        }
 
-                    if (precioCostoU.equals("") && !precioVentaU.equals("")) //solo precio venta
-                    {                        
-                        String filaNueva[] = {descrip, cantidad, "---", "$"+precioVentaU, id_recibido};
-                        m.addRow(filaNueva);
+                        if (precioCostoU.equals("") && !precioVentaU.equals("")) //solo precio venta
+                        {                        
+                            String filaNueva[] = {descrip, cantidad, "---", "$"+precioVentaU, id_recibido};
+                            m.addRow(filaNueva);
+                        }
                     }
-                }
+                }                
             }
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
+            JOptionPane.showMessageDialog(null, "Debe seleccionar un producto.");
         }
         txfdCantidad.setText("");
         txfdPrecioCU.setText("");
@@ -628,88 +637,126 @@ public class ventanaCargaStock extends javax.swing.JFrame
     }//GEN-LAST:event_btnQuitarActionPerformed
 
     private void btnCargarInventarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarInventarioActionPerformed
-        Producto producto = null;    
-        double importe = 0;
-        
-        //<-----Entradastock-------------------------------------------------------------------------------------
-        Entradastock eStock = new Entradastock();        
-        eStock.setFechaHora(new Date());        
-        eStock.setProveedor(elProv);        
-        eStockDAO.alta(eStock);
-        //------Entradastock------------------------------------------------------------------------------------->
-
         int filasTablaInv = tablaListaInventario.getRowCount();
-        for (int i = 0 ; i<filasTablaInv ; i++ )
-        {            
-            producto = prodDAO.buscarPorId(Integer.parseInt(tablaListaInventario.getValueAt(i,4).toString()));
-            
-            //<-----ItemEntradastock-------------------------------------------------------------------------------------
-            ItemEntradastock itemES = new ItemEntradastock();
-            itemES.setProducto(producto);
-            int canti = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
-            itemES.setCantidad(canti);
-            itemES.setEntradastock(eStock);
-            itemES.setPrecioCostoItem(canti * producto.getPrecioCosto());
-            iESDAO.alta(itemES);
-            //------ItemEntradastock------------------------------------------------------------------------------------->
-                      
-            importe += itemES.getPrecioCostoItem();
-            eStock.setImporte(importe);
-            eStockDAO.modificar(eStock, eStock.getId());
-                        
-            //<-----Producto--------------------------------------------------------------------------------------------
-            String cadenaPC = tablaListaInventario.getValueAt(i,2).toString();
-            double precioCostoU = 0;            
-            
-            if (cadenaPC.equals("---"))
-            {
-                precioCostoU = 0;
-            }
-            else
-            {
-                cadenaPC = cadenaPC.substring(1);
-                precioCostoU = Double.parseDouble(cadenaPC);
-            }
-            
-            String cadenaPV = tablaListaInventario.getValueAt(i,3).toString();
-            double precioVentaU = 0;
-            double precioVentaXkilo = 0;
-            
-            if (cadenaPV.equals("---"))
-            {
-                precioVentaU = 0;
-                precioVentaXkilo = 0;
-            }
-            else
-            {
-                cadenaPV = cadenaPV.substring(1);
-                precioVentaU = Double.parseDouble(cadenaPV);
+        int cantidadTotal = 0;
+        double importeCostoT = 0;
+        double precioCTItem = 0;
+        
+        if (filasTablaInv >= 0)
+        {
+            Producto producto = null; 
+
+            //<-----Entradastock-------------------------------------------------------------------------------------
+            Entradastock eStock = new Entradastock();        
+            eStock.setFechaHora(new Date());        
+            eStock.setProveedor(elProv);        
+            eStockDAO.alta(eStock);
+            //------Entradastock------------------------------------------------------------------------------------->
+
+            for (int i = 0 ; i<filasTablaInv ; i++)
+            {            
+                producto = prodDAO.buscarPorId(Integer.parseInt(tablaListaInventario.getValueAt(i,4).toString()));
+                                        
+                //<-----ItemEntradastock-------------------------------------------------------------------------------------
+                ItemEntradastock itemES = new ItemEntradastock();
+                itemES.setProducto(producto);
+                itemES.setEntradastock(eStock);
+                int cant = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
+                itemES.setCantidad(cant);            
+
+                String cadenaPC = tablaListaInventario.getValueAt(i,2).toString();
+                if (!cadenaPC.equals("---"))
+                {
+                    double pc = Double.parseDouble(cadenaPC.substring(1));
+                    itemES.setPrecioCosto(pc);
+                }
+
+                String cadenaPV = tablaListaInventario.getValueAt(i,3).toString();
+                if (!cadenaPV.equals("---"))
+                {
+                    double pv = Double.parseDouble(cadenaPV.substring(1));
+                    itemES.setPrecioVenta(pv);
+                }
+
+                iESDAO.alta(itemES);
+                //------ItemEntradastock------------------------------------------------------------------------------------->
+
                 
-                precioVentaXkilo = (1000 * precioVentaU) / producto.getPesoEnvase();
-                precioVentaXkilo = r.RedondearAIntArriba(precioVentaXkilo);
-            }               
-            
-            if (producto.isPorPeso())
-            {    
-                int cantU = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
-                int cantGR = cantU * producto.getPesoEnvase();
-                prodDAO.sumarStock(producto.getId(), cantGR);
-            }
-            else
-            {
-                prodDAO.sumarStock(producto.getId(), Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString()));
-            }            
-            
-            prodDAO.setearPreciosUnidad(producto.getId(), precioCostoU, precioVentaU, precioVentaXkilo);
-            //------Producto-------------------------------------------------------------------------------------------->
+                //<-----Entradastock-------------------------------------------------------------------------------------
+                cantidadTotal += itemES.getCantidad();
+                eStock.setCantidadTotal(cantidadTotal);
+               
+                if (cadenaPC.equals("---"))   //si NO ingresó un precioCostoNUEVO, calcula el importeT con el pcVIEJO
+                {
+                    double pcProd = producto.getPrecioCosto();
+                    precioCTItem = itemES.getCantidad() * pcProd;
+                }
+                else    //si SÍ ingreso un precioCostoNUEVO, calcula el importeTotal.
+                {
+                    precioCTItem = itemES.getCantidad() * itemES.getPrecioCosto();                    
+                }        
+                importeCostoT += precioCTItem;
+                eStock.setImporteCostoTotal(importeCostoT);
+                eStockDAO.modificar(eStock, eStock.getId());
+                //------Entradastock------------------------------------------------------------------------------------->
+                
+                
+                //<-----Producto--------------------------------------------------------------------------------------------
+                double precioCostoU = 0;            
+
+                if (cadenaPC.equals("---"))
+                {
+                    precioCostoU = 0;
+                }
+                else
+                {
+                    cadenaPC = cadenaPC.substring(1);
+                    precioCostoU = Double.parseDouble(cadenaPC);
+                }
+
+                double precioVentaU = 0;
+                double precioVentaXkilo = 0;
+
+                if (cadenaPV.equals("---"))
+                {
+                    precioVentaU = 0;
+                    precioVentaXkilo = 0;
+                }
+                else
+                {
+                    cadenaPV = cadenaPV.substring(1);
+                    precioVentaU = Double.parseDouble(cadenaPV);
+
+                    precioVentaXkilo = (1000 * precioVentaU) / producto.getPesoEnvase();
+                    precioVentaXkilo = r.RedondearAIntArriba(precioVentaXkilo);
+                }               
+
+                if (producto.isPorPeso())
+                {    
+                    int cantU = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
+                    int cantGR = cantU * producto.getPesoEnvase();
+                    prodDAO.sumarStock(producto.getId(), cantGR);
+                }
+                else
+                {
+                    prodDAO.sumarStock(producto.getId(), Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString()));
+                }            
+
+                prodDAO.setearPreciosUnidad(producto.getId(), precioCostoU, precioVentaU, precioVentaXkilo);
+                //------Producto-------------------------------------------------------------------------------------------->
+            }          
+                            
+            JOptionPane.showMessageDialog(null, "¡Finalizado con éxito!");
+
+            txfdCantidad.setText(null);
+            txfdPrecioCU.setText(null);        
+            llenarTablaInventario();
+            llenarTabla();
         }
-        
-        JOptionPane.showMessageDialog(null, "Finalizado con éxito");
-        
-        txfdCantidad.setText(null);
-        txfdPrecioCU.setText(null);        
-        llenarTablaInventario();
-        llenarTabla();
+        else
+        {
+            JOptionPane.showMessageDialog(null, "¡No hay producto para cargar al inventario!");
+        }
     }//GEN-LAST:event_btnCargarInventarioActionPerformed
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed

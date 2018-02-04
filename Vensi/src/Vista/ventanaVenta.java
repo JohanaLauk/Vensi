@@ -42,6 +42,8 @@ public class ventanaVenta extends javax.swing.JFrame
     Redondear r = new Redondear();    
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
+    
+    int contadorCantVentas = 0;
         
     public ventanaVenta() 
     {

@@ -9,6 +9,7 @@ import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -25,6 +26,7 @@ public class ventanaHistorial extends javax.swing.JFrame
     EntradaStockDAO eStockDAO = new EntradaStockDAO();    
     
     DateFormat fechaHoraFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     
     public ventanaHistorial() 
     {
@@ -581,6 +583,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                     modelo.addColumn("Número");
                     modelo.addColumn("Fecha y hora");
                     modelo.addColumn("Proveedor");
+                    modelo.addColumn("Importe");
 
                     if (cbBuscarPor.getSelectedItem().equals("Fecha"))
                     {
@@ -594,19 +597,21 @@ public class ventanaHistorial extends javax.swing.JFrame
                             } 
                             else 
                             {
-                                String[] datos = new String[3];
+                                String[] datos = new String[4];
 
                                 for (Entradastock es : listaEntradastocks) 
                                 {
                                     datos[0] = String.valueOf(es.getId());
                                     datos[1] = String.valueOf(fechaHoraFormat.format(es.getFechaHora()) + "hs.");
                                     datos[2] = String.valueOf(es.getProveedor().getRazonSocial());
+                                    datos[3] = String.valueOf("$"+formatoPrecios.format(es.getImporteCostoTotal()));
 
                                     modelo.addRow(datos);
                                     this.tablaHistorial.setModel(modelo);
                                     tcm.getColumn(0).setPreferredWidth(100);
                                     tcm.getColumn(1).setPreferredWidth(200);
                                     tcm.getColumn(2).setPreferredWidth(200);
+                                    tcm.getColumn(3).setPreferredWidth(100);
                                 }
                             }
                         }
@@ -630,17 +635,19 @@ public class ventanaHistorial extends javax.swing.JFrame
                                 } 
                                 else 
                                 {
-                                    String[] datos = new String[3];
+                                    String[] datos = new String[4];
 
                                     datos[0] = String.valueOf(es.getId());
                                     datos[1] = String.valueOf(fechaHoraFormat.format(es.getFechaHora()) + "hs.");
                                     datos[2] = String.valueOf(es.getProveedor().getRazonSocial());
+                                    datos[3] = String.valueOf("$"+formatoPrecios.format(es.getImporteCostoTotal()));
 
                                     modelo.addRow(datos);
                                     this.tablaHistorial.setModel(modelo);
                                     tcm.getColumn(0).setPreferredWidth(100);
                                     tcm.getColumn(1).setPreferredWidth(200);
                                     tcm.getColumn(2).setPreferredWidth(200);
+                                    tcm.getColumn(3).setPreferredWidth(100);
                                 }
                             }
                             else

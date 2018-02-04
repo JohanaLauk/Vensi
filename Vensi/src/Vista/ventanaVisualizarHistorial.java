@@ -64,6 +64,10 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         txfdTotalCaja = new javax.swing.JTextField();
         labDiferencia = new javax.swing.JLabel();
         txfdDiferencia = new javax.swing.JTextField();
+        labDiferencia1 = new javax.swing.JLabel();
+        txfdDiferencia1 = new javax.swing.JTextField();
+        txfdTotalCaja1 = new javax.swing.JTextField();
+        labTotalCaja1 = new javax.swing.JLabel();
         btnVolverVerHistorial = new javax.swing.JButton();
         btnImprimir = new javax.swing.JButton();
 
@@ -126,55 +130,82 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         txfdDiferencia.setText("$");
         txfdDiferencia.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        labDiferencia1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        labDiferencia1.setText("Importe:");
+
+        txfdDiferencia1.setBackground(new java.awt.Color(102, 0, 51));
+        txfdDiferencia1.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        txfdDiferencia1.setForeground(new java.awt.Color(255, 255, 255));
+        txfdDiferencia1.setText("$");
+        txfdDiferencia1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txfdTotalCaja1.setBackground(new java.awt.Color(0, 0, 204));
+        txfdTotalCaja1.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        txfdTotalCaja1.setForeground(new java.awt.Color(255, 255, 255));
+        txfdTotalCaja1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        labTotalCaja1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        labTotalCaja1.setText("Unidades:");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(jScrollPane2)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addComponent(labTotalCaja1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txfdTotalCaja1)
+                .addGap(18, 18, 18)
+                .addComponent(labDiferencia1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(txfdDiferencia1, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(labVenta)
-                            .addComponent(labDiferencia)
-                            .addComponent(labTotalCaja))
-                        .addGap(11, 11, 11)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txfdTotalCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(1, 1, 1)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(txfdVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txfdDiferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
-                .addContainerGap())
+                    .addComponent(jLabel1)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                .addGap(10, 10, 10)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labDiferencia)
+                    .addComponent(labTotalCaja)
+                    .addComponent(labVenta))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfdVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 104, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(txfdDiferencia, javax.swing.GroupLayout.DEFAULT_SIZE, 104, Short.MAX_VALUE)
+                        .addComponent(txfdTotalCaja))))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labVenta)
-                            .addComponent(txfdVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labTotalCaja)
-                            .addComponent(txfdTotalCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 88, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txfdVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labDiferencia)
-                            .addComponent(txfdDiferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(txfdTotalCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txfdDiferencia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(labVenta)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labTotalCaja)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(labDiferencia)))
                 .addGap(18, 18, 18)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 196, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labDiferencia1)
+                    .addComponent(txfdDiferencia1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labTotalCaja1)
+                    .addComponent(txfdTotalCaja1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         btnVolverVerHistorial.setText("Volver");
@@ -192,25 +223,25 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+            .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(btnVolverVerHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(18, 18, 18)
-                        .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, 304, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVolverVerHistorial, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnVolverVerHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, 37, Short.MAX_VALUE)
+                    .addComponent(btnImprimir, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -243,7 +274,12 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         this.tablaTP.setModel(modelo);
         
         if (tablaSelec.equals("Turno")) 
-        {            
+        {
+            labTotalCaja1.setVisible(false);
+            txfdTotalCaja1.setVisible(false);
+            labDiferencia1.setVisible(false);
+            txfdDiferencia1.setVisible(false);
+            
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
             
@@ -336,8 +372,8 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             labDiferencia.setVisible(false);
             txfdDiferencia.setVisible(false);
                         
-            modelo.addColumn("Entrada");
-            modelo.addColumn("Salida");
+            modelo.addColumn("Precio costo");
+            modelo.addColumn("Precio venta");
             
             Entradastock es = eStockDAO.buscarPorID(idSelec);
             
@@ -345,19 +381,36 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             modeloList.addElement("NÚMERO:  " + String.valueOf(es.getId()));
             modeloList.addElement("PROVEEDOR:  " + es.getProveedor().getRazonSocial());
             modeloList.addElement("FECHA Y HORA:  " + String.valueOf(fechaHoraFormat.format(es.getFechaHora())+ "hs."));
-            modeloList.addElement(" ");
-            modeloList.addElement("IMPORTE:  $" + String.valueOf(formatoPrecios.format(es.getImporte())));
-                        
+                       
             List<ItemEntradastock> listaEntradaStock = iEStockDAO.listar(idSelec);
             
             for (ItemEntradastock i : listaEntradaStock)
             {
                 datos[0] = i.getProducto().getDescripcion();
                 datos[1] = String.valueOf(i.getCantidad());
-                datos[2] = String.valueOf("---");
-                datos[3] = String.valueOf("$" + formatoPrecios.format(i.getPrecioCostoItem()));               
+                
+                if (i.getPrecioCosto() == 0)
+                {
+                    datos[2] = String.valueOf("---");
+                }
+                else
+                {
+                    datos[2] = String.valueOf("$" + formatoPrecios.format(i.getPrecioCosto()));   
+                }
+                
+                if (i.getPrecioVenta() == 0)
+                {
+                    datos[3] = String.valueOf("---");
+                }
+                else
+                {
+                    datos[3] = String.valueOf("$" + formatoPrecios.format(i.getPrecioVenta()));
+                }
                 
                 modelo.addRow(datos);
+                
+                txfdTotalCaja1.setText(String.valueOf(es.getCantidadTotal()));
+                txfdDiferencia1.setText(String.valueOf("$" + formatoPrecios.format(es.getImporteCostoTotal())));                
             }
         }
         
@@ -368,7 +421,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         tcm.getColumn(0).setPreferredWidth(200);
         tcm.getColumn(1).setPreferredWidth(100);
         tcm.getColumn(2).setPreferredWidth(100);
-        tcm.getColumn(3).setPreferredWidth(100);
+        tcm.getColumn(3).setPreferredWidth(100);    
     }
     
     public void mostrarCalculos()
@@ -399,12 +452,16 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JLabel labDiferencia;
+    private javax.swing.JLabel labDiferencia1;
     private javax.swing.JLabel labTotalCaja;
+    private javax.swing.JLabel labTotalCaja1;
     private javax.swing.JLabel labVenta;
     private javax.swing.JList<String> listDatosTP;
     private javax.swing.JTable tablaTP;
     private javax.swing.JTextField txfdDiferencia;
+    private javax.swing.JTextField txfdDiferencia1;
     private javax.swing.JTextField txfdTotalCaja;
+    private javax.swing.JTextField txfdTotalCaja1;
     private javax.swing.JTextField txfdVenta;
     // End of variables declaration//GEN-END:variables
 }
