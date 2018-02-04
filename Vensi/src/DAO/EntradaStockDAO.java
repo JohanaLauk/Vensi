@@ -72,7 +72,7 @@ public class EntradaStockDAO
         try
         {
             tx = session.beginTransaction();
-            lista = session.createQuery("FROM EntradaStock").list();
+            lista = session.createQuery("FROM Entradastock").list();
             tx.commit();            
         }
         catch(Exception e)
@@ -96,12 +96,12 @@ public class EntradaStockDAO
             tx = session.beginTransaction();
             if(fechaFin == null)
             {
-                query = session.createQuery("FROM EntradaStock p WHERE date(p.fechaHora) = :fechaDesde");
+                query = session.createQuery("FROM Entradastock p WHERE date(p.fechaHora) = :fechaDesde");
                 query.setParameter("fechaDesde", fechaDesde);
             }
             else
             {
-                query = session.createQuery("FROM EntradaStock p WHERE p.fechaHora BETWEEN :fechaDesde AND :fechaFin");
+                query = session.createQuery("FROM Entradastock p WHERE p.fechaHora BETWEEN :fechaDesde AND :fechaFin");
                 query.setParameter("fechaDesde", fechaDesde);
                 query.setParameter("fechaFin", fechaFin);
             }

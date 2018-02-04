@@ -98,14 +98,14 @@ public class ItemEntradaStockDAO
         try
         {
             tx = session.beginTransaction();
-            Query query = session.createQuery("FROM ItemEntradaStock ies WHERE ies.entradastock.id = :nroItemES");
+            Query query = session.createQuery("FROM ItemEntradastock ies WHERE ies.entradastock.id = :nroItemES");
             query.setParameter("nroItemES", nroItemES);
             lista = query.list(); 
             tx.commit();
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "Error al listar los ItemEntradaStock");
+            JOptionPane.showMessageDialog(null, "Error al listar los ItemEntradastock");
         }      
         finally
         {
