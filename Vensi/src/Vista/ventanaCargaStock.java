@@ -541,7 +541,49 @@ public class ventanaCargaStock extends javax.swing.JFrame
                 JOptionPane.showMessageDialog(null, "Producto repetido.");
             }
             else
-            
+            {
+                elProd = prodDAO.buscarPorId(Integer.parseInt(id_recibido));
+
+                String descrip = elProd.getDescripcion();
+
+                String cantidad = null, precioCostoU = null, precioVentaU = null;
+
+                cantidad = txfdCantidad.getText();
+                precioCostoU = txfdPrecioCU.getText();
+                precioVentaU = txfdPrecioVU.getText();
+                m = (DefaultTableModel) tablaListaInventario.getModel();
+
+                if(cantidad.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Es obligatorio ingresar una cantidad");
+                }
+                else
+                {
+                    if (precioCostoU.equals("") && precioVentaU.equals("")) //Ninguno
+                    {
+                        String filaNueva[] = {descrip, cantidad, "---", "---", id_recibido};
+                        m.addRow(filaNueva);
+                    }
+
+                    if (!precioCostoU.equals("") && !precioVentaU.equals(""))   //Todos 
+                    {                        
+                        String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "$"+precioVentaU, id_recibido};
+                        m.addRow(filaNueva);
+                    }
+
+                    if (!precioCostoU.equals("") && precioVentaU.equals("")) //solo precio costo
+                    {                        
+                        String filaNueva[] = {descrip, cantidad, "$"+precioCostoU, "---", id_recibido};
+                        m.addRow(filaNueva);
+                    }
+
+                    if (precioCostoU.equals("") && !precioVentaU.equals("")) //solo precio venta
+                    {                        
+                        String filaNueva[] = {descrip, cantidad, "---", "$"+precioVentaU, id_recibido};
+                        m.addRow(filaNueva);
+                    }
+                }
+            }
         }
         else
         {
@@ -590,7 +632,7 @@ public class ventanaCargaStock extends javax.swing.JFrame
         double importe = 0;
         
         //<-----Entradastock-------------------------------------------------------------------------------------
-        EntradaStock eStock = new EntradaStock();        
+        Entradastock eStock = new Entradastock();        
         eStock.setFechaHora(new Date());        
         eStock.setProveedor(elProv);        
         eStockDAO.alta(eStock);
