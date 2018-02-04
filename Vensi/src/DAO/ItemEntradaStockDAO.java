@@ -2,7 +2,7 @@ package DAO;
 
 import Conexion.NewHibernateUtil;
 import org.hibernate.*;
-import Modelo.ItemEntradaStock;
+import Modelo.ItemEntradastock;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -11,7 +11,7 @@ public class ItemEntradaStockDAO
     Session session = null;
     Transaction tx;
     
-    public void alta(ItemEntradaStock i)
+    public void alta(ItemEntradastock i)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
         tx = session.beginTransaction();
@@ -34,12 +34,12 @@ public class ItemEntradaStockDAO
         //JOptionPane.showMessageDialog(null, "Item agregado");
     }
     
-    public void modificar(ItemEntradaStock i, int id)
+    public void modificar(ItemEntradastock i, int id)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();        
-        ItemEntradaStock item = null;
+        ItemEntradastock item = null;
         
-        item = (ItemEntradaStock)session.get(ItemEntradaStock.class, id);
+        item = (ItemEntradastock)session.get(ItemEntradastock.class, id);
         item.setCantidad(i.getCantidad());        
         
         tx = session.beginTransaction();
@@ -65,8 +65,8 @@ public class ItemEntradaStockDAO
     public void borrar(int id)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
-        ItemEntradaStock item = null;                    
-        item = (ItemEntradaStock)session.get(ItemEntradaStock.class, id);
+        ItemEntradastock item = null;                    
+        item = (ItemEntradastock)session.get(ItemEntradastock.class, id);
         
         tx = session.beginTransaction();
         try
@@ -91,10 +91,10 @@ public class ItemEntradaStockDAO
         //JOptionPane.showMessageDialog(null, "Item eliminado");
     }
     
-    public List<ItemEntradaStock> listar(int nroItemES)
+    public List<ItemEntradastock> listar(int nroItemES)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();        
-        List<ItemEntradaStock> lista = null;
+        List<ItemEntradastock> lista = null;
         try
         {
             tx = session.beginTransaction();

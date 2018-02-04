@@ -4,14 +4,14 @@ import Conexion.NewHibernateUtil;
 import org.hibernate.*;
 import java.util.*;
 import javax.swing.*;
-import Modelo.EntradaStock;
+import Modelo.Entradastock;
 
 public class EntradaStockDAO 
 {            
     Session session;
     Transaction tx;
         
-    public void alta (EntradaStock es)
+    public void alta (Entradastock es)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
         tx = session.beginTransaction();
@@ -31,15 +31,15 @@ public class EntradaStockDAO
         {
             session.close();
         }
-        //JOptionPane.showMessageDialog(null, "EntradaStock creado");
+        //JOptionPane.showMessageDialog(null, "Entradastock creado");
     }
     
-    public void modificar(EntradaStock es, int id)
+    public void modificar(Entradastock es, int id)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
-        EntradaStock nuevoEStock = null;
+        Entradastock nuevoEStock = null;
                    
-        nuevoEStock = (EntradaStock)session.get(EntradaStock.class, id);
+        nuevoEStock = (Entradastock)session.get(Entradastock.class, id);
         nuevoEStock.setFechaHora(es.getFechaHora());
         nuevoEStock.setProveedor(es.getProveedor());
         nuevoEStock.setImporte(es.getImporte());
@@ -55,20 +55,20 @@ public class EntradaStockDAO
             if (tx.isActive())
 		tx.rollback();
                     e.printStackTrace();
-                    //JOptionPane.showMessageDialog(null, "Error al modificar EntradaStock");
+                    //JOptionPane.showMessageDialog(null, "Error al modificar Entradastock");
 		throw e;
         }        
         finally
         {
             session.close();
         }
-        //JOptionPane.showMessageDialog(null, "EntradaStock modificado");
+        //JOptionPane.showMessageDialog(null, "Entradastock modificado");
     }
     
-    public List<EntradaStock> listar()
+    public List<Entradastock> listar()
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
-        List<EntradaStock> lista = null;
+        List<Entradastock> lista = null;
         try
         {
             tx = session.beginTransaction();
@@ -86,10 +86,10 @@ public class EntradaStockDAO
         return lista;
     }
     
-    public List<EntradaStock> buscarPorFecha(Date fechaDesde, Date fechaFin)
+    public List<Entradastock> buscarPorFecha(Date fechaDesde, Date fechaFin)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
-        List<EntradaStock> lista = null;
+        List<Entradastock> lista = null;
         Query query;
         try
         {
@@ -120,14 +120,14 @@ public class EntradaStockDAO
         return lista;
     }
     
-    public EntradaStock buscarPorID(int nro)
+    public Entradastock buscarPorID(int nro)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
-        EntradaStock es = null;
+        Entradastock es = null;
         try
         {
             tx = session.beginTransaction();
-            es = (EntradaStock)session.get(EntradaStock.class, nro);
+            es = (Entradastock)session.get(Entradastock.class, nro);
             tx.commit();
             
         }

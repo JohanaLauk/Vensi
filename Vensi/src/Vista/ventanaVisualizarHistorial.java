@@ -5,9 +5,9 @@ import DAO.ItemEntradaStockDAO;
 import DAO.ItemVentaDAO;
 import DAO.EntradaStockDAO;
 import DAO.TurnoDAO;
-import Modelo.ItemEntradaStock;
+import Modelo.ItemEntradastock;
 import Modelo.ItemVenta;
-import Modelo.EntradaStock;
+import Modelo.Entradastock;
 import Modelo.Turno;
 import Modelo.EntradaSalida;
 import java.text.DateFormat;
@@ -339,7 +339,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             modelo.addColumn("Entrada");
             modelo.addColumn("Salida");
             
-            EntradaStock es = eStockDAO.buscarPorID(idSelec);
+            Entradastock es = eStockDAO.buscarPorID(idSelec);
             
             modeloList = new DefaultListModel();
             modeloList.addElement("NÚMERO:  " + String.valueOf(es.getId()));
@@ -348,9 +348,9 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             modeloList.addElement(" ");
             modeloList.addElement("IMPORTE:  $" + String.valueOf(formatoPrecios.format(es.getImporte())));
                         
-            List<ItemEntradaStock> listaEntradaStock = iEStockDAO.listar(idSelec);
+            List<ItemEntradastock> listaEntradaStock = iEStockDAO.listar(idSelec);
             
-            for (ItemEntradaStock i : listaEntradaStock)
+            for (ItemEntradastock i : listaEntradaStock)
             {
                 datos[0] = i.getProducto().getDescripcion();
                 datos[1] = String.valueOf(i.getCantidad());

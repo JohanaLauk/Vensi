@@ -2,7 +2,7 @@ package Vista;
 
 import DAO.EntradaStockDAO;
 import DAO.TurnoDAO;
-import Modelo.EntradaStock;
+import Modelo.Entradastock;
 import Modelo.Turno;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -586,7 +586,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                     {
                         if (nro.equals("") && fechaDesde != null)
                         {
-                            List<EntradaStock> listaEntradastocks = eStockDAO.buscarPorFecha(fechaDesde, fechaHasta);
+                            List<Entradastock> listaEntradastocks = eStockDAO.buscarPorFecha(fechaDesde, fechaHasta);
 
                             if (listaEntradastocks.isEmpty()) 
                             {
@@ -596,7 +596,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                             {
                                 String[] datos = new String[3];
 
-                                for (EntradaStock es : listaEntradastocks) 
+                                for (Entradastock es : listaEntradastocks) 
                                 {
                                     datos[0] = String.valueOf(es.getId());
                                     datos[1] = String.valueOf(fechaHoraFormat.format(es.getFechaHora()) + "hs.");
@@ -622,7 +622,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                         {
                             if (!nro.equals("") && fechaDesde == null)
                             {
-                                EntradaStock es = eStockDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
+                                Entradastock es = eStockDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
 
                                 if (es == null) 
                                 {
