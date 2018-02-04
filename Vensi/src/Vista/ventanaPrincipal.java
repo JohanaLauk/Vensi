@@ -184,13 +184,13 @@ public class ventanaPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
-        ventanaPedido vPedido = new ventanaPedido();
+        ventanaGenerarPedido vPedido = new ventanaGenerarPedido();
         vPedido.setVisible(true);    //hace visible una ventana
         dispose();  //cierra la ventana que deja
     }//GEN-LAST:event_btnPedidosActionPerformed
 
     private void btnComprasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnComprasActionPerformed
-        ventanaCompra vInventario = new ventanaCompra();
+        ventanaCargaStock vInventario = new ventanaCargaStock();
         vInventario.setVisible(true);    //hace visible una ventana
         dispose();  //cierra la ventana que deja
     }//GEN-LAST:event_btnComprasActionPerformed

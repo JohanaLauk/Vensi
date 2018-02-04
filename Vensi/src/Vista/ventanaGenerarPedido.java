@@ -19,7 +19,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-public class ventanaPedido extends javax.swing.JFrame 
+public class ventanaGenerarPedido extends javax.swing.JFrame 
 {
     ProductoDAO prodDAO = new ProductoDAO();
     ProveedorDAO provDAO = new ProveedorDAO();
@@ -39,7 +39,7 @@ public class ventanaPedido extends javax.swing.JFrame
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
     
-    public ventanaPedido() 
+    public ventanaGenerarPedido() 
     {
         initComponents();
         
@@ -122,7 +122,7 @@ public class ventanaPedido extends javax.swing.JFrame
         listProdAlarma = new javax.swing.JList<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Pedido");
+        setTitle("Generar pedido");
 
         jLabel1.setText("Buscar:");
 
@@ -825,7 +825,7 @@ public class ventanaPedido extends javax.swing.JFrame
         {
             public void run() 
             {
-                new ventanaPedido().setVisible(true);
+                new ventanaGenerarPedido().setVisible(true);
             }
         });
     }

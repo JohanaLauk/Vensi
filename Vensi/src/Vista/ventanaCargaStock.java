@@ -16,7 +16,7 @@ import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
-public class ventanaCompra extends javax.swing.JFrame 
+public class ventanaCargaStock extends javax.swing.JFrame 
 {
     ProductoDAO prodDAO = new ProductoDAO();
     ProveedorDAO provDAO = new ProveedorDAO();
@@ -40,7 +40,7 @@ public class ventanaCompra extends javax.swing.JFrame
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
     
-    public ventanaCompra() 
+    public ventanaCargaStock() 
     {
         initComponents();
         
@@ -132,7 +132,7 @@ public class ventanaCompra extends javax.swing.JFrame
         cbProveedores = new javax.swing.JComboBox<>();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Inventario");
+        setTitle("Actualización del inventario producto");
 
         tablaProd = new javax.swing.JTable()
         {
@@ -632,7 +632,7 @@ public class ventanaCompra extends javax.swing.JFrame
         double importe = 0;
         
         //<-----EntradaStock-------------------------------------------------------------------------------------
-        Entradastock eStock = new Entradastock();        
+        EntradaStock eStock = new EntradaStock();        
         eStock.setFechaHora(new Date());        
         eStock.setProveedor(elProv);        
         eStockDAO.alta(eStock);
@@ -644,7 +644,7 @@ public class ventanaCompra extends javax.swing.JFrame
             producto = prodDAO.buscarPorId(Integer.parseInt(tablaListaInventario.getValueAt(i,4).toString()));
             
             //<-----ItemEntradaStock-------------------------------------------------------------------------------------
-            ItemEntradastock itemES = new ItemEntradastock();
+            ItemEntradaStock itemES = new ItemEntradaStock();
             itemES.setProducto(producto);
             int canti = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
             itemES.setCantidad(canti);
@@ -942,7 +942,7 @@ public class ventanaCompra extends javax.swing.JFrame
         {
             public void run() 
             {
-                new ventanaCompra().setVisible(true);
+                new ventanaCargaStock().setVisible(true);
             }
         });
     }

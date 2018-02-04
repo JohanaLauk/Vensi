@@ -2,7 +2,7 @@ package DAO;
 
 import Conexion.NewHibernateUtil;
 import org.hibernate.*;
-import Modelo.ItemEntradastock;
+import Modelo.ItemEntradaStock;
 import java.util.List;
 import javax.swing.JOptionPane;
 
@@ -11,7 +11,7 @@ public class ItemEntradaStockDAO
     Session session = null;
     Transaction tx;
     
-    public void alta(ItemEntradastock i)
+    public void alta(ItemEntradaStock i)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
         tx = session.beginTransaction();
@@ -34,12 +34,12 @@ public class ItemEntradaStockDAO
         //JOptionPane.showMessageDialog(null, "Item agregado");
     }
     
-    public void modificar(ItemEntradastock i, int id)
+    public void modificar(ItemEntradaStock i, int id)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();        
-        ItemEntradastock item = null;
+        ItemEntradaStock item = null;
         
-        item = (ItemEntradastock)session.get(ItemEntradastock.class, id);
+        item = (ItemEntradaStock)session.get(ItemEntradaStock.class, id);
         item.setCantidad(i.getCantidad());        
         
         tx = session.beginTransaction();
@@ -65,8 +65,8 @@ public class ItemEntradaStockDAO
     public void borrar(int id)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
-        ItemEntradastock item = null;                    
-        item = (ItemEntradastock)session.get(ItemEntradastock.class, id);
+        ItemEntradaStock item = null;                    
+        item = (ItemEntradaStock)session.get(ItemEntradaStock.class, id);
         
         tx = session.beginTransaction();
         try
@@ -91,21 +91,21 @@ public class ItemEntradaStockDAO
         //JOptionPane.showMessageDialog(null, "Item eliminado");
     }
     
-    public List<ItemEntradastock> listar(int nroItemES)
+    public List<ItemEntradaStock> listar(int nroItemES)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();        
-        List<ItemEntradastock> lista = null;
+        List<ItemEntradaStock> lista = null;
         try
         {
             tx = session.beginTransaction();
-            Query query = session.createQuery("FROM ItemEntradastock ies WHERE ies.entradastock.id = :nroItemES");
+            Query query = session.createQuery("FROM ItemEntradaStock ies WHERE ies.entradastock.id = :nroItemES");
             query.setParameter("nroItemES", nroItemES);
             lista = query.list(); 
             tx.commit();
         }
         catch(Exception e)
         {
-            JOptionPane.showMessageDialog(null, "Error al listar los ItemEntradastock");
+            JOptionPane.showMessageDialog(null, "Error al listar los ItemEntradaStock");
         }      
         finally
         {

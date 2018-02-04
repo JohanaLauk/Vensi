@@ -2,7 +2,7 @@ package Vista;
 
 import DAO.EntradaStockDAO;
 import DAO.TurnoDAO;
-import Modelo.Entradastock;
+import Modelo.EntradaStock;
 import Modelo.Turno;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -22,7 +22,7 @@ public class ventanaHistorial extends javax.swing.JFrame
     DefaultTableModel modelo;
     TableColumnModel tcm ;
     TurnoDAO tDAO = new TurnoDAO();
-    EntradaStockDAO pDAO = new EntradaStockDAO();    
+    EntradaStockDAO eStockDAO = new EntradaStockDAO();    
     
     DateFormat fechaHoraFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     
@@ -586,7 +586,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                     {
                         if (nro.equals("") && fechaDesde != null)
                         {
-                            List<Entradastock> listaEntradastocks = pDAO.buscarPorFecha(fechaDesde, fechaHasta);
+                            List<EntradaStock> listaEntradastocks = eStockDAO.buscarPorFecha(fechaDesde, fechaHasta);
 
                             if (listaEntradastocks.isEmpty()) 
                             {
@@ -596,7 +596,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                             {
                                 String[] datos = new String[3];
 
-                                for (Entradastock es : listaEntradastocks) 
+                                for (EntradaStock es : listaEntradastocks) 
                                 {
                                     datos[0] = String.valueOf(es.getId());
                                     datos[1] = String.valueOf(fechaHoraFormat.format(es.getFechaHora()) + "hs.");
@@ -622,7 +622,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                         {
                             if (!nro.equals("") && fechaDesde == null)
                             {
-                                Entradastock es = pDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
+                                EntradaStock es = eStockDAO.buscarPorID(Integer.parseInt(txfdNro.getText()));
 
                                 if (es == null) 
                                 {

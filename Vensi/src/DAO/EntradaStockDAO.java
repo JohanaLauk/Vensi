@@ -4,14 +4,14 @@ import Conexion.NewHibernateUtil;
 import org.hibernate.*;
 import java.util.*;
 import javax.swing.*;
-import Modelo.Entradastock;
+import Modelo.EntradaStock;
 
 public class EntradaStockDAO 
 {            
     Session session;
     Transaction tx;
         
-    public void alta (Entradastock es)
+    public void alta (EntradaStock es)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
         tx = session.beginTransaction();
@@ -34,12 +34,12 @@ public class EntradaStockDAO
         //JOptionPane.showMessageDialog(null, "EntradaStock creado");
     }
     
-    public void modificar(Entradastock es, int id)
+    public void modificar(EntradaStock es, int id)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
-        Entradastock nuevoEStock = null;
+        EntradaStock nuevoEStock = null;
                    
-        nuevoEStock = (Entradastock)session.get(Entradastock.class, id);
+        nuevoEStock = (EntradaStock)session.get(EntradaStock.class, id);
         nuevoEStock.setFechaHora(es.getFechaHora());
         nuevoEStock.setProveedor(es.getProveedor());
         nuevoEStock.setImporte(es.getImporte());
@@ -65,14 +65,14 @@ public class EntradaStockDAO
         //JOptionPane.showMessageDialog(null, "EntradaStock modificado");
     }
     
-    public List<Entradastock> listar()
+    public List<EntradaStock> listar()
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
-        List<Entradastock> lista = null;
+        List<EntradaStock> lista = null;
         try
         {
             tx = session.beginTransaction();
-            lista = session.createQuery("FROM Entradastock").list();
+            lista = session.createQuery("FROM EntradaStock").list();
             tx.commit();            
         }
         catch(Exception e)
@@ -86,22 +86,22 @@ public class EntradaStockDAO
         return lista;
     }
     
-    public List<Entradastock> buscarPorFecha(Date fechaDesde, Date fechaFin)
+    public List<EntradaStock> buscarPorFecha(Date fechaDesde, Date fechaFin)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
-        List<Entradastock> lista = null;
+        List<EntradaStock> lista = null;
         Query query;
         try
         {
             tx = session.beginTransaction();
             if(fechaFin == null)
             {
-                query = session.createQuery("FROM Entradastock p WHERE date(p.fechaHora) = :fechaDesde");
+                query = session.createQuery("FROM EntradaStock p WHERE date(p.fechaHora) = :fechaDesde");
                 query.setParameter("fechaDesde", fechaDesde);
             }
             else
             {
-                query = session.createQuery("FROM Entradastock p WHERE p.fechaHora BETWEEN :fechaDesde AND :fechaFin");
+                query = session.createQuery("FROM EntradaStock p WHERE p.fechaHora BETWEEN :fechaDesde AND :fechaFin");
                 query.setParameter("fechaDesde", fechaDesde);
                 query.setParameter("fechaFin", fechaFin);
             }
@@ -120,14 +120,14 @@ public class EntradaStockDAO
         return lista;
     }
     
-    public Entradastock buscarPorID(int nro)
+    public EntradaStock buscarPorID(int nro)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
-        Entradastock es = null;
+        EntradaStock es = null;
         try
         {
             tx = session.beginTransaction();
-            es = (Entradastock)session.get(Entradastock.class, nro);
+            es = (EntradaStock)session.get(EntradaStock.class, nro);
             tx.commit();
             
         }
