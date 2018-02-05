@@ -722,7 +722,7 @@ public class ventanaVenta extends javax.swing.JFrame
                             
                             precioTotal = String.valueOf(formatoPrecios.format(precioU));   
                             
-                            tablaCarrito.setValueAt(cantTotal+"gr", filaModificar, 1);
+                            tablaCarrito.setValueAt(cantTotal+"gr", filaModificar, 1);  //1 = nroColumna | cantTotal=valor nuevo
                         }
                         else
                         {

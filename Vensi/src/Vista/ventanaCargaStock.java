@@ -521,24 +521,155 @@ public class ventanaCargaStock extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
-        int filaSelec = tablaProd.getSelectedRow();
-        boolean repetido = false;
-
+        int filaSelec = tablaProd.getSelectedRow();         
+        
         if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
         {
-            String id_recibido = tablaProd.getValueAt(filaSelec, 7).toString();
-            
-            for (int i = 0; i < tablaListaInventario.getModel().getRowCount(); i++)
+            int filaModificar = -1; 
+            boolean repetido = false;            
+            String id_recibido = tablaProd.getValueAt(filaSelec, 7).toString();                        
+            int cantFilasInventario = tablaListaInventario.getRowCount();
+                        
+            for (int i = 0 ; i < cantFilasInventario ; i++)     //recorre las filas de la tablaListaInventario
             {
                 if (Integer.parseInt(tablaListaInventario.getValueAt(i, 4).toString()) == Integer.parseInt(id_recibido))
                 {
                     repetido = true;
+                    filaModificar = i;
                 }
             }
             
             if (repetido)
             {
-                JOptionPane.showMessageDialog(null, "Producto repetido.");
+                int cantVieja = Integer.parseInt(tablaListaInventario.getValueAt(filaModificar, 1).toString());
+                String pcViejo = null;
+                String pvViejo = null;
+                
+                String cadenaPC = tablaListaInventario.getValueAt(filaModificar, 2).toString();
+                if (!cadenaPC.equals("---"))
+                {
+                    pcViejo = cadenaPC.substring(1);
+                }
+                else
+                {
+                    pcViejo = "---";
+                }
+                
+                String cadenaPV = tablaListaInventario.getValueAt(filaModificar, 3).toString();
+                if (!cadenaPV.equals("---"))
+                {
+                    pvViejo = cadenaPV.substring(1);
+                } 
+                else
+                {
+                    pvViejo = "---";
+                }
+                
+                int cantNueva = Integer.parseInt(txfdCantidad.getText());
+                String pcNuevo = txfdPrecioCU.getText();
+                String pvNuevo = txfdPrecioVU.getText();
+                
+                int cantidad = cantVieja + cantNueva;                
+                
+                if ((pcViejo.equals("---") && pcNuevo.equals("")) && (pvViejo.equals("---") && pvNuevo.equals("")))     //null | null -- null | null
+                {
+                    pcNuevo = "---";
+                    pvNuevo = "---";
+                }
+                if ((!pcViejo.equals("---") && !pcNuevo.equals("")) && (!pvViejo.equals("---") && !pvNuevo.equals(""))) //valor | valor -- valor | valor
+                {
+                    pcNuevo = pcNuevo;
+                    pvNuevo = pvNuevo;
+                }
+                if ((!pcViejo.equals("---") && pcNuevo.equals("")) && (!pvViejo.equals("---") && pvNuevo.equals("")))   //valor | null -- valor | null
+                {
+                    pcNuevo = pcViejo;
+                    pvNuevo = pvViejo;                    
+                }
+                if ((!pcViejo.equals("---") && pcNuevo.equals("")) && (!pvViejo.equals("---") && !pvNuevo.equals("")))   //valor | null -- valor | valor
+                {
+                    pcNuevo = pcViejo;
+                    pvNuevo = pvNuevo;                    
+                }
+                if ((pcViejo.equals("---") && !pcNuevo.equals("")) && (pvViejo.equals("---") && !pvNuevo.equals("")))   //null | valor  -- null | valor
+                {
+                    pcNuevo = pcNuevo;
+                    pvNuevo = pvNuevo;                    
+                }
+                if ((pcViejo.equals("---") && !pcNuevo.equals("")) && (!pvViejo.equals("---") && pvNuevo.equals("")))   //null | valor -- valor | null
+                {
+                    pcNuevo = pcNuevo;
+                    pvNuevo = pvViejo;                    
+                } 
+                if ((!pcViejo.equals("---") && pcNuevo.equals("")) && (pvViejo.equals("---") && !pvNuevo.equals("")))   //valor | null -- null | valor
+                {
+                    pcNuevo = pcViejo;
+                    pvNuevo = pvNuevo;                    
+                }
+                if ((pcViejo.equals("---") && !pcNuevo.equals("")) && (pvViejo.equals("---") && pvNuevo.equals("")))   //null | valor -- null | null
+                {
+                    pcNuevo = pcNuevo;
+                    pvNuevo = "---";                    
+                }
+                if ((pcViejo.equals("---") && pcNuevo.equals("")) && (pvViejo.equals("---") && !pvNuevo.equals("")))   //null | null -- null | valor
+                {
+                    pcNuevo = "---";
+                    pvNuevo = pvNuevo;                    
+                }
+                if ((!pcViejo.equals("---") && !pcNuevo.equals("")) && (pvViejo.equals("---") && pvNuevo.equals("")))   //valor | valor -- null | null
+                {
+                    pcNuevo = pcNuevo;
+                    pvNuevo = "---";                    
+                }
+                if ((pcViejo.equals("---") && pcNuevo.equals("")) && (!pvViejo.equals("---") && !pvNuevo.equals("")))   //null | null -- valor | valor
+                {
+                    pcNuevo = "---";
+                    pvNuevo = pvNuevo;                    
+                }
+                
+                if ((!pcViejo.equals("---") && !pcNuevo.equals("")) && (!pvViejo.equals("---") && pvNuevo.equals("")))   //valor | valor -- valor | null
+                {
+                    pcNuevo = pcNuevo;
+                    pvNuevo = pvViejo;                    
+                }
+                if ((!pcViejo.equals("---") && !pcNuevo.equals("")) && (pvViejo.equals("---") && !pvNuevo.equals("")))   //valor | valor -- null | valor
+                {
+                    pcNuevo = pcNuevo;
+                    pvNuevo = pvNuevo;                    
+                }
+                if ((pcViejo.equals("---") && pcNuevo.equals("")) && (!pvViejo.equals("---") && pvNuevo.equals("")))   //null | null -- valor | null
+                {
+                    pcNuevo = "---";
+                    pvNuevo = pvViejo;                    
+                }
+                if ((pcViejo.equals("---") && !pcNuevo.equals("")) && (!pvViejo.equals("---") && !pvNuevo.equals("")))   //null | valor -- valor | valor
+                {
+                    pcNuevo = pcNuevo;
+                    pvNuevo = pvNuevo;                    
+                }
+                if ((!pcViejo.equals("---") && pcNuevo.equals("")) && (pvViejo.equals("---") && pvNuevo.equals("")))   //valor | null -- null | null
+                {
+                    pcNuevo = pcViejo;
+                    pvNuevo = "---";                    
+                }
+                                
+                tablaListaInventario.setValueAt(cantidad, filaModificar, 1);
+                if (!pcNuevo.equals("---"))
+                {
+                    tablaListaInventario.setValueAt("$" + pcNuevo, filaModificar, 2);
+                }
+                else
+                {
+                    tablaListaInventario.setValueAt(pcNuevo, filaModificar, 2);
+                }
+                if (!pvNuevo.equals("---"))
+                {
+                    tablaListaInventario.setValueAt("$" + pvNuevo, filaModificar, 3);
+                }
+                else
+                {
+                    tablaListaInventario.setValueAt(pvNuevo, filaModificar, 3);
+                }
             }
             else
             {
@@ -563,7 +694,7 @@ public class ventanaCargaStock extends javax.swing.JFrame
                     {
                         JOptionPane.showMessageDialog(null, "¡Es obligatorio ingresar una cantidad!\n"
                                 + "Si sólo desea modificiar los precios,\n"
-                                + "hágalo desde la Administración del producto.");
+                                + "hágalo desde \"Gestión del producto\".");
                     }
                     else
                     {
@@ -642,7 +773,7 @@ public class ventanaCargaStock extends javax.swing.JFrame
         double importeCostoT = 0;
         double precioCTItem = 0;
         
-        if (filasTablaInv >= 0)
+        if (filasTablaInv > 0)
         {
             Producto producto = null; 
 
@@ -1155,13 +1286,13 @@ public class ventanaCargaStock extends javax.swing.JFrame
         
                 if (filaSelec >= 0)
                 {
-                    String cod = tablaListaInventario.getValueAt(filaSelec, 0).toString();
-                    String desc = tablaListaInventario.getValueAt(filaSelec, 1).toString();
+                    int id = Integer.parseInt(tablaListaInventario.getValueAt(filaSelec, 4).toString());
+                    Producto elProd = prodDAO.buscarPorId(id);         
                     
                     modeloList = new DefaultListModel(); 
                     modeloList.clear();
-                    modeloList.addElement("Código: " + cod);
-                    modeloList.addElement("Descripcion: " + desc);
+                    modeloList.addElement("Código: " + elProd.getCodigo());
+                    modeloList.addElement("Descripcion: " + elProd.getDescripcion());
                     listInfoProd.setModel(modeloList);
                     
                     txfdCantidad.setEnabled(false);

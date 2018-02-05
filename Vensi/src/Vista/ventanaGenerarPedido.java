@@ -677,56 +677,62 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         int filaSelec = tablaProd.getSelectedRow();
-        boolean repetido = false;
-        
-        if (filaSelec >= 0)   //corrobotamos si seleccionó una fila
+                
+        if (filaSelec >= 0)   //corroboramos si seleccionó una fila
         {
+            int filaModificar = -1;
+            boolean repetido = false;
             String id_recibido = tablaProd.getValueAt(filaSelec, 6).toString();
-            for(int i = 0; i < tablaPedido.getModel().getRowCount(); i++){
+            
+            for (int i = 0; i < tablaPedido.getRowCount(); i++)
+            {
                 if(Integer.parseInt(tablaPedido.getValueAt(i, 3).toString()) == Integer.parseInt(id_recibido))
                 {
                     repetido = true;
+                    filaModificar = i;
                 }
             }
-            if(repetido){
-                JOptionPane.showMessageDialog(null, "Producto repetido.");
-            }
-            else{
-                            
-            elProd = prodDAO.buscarPorId(Integer.parseInt(id_recibido));
-            
-            String codigo = elProd.getCodigo();
-            String descrip = elProd.getDescripcion();
-                
-            String cantidad = txfdCantidad.getText();
-            
-            if(cantidad.equals(""))
+            if (repetido)
             {
-                JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad");
+                int cantVieja = Integer.parseInt(tablaPedido.getValueAt(filaModificar, 2).toString());
+                int cantNueva = Integer.parseInt(txfdCantidad.getText());
+                int cantidad = cantVieja + cantNueva;
+                
+                tablaPedido.setValueAt(cantidad, filaModificar, 2);
             }
             else
-            {   
-                m = (DefaultTableModel) tablaPedido.getModel();
-                String filaNueva[] = {codigo, descrip, cantidad, id_recibido};
-                m.addRow(filaNueva);                   
-            }
+            {                            
+                elProd = prodDAO.buscarPorId(Integer.parseInt(id_recibido));
+
+                String codigo = elProd.getCodigo();
+                String descrip = elProd.getDescripcion();
+
+                String cantidad = txfdCantidad.getText();
+
+                if(cantidad.equals(""))
+                {
+                    JOptionPane.showMessageDialog(null, "Debe ingresar una cantidad");
+                }
+                else
+                {   
+                    m = (DefaultTableModel) tablaPedido.getModel();
+                    String filaNueva[] = {codigo, descrip, cantidad, id_recibido};
+                    m.addRow(filaNueva);                   
+                }
             }
         }
         else
         {
             JOptionPane.showMessageDialog(null, "Debe seleccionar un producto");
         }
+        
         txfdCantidad.setText("");
-        
-        limpiarList();
-        
+        limpiarList();        
         tablaProd.setRowSelectionAllowed(false);
-        tablaPedido.setRowSelectionAllowed(false);
-        
+        tablaPedido.setRowSelectionAllowed(false);        
         btnAgregar.setEnabled(false);
         btnQuitar.setEnabled(false);
-        txfdCantidad.setEnabled(false);
-        
+        txfdCantidad.setEnabled(false);        
     }//GEN-LAST:event_btnAgregarActionPerformed
 
     private void btnQuitarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnQuitarActionPerformed
