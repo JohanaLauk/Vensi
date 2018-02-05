@@ -45,9 +45,15 @@ public class TurnoDAO
         turno.setFechaHoraInicio(t.getFechaHoraInicio());
         turno.setFechaHoraFin(t.getFechaHoraFin());
         turno.setUsuario(t.getUsuario());
-        turno.setMontoVenta(t.getMontoVenta());
-        turno.setMontoES(t.getMontoES());
-        turno.setEfectivoHay(t.getEfectivoHay());        
+        turno.setMontoVentas(t.getMontoVentas());
+        turno.setMontoEntradas(t.getMontoEntradas());
+        turno.setMontoSalidas(t.getMontoSalidas());
+        turno.setMontoAnuladas(t.getMontoAnuladas());
+        turno.setEfectivoHay(t.getEfectivoHay());    
+        turno.setCantVentas(t.getCantVentas());
+        turno.setCantEntradas(t.getCantEntradas());
+        turno.setCantSalidas(t.getCantSalidas());
+        turno.setCantAnuladas(t.getCantAnuladas());
                     
         tx = session.beginTransaction();
         try
@@ -90,7 +96,7 @@ public class TurnoDAO
         }
         return lista;
     }
-    
+      
     public List<Turno> buscarPorFecha(Date fechaDesde, Date fechaFin)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();        
@@ -169,5 +175,5 @@ public class TurnoDAO
             session.close();
         }        
         return t;
-    }
+    }   
 }

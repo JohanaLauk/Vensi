@@ -18,6 +18,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     
     Turno turnoActual = null;
     
+    public static int cantVentas;
+    
     public ventanaCierreTurno() 
     {
         initComponents();
@@ -604,7 +606,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         return hay;
     }
     
-    public double calcularVenta()   //entrada de plata
+    public double calcularMontoVentas()      //monto ventas
     {
         double montoVenta = 0;
     
@@ -612,14 +614,14 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         
         for (ItemVenta iv : listaIT)
         {
-            montoVenta = montoVenta + iv.getMonto();
+            montoVenta += iv.getMonto();
         }
         return montoVenta;
     }
     
-    public double calcularMontoES()     //apertuda=entrada   |    lo otro es salida de plata
-    {
-        double montoES = 0;
+    public double calcularMontoEntradas()    //monto aperturas
+    {   
+        double montoEntradas = 0;
         
         List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
         
@@ -627,24 +629,110 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         {
             if (es.isTipo())  //entrada de plata
             {
-                montoES = montoES + es.getMonto();
-            }      
-            else    //salida de plata
-            {
-                if (!es.getNombre().equals("ANULACIÓN DE VENTA"))
-                {
-                    montoES = montoES - es.getMonto();
-                }
-            }
+                montoEntradas += es.getMonto();
+            } 
         }        
-        return montoES;
+        return montoEntradas;
+    }
+    
+    public int calcularCantEntradas()       //cant aperturas
+    {
+        int cantEntradas = 0;
+        
+        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
+        
+        for (EntradaSalida es : listaES)
+        {
+            if (es.isTipo())  //entrada de plata
+            {
+                cantEntradas += 1;
+            } 
+        }        
+        return cantEntradas;
+    }
+    
+    public double calcularMontoSalidas()     //monto retiros y sueldos
+    {
+        double montoSalidas = 0;
+        
+        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
+        
+        for (EntradaSalida es : listaES)
+        {
+            if (!es.isTipo())  //salida de plata
+            {
+                if (!es.getNombre().equals("ANULACIÓN DE VENTA"))   //Retiros y sueldos
+                {
+                    montoSalidas += es.getMonto();
+                }
+            } 
+        }        
+        return montoSalidas;
+    }
+    
+    public int calcularCantSalidas()        //cant retiros y sueldos
+    {
+        int cantSalidas = 0;
+        
+        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
+        
+        for (EntradaSalida es : listaES)
+        {
+            if (!es.isTipo())  //salida de plata
+            {
+                if (!es.getNombre().equals("ANULACIÓN DE VENTA"))   //Retiros y sueldos
+                {
+                    cantSalidas += 1;
+                }
+            } 
+        }        
+        return cantSalidas;
+    }
+    
+    public double calcularMontoAnuladas()   //monto anulaciones
+    {
+        double montoAnuladas = 0;
+        
+        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
+        
+        for (EntradaSalida es : listaES)
+        {
+            if (!es.isTipo())  //salida de plata
+            {
+                if (es.getNombre().equals("ANULACIÓN DE VENTA"))   //Retiros y sueldos
+                {
+                    montoAnuladas += es.getMonto();
+                }
+            } 
+        }        
+        return montoAnuladas;
+    }
+    
+    public int calcularCantAnuladas()       //cant anulaciones
+    {
+        int cantAnuladas = 0;
+        
+        List<EntradaSalida> listaES = esDAO.listar(turnoActual.getId());
+        
+        for (EntradaSalida es : listaES)
+        {
+            if (!es.isTipo())  //salida de plata
+            {
+                if (es.getNombre().equals("ANULACIÓN DE VENTA"))   //Retiros y sueldos
+                {
+                    cantAnuladas += 1;
+                }
+            } 
+        }
+        
+        return cantAnuladas;
     }
     
     public double calcularMontoEsperado()
     {       
         double montoEsperado = 0;
                          
-        montoEsperado = calcularVenta() + calcularMontoES();
+        montoEsperado = (calcularMontoVentas() + calcularMontoEntradas()) - calcularMontoSalidas();
         
         return montoEsperado;
     }
@@ -670,8 +758,19 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         if (cerrar == 0)
         {
             turnoActual.setFechaHoraFin(new Date());
-            turnoActual.setMontoVenta(calcularVenta());
-            turnoActual.setMontoES(calcularMontoES());
+            
+            turnoActual.setMontoVentas(calcularMontoVentas());
+            turnoActual.setCantVentas(cantVentas);    //recibir el valor de ventanaVenta boton CONFIRMAR
+            
+            turnoActual.setMontoEntradas(calcularMontoEntradas());
+            turnoActual.setCantEntradas(calcularCantEntradas());
+            
+            turnoActual.setMontoSalidas(calcularMontoSalidas());
+            turnoActual.setCantSalidas(calcularCantSalidas());
+            
+            turnoActual.setMontoAnuladas(calcularMontoAnuladas());
+            turnoActual.setCantAnuladas(calcularCantAnuladas());
+            
             turnoActual.setEfectivoHay(calcularHay());            
                     
             tDAO.modificar(turnoActual, turnoActual.getId());
@@ -682,6 +781,17 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         }               
     }//GEN-LAST:event_btnAceptarCerrarTurnoActionPerformed
 
+    public static void main(String args[]) 
+    {
+        java.awt.EventQueue.invokeLater(new Runnable() 
+        {
+            public void run() 
+            {
+                new ventanaCierreTurno().setVisible(true);
+            }
+        });
+    }
+    
     private void txfd500KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfd500KeyReleased
         if (txfd500.getText().equals(""))
         {
@@ -913,17 +1023,6 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
     }//GEN-LAST:event_txfd0025KeyTyped
-
-    public static void main(String args[]) 
-    {
-        java.awt.EventQueue.invokeLater(new Runnable() 
-        {
-            public void run() 
-            {
-                new ventanaCierreTurno().setVisible(true);
-            }
-        });
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarCerrarTurno;

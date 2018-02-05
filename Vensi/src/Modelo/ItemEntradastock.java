@@ -6,8 +6,9 @@ public class ItemEntradastock  implements java.io.Serializable
     private Entradastock entradastock;
     private Producto producto;
     private int cantidad;
-    private double precioCostoItem;
-
+    private double precioCosto;
+    private double precioVenta;
+            
     public ItemEntradastock() 
     { }
    
@@ -47,14 +48,23 @@ public class ItemEntradastock  implements java.io.Serializable
         this.cantidad = cantidad;
     }
     
-    public double getPrecioCostoItem() 
+    public double getPrecioCosto() 
     {
-        return this.precioCostoItem;
+        return this.precioCosto;
     }    
-    public void setPrecioCostoItem(double precioCostoItem) 
+    public void setPrecioCosto(double precioCosto) 
     {
-        this.precioCostoItem = precioCostoItem;
+        this.precioCosto = precioCosto;
     }
+
+    public double getPrecioVenta() 
+    {
+        return precioVenta;
+    }
+    public void setPrecioVenta(double precioVenta) 
+    {
+        this.precioVenta = precioVenta;
+    }   
 }
 
 

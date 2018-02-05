@@ -9,7 +9,8 @@ public class Entradastock  implements java.io.Serializable
     private int id;
     private Proveedor proveedor;
     private Date fechaHora;
-    private double importe;
+    private int cantidadTotal;
+    private double importeCostoTotal;
     //private Set<ItemEntradastock> itemEntradastocks = new HashSet<ItemEntradastock>(0);
 
     public Entradastock() 
@@ -42,13 +43,22 @@ public class Entradastock  implements java.io.Serializable
         this.fechaHora = fechaHora;
     }
     
-    public double getImporte() 
+    public int getCantidadTotal() 
     {
-        return this.importe;
-    }    
-    public void setImporte(double importe) 
+        return cantidadTotal;
+    }
+    public void setCantidadTotal(int cantidadTotal) 
     {
-        this.importe = importe;
+        this.cantidadTotal = cantidadTotal;
+    }
+
+    public double getImporteCostoTotal() 
+    {
+        return importeCostoTotal;
+    }
+    public void setImporteCostoTotal(double importeCostoTotal) 
+    {
+        this.importeCostoTotal = importeCostoTotal;
     }
     
     /*public Set<ItemEntradastock> getItemEntradastocks() 
@@ -58,7 +68,7 @@ public class Entradastock  implements java.io.Serializable
     public void setItemEntradastocks(Set<ItemEntradastock> itemEntradastocks) 
     {
         this.itemEntradastocks = itemEntradastocks;
-    }*/
+    }*/    
 }
 
 

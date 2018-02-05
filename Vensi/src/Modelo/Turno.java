@@ -1,8 +1,6 @@
 package Modelo;
 
 import java.util.Date;
-import java.util.HashSet;
-import java.util.Set;
 
 public class Turno  implements java.io.Serializable 
 {
@@ -10,11 +8,15 @@ public class Turno  implements java.io.Serializable
     private Usuario usuario;
     private Date fechaHoraInicio;
     private Date fechaHoraFin;
-    private double montoVenta;
-    private double montoES;
+    private double montoVentas;
+    private double montoEntradas;
+    private double montoSalidas;
+    private double montoAnuladas;
     private double efectivoHay;
-    /*private Set<EntradaSalida> entradaSalidas = new HashSet<EntradaSalida>(0);
-    private Set<ItemVenta> itemVentas = new HashSet<ItemVenta>(0);*/
+    private int cantVentas;
+    private int cantEntradas;
+    private int cantSalidas;
+    private int cantAnuladas;
 
     public Turno() 
     { }
@@ -53,26 +55,44 @@ public class Turno  implements java.io.Serializable
     public void setFechaHoraFin(Date fechaHoraFin) 
     {
         this.fechaHoraFin = fechaHoraFin;
-    }
-    
-    public double getMontoVenta() 
+    }  
+
+    public double getMontoVentas() 
     {
-        return this.montoVenta;
+        return montoVentas;
     }
-    public void setMontoVenta(double montoVenta) 
+    public void setMontoVentas(double montoVentas) 
     {
-        this.montoVenta = montoVenta;
+        this.montoVentas = montoVentas;
     }
-    
-    public double getMontoES() 
+
+    public double getMontoEntradas() 
     {
-        return this.montoES;
-    }    
-    public void setMontoES(double montoES) 
-    {
-        this.montoES = montoES;
+        return montoEntradas;
     }
-    
+    public void setMontoEntradas(double montoEntradas) 
+    {
+        this.montoEntradas = montoEntradas;
+    }
+
+    public double getMontoSalidas() 
+    {
+        return montoSalidas;
+    }
+    public void setMontoSalidas(double montoSalidas) 
+    {
+        this.montoSalidas = montoSalidas;
+    }
+
+    public double getMontoAnuladas() 
+    {
+        return montoAnuladas;
+    }
+    public void setMontoAnuladas(double montoAnuladas) 
+    {
+        this.montoAnuladas = montoAnuladas;
+    }
+
     public double getEfectivoHay() 
     {
         return this.efectivoHay;
@@ -82,23 +102,41 @@ public class Turno  implements java.io.Serializable
         this.efectivoHay = efectivoHay;
     }
     
-    /*public Set<EntradaSalida> getEntradaSalidas() 
+    public int getCantVentas() 
     {
-        return this.entradaSalidas;
-    }    
-    public void setEntradaSalidas(Set<EntradaSalida> entradaSalidas) 
-    {
-        this.entradaSalidas = entradaSalidas;
+        return cantVentas;
     }
-    
-    public Set<ItemVenta> getItemVentas() 
+    public void setCantVentas(int cantVentas) 
     {
-        return this.itemVentas;
-    }    
-    public void setItemVentas(Set<ItemVenta> itemVentas) 
+        this.cantVentas = cantVentas;
+    }
+
+    public int getCantEntradas() 
     {
-        this.itemVentas = itemVentas;
-    }*/
+        return cantEntradas;
+    }
+    public void setCantEntradas(int cantEntradas) 
+    {
+        this.cantEntradas = cantEntradas;
+    }
+
+    public int getCantSalidas() 
+    {
+        return cantSalidas;
+    }
+    public void setCantSalidas(int cantSalidas) 
+    {
+        this.cantSalidas = cantSalidas;
+    }
+
+    public int getCantAnuladas() 
+    {
+        return cantAnuladas;
+    }
+    public void setCantAnuladas(int cantAnuladas) 
+    {
+        this.cantAnuladas = cantAnuladas;
+    }
 }
 
 

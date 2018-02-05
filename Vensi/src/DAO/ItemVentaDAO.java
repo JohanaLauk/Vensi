@@ -140,4 +140,9 @@ public class ItemVentaDAO
         }
         return lista;
     }
+    
+    /*public List<Turno> listarProdOferta()
+    {
+        
+    }*/
 }

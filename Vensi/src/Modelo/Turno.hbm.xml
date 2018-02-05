@@ -7,11 +7,7 @@
         <id name="id" type="int">
             <column name="id" />
             <generator class="identity" />
-        </id>
-        
-        <!-- <many-to-one name="usuario" class="Modelo.Usuario" fetch="select">
-            <column name="id_usuario" not-null="true" />
-        </many-to-one> -->
+        </id>     
         
         <many-to-one name = "usuario" column = "id_usuario"  
          class="Modelo.Usuario" not-null="true" lazy="false" />
@@ -22,17 +18,38 @@
         <property name="fechaHoraFin" type="timestamp">
             <column name="fecha_hora_fin" length="29" />
         </property>
-        <property name="montoVenta" type="double">
-            <column name="monto_venta" precision="8" />
+        <property name="montoVentas" type="double">
+            <column name="monto_ventas" precision="8" />
         </property>
-        <property name="montoES" type="double">
-            <column name="monto_es" precision="8" />
+        <property name="montoEntradas" type="double">
+            <column name="monto_entradas" precision="8" />
+        </property>
+        <property name="montoSalidas" type="double">
+            <column name="monto_salidas" precision="8" />
+        </property>
+        <property name="montoAnuladas" type="double">
+            <column name="monto_anuladas" precision="8" />
         </property>
         <property name="efectivoHay" type="double">
             <column name="efectivo_hay" precision="8" />
         </property>
+        <property name="cantVentas" type="int">
+            <column name="cant_ventas" not-null="false" />
+        </property>
+        <property name="cantEntradas" type="int">
+            <column name="cant_entradas" not-null="false" />
+        </property>
+        <property name="cantSalidas" type="int">
+            <column name="cant_salidas" not-null="false" />
+        </property>
+        <property name="cantAnuladas" type="int">
+            <column name="cant_anuladas" not-null="false" />
+        </property>
         
-        <!-- <set name="entradaSalidas" table="entrada_salida" inverse="true" lazy="true" fetch="select">
+        <!-- <many-to-one name="usuario" class="Modelo.Usuario" fetch="select">
+            <column name="id_usuario" not-null="true" />
+        </many-to-one>       
+        <set name="entradaSalidas" table="entrada_salida" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_turno" not-null="true" />
             </key>
@@ -44,7 +61,6 @@
                 <column name="id_turno" not-null="true" />
             </key>
             <one-to-many class="Modelo.ItemVenta" />
-        </set> -->
-        
+        </set> -->        
     </class>
 </hibernate-mapping>

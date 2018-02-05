@@ -519,6 +519,9 @@ public class ventanaVenta extends javax.swing.JFrame
     }//GEN-LAST:event_btnIniciarTurnoActionPerformed
 
     private void btnCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarTurnoActionPerformed
+        //GUARDAMOS EL CONTADOR_VENTAS_CONFIRMADAS EN LA VARIABLE DE LA VENTANA_CIERRE_TURNO
+        ventanaCierreTurno.cantVentas = contadorCantVentas; 
+            
         ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
         vCierreTurno.setVisible(true);
     }//GEN-LAST:event_btnCerrarTurnoActionPerformed
@@ -646,7 +649,7 @@ public class ventanaVenta extends javax.swing.JFrame
                         //JOptionPane.showMessageDialog(null, "Producto nuevo, ItemVenta agregado.");
                     }
                 }                    
-                pDAO.restarStock(Integer.parseInt(idProd), cantidad);   //Descuenta stock
+                pDAO.restarStock(Integer.parseInt(idProd), cantidad);   //Descuenta stock                
             }            
         }
         else
@@ -654,6 +657,7 @@ public class ventanaVenta extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, "El carrito está vacío.");
         }
         
+        contadorCantVentas += 1;
         labMontoTotalCompra.setText("$0,00");
         llenarTabla();
         llenarTablaCarrito();
