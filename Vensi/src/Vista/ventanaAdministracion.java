@@ -88,7 +88,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
                 btnGestionProvActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGestionProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 232, 133, 90));
+        jPanel1.add(btnGestionProv, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 230, 110, 90));
 
         btnGestionProd.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnGestionProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vAdministracion/prod_100.png"))); // NOI18N
@@ -110,7 +110,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
                 btnGestionProdActionPerformed(evt);
             }
         });
-        jPanel1.add(btnGestionProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 70, 133, 120));
+        jPanel1.add(btnGestionProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 70, 110, 120));
 
         btnGestionClave.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnGestionClave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vAdministracion/clave_100.png"))); // NOI18N
@@ -167,7 +167,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 0, 10, 510));
 
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo.png"))); // NOI18N
+        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo grande.png"))); // NOI18N
         getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 850, 510));
 
         pack();

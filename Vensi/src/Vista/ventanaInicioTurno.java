@@ -153,7 +153,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 50, 50));
 
         labImagenFondo.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo.png"))); // NOI18N
+        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo grande.png"))); // NOI18N
         getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 250));
 
         pack();

@@ -80,7 +80,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 260, 10));
 
-        labImagenIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/imagen_fondo_izquierdo.jpg"))); // NOI18N
+        labImagenIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/imagen_fondo_izquierdo_(grande).jpg"))); // NOI18N
         jPanel2.add(labImagenIzquierda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 480));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 480));
@@ -276,7 +276,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         jLabel5.setText("Historial");
         panelPrincipal.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 100, 20));
 
-        labImagenDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo.png"))); // NOI18N
+        labImagenDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo grande.png"))); // NOI18N
         panelPrincipal.add(labImagenDerecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 480));
 
         getContentPane().add(panelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 500, 480));

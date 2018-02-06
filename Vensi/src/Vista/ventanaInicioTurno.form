@@ -204,7 +204,7 @@
           <Font name="Calibri" size="14" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Recursos/petroleo.png"/>
+          <Image iconType="3" name="/Recursos/petroleo grande.png"/>
         </Property>
       </Properties>
       <Constraints>
