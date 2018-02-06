@@ -759,8 +759,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         {
             turnoActual.setFechaHoraFin(new Date());
             
-            turnoActual.setMontoVentas(calcularMontoVentas());
-            turnoActual.setCantVentas(cantVentas);    //recibir el valor de ventanaVenta boton CONFIRMAR
+            turnoActual.setMontoVentas(calcularMontoVentas());            
             
             turnoActual.setMontoEntradas(calcularMontoEntradas());
             turnoActual.setCantEntradas(calcularCantEntradas());
@@ -775,7 +774,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
                     
             tDAO.modificar(turnoActual, turnoActual.getId());
             
-            JOptionPane.showMessageDialog(null, "Se ha cerrado el turno correctamente.");
+            JOptionPane.showMessageDialog(null, "¡Se ha cerrado el turno correctamente!");
               
             dispose();
         }               

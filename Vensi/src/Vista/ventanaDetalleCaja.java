@@ -10,6 +10,7 @@ import Modelo.Producto;
 import Modelo.Turno;
 import java.text.DecimalFormat;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
@@ -31,6 +32,8 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
+    
+    ImageIcon icono;
                 
     public ventanaDetalleCaja() 
     {
@@ -66,11 +69,8 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         txfdTotalCaja = new javax.swing.JTextField();
         btnCargarES = new javax.swing.JButton();
         btnVolverDC = new javax.swing.JButton();
-        labVenta = new javax.swing.JLabel();
-        labCajaT = new org.jdesktop.swingx.JXLabel();
         jLabel3 = new javax.swing.JLabel();
         txfdMontoES = new javax.swing.JTextField();
-        labMontoES = new org.jdesktop.swingx.JXLabel();
         labImagenFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -85,12 +85,20 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/apagar_50.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salir2_50.png"))); // NOI18N
         btnSalir.setToolTipText("Salir");
         btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
         btnSalir.setContentAreaFilled(false);
         btnSalir.setNextFocusableComponent(btnCargarES);
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+        });
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -145,14 +153,14 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         txfdTotalVenta.setForeground(new java.awt.Color(255, 255, 255));
         txfdTotalVenta.setText("$");
         txfdTotalVenta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(txfdTotalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 80, 30));
+        jPanel1.add(txfdTotalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 150, 30));
 
         txfdTotalCaja.setBackground(new java.awt.Color(0, 0, 204));
         txfdTotalCaja.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfdTotalCaja.setForeground(new java.awt.Color(255, 255, 255));
         txfdTotalCaja.setText("$");
         txfdTotalCaja.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(txfdTotalCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 80, 30));
+        jPanel1.add(txfdTotalCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 150, 30));
 
         btnCargarES.setText("Cargar entrada/salida");
         btnCargarES.setNextFocusableComponent(btnVolverDC);
@@ -172,20 +180,6 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         });
         jPanel1.add(btnVolverDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 380, 240, 100));
 
-        labVenta.setBackground(new java.awt.Color(0, 153, 0));
-        labVenta.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
-        labVenta.setForeground(new java.awt.Color(255, 255, 255));
-        labVenta.setText("$");
-        labVenta.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        jPanel1.add(labVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 380, 80, 30));
-
-        labCajaT.setBackground(new java.awt.Color(0, 0, 204));
-        labCajaT.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        labCajaT.setForeground(new java.awt.Color(255, 255, 255));
-        labCajaT.setText("$");
-        labCajaT.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
-        jPanel1.add(labCajaT, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 460, 80, 30));
-
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Retiros:");
@@ -196,18 +190,11 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         txfdMontoES.setForeground(new java.awt.Color(255, 255, 255));
         txfdMontoES.setText("$");
         txfdMontoES.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(txfdMontoES, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 80, 30));
-
-        labMontoES.setBackground(new java.awt.Color(255, 0, 0));
-        labMontoES.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        labMontoES.setForeground(new java.awt.Color(255, 255, 255));
-        labMontoES.setText("$");
-        labMontoES.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
-        jPanel1.add(labMontoES, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 420, 80, 30));
+        jPanel1.add(txfdMontoES, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 150, 30));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 950, 500));
 
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/petroleo 2 grande.png"))); // NOI18N
+        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo 2 grande.png"))); // NOI18N
         getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 560));
 
         pack();
@@ -237,6 +224,16 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         //labMontoES.setText("$" + String.valueOf(formatoPrecios.format(calcularSalidas())));
         //labCajaT.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja()))); 
     }//GEN-LAST:event_formWindowGainedFocus
+
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/salir2_lleno_50.png"));     
+        btnSalir.setIcon(icono);
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/salir2_50.png"));     
+        btnSalir.setIcon(icono);
+    }//GEN-LAST:event_btnSalirMouseExited
     
     public static void main(String args[]) 
     {
@@ -423,10 +420,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private org.jdesktop.swingx.JXLabel labCajaT;
     private javax.swing.JLabel labImagenFondo;
-    private org.jdesktop.swingx.JXLabel labMontoES;
-    private javax.swing.JLabel labVenta;
     private javax.swing.JTable tablaDetalleCaja;
     private javax.swing.JTextField txfdMontoES;
     private javax.swing.JTextField txfdTotalCaja;

@@ -9,6 +9,7 @@ import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class ventanaCargarES extends javax.swing.JFrame 
@@ -26,6 +27,8 @@ public class ventanaCargarES extends javax.swing.JFrame
     Redondear r = new Redondear(); 
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
+    
+    ImageIcon icono;
     
     public ventanaCargarES() 
     {
@@ -72,11 +75,19 @@ public class ventanaCargarES extends javax.swing.JFrame
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/apagar_50.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salir2_50.png"))); // NOI18N
         btnSalir.setToolTipText("Salir");
         btnSalir.setBorderPainted(false);
         btnSalir.setContentAreaFilled(false);
         btnSalir.setNextFocusableComponent(cbTipoES);
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+        });
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -250,7 +261,7 @@ public class ventanaCargarES extends javax.swing.JFrame
 
         getContentPane().add(panelidentificarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 420, 370));
 
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/petroleo.png"))); // NOI18N
+        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo.png"))); // NOI18N
         labImagenFondo.setText("jLabel1");
         getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 430));
 
@@ -510,6 +521,16 @@ public class ventanaCargarES extends javax.swing.JFrame
             }
         }
     }//GEN-LAST:event_txfdCodNomProdAnularKeyReleased
+
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/salir2_lleno_50.png"));     
+        btnSalir.setIcon(icono);
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/salir2_50.png"));     
+        btnSalir.setIcon(icono);
+    }//GEN-LAST:event_btnSalirMouseExited
 
     public void habDeshabComponentes(String nombre)
     {

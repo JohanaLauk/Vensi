@@ -42,8 +42,6 @@ public class ventanaVenta extends javax.swing.JFrame
     Redondear r = new Redondear();    
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
-    
-    int contadorCantVentas = 0;
         
     public ventanaVenta() 
     {
@@ -518,9 +516,6 @@ public class ventanaVenta extends javax.swing.JFrame
     }//GEN-LAST:event_btnIniciarTurnoActionPerformed
 
     private void btnCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarTurnoActionPerformed
-        //GUARDAMOS EL CONTADOR_VENTAS_CONFIRMADAS EN LA VARIABLE DE LA VENTANA_CIERRE_TURNO
-        ventanaCierreTurno.cantVentas = contadorCantVentas; 
-            
         ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
         vCierreTurno.setVisible(true);
     }//GEN-LAST:event_btnCerrarTurnoActionPerformed
@@ -656,7 +651,9 @@ public class ventanaVenta extends javax.swing.JFrame
             JOptionPane.showMessageDialog(null, "El carrito está vacío.");
         }
         
-        contadorCantVentas += 1;
+        turnoActual.setCantVentas(turnoActual.getCantVentas() + 1);  
+        tDAO.modificar(turnoActual, turnoActual.getId());
+        
         labMontoTotalCompra.setText("$0,00");
         llenarTabla();
         llenarTablaCarrito();

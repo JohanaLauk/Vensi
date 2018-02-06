@@ -173,7 +173,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Recursos/vPrincipal/apagar_50.png"/>
+          <Image iconType="3" name="/Recursos/salir2_50.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Salir"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -188,6 +188,8 @@
         <Property name="verticalTextPosition" type="int" value="3"/>
       </Properties>
       <Events>
+        <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSalirMouseEntered"/>
+        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="btnSalirMouseExited"/>
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnSalirActionPerformed"/>
       </Events>
       <Constraints>
@@ -202,7 +204,7 @@
           <Font name="Calibri" size="14" style="1"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Recursos/vPrincipal/petroleo.png"/>
+          <Image iconType="3" name="/Recursos/petroleo.png"/>
         </Property>
       </Properties>
       <Constraints>

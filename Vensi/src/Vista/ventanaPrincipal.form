@@ -90,7 +90,7 @@
         <Component class="javax.swing.JLabel" name="labImagenIzquierda">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Recursos/vPrincipal/imagen_fondo_izquierdo_(grande).jpg"/>
+              <Image iconType="3" name="/Recursos/imagen_fondo_izquierdo.jpg"/>
             </Property>
           </Properties>
           <Constraints>
@@ -337,7 +337,7 @@
         <Component class="javax.swing.JLabel" name="labBarraTitulo">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Recursos/vPrincipal/plata_circular.jpg"/>
+              <Image iconType="3" name="/Recursos/plata_circular.jpg"/>
             </Property>
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Cursor Por defecto"/>
@@ -438,7 +438,7 @@
         <Component class="javax.swing.JLabel" name="labImagenDerecha">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/Recursos/vPrincipal/petroleo.png"/>
+              <Image iconType="3" name="/Recursos/petroleo.png"/>
             </Property>
           </Properties>
           <Constraints>

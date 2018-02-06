@@ -6,12 +6,15 @@ import Modelo.Turno;
 import Modelo.Usuario;
 import java.util.Date;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class ventanaInicioTurno extends javax.swing.JFrame 
 {
     UsuarioDAO uDAO = new UsuarioDAO();
     TurnoDAO tDAO = new TurnoDAO();
+    
+    ImageIcon icono;
     
     public ventanaInicioTurno() 
     {        
@@ -126,7 +129,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         getContentPane().add(labTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/apagar_50.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salir2_50.png"))); // NOI18N
         btnSalir.setToolTipText("Salir");
         btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
@@ -134,6 +137,14 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         btnSalir.setNextFocusableComponent(txfdPin);
         btnSalir.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
         btnSalir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSalirMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSalirMouseExited(evt);
+            }
+        });
         btnSalir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSalirActionPerformed(evt);
@@ -142,7 +153,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 50, 50));
 
         labImagenFondo.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/petroleo.png"))); // NOI18N
+        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo.png"))); // NOI18N
         getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 250));
 
         pack();
@@ -184,9 +195,9 @@ public class ventanaInicioTurno extends javax.swing.JFrame
                     unTurno.setUsuario(u);
                 }
             }
-            
-            unTurno.setFechaHoraInicio(fechaHoraInicio);            
-                        
+            unTurno.setCantVentas(0);
+            unTurno.setFechaHoraInicio(fechaHoraInicio);      
+                                    
             tDAO.alta(unTurno);
                             
             dispose();            
@@ -204,6 +215,16 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume(); 
     }//GEN-LAST:event_txfdPinKeyTyped
+
+    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/salir2_lleno_50.png"));     
+        btnSalir.setIcon(icono);
+    }//GEN-LAST:event_btnSalirMouseEntered
+
+    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/salir2_lleno_50.png"));     
+        btnSalir.setIcon(icono);
+    }//GEN-LAST:event_btnSalirMouseExited
     
     public static void main(String args[]) 
     {        
