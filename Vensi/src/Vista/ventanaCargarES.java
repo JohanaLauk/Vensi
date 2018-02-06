@@ -72,7 +72,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono_salir_blanco.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/apagar_50.png"))); // NOI18N
         btnSalir.setToolTipText("Salir");
         btnSalir.setBorderPainted(false);
         btnSalir.setContentAreaFilled(false);
@@ -82,7 +82,7 @@ public class ventanaCargarES extends javax.swing.JFrame
                 btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 10, 30, 30));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, 50, 50));
 
         panelES.setBackground(new java.awt.Color(0, 0, 0));
         panelES.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -250,9 +250,9 @@ public class ventanaCargarES extends javax.swing.JFrame
 
         getContentPane().add(panelidentificarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 420, 370));
 
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo 2 grande.png"))); // NOI18N
+        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/petroleo.png"))); // NOI18N
         labImagenFondo.setText("jLabel1");
-        getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 510));
+        getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 430));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

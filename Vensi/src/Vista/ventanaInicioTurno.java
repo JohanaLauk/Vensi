@@ -126,7 +126,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         getContentPane().add(labTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
 
         btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/Icono_salir_blanco.png"))); // NOI18N
+        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/apagar_50.png"))); // NOI18N
         btnSalir.setToolTipText("Salir");
         btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
@@ -139,10 +139,10 @@ public class ventanaInicioTurno extends javax.swing.JFrame
                 btnSalirActionPerformed(evt);
             }
         });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 10, 30, 30));
+        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 50, 50));
 
         labImagenFondo.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo 2 grande.png"))); // NOI18N
+        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/petroleo.png"))); // NOI18N
         getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 250));
 
         pack();

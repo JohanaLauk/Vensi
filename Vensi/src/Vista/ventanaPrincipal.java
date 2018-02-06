@@ -43,6 +43,11 @@ public class ventanaPrincipal extends javax.swing.JFrame
         LabTitulo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         labBarraTitulo = new javax.swing.JLabel();
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
         labImagenDerecha = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -104,7 +109,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnHistorialActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 360, 100, 100));
+        panelPrincipal.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 100, 100));
 
         btnPedidos.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/pedido_100.png"))); // NOI18N
@@ -127,7 +132,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnPedidosActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 220, 80, -1));
+        panelPrincipal.add(btnPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 80, -1));
 
         btnAdministracion.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnAdministracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/adminBD_100.png"))); // NOI18N
@@ -150,7 +155,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnAdministracionActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 100, 110));
+        panelPrincipal.add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 100, 110));
 
         btnVentas.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/ventas_100.png"))); // NOI18N
@@ -173,7 +178,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnVentasActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 90, 110, 100));
+        panelPrincipal.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 110, 100));
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/apagar_50.png"))); // NOI18N
         btnSalir.setToolTipText("Salir");
@@ -217,7 +222,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnCargaStockActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnCargaStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, 110));
+        panelPrincipal.add(btnCargaStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, 110));
 
         LabTitulo.setBackground(new java.awt.Color(255, 255, 0));
         LabTitulo.setFont(new java.awt.Font("Calibri", 0, 48)); // NOI18N
@@ -243,6 +248,33 @@ public class ventanaPrincipal extends javax.swing.JFrame
             }
         });
         panelPrincipal.add(labBarraTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 520, 70));
+
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("Ventas");
+        panelPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 90, -1));
+
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel2.setText("Generar pedido");
+        panelPrincipal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 160, 20));
+
+        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel3.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel3.setText("Actualizar inventario");
+        panelPrincipal.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, 20));
+
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel4.setText("Administrar inventario");
+        panelPrincipal.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, -1, 20));
+
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("Historial");
+        panelPrincipal.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 100, 20));
 
         labImagenDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/petroleo.png"))); // NOI18N
         panelPrincipal.add(labImagenDerecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 480));
@@ -374,6 +406,11 @@ public class ventanaPrincipal extends javax.swing.JFrame
     private javax.swing.JButton btnPedidos;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVentas;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;

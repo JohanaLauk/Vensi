@@ -406,8 +406,7 @@
                   <EmptySpace max="32767" attributes="0"/>
                   <Component id="LabMsjPC" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="labMontoTotalCompra" min="-2" pref="95" max="-2" attributes="0"/>
-                  <EmptySpace min="-2" pref="79" max="-2" attributes="0"/>
+                  <Component id="labMontoTotalCompra" min="-2" pref="174" max="-2" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>

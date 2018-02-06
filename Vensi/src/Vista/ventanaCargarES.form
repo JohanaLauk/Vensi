@@ -35,7 +35,7 @@
           <Color blue="ff" green="ff" red="ff" type="rgb"/>
         </Property>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Recursos/Icono_salir_blanco.png"/>
+          <Image iconType="3" name="/Recursos/vPrincipal/apagar_50.png"/>
         </Property>
         <Property name="toolTipText" type="java.lang.String" value="Salir"/>
         <Property name="borderPainted" type="boolean" value="false"/>
@@ -49,7 +49,7 @@
       </Events>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="740" y="10" width="30" height="30"/>
+          <AbsoluteConstraints x="720" y="0" width="50" height="50"/>
         </Constraint>
       </Constraints>
     </Component>
@@ -397,13 +397,13 @@
     <Component class="javax.swing.JLabel" name="labImagenFondo">
       <Properties>
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-          <Image iconType="3" name="/Recursos/petroleo 2 grande.png"/>
+          <Image iconType="3" name="/Recursos/vPrincipal/petroleo.png"/>
         </Property>
         <Property name="text" type="java.lang.String" value="jLabel1"/>
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="0" y="0" width="780" height="510"/>
+          <AbsoluteConstraints x="0" y="0" width="780" height="430"/>
         </Constraint>
       </Constraints>
     </Component>

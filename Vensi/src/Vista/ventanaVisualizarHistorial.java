@@ -480,12 +480,12 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             txfdVenta.setText(String.valueOf("$"+t.getMontoVentas()));
             
             double montoEsperado = (t.getMontoVentas() + t.getMontoEntradas()) - t.getMontoSalidas();
-            txfdTotalCaja.setText(String.valueOf("$" + montoEsperado));
+            txfdTotalCaja.setText(String.valueOf("$" + formatoPrecios.format(montoEsperado)));
             
-            txfdEfectivo.setText(String.valueOf("$" + t.getEfectivoHay()));  
+            txfdEfectivo.setText(String.valueOf("$" + formatoPrecios.format(t.getEfectivoHay())));  
             
             double diferencia = t.getEfectivoHay() - montoEsperado;
-            txfdDiferencia.setText(String.valueOf("$" + diferencia));            
+            txfdDiferencia.setText(String.valueOf("$" + formatoPrecios.format(diferencia)));            
         }       
     }    
 
