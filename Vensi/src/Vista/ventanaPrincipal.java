@@ -40,6 +40,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnVentas = new javax.swing.JButton();
         btnSalir = new javax.swing.JButton();
         btnCargaStock = new javax.swing.JButton();
+        btnMinimizar = new org.jdesktop.swingx.JXButton();
         LabTitulo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         labBarraTitulo = new javax.swing.JLabel();
@@ -90,7 +91,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
         btnHistorial.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/historial_100.png"))); // NOI18N
-        btnHistorial.setToolTipText("Historial");
+        btnHistorial.setToolTipText("");
         btnHistorial.setBorder(null);
         btnHistorial.setBorderPainted(false);
         btnHistorial.setContentAreaFilled(false);
@@ -113,7 +114,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
         btnPedidos.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/pedido_100.png"))); // NOI18N
-        btnPedidos.setToolTipText("Generar pedido");
+        btnPedidos.setToolTipText("");
         btnPedidos.setBorder(null);
         btnPedidos.setBorderPainted(false);
         btnPedidos.setContentAreaFilled(false);
@@ -136,7 +137,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
         btnAdministracion.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnAdministracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/adminBD_100.png"))); // NOI18N
-        btnAdministracion.setToolTipText("Administrar inventario");
+        btnAdministracion.setToolTipText("");
         btnAdministracion.setBorder(null);
         btnAdministracion.setBorderPainted(false);
         btnAdministracion.setContentAreaFilled(false);
@@ -159,7 +160,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
         btnVentas.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/ventas_100.png"))); // NOI18N
-        btnVentas.setToolTipText("Ventas");
+        btnVentas.setToolTipText("");
         btnVentas.setBorder(null);
         btnVentas.setBorderPainted(false);
         btnVentas.setContentAreaFilled(false);
@@ -200,10 +201,10 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnSalirActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 10, 50, 50));
+        panelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 50, 70));
 
         btnCargaStock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/cargaStock_100.png"))); // NOI18N
-        btnCargaStock.setToolTipText("Actualizar inventario");
+        btnCargaStock.setToolTipText("");
         btnCargaStock.setBorder(null);
         btnCargaStock.setBorderPainted(false);
         btnCargaStock.setContentAreaFilled(false);
@@ -223,6 +224,28 @@ public class ventanaPrincipal extends javax.swing.JFrame
             }
         });
         panelPrincipal.add(btnCargaStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, 110));
+
+        btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/minimizar_50.png"))); // NOI18N
+        btnMinimizar.setToolTipText("Minimizar");
+        btnMinimizar.setBorderPainted(false);
+        btnMinimizar.setContentAreaFilled(false);
+        btnMinimizar.setDefaultCapable(false);
+        btnMinimizar.setFocusPainted(false);
+        btnMinimizar.setPaintBorderInsets(false);
+        btnMinimizar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMinimizarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMinimizarMouseExited(evt);
+            }
+        });
+        btnMinimizar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMinimizarActionPerformed(evt);
+            }
+        });
+        panelPrincipal.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 60, 70));
 
         LabTitulo.setBackground(new java.awt.Color(255, 255, 0));
         LabTitulo.setFont(new java.awt.Font("Calibri", 0, 48)); // NOI18N
@@ -387,6 +410,20 @@ public class ventanaPrincipal extends javax.swing.JFrame
         y = evt.getY();
     }//GEN-LAST:event_labBarraTituloMousePressed
 
+    private void btnMinimizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMinimizarActionPerformed
+        setExtendedState(ICONIFIED);
+    }//GEN-LAST:event_btnMinimizarActionPerformed
+
+    private void btnMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/minimizar_lleno_50.png"));     
+        btnMinimizar.setIcon(icono);  
+    }//GEN-LAST:event_btnMinimizarMouseEntered
+
+    private void btnMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/minimizar_50.png"));     
+        btnMinimizar.setIcon(icono);  
+    }//GEN-LAST:event_btnMinimizarMouseExited
+
     public static void main(String args[]) 
     {               
         java.awt.EventQueue.invokeLater(new Runnable() 
@@ -403,6 +440,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
     private javax.swing.JButton btnAdministracion;
     private javax.swing.JButton btnCargaStock;
     private javax.swing.JButton btnHistorial;
+    private org.jdesktop.swingx.JXButton btnMinimizar;
     private javax.swing.JButton btnPedidos;
     private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVentas;

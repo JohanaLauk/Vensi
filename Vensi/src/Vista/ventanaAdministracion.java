@@ -1,5 +1,6 @@
 package Vista;
 
+import java.awt.Dimension;
 import javax.swing.ImageIcon;
 
 public class ventanaAdministracion extends javax.swing.JFrame 
@@ -13,6 +14,9 @@ public class ventanaAdministracion extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);     //centra la ventana        
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir  
+        this.setMinimumSize(new Dimension(850, 551));  //al minimizar la ventana no permite que sea mas chico que esa medida 
+        this.setPreferredSize(new Dimension(850, 551));
+        
     }
     
     @SuppressWarnings("unchecked")
@@ -20,7 +24,6 @@ public class ventanaAdministracion extends javax.swing.JFrame
     private void initComponents() {
 
         panelTodo = new javax.swing.JPanel();
-        jSeparator1 = new javax.swing.JSeparator();
         jPanel1 = new javax.swing.JPanel();
         btnGestionProd = new javax.swing.JButton();
         labProd = new javax.swing.JLabel();
@@ -34,16 +37,19 @@ public class ventanaAdministracion extends javax.swing.JFrame
         labClave = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
         labFondo = new javax.swing.JLabel();
-        panelTitulo = new javax.swing.JPanel();
-        labTitulo = new javax.swing.JLabel();
-        btnVolver = new javax.swing.JButton();
-        labImagenFondo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administración");
-        setUndecorated(true);
-
-        jSeparator1.setForeground(new java.awt.Color(0, 0, 255));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setMinimumSize(new java.awt.Dimension(850, 551));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowActivated(java.awt.event.WindowEvent evt) {
+                formWindowActivated(evt);
+            }
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         jPanel1.setOpaque(false);
 
@@ -53,6 +59,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
         btnGestionProd.setBorderPainted(false);
         btnGestionProd.setContentAreaFilled(false);
         btnGestionProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGestionProd.setFocusPainted(false);
         btnGestionProd.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGestionProd.setNextFocusableComponent(btnGestionProv);
         btnGestionProd.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -159,7 +166,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(btnGestionProv, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(0, 12, Short.MAX_VALUE))
         );
 
         jPanel3.setOpaque(false);
@@ -171,7 +178,6 @@ public class ventanaAdministracion extends javax.swing.JFrame
         btnGestionClave.setContentAreaFilled(false);
         btnGestionClave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnGestionClave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnGestionClave.setNextFocusableComponent(btnVolver);
         btnGestionClave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnGestionClaveMouseEntered(evt);
@@ -206,7 +212,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGap(34, 34, 34)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(labClave, javax.swing.GroupLayout.DEFAULT_SIZE, 193, Short.MAX_VALUE)
+                            .addComponent(labClave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(7, 7, 7)
                                 .addComponent(jSeparator4)))
@@ -222,7 +228,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(40, 40, 40)
                 .addComponent(btnGestionClave, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 9, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
         labFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo grande.png"))); // NOI18N
@@ -239,100 +245,28 @@ public class ventanaAdministracion extends javax.swing.JFrame
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(labFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-            .addComponent(jSeparator1)
         );
         panelTodoLayout.setVerticalGroup(
             panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTodoLayout.createSequentialGroup()
-                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(112, 112, 112)
+                .addGap(122, 122, 122)
                 .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(75, 75, 75))
-            .addComponent(labFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-        );
-
-        panelTitulo.setOpaque(false);
-
-        labTitulo.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
-        labTitulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        labTitulo.setText("   Administración");
-        labTitulo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        labTitulo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        labTitulo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
-                labTituloMouseDragged(evt);
-            }
-        });
-        labTitulo.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
-                labTituloMousePressed(evt);
-            }
-        });
-
-        btnVolver.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
-        btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/volver2_50.png"))); // NOI18N
-        btnVolver.setToolTipText("Volver");
-        btnVolver.setBorder(null);
-        btnVolver.setBorderPainted(false);
-        btnVolver.setContentAreaFilled(false);
-        btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnVolver.setFocusPainted(false);
-        btnVolver.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        btnVolver.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        btnVolver.setNextFocusableComponent(btnGestionProd);
-        btnVolver.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnVolverMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnVolverMouseExited(evt);
-            }
-        });
-        btnVolver.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVolverActionPerformed(evt);
-            }
-        });
-
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/plata_circular grande.jpg"))); // NOI18N
-
-        javax.swing.GroupLayout panelTituloLayout = new javax.swing.GroupLayout(panelTitulo);
-        panelTitulo.setLayout(panelTituloLayout);
-        panelTituloLayout.setHorizontalGroup(
-            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTituloLayout.createSequentialGroup()
-                .addComponent(labTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(9, 9, 9)
-                .addComponent(btnVolver)
-                .addContainerGap())
-            .addComponent(labImagenFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
-        );
-        panelTituloLayout.setVerticalGroup(
-            panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(panelTituloLayout.createSequentialGroup()
-                .addGroup(panelTituloLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labImagenFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 455, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap())
+            .addComponent(labFondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(panelTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(panelTitulo, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, 0)
-                .addComponent(panelTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(panelTodo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -386,30 +320,14 @@ public class ventanaAdministracion extends javax.swing.JFrame
         btnGestionProd.setIcon(icono);
     }//GEN-LAST:event_btnGestionProdMouseExited
 
-    private void btnVolverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/volver2_lleno_50.png"));     
-        btnVolver.setIcon(icono);
-    }//GEN-LAST:event_btnVolverMouseEntered
+    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
+        this.setExtendedState(MAXIMIZED_BOTH);
+    }//GEN-LAST:event_formWindowActivated
 
-    private void btnVolverMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/volver2_50.png"));     
-        btnVolver.setIcon(icono);
-    }//GEN-LAST:event_btnVolverMouseExited
-
-    private void btnVolverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverActionPerformed
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         ventanaPrincipal vPrincipal = new ventanaPrincipal();
         vPrincipal.setVisible(true);
-        dispose();
-    }//GEN-LAST:event_btnVolverActionPerformed
-
-    private void labTituloMouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labTituloMouseDragged
-        //this.setLocation(this.getLocation().x + evt.getX() - x, this.getLocation().y + evt.getY() - y);
-    }//GEN-LAST:event_labTituloMouseDragged
-
-    private void labTituloMousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_labTituloMousePressed
-        //x = evt.getX();
-        //y = evt.getY();
-    }//GEN-LAST:event_labTituloMousePressed
+    }//GEN-LAST:event_formWindowClosing
 
     public static void main(String args[]) 
     {
@@ -426,21 +344,16 @@ public class ventanaAdministracion extends javax.swing.JFrame
     private javax.swing.JButton btnGestionClave;
     private javax.swing.JButton btnGestionProd;
     private javax.swing.JButton btnGestionProv;
-    private javax.swing.JButton btnVolver;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel labClave;
     private javax.swing.JLabel labFondo;
-    private javax.swing.JLabel labImagenFondo;
     private javax.swing.JLabel labProd;
     private javax.swing.JLabel labProv;
-    private javax.swing.JLabel labTitulo;
-    private javax.swing.JPanel panelTitulo;
     private javax.swing.JPanel panelTodo;
     // End of variables declaration//GEN-END:variables
 }

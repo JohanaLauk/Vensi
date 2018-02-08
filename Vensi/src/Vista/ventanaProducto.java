@@ -15,6 +15,7 @@ import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import java.util.Set;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.ImageIcon;
 import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
@@ -34,20 +35,17 @@ public class ventanaProducto extends javax.swing.JFrame
     String situacionSelec = "Todos";
     String ordenSelec = "descripcion";
     String tipoSelec = "ASC";
-    String proveedorSelec = "Todos";                 
+    String proveedorSelec = "Todos";    
+    
+    ImageIcon icono;
     
     public ventanaProducto() 
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);     //centra la ventana
-        
-        this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
-        
-        this.setMinimumSize(new Dimension(1000, 500));  //al minimizar la ventana no permite que sea mas chico que esa medida
-        
-        this.setPreferredSize(new Dimension(1000, 500));    //al minimizar la ventana aparece con esa medida
-        
+        this.setLocationRelativeTo(null);     //centra la ventana        
+        this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir        
+               
         cbSituacion.setEnabled(false);
         
         //Al hacer click en el JFrame se quita la seleccion del JTable
@@ -68,47 +66,48 @@ public class ventanaProducto extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelTodo = new javax.swing.JPanel();
+        panelBusqueda = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        btnBuscarProd = new javax.swing.JButton();
         txfdBuscarProd = new org.jdesktop.swingx.JXTextField();
-        jPanel2 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
+        cbFiltroProv = new javax.swing.JComboBox<>();
+        panelFiltros = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        cbFiltroCampo = new javax.swing.JComboBox<>();
+        cbSituacion = new javax.swing.JComboBox<>();
+        jLabel3 = new javax.swing.JLabel();
+        cbCampoOrden = new javax.swing.JComboBox<>();
+        cbTipoOrden = new javax.swing.JComboBox<>();
+        panelTabla = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProd = new javax.swing.JTable();
         btnNuevoProd = new javax.swing.JButton();
         btnEditarProd = new javax.swing.JButton();
-        btnMenuPrincipalProd = new javax.swing.JButton();
         btnVolverProd = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
-        jLabel4 = new javax.swing.JLabel();
-        cbFiltroCampo = new javax.swing.JComboBox<>();
-        jLabel2 = new javax.swing.JLabel();
-        cbFiltroProv = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
-        cbCampoOrden = new javax.swing.JComboBox<>();
-        cbTipoOrden = new javax.swing.JComboBox<>();
-        cbSituacion = new javax.swing.JComboBox<>();
+        btnMenuPrincipalProd = new javax.swing.JButton();
+        lsbFondo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Administración del producto");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Gestion del producto");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 0, 24)); // NOI18N
+        panelTodo.setBackground(new java.awt.Color(0, 133, 155));
+        panelTodo.setForeground(new java.awt.Color(0, 133, 155));
+
+        panelBusqueda.setOpaque(false);
+
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel1.setText("Buscar:");
 
-        btnBuscarProd.setText("Buscar");
-        btnBuscarProd.setNextFocusableComponent(cbFiltroCampo);
-        btnBuscarProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarProdActionPerformed(evt);
-            }
-        });
-
-        txfdBuscarProd.setNextFocusableComponent(btnBuscarProd);
+        txfdBuscarProd.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        txfdBuscarProd.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txfdBuscarProd.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         txfdBuscarProd.setPrompt("Busque por código o por descripción");
         txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -116,28 +115,128 @@ public class ventanaProducto extends javax.swing.JFrame
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel2.setText("Proveedor:");
+
+        cbFiltroProv.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        cbFiltroProv.setNextFocusableComponent(cbCampoOrden);
+        cbFiltroProv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFiltroProvActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelBusquedaLayout = new javax.swing.GroupLayout(panelBusqueda);
+        panelBusqueda.setLayout(panelBusquedaLayout);
+        panelBusquedaLayout.setHorizontalGroup(
+            panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBusquedaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txfdBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(1, 1, 1))
+                .addComponent(cbFiltroProv, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(24, 24, 24))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txfdBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+        panelBusquedaLayout.setVerticalGroup(
+            panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBusquedaLayout.createSequentialGroup()
+                .addGap(1, 1, 1)
+                .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel1)
+                            .addComponent(txfdBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(cbFiltroProv, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        panelFiltros.setOpaque(false);
+
+        jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Filtrar por:");
+
+        cbFiltroCampo.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        cbFiltroCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
+        cbFiltroCampo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cbFiltroCampo.setNextFocusableComponent(cbSituacion);
+        cbFiltroCampo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbFiltroCampoActionPerformed(evt);
+            }
+        });
+
+        cbSituacion.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo habilitados", "Sólo ofertas", "Sólo suspendidos" }));
+        cbSituacion.setNextFocusableComponent(cbFiltroProv);
+        cbSituacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbSituacionActionPerformed(evt);
+            }
+        });
+
+        jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Ordenar por:");
+
+        cbCampoOrden.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        cbCampoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripción", "Código", "Precio costo", "Precio venta", "Stock", "Stock mínimo", "Peso del envase" }));
+        cbCampoOrden.setNextFocusableComponent(cbTipoOrden);
+        cbCampoOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbCampoOrdenActionPerformed(evt);
+            }
+        });
+
+        cbTipoOrden.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        cbTipoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        cbTipoOrden.setNextFocusableComponent(btnNuevoProd);
+        cbTipoOrden.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoOrdenActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelFiltrosLayout = new javax.swing.GroupLayout(panelFiltros);
+        panelFiltros.setLayout(panelFiltrosLayout);
+        panelFiltrosLayout.setHorizontalGroup(
+            panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelFiltrosLayout.createSequentialGroup()
+                .addGap(96, 96, 96)
+                .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(8, 8, 8)
+                .addComponent(cbFiltroCampo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbSituacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(cbCampoOrden, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(4, 4, 4)
+                .addComponent(cbTipoOrden, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(158, 158, 158))
+        );
+        panelFiltrosLayout.setVerticalGroup(
+            panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelFiltrosLayout.createSequentialGroup()
+                .addGroup(panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(cbFiltroCampo)
+                        .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbCampoOrden)
+                        .addComponent(cbTipoOrden))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+
+        panelTabla.setOpaque(false);
 
         tablaProd = new javax.swing.JTable()
         {
@@ -160,7 +259,12 @@ public class ventanaProducto extends javax.swing.JFrame
         tablaProd.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaProd);
 
+        btnNuevoProd.setBackground(new java.awt.Color(204, 204, 255));
+        btnNuevoProd.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnNuevoProd.setText("Nuevo");
+        btnNuevoProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnNuevoProd.setBorderPainted(false);
+        btnNuevoProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevoProd.setNextFocusableComponent(btnEditarProd);
         btnNuevoProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -168,7 +272,12 @@ public class ventanaProducto extends javax.swing.JFrame
             }
         });
 
+        btnEditarProd.setBackground(new java.awt.Color(204, 204, 255));
+        btnEditarProd.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnEditarProd.setText("Editar");
+        btnEditarProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEditarProd.setBorderPainted(false);
+        btnEditarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarProd.setNextFocusableComponent(btnVolverProd);
         btnEditarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -176,15 +285,12 @@ public class ventanaProducto extends javax.swing.JFrame
             }
         });
 
-        btnMenuPrincipalProd.setText("Menú principal");
-        btnMenuPrincipalProd.setNextFocusableComponent(txfdBuscarProd);
-        btnMenuPrincipalProd.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuPrincipalProdActionPerformed(evt);
-            }
-        });
-
+        btnVolverProd.setBackground(new java.awt.Color(204, 204, 255));
+        btnVolverProd.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnVolverProd.setText("Volver");
+        btnVolverProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVolverProd.setBorderPainted(false);
+        btnVolverProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVolverProd.setNextFocusableComponent(btnMenuPrincipalProd);
         btnVolverProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -192,141 +298,89 @@ public class ventanaProducto extends javax.swing.JFrame
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(btnNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnEditarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnVolverProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnMenuPrincipalProd, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE))
+        btnMenuPrincipalProd.setBackground(new java.awt.Color(204, 204, 255));
+        btnMenuPrincipalProd.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnMenuPrincipalProd.setText("Menú principal");
+        btnMenuPrincipalProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnMenuPrincipalProd.setBorderPainted(false);
+        btnMenuPrincipalProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenuPrincipalProd.setNextFocusableComponent(txfdBuscarProd);
+        btnMenuPrincipalProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMenuPrincipalProdActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelTablaLayout = new javax.swing.GroupLayout(panelTabla);
+        panelTabla.setLayout(panelTablaLayout);
+        panelTablaLayout.setHorizontalGroup(
+            panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jScrollPane1)
+            .addGroup(panelTablaLayout.createSequentialGroup()
+                .addComponent(btnNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addComponent(btnEditarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addComponent(btnVolverProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(6, 6, 6)
+                .addComponent(btnMenuPrincipalProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        panelTablaLayout.setVerticalGroup(
+            panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTablaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 253, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnMenuPrincipalProd, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE)
-                    .addComponent(btnNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnEditarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(btnVolverProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                .addComponent(jScrollPane1)
+                .addGap(11, 11, 11)
+                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(btnNuevoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnEditarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVolverProd, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMenuPrincipalProd, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
-        jLabel4.setText("Filtrar por:");
+        lsbFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo grande.png"))); // NOI18N
 
-        cbFiltroCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
-        cbFiltroCampo.setNextFocusableComponent(cbSituacion);
-        cbFiltroCampo.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbFiltroCampoActionPerformed(evt);
-            }
-        });
-
-        jLabel2.setText("Proveedor:");
-
-        cbFiltroProv.setNextFocusableComponent(cbCampoOrden);
-        cbFiltroProv.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbFiltroProvActionPerformed(evt);
-            }
-        });
-
-        jLabel3.setText("Ordenar por:");
-
-        cbCampoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripción", "Código", "Precio costo", "Precio venta", "Stock", "Stock mínimo", "Peso del envase" }));
-        cbCampoOrden.setNextFocusableComponent(cbTipoOrden);
-        cbCampoOrden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbCampoOrdenActionPerformed(evt);
-            }
-        });
-
-        cbTipoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
-        cbTipoOrden.setNextFocusableComponent(btnNuevoProd);
-        cbTipoOrden.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbTipoOrdenActionPerformed(evt);
-            }
-        });
-
-        cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo habilitados", "Sólo ofertas", "Sólo suspendidos" }));
-        cbSituacion.setNextFocusableComponent(cbFiltroProv);
-        cbSituacion.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbSituacionActionPerformed(evt);
-            }
-        });
-
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                .addGap(59, 59, 59)
-                .addComponent(jLabel4)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbFiltroCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout panelTodoLayout = new javax.swing.GroupLayout(panelTodo);
+        panelTodo.setLayout(panelTodoLayout);
+        panelTodoLayout.setHorizontalGroup(
+            panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(lsbFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+            .addGroup(panelTodoLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addComponent(jLabel2)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbFiltroProv, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
-                .addComponent(jLabel3)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbCampoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTodoLayout.createSequentialGroup()
+                        .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(panelFiltros, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap())))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbCampoOrden)
-                        .addComponent(cbTipoOrden))
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(cbFiltroProv)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(cbSituacion, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbFiltroCampo, javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+        panelTodoLayout.setVerticalGroup(
+            panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTodoLayout.createSequentialGroup()
+                .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelTodoLayout.createSequentialGroup()
+                        .addGap(10, 10, 10)
+                        .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelTodoLayout.createSequentialGroup()
+                        .addGap(60, 60, 60)
+                        .addComponent(panelFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(1, 1, 1)
+                .addComponent(lsbFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+            .addComponent(panelTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(17, 17, 17)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(12, 12, 12))
+            .addComponent(panelTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -432,48 +486,6 @@ public class ventanaProducto extends javax.swing.JFrame
         llenarTabla();
     }//GEN-LAST:event_cbFiltroCampoActionPerformed
 
-    private void btnBuscarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarProdActionPerformed
-        String cadena = txfdBuscarProd.getText();
-        List<Producto> listaBusqueda = null;
-        
-        if (proveedorSelec.equals("Todos") || proveedorSelec == null)
-        {
-            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec, situacionSelec);
-        }
-        else
-        {
-            Proveedor prov = prDAO.buscarPorCuitNombre(proveedorSelec, "Habilitados").get(0);
-            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, filtroSelec, situacionSelec, prov.getId());
-        }
-        
-        llenarTablaBusqueda(listaBusqueda);
-        
-        if (txfdBuscarProd.getText().equals(""))
-        {
-            cbFiltroCampo.setEnabled(true);
-            if (cbFiltroCampo.getSelectedItem().equals("Habilitados"))
-            {
-                cbSituacion.setEnabled(true);
-            }
-            else
-            {
-                cbSituacion.setEnabled(false);
-            }
-            cbFiltroProv.setEnabled(true);
-            cbCampoOrden.setEnabled(true);
-            cbTipoOrden.setEnabled(true);
-            llenarTabla();
-        }
-        else
-        {
-            cbFiltroCampo.setEnabled(false);
-            cbSituacion.setEnabled(false);
-            cbFiltroProv.setEnabled(false);
-            cbCampoOrden.setEnabled(false);
-            cbTipoOrden.setEnabled(false);
-        }
-    }//GEN-LAST:event_btnBuscarProdActionPerformed
-
     private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
         String cadena = txfdBuscarProd.getText();
         List<Producto> listaBusqueda = null;
@@ -528,11 +540,6 @@ public class ventanaProducto extends javax.swing.JFrame
         llenarTabla();
     }//GEN-LAST:event_cbFiltroProvActionPerformed
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        //acciones para cuando vuelve a la ventana
-        llenarTabla();
-    }//GEN-LAST:event_formWindowActivated
-
     private void cbSituacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSituacionActionPerformed
         if (cbSituacion.getSelectedItem().equals("Todos"))
         {
@@ -552,6 +559,12 @@ public class ventanaProducto extends javax.swing.JFrame
         }    
         llenarTabla();
     }//GEN-LAST:event_cbSituacionActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        ventanaAdministracion vAdministracion = new ventanaAdministracion();
+        vAdministracion.setVisible(true);
+        dispose();
+    }//GEN-LAST:event_formWindowClosing
     
     public static void main(String args[]) 
     {
@@ -860,7 +873,6 @@ public class ventanaProducto extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnBuscarProd;
     private javax.swing.JButton btnEditarProd;
     private javax.swing.JButton btnMenuPrincipalProd;
     private javax.swing.JButton btnNuevoProd;
@@ -874,10 +886,12 @@ public class ventanaProducto extends javax.swing.JFrame
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lsbFondo;
+    private javax.swing.JPanel panelBusqueda;
+    private javax.swing.JPanel panelFiltros;
+    private javax.swing.JPanel panelTabla;
+    private javax.swing.JPanel panelTodo;
     private javax.swing.JTable tablaProd;
     private org.jdesktop.swingx.JXTextField txfdBuscarProd;
     // End of variables declaration//GEN-END:variables
