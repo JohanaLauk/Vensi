@@ -2,12 +2,13 @@ package Vista;
 
 import DAO.ProductoDAO;
 import DAO.ProveedorDAO;
-import java.awt.Dimension;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import Modelo.Producto;
 import Modelo.Proveedor;
+import Utils.CentrarColumnas;
+import Utils.ColorFilas;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
@@ -74,7 +75,7 @@ public class ventanaProducto extends javax.swing.JFrame
         cbFiltroProv = new javax.swing.JComboBox<>();
         panelFiltros = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
-        cbFiltroCampo = new javax.swing.JComboBox<>();
+        cbFiltroEstado = new javax.swing.JComboBox<>();
         cbSituacion = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         cbCampoOrden = new javax.swing.JComboBox<>();
@@ -85,12 +86,10 @@ public class ventanaProducto extends javax.swing.JFrame
         btnNuevoProd = new javax.swing.JButton();
         btnEditarProd = new javax.swing.JButton();
         btnVolverProd = new javax.swing.JButton();
-        btnMenuPrincipalProd = new javax.swing.JButton();
-        lsbFondo = new javax.swing.JLabel();
+        btnMenuPpal = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setTitle("Gestion del producto");
-        setResizable(false);
+        setTitle("Gestión del producto");
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -105,9 +104,11 @@ public class ventanaProducto extends javax.swing.JFrame
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel1.setText("Buscar:");
 
-        txfdBuscarProd.setBorder(javax.swing.BorderFactory.createCompoundBorder());
+        txfdBuscarProd.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdBuscarProd.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txfdBuscarProd.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txfdBuscarProd.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        txfdBuscarProd.setNextFocusableComponent(btnEditarProd);
         txfdBuscarProd.setPrompt("Busque por código o por descripción");
         txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -119,7 +120,7 @@ public class ventanaProducto extends javax.swing.JFrame
         jLabel2.setText("Proveedor:");
 
         cbFiltroProv.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        cbFiltroProv.setNextFocusableComponent(cbCampoOrden);
+        cbFiltroProv.setNextFocusableComponent(cbFiltroEstado);
         cbFiltroProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbFiltroProvActionPerformed(evt);
@@ -161,19 +162,19 @@ public class ventanaProducto extends javax.swing.JFrame
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Filtrar por:");
 
-        cbFiltroCampo.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        cbFiltroCampo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
-        cbFiltroCampo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        cbFiltroCampo.setNextFocusableComponent(cbSituacion);
-        cbFiltroCampo.addActionListener(new java.awt.event.ActionListener() {
+        cbFiltroEstado.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        cbFiltroEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
+        cbFiltroEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cbFiltroEstado.setNextFocusableComponent(cbSituacion);
+        cbFiltroEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                cbFiltroCampoActionPerformed(evt);
+                cbFiltroEstadoActionPerformed(evt);
             }
         });
 
         cbSituacion.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo habilitados", "Sólo ofertas", "Sólo suspendidos" }));
-        cbSituacion.setNextFocusableComponent(cbFiltroProv);
+        cbSituacion.setNextFocusableComponent(cbCampoOrden);
         cbSituacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbSituacionActionPerformed(evt);
@@ -210,15 +211,15 @@ public class ventanaProducto extends javax.swing.JFrame
                 .addGap(96, 96, 96)
                 .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(8, 8, 8)
-                .addComponent(cbFiltroCampo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbFiltroEstado, 0, 1, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbSituacion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbSituacion, 0, 1, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(cbCampoOrden, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbCampoOrden, 0, 1, Short.MAX_VALUE)
                 .addGap(4, 4, 4)
-                .addComponent(cbTipoOrden, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(cbTipoOrden, 0, 1, Short.MAX_VALUE)
                 .addGap(158, 158, 158))
         );
         panelFiltrosLayout.setVerticalGroup(
@@ -227,7 +228,7 @@ public class ventanaProducto extends javax.swing.JFrame
                 .addGroup(panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(cbFiltroCampo)
+                        .addComponent(cbFiltroEstado)
                         .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelFiltrosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(cbCampoOrden)
@@ -245,6 +246,8 @@ public class ventanaProducto extends javax.swing.JFrame
                 return false;
             }
         };
+        tablaProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tablaProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         tablaProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -253,19 +256,42 @@ public class ventanaProducto extends javax.swing.JFrame
 
             }
         ));
+        tablaProd.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablaProd.setFocusable(false);
+        tablaProd.setGridColor(new java.awt.Color(204, 204, 204));
+        tablaProd.setNextFocusableComponent(btnEditarProd);
+        tablaProd.setRowHeight(20);
         tablaProd.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaProd.getTableHeader().setResizingAllowed(false);
         tablaProd.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaProd);
 
         btnNuevoProd.setBackground(new java.awt.Color(204, 204, 255));
-        btnNuevoProd.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnNuevoProd.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        btnNuevoProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProducto/prod+_50.png"))); // NOI18N
         btnNuevoProd.setText("Nuevo");
         btnNuevoProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnNuevoProd.setBorderPainted(false);
         btnNuevoProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevoProd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnNuevoProd.setIconTextGap(40);
         btnNuevoProd.setNextFocusableComponent(btnEditarProd);
+        btnNuevoProd.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnNuevoProdFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnNuevoProdFocusLost(evt);
+            }
+        });
+        btnNuevoProd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnNuevoProdMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnNuevoProdMouseExited(evt);
+            }
+        });
         btnNuevoProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnNuevoProdActionPerformed(evt);
@@ -273,12 +299,31 @@ public class ventanaProducto extends javax.swing.JFrame
         });
 
         btnEditarProd.setBackground(new java.awt.Color(204, 204, 255));
-        btnEditarProd.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnEditarProd.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        btnEditarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProducto/editarProd_50.png"))); // NOI18N
         btnEditarProd.setText("Editar");
         btnEditarProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditarProd.setBorderPainted(false);
         btnEditarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditarProd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnEditarProd.setIconTextGap(40);
         btnEditarProd.setNextFocusableComponent(btnVolverProd);
+        btnEditarProd.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnEditarProdFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnEditarProdFocusLost(evt);
+            }
+        });
+        btnEditarProd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnEditarProdMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnEditarProdMouseExited(evt);
+            }
+        });
         btnEditarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnEditarProdActionPerformed(evt);
@@ -286,75 +331,108 @@ public class ventanaProducto extends javax.swing.JFrame
         });
 
         btnVolverProd.setBackground(new java.awt.Color(204, 204, 255));
-        btnVolverProd.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnVolverProd.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        btnVolverProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProducto/volver_50.png"))); // NOI18N
         btnVolverProd.setText("Volver");
         btnVolverProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnVolverProd.setBorderPainted(false);
         btnVolverProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnVolverProd.setNextFocusableComponent(btnMenuPrincipalProd);
+        btnVolverProd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnVolverProd.setIconTextGap(30);
+        btnVolverProd.setNextFocusableComponent(btnMenuPpal);
+        btnVolverProd.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnVolverProdFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnVolverProdFocusLost(evt);
+            }
+        });
+        btnVolverProd.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVolverProdMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVolverProdMouseExited(evt);
+            }
+        });
         btnVolverProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverProdActionPerformed(evt);
             }
         });
 
-        btnMenuPrincipalProd.setBackground(new java.awt.Color(204, 204, 255));
-        btnMenuPrincipalProd.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        btnMenuPrincipalProd.setText("Menú principal");
-        btnMenuPrincipalProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btnMenuPrincipalProd.setBorderPainted(false);
-        btnMenuPrincipalProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        btnMenuPrincipalProd.setNextFocusableComponent(txfdBuscarProd);
-        btnMenuPrincipalProd.addActionListener(new java.awt.event.ActionListener() {
+        btnMenuPpal.setBackground(new java.awt.Color(204, 204, 255));
+        btnMenuPpal.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        btnMenuPpal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProducto/home_50.png"))); // NOI18N
+        btnMenuPpal.setText("Menú principal");
+        btnMenuPpal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnMenuPpal.setBorderPainted(false);
+        btnMenuPpal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenuPpal.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnMenuPpal.setIconTextGap(20);
+        btnMenuPpal.setNextFocusableComponent(txfdBuscarProd);
+        btnMenuPpal.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                btnMenuPpalFocusGained(evt);
+            }
+            public void focusLost(java.awt.event.FocusEvent evt) {
+                btnMenuPpalFocusLost(evt);
+            }
+        });
+        btnMenuPpal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMenuPpalMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMenuPpalMouseExited(evt);
+            }
+        });
+        btnMenuPpal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuPrincipalProdActionPerformed(evt);
+                btnMenuPpalActionPerformed(evt);
             }
         });
 
         javax.swing.GroupLayout panelTablaLayout = new javax.swing.GroupLayout(panelTabla);
         panelTabla.setLayout(panelTablaLayout);
         panelTablaLayout.setHorizontalGroup(
-            panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1)
+            panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(panelTablaLayout.createSequentialGroup()
-                .addComponent(btnNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(6, 6, 6)
-                .addComponent(btnEditarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(6, 6, 6)
-                .addComponent(btnVolverProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(6, 6, 6)
-                .addComponent(btnMenuPrincipalProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnEditarProd, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnVolverProd, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(btnMenuPpal))
+            .addComponent(jScrollPane1)
         );
         panelTablaLayout.setVerticalGroup(
             panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTablaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane1)
-                .addGap(11, 11, 11)
-                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnNuevoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnEditarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVolverProd, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnMenuPrincipalProd, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addGap(10, 10, 10)
+                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnNuevoProd)
+                    .addComponent(btnEditarProd)
+                    .addComponent(btnVolverProd, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnMenuPpal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
-
-        lsbFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo grande.png"))); // NOI18N
 
         javax.swing.GroupLayout panelTodoLayout = new javax.swing.GroupLayout(panelTodo);
         panelTodo.setLayout(panelTodoLayout);
         panelTodoLayout.setHorizontalGroup(
             panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(lsbFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
             .addGroup(panelTodoLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
-                .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTodoLayout.createSequentialGroup()
-                        .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(panelFiltros, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(panelBusqueda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelFiltros, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelTabla, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         panelTodoLayout.setVerticalGroup(
             panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -368,8 +446,7 @@ public class ventanaProducto extends javax.swing.JFrame
                         .addComponent(panelFiltros, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGap(1, 1, 1)
-                .addComponent(lsbFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(11, 11, 11))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -386,11 +463,11 @@ public class ventanaProducto extends javax.swing.JFrame
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnMenuPrincipalProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalProdActionPerformed
+    private void btnMenuPpalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPpalActionPerformed
         ventanaPrincipal vPrincipal = new ventanaPrincipal();
         vPrincipal.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnMenuPrincipalProdActionPerformed
+    }//GEN-LAST:event_btnMenuPpalActionPerformed
 
     private void btnVolverProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverProdActionPerformed
         ventanaAdministracion vAdministracion = new ventanaAdministracion();
@@ -464,15 +541,15 @@ public class ventanaProducto extends javax.swing.JFrame
         llenarTabla();
     }//GEN-LAST:event_cbTipoOrdenActionPerformed
 
-    private void cbFiltroCampoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroCampoActionPerformed
-        if (cbFiltroCampo.getSelectedItem().equals("Todos"))
+    private void cbFiltroEstadoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroEstadoActionPerformed
+        if (cbFiltroEstado.getSelectedItem().equals("Todos"))
         {
             filtroSelec = "Todos";
             cbSituacion.setEnabled(false);
         }
         else
         {
-            if (cbFiltroCampo.getSelectedItem().equals("Habilitados"))
+            if (cbFiltroEstado.getSelectedItem().equals("Habilitados"))
             {
                 filtroSelec = "Habilitados";   
                 cbSituacion.setEnabled(true);
@@ -484,7 +561,7 @@ public class ventanaProducto extends javax.swing.JFrame
             }
         }        
         llenarTabla();
-    }//GEN-LAST:event_cbFiltroCampoActionPerformed
+    }//GEN-LAST:event_cbFiltroEstadoActionPerformed
 
     private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
         String cadena = txfdBuscarProd.getText();
@@ -504,8 +581,8 @@ public class ventanaProducto extends javax.swing.JFrame
         
         if (cadena.equals(""))
         {
-            cbFiltroCampo.setEnabled(true);
-            if (cbFiltroCampo.getSelectedItem().equals("Habilitados"))
+            cbFiltroEstado.setEnabled(true);
+            if (cbFiltroEstado.getSelectedItem().equals("Habilitados"))
             {
                 cbSituacion.setEnabled(true);
             }
@@ -520,7 +597,7 @@ public class ventanaProducto extends javax.swing.JFrame
         }
         else
         {
-            cbFiltroCampo.setEnabled(false);
+            cbFiltroEstado.setEnabled(false);
             cbSituacion.setEnabled(false);
             cbFiltroProv.setEnabled(false);
             cbCampoOrden.setEnabled(false);
@@ -565,6 +642,86 @@ public class ventanaProducto extends javax.swing.JFrame
         vAdministracion.setVisible(true);
         dispose();
     }//GEN-LAST:event_formWindowClosing
+
+    private void btnNuevoProdMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoProdMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/prod+_lleno_50.png"));     
+        btnNuevoProd.setIcon(icono);
+    }//GEN-LAST:event_btnNuevoProdMouseEntered
+
+    private void btnNuevoProdMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoProdMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/prod+_50.png"));     
+        btnNuevoProd.setIcon(icono);
+    }//GEN-LAST:event_btnNuevoProdMouseExited
+
+    private void btnEditarProdMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarProdMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/editarProd_lleno_50.png"));     
+        btnEditarProd.setIcon(icono);
+    }//GEN-LAST:event_btnEditarProdMouseEntered
+
+    private void btnEditarProdMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarProdMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/editarProd_50.png"));     
+        btnEditarProd.setIcon(icono);
+    }//GEN-LAST:event_btnEditarProdMouseExited
+
+    private void btnVolverProdMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverProdMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/volver_lleno_50.png"));     
+        btnVolverProd.setIcon(icono);
+    }//GEN-LAST:event_btnVolverProdMouseEntered
+
+    private void btnVolverProdMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverProdMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/volver_50.png"));     
+        btnVolverProd.setIcon(icono);
+    }//GEN-LAST:event_btnVolverProdMouseExited
+
+    private void btnMenuPpalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuPpalMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/home_lleno_50.png"));     
+        btnMenuPpal.setIcon(icono);
+    }//GEN-LAST:event_btnMenuPpalMouseEntered
+
+    private void btnMenuPpalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuPpalMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/home_50.png"));     
+        btnMenuPpal.setIcon(icono);
+    }//GEN-LAST:event_btnMenuPpalMouseExited
+
+    private void btnEditarProdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditarProdFocusGained
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/editarProd_lleno_50.png"));     
+        btnEditarProd.setIcon(icono);
+    }//GEN-LAST:event_btnEditarProdFocusGained
+
+    private void btnEditarProdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditarProdFocusLost
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/editarProd_50.png"));     
+        btnEditarProd.setIcon(icono);
+    }//GEN-LAST:event_btnEditarProdFocusLost
+
+    private void btnNuevoProdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevoProdFocusGained
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/prod+_lleno_50.png"));     
+        btnNuevoProd.setIcon(icono);
+    }//GEN-LAST:event_btnNuevoProdFocusGained
+
+    private void btnNuevoProdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevoProdFocusLost
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/prod+_50.png"));     
+        btnNuevoProd.setIcon(icono);
+    }//GEN-LAST:event_btnNuevoProdFocusLost
+
+    private void btnVolverProdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnVolverProdFocusGained
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/volver_lleno_50.png"));     
+        btnVolverProd.setIcon(icono);
+    }//GEN-LAST:event_btnVolverProdFocusGained
+
+    private void btnVolverProdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnVolverProdFocusLost
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/volver_50.png"));     
+        btnVolverProd.setIcon(icono);
+    }//GEN-LAST:event_btnVolverProdFocusLost
+
+    private void btnMenuPpalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnMenuPpalFocusGained
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/home_lleno_50.png"));     
+        btnMenuPpal.setIcon(icono);
+    }//GEN-LAST:event_btnMenuPpalFocusGained
+
+    private void btnMenuPpalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnMenuPpalFocusLost
+        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/home_50.png"));     
+        btnMenuPpal.setIcon(icono);
+    }//GEN-LAST:event_btnMenuPpalFocusLost
     
     public static void main(String args[]) 
     {
@@ -671,15 +828,7 @@ public class ventanaProducto extends javax.swing.JFrame
                 datos[9] = "Deshabilitado";
             }    
     
-            Set<Proveedor> listaProv = p.getProveedors(); 
-            
-            /*String provs = "";          
-           
-            for (Proveedor pr : listaProv)
-            {
-                provs += pr.getRazonSocial() + ", ";
-            }            
-            datos[10] = provs;*/
+            Set<Proveedor> listaProv = p.getProveedors();   
             
             datos[10] = String.valueOf(listaProv.size());            
             datos[11] = String.valueOf(p.getId());            
@@ -687,7 +836,12 @@ public class ventanaProducto extends javax.swing.JFrame
             modelo.addRow(datos);
         }
         
-        tablaProd.setModel(modelo);       
+        //ColorFilas cf = new ColorFilas(2);
+        //tablaProd.setDefaultRenderer(Object.class, cf);  //Cambia de color las filas de la tablaProd (intercaladas)
+        
+        //tablaProd.setDefaultRenderer(Object.class, new CentrarColumnas());    //Centra el contenido de las columnas en la tablaProd
+                
+        tablaProd.setModel(modelo);                
         
         tcm = tablaProd.getColumnModel();
         tcm.getColumn(0).setPreferredWidth(100);
@@ -729,7 +883,7 @@ public class ventanaProducto extends javax.swing.JFrame
             {
                 tablaProd.setRowSelectionAllowed(true);
             } 
-        });
+        });                
     }  
         
     public void llenarTablaBusqueda (List<Producto> listaBusqueda)
@@ -811,15 +965,7 @@ public class ventanaProducto extends javax.swing.JFrame
                 datos[9] = "Deshabilitado";
             }    
     
-            Set<Proveedor> listaProv = p.getProveedors(); 
-            
-            /*String provs = "";          
-           
-            for (Proveedor pr : listaProv)
-            {
-                provs += pr.getRazonSocial() + ", ";
-            }            
-            datos[10] = provs;*/
+            Set<Proveedor> listaProv = p.getProveedors();                        
             
             datos[10] = String.valueOf(listaProv.size());            
             datos[11] = String.valueOf(p.getId());            
@@ -874,11 +1020,11 @@ public class ventanaProducto extends javax.swing.JFrame
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnEditarProd;
-    private javax.swing.JButton btnMenuPrincipalProd;
+    private javax.swing.JButton btnMenuPpal;
     private javax.swing.JButton btnNuevoProd;
     private javax.swing.JButton btnVolverProd;
     private javax.swing.JComboBox<String> cbCampoOrden;
-    private javax.swing.JComboBox<String> cbFiltroCampo;
+    private javax.swing.JComboBox<String> cbFiltroEstado;
     private javax.swing.JComboBox<String> cbFiltroProv;
     private javax.swing.JComboBox<String> cbSituacion;
     private javax.swing.JComboBox<String> cbTipoOrden;
@@ -887,7 +1033,6 @@ public class ventanaProducto extends javax.swing.JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel lsbFondo;
     private javax.swing.JPanel panelBusqueda;
     private javax.swing.JPanel panelFiltros;
     private javax.swing.JPanel panelTabla;

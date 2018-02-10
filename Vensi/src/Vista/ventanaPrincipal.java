@@ -96,6 +96,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnHistorial.setBorderPainted(false);
         btnHistorial.setContentAreaFilled(false);
         btnHistorial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnHistorial.setFocusPainted(false);
         btnHistorial.setNextFocusableComponent(btnPedidos);
         btnHistorial.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -119,6 +120,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnPedidos.setBorderPainted(false);
         btnPedidos.setContentAreaFilled(false);
         btnPedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnPedidos.setFocusPainted(false);
         btnPedidos.setNextFocusableComponent(btnCargaStock);
         btnPedidos.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -142,6 +144,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnAdministracion.setBorderPainted(false);
         btnAdministracion.setContentAreaFilled(false);
         btnAdministracion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAdministracion.setFocusPainted(false);
         btnAdministracion.setNextFocusableComponent(btnHistorial);
         btnAdministracion.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -165,6 +168,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnVentas.setBorderPainted(false);
         btnVentas.setContentAreaFilled(false);
         btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVentas.setFocusPainted(false);
         btnVentas.setNextFocusableComponent(btnAdministracion);
         btnVentas.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -209,6 +213,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnCargaStock.setBorderPainted(false);
         btnCargaStock.setContentAreaFilled(false);
         btnCargaStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCargaStock.setFocusPainted(false);
         btnCargaStock.setNextFocusableComponent(btnSalir);
         btnCargaStock.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {

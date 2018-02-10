@@ -120,6 +120,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
         btnGestionProv.setBorderPainted(false);
         btnGestionProv.setContentAreaFilled(false);
         btnGestionProv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGestionProv.setFocusPainted(false);
         btnGestionProv.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGestionProv.setNextFocusableComponent(btnGestionClave);
         btnGestionProv.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -177,6 +178,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
         btnGestionClave.setBorderPainted(false);
         btnGestionClave.setContentAreaFilled(false);
         btnGestionClave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnGestionClave.setFocusPainted(false);
         btnGestionClave.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnGestionClave.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -232,6 +234,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
         );
 
         labFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo grande.png"))); // NOI18N
+        labFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout panelTodoLayout = new javax.swing.GroupLayout(panelTodo);
         panelTodo.setLayout(panelTodoLayout);
