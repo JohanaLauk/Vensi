@@ -47,8 +47,8 @@ public class ventanaProducto extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);     //centra la ventana        
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir        
-        //this.setMinimumSize(new Dimension(2147483647, 2147483647));  //al minimizar la ventana no permite que sea mas chico que esa medida        
-        //this.setPreferredSize(new Dimension(2147483647, 2147483647));    //al minimizar la ventana aparece con esa medida       
+        this.setMinimumSize(new Dimension(1120,600));
+        this.setPreferredSize(new Dimension(1120,600));      
         
         cbSituacion.setEnabled(false);
         
@@ -93,7 +93,8 @@ public class ventanaProducto extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión del producto");
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(1120, 600));
+        setPreferredSize(new java.awt.Dimension(1120, 600));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);

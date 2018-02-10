@@ -15,8 +15,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);     //centra la ventana          
-        //this.setPreferredSize(new Dimension(836, 520));    //al ejecutarse, la ventana aparece con esa medida
+        this.setLocationRelativeTo(null);     //centra la ventana                  
         this.setPreferredSize(new Dimension(820, 480));        
         AWTUtilities.setWindowOpaque(this, false);  //quita el fondo del frame
         

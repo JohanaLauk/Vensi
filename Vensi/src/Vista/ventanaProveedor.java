@@ -32,8 +32,8 @@ public class ventanaProveedor extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);     //centra la ventana        
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir        
-        //this.setMinimumSize(new Dimension(2147483647, 2147483647));  //al minimizar la ventana no permite que sea mas chico que esa medida        
-        //this.setPreferredSize(new Dimension(2147483647, 2147483647));    //al minimizar la ventana aparece con esa medida
+        this.setMinimumSize(new Dimension(1120,600));  //al minimizar la ventana no permite que sea mas chico que esa medida        
+        this.setPreferredSize(new Dimension(1120,600));    //al minimizar la ventana aparece con esa medida
          
         //Al hacer click en el JFrame se quita la seleccion en el JTable
         this.addMouseListener(new MouseAdapter()
@@ -71,7 +71,8 @@ public class ventanaProveedor extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión del Proveedor");
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(1120, 600));
+        setPreferredSize(new java.awt.Dimension(1120, 600));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -106,7 +107,6 @@ public class ventanaProveedor extends javax.swing.JFrame
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Filtrar por:");
 
-        txfdBuscarProv.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdBuscarProv.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdBuscarProv.setPrompt("Busque por código o por descripción");
         txfdBuscarProv.setPromptForeground(new java.awt.Color(51, 51, 51));

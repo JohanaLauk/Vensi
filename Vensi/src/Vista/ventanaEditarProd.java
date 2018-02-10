@@ -72,7 +72,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
         rbUnidad = new javax.swing.JRadioButton();
         rbPeso = new javax.swing.JRadioButton();
         jLabel11 = new javax.swing.JLabel();
-        txfdEditarPesoEnvase = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         cbEstado = new javax.swing.JComboBox<>();
@@ -81,6 +80,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel6 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaProv = new javax.swing.JTable();
+        txfdEditarPesoEnvase = new org.jdesktop.swingx.JXTextField();
         panelBotones = new javax.swing.JPanel();
         btnAceptarEditar = new javax.swing.JButton();
         btnCancelarEditar = new javax.swing.JButton();
@@ -95,6 +95,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         panelIzquierdo.setOpaque(false);
 
         txfdEditarStockMinimo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdEditarStockMinimo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarStockMinimo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarStockMinimo.setNextFocusableComponent(rbUnidad);
         txfdEditarStockMinimo.setPrompt("Ingrese la cantidad en unidades");
@@ -109,6 +110,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel7.setText("Stock mínimo:");
 
         txfdEditarPrecioVenta.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdEditarPrecioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarPrecioVenta.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarPrecioVenta.setNextFocusableComponent(txfdEditarStockMinimo);
         txfdEditarPrecioVenta.setPrompt("Ej: \"00\" o \"00.00\"");
@@ -123,6 +125,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel4.setText("Precio venta:");
 
         txfdEditarPrecioCosto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdEditarPrecioCosto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarPrecioCosto.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarPrecioCosto.setNextFocusableComponent(txfdEditarPrecioVenta);
         txfdEditarPrecioCosto.setPrompt("Ej: \"00\" o \"00.00\"");
@@ -137,6 +140,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel3.setText("Precio costo:");
 
         txfdEditarDescripcion.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txfdEditarDescripcion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarDescripcion.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarDescripcion.setNextFocusableComponent(txfdEditarPrecioCosto);
 
@@ -144,6 +148,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel2.setText("Descripción:");
 
         txfdEditarCodigo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txfdEditarCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarCodigo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarCodigo.setNextFocusableComponent(txfdEditarDescripcion);
 
@@ -188,7 +193,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
                 .addComponent(txfdEditarPrecioVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel7)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE)
                 .addComponent(txfdEditarStockMinimo, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
@@ -221,15 +226,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         jLabel11.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel11.setText("gramos.");
-
-        txfdEditarPesoEnvase.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        txfdEditarPesoEnvase.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
-        txfdEditarPesoEnvase.setNextFocusableComponent(cbEstado);
-        txfdEditarPesoEnvase.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
-                txfdEditarPesoEnvaseKeyTyped(evt);
-            }
-        });
 
         jLabel9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel9.setText("Peso del envase:");
@@ -296,6 +292,17 @@ public class ventanaEditarProd extends javax.swing.JFrame
             tablaProv.getColumnModel().getColumn(2).setMaxWidth(0);
         }
 
+        txfdEditarPesoEnvase.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdEditarPesoEnvase.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdEditarPesoEnvase.setToolTipText("Ej: 1000");
+        txfdEditarPesoEnvase.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txfdEditarPesoEnvase.setPrompt("Ej: 1000");
+        txfdEditarPesoEnvase.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txfdEditarPesoEnvaseKeyTyped(evt);
+            }
+        });
+
         javax.swing.GroupLayout panelDerechoLayout = new javax.swing.GroupLayout(panelDerecho);
         panelDerecho.setLayout(panelDerechoLayout);
         panelDerechoLayout.setHorizontalGroup(
@@ -340,10 +347,10 @@ public class ventanaEditarProd extends javax.swing.JFrame
                     .addComponent(jLabel5)
                     .addComponent(rbUnidad)
                     .addComponent(rbPeso))
-                .addGap(9, 9, 9)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(txfdEditarPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel9)
-                    .addComponent(txfdEditarPesoEnvase, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel11))
                 .addGap(18, 18, 18)
                 .addGroup(panelDerechoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
@@ -444,12 +451,12 @@ public class ventanaEditarProd extends javax.swing.JFrame
             panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTodoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(panelDerecho, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelIzquierdo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(18, 18, 18)
                 .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -699,12 +706,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
         }
     }//GEN-LAST:event_cbEstadoActionPerformed
 
-    private void txfdEditarPesoEnvaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPesoEnvaseKeyTyped
-        char c = evt.getKeyChar();
-        if (c < '0' || c > '9')        
-            evt.consume();        
-    }//GEN-LAST:event_txfdEditarPesoEnvaseKeyTyped
-
     private void rbPesoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbPesoActionPerformed
         if (rbPeso.isSelected())
         {
@@ -740,6 +741,12 @@ public class ventanaEditarProd extends javax.swing.JFrame
         icono = new ImageIcon(getClass().getResource("/Recursos/confirmar_50.png"));     
         btnAceptarEditar.setIcon(icono);
     }//GEN-LAST:event_btnAceptarEditarMouseExited
+
+    private void txfdEditarPesoEnvaseKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarPesoEnvaseKeyTyped
+        char c = evt.getKeyChar();
+        if(c < '0' || c > '9')         
+            evt.consume(); 
+    }//GEN-LAST:event_txfdEditarPesoEnvaseKeyTyped
 
     public static void main(String args[]) 
     {
@@ -881,7 +888,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
     private javax.swing.JTable tablaProv;
     private javax.swing.JTextField txfdEditarCodigo;
     private javax.swing.JTextField txfdEditarDescripcion;
-    private javax.swing.JTextField txfdEditarPesoEnvase;
+    private org.jdesktop.swingx.JXTextField txfdEditarPesoEnvase;
     private org.jdesktop.swingx.JXTextField txfdEditarPrecioCosto;
     private org.jdesktop.swingx.JXTextField txfdEditarPrecioVenta;
     private org.jdesktop.swingx.JXTextField txfdEditarStockMinimo;
