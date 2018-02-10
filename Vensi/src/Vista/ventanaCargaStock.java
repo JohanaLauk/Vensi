@@ -892,7 +892,7 @@ public class ventanaCargaStock extends javax.swing.JFrame
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed
         provSelec = String.valueOf(cbProveedores.getSelectedItem());
-        List<Proveedor> listaProvHab = provDAO.listar("Habilitados");
+        List<Proveedor> listaProvHab = provDAO.listar("Habilitados", "razonSocial", "ASC");
                 
         if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
         {  
@@ -1417,7 +1417,7 @@ public class ventanaCargaStock extends javax.swing.JFrame
     {
         DefaultComboBoxModel modeloCBB = new DefaultComboBoxModel();
         
-        List<Proveedor> listaP = provDAO.listar("Habilitados");
+        List<Proveedor> listaP = provDAO.listar("Habilitados", "razonSocial", "ASC");
         
         if (listaP.size() < 0)
         {            

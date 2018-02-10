@@ -73,7 +73,7 @@ public class ProveedorDAO
         //JOptionPane.showMessageDialog(null, "Proveedor modificado");
     }  
     
-    public List<Proveedor> listar(String filtro)
+    public List<Proveedor> listar(String filtro, String orden, String tipoOrden)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
         
@@ -83,20 +83,82 @@ public class ProveedorDAO
             tx = session.beginTransaction();
             if (filtro.equals("Todos"))
             {
-                lista = session.createQuery("FROM Proveedor ORDER BY razon_social").list();
+                if (orden.equals("razonSocial"))
+                {
+                    if (tipoOrden.equals("ASC"))
+                    {
+                        lista = session.createQuery("FROM Proveedor ORDER BY razon_social").list();
+                    }
+                    else
+                    {
+                        lista = session.createQuery("FROM Proveedor ORDER BY razon_social DESC").list();
+                    }
+                }
+                if (orden.equals("cuit"))
+                {
+                    if (tipoOrden.equals("ASC"))
+                    {
+                        lista = session.createQuery("FROM Proveedor ORDER BY cuit").list();
+                    }
+                    else
+                    {
+                        lista = session.createQuery("FROM Proveedor ORDER BY cuit DESC").list();
+                    }
+                }
             }
             else
             {
                 if (filtro.equals("Habilitados"))
                 {
-                    lista = session.createQuery("FROM Proveedor WHERE estado = true ORDER BY razon_social").list();
+                    if (orden.equals("razonSocial"))
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            lista = session.createQuery("FROM Proveedor WHERE estado = true ORDER BY razon_social").list();
+                        }
+                        else
+                        {
+                            lista = session.createQuery("FROM Proveedor WHERE estado = true ORDER BY razon_social DESC").list();
+                        }
+                    }
+                    if (orden.equals("cuit"))
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            lista = session.createQuery("FROM Proveedor WHERE estado = true ORDER BY cuit").list();
+                        }
+                        else
+                        {
+                            lista = session.createQuery("FROM Proveedor WHERE estado = true ORDER BY cuit DESC").list();
+                        }
+                    }                   
                 }
                 else
                 {
-                    lista = session.createQuery("FROM Proveedor WHERE estado = false ORDER BY razon_social").list();
+                    if (orden.equals("razonSocial"))
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            lista = session.createQuery("FROM Proveedor WHERE estado = false ORDER BY razon_social").list();
+                        }
+                        else
+                        {
+                            lista = session.createQuery("FROM Proveedor WHERE estado = false ORDER BY razon_social DESC").list();
+                        }
+                    }
+                    if (orden.equals("cuit"))
+                    {
+                        if (tipoOrden.equals("ASC"))
+                        {
+                            lista = session.createQuery("FROM Proveedor WHERE estado = false ORDER BY cuit").list();
+                        }
+                        else
+                        {
+                            lista = session.createQuery("FROM Proveedor WHERE estado = false ORDER BY cuit DESC").list();
+                        }
+                    }
                 }
-            }
-            
+            }            
             tx.commit();
             
         }

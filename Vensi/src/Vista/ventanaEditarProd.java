@@ -830,7 +830,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
     
     public void llenarTabla()
     {        
-        List<Proveedor> lista = prDAO.listar("Habilitados");
+        List<Proveedor> lista = prDAO.listar("Habilitados", "razonSocial", "ASC");
         Set<Proveedor> listaProvDelProducto = pDAO.buscarPorId(id_recibido).getProveedors();
         modelo = (DefaultTableModel) tablaProv.getModel();
         Object datos[] = {"",false,""};

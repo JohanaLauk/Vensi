@@ -759,7 +759,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     
     public void llenarTabla() 
     {
-        List<Proveedor> lista = prDAO.listar("Habilitados");
+        List<Proveedor> lista = prDAO.listar("Habilitados", "razonSocial", "ASC");
         modelo = (DefaultTableModel) tablaProv.getModel();
         
         for (Proveedor p : lista) 

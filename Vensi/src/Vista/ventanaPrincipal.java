@@ -29,11 +29,13 @@ public class ventanaPrincipal extends javax.swing.JFrame
     private void initComponents() {
 
         jPanel1 = new javax.swing.JPanel();
-        jPanel2 = new javax.swing.JPanel();
+        panelIzquierda = new javax.swing.JPanel();
         labNombreNegocio = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        labImagenIzquierda = new javax.swing.JLabel();
-        panelPrincipal = new javax.swing.JPanel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        panelDerecha = new javax.swing.JPanel();
         btnHistorial = new javax.swing.JButton();
         btnPedidos = new javax.swing.JButton();
         btnAdministracion = new javax.swing.JButton();
@@ -69,25 +71,74 @@ public class ventanaPrincipal extends javax.swing.JFrame
         setOpacity(0.95F);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelIzquierda.setBackground(new java.awt.Color(0, 0, 15));
 
         labNombreNegocio.setFont(new java.awt.Font("Calibri", 0, 36)); // NOI18N
-        labNombreNegocio.setForeground(new java.awt.Color(255, 255, 255));
+        labNombreNegocio.setForeground(new java.awt.Color(204, 204, 0));
         labNombreNegocio.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labNombreNegocio.setText("\"LA ESQUINA\"");
         labNombreNegocio.setToolTipText("");
-        jPanel2.add(labNombreNegocio, new org.netbeans.lib.awtextra.AbsoluteConstraints(27, 70, 260, -1));
 
         jSeparator2.setForeground(new java.awt.Color(255, 255, 255));
-        jPanel2.add(jSeparator2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 120, 260, 10));
 
-        labImagenIzquierda.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/imagen_fondo_izquierdo_(grande).jpg"))); // NOI18N
-        jPanel2.add(labImagenIzquierda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 480));
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/local_200.png"))); // NOI18N
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 480));
+        jLabel7.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel7.setFont(new java.awt.Font("Calibri", 0, 20)); // NOI18N
+        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("9 de Julio y Garabasso");
 
-        panelPrincipal.setPreferredSize(new java.awt.Dimension(600, 400));
-        panelPrincipal.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        jLabel8.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel8.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("San Benito - Entre Ríos");
+
+        javax.swing.GroupLayout panelIzquierdaLayout = new javax.swing.GroupLayout(panelIzquierda);
+        panelIzquierda.setLayout(panelIzquierdaLayout);
+        panelIzquierdaLayout.setHorizontalGroup(
+            panelIzquierdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelIzquierdaLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addComponent(labNombreNegocio, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(panelIzquierdaLayout.createSequentialGroup()
+                .addGroup(panelIzquierdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelIzquierdaLayout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addGroup(panelIzquierdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jSeparator2)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(panelIzquierdaLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelIzquierdaLayout.setVerticalGroup(
+            panelIzquierdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelIzquierdaLayout.createSequentialGroup()
+                .addGap(70, 70, 70)
+                .addComponent(labNombreNegocio)
+                .addGroup(panelIzquierdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelIzquierdaLayout.createSequentialGroup()
+                        .addGap(6, 6, 6)
+                        .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelIzquierdaLayout.createSequentialGroup()
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(31, 31, 31)
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(61, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(panelIzquierda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 480));
+
+        panelDerecha.setPreferredSize(new java.awt.Dimension(600, 400));
+        panelDerecha.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnHistorial.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/historial_100.png"))); // NOI18N
@@ -111,7 +162,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnHistorialActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 100, 100));
+        panelDerecha.add(btnHistorial, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 350, 100, 100));
 
         btnPedidos.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/pedido_100.png"))); // NOI18N
@@ -135,7 +186,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnPedidosActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 80, -1));
+        panelDerecha.add(btnPedidos, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 80, -1));
 
         btnAdministracion.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnAdministracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/adminBD_100.png"))); // NOI18N
@@ -159,7 +210,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnAdministracionActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 100, 110));
+        panelDerecha.add(btnAdministracion, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 300, 100, 110));
 
         btnVentas.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/ventas_100.png"))); // NOI18N
@@ -183,7 +234,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnVentasActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 110, 100));
+        panelDerecha.add(btnVentas, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 80, 110, 100));
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/apagar_50.png"))); // NOI18N
         btnSalir.setToolTipText("Salir");
@@ -205,7 +256,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnSalirActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 50, 70));
+        panelDerecha.add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 50, 70));
 
         btnCargaStock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/cargaStock_100.png"))); // NOI18N
         btnCargaStock.setToolTipText("");
@@ -228,9 +279,9 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnCargaStockActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnCargaStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, 110));
+        panelDerecha.add(btnCargaStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, 110));
 
-        btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/minimizar_50.png"))); // NOI18N
+        btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/minimizar_50.png"))); // NOI18N
         btnMinimizar.setToolTipText("Minimizar");
         btnMinimizar.setBorderPainted(false);
         btnMinimizar.setContentAreaFilled(false);
@@ -250,20 +301,20 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnMinimizarActionPerformed(evt);
             }
         });
-        panelPrincipal.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 60, 70));
+        panelDerecha.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 60, 70));
 
-        LabTitulo.setBackground(new java.awt.Color(255, 255, 0));
-        LabTitulo.setFont(new java.awt.Font("Calibri", 0, 48)); // NOI18N
+        LabTitulo.setBackground(new java.awt.Color(255, 255, 255));
+        LabTitulo.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
         LabTitulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         LabTitulo.setText("VENSI");
         LabTitulo.setToolTipText("");
         LabTitulo.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        panelPrincipal.add(LabTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 120, 70));
+        panelDerecha.add(LabTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 0, 120, 70));
 
         jSeparator1.setForeground(new java.awt.Color(102, 102, 255));
-        panelPrincipal.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 500, 10));
+        panelDerecha.add(jSeparator1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 70, 500, 10));
 
-        labBarraTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/plata_circular.jpg"))); // NOI18N
+        labBarraTitulo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/plata_circular.jpg"))); // NOI18N
         labBarraTitulo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         labBarraTitulo.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
@@ -275,39 +326,44 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 labBarraTituloMousePressed(evt);
             }
         });
-        panelPrincipal.add(labBarraTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 520, 70));
+        panelDerecha.add(labBarraTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-20, 0, 520, 70));
 
-        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(204, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ventas");
-        panelPrincipal.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 90, -1));
+        panelDerecha.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 90, -1));
 
-        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(204, 255, 255));
         jLabel2.setText("Generar pedido");
-        panelPrincipal.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 160, 20));
+        panelDerecha.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 160, 20));
 
-        jLabel3.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(204, 255, 255));
         jLabel3.setText("Actualizar inventario");
-        panelPrincipal.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, 20));
+        panelDerecha.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, 20));
 
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(204, 255, 255));
         jLabel4.setText("Administrar inventario");
-        panelPrincipal.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, -1, 20));
+        panelDerecha.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, -1, 20));
 
-        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel5.setForeground(new java.awt.Color(204, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Historial");
-        panelPrincipal.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 100, 20));
+        panelDerecha.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 100, 20));
 
         labImagenDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo grande.png"))); // NOI18N
-        panelPrincipal.add(labImagenDerecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 480));
+        panelDerecha.add(labImagenDerecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 480));
 
-        getContentPane().add(panelPrincipal, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 500, 480));
+        getContentPane().add(panelDerecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 500, 480));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -420,12 +476,12 @@ public class ventanaPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_btnMinimizarActionPerformed
 
     private void btnMinimizarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/minimizar_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vPrincipal/minimizar_lleno_50.png"));     
         btnMinimizar.setIcon(icono);  
     }//GEN-LAST:event_btnMinimizarMouseEntered
 
     private void btnMinimizarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMinimizarMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/minimizar_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vPrincipal/minimizar_50.png"));     
         btnMinimizar.setIcon(icono);  
     }//GEN-LAST:event_btnMinimizarMouseExited
 
@@ -454,14 +510,16 @@ public class ventanaPrincipal extends javax.swing.JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel labBarraTitulo;
     private javax.swing.JLabel labImagenDerecha;
-    private javax.swing.JLabel labImagenIzquierda;
     private javax.swing.JLabel labNombreNegocio;
-    private javax.swing.JPanel panelPrincipal;
+    private javax.swing.JPanel panelDerecha;
+    private javax.swing.JPanel panelIzquierda;
     // End of variables declaration//GEN-END:variables
 }

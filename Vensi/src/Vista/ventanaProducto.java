@@ -9,6 +9,7 @@ import Modelo.Producto;
 import Modelo.Proveedor;
 import Utils.CentrarColumnas;
 import Utils.ColorFilas;
+import java.awt.Dimension;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
@@ -46,7 +47,9 @@ public class ventanaProducto extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);     //centra la ventana        
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir        
-               
+        //this.setMinimumSize(new Dimension(2147483647, 2147483647));  //al minimizar la ventana no permite que sea mas chico que esa medida        
+        //this.setPreferredSize(new Dimension(2147483647, 2147483647));    //al minimizar la ventana aparece con esa medida       
+        
         cbSituacion.setEnabled(false);
         
         //Al hacer click en el JFrame se quita la seleccion del JTable
@@ -90,6 +93,7 @@ public class ventanaProducto extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Gestión del producto");
+        setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -116,7 +120,7 @@ public class ventanaProducto extends javax.swing.JFrame
             }
         });
 
-        jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Calibri", 1, 16)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Proveedor:");
 
@@ -135,10 +139,10 @@ public class ventanaProducto extends javax.swing.JFrame
             .addGroup(panelBusquedaLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(txfdBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txfdBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(27, 27, 27)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbFiltroProv, javax.swing.GroupLayout.PREFERRED_SIZE, 163, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(24, 24, 24))
@@ -159,7 +163,7 @@ public class ventanaProducto extends javax.swing.JFrame
 
         panelFiltros.setOpaque(false);
 
-        jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Calibri", 1, 16)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Filtrar por:");
@@ -183,7 +187,7 @@ public class ventanaProducto extends javax.swing.JFrame
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Calibri", 1, 16)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Ordenar por:");
@@ -277,7 +281,7 @@ public class ventanaProducto extends javax.swing.JFrame
         btnNuevoProd.setBorderPainted(false);
         btnNuevoProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevoProd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnNuevoProd.setIconTextGap(40);
+        btnNuevoProd.setIconTextGap(50);
         btnNuevoProd.setNextFocusableComponent(btnEditarProd);
         btnNuevoProd.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -309,7 +313,7 @@ public class ventanaProducto extends javax.swing.JFrame
         btnEditarProd.setBorderPainted(false);
         btnEditarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarProd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnEditarProd.setIconTextGap(40);
+        btnEditarProd.setIconTextGap(50);
         btnEditarProd.setNextFocusableComponent(btnVolverProd);
         btnEditarProd.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
@@ -402,11 +406,11 @@ public class ventanaProducto extends javax.swing.JFrame
         panelTablaLayout.setHorizontalGroup(
             panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(panelTablaLayout.createSequentialGroup()
-                .addComponent(btnNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addComponent(btnNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEditarProd, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addComponent(btnEditarProd, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnVolverProd, javax.swing.GroupLayout.DEFAULT_SIZE, 163, Short.MAX_VALUE)
+                .addComponent(btnVolverProd, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnMenuPpal))
             .addComponent(jScrollPane1)
@@ -643,7 +647,6 @@ public class ventanaProducto extends javax.swing.JFrame
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         ventanaAdministracion vAdministracion = new ventanaAdministracion();
         vAdministracion.setVisible(true);
-        dispose();
     }//GEN-LAST:event_formWindowClosing
 
     private void btnNuevoProdMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoProdMouseEntered
@@ -1011,7 +1014,7 @@ public class ventanaProducto extends javax.swing.JFrame
     
     private void llenarComboBoxProv() 
     {
-        List<Proveedor> lista = prDAO.listar("Habilitados");
+        List<Proveedor> lista = prDAO.listar("Habilitados", "razonSocial", "ASC");
         
         cbFiltroProv.addItem("Todos");
         

@@ -6,7 +6,6 @@ import javax.swing.ImageIcon;
 public class ventanaAdministracion extends javax.swing.JFrame 
 {
     ImageIcon icono;
-    //int x, y;
     
     public ventanaAdministracion() 
     {
@@ -14,9 +13,8 @@ public class ventanaAdministracion extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);     //centra la ventana        
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir  
-        this.setMinimumSize(new Dimension(850, 551));  //al minimizar la ventana no permite que sea mas chico que esa medida 
-        this.setPreferredSize(new Dimension(850, 551));
-        
+        this.setMinimumSize(new Dimension(835, 501));  //al minimizar la ventana no permite que sea mas chico que esa medida 
+        this.setPreferredSize(new Dimension(835, 501));        
     }
     
     @SuppressWarnings("unchecked")
@@ -24,34 +22,31 @@ public class ventanaAdministracion extends javax.swing.JFrame
     private void initComponents() {
 
         panelTodo = new javax.swing.JPanel();
-        jPanel1 = new javax.swing.JPanel();
+        panelIzquierda = new javax.swing.JPanel();
         btnGestionProd = new javax.swing.JButton();
         labProd = new javax.swing.JLabel();
         jSeparator2 = new javax.swing.JSeparator();
-        jPanel2 = new javax.swing.JPanel();
+        panelMedio = new javax.swing.JPanel();
         btnGestionProv = new javax.swing.JButton();
         labProv = new javax.swing.JLabel();
         jSeparator3 = new javax.swing.JSeparator();
-        jPanel3 = new javax.swing.JPanel();
+        panelDerecha = new javax.swing.JPanel();
         btnGestionClave = new javax.swing.JButton();
         labClave = new javax.swing.JLabel();
         jSeparator4 = new javax.swing.JSeparator();
-        labFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Administración");
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        setMinimumSize(new java.awt.Dimension(850, 551));
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowActivated(java.awt.event.WindowEvent evt) {
-                formWindowActivated(evt);
-            }
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
 
-        jPanel1.setOpaque(false);
+        panelTodo.setBackground(new java.awt.Color(0, 133, 155));
+
+        panelIzquierda.setOpaque(false);
 
         btnGestionProd.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnGestionProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vAdministracion/prod_200.png"))); // NOI18N
@@ -76,7 +71,8 @@ public class ventanaAdministracion extends javax.swing.JFrame
             }
         });
 
-        labProd.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        labProd.setFont(new java.awt.Font("Calibri", 1, 26)); // NOI18N
+        labProd.setForeground(new java.awt.Color(255, 255, 255));
         labProd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labProd.setText("Gestión del producto");
         labProd.setToolTipText("");
@@ -87,23 +83,19 @@ public class ventanaAdministracion extends javax.swing.JFrame
 
         jSeparator2.setForeground(new java.awt.Color(0, 0, 0));
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGap(33, 33, 33)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labProd, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.CENTER)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(btnGestionProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 5, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(57, 57, 57))
+        javax.swing.GroupLayout panelIzquierdaLayout = new javax.swing.GroupLayout(panelIzquierda);
+        panelIzquierda.setLayout(panelIzquierdaLayout);
+        panelIzquierdaLayout.setHorizontalGroup(
+            panelIzquierdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(labProd, javax.swing.GroupLayout.Alignment.CENTER, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSeparator2, javax.swing.GroupLayout.Alignment.CENTER)
+            .addGroup(panelIzquierdaLayout.createSequentialGroup()
+                .addComponent(btnGestionProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap(5, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        panelIzquierdaLayout.setVerticalGroup(
+            panelIzquierdaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelIzquierdaLayout.createSequentialGroup()
                 .addComponent(labProd)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator2, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -112,7 +104,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel2.setOpaque(false);
+        panelMedio.setOpaque(false);
 
         btnGestionProv.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnGestionProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vAdministracion/prov_200.png"))); // NOI18N
@@ -137,7 +129,8 @@ public class ventanaAdministracion extends javax.swing.JFrame
             }
         });
 
-        labProv.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        labProv.setFont(new java.awt.Font("Calibri", 1, 26)); // NOI18N
+        labProv.setForeground(new java.awt.Color(255, 255, 255));
         labProv.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labProv.setText("Gestión del proveedor");
         labProv.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
@@ -147,30 +140,26 @@ public class ventanaAdministracion extends javax.swing.JFrame
 
         jSeparator3.setForeground(new java.awt.Color(0, 0, 0));
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(labProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jSeparator3))
-                .addGap(11, 11, 11))
-            .addComponent(btnGestionProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelMedioLayout = new javax.swing.GroupLayout(panelMedio);
+        panelMedio.setLayout(panelMedioLayout);
+        panelMedioLayout.setHorizontalGroup(
+            panelMedioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnGestionProv, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(labProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jSeparator3)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
+        panelMedioLayout.setVerticalGroup(
+            panelMedioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelMedioLayout.createSequentialGroup()
                 .addComponent(labProv)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator3, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(32, 32, 32)
                 .addComponent(btnGestionProv, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 12, Short.MAX_VALUE))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        jPanel3.setOpaque(false);
+        panelDerecha.setOpaque(false);
 
         btnGestionClave.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         btnGestionClave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vAdministracion/clave_210.png"))); // NOI18N
@@ -194,7 +183,8 @@ public class ventanaAdministracion extends javax.swing.JFrame
             }
         });
 
-        labClave.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        labClave.setFont(new java.awt.Font("Calibri", 1, 26)); // NOI18N
+        labClave.setForeground(new java.awt.Color(255, 255, 255));
         labClave.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labClave.setText("Gestión de clave");
         labClave.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
@@ -204,61 +194,54 @@ public class ventanaAdministracion extends javax.swing.JFrame
 
         jSeparator4.setForeground(new java.awt.Color(0, 0, 0));
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        javax.swing.GroupLayout panelDerechaLayout = new javax.swing.GroupLayout(panelDerecha);
+        panelDerecha.setLayout(panelDerechaLayout);
+        panelDerechaLayout.setHorizontalGroup(
+            panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelDerechaLayout.createSequentialGroup()
+                .addGap(44, 44, 44)
+                .addGroup(panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labClave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jSeparator4))
+                .addGap(57, 57, 57))
+            .addGroup(panelDerechaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
-                            .addComponent(labClave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addGap(7, 7, 7)
-                                .addComponent(jSeparator4)))
-                        .addGap(47, 47, 47))
-                    .addComponent(btnGestionClave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(0, 0, 0))
+                .addComponent(btnGestionClave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(26, 26, 26))
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        panelDerechaLayout.setVerticalGroup(
+            panelDerechaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDerechaLayout.createSequentialGroup()
                 .addComponent(labClave)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator4, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(40, 40, 40)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(btnGestionClave, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 0, Short.MAX_VALUE))
+                .addGap(29, 29, 29))
         );
-
-        labFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo grande.png"))); // NOI18N
-        labFondo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         javax.swing.GroupLayout panelTodoLayout = new javax.swing.GroupLayout(panelTodo);
         panelTodo.setLayout(panelTodoLayout);
         panelTodoLayout.setHorizontalGroup(
             panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTodoLayout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addComponent(labFondo, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addGap(39, 39, 39)
+                .addComponent(panelIzquierda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(46, 46, 46)
+                .addComponent(panelMedio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, 253, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
         );
         panelTodoLayout.setVerticalGroup(
             panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTodoLayout.createSequentialGroup()
-                .addGap(122, 122, 122)
+                .addGap(121, 121, 121)
                 .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addGap(75, 75, 75))
-            .addComponent(labFondo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                    .addComponent(panelDerecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(panelMedio, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelIzquierda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(76, 76, 76))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -269,7 +252,7 @@ public class ventanaAdministracion extends javax.swing.JFrame
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelTodo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(panelTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -323,10 +306,6 @@ public class ventanaAdministracion extends javax.swing.JFrame
         btnGestionProd.setIcon(icono);
     }//GEN-LAST:event_btnGestionProdMouseExited
 
-    private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
-        this.setExtendedState(MAXIMIZED_BOTH);
-    }//GEN-LAST:event_formWindowActivated
-
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         ventanaPrincipal vPrincipal = new ventanaPrincipal();
         vPrincipal.setVisible(true);
@@ -347,16 +326,15 @@ public class ventanaAdministracion extends javax.swing.JFrame
     private javax.swing.JButton btnGestionClave;
     private javax.swing.JButton btnGestionProd;
     private javax.swing.JButton btnGestionProv;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JSeparator jSeparator3;
     private javax.swing.JSeparator jSeparator4;
     private javax.swing.JLabel labClave;
-    private javax.swing.JLabel labFondo;
     private javax.swing.JLabel labProd;
     private javax.swing.JLabel labProv;
+    private javax.swing.JPanel panelDerecha;
+    private javax.swing.JPanel panelIzquierda;
+    private javax.swing.JPanel panelMedio;
     private javax.swing.JPanel panelTodo;
     // End of variables declaration//GEN-END:variables
 }

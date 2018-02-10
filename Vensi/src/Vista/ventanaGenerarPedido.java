@@ -626,7 +626,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed
         provSelec = String.valueOf(cbProveedores.getSelectedItem());
-        List<Proveedor> listaTotalProv = provDAO.listar("Habilitados");
+        List<Proveedor> listaTotalProv = provDAO.listar("Habilitados", "razonSocial", "ASC");
                 
         if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
         {  
@@ -770,7 +770,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
                 listaProdImprimir.add(unItemImp);                
             }
             
-            List<Proveedor> listaTotalProv = provDAO.listar("Habilitados");
+            List<Proveedor> listaTotalProv = provDAO.listar("Habilitados", "razonSocial", "ASC");
             
             for (Proveedor p : listaTotalProv)
             {
@@ -1131,7 +1131,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
     {
         DefaultComboBoxModel modeloCBB = new DefaultComboBoxModel();
         
-        List<Proveedor> listaP = provDAO.listar("Habilitados");
+        List<Proveedor> listaP = provDAO.listar("Habilitados", "razonSocial", "ASC");
         
         if (listaP.size() < 0)
         {            
