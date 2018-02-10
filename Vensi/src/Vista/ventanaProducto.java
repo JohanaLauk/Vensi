@@ -102,11 +102,11 @@ public class ventanaProducto extends javax.swing.JFrame
         panelBusqueda.setOpaque(false);
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Buscar:");
 
-        txfdBuscarProd.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdBuscarProd.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txfdBuscarProd.setDisabledTextColor(new java.awt.Color(102, 102, 102));
+        txfdBuscarProd.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txfdBuscarProd.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         txfdBuscarProd.setNextFocusableComponent(btnEditarProd);
         txfdBuscarProd.setPrompt("Busque por código o por descripción");
@@ -117,6 +117,7 @@ public class ventanaProducto extends javax.swing.JFrame
         });
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Proveedor:");
 
         cbFiltroProv.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -159,6 +160,7 @@ public class ventanaProducto extends javax.swing.JFrame
         panelFiltros.setOpaque(false);
 
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Filtrar por:");
 
@@ -182,6 +184,7 @@ public class ventanaProducto extends javax.swing.JFrame
         });
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Ordenar por:");
 
