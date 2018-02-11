@@ -184,7 +184,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel7.setText("Precio costo:");
 
-        txfdPrecioCosto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdPrecioCosto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdPrecioCosto.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdPrecioCosto.setNextFocusableComponent(txfdPrecioVenta);
@@ -199,7 +198,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel3.setText("Precio venta:");
 
-        txfdPrecioVenta.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdPrecioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdPrecioVenta.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdPrecioVenta.setNextFocusableComponent(txfdStockInicial);
@@ -214,7 +212,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel9.setText("Stock inicial:");
 
-        txfdStockInicial.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdStockInicial.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdStockInicial.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdStockInicial.setNextFocusableComponent(txfdStockMinimo);
@@ -229,7 +226,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setText("Stock mínimo:");
 
-        txfdStockMinimo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdStockMinimo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdStockMinimo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdStockMinimo.setNextFocusableComponent(rbUnidad);
@@ -372,7 +368,6 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             tablaProv.getColumnModel().getColumn(2).setMaxWidth(0);
         }
 
-        txfdPesoEnvase.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdPesoEnvase.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdPesoEnvase.setToolTipText("Ej: 1000");
         txfdPesoEnvase.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N

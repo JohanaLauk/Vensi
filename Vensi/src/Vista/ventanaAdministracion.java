@@ -274,7 +274,6 @@ public class ventanaAdministracion extends javax.swing.JFrame
     private void btnGestionClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGestionClaveActionPerformed
         ventanaGestionClave vGestionClave = new ventanaGestionClave();
         vGestionClave.setVisible(true);
-        dispose();
     }//GEN-LAST:event_btnGestionClaveActionPerformed
 
     private void btnGestionClaveMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnGestionClaveMouseEntered

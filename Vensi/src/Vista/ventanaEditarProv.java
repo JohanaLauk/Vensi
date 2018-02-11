@@ -4,6 +4,7 @@ import DAO.ProveedorDAO;
 import Modelo.Proveedor;
 import Utils.Validar;
 import java.awt.Dimension;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class ventanaEditarProv extends javax.swing.JFrame 
@@ -11,22 +12,18 @@ public class ventanaEditarProv extends javax.swing.JFrame
     ProveedorDAO pDAO = new ProveedorDAO();
     Validar validar = new Validar();
     public static int id_recibido;
-    Proveedor elProv = null;          
+    Proveedor elProv = null;      
+
+    ImageIcon icono;
     
     public ventanaEditarProv() 
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);     //centra la ventana  
-        
-        this.setMinimumSize(new Dimension(520, 350));  //al minimizar la ventana no permite que sea mas chico que esa medida
-       
-        this.setPreferredSize(new Dimension(520,350));    //al minimizar la ventana aparece con esa medida
-        
-        this.setResizable(false);   //No permite modificar el tamaño de la ventana
-        
-        labIdSelec.setVisible(false);   //label que contiene el id
-        
+        this.setLocationRelativeTo(null);     //centra la ventana          
+        this.setMinimumSize(new Dimension(333, 635));  //al minimizar la ventana no permite que sea mas chico que esa medida       
+        this.setPreferredSize(new Dimension(333, 635));    //al minimizar la ventana aparece con esa medida    
+               
         elProv = pDAO.buscarPorId(id_recibido);
         
         mostrarProvSelec();
@@ -36,16 +33,15 @@ public class ventanaEditarProv extends javax.swing.JFrame
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        panelTodo = new javax.swing.JPanel();
+        panelDatos = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         cbEditarEstado = new javax.swing.JComboBox<>();
         txfdEditarRazonSocial = new javax.swing.JTextField();
-        txfdEditarCuit = new javax.swing.JTextField();
         txfdEditarDireccion = new javax.swing.JTextField();
-        labIdSelec = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         txfdLocalidad = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
@@ -54,188 +50,243 @@ public class ventanaEditarProv extends javax.swing.JFrame
         txfdPais = new javax.swing.JTextField();
         txfdEditarContacto = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jPanel2 = new javax.swing.JPanel();
+        txfdEditarCuit = new org.jdesktop.swingx.JXTextField();
+        panelBotones = new javax.swing.JPanel();
         btnAceptarEditar = new javax.swing.JButton();
         btnCancelarEditar = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Editar proveedor");
-        setPreferredSize(new java.awt.Dimension(520, 350));
+        setMinimumSize(new java.awt.Dimension(333, 635));
+        setPreferredSize(new java.awt.Dimension(333, 635));
+        setResizable(false);
 
+        panelTodo.setBackground(new java.awt.Color(102, 184, 211));
+
+        panelDatos.setOpaque(false);
+
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel1.setText("Razon social:");
 
+        jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel2.setText("CUIT:");
 
+        jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel3.setText("Dirección:");
 
+        jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel5.setText("Estado:");
 
         cbEditarEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "Deshabilitado" }));
         cbEditarEstado.setNextFocusableComponent(btnAceptarEditar);
 
+        txfdEditarRazonSocial.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txfdEditarRazonSocial.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdEditarRazonSocial.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarRazonSocial.setNextFocusableComponent(txfdEditarCuit);
 
-        txfdEditarCuit.setNextFocusableComponent(txfdEditarDireccion);
+        txfdEditarDireccion.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txfdEditarDireccion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdEditarDireccion.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdEditarDireccion.setNextFocusableComponent(txfdLocalidad);
+
+        jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel6.setText("Localidad:");
+
+        txfdLocalidad.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txfdLocalidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdLocalidad.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdLocalidad.setNextFocusableComponent(txfdProvincia);
+
+        jLabel7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel7.setText("Provincia:");
+
+        txfdProvincia.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txfdProvincia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdProvincia.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdProvincia.setNextFocusableComponent(txfdPais);
+
+        jLabel8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel8.setText("País:");
+
+        txfdPais.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txfdPais.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdPais.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdPais.setNextFocusableComponent(txfdEditarContacto);
+
+        txfdEditarContacto.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txfdEditarContacto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdEditarContacto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdEditarContacto.setNextFocusableComponent(cbEditarEstado);
+
+        jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel4.setText("Contacto:");
+
+        txfdEditarCuit.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdEditarCuit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdEditarCuit.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txfdEditarCuit.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txfdEditarCuit.setPrompt("XX-XXXXXXXX-X");
         txfdEditarCuit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdEditarCuitKeyTyped(evt);
             }
         });
 
-        txfdEditarDireccion.setNextFocusableComponent(txfdLocalidad);
-
-        labIdSelec.setText("ID_Prov");
-
-        jLabel6.setText("Localidad:");
-
-        txfdLocalidad.setNextFocusableComponent(txfdProvincia);
-
-        jLabel7.setText("Provincia:");
-
-        txfdProvincia.setNextFocusableComponent(txfdPais);
-
-        jLabel8.setText("País:");
-
-        txfdPais.setNextFocusableComponent(txfdEditarContacto);
-
-        txfdEditarContacto.setNextFocusableComponent(cbEditarEstado);
-
-        jLabel4.setText("Contacto:");
-
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jLabel5)
-                .addGap(18, 18, 18)
-                .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(labIdSelec)
-                .addGap(29, 29, 29))
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel8)
+        javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
+        panelDatos.setLayout(panelDatosLayout);
+        panelDatosLayout.setHorizontalGroup(
+            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(txfdEditarRazonSocial)
+            .addComponent(txfdEditarDireccion)
+            .addComponent(txfdLocalidad)
+            .addComponent(txfdProvincia)
+            .addComponent(txfdPais)
+            .addComponent(txfdEditarContacto)
+            .addGroup(panelDatosLayout.createSequentialGroup()
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addComponent(jLabel5)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfdPais))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel7)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfdProvincia))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel2)
-                        .addGap(14, 14, 14)
-                        .addComponent(txfdEditarCuit))
-                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(18, 18, 18)
-                            .addComponent(txfdEditarRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 266, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel3)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(txfdEditarDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 288, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel6)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfdLocalidad))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel4)
-                        .addGap(14, 14, 14)
-                        .addComponent(txfdEditarContacto)))
-                .addGap(0, 5, Short.MAX_VALUE))
-        );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(txfdEditarRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(txfdEditarCuit, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(txfdEditarDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel6)
-                    .addComponent(txfdLocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(txfdProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel8)
-                    .addComponent(txfdPais, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel2)
+                    .addComponent(jLabel3)
+                    .addComponent(jLabel6)
+                    .addComponent(jLabel7)
                     .addComponent(jLabel4)
-                    .addComponent(txfdEditarContacto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1))
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addComponent(txfdEditarCuit, javax.swing.GroupLayout.DEFAULT_SIZE, 303, Short.MAX_VALUE)
+        );
+        panelDatosLayout.setVerticalGroup(
+            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txfdEditarRazonSocial, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel5)
-                    .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labIdSelec))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(jLabel2)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txfdEditarCuit, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel3)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txfdEditarDireccion, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel6)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txfdLocalidad, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel7)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txfdProvincia, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel8)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txfdPais, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jLabel4)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txfdEditarContacto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbEditarEstado, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
+        panelBotones.setOpaque(false);
+
+        btnAceptarEditar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnAceptarEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/confirmar_50.png"))); // NOI18N
         btnAceptarEditar.setText("Aceptar");
+        btnAceptarEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAceptarEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAceptarEditar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnAceptarEditar.setIconTextGap(10);
         btnAceptarEditar.setNextFocusableComponent(btnCancelarEditar);
+        btnAceptarEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAceptarEditarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAceptarEditarMouseExited(evt);
+            }
+        });
         btnAceptarEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarEditarActionPerformed(evt);
             }
         });
 
+        btnCancelarEditar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnCancelarEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cancelar_50.png"))); // NOI18N
         btnCancelarEditar.setText("Cancelar");
+        btnCancelarEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCancelarEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelarEditar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCancelarEditar.setIconTextGap(10);
         btnCancelarEditar.setNextFocusableComponent(txfdEditarRazonSocial);
+        btnCancelarEditar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelarEditarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarEditarMouseExited(evt);
+            }
+        });
         btnCancelarEditar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarEditarActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(btnAceptarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(btnCancelarEditar, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(btnAceptarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        javax.swing.GroupLayout panelBotonesLayout = new javax.swing.GroupLayout(panelBotones);
+        panelBotones.setLayout(panelBotonesLayout);
+        panelBotonesLayout.setHorizontalGroup(
+            panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonesLayout.createSequentialGroup()
+                .addComponent(btnCancelarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnCancelarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addComponent(btnAceptarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelBotonesLayout.setVerticalGroup(
+            panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(btnAceptarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(btnCancelarEditar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+
+        javax.swing.GroupLayout panelTodoLayout = new javax.swing.GroupLayout(panelTodo);
+        panelTodo.setLayout(panelTodoLayout);
+        panelTodoLayout.setHorizontalGroup(
+            panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTodoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelBotones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        panelTodoLayout.setVerticalGroup(
+            panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTodoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelDatos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelBotones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(panelTodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+            .addComponent(panelTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -297,11 +348,31 @@ public class ventanaEditarProv extends javax.swing.JFrame
 
     private void txfdEditarCuitKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdEditarCuitKeyTyped
         char c = evt.getKeyChar();
-        if((c < '0' || c > '9') &&  (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '-'))
+        if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '-'))
         {
             evt.consume();
         }
     }//GEN-LAST:event_txfdEditarCuitKeyTyped
+
+    private void btnCancelarEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarEditarMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/cancelar_lleno_50.png"));     
+        btnCancelarEditar.setIcon(icono);
+    }//GEN-LAST:event_btnCancelarEditarMouseEntered
+
+    private void btnCancelarEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarEditarMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/cancelar_50.png"));     
+        btnCancelarEditar.setIcon(icono);
+    }//GEN-LAST:event_btnCancelarEditarMouseExited
+
+    private void btnAceptarEditarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarEditarMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/confirmar_lleno_50.png"));     
+        btnAceptarEditar.setIcon(icono);
+    }//GEN-LAST:event_btnAceptarEditarMouseEntered
+
+    private void btnAceptarEditarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarEditarMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/confirmar_50.png"));     
+        btnAceptarEditar.setIcon(icono);
+    }//GEN-LAST:event_btnAceptarEditarMouseExited
     
     public static void main(String args[]) 
     {
@@ -347,11 +418,11 @@ public class ventanaEditarProv extends javax.swing.JFrame
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JLabel labIdSelec;
+    private javax.swing.JPanel panelBotones;
+    private javax.swing.JPanel panelDatos;
+    private javax.swing.JPanel panelTodo;
     private javax.swing.JTextField txfdEditarContacto;
-    private javax.swing.JTextField txfdEditarCuit;
+    private org.jdesktop.swingx.JXTextField txfdEditarCuit;
     private javax.swing.JTextField txfdEditarDireccion;
     private javax.swing.JTextField txfdEditarRazonSocial;
     private javax.swing.JTextField txfdLocalidad;

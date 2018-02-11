@@ -39,7 +39,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
         initComponents();
 
         this.setLocationRelativeTo(null);     //centra la ventana  
-
         this.setMinimumSize(new Dimension(666, 428));  //al minimizar la ventana no permite que sea mas chico que esa medida
         this.setPreferredSize(new Dimension(666, 428));    //al minimizar la ventana aparece con esa medida        
         
