@@ -175,8 +175,9 @@ public class ventanaProveedor extends javax.swing.JFrame
 
         panelTabla.setOpaque(false);
 
+        btnNuevoProv.setBackground(new java.awt.Color(204, 204, 255));
         btnNuevoProv.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        btnNuevoProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProveedor/prov+_50.png"))); // NOI18N
+        btnNuevoProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/prov+_50.png"))); // NOI18N
         btnNuevoProv.setText("Nuevo");
         btnNuevoProv.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnNuevoProv.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -196,8 +197,9 @@ public class ventanaProveedor extends javax.swing.JFrame
             }
         });
 
+        btnEditarProv.setBackground(new java.awt.Color(204, 204, 255));
         btnEditarProv.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        btnEditarProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProducto/editarProd_50.png"))); // NOI18N
+        btnEditarProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/editar_50.png"))); // NOI18N
         btnEditarProv.setText("Editar");
         btnEditarProv.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditarProv.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -217,8 +219,9 @@ public class ventanaProveedor extends javax.swing.JFrame
             }
         });
 
+        btnMenuPpal.setBackground(new java.awt.Color(204, 204, 255));
         btnMenuPpal.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        btnMenuPpal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProducto/home_50.png"))); // NOI18N
+        btnMenuPpal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/home_50.png"))); // NOI18N
         btnMenuPpal.setText("Menú principal");
         btnMenuPpal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnMenuPpal.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -238,8 +241,9 @@ public class ventanaProveedor extends javax.swing.JFrame
             }
         });
 
+        btnVolverProv.setBackground(new java.awt.Color(204, 204, 255));
         btnVolverProv.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        btnVolverProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProducto/volver_50.png"))); // NOI18N
+        btnVolverProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/volver_50.png"))); // NOI18N
         btnVolverProv.setText("Volver");
         btnVolverProv.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnVolverProv.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -285,19 +289,19 @@ public class ventanaProveedor extends javax.swing.JFrame
         panelTablaLayout.setHorizontalGroup(
             panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTablaLayout.createSequentialGroup()
-                .addComponent(btnNuevoProv, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                .addComponent(btnNuevoProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEditarProv, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                .addComponent(btnEditarProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnVolverProv, javax.swing.GroupLayout.DEFAULT_SIZE, 178, Short.MAX_VALUE)
+                .addComponent(btnVolverProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnMenuPpal))
+                .addComponent(btnMenuPpal, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
             .addComponent(jScrollPane3)
         );
         panelTablaLayout.setVerticalGroup(
             panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaLayout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 284, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnNuevoProv)
@@ -420,42 +424,42 @@ public class ventanaProveedor extends javax.swing.JFrame
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void btnNuevoProvMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoProvMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProveedor/prov+_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/prov+_lleno_50.png"));     
         btnNuevoProv.setIcon(icono);
     }//GEN-LAST:event_btnNuevoProvMouseEntered
 
     private void btnNuevoProvMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoProvMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProveedor/prov+_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/prov+_50.png"));     
         btnNuevoProv.setIcon(icono);
     }//GEN-LAST:event_btnNuevoProvMouseExited
 
     private void btnEditarProvMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarProvMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/editarProd_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/editar_lleno_50.png"));     
         btnEditarProv.setIcon(icono);
     }//GEN-LAST:event_btnEditarProvMouseEntered
 
     private void btnEditarProvMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarProvMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/editarProd_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/editar_50.png"));     
         btnEditarProv.setIcon(icono);
     }//GEN-LAST:event_btnEditarProvMouseExited
 
     private void btnVolverProvMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverProvMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/volver_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/volver_lleno_50.png"));     
         btnVolverProv.setIcon(icono);
     }//GEN-LAST:event_btnVolverProvMouseEntered
 
     private void btnVolverProvMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverProvMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/volver_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/volver_50.png"));     
         btnVolverProv.setIcon(icono);
     }//GEN-LAST:event_btnVolverProvMouseExited
 
     private void btnMenuPpalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuPpalMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/home_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/home_lleno_50.png"));     
         btnMenuPpal.setIcon(icono);
     }//GEN-LAST:event_btnMenuPpalMouseEntered
 
     private void btnMenuPpalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuPpalMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/home_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/home_50.png"));     
         btnMenuPpal.setIcon(icono);
     }//GEN-LAST:event_btnMenuPpalMouseExited
 

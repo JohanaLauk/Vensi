@@ -176,6 +176,7 @@ public class ventanaNuevoProv extends javax.swing.JFrame
 
         panelBotones.setOpaque(false);
 
+        btnAceptar.setBackground(new java.awt.Color(153, 255, 153));
         btnAceptar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/confirmar_50.png"))); // NOI18N
         btnAceptar.setText("Aceptar");
@@ -197,6 +198,7 @@ public class ventanaNuevoProv extends javax.swing.JFrame
             }
         });
 
+        btnCancelar.setBackground(new java.awt.Color(255, 153, 153));
         btnCancelar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cancelar_50.png"))); // NOI18N
         btnCancelar.setText("Cancelar");

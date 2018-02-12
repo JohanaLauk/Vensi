@@ -7,6 +7,7 @@ import Modelo.ItemVenta;
 import Modelo.Producto;
 import Modelo.Turno;
 import Utils.Redondear;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
@@ -138,6 +139,7 @@ public class ventanaVenta extends javax.swing.JFrame
 
         panelBotonesArriba.setBackground(new java.awt.Color(0, 0, 0));
 
+        btnIniciarTurno.setBackground(new java.awt.Color(204, 204, 255));
         btnIniciarTurno.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnIniciarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vVenta/turnoSinIniciar_50.png"))); // NOI18N
         btnIniciarTurno.setText("Iniciar turno");
@@ -152,6 +154,7 @@ public class ventanaVenta extends javax.swing.JFrame
             }
         });
 
+        btnDetalleCaja.setBackground(new java.awt.Color(204, 204, 255));
         btnDetalleCaja.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnDetalleCaja.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vVenta/caja_50.png"))); // NOI18N
         btnDetalleCaja.setText("Detalle de caja");
@@ -174,6 +177,7 @@ public class ventanaVenta extends javax.swing.JFrame
             }
         });
 
+        btnCerrarTurno.setBackground(new java.awt.Color(204, 204, 255));
         btnCerrarTurno.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnCerrarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vVenta/turnoSinCerrar_50.png"))); // NOI18N
         btnCerrarTurno.setText("Cerrar turno");
@@ -188,8 +192,9 @@ public class ventanaVenta extends javax.swing.JFrame
             }
         });
 
+        btnMenuPrincipal.setBackground(new java.awt.Color(204, 204, 255));
         btnMenuPrincipal.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        btnMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProducto/home_50.png"))); // NOI18N
+        btnMenuPrincipal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/home_50.png"))); // NOI18N
         btnMenuPrincipal.setText("Menú principal");
         btnMenuPrincipal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnMenuPrincipal.setFocusPainted(false);
@@ -216,13 +221,13 @@ public class ventanaVenta extends javax.swing.JFrame
             panelBotonesArribaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBotonesArribaLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(btnIniciarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addComponent(btnIniciarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnDetalleCaja, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addComponent(btnDetalleCaja, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnCerrarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)
+                .addComponent(btnCerrarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnMenuPrincipal)
                 .addContainerGap())
         );
         panelBotonesArribaLayout.setVerticalGroup(
@@ -261,7 +266,6 @@ public class ventanaVenta extends javax.swing.JFrame
             }
         });
 
-        txfdBuscarProd.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdBuscarProd.setToolTipText("");
         txfdBuscarProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdBuscarProd.setPrompt("Busque por código o por descripción");
@@ -363,7 +367,6 @@ public class ventanaVenta extends javax.swing.JFrame
         panelDatosProd.setBackground(new java.awt.Color(102, 184, 211));
 
         listInfoProd.setFont(new java.awt.Font("Calibri", 2, 14)); // NOI18N
-        listInfoProd.setForeground(new java.awt.Color(255, 0, 21));
         listInfoProd.setModel(new javax.swing.AbstractListModel<String>() {
             String[] strings = { "CÓDIGO:", "DESCRIPCIÓN:" };
             public int getSize() { return strings.length; }
@@ -378,8 +381,9 @@ public class ventanaVenta extends javax.swing.JFrame
         jLabel5.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jLabel5.setText("Cantidad:");
 
+        btnAgregar.setBackground(new java.awt.Color(153, 255, 153));
         btnAgregar.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProducto/prod+_50.png"))); // NOI18N
+        btnAgregar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/prod+_50.png"))); // NOI18N
         btnAgregar.setText("Agregar");
         btnAgregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -399,6 +403,7 @@ public class ventanaVenta extends javax.swing.JFrame
             }
         });
 
+        btnQuitar.setBackground(new java.awt.Color(255, 153, 153));
         btnQuitar.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         btnQuitar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vVenta/borrar_50.png"))); // NOI18N
         btnQuitar.setText("Quitar");
@@ -976,12 +981,12 @@ public class ventanaVenta extends javax.swing.JFrame
     }//GEN-LAST:event_btnDetalleCajaMouseExited
 
     private void btnMenuPrincipalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuPrincipalMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/home_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/home_lleno_50.png"));     
         btnMenuPrincipal.setIcon(icono);
     }//GEN-LAST:event_btnMenuPrincipalMouseEntered
 
     private void btnMenuPrincipalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuPrincipalMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/home_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/home_50.png"));     
         btnMenuPrincipal.setIcon(icono); 
     }//GEN-LAST:event_btnMenuPrincipalMouseExited
 
@@ -990,13 +995,13 @@ public class ventanaVenta extends javax.swing.JFrame
         
         if (filaSelec >= 0)// && cantFilas == 0)   //si hay seleccionado una fila en la tabla...            
         {
-            icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/prod+_lleno_50.png"));
+            icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/prod+_lleno_50.png"));
             btnAgregar.setIcon(icono); 
         }
     }//GEN-LAST:event_btnAgregarMouseEntered
 
     private void btnAgregarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAgregarMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/prod+_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/prod+_50.png"));     
         btnAgregar.setIcon(icono); 
     }//GEN-LAST:event_btnAgregarMouseExited
 
@@ -1135,7 +1140,9 @@ public class ventanaVenta extends javax.swing.JFrame
                     modeloList.clear();
                     modeloList.addElement("CÓDIGO:    " + cod);
                     modeloList.addElement("DESCRIPCIÓN:    " + desc);
-                    listInfoProd.setModel(modeloList);
+                    
+                    listInfoProd.setModel(modeloList);                    
+                    listInfoProd.setForeground(Color.GREEN.darker());
                     
                     txfdCantidad.setEnabled(true);
                     btnQuitar.setEnabled(false);
@@ -1202,7 +1209,9 @@ public class ventanaVenta extends javax.swing.JFrame
                     modeloList.clear();
                     modeloList.addElement("CÓDIGO:    " + cod);
                     modeloList.addElement("DESCRIPCIÓN:    " + desc);
+                    
                     listInfoProd.setModel(modeloList);
+                    listInfoProd.setForeground(Color.RED);
                     
                     txfdCantidad.setEnabled(false);
                     btnAgregar.setEnabled(false);
@@ -1432,7 +1441,9 @@ public class ventanaVenta extends javax.swing.JFrame
         modeloList.clear();
         modeloList.addElement("CÓDIGO:    ");
         modeloList.addElement("DESCRIPCIÓN:    ");
+        
         listInfoProd.setModel(modeloList);
+        listInfoProd.setForeground(Color.BLACK);        
     }
     
     public void tablaVacia()

@@ -99,6 +99,7 @@ public class ventanaGestionClave extends javax.swing.JFrame
             }
         });
 
+        btnConfirmarClave.setBackground(new java.awt.Color(153, 255, 153));
         btnConfirmarClave.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnConfirmarClave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/aceptar_50.png"))); // NOI18N
         btnConfirmarClave.setText("Confirmar");

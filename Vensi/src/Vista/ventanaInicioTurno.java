@@ -47,6 +47,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setForeground(new java.awt.Color(0, 0, 51));
 
+        btnNO.setBackground(new java.awt.Color(255, 153, 153));
         btnNO.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         btnNO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/no_50.png"))); // NOI18N
         btnNO.setText("NO");
@@ -76,6 +77,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         lbPin.setText("Ingrese el pin:");
         lbPin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
+        btnSI.setBackground(new java.awt.Color(153, 255, 153));
         btnSI.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         btnSI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/si_50.png"))); // NOI18N
         btnSI.setText("SI");

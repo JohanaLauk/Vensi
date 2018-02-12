@@ -370,11 +370,11 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="1" attributes="0">
                   <Group type="102" attributes="0">
-                      <Component id="btnNuevoProd" pref="185" max="32767" attributes="0"/>
+                      <Component id="btnNuevoProd" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnEditarProd" pref="181" max="32767" attributes="0"/>
+                      <Component id="btnEditarProd" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
-                      <Component id="btnVolverProd" pref="177" max="32767" attributes="0"/>
+                      <Component id="btnVolverProd" max="32767" attributes="0"/>
                       <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="btnMenuPpal" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -455,7 +455,7 @@
                   <Font name="Calibri" size="24" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Recursos/vProducto/prod+_50.png"/>
+                  <Image iconType="3" name="/Recursos/vGestion/prod+_50.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Nuevo"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -490,7 +490,7 @@
                   <Font name="Calibri" size="24" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Recursos/vProducto/editarProd_50.png"/>
+                  <Image iconType="3" name="/Recursos/vGestion/editar_50.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Editar"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -525,7 +525,7 @@
                   <Font name="Calibri" size="24" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Recursos/vProducto/volver_50.png"/>
+                  <Image iconType="3" name="/Recursos/vGestion/volver_50.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Volver"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
@@ -560,7 +560,7 @@
                   <Font name="Calibri" size="24" style="1"/>
                 </Property>
                 <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                  <Image iconType="3" name="/Recursos/vProducto/home_50.png"/>
+                  <Image iconType="3" name="/Recursos/vGestion/home_50.png"/>
                 </Property>
                 <Property name="text" type="java.lang.String" value="Men&#xfa; principal"/>
                 <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">

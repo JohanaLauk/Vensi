@@ -276,7 +276,7 @@ public class ventanaProducto extends javax.swing.JFrame
 
         btnNuevoProd.setBackground(new java.awt.Color(204, 204, 255));
         btnNuevoProd.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        btnNuevoProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProducto/prod+_50.png"))); // NOI18N
+        btnNuevoProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/prod+_50.png"))); // NOI18N
         btnNuevoProd.setText("Nuevo");
         btnNuevoProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnNuevoProd.setBorderPainted(false);
@@ -308,7 +308,7 @@ public class ventanaProducto extends javax.swing.JFrame
 
         btnEditarProd.setBackground(new java.awt.Color(204, 204, 255));
         btnEditarProd.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        btnEditarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProducto/editarProd_50.png"))); // NOI18N
+        btnEditarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/editar_50.png"))); // NOI18N
         btnEditarProd.setText("Editar");
         btnEditarProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditarProd.setBorderPainted(false);
@@ -340,7 +340,7 @@ public class ventanaProducto extends javax.swing.JFrame
 
         btnVolverProd.setBackground(new java.awt.Color(204, 204, 255));
         btnVolverProd.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        btnVolverProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProducto/volver_50.png"))); // NOI18N
+        btnVolverProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/volver_50.png"))); // NOI18N
         btnVolverProd.setText("Volver");
         btnVolverProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnVolverProd.setBorderPainted(false);
@@ -372,7 +372,7 @@ public class ventanaProducto extends javax.swing.JFrame
 
         btnMenuPpal.setBackground(new java.awt.Color(204, 204, 255));
         btnMenuPpal.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        btnMenuPpal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vProducto/home_50.png"))); // NOI18N
+        btnMenuPpal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/home_50.png"))); // NOI18N
         btnMenuPpal.setText("Menú principal");
         btnMenuPpal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnMenuPpal.setBorderPainted(false);
@@ -407,11 +407,11 @@ public class ventanaProducto extends javax.swing.JFrame
         panelTablaLayout.setHorizontalGroup(
             panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
             .addGroup(panelTablaLayout.createSequentialGroup()
-                .addComponent(btnNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, 185, Short.MAX_VALUE)
+                .addComponent(btnNuevoProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnEditarProd, javax.swing.GroupLayout.DEFAULT_SIZE, 181, Short.MAX_VALUE)
+                .addComponent(btnEditarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnVolverProd, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
+                .addComponent(btnVolverProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
                 .addComponent(btnMenuPpal))
             .addComponent(jScrollPane1)
@@ -651,82 +651,82 @@ public class ventanaProducto extends javax.swing.JFrame
     }//GEN-LAST:event_formWindowClosing
 
     private void btnNuevoProdMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoProdMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/prod+_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/prod+_lleno_50.png"));     
         btnNuevoProd.setIcon(icono);
     }//GEN-LAST:event_btnNuevoProdMouseEntered
 
     private void btnNuevoProdMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNuevoProdMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/prod+_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/prod+_50.png"));     
         btnNuevoProd.setIcon(icono);
     }//GEN-LAST:event_btnNuevoProdMouseExited
 
     private void btnEditarProdMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarProdMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/editarProd_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/editar_lleno_50.png"));     
         btnEditarProd.setIcon(icono);
     }//GEN-LAST:event_btnEditarProdMouseEntered
 
     private void btnEditarProdMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnEditarProdMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/editarProd_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/editar_50.png"));     
         btnEditarProd.setIcon(icono);
     }//GEN-LAST:event_btnEditarProdMouseExited
 
     private void btnVolverProdMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverProdMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/volver_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/volver_lleno_50.png"));     
         btnVolverProd.setIcon(icono);
     }//GEN-LAST:event_btnVolverProdMouseEntered
 
     private void btnVolverProdMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverProdMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/volver_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/volver_50.png"));     
         btnVolverProd.setIcon(icono);
     }//GEN-LAST:event_btnVolverProdMouseExited
 
     private void btnMenuPpalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuPpalMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/home_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/home_lleno_50.png"));     
         btnMenuPpal.setIcon(icono);
     }//GEN-LAST:event_btnMenuPpalMouseEntered
 
     private void btnMenuPpalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuPpalMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/home_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/home_50.png"));     
         btnMenuPpal.setIcon(icono);
     }//GEN-LAST:event_btnMenuPpalMouseExited
 
     private void btnEditarProdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditarProdFocusGained
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/editarProd_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/editar_lleno_50.png"));     
         btnEditarProd.setIcon(icono);
     }//GEN-LAST:event_btnEditarProdFocusGained
 
     private void btnEditarProdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditarProdFocusLost
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/editarProd_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/editar_50.png"));     
         btnEditarProd.setIcon(icono);
     }//GEN-LAST:event_btnEditarProdFocusLost
 
     private void btnNuevoProdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevoProdFocusGained
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/prod+_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/prod+_lleno_50.png"));     
         btnNuevoProd.setIcon(icono);
     }//GEN-LAST:event_btnNuevoProdFocusGained
 
     private void btnNuevoProdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevoProdFocusLost
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/prod+_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/prod+_50.png"));     
         btnNuevoProd.setIcon(icono);
     }//GEN-LAST:event_btnNuevoProdFocusLost
 
     private void btnVolverProdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnVolverProdFocusGained
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/volver_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/volver_lleno_50.png"));     
         btnVolverProd.setIcon(icono);
     }//GEN-LAST:event_btnVolverProdFocusGained
 
     private void btnVolverProdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnVolverProdFocusLost
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/volver_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/volver_50.png"));     
         btnVolverProd.setIcon(icono);
     }//GEN-LAST:event_btnVolverProdFocusLost
 
     private void btnMenuPpalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnMenuPpalFocusGained
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/home_lleno_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/home_lleno_50.png"));     
         btnMenuPpal.setIcon(icono);
     }//GEN-LAST:event_btnMenuPpalFocusGained
 
     private void btnMenuPpalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnMenuPpalFocusLost
-        icono = new ImageIcon(getClass().getResource("/Recursos/vProducto/home_50.png"));     
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/home_50.png"));     
         btnMenuPpal.setIcon(icono);
     }//GEN-LAST:event_btnMenuPpalFocusLost
     

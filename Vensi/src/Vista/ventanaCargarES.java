@@ -97,6 +97,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Descripción:");
 
+        btnCancelar.setBackground(new java.awt.Color(255, 153, 153));
         btnCancelar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/no_50.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
@@ -119,6 +120,7 @@ public class ventanaCargarES extends javax.swing.JFrame
             }
         });
 
+        btnConfirmar.setBackground(new java.awt.Color(153, 255, 153));
         btnConfirmar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/si_50.png"))); // NOI18N
         btnConfirmar.setText("Confirmar");
@@ -239,6 +241,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         listaInfoProdAnular.setNextFocusableComponent(btnAnular);
         jScrollPane1.setViewportView(listaInfoProdAnular);
 
+        btnAnular.setBackground(new java.awt.Color(51, 51, 255));
         btnAnular.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/anular_50.png"))); // NOI18N
         btnAnular.setText("Anular");
@@ -267,7 +270,6 @@ public class ventanaCargarES extends javax.swing.JFrame
         labTituloPanelAnularProd.setText("ANULACIÓN DE PRODUCTO");
         labTituloPanelAnularProd.setToolTipText("");
 
-        txfdCantProdAnular.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdCantProdAnular.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdCantProdAnular.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCantProdAnular.setNextFocusableComponent(listaInfoProdAnular);
@@ -282,7 +284,6 @@ public class ventanaCargarES extends javax.swing.JFrame
             }
         });
 
-        txfdCodNomProdAnular.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdCodNomProdAnular.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdCodNomProdAnular.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCodNomProdAnular.setNextFocusableComponent(txfdCantProdAnular);
@@ -684,12 +685,19 @@ public class ventanaCargarES extends javax.swing.JFrame
                 panelES.getComponent(i).setEnabled(false);                
             }
             
+            if (!txfdCodNomProdAnular.equals("") && !txfdCantProdAnular.equals(""))
+            {
+                btnAnular.setEnabled(true);
+            }
+            else
+            {
+                btnAnular.setEnabled(false);
+            }
             cbTipoES.setEnabled(true);
             btnCancelar.setEnabled(true);            
             txfdMonto.setText(null);           
             txAreaDescripcion.setText(null);
             labTipo.setEnabled(true);
-            btnAnular.setEnabled(false);
         }
         else
         {
@@ -710,6 +718,10 @@ public class ventanaCargarES extends javax.swing.JFrame
                 btnCancelar.setEnabled(true);                
                 txfdMonto.setText(null);           
                 txAreaDescripcion.setText(null);
+                txfdCodNomProdAnular.setText(null);
+                txfdCantProdAnular.setText(null);
+                                
+                limpiarList();
             }
             else
             {           
@@ -730,6 +742,8 @@ public class ventanaCargarES extends javax.swing.JFrame
                 txAreaDescripcion.setText(null);
                 txfdCodNomProdAnular.setText(null);
                 txfdCantProdAnular.setText(null);
+                
+                limpiarList();
             }
         }
     }
@@ -750,8 +764,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         modeloList = new DefaultListModel();
         
         if (listaIV == null)
-        {
-            modeloList = new DefaultListModel();
+        {            
             modeloList.clear();
             btnAnular.setEnabled(false);
         }
@@ -779,6 +792,13 @@ public class ventanaCargarES extends javax.swing.JFrame
                 modeloList.addElement("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
         }   
+        listaInfoProdAnular.setModel(modeloList);
+    }
+    
+    public void limpiarList()
+    {
+        modeloList = new DefaultListModel();        
+        modeloList.clear();
         listaInfoProdAnular.setModel(modeloList);
     }
 

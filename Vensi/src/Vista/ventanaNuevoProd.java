@@ -5,7 +5,6 @@ import DAO.ProveedorDAO;
 import Modelo.*;
 import Utils.Redondear;
 import Utils.Validar;
-import java.awt.Dimension;
 import java.util.*;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -101,6 +100,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
         panelBotones.setOpaque(false);
 
+        btnAceptarNuevoProd.setBackground(new java.awt.Color(153, 255, 153));
         btnAceptarNuevoProd.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnAceptarNuevoProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/confirmar_50.png"))); // NOI18N
         btnAceptarNuevoProd.setText("Aceptar");
@@ -123,6 +123,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             }
         });
 
+        btnCancelarNuevoProd.setBackground(new java.awt.Color(255, 153, 153));
         btnCancelarNuevoProd.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnCancelarNuevoProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cancelar_50.png"))); // NOI18N
         btnCancelarNuevoProd.setText("Cancelar");

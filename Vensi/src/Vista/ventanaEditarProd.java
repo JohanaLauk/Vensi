@@ -93,7 +93,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         panelIzquierdo.setOpaque(false);
 
-        txfdEditarStockMinimo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarStockMinimo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarStockMinimo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarStockMinimo.setNextFocusableComponent(rbUnidad);
@@ -108,7 +107,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel7.setText("Stock mínimo:");
 
-        txfdEditarPrecioVenta.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarPrecioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarPrecioVenta.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarPrecioVenta.setNextFocusableComponent(txfdEditarStockMinimo);
@@ -123,7 +121,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setText("Precio venta:");
 
-        txfdEditarPrecioCosto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarPrecioCosto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarPrecioCosto.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarPrecioCosto.setNextFocusableComponent(txfdEditarPrecioVenta);
@@ -291,7 +288,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
             tablaProv.getColumnModel().getColumn(2).setMaxWidth(0);
         }
 
-        txfdEditarPesoEnvase.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarPesoEnvase.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarPesoEnvase.setToolTipText("Ej: 1000");
         txfdEditarPesoEnvase.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -367,6 +363,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         panelBotones.setOpaque(false);
 
+        btnAceptarEditar.setBackground(new java.awt.Color(153, 255, 153));
         btnAceptarEditar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnAceptarEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/confirmar_50.png"))); // NOI18N
         btnAceptarEditar.setText("Aceptar");
@@ -389,6 +386,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
             }
         });
 
+        btnCancelarEditar.setBackground(new java.awt.Color(255, 153, 153));
         btnCancelarEditar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnCancelarEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cancelar_50.png"))); // NOI18N
         btnCancelarEditar.setText("Cancelar");

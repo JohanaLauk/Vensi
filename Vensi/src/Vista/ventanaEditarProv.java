@@ -122,7 +122,6 @@ public class ventanaEditarProv extends javax.swing.JFrame
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setText("Contacto:");
 
-        txfdEditarCuit.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarCuit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarCuit.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txfdEditarCuit.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -198,6 +197,7 @@ public class ventanaEditarProv extends javax.swing.JFrame
 
         panelBotones.setOpaque(false);
 
+        btnAceptarEditar.setBackground(new java.awt.Color(153, 255, 153));
         btnAceptarEditar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnAceptarEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/confirmar_50.png"))); // NOI18N
         btnAceptarEditar.setText("Aceptar");
@@ -220,6 +220,7 @@ public class ventanaEditarProv extends javax.swing.JFrame
             }
         });
 
+        btnCancelarEditar.setBackground(new java.awt.Color(255, 153, 153));
         btnCancelarEditar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnCancelarEditar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cancelar_50.png"))); // NOI18N
         btnCancelarEditar.setText("Cancelar");
