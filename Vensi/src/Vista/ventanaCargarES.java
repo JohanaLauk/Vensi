@@ -243,7 +243,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         listaInfoProdAnular.setNextFocusableComponent(btnAnular);
         jScrollPane1.setViewportView(listaInfoProdAnular);
 
-        btnAnular.setBackground(new java.awt.Color(51, 51, 255));
+        btnAnular.setBackground(new java.awt.Color(204, 204, 255));
         btnAnular.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/anular_50.png"))); // NOI18N
         btnAnular.setText("Anular");

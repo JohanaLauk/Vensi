@@ -4,6 +4,7 @@ import DAO.EntradaStockDAO;
 import DAO.TurnoDAO;
 import Modelo.Entradastock;
 import Modelo.Turno;
+import java.awt.Dimension;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
@@ -13,6 +14,7 @@ import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
@@ -28,16 +30,21 @@ public class ventanaHistorial extends javax.swing.JFrame
     DateFormat fechaHoraFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     
+    ImageIcon icono;
+    
     public ventanaHistorial() 
     {
         initComponents();
         
         this.setLocationRelativeTo(null);   //centra la ventana
+        this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir  
+        this.setMinimumSize(new Dimension(870, 550));
+        this.setPreferredSize(new Dimension(870, 550)); 
         
         cbBuscarPor.addItem("Seleccionar");
         cbBuscarPor.addItem("Número");
         cbBuscarPor.addItem("Fecha");
-        btnVisualizarHistorial.setEnabled(false);
+        btnVisualizarH.setEnabled(false);
         txfdNro.setEnabled(false);        
         dateDesde.setEnabled(false);
         dateHasta.setEnabled(false);
@@ -49,7 +56,7 @@ public class ventanaHistorial extends javax.swing.JFrame
             public void mouseClicked(MouseEvent me) 
             {               
                 tablaHistorial.clearSelection();
-                btnVisualizarHistorial.setEnabled(false);
+                btnVisualizarH.setEnabled(false);
             } 
         });        
         
@@ -61,10 +68,8 @@ public class ventanaHistorial extends javax.swing.JFrame
     private void initComponents() {
 
         bgTipo = new javax.swing.ButtonGroup();
-        jPanel1 = new javax.swing.JPanel();
-        rbTurno = new javax.swing.JRadioButton();
-        rbCargaStock = new javax.swing.JRadioButton();
-        jLabel1 = new javax.swing.JLabel();
+        panelTodo = new javax.swing.JPanel();
+        panelBusqueda = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         cbBuscarPor = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
@@ -75,16 +80,22 @@ public class ventanaHistorial extends javax.swing.JFrame
         dateDesde = new org.jdesktop.swingx.JXDatePicker();
         dateHasta = new org.jdesktop.swingx.JXDatePicker();
         btnVaciarFechaHasta = new javax.swing.JButton();
-        jPanel3 = new javax.swing.JPanel();
+        btnBuscar = new javax.swing.JButton();
+        panelRB = new javax.swing.JPanel();
+        jLabel1 = new javax.swing.JLabel();
+        rbTurno = new javax.swing.JRadioButton();
+        rbCargaStock = new javax.swing.JRadioButton();
+        panelTabla = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaHistorial = new javax.swing.JTable();
         jLabel6 = new javax.swing.JLabel();
-        btnMenuPrincipalHistorial = new javax.swing.JButton();
-        btnVisualizarHistorial = new javax.swing.JButton();
-        btnBuscar = new javax.swing.JButton();
+        btnMenuPpal = new javax.swing.JButton();
+        btnVisualizarH = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setTitle("Historial");
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Historial de registros");
+        setMinimumSize(new java.awt.Dimension(870, 550));
+        setPreferredSize(new java.awt.Dimension(870, 550));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -92,27 +103,20 @@ public class ventanaHistorial extends javax.swing.JFrame
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
             }
         });
-
-        bgTipo.add(rbTurno);
-        rbTurno.setText("Turno");
-        rbTurno.setNextFocusableComponent(rbCargaStock);
-        rbTurno.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbTurnoActionPerformed(evt);
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
             }
         });
 
-        bgTipo.add(rbCargaStock);
-        rbCargaStock.setText("Carga stock");
-        rbCargaStock.setNextFocusableComponent(cbBuscarPor);
-        rbCargaStock.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                rbCargaStockActionPerformed(evt);
-            }
-        });
+        panelTodo.setBackground(new java.awt.Color(0, 133, 155));
+        panelTodo.setMinimumSize(new java.awt.Dimension(820, 510));
 
-        jLabel1.setText("Tipo:");
+        panelBusqueda.setOpaque(false);
 
+        jPanel2.setOpaque(false);
+
+        cbBuscarPor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbBuscarPor.setNextFocusableComponent(txfdNro);
         cbBuscarPor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -120,10 +124,17 @@ public class ventanaHistorial extends javax.swing.JFrame
             }
         });
 
+        jLabel2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Buscar por:");
 
+        labNro.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        labNro.setForeground(new java.awt.Color(255, 255, 255));
         labNro.setText("Ingrese el n° del registro:");
 
+        txfdNro.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txfdNro.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdNro.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdNro.setNextFocusableComponent(dateDesde);
         txfdNro.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
@@ -131,19 +142,63 @@ public class ventanaHistorial extends javax.swing.JFrame
             }
         });
 
+        labFecha.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        labFecha.setForeground(new java.awt.Color(255, 255, 255));
         labFecha.setText("Ingrese la fecha:");
 
+        LabFechaHasta.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        LabFechaHasta.setForeground(new java.awt.Color(255, 255, 255));
         LabFechaHasta.setText("hasta");
 
         dateDesde.setNextFocusableComponent(dateHasta);
 
         dateHasta.setNextFocusableComponent(btnVaciarFechaHasta);
 
-        btnVaciarFechaHasta.setText("X");
+        btnVaciarFechaHasta.setBackground(new java.awt.Color(255, 153, 153));
+        btnVaciarFechaHasta.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnVaciarFechaHasta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vHistorial/vaciar_50.png"))); // NOI18N
+        btnVaciarFechaHasta.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVaciarFechaHasta.setBorderPainted(false);
+        btnVaciarFechaHasta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVaciarFechaHasta.setFocusPainted(false);
+        btnVaciarFechaHasta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         btnVaciarFechaHasta.setNextFocusableComponent(btnBuscar);
+        btnVaciarFechaHasta.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVaciarFechaHastaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVaciarFechaHastaMouseExited(evt);
+            }
+        });
         btnVaciarFechaHasta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVaciarFechaHastaActionPerformed(evt);
+            }
+        });
+
+        btnBuscar.setBackground(new java.awt.Color(255, 255, 255));
+        btnBuscar.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        btnBuscar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vHistorial/buscarRegistro_100.png"))); // NOI18N
+        btnBuscar.setText("Buscar");
+        btnBuscar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnBuscar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnBuscar.setFocusPainted(false);
+        btnBuscar.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnBuscar.setIconTextGap(5);
+        btnBuscar.setNextFocusableComponent(btnVisualizarH);
+        btnBuscar.setVerticalTextPosition(javax.swing.SwingConstants.TOP);
+        btnBuscar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnBuscarMouseExited(evt);
+            }
+        });
+        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnBuscarActionPerformed(evt);
             }
         });
 
@@ -152,75 +207,136 @@ public class ventanaHistorial extends javax.swing.JFrame
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addComponent(jLabel2)
-                .addGap(18, 18, 18)
-                .addComponent(cbBuscarPor, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(jPanel2Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(labFecha)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(LabFechaHasta)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnVaciarFechaHasta))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(labNro)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(txfdNro, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addComponent(txfdNro, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(labFecha)
+                                .addGap(12, 12, 12)
+                                .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(LabFechaHasta)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(18, 18, 18)
+                        .addComponent(btnVaciarFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(cbBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labNro)
-                    .addComponent(txfdNro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labFecha)
-                    .addComponent(LabFechaHasta)
-                    .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnVaciarFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(cbBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txfdNro)
+                            .addComponent(labNro, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(15, 15, 15)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(LabFechaHasta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(labFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(44, 44, 44)
+                        .addComponent(btnVaciarFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+            .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(btnBuscar))
         );
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(rbCargaStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        panelRB.setOpaque(false);
+
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setText("Tipo de registro:");
+
+        bgTipo.add(rbTurno);
+        rbTurno.setFont(new java.awt.Font("Calibri", 2, 18)); // NOI18N
+        rbTurno.setForeground(new java.awt.Color(255, 255, 255));
+        rbTurno.setText("Turno");
+        rbTurno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        rbTurno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rbTurno.setNextFocusableComponent(rbCargaStock);
+        rbTurno.setOpaque(false);
+        rbTurno.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbTurnoActionPerformed(evt);
+            }
+        });
+
+        bgTipo.add(rbCargaStock);
+        rbCargaStock.setFont(new java.awt.Font("Calibri", 2, 18)); // NOI18N
+        rbCargaStock.setForeground(new java.awt.Color(255, 255, 255));
+        rbCargaStock.setText("Carga stock");
+        rbCargaStock.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        rbCargaStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rbCargaStock.setNextFocusableComponent(cbBuscarPor);
+        rbCargaStock.setOpaque(false);
+        rbCargaStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                rbCargaStockActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout panelRBLayout = new javax.swing.GroupLayout(panelRB);
+        panelRB.setLayout(panelRBLayout);
+        panelRBLayout.setHorizontalGroup(
+            panelRBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+            .addGroup(panelRBLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelRBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(rbCargaStock, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
                     .addComponent(rbTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rbTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(rbCargaStock, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        panelRBLayout.setVerticalGroup(
+            panelRBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelRBLayout.createSequentialGroup()
+                .addComponent(jLabel1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(rbTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(rbCargaStock, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout panelBusquedaLayout = new javax.swing.GroupLayout(panelBusqueda);
+        panelBusqueda.setLayout(panelBusquedaLayout);
+        panelBusquedaLayout.setHorizontalGroup(
+            panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBusquedaLayout.createSequentialGroup()
+                .addComponent(panelRB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
+                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelBusquedaLayout.setVerticalGroup(
+            panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBusquedaLayout.createSequentialGroup()
+                .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(panelRB, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        panelTabla.setOpaque(false);
 
         tablaHistorial = new javax.swing.JTable()
         {
@@ -229,6 +345,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                 return false;
             }
         };
+        tablaHistorial.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         tablaHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -246,87 +363,111 @@ public class ventanaHistorial extends javax.swing.JFrame
         tablaHistorial.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaHistorial);
 
+        jLabel6.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Resultados");
 
-        btnMenuPrincipalHistorial.setText("Menú principal");
-        btnMenuPrincipalHistorial.setNextFocusableComponent(rbTurno);
-        btnMenuPrincipalHistorial.addActionListener(new java.awt.event.ActionListener() {
+        btnMenuPpal.setBackground(new java.awt.Color(204, 204, 255));
+        btnMenuPpal.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        btnMenuPpal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/home_50.png"))); // NOI18N
+        btnMenuPpal.setText("Menú principal");
+        btnMenuPpal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnMenuPpal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenuPpal.setFocusPainted(false);
+        btnMenuPpal.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnMenuPpal.setIconTextGap(30);
+        btnMenuPpal.setNextFocusableComponent(rbTurno);
+        btnMenuPpal.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnMenuPpalMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnMenuPpalMouseExited(evt);
+            }
+        });
+        btnMenuPpal.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnMenuPrincipalHistorialActionPerformed(evt);
+                btnMenuPpalActionPerformed(evt);
             }
         });
 
-        btnVisualizarHistorial.setText("Visualizar");
-        btnVisualizarHistorial.setNextFocusableComponent(btnMenuPrincipalHistorial);
-        btnVisualizarHistorial.addActionListener(new java.awt.event.ActionListener() {
+        btnVisualizarH.setBackground(new java.awt.Color(204, 204, 255));
+        btnVisualizarH.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        btnVisualizarH.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vHistorial/ver1_50.png"))); // NOI18N
+        btnVisualizarH.setText("Visualizar");
+        btnVisualizarH.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVisualizarH.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVisualizarH.setFocusPainted(false);
+        btnVisualizarH.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnVisualizarH.setIconTextGap(40);
+        btnVisualizarH.setNextFocusableComponent(btnMenuPpal);
+        btnVisualizarH.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVisualizarHMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVisualizarHMouseExited(evt);
+            }
+        });
+        btnVisualizarH.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnVisualizarHistorialActionPerformed(evt);
+                btnVisualizarHActionPerformed(evt);
             }
         });
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel6)
-                .addGap(0, 0, Short.MAX_VALUE))
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnMenuPrincipalHistorial)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btnVisualizarHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+        javax.swing.GroupLayout panelTablaLayout = new javax.swing.GroupLayout(panelTabla);
+        panelTabla.setLayout(panelTablaLayout);
+        panelTablaLayout.setHorizontalGroup(
+            panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jScrollPane1)
+            .addComponent(jLabel6)
+            .addGroup(panelTablaLayout.createSequentialGroup()
+                .addComponent(btnMenuPpal, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(btnVisualizarH, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelTablaLayout.setVerticalGroup(
+            panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTablaLayout.createSequentialGroup()
+                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 18, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 249, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnMenuPpal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnVisualizarH, javax.swing.GroupLayout.DEFAULT_SIZE, 59, Short.MAX_VALUE)))
+        );
+
+        javax.swing.GroupLayout panelTodoLayout = new javax.swing.GroupLayout(panelTodo);
+        panelTodo.setLayout(panelTodoLayout);
+        panelTodoLayout.setHorizontalGroup(
+            panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTodoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelBusqueda, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
-                .addComponent(jLabel6)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(btnVisualizarHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(btnMenuPrincipalHistorial, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        panelTodoLayout.setVerticalGroup(
+            panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTodoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(panelTabla, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
         );
-
-        btnBuscar.setText("Buscar");
-        btnBuscar.setNextFocusableComponent(btnVisualizarHistorial);
-        btnBuscar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnBuscarActionPerformed(evt);
-            }
-        });
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btnBuscar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addContainerGap())
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+            .addComponent(panelTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnBuscar)
-                .addGap(18, 18, 18)
-                .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, 177, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+            .addComponent(panelTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -391,16 +532,16 @@ public class ventanaHistorial extends javax.swing.JFrame
         }
     }//GEN-LAST:event_cbBuscarPorActionPerformed
 
-    private void btnMenuPrincipalHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPrincipalHistorialActionPerformed
+    private void btnMenuPpalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMenuPpalActionPerformed
         ventanaPrincipal vPrincipal = new ventanaPrincipal();
         vPrincipal.setVisible(true);
         dispose();
-    }//GEN-LAST:event_btnMenuPrincipalHistorialActionPerformed
+    }//GEN-LAST:event_btnMenuPpalActionPerformed
 
-    private void btnVisualizarHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarHistorialActionPerformed
+    private void btnVisualizarHActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVisualizarHActionPerformed
         if (rbTurno.isSelected())
         {
-            ventanaVisualizarHistorial.tablaSelec = "Turno";         
+            ventanaVisualizarHistorial.tablaSelec = "Turno"; 
         }
         if (rbCargaStock.isSelected())
         {
@@ -409,9 +550,9 @@ public class ventanaHistorial extends javax.swing.JFrame
         
         ventanaVisualizarHistorial.idSelec = Integer.parseInt(tablaHistorial.getValueAt(tablaHistorial.getSelectedRow(),0).toString());
         
-        ventanaVisualizarHistorial vVisualizarHistorial = new ventanaVisualizarHistorial();
+        ventanaVisualizarHistorial vVisualizarHistorial = new ventanaVisualizarHistorial();        
         vVisualizarHistorial.setVisible(true);
-    }//GEN-LAST:event_btnVisualizarHistorialActionPerformed
+    }//GEN-LAST:event_btnVisualizarHActionPerformed
 
     private void txfdNroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdNroKeyTyped
         char c = evt.getKeyChar();
@@ -424,11 +565,11 @@ public class ventanaHistorial extends javax.swing.JFrame
         
         if (filaSelec >= 0)
         {
-            btnVisualizarHistorial.setEnabled(true);
+            btnVisualizarH.setEnabled(true);
         }
         else
         {
-            btnVisualizarHistorial.setEnabled(false);
+            btnVisualizarH.setEnabled(false);
         }                
     }//GEN-LAST:event_formWindowGainedFocus
 
@@ -441,7 +582,7 @@ public class ventanaHistorial extends javax.swing.JFrame
         dateDesde.setDate(null);
         dateHasta.setDate(null);        
         cbBuscarPor.setSelectedItem("Seleccionar");      
-        btnVisualizarHistorial.setEnabled(false);
+        btnVisualizarH.setEnabled(false);
 
         tablaVacia();
     }//GEN-LAST:event_rbTurnoActionPerformed
@@ -451,10 +592,60 @@ public class ventanaHistorial extends javax.swing.JFrame
         dateDesde.setDate(null);
         dateHasta.setDate(null);        
         cbBuscarPor.setSelectedItem("Seleccionar"); 
-        btnVisualizarHistorial.setEnabled(false);
+        btnVisualizarH.setEnabled(false);
 
         tablaVacia();
     }//GEN-LAST:event_rbCargaStockActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        ventanaPrincipal vPrincipal = new ventanaPrincipal();
+        vPrincipal.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
+
+    private void btnBuscarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/vHistorial/buscarRegistro_lleno_100.png"));     
+        btnBuscar.setIcon(icono); 
+    }//GEN-LAST:event_btnBuscarMouseEntered
+
+    private void btnBuscarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnBuscarMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vHistorial/buscarRegistro_100.png"));     
+        btnBuscar.setIcon(icono);
+    }//GEN-LAST:event_btnBuscarMouseExited
+
+    private void btnVisualizarHMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVisualizarHMouseEntered
+        int filaSelec = tablaHistorial.getSelectedRow();
+        
+        if (filaSelec >= 0)
+        {
+            icono = new ImageIcon(getClass().getResource("/Recursos/vHistorial/ver1_lleno_50.png"));
+            btnVisualizarH.setIcon(icono);
+        }             
+    }//GEN-LAST:event_btnVisualizarHMouseEntered
+
+    private void btnVisualizarHMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVisualizarHMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vHistorial/ver1_50.png"));     
+        btnVisualizarH.setIcon(icono);
+    }//GEN-LAST:event_btnVisualizarHMouseExited
+
+    private void btnMenuPpalMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuPpalMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/home_lleno_50.png"));     
+        btnMenuPpal.setIcon(icono);
+    }//GEN-LAST:event_btnMenuPpalMouseEntered
+
+    private void btnMenuPpalMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnMenuPpalMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/home_50.png"));     
+        btnMenuPpal.setIcon(icono);
+    }//GEN-LAST:event_btnMenuPpalMouseExited
+
+    private void btnVaciarFechaHastaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVaciarFechaHastaMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/vHistorial/vaciar_lleno_50.png"));     
+        btnVaciarFechaHasta.setIcon(icono);
+    }//GEN-LAST:event_btnVaciarFechaHastaMouseEntered
+
+    private void btnVaciarFechaHastaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVaciarFechaHastaMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vHistorial/vaciar_50.png"));     
+        btnVaciarFechaHasta.setIcon(icono);
+    }//GEN-LAST:event_btnVaciarFechaHastaMouseExited
 
     public static void main(String args[]) 
     {
@@ -687,11 +878,11 @@ public class ventanaHistorial extends javax.swing.JFrame
         
                 if (filaSelec >= 0)
                 {
-                    btnVisualizarHistorial.setEnabled(true);
+                    btnVisualizarH.setEnabled(true);
                 }
                 else
                 {
-                    btnVisualizarHistorial.setEnabled(false);
+                    btnVisualizarH.setEnabled(false);
                 }
             } 
         });
@@ -716,21 +907,23 @@ public class ventanaHistorial extends javax.swing.JFrame
     private javax.swing.JLabel LabFechaHasta;
     private javax.swing.ButtonGroup bgTipo;
     private javax.swing.JButton btnBuscar;
-    private javax.swing.JButton btnMenuPrincipalHistorial;
+    private javax.swing.JButton btnMenuPpal;
     private javax.swing.JButton btnVaciarFechaHasta;
-    private javax.swing.JButton btnVisualizarHistorial;
+    private javax.swing.JButton btnVisualizarH;
     private javax.swing.JComboBox<String> cbBuscarPor;
     private org.jdesktop.swingx.JXDatePicker dateDesde;
     private org.jdesktop.swingx.JXDatePicker dateHasta;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labFecha;
     private javax.swing.JLabel labNro;
+    private javax.swing.JPanel panelBusqueda;
+    private javax.swing.JPanel panelRB;
+    private javax.swing.JPanel panelTabla;
+    private javax.swing.JPanel panelTodo;
     private javax.swing.JRadioButton rbCargaStock;
     private javax.swing.JRadioButton rbTurno;
     private javax.swing.JTable tablaHistorial;
