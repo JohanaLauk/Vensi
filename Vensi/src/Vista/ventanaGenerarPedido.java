@@ -7,6 +7,7 @@ import Modelo.ItemImprimir;
 import Modelo.Producto;
 import Modelo.Proveedor;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
@@ -37,6 +38,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
     Producto elProd = null;
     Proveedor elProv = null;
     String provSelec = "Seleccionar";
+    String provProvisorio = "Seleccionar";
     
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
@@ -49,15 +51,24 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);       //centra la ventana        
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
-        
-        txfdBuscarProd.setEnabled(false);
-        cbFiltro.setEnabled(false);
-        cbSituacion.setEnabled(false);
-        cbOrdenCampo.setEnabled(false);
-        cbTipoOrden.setEnabled(false);        
+        this.setMinimumSize(new Dimension(1300, 650));  //Indica que hasta esa medida se puede minimizar        
+        this.setPreferredSize(new Dimension(1300, 650));    //al ejecutarse, la ventana aparece con esa medida
+                        
+        for (int i=0 ; i < panelBusqueda.getComponents().length ; i++)
+        {
+            panelBusqueda.getComponent(i).setEnabled(false);
+        }
         btnQuitar.setEnabled(false);
         btnAgregar.setEnabled(false);
         txfdCantidad.setEnabled(false);
+        btnImprimirPedido.setEnabled(false);
+        
+        for (int i=0 ; i < panelIzquierdo.getComponents().length ; i++)
+        {
+            panelIzquierdo.getComponent(i).setEnabled(false);
+        }
+        labProveedor.setEnabled(true);
+        cbProveedores.setEnabled(true);
         
         //Al hacer click en el JFrame se quita la seleccion en los JTable
         this.addMouseListener(new MouseAdapter()
@@ -91,8 +102,11 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         panelTodo = new javax.swing.JPanel();
         panelIzquierdo = new javax.swing.JPanel();
         panelProv = new javax.swing.JPanel();
-        jLabel7 = new javax.swing.JLabel();
+        labProveedor = new javax.swing.JLabel();
         cbProveedores = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaProd = new javax.swing.JTable();
+        panelBusqueda = new javax.swing.JPanel();
         labBuscar = new javax.swing.JLabel();
         txfdBuscarProd = new org.jdesktop.swingx.JXTextField();
         labFiltrarPor = new javax.swing.JLabel();
@@ -101,8 +115,6 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         labOrdenarPor = new javax.swing.JLabel();
         cbOrdenCampo = new javax.swing.JComboBox<>();
         cbTipoOrden = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaProd = new javax.swing.JTable();
         panelAlarma = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -124,6 +136,8 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Generar pedido");
+        setMinimumSize(new java.awt.Dimension(1300, 650));
+        setPreferredSize(new java.awt.Dimension(1300, 650));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -136,9 +150,9 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
 
         panelProv.setOpaque(false);
 
-        jLabel7.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setText("Indique el proveedor:");
+        labProveedor.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        labProveedor.setForeground(new java.awt.Color(255, 255, 255));
+        labProveedor.setText("Indique el proveedor:");
 
         cbProveedores.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cbProveedores.setNextFocusableComponent(txfdBuscarProd);
@@ -153,7 +167,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         panelProvLayout.setHorizontalGroup(
             panelProvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelProvLayout.createSequentialGroup()
-                .addComponent(jLabel7)
+                .addComponent(labProveedor)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(cbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 270, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -163,9 +177,32 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
             .addGroup(panelProvLayout.createSequentialGroup()
                 .addGroup(panelProvLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cbProveedores, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(labProveedor, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
+
+        tablaProd = new javax.swing.JTable()
+        {
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false;
+            }
+        };
+        tablaProd.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tablaProd.setFocusable(false);
+        tablaProd.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaProd.getTableHeader().setResizingAllowed(false);
+        tablaProd.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablaProd);
+
+        panelBusqueda.setOpaque(false);
 
         labBuscar.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         labBuscar.setForeground(new java.awt.Color(255, 255, 255));
@@ -194,7 +231,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         });
 
         cbSituacion.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo ofertas", "Sólo suspendidos" }));
+        cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo habilitados", "Sólo ofertas", "Sólo suspendidos" }));
         cbSituacion.setNextFocusableComponent(cbOrdenCampo);
         cbSituacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -224,26 +261,45 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
             }
         });
 
-        tablaProd = new javax.swing.JTable()
-        {
-            public boolean isCellEditable(int rowIndex, int colIndex)
-            {
-                return false;
-            }
-        };
-        tablaProd.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        tablaProd.setFocusable(false);
-        tablaProd.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablaProd.getTableHeader().setResizingAllowed(false);
-        tablaProd.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tablaProd);
+        javax.swing.GroupLayout panelBusquedaLayout = new javax.swing.GroupLayout(panelBusqueda);
+        panelBusqueda.setLayout(panelBusquedaLayout);
+        panelBusquedaLayout.setHorizontalGroup(
+            panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBusquedaLayout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(labBuscar)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelBusquedaLayout.createSequentialGroup()
+                        .addComponent(labFiltrarPor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(labOrdenarPor)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfdBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        panelBusquedaLayout.setVerticalGroup(
+            panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelBusquedaLayout.createSequentialGroup()
+                .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(labBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfdBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labOrdenarPor)
+                    .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(labFiltrarPor)
+                    .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
 
         javax.swing.GroupLayout panelIzquierdoLayout = new javax.swing.GroupLayout(panelIzquierdo);
         panelIzquierdo.setLayout(panelIzquierdoLayout);
@@ -252,43 +308,19 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
             .addGroup(panelIzquierdoLayout.createSequentialGroup()
                 .addGroup(panelIzquierdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jScrollPane1)
+                    .addComponent(panelProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelIzquierdoLayout.createSequentialGroup()
-                        .addComponent(labBuscar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(panelIzquierdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(panelIzquierdoLayout.createSequentialGroup()
-                                .addComponent(labFiltrarPor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(27, 27, 27)
-                                .addComponent(labOrdenarPor)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(txfdBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                    .addComponent(panelProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         panelIzquierdoLayout.setVerticalGroup(
             panelIzquierdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelIzquierdoLayout.createSequentialGroup()
                 .addComponent(panelProv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(7, 7, 7)
-                .addGroup(panelIzquierdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(labBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfdBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(panelIzquierdoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labOrdenarPor)
-                    .addComponent(cbFiltro, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(labFiltrarPor)
-                    .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
         );
 
@@ -513,7 +545,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(panelTablaPeodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaPeodoLayout.createSequentialGroup()
-                        .addComponent(btnVolverMP, javax.swing.GroupLayout.DEFAULT_SIZE, 189, Short.MAX_VALUE)
+                        .addComponent(btnVolverMP, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnImprimirPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3)
@@ -527,7 +559,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaPeodoLayout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelTablaPeodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnImprimirPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -541,11 +573,11 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
             panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTodoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelIzquierdo, javax.swing.GroupLayout.PREFERRED_SIZE, 316, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(panelIzquierdo, javax.swing.GroupLayout.PREFERRED_SIZE, 317, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(panelTablaPeodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelInfoProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelTablaPeodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelAlarma, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
@@ -695,51 +727,70 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed
         provSelec = String.valueOf(cbProveedores.getSelectedItem());
-        List<Proveedor> listaTotalProv = provDAO.listar("Habilitados", "razonSocial", "ASC");
-                
-        if (!provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
-        {  
-            txfdBuscarProd.setEnabled(true);
-            
-            cbFiltro.setEnabled(true);
-            if (filtroSelec.equals("Habilitados"))
-            {
-                cbSituacion.setEnabled(true);
-            }
-            else
-            {
-                cbSituacion.setEnabled(false);
-            }            
-            cbOrdenCampo.setEnabled(true);
-            cbTipoOrden.setEnabled(true);
-            
-            for (Proveedor p : listaTotalProv)
-            {
-                if (p.getRazonSocial().equals(provSelec))
-                {
-                    elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
-                    llenarTabla();
-                }
-            }      
-            
-            llenarTablaPedido();
-        }
-        else
+        
+        if (!provProvisorio.equals(provSelec))
         {
-            mostrarTablaVacia();   
-            
-            if (provSelec.equals("Seleccionar"))
-            {
-                llenarTablaPedido();
+            List<Proveedor> listaTotalProv = provDAO.listar("Habilitados", "razonSocial", "ASC");
+               
+            if (provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
+            {  
+                mostrarTablaVacia();   
+
+                if (provSelec.equals("Seleccionar"))
+                {
+                    llenarTablaPedido();
+                }
+
+                limpiarList();
+                habilitarBTNImprimir();
+
+                btnAgregar.setEnabled(false);
+                btnQuitar.setEnabled(false);
+                txfdCantidad.setText(null);
+
+                for (int i=0 ; i < panelBusqueda.getComponents().length ; i++)
+                {
+                    panelBusqueda.getComponent(i).setEnabled(false);
+                }
             }
-            
-            txfdBuscarProd.setEnabled(false);
-            
-            cbFiltro.setEnabled(false);
-            cbSituacion.setEnabled(false);
-            cbOrdenCampo.setEnabled(false);
-            cbTipoOrden.setEnabled(false);
+            else    
+            {
+                labBuscar.setEnabled(true);
+                labFiltrarPor.setEnabled(true);
+                labOrdenarPor.setEnabled(true);
+                txfdBuscarProd.setEnabled(true);
+
+                cbFiltro.setEnabled(true);
+                if (filtroSelec.equals("Habilitados"))
+                {
+                    cbSituacion.setEnabled(true);
+                }
+                else
+                {
+                    cbSituacion.setEnabled(false);
+                }            
+                cbOrdenCampo.setEnabled(true);
+                cbTipoOrden.setEnabled(true);
+
+                for (Proveedor p : listaTotalProv)
+                {
+                    if (p.getRazonSocial().equals(provSelec))
+                    {
+                        elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
+                        llenarTabla();
+                    }
+                }      
+
+                llenarTablaPedido();
+
+                limpiarList();
+                habilitarBTNImprimir();
+                btnAgregar.setEnabled(false);
+                btnQuitar.setEnabled(false);
+                txfdCantidad.setText(null);            
+            }
         }
+        provProvisorio = provSelec;       
     }//GEN-LAST:event_cbProveedoresActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -795,6 +846,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         
         txfdCantidad.setText("");
         limpiarList(); 
+        habilitarBTNImprimir();
         
         tablaProd.clearSelection();
         icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/prod+_50.png"));     
@@ -814,6 +866,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         m2.removeRow(filaSelec); 
         
         limpiarList();
+        habilitarBTNImprimir();
         
         tablaPedido.clearSelection();
         icono = new ImageIcon(getClass().getResource("/Recursos/vVenta/borrar_50.png"));
@@ -881,16 +934,17 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         {
             situacionSelec = "Todos";
         }
-        else
+        if (cbSituacion.getSelectedItem().equals("Sólo habilitados"))
         {
-            if (cbSituacion.getSelectedItem().equals("Sólo ofertas"))
-            {
-                situacionSelec = "Oferta";
-            }
-            else
-            {
-                situacionSelec = "Suspendido";
-            }
+            situacionSelec = "Habilitado";
+        }
+        if (cbSituacion.getSelectedItem().equals("Sólo ofertas"))
+        {
+            situacionSelec = "Oferta";
+        }
+        if (cbSituacion.getSelectedItem().equals("Sólo suspendidos"))
+        {
+            situacionSelec = "Suspendido";
         }
         llenarTabla();
     }//GEN-LAST:event_cbSituacionActionPerformed
@@ -939,7 +993,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
     private void btnImprimirPedidoMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnImprimirPedidoMouseEntered
         int filasTabla = tablaPedido.getRowCount();
         
-        if (!provSelec.equals("Seleccionar") && !provSelec.equals("No hay proveedores") && filasTabla!=0 )
+        if (!provSelec.equals("Seleccionar") && !provSelec.equals("No hay proveedores") && filasTabla!=0)
         {
             icono = new ImageIcon(getClass().getResource("/Recursos/vHistorial/imprimir_lleno_50.png"));
             btnImprimirPedido.setIcon(icono);
@@ -1242,6 +1296,20 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         tablaProd.getTableHeader().getColumnModel().getColumn(6).setMinWidth(0);
     }
     
+    public void habilitarBTNImprimir()
+    {
+        int cantFilas = tablaPedido.getRowCount();
+        
+        if (cantFilas > 0)
+        {
+            btnImprimirPedido.setEnabled(true);
+        }
+        else
+        {
+            btnImprimirPedido.setEnabled(false);            
+        }
+    }
+    
     public String[] OrdenarTabla()
     {
         String[] ordenamiento = new String[4];
@@ -1315,7 +1383,6 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
@@ -1324,9 +1391,11 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
     private javax.swing.JLabel labBuscar;
     private javax.swing.JLabel labFiltrarPor;
     private javax.swing.JLabel labOrdenarPor;
+    private javax.swing.JLabel labProveedor;
     private javax.swing.JList<String> listInfoProd;
     private javax.swing.JList<String> listProdAlarma;
     private javax.swing.JPanel panelAlarma;
+    private javax.swing.JPanel panelBusqueda;
     private javax.swing.JPanel panelInfoProd;
     private javax.swing.JPanel panelIzquierdo;
     private javax.swing.JPanel panelProv;

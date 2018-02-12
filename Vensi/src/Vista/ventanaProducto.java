@@ -95,6 +95,13 @@ public class ventanaProducto extends javax.swing.JFrame
         setTitle("Gestión del producto");
         setMinimumSize(new java.awt.Dimension(1120, 600));
         setPreferredSize(new java.awt.Dimension(1120, 600));
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
@@ -733,6 +740,10 @@ public class ventanaProducto extends javax.swing.JFrame
         icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/home_50.png"));     
         btnMenuPpal.setIcon(icono);
     }//GEN-LAST:event_btnMenuPpalFocusLost
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        llenarTabla();
+    }//GEN-LAST:event_formWindowGainedFocus
     
     public static void main(String args[]) 
     {
