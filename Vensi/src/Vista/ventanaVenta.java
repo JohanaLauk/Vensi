@@ -898,6 +898,9 @@ public class ventanaVenta extends javax.swing.JFrame
         limpiarList();
         
         tablaProd.clearSelection();
+        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/prod+_50.png"));     
+        btnAgregar.setIcon(icono);
+        
         tablaProd.setRowSelectionAllowed(false);
         tablaCarrito.setRowSelectionAllowed(false);
         
@@ -925,6 +928,10 @@ public class ventanaVenta extends javax.swing.JFrame
         }
         
         limpiarList();
+        
+        tablaProd.clearSelection();
+        icono = new ImageIcon(getClass().getResource("/Recursos/vVenta/borrar_50.png"));     
+        btnQuitar.setIcon(icono);
         
         txfdCantidad.setEnabled(false);
         btnAgregar.setEnabled(false);

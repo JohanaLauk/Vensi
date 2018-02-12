@@ -133,6 +133,11 @@ public class ventanaCargaStock extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Actualización del inventario producto");
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         tablaProd = new javax.swing.JTable()
         {
@@ -1113,6 +1118,11 @@ public class ventanaCargaStock extends javax.swing.JFrame
         if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))        
             evt.consume();        
     }//GEN-LAST:event_txfdPrecioVUKeyTyped
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        ventanaPrincipal vPrincipal = new ventanaPrincipal();
+        vPrincipal.setVisible(true);
+    }//GEN-LAST:event_formWindowClosing
 
     public static void main(String args[]) 
     {
