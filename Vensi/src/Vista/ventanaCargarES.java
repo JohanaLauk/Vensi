@@ -103,6 +103,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setFocusPainted(false);
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnCancelar.setIconTextGap(5);
         btnCancelar.setNextFocusableComponent(btnConfirmar);
@@ -126,6 +127,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         btnConfirmar.setText("Confirmar");
         btnConfirmar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmar.setFocusPainted(false);
         btnConfirmar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnConfirmar.setIconTextGap(5);
         btnConfirmar.setNextFocusableComponent(txfdCodNomProdAnular);
@@ -247,6 +249,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         btnAnular.setText("Anular");
         btnAnular.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAnular.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAnular.setFocusPainted(false);
         btnAnular.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAnular.setIconTextGap(40);
         btnAnular.addMouseListener(new java.awt.event.MouseAdapter() {

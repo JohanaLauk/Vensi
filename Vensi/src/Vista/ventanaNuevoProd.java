@@ -106,6 +106,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         btnAceptarNuevoProd.setText("Aceptar");
         btnAceptarNuevoProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAceptarNuevoProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAceptarNuevoProd.setFocusPainted(false);
         btnAceptarNuevoProd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAceptarNuevoProd.setIconTextGap(30);
         btnAceptarNuevoProd.setNextFocusableComponent(btnCancelarNuevoProd);
@@ -129,6 +130,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         btnCancelarNuevoProd.setText("Cancelar");
         btnCancelarNuevoProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCancelarNuevoProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelarNuevoProd.setFocusPainted(false);
         btnCancelarNuevoProd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnCancelarNuevoProd.setIconTextGap(20);
         btnCancelarNuevoProd.setNextFocusableComponent(txfdCodigo);
@@ -151,11 +153,11 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         panelBotonesLayout.setHorizontalGroup(
             panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonesLayout.createSequentialGroup()
-                .addGap(109, 109, 109)
-                .addComponent(btnCancelarNuevoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(75, 75, 75)
+                .addComponent(btnCancelarNuevoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAceptarNuevoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55))
+                .addComponent(btnAceptarNuevoProd, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(60, 60, 60))
         );
         panelBotonesLayout.setVerticalGroup(
             panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

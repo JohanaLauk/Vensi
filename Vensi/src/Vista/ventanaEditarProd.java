@@ -369,6 +369,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         btnAceptarEditar.setText("Aceptar");
         btnAceptarEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAceptarEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAceptarEditar.setFocusPainted(false);
         btnAceptarEditar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAceptarEditar.setIconTextGap(30);
         btnAceptarEditar.setNextFocusableComponent(btnCancelarEditar);
@@ -392,6 +393,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         btnCancelarEditar.setText("Cancelar");
         btnCancelarEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCancelarEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelarEditar.setFocusPainted(false);
         btnCancelarEditar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnCancelarEditar.setIconTextGap(20);
         btnCancelarEditar.setNextFocusableComponent(txfdEditarCodigo);
@@ -414,11 +416,11 @@ public class ventanaEditarProd extends javax.swing.JFrame
         panelBotonesLayout.setHorizontalGroup(
             panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelBotonesLayout.createSequentialGroup()
-                .addGap(67, 67, 67)
-                .addComponent(btnCancelarEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 167, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
-                .addComponent(btnAceptarEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 172, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74))
+                .addGap(56, 56, 56)
+                .addComponent(btnCancelarEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 110, Short.MAX_VALUE)
+                .addComponent(btnAceptarEditar, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(53, 53, 53))
         );
         panelBotonesLayout.setVerticalGroup(
             panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)

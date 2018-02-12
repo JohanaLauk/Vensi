@@ -181,6 +181,7 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/confirmar_50.png"))); // NOI18N
         btnAceptar.setText("Aceptar");
         btnAceptar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAceptar.setFocusPainted(false);
         btnAceptar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAceptar.setIconTextGap(10);
         btnAceptar.setNextFocusableComponent(btnCancelar);
@@ -203,6 +204,7 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cancelar_50.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCancelar.setFocusPainted(false);
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnCancelar.setIconTextGap(10);
         btnCancelar.setNextFocusableComponent(txfdRazonSocial);

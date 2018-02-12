@@ -203,6 +203,7 @@ public class ventanaEditarProv extends javax.swing.JFrame
         btnAceptarEditar.setText("Aceptar");
         btnAceptarEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAceptarEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAceptarEditar.setFocusPainted(false);
         btnAceptarEditar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAceptarEditar.setIconTextGap(10);
         btnAceptarEditar.setNextFocusableComponent(btnCancelarEditar);
@@ -226,6 +227,7 @@ public class ventanaEditarProv extends javax.swing.JFrame
         btnCancelarEditar.setText("Cancelar");
         btnCancelarEditar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCancelarEditar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelarEditar.setFocusPainted(false);
         btnCancelarEditar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnCancelarEditar.setIconTextGap(10);
         btnCancelarEditar.setNextFocusableComponent(txfdEditarRazonSocial);

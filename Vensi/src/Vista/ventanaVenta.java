@@ -115,6 +115,7 @@ public class ventanaVenta extends javax.swing.JFrame
         jScrollPane2 = new javax.swing.JScrollPane();
         tablaCarrito = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
+        jSeparator1 = new javax.swing.JSeparator();
 
         jMenu1.setText("jMenu1");
 
@@ -138,6 +139,7 @@ public class ventanaVenta extends javax.swing.JFrame
         panelTodo.setBackground(new java.awt.Color(0, 133, 155));
 
         panelBotonesArriba.setBackground(new java.awt.Color(0, 0, 0));
+        panelBotonesArriba.setOpaque(false);
 
         btnIniciarTurno.setBackground(new java.awt.Color(204, 204, 255));
         btnIniciarTurno.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
@@ -227,7 +229,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addComponent(btnCerrarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnMenuPrincipal)
+                .addComponent(btnMenuPrincipal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
         panelBotonesArribaLayout.setVerticalGroup(
@@ -387,6 +389,7 @@ public class ventanaVenta extends javax.swing.JFrame
         btnAgregar.setText("Agregar");
         btnAgregar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAgregar.setFocusPainted(false);
         btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAgregar.setNextFocusableComponent(btnQuitar);
         btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -409,6 +412,7 @@ public class ventanaVenta extends javax.swing.JFrame
         btnQuitar.setText("Quitar");
         btnQuitar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnQuitar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnQuitar.setFocusPainted(false);
         btnQuitar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnQuitar.setNextFocusableComponent(btnConfirmar);
         btnQuitar.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -561,12 +565,16 @@ public class ventanaVenta extends javax.swing.JFrame
             .addGroup(panelTablaCarritoLayout.createSequentialGroup()
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labMontoTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
+
+        jSeparator1.setBackground(new java.awt.Color(0, 0, 0));
+        jSeparator1.setForeground(new java.awt.Color(255, 255, 255));
+        jSeparator1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
 
         javax.swing.GroupLayout panelTodoLayout = new javax.swing.GroupLayout(panelTodo);
         panelTodo.setLayout(panelTodoLayout);
@@ -578,20 +586,23 @@ public class ventanaVenta extends javax.swing.JFrame
                     .addComponent(panelBotonesArriba, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelTodoLayout.createSequentialGroup()
                         .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                            .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 212, Short.MAX_VALUE)
                             .addComponent(panelTablaProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(18, 18, 18)
                         .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(panelDatosProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(panelTablaCarrito, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addContainerGap())
+            .addComponent(jSeparator1)
         );
         panelTodoLayout.setVerticalGroup(
             panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTodoLayout.createSequentialGroup()
                 .addGap(6, 6, 6)
                 .addComponent(panelBotonesArriba, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(2, 2, 2)
                 .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelTodoLayout.createSequentialGroup()
                         .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -1493,6 +1504,7 @@ public class ventanaVenta extends javax.swing.JFrame
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JSeparator jSeparator1;
     private javax.swing.JLabel labMontoTotalCompra;
     private javax.swing.JList<String> listInfoProd;
     private javax.swing.JPanel panelBotonesArriba;

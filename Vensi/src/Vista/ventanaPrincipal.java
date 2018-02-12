@@ -50,7 +50,6 @@ public class ventanaPrincipal extends javax.swing.JFrame
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        labImagenDerecha = new javax.swing.JLabel();
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -136,6 +135,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
         getContentPane().add(panelIzquierda, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 320, 480));
 
+        panelDerecha.setBackground(new java.awt.Color(0, 133, 155));
         panelDerecha.setPreferredSize(new java.awt.Dimension(600, 400));
         panelDerecha.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -329,38 +329,35 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
         jLabel1.setBackground(new java.awt.Color(255, 255, 255));
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("Ventas");
         panelDerecha.add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 90, -1));
 
         jLabel2.setBackground(new java.awt.Color(255, 255, 255));
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Generar pedido");
         panelDerecha.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 160, 20));
 
         jLabel3.setBackground(new java.awt.Color(255, 255, 255));
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
         jLabel3.setText("Actualizar inventario");
         panelDerecha.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(260, 250, -1, 20));
 
         jLabel4.setBackground(new java.awt.Color(255, 255, 255));
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Administrar inventario");
         panelDerecha.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 410, -1, 20));
 
         jLabel5.setBackground(new java.awt.Color(255, 255, 255));
         jLabel5.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(204, 255, 255));
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("Historial");
         panelDerecha.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 450, 100, 20));
-
-        labImagenDerecha.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo grande.png"))); // NOI18N
-        panelDerecha.add(labImagenDerecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 480));
 
         getContentPane().add(panelDerecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 0, 500, 480));
 
@@ -516,7 +513,6 @@ public class ventanaPrincipal extends javax.swing.JFrame
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JSeparator jSeparator2;
     private javax.swing.JLabel labBarraTitulo;
-    private javax.swing.JLabel labImagenDerecha;
     private javax.swing.JLabel labNombreNegocio;
     private javax.swing.JPanel panelDerecha;
     private javax.swing.JPanel panelIzquierda;

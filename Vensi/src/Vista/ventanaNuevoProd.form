@@ -111,11 +111,11 @@
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <EmptySpace min="-2" pref="109" max="-2" attributes="0"/>
-                      <Component id="btnCancelarNuevoProd" min="-2" pref="160" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="75" max="-2" attributes="0"/>
+                      <Component id="btnCancelarNuevoProd" min="-2" pref="210" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btnAceptarNuevoProd" min="-2" pref="215" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="55" max="-2" attributes="0"/>
+                      <Component id="btnAceptarNuevoProd" min="-2" pref="210" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="60" max="-2" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -149,6 +149,7 @@
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Cursor de Mano"/>
                 </Property>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="2"/>
                 <Property name="iconTextGap" type="int" value="30"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
@@ -181,6 +182,7 @@
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
                   <Color id="Cursor de Mano"/>
                 </Property>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="2"/>
                 <Property name="iconTextGap" type="int" value="20"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">

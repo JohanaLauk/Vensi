@@ -165,6 +165,7 @@
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Cursor de Mano"/>
             </Property>
+            <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
             <Property name="iconTextGap" type="int" value="0"/>
           </Properties>
@@ -248,6 +249,7 @@
             <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">
               <Color id="Cursor de Mano"/>
             </Property>
+            <Property name="focusPainted" type="boolean" value="false"/>
             <Property name="horizontalTextPosition" type="int" value="2"/>
             <Property name="iconTextGap" type="int" value="10"/>
           </Properties>

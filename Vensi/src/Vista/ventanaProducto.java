@@ -281,6 +281,7 @@ public class ventanaProducto extends javax.swing.JFrame
         btnNuevoProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnNuevoProd.setBorderPainted(false);
         btnNuevoProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnNuevoProd.setFocusPainted(false);
         btnNuevoProd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnNuevoProd.setIconTextGap(50);
         btnNuevoProd.setNextFocusableComponent(btnEditarProd);
@@ -313,6 +314,7 @@ public class ventanaProducto extends javax.swing.JFrame
         btnEditarProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnEditarProd.setBorderPainted(false);
         btnEditarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnEditarProd.setFocusPainted(false);
         btnEditarProd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEditarProd.setIconTextGap(50);
         btnEditarProd.setNextFocusableComponent(btnVolverProd);
@@ -345,6 +347,7 @@ public class ventanaProducto extends javax.swing.JFrame
         btnVolverProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnVolverProd.setBorderPainted(false);
         btnVolverProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVolverProd.setFocusPainted(false);
         btnVolverProd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnVolverProd.setIconTextGap(30);
         btnVolverProd.setNextFocusableComponent(btnMenuPpal);
@@ -377,6 +380,7 @@ public class ventanaProducto extends javax.swing.JFrame
         btnMenuPpal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnMenuPpal.setBorderPainted(false);
         btnMenuPpal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnMenuPpal.setFocusPainted(false);
         btnMenuPpal.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnMenuPpal.setIconTextGap(20);
         btnMenuPpal.setNextFocusableComponent(txfdBuscarProd);
@@ -413,7 +417,7 @@ public class ventanaProducto extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addComponent(btnVolverProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnMenuPpal))
+                .addComponent(btnMenuPpal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane1)
         );
         panelTablaLayout.setVerticalGroup(

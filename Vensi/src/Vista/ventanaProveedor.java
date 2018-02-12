@@ -180,6 +180,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         btnNuevoProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/prov+_50.png"))); // NOI18N
         btnNuevoProv.setText("Nuevo");
         btnNuevoProv.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnNuevoProv.setFocusPainted(false);
         btnNuevoProv.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnNuevoProv.setIconTextGap(50);
         btnNuevoProv.setNextFocusableComponent(btnEditarProv);
@@ -202,6 +203,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         btnEditarProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/editar_50.png"))); // NOI18N
         btnEditarProv.setText("Editar");
         btnEditarProv.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEditarProv.setFocusPainted(false);
         btnEditarProv.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEditarProv.setIconTextGap(50);
         btnEditarProv.setNextFocusableComponent(btnVolverProv);
@@ -224,6 +226,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         btnMenuPpal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/home_50.png"))); // NOI18N
         btnMenuPpal.setText("Menú principal");
         btnMenuPpal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnMenuPpal.setFocusPainted(false);
         btnMenuPpal.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnMenuPpal.setIconTextGap(10);
         btnMenuPpal.setNextFocusableComponent(txfdBuscarProv);
@@ -246,6 +249,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         btnVolverProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/volver_50.png"))); // NOI18N
         btnVolverProv.setText("Volver");
         btnVolverProv.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVolverProv.setFocusPainted(false);
         btnVolverProv.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnVolverProv.setIconTextGap(40);
         btnVolverProv.setNextFocusableComponent(btnMenuPpal);
@@ -295,13 +299,13 @@ public class ventanaProveedor extends javax.swing.JFrame
                 .addGap(18, 18, 18)
                 .addComponent(btnVolverProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGap(18, 18, 18)
-                .addComponent(btnMenuPpal, javax.swing.GroupLayout.PREFERRED_SIZE, 219, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(btnMenuPpal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jScrollPane3)
         );
         panelTablaLayout.setVerticalGroup(
             panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaLayout.createSequentialGroup()
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 264, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 265, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnNuevoProv)

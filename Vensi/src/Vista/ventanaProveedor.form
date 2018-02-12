@@ -250,12 +250,12 @@
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" attributes="0">
                       <Component id="btnNuevoProv" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="btnEditarProv" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
                       <Component id="btnVolverProv" max="32767" attributes="0"/>
-                      <EmptySpace type="separate" max="-2" attributes="0"/>
-                      <Component id="btnMenuPpal" min="-2" pref="219" max="-2" attributes="0"/>
+                      <EmptySpace type="separate" min="-2" max="-2" attributes="0"/>
+                      <Component id="btnMenuPpal" max="32767" attributes="0"/>
                   </Group>
                   <Component id="jScrollPane3" max="32767" attributes="0"/>
               </Group>
@@ -263,7 +263,7 @@
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="jScrollPane3" pref="264" max="32767" attributes="0"/>
+                      <Component id="jScrollPane3" pref="265" max="32767" attributes="0"/>
                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="btnNuevoProv" alignment="0" min="-2" max="-2" attributes="0"/>
@@ -295,6 +295,7 @@
                     <BevelBorder/>
                   </Border>
                 </Property>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="2"/>
                 <Property name="iconTextGap" type="int" value="50"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
@@ -324,6 +325,7 @@
                     <BevelBorder/>
                   </Border>
                 </Property>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="2"/>
                 <Property name="iconTextGap" type="int" value="50"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
@@ -353,6 +355,7 @@
                     <BevelBorder/>
                   </Border>
                 </Property>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="2"/>
                 <Property name="iconTextGap" type="int" value="10"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
@@ -382,6 +385,7 @@
                     <BevelBorder/>
                   </Border>
                 </Property>
+                <Property name="focusPainted" type="boolean" value="false"/>
                 <Property name="horizontalTextPosition" type="int" value="2"/>
                 <Property name="iconTextGap" type="int" value="40"/>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">

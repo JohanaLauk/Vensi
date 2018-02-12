@@ -52,6 +52,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         btnNO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/no_50.png"))); // NOI18N
         btnNO.setText("NO");
         btnNO.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnNO.setFocusPainted(false);
         btnNO.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnNO.setIconTextGap(30);
         btnNO.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -82,6 +83,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         btnSI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/si_50.png"))); // NOI18N
         btnSI.setText("SI");
         btnSI.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSI.setFocusPainted(false);
         btnSI.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnSI.setIconTextGap(30);
         btnSI.setNextFocusableComponent(btnNO);

@@ -57,6 +57,7 @@ public class ventanaGestionClave extends javax.swing.JFrame
         btnVolver.setText("Volver");
         btnVolver.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnVolver.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVolver.setFocusPainted(false);
         btnVolver.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnVolver.setIconTextGap(0);
         btnVolver.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -105,6 +106,7 @@ public class ventanaGestionClave extends javax.swing.JFrame
         btnConfirmarClave.setText("Confirmar");
         btnConfirmarClave.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnConfirmarClave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmarClave.setFocusPainted(false);
         btnConfirmarClave.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnConfirmarClave.setIconTextGap(10);
         btnConfirmarClave.addMouseListener(new java.awt.event.MouseAdapter() {

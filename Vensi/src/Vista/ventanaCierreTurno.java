@@ -124,6 +124,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         btnAceptarCerrarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/aceptar_50.png"))); // NOI18N
         btnAceptarCerrarTurno.setText("Aceptar");
         btnAceptarCerrarTurno.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAceptarCerrarTurno.setFocusPainted(false);
         btnAceptarCerrarTurno.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAceptarCerrarTurno.setIconTextGap(20);
         btnAceptarCerrarTurno.setNextFocusableComponent(btnCancelarCerrarTurno);
@@ -146,6 +147,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         btnCancelarCerrarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/no_50.png"))); // NOI18N
         btnCancelarCerrarTurno.setText("Cancelar");
         btnCancelarCerrarTurno.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCancelarCerrarTurno.setFocusPainted(false);
         btnCancelarCerrarTurno.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnCancelarCerrarTurno.setIconTextGap(20);
         btnCancelarCerrarTurno.setNextFocusableComponent(txfdMontoEsperado);
@@ -231,51 +233,61 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         jButton1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton1.setText("500 x");
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton1.setFocusPainted(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton2.setText("200 x");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton2.setFocusPainted(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton3.setText("100 x");
         jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton3.setFocusPainted(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton5.setText("20 x");
         jButton5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton5.setFocusPainted(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton6.setText("10 x");
         jButton6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton6.setFocusPainted(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton7.setText("5 x");
         jButton7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton7.setFocusPainted(false);
         jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton8.setText("2 x ");
         jButton8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton8.setFocusPainted(false);
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton9.setText("1 x");
         jButton9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton9.setFocusPainted(false);
         jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton10.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton10.setText("00,50 x");
         jButton10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton10.setFocusPainted(false);
         jButton10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton11.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton11.setText("00,25 x");
         jButton11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton11.setFocusPainted(false);
         jButton11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         txfd500.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -294,6 +306,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         jButton4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton4.setText("50 x");
         jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton4.setFocusPainted(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         txfd200.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
@@ -571,21 +584,15 @@ public class ventanaCierreTurno extends javax.swing.JFrame
                             .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addGroup(panelEntradasLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                        .addComponent(txfd10, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                                        .addComponent(txfd5)
-                                        .addComponent(txfd2)
-                                        .addComponent(txfd1)))
-                                .addGroup(panelEntradasLayout.createSequentialGroup()
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                    .addComponent(txfd0050)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEntradasLayout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(txfd0025, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(txfd10, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
+                                .addComponent(txfd5)
+                                .addComponent(txfd2)
+                                .addComponent(txfd1)
+                                .addComponent(txfd0050))
+                            .addComponent(txfd0025, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(panelEntradasLayout.createSequentialGroup()
