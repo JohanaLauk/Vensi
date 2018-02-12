@@ -22,58 +22,87 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);   //centra la ventana
         
-        btnSIiniciarTurno.setEnabled(false);
+        btnSI.setEnabled(false);
     }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        panelTodo = new javax.swing.JPanel();
         jPanel1 = new javax.swing.JPanel();
-        btnNOiniciarTurno = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
+        btnNO = new javax.swing.JButton();
+        labPregunta = new javax.swing.JLabel();
         lbPin = new javax.swing.JLabel();
-        btnSIiniciarTurno = new javax.swing.JButton();
+        btnSI = new javax.swing.JButton();
         txfdPin = new javax.swing.JPasswordField();
-        labTitulo = new javax.swing.JLabel();
-        btnSalir = new javax.swing.JButton();
-        labImagenFondo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Iniciar turno");
         setName("ventanaIniciarTurno"); // NOI18N
-        setUndecorated(true);
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setResizable(false);
+
+        panelTodo.setBackground(new java.awt.Color(102, 184, 211));
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setForeground(new java.awt.Color(0, 0, 51));
 
-        btnNOiniciarTurno.setText("NO");
-        btnNOiniciarTurno.setNextFocusableComponent(btnSalir);
-        btnNOiniciarTurno.addActionListener(new java.awt.event.ActionListener() {
+        btnNO.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        btnNO.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/no_50.png"))); // NOI18N
+        btnNO.setText("NO");
+        btnNO.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnNO.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnNO.setIconTextGap(30);
+        btnNO.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnNOMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnNOMouseExited(evt);
+            }
+        });
+        btnNO.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnNOiniciarTurnoActionPerformed(evt);
+                btnNOActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("¿Está seguro que desea iniciar el turno ahora?");
+        labPregunta.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        labPregunta.setForeground(new java.awt.Color(255, 255, 255));
+        labPregunta.setText("¿Está seguro que desea iniciar el turno ahora?");
 
+        lbPin.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         lbPin.setForeground(new java.awt.Color(255, 255, 255));
         lbPin.setText("Ingrese el pin:");
+        lbPin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
-        btnSIiniciarTurno.setText("SI");
-        btnSIiniciarTurno.setNextFocusableComponent(btnNOiniciarTurno);
-        btnSIiniciarTurno.addActionListener(new java.awt.event.ActionListener() {
+        btnSI.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        btnSI.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/si_50.png"))); // NOI18N
+        btnSI.setText("SI");
+        btnSI.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnSI.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnSI.setIconTextGap(30);
+        btnSI.setNextFocusableComponent(btnNO);
+        btnSI.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnSIMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnSIMouseExited(evt);
+            }
+        });
+        btnSI.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSIiniciarTurnoActionPerformed(evt);
+                btnSIActionPerformed(evt);
             }
         });
 
-        txfdPin.setNextFocusableComponent(btnSIiniciarTurno);
+        txfdPin.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txfdPin.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdPin.setNextFocusableComponent(btnSI);
         txfdPin.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
-                txfdPinKeyPressed(evt);
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txfdPinKeyReleased(evt);
             }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdPinKeyTyped(evt);
@@ -84,101 +113,75 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(labPregunta, javax.swing.GroupLayout.DEFAULT_SIZE, 471, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 460, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(115, 115, 115)
-                                .addComponent(btnNOiniciarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(85, 85, 85)
-                                .addComponent(btnSIiniciarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(125, 125, 125)
-                                .addComponent(lbPin)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(txfdPin, javax.swing.GroupLayout.PREFERRED_SIZE, 132, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addGap(125, 125, 125)
+                        .addComponent(lbPin)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(txfdPin, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(36, 36, 36)
+                        .addComponent(btnNO, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(67, 67, 67)
+                        .addComponent(btnSI, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(0, 0, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addComponent(jLabel1)
-                .addGap(18, 18, 18)
+                .addComponent(labPregunta)
+                .addGap(26, 26, 26)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lbPin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txfdPin, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 29, Short.MAX_VALUE)
+                .addGap(32, 32, 32)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnNOiniciarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnSIiniciarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20))
+                    .addComponent(btnNO, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSI, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(28, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 480, 180));
+        javax.swing.GroupLayout panelTodoLayout = new javax.swing.GroupLayout(panelTodo);
+        panelTodo.setLayout(panelTodoLayout);
+        panelTodoLayout.setHorizontalGroup(
+            panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTodoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelTodoLayout.setVerticalGroup(
+            panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTodoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        labTitulo.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        labTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        labTitulo.setText("Inicio de turno");
-        labTitulo.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
-        getContentPane().add(labTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
-
-        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salir2_50.png"))); // NOI18N
-        btnSalir.setToolTipText("Salir");
-        btnSalir.setBorder(null);
-        btnSalir.setBorderPainted(false);
-        btnSalir.setContentAreaFilled(false);
-        btnSalir.setNextFocusableComponent(txfdPin);
-        btnSalir.setVerticalAlignment(javax.swing.SwingConstants.BOTTOM);
-        btnSalir.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnSalirMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnSalirMouseExited(evt);
-            }
-        });
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(440, 0, 50, 50));
-
-        labImagenFondo.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo grande.png"))); // NOI18N
-        getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 500, 250));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
+    private void btnNOActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNOActionPerformed
         dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
+    }//GEN-LAST:event_btnNOActionPerformed
 
-    private void btnNOiniciarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNOiniciarTurnoActionPerformed
-        dispose();
-    }//GEN-LAST:event_btnNOiniciarTurnoActionPerformed
-
-    private void txfdPinKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPinKeyPressed
-        if (!txfdPin.equals("")) 
-        {
-            btnSIiniciarTurno.setEnabled(true);
-        } 
-        else 
-        {
-            btnSIiniciarTurno.setEnabled(false);
-        }
-    }//GEN-LAST:event_txfdPinKeyPressed
-
-    private void btnSIiniciarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSIiniciarTurnoActionPerformed
+    private void btnSIActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSIActionPerformed
         int pin = Integer.parseInt(txfdPin.getText());
         
         if(uDAO.verificar("Propietario", pin) || uDAO.verificar("Empleado", pin))
@@ -206,9 +209,9 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         {
             JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
             txfdPin.setText("");
-            btnSIiniciarTurno.setEnabled(false);
+            btnSI.setEnabled(false);
         }
-    }//GEN-LAST:event_btnSIiniciarTurnoActionPerformed
+    }//GEN-LAST:event_btnSIActionPerformed
 
     private void txfdPinKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPinKeyTyped
         char c = evt.getKeyChar();
@@ -216,15 +219,39 @@ public class ventanaInicioTurno extends javax.swing.JFrame
             evt.consume(); 
     }//GEN-LAST:event_txfdPinKeyTyped
 
-    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/salir2_lleno_50.png"));     
-        btnSalir.setIcon(icono);
-    }//GEN-LAST:event_btnSalirMouseEntered
+    private void btnNOMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNOMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/no_lleno_50.png"));     
+        btnNO.setIcon(icono); 
+    }//GEN-LAST:event_btnNOMouseEntered
 
-    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/salir2_lleno_50.png"));     
-        btnSalir.setIcon(icono);
-    }//GEN-LAST:event_btnSalirMouseExited
+    private void btnNOMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNOMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/no_50.png"));     
+        btnNO.setIcon(icono);
+    }//GEN-LAST:event_btnNOMouseExited
+
+    private void btnSIMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSIMouseEntered
+        if (!txfdPin.getText().equals("")) 
+        {
+            icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/si_lleno_50.png"));     
+            btnSI.setIcon(icono);
+        }        
+    }//GEN-LAST:event_btnSIMouseEntered
+
+    private void btnSIMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSIMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/si_50.png"));     
+        btnSI.setIcon(icono);
+    }//GEN-LAST:event_btnSIMouseExited
+
+    private void txfdPinKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPinKeyReleased
+        if (txfdPin.getText().equals("")) 
+        {
+            btnSI.setEnabled(false);
+        } 
+        else 
+        {
+            btnSI.setEnabled(true);
+        }
+    }//GEN-LAST:event_txfdPinKeyReleased
     
     public static void main(String args[]) 
     {        
@@ -238,14 +265,12 @@ public class ventanaInicioTurno extends javax.swing.JFrame
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnNOiniciarTurno;
-    private javax.swing.JButton btnSIiniciarTurno;
-    private javax.swing.JButton btnSalir;
-    private javax.swing.JLabel jLabel1;
+    private javax.swing.JButton btnNO;
+    private javax.swing.JButton btnSI;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JLabel labImagenFondo;
-    private javax.swing.JLabel labTitulo;
+    private javax.swing.JLabel labPregunta;
     private javax.swing.JLabel lbPin;
+    private javax.swing.JPanel panelTodo;
     private javax.swing.JPasswordField txfdPin;
     // End of variables declaration//GEN-END:variables
 }

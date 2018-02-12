@@ -4,7 +4,7 @@ import DAO.*;
 import Modelo.*;
 import Utils.Redondear;
 import Utils.Validar;
-import java.awt.Dimension;
+import java.awt.Color;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
@@ -22,7 +22,8 @@ public class ventanaCargarES extends javax.swing.JFrame
     DefaultListModel modeloList;
     
     List<ItemVenta> listaIV = null;
-    String nombre = "";
+    Turno turnoActual = null;
+    String nombre = "Ninguno";
     
     Redondear r = new Redondear(); 
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
@@ -35,20 +36,18 @@ public class ventanaCargarES extends javax.swing.JFrame
         initComponents();
         
         this.setLocationRelativeTo(null);   //centra la ventana
-        
-        this.setPreferredSize(new Dimension(780, 440));     //tamaño en la que aparecerá la ventana al ejecutar 
-               
-        habDeshabComponentes("Ninguno");          
+                        
+        habDeshabComponentes(nombre);          
     }
     
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnSalir = new javax.swing.JButton();
+        panelTodo = new javax.swing.JPanel();
         panelES = new javax.swing.JPanel();
         cbTipoES = new javax.swing.JComboBox<>();
-        jLabel3 = new javax.swing.JLabel();
+        labTipo = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnConfirmar = new javax.swing.JButton();
@@ -56,7 +55,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         txAreaDescripcion = new javax.swing.JTextArea();
         jLabel6 = new javax.swing.JLabel();
         txfdMonto = new javax.swing.JTextField();
-        labTitulo = new javax.swing.JLabel();
+        labTituloES = new javax.swing.JLabel();
         panelidentificarProd = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
@@ -67,71 +66,80 @@ public class ventanaCargarES extends javax.swing.JFrame
         labTituloPanelAnularProd = new javax.swing.JLabel();
         txfdCantProdAnular = new org.jdesktop.swingx.JXTextField();
         txfdCodNomProdAnular = new org.jdesktop.swingx.JXTextField();
-        labImagenFondo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Cargar un movimiento de caja");
         setPreferredSize(new java.awt.Dimension(780, 440));
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        setResizable(false);
 
-        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salir2_50.png"))); // NOI18N
-        btnSalir.setToolTipText("Salir");
-        btnSalir.setBorderPainted(false);
-        btnSalir.setContentAreaFilled(false);
-        btnSalir.setNextFocusableComponent(cbTipoES);
-        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnSalirMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnSalirMouseExited(evt);
-            }
-        });
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(720, 0, 50, 50));
+        panelTodo.setBackground(new java.awt.Color(0, 0, 0));
 
-        panelES.setBackground(new java.awt.Color(0, 0, 0));
-        panelES.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        panelES.setBackground(new java.awt.Color(0, 133, 155));
+        panelES.setForeground(new java.awt.Color(255, 255, 255));
 
+        cbTipoES.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cbTipoES.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Apertura de caja", "Retiro", "Anulación de venta", "Sueldo" }));
+        cbTipoES.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbTipoES.setNextFocusableComponent(txfdMonto);
         cbTipoES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoESActionPerformed(evt);
             }
         });
-        panelES.add(cbTipoES, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 40, 160, -1));
 
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Tipo:");
-        panelES.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 40, 70, 20));
+        labTipo.setBackground(new java.awt.Color(0, 0, 0));
+        labTipo.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        labTipo.setForeground(new java.awt.Color(255, 255, 255));
+        labTipo.setText("Tipo:");
 
+        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel4.setFont(new java.awt.Font("Calibri", 1, 15)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Descripción:");
-        panelES.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, -1, -1));
 
+        btnCancelar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/no_50.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
+        btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCancelar.setIconTextGap(5);
         btnCancelar.setNextFocusableComponent(btnConfirmar);
+        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarMouseExited(evt);
+            }
+        });
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
             }
         });
-        panelES.add(btnCancelar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 310, 120, 30));
 
+        btnConfirmar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/si_50.png"))); // NOI18N
         btnConfirmar.setText("Confirmar");
+        btnConfirmar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnConfirmar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnConfirmar.setIconTextGap(5);
         btnConfirmar.setNextFocusableComponent(txfdCodNomProdAnular);
+        btnConfirmar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnConfirmarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnConfirmarMouseExited(evt);
+            }
+        });
         btnConfirmar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnConfirmarActionPerformed(evt);
             }
         });
-        panelES.add(btnConfirmar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 310, 130, 30));
 
         txAreaDescripcion.setEditable(false);
         txAreaDescripcion.setColumns(20);
@@ -139,11 +147,10 @@ public class ventanaCargarES extends javax.swing.JFrame
         txAreaDescripcion.setNextFocusableComponent(btnCancelar);
         jScrollPane2.setViewportView(txAreaDescripcion);
 
-        panelES.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 150, 260, 130));
-
+        jLabel6.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel6.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Monto:");
-        panelES.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, 20));
 
         txfdMonto.setNextFocusableComponent(txAreaDescripcion);
         txfdMonto.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -154,43 +161,118 @@ public class ventanaCargarES extends javax.swing.JFrame
                 txfdMontoKeyTyped(evt);
             }
         });
-        panelES.add(txfdMonto, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 80, -1));
 
-        getContentPane().add(panelES, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 340, 370));
+        labTituloES.setBackground(new java.awt.Color(0, 0, 0));
+        labTituloES.setFont(new java.awt.Font("Calibri", 1, 22)); // NOI18N
+        labTituloES.setForeground(new java.awt.Color(255, 255, 255));
+        labTituloES.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labTituloES.setText("CARGA DE ENTRADA/SALIDA");
 
-        labTitulo.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        labTitulo.setForeground(new java.awt.Color(255, 255, 255));
-        labTitulo.setText("Cargar entrada/salida");
-        getContentPane().add(labTitulo, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, -3, -1, 50));
+        javax.swing.GroupLayout panelESLayout = new javax.swing.GroupLayout(panelES);
+        panelES.setLayout(panelESLayout);
+        panelESLayout.setHorizontalGroup(
+            panelESLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelESLayout.createSequentialGroup()
+                .addGap(21, 21, 21)
+                .addGroup(panelESLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(labTituloES, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel4)
+                    .addGroup(panelESLayout.createSequentialGroup()
+                        .addComponent(btnCancelar)
+                        .addGap(18, 18, 18)
+                        .addComponent(btnConfirmar, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelESLayout.createSequentialGroup()
+                        .addGroup(panelESLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel6)
+                            .addComponent(labTipo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(panelESLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txfdMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(cbTipoES, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jScrollPane2))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+        panelESLayout.setVerticalGroup(
+            panelESLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelESLayout.createSequentialGroup()
+                .addGap(8, 8, 8)
+                .addComponent(labTituloES, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(29, 29, 29)
+                .addGroup(panelESLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(labTipo, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(cbTipoES, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelESLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txfdMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(28, 28, 28)
+                .addComponent(jLabel4)
+                .addGap(6, 6, 6)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(panelESLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnConfirmar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(btnCancelar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        panelidentificarProd.setBackground(new java.awt.Color(0, 0, 0));
+        panelidentificarProd.setBackground(new java.awt.Color(0, 133, 155));
+        panelidentificarProd.setForeground(new java.awt.Color(255, 255, 255));
 
+        jLabel1.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Busque el producto:");
 
+        jLabel5.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel5.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Ingerese la cantidad:");
 
+        jLabel2.setBackground(new java.awt.Color(0, 0, 0));
+        jLabel2.setFont(new java.awt.Font("Calibri", 1, 15)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Informacíon del producto:");
 
+        listaInfoProdAnular.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        listaInfoProdAnular.setForeground(new java.awt.Color(255, 0, 0));
         listaInfoProdAnular.setNextFocusableComponent(btnAnular);
         jScrollPane1.setViewportView(listaInfoProdAnular);
 
+        btnAnular.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/anular_50.png"))); // NOI18N
         btnAnular.setText("Anular");
-        btnAnular.setNextFocusableComponent(btnSalir);
+        btnAnular.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAnular.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAnular.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnAnular.setIconTextGap(40);
+        btnAnular.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAnularMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAnularMouseExited(evt);
+            }
+        });
         btnAnular.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAnularActionPerformed(evt);
             }
         });
 
+        labTituloPanelAnularProd.setBackground(new java.awt.Color(0, 0, 0));
+        labTituloPanelAnularProd.setFont(new java.awt.Font("Calibri", 1, 22)); // NOI18N
         labTituloPanelAnularProd.setForeground(new java.awt.Color(255, 255, 255));
+        labTituloPanelAnularProd.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         labTituloPanelAnularProd.setText("ANULACIÓN DE PRODUCTO");
         labTituloPanelAnularProd.setToolTipText("");
 
+        txfdCantProdAnular.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdCantProdAnular.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdCantProdAnular.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCantProdAnular.setNextFocusableComponent(listaInfoProdAnular);
         txfdCantProdAnular.setPrompt("unidad / gramos");
+        txfdCantProdAnular.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdCantProdAnular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfdCantProdAnularKeyReleased(evt);
@@ -200,8 +282,12 @@ public class ventanaCargarES extends javax.swing.JFrame
             }
         });
 
+        txfdCodNomProdAnular.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdCodNomProdAnular.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdCodNomProdAnular.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCodNomProdAnular.setNextFocusableComponent(txfdCantProdAnular);
-        txfdCodNomProdAnular.setPrompt("Por código o descripción");
+        txfdCodNomProdAnular.setPrompt("por código o descripción");
+        txfdCodNomProdAnular.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdCodNomProdAnular.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfdCodNomProdAnularKeyReleased(evt);
@@ -213,64 +299,83 @@ public class ventanaCargarES extends javax.swing.JFrame
         panelidentificarProdLayout.setHorizontalGroup(
             panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelidentificarProdLayout.createSequentialGroup()
-                .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelidentificarProdLayout.createSequentialGroup()
-                        .addGap(63, 63, 63)
+                .addGap(26, 26, 26)
+                .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labTituloPanelAnularProd, javax.swing.GroupLayout.PREFERRED_SIZE, 358, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.LEADING)
                         .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel1))
-                        .addGap(18, 18, 18)
-                        .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txfdCantProdAnular, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txfdCodNomProdAnular, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE)))
-                    .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(panelidentificarProdLayout.createSequentialGroup()
-                            .addGap(150, 150, 150)
-                            .addComponent(labTituloPanelAnularProd))
-                        .addGroup(panelidentificarProdLayout.createSequentialGroup()
-                            .addGap(60, 60, 60)
-                            .addComponent(jLabel2))
-                        .addGroup(panelidentificarProdLayout.createSequentialGroup()
-                            .addGap(60, 60, 60)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 310, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(panelidentificarProdLayout.createSequentialGroup()
-                            .addGap(180, 180, 180)
-                            .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(47, 47, 47))
+                            .addComponent(jLabel2)
+                            .addGroup(panelidentificarProdLayout.createSequentialGroup()
+                                .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(jLabel1))
+                                .addGap(18, 18, 18)
+                                .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txfdCodNomProdAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(txfdCantProdAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))))))
+                .addContainerGap(22, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelidentificarProdLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 223, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(80, 80, 80))
         );
         panelidentificarProdLayout.setVerticalGroup(
             panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelidentificarProdLayout.createSequentialGroup()
                 .addGap(10, 10, 10)
                 .addComponent(labTituloPanelAnularProd)
-                .addGap(36, 36, 36)
-                .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGap(27, 27, 27)
+                .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfdCodNomProdAnular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(10, 10, 10)
+                    .addComponent(txfdCodNomProdAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(12, 12, 12)
                 .addGroup(panelidentificarProdLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfdCantProdAnular, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(20, 20, 20)
+                    .addComponent(txfdCantProdAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(27, 27, 27)
                 .addComponent(jLabel2)
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(30, 30, 30)
-                .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnAnular, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        getContentPane().add(panelidentificarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(350, 50, 420, 370));
+        javax.swing.GroupLayout panelTodoLayout = new javax.swing.GroupLayout(panelTodo);
+        panelTodo.setLayout(panelTodoLayout);
+        panelTodoLayout.setHorizontalGroup(
+            panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTodoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelES, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(panelidentificarProd, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        panelTodoLayout.setVerticalGroup(
+            panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTodoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(panelES, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(panelidentificarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo grande.png"))); // NOI18N
-        labImagenFondo.setText("jLabel1");
-        getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 780, 430));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelTodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelTodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        dispose();
-    }//GEN-LAST:event_btnSalirActionPerformed
 
     private void cbTipoESActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoESActionPerformed
         if (cbTipoES.getSelectedItem().equals("Ninguno"))
@@ -493,7 +598,7 @@ public class ventanaCargarES extends javax.swing.JFrame
 
     private void txfdCodNomProdAnularKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCodNomProdAnularKeyReleased
         String cadena = txfdCodNomProdAnular.getText();
-        Turno turnoActual = tDAO.obtenerUltimo();
+        turnoActual = tDAO.obtenerUltimo();
         
         if (cadena.equals(""))
         {
@@ -522,15 +627,49 @@ public class ventanaCargarES extends javax.swing.JFrame
         }
     }//GEN-LAST:event_txfdCodNomProdAnularKeyReleased
 
-    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/salir2_lleno_50.png"));     
-        btnSalir.setIcon(icono);
-    }//GEN-LAST:event_btnSalirMouseEntered
+    private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/no_lleno_50.png"));     
+        btnCancelar.setIcon(icono); 
+    }//GEN-LAST:event_btnCancelarMouseEntered
 
-    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/salir2_50.png"));     
-        btnSalir.setIcon(icono);
-    }//GEN-LAST:event_btnSalirMouseExited
+    private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/no_50.png"));     
+        btnCancelar.setIcon(icono); 
+    }//GEN-LAST:event_btnCancelarMouseExited
+
+    private void btnConfirmarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarMouseEntered
+        if (!txfdMonto.getText().equals(""))
+        {
+            icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/si_lleno_50.png"));
+            btnConfirmar.setIcon(icono); 
+        }            
+    }//GEN-LAST:event_btnConfirmarMouseEntered
+
+    private void btnConfirmarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnConfirmarMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/si_50.png"));     
+        btnConfirmar.setIcon(icono); 
+    }//GEN-LAST:event_btnConfirmarMouseExited
+
+    private void btnAnularMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnularMouseEntered
+        String codProd = txfdCodNomProdAnular.getText();
+        String cantProd = txfdCantProdAnular.getText();
+        
+        if (!codProd.equals("") && !cantProd.equals(""))
+        {
+            listaIV = itDAO.buscar(codProd, turnoActual.getId());   //lista de productos que se vendieron segun la BUSQUEDA         
+        
+            if (nombre.equals("Anulación de venta") && listaIV.size() == 1)
+            {
+                icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/anular_lleno_50.png"));     
+                btnAnular.setIcon(icono); 
+            }
+        }            
+    }//GEN-LAST:event_btnAnularMouseEntered
+
+    private void btnAnularMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAnularMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/anular_50.png"));     
+        btnAnular.setIcon(icono); 
+    }//GEN-LAST:event_btnAnularMouseExited
 
     public void habDeshabComponentes(String nombre)
     {
@@ -546,8 +685,10 @@ public class ventanaCargarES extends javax.swing.JFrame
             }
             
             cbTipoES.setEnabled(true);
+            btnCancelar.setEnabled(true);            
             txfdMonto.setText(null);           
             txAreaDescripcion.setText(null);
+            labTipo.setEnabled(true);
             btnAnular.setEnabled(false);
         }
         else
@@ -563,7 +704,10 @@ public class ventanaCargarES extends javax.swing.JFrame
                     panelidentificarProd.getComponent(i).setEnabled(false);
                 }
                 
-                cbTipoES.setEnabled(true);                    
+                labTituloES.setEnabled(true);
+                labTipo.setEnabled(true);                
+                cbTipoES.setEnabled(true);    
+                btnCancelar.setEnabled(true);                
                 txfdMonto.setText(null);           
                 txAreaDescripcion.setText(null);
             }
@@ -578,11 +722,14 @@ public class ventanaCargarES extends javax.swing.JFrame
                     panelES.getComponent(i).setEnabled(true);
                 }
                 
+                btnCancelar.setEnabled(true);
                 btnConfirmar.setEnabled(false);
                 txAreaDescripcion.setEditable(true);
                 cbTipoES.setEnabled(true);
                 txfdMonto.setText(null);           
                 txAreaDescripcion.setText(null);
+                txfdCodNomProdAnular.setText(null);
+                txfdCantProdAnular.setText(null);
             }
         }
     }
@@ -612,24 +759,24 @@ public class ventanaCargarES extends javax.swing.JFrame
         {
             for (ItemVenta x : listaIV)
             {                
-                modeloList.addElement("Código:  " + x.getProducto().getCodigo());
-                modeloList.addElement("Descripción:  " + x.getProducto().getDescripcion());                
+                modeloList.addElement("CÓDIGO:  " + x.getProducto().getCodigo());
+                modeloList.addElement("DESCRIPCIÓN:  " + x.getProducto().getDescripcion());                
 
                 if (x.getProducto().isPorPeso())
                 {
-                    modeloList.addElement("Tipo venta:  Por peso");
-                    modeloList.addElement("Precio de venta:  $" + String.valueOf(formatoPrecios.format(x.getProducto().getPrecioVenta())));
+                    modeloList.addElement("TIPO DE VENTA:  Por peso");
+                    modeloList.addElement("PRECIO DE VENTA:  $" + String.valueOf(formatoPrecios.format(x.getProducto().getPrecioVenta())));
                     double cantGR2 = x.getCantidad();                    
                     double cantKG = cantGR2 / 1000;
-                    modeloList.addElement("Cantidad vendidos:  " + String.valueOf(formatoKilos.format(cantKG)) + "kg");
+                    modeloList.addElement("CANTIDAD VENDIDOS:  " + String.valueOf(formatoKilos.format(cantKG)) + "kg");
                 }
                 else
                 {
-                    modeloList.addElement("Tipo venta:  Por unidad");                    
-                    modeloList.addElement("Precio de venta:  $" + String.valueOf(formatoPrecios.format(x.getProducto().getPrecioVenta())));
-                    modeloList.addElement("Cantidad vendidos:  " + String.valueOf(x.getCantidad()));
+                    modeloList.addElement("TIPO DE VENTA:  Por unidad");                    
+                    modeloList.addElement("PRECIO DE VENTA:  $" + String.valueOf(formatoPrecios.format(x.getProducto().getPrecioVenta())));
+                    modeloList.addElement("CANTIDAD VENDIDOS:  " + String.valueOf(x.getCantidad()));
                 }
-                modeloList.addElement("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                modeloList.addElement("~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
             }
         }   
         listaInfoProdAnular.setModel(modeloList);
@@ -639,21 +786,20 @@ public class ventanaCargarES extends javax.swing.JFrame
     private javax.swing.JButton btnAnular;
     private javax.swing.JButton btnCancelar;
     private javax.swing.JButton btnConfirmar;
-    private javax.swing.JButton btnSalir;
     private javax.swing.JComboBox<String> cbTipoES;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JLabel labImagenFondo;
-    private javax.swing.JLabel labTitulo;
+    private javax.swing.JLabel labTipo;
+    private javax.swing.JLabel labTituloES;
     private javax.swing.JLabel labTituloPanelAnularProd;
     private javax.swing.JList<String> listaInfoProdAnular;
     private javax.swing.JPanel panelES;
+    private javax.swing.JPanel panelTodo;
     private javax.swing.JPanel panelidentificarProd;
     private javax.swing.JTextArea txAreaDescripcion;
     private org.jdesktop.swingx.JXTextField txfdCantProdAnular;

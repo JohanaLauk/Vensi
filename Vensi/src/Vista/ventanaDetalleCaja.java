@@ -45,36 +45,31 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         
         llenarTabla();  
                
-        txfdTotalVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
-        txfdMontoES.setText("$" + String.valueOf(formatoPrecios.format(calcularSalidas())));
-        txfdTotalCaja.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));        
-        
-        //labVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
-        //labMontoES.setText("$" + String.valueOf(formatoPrecios.format(calcularSalidas())));
-        //labCajaT.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));        
+        txfdTotalVenta.setText("$   " + String.valueOf(formatoPrecios.format(calcularVenta())));
+        txfdRetiros.setText("$   " + String.valueOf(formatoPrecios.format(calcularSalidas())));
+        txfdTotalCaja.setText("$   " + String.valueOf(formatoPrecios.format(calcularTotalCaja())));       
     }
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnSalir = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        panelTodo = new javax.swing.JPanel();
+        panelDatos = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         tablaDetalleCaja = new javax.swing.JTable();
+        labVenta = new javax.swing.JLabel();
         txfdTotalVenta = new javax.swing.JTextField();
+        labRetiros = new javax.swing.JLabel();
+        txfdRetiros = new javax.swing.JTextField();
+        labTotalCaja = new javax.swing.JLabel();
         txfdTotalCaja = new javax.swing.JTextField();
         btnCargarES = new javax.swing.JButton();
         btnVolverDC = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
-        txfdMontoES = new javax.swing.JTextField();
-        labImagenFondo = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-        setUndecorated(true);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Información de caja");
+        setResizable(false);
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -82,47 +77,11 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnSalir.setForeground(new java.awt.Color(255, 255, 255));
-        btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/salir2_50.png"))); // NOI18N
-        btnSalir.setToolTipText("Salir");
-        btnSalir.setBorder(null);
-        btnSalir.setBorderPainted(false);
-        btnSalir.setContentAreaFilled(false);
-        btnSalir.setNextFocusableComponent(btnCargarES);
-        btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseEntered(java.awt.event.MouseEvent evt) {
-                btnSalirMouseEntered(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                btnSalirMouseExited(evt);
-            }
-        });
-        btnSalir.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnSalirActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnSalir, new org.netbeans.lib.awtextra.AbsoluteConstraints(910, 0, 50, 50));
+        panelTodo.setBackground(new java.awt.Color(102, 184, 211));
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setText("Detalle de caja");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 0, -1, 50));
-
-        jPanel1.setBackground(new java.awt.Color(0, 0, 0));
-        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        jLabel2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Venta: ");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 380, 80, -1));
-
-        jLabel4.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Total caja:");
-        jPanel1.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 460, 110, -1));
+        panelDatos.setBackground(new java.awt.Color(0, 0, 0));
+        panelDatos.setOpaque(false);
 
         tablaDetalleCaja = new javax.swing.JTable()
         {
@@ -145,7 +104,9 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         tablaDetalleCaja.getTableHeader().setReorderingAllowed(false);
         jScrollPane1.setViewportView(tablaDetalleCaja);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 930, 360));
+        labVenta.setBackground(new java.awt.Color(0, 153, 0));
+        labVenta.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        labVenta.setText("Venta: ");
 
         txfdTotalVenta.setEditable(false);
         txfdTotalVenta.setBackground(new java.awt.Color(0, 153, 51));
@@ -153,56 +114,157 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         txfdTotalVenta.setForeground(new java.awt.Color(255, 255, 255));
         txfdTotalVenta.setText("$");
         txfdTotalVenta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(txfdTotalVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 380, 150, 30));
+
+        labRetiros.setBackground(new java.awt.Color(204, 0, 0));
+        labRetiros.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        labRetiros.setText("Retiros:");
+
+        txfdRetiros.setBackground(new java.awt.Color(255, 0, 0));
+        txfdRetiros.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
+        txfdRetiros.setForeground(new java.awt.Color(255, 255, 255));
+        txfdRetiros.setText("$");
+        txfdRetiros.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        labTotalCaja.setBackground(new java.awt.Color(0, 51, 204));
+        labTotalCaja.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        labTotalCaja.setText("Total caja:");
 
         txfdTotalCaja.setBackground(new java.awt.Color(0, 0, 204));
         txfdTotalCaja.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfdTotalCaja.setForeground(new java.awt.Color(255, 255, 255));
         txfdTotalCaja.setText("$");
         txfdTotalCaja.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(txfdTotalCaja, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 460, 150, 30));
 
-        btnCargarES.setText("Cargar entrada/salida");
+        btnCargarES.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        btnCargarES.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/calculadora_100.png"))); // NOI18N
+        btnCargarES.setText("Cargar");
+        btnCargarES.setToolTipText("Cargar entrada/salida");
+        btnCargarES.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCargarES.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCargarES.setFocusPainted(false);
+        btnCargarES.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnCargarES.setIconTextGap(15);
         btnCargarES.setNextFocusableComponent(btnVolverDC);
+        btnCargarES.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCargarESMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCargarESMouseExited(evt);
+            }
+        });
         btnCargarES.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCargarESActionPerformed(evt);
             }
         });
-        jPanel1.add(btnCargarES, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 380, 240, 100));
 
+        btnVolverDC.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        btnVolverDC.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/atras_100.png"))); // NOI18N
         btnVolverDC.setText("Volver");
-        btnVolverDC.setNextFocusableComponent(btnSalir);
+        btnVolverDC.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVolverDC.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnVolverDC.setFocusPainted(false);
+        btnVolverDC.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        btnVolverDC.setIconTextGap(10);
+        btnVolverDC.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnVolverDCMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnVolverDCMouseExited(evt);
+            }
+        });
         btnVolverDC.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVolverDCActionPerformed(evt);
             }
         });
-        jPanel1.add(btnVolverDC, new org.netbeans.lib.awtextra.AbsoluteConstraints(690, 380, 240, 100));
 
-        jLabel3.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Retiros:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 420, 110, -1));
+        javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
+        panelDatos.setLayout(panelDatosLayout);
+        panelDatosLayout.setHorizontalGroup(
+            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosLayout.createSequentialGroup()
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addGap(25, 25, 25)
+                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(labRetiros, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(labTotalCaja, javax.swing.GroupLayout.DEFAULT_SIZE, 110, Short.MAX_VALUE)
+                            .addComponent(labVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(10, 10, 10)
+                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txfdTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfdRetiros, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txfdTotalCaja, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(54, 54, 54)
+                        .addComponent(btnCargarES, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(42, 42, 42)
+                        .addComponent(btnVolverDC, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 799, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(141, 141, 141))
+        );
+        panelDatosLayout.setVerticalGroup(
+            panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelDatosLayout.createSequentialGroup()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 374, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addGap(16, 16, 16)
+                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(panelDatosLayout.createSequentialGroup()
+                                .addComponent(labVenta)
+                                .addGap(10, 10, 10)
+                                .addComponent(labRetiros)
+                                .addGap(10, 10, 10)
+                                .addComponent(labTotalCaja))
+                            .addGroup(panelDatosLayout.createSequentialGroup()
+                                .addComponent(txfdTotalVenta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(txfdRetiros, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addComponent(txfdTotalCaja, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(panelDatosLayout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(btnCargarES, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnVolverDC, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        txfdMontoES.setBackground(new java.awt.Color(255, 0, 0));
-        txfdMontoES.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
-        txfdMontoES.setForeground(new java.awt.Color(255, 255, 255));
-        txfdMontoES.setText("$");
-        txfdMontoES.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-        jPanel1.add(txfdMontoES, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 420, 150, 30));
+        javax.swing.GroupLayout panelTodoLayout = new javax.swing.GroupLayout(panelTodo);
+        panelTodo.setLayout(panelTodoLayout);
+        panelTodoLayout.setHorizontalGroup(
+            panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTodoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, 820, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+        panelTodoLayout.setVerticalGroup(
+            panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(panelTodoLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(panelDatos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 950, 500));
-
-        labImagenFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/petroleo grande.png"))); // NOI18N
-        getContentPane().add(labImagenFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 970, 560));
+        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
+        getContentPane().setLayout(layout);
+        layout.setHorizontalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        layout.setVerticalGroup(
+            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(panelTodo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+        );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
-        dispose();  
-    }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnVolverDCActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverDCActionPerformed
         dispose();
@@ -216,24 +278,30 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         llenarTabla();
         
-        txfdTotalVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
-        txfdMontoES.setText("$" + String.valueOf(formatoPrecios.format(calcularSalidas())));
-        txfdTotalCaja.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja())));    
-        
-        //labVenta.setText("$" + String.valueOf(formatoPrecios.format(calcularVenta())));
-        //labMontoES.setText("$" + String.valueOf(formatoPrecios.format(calcularSalidas())));
-        //labCajaT.setText("$" + String.valueOf(formatoPrecios.format(calcularTotalCaja()))); 
+        txfdTotalVenta.setText("$   " + String.valueOf(formatoPrecios.format(calcularVenta())));
+        txfdRetiros.setText("$   " + String.valueOf(formatoPrecios.format(calcularSalidas())));
+        txfdTotalCaja.setText("$   " + String.valueOf(formatoPrecios.format(calcularTotalCaja())));    
     }//GEN-LAST:event_formWindowGainedFocus
 
-    private void btnSalirMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseEntered
-        icono = new ImageIcon(getClass().getResource("/Recursos/salir2_lleno_50.png"));     
-        btnSalir.setIcon(icono);
-    }//GEN-LAST:event_btnSalirMouseEntered
+    private void btnCargarESMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCargarESMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/calculadora_lleno_100.png"));     
+        btnCargarES.setIcon(icono); 
+    }//GEN-LAST:event_btnCargarESMouseEntered
 
-    private void btnSalirMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnSalirMouseExited
-        icono = new ImageIcon(getClass().getResource("/Recursos/salir2_50.png"));     
-        btnSalir.setIcon(icono);
-    }//GEN-LAST:event_btnSalirMouseExited
+    private void btnCargarESMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCargarESMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/calculadora_100.png"));     
+        btnCargarES.setIcon(icono); 
+    }//GEN-LAST:event_btnCargarESMouseExited
+
+    private void btnVolverDCMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverDCMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/atras_lleno_100.png"));     
+        btnVolverDC.setIcon(icono); 
+    }//GEN-LAST:event_btnVolverDCMouseEntered
+
+    private void btnVolverDCMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverDCMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/atras_100.png"));     
+        btnVolverDC.setIcon(icono); 
+    }//GEN-LAST:event_btnVolverDCMouseExited
     
     public static void main(String args[]) 
     {
@@ -412,17 +480,15 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCargarES;
-    private javax.swing.JButton btnSalir;
     private javax.swing.JButton btnVolverDC;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JLabel labImagenFondo;
+    private javax.swing.JLabel labRetiros;
+    private javax.swing.JLabel labTotalCaja;
+    private javax.swing.JLabel labVenta;
+    private javax.swing.JPanel panelDatos;
+    private javax.swing.JPanel panelTodo;
     private javax.swing.JTable tablaDetalleCaja;
-    private javax.swing.JTextField txfdMontoES;
+    private javax.swing.JTextField txfdRetiros;
     private javax.swing.JTextField txfdTotalCaja;
     private javax.swing.JTextField txfdTotalVenta;
     // End of variables declaration//GEN-END:variables
