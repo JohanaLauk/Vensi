@@ -51,6 +51,7 @@ public class ProductoDAO
         prod.setStock(p.getStock());
         prod.setStockMinimo(p.getStockMinimo());
         prod.setEstado(p.isEstado());
+        prod.setPorPeso(p.isPorPeso());        
         prod.setOferta(p.isOferta());
         prod.setSuspendido(p.isSuspendido());
         prod.setProveedors(p.getProveedors());

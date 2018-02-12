@@ -532,7 +532,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
                             if (txfdEditarPesoEnvase.getText().equals(""))   //marcó PESO pero no ingresó el PESO DEL ENVASE
                             {
                                 JOptionPane.showMessageDialog(null, "Debe ingresar el PESO DEL ENVASE (en gramos).");
-                                rbOK = false;
+                                //rbOK = false;
                             }
                             else
                             {
@@ -573,6 +573,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
                         {
                             prodEditar.setPorPeso(false);
                             prodEditar.setPesoEnvase(0);
+
                             String stockMin = txfdEditarStockMinimo.getText();
                             if (stockMin.equals(""))
                             {
