@@ -48,7 +48,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         panelES = new javax.swing.JPanel();
         cbTipoES = new javax.swing.JComboBox<>();
         labTipo = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
+        labDescripcion = new javax.swing.JLabel();
         btnCancelar = new javax.swing.JButton();
         btnConfirmar = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
@@ -92,10 +92,10 @@ public class ventanaCargarES extends javax.swing.JFrame
         labTipo.setForeground(new java.awt.Color(255, 255, 255));
         labTipo.setText("Tipo:");
 
-        jLabel4.setBackground(new java.awt.Color(0, 0, 0));
-        jLabel4.setFont(new java.awt.Font("Calibri", 1, 15)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setText("Descripción:");
+        labDescripcion.setBackground(new java.awt.Color(0, 0, 0));
+        labDescripcion.setFont(new java.awt.Font("Calibri", 1, 15)); // NOI18N
+        labDescripcion.setForeground(new java.awt.Color(255, 255, 255));
+        labDescripcion.setText("Descripción:");
 
         btnCancelar.setBackground(new java.awt.Color(255, 153, 153));
         btnCancelar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
@@ -180,7 +180,7 @@ public class ventanaCargarES extends javax.swing.JFrame
                 .addGap(21, 21, 21)
                 .addGroup(panelESLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(labTituloES, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel4)
+                    .addComponent(labDescripcion)
                     .addGroup(panelESLayout.createSequentialGroup()
                         .addComponent(btnCancelar)
                         .addGap(18, 18, 18)
@@ -210,7 +210,7 @@ public class ventanaCargarES extends javax.swing.JFrame
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txfdMonto, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(28, 28, 28)
-                .addComponent(jLabel4)
+                .addComponent(labDescripcion)
                 .addGap(6, 6, 6)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -388,7 +388,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         }
         if (cbTipoES.getSelectedItem().equals("Apertura de caja"))
         {
-            nombre = "Apertura de caja";
+            nombre = "Apertura de caja";            
         }       
         if (cbTipoES.getSelectedItem().equals("Retiro"))
         {
@@ -727,7 +727,7 @@ public class ventanaCargarES extends javax.swing.JFrame
                 limpiarList();
             }
             else
-            {           
+            {     
                 for (int i=0 ; i < panelidentificarProd.getComponents().length ; i++)  //deshabilita el panel de identificar producto
                 {
                     panelidentificarProd.getComponent(i).setEnabled(false);
@@ -737,10 +737,19 @@ public class ventanaCargarES extends javax.swing.JFrame
                     panelES.getComponent(i).setEnabled(true);
                 }
                 
-                btnCancelar.setEnabled(true);
+                if (nombre.equals("Apertura de caja"))
+                {
+                    labDescripcion.setEnabled(false);
+                    txAreaDescripcion.setEnabled(false);                    
+                }
+                else
+                {
+                    labDescripcion.setEnabled(true);
+                    txAreaDescripcion.setEnabled(true); 
+                }
+                                
                 btnConfirmar.setEnabled(false);
-                txAreaDescripcion.setEditable(true);
-                cbTipoES.setEnabled(true);
+                txAreaDescripcion.setEditable(true);                
                 txfdMonto.setText(null);           
                 txAreaDescripcion.setText(null);
                 txfdCodNomProdAnular.setText(null);
@@ -812,11 +821,11 @@ public class ventanaCargarES extends javax.swing.JFrame
     private javax.swing.JComboBox<String> cbTipoES;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JLabel labDescripcion;
     private javax.swing.JLabel labTipo;
     private javax.swing.JLabel labTituloES;
     private javax.swing.JLabel labTituloPanelAnularProd;

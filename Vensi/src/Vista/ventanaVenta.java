@@ -1,8 +1,10 @@
 package Vista;
 
+import DAO.EntradaSalidaDAO;
 import DAO.ItemVentaDAO;
 import DAO.ProductoDAO;
 import DAO.TurnoDAO;
+import Modelo.EntradaSalida;
 import Modelo.ItemVenta;
 import Modelo.Producto;
 import Modelo.Turno;
@@ -30,6 +32,7 @@ public class ventanaVenta extends javax.swing.JFrame
     TurnoDAO tDAO = new TurnoDAO();
     ItemVentaDAO itDAO = new ItemVentaDAO();
     Turno elTurno = new Turno();    
+    EntradaSalidaDAO esDAO = new EntradaSalidaDAO();    
     
     DefaultTableModel modelo, modelo2, modelo3, m;
     TableColumnModel tcm, tcm2, tcm3;   
@@ -648,8 +651,45 @@ public class ventanaVenta extends javax.swing.JFrame
     }//GEN-LAST:event_btnIniciarTurnoActionPerformed
 
     private void btnCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCerrarTurnoActionPerformed
-        ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
-        vCierreTurno.setVisible(true);
+        List<EntradaSalida> listaAperturas = esDAO.validarES(turnoActual.getId(), "apertura de caja");
+        List<EntradaSalida> listaSueldos = esDAO.validarES(turnoActual.getId(), "sueldo");
+        
+        if (listaAperturas.size() != 0 && listaSueldos.size() != 0)   //tiene aperturas y sueldos cargados
+        {
+            ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
+            vCierreTurno.setVisible(true);
+        }
+        else
+        {
+            if (listaAperturas.size() != 0 && listaSueldos.size() == 0)   //SI aperturas | NO sueldos 
+            {
+                int cerrarTurno = JOptionPane.showConfirmDialog(null, "El turno no tiene registrado un \"Sueldo\".\n¿Desea continuar?", "AVISO", JOptionPane.YES_NO_OPTION);
+                if (cerrarTurno == 0)
+                {
+                    ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
+                    vCierreTurno.setVisible(true);
+                }
+            }
+            if (listaAperturas.size() == 0 && listaSueldos.size() != 0) //NO aperturas | SI sueldos 
+            {
+                int cerrarTurno = JOptionPane.showConfirmDialog(null, "El turno no tiene registrado una \"Apertura de caja\".\n¿Desea continuar?", "AVISO", JOptionPane.YES_NO_OPTION);
+                if (cerrarTurno == 0)
+                {
+                    ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
+                    vCierreTurno.setVisible(true);
+                }
+            }
+            if (listaAperturas.size() == 0 && listaSueldos.size() == 0) //NO aperturas | NO sueldos 
+            {
+                int cerrarTurno = JOptionPane.showConfirmDialog(null, "El turno no tiene registrado una \"Apertura de caja\" ni un \"Sueldo\".\n"
+                                                                        + "¿Desea continuar?", "AVISO", JOptionPane.YES_NO_OPTION);
+                if (cerrarTurno == 0)
+                {
+                    ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
+                    vCierreTurno.setVisible(true);
+                }
+            }
+        }
     }//GEN-LAST:event_btnCerrarTurnoActionPerformed
 
     private void btnDetalleCajaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDetalleCajaActionPerformed

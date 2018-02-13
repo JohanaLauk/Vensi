@@ -112,4 +112,29 @@ public class EntradaSalidaDAO
         }
         return lista;
     }
+    
+    public List<EntradaSalida> validarES(int nroTurno, String cadena)
+    {
+        session = NewHibernateUtil.getSessionFactory().openSession();
+        List<EntradaSalida> lista = null;
+        
+        try
+        {            
+            tx = session.beginTransaction();
+            Query query = session.createQuery("FROM EntradaSalida es WHERE es.turno.id = :nroTurno AND es.nombre LIKE :cadena");
+            query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");        
+            query.setParameter("nroTurno", nroTurno);
+            lista = query.list();
+            tx.commit();            
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error. validar EntradaSsalida");
+        }        
+        finally
+        {
+            session.close();
+        }
+        return lista;
+    }
 }
