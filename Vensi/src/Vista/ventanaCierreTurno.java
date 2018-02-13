@@ -293,7 +293,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         txfd500.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         txfd500.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd500.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txfd500.setNextFocusableComponent(txfd500total);
+        txfd500.setNextFocusableComponent(txfd200);
         txfd500.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd500KeyReleased(evt);
@@ -312,7 +312,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         txfd200.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         txfd200.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd200.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txfd200.setNextFocusableComponent(txfd200total);
+        txfd200.setNextFocusableComponent(txfd100);
         txfd200.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd200KeyReleased(evt);
@@ -325,7 +325,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         txfd100.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         txfd100.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd100.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txfd100.setNextFocusableComponent(txfd100total);
+        txfd100.setNextFocusableComponent(txfd50);
         txfd100.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd100KeyReleased(evt);
@@ -338,7 +338,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         txfd50.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         txfd50.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd50.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txfd50.setNextFocusableComponent(txfd50total);
+        txfd50.setNextFocusableComponent(txfd20);
         txfd50.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd50KeyReleased(evt);
@@ -351,7 +351,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         txfd20.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         txfd20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txfd20.setNextFocusableComponent(txfd20total);
+        txfd20.setNextFocusableComponent(txfd10);
         txfd20.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd20KeyReleased(evt);
@@ -364,7 +364,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         txfd10.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         txfd10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txfd10.setNextFocusableComponent(txfd10total);
+        txfd10.setNextFocusableComponent(txfd5);
         txfd10.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd10KeyReleased(evt);
@@ -377,7 +377,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         txfd5.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         txfd5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txfd5.setNextFocusableComponent(txfd5total);
+        txfd5.setNextFocusableComponent(txfd2);
         txfd5.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd5KeyReleased(evt);
@@ -390,6 +390,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         txfd2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         txfd2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txfd2.setNextFocusableComponent(txfd1);
         txfd2.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd2KeyReleased(evt);
@@ -402,7 +403,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         txfd1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         txfd1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txfd1.setNextFocusableComponent(txfd1total);
+        txfd1.setNextFocusableComponent(txfd0050);
         txfd1.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd1KeyReleased(evt);
@@ -415,7 +416,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         txfd0050.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         txfd0050.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd0050.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txfd0050.setNextFocusableComponent(txfd0050total);
+        txfd0050.setNextFocusableComponent(txfd0025);
         txfd0050.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd0050KeyReleased(evt);
@@ -428,7 +429,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         txfd0025.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
         txfd0025.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd0025.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txfd0025.setNextFocusableComponent(txfd0025total);
+        txfd0025.setNextFocusableComponent(txfdHay);
         txfd0025.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd0025KeyReleased(evt);

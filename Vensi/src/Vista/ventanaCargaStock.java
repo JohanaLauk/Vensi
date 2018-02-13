@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
@@ -1277,19 +1278,34 @@ public class ventanaCargaStock extends javax.swing.JFrame
     private void txfdCantidadKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdCantidadKeyTyped
         char c = evt.getKeyChar();
         if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE))        
-            evt.consume();        
+            evt.consume();   
+        
+        if (c == KeyEvent.VK_ENTER)
+        {
+            btnAgregar.doClick();
+        }
     }//GEN-LAST:event_txfdCantidadKeyTyped
 
     private void txfdPrecioCUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioCUKeyTyped
         char c = evt.getKeyChar();
         if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))        
-            evt.consume();        
+            evt.consume();   
+        
+        if (c == KeyEvent.VK_ENTER)
+        {
+            btnAgregar.doClick();
+        }
     }//GEN-LAST:event_txfdPrecioCUKeyTyped
 
     private void txfdPrecioVUKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdPrecioVUKeyTyped
         char c = evt.getKeyChar();
         if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE) && (c != '.'))        
-            evt.consume();        
+            evt.consume(); 
+        
+        if (c == KeyEvent.VK_ENTER)
+        {
+            btnAgregar.doClick();
+        }
     }//GEN-LAST:event_txfdPrecioVUKeyTyped
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

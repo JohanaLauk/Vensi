@@ -616,7 +616,7 @@
                   </Border>
                 </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="txfd500total"/>
+                  <ComponentRef name="txfd200"/>
                 </Property>
               </Properties>
               <Events>
@@ -651,7 +651,7 @@
                   </Border>
                 </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="txfd200total"/>
+                  <ComponentRef name="txfd100"/>
                 </Property>
               </Properties>
               <Events>
@@ -671,7 +671,7 @@
                   </Border>
                 </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="txfd100total"/>
+                  <ComponentRef name="txfd50"/>
                 </Property>
               </Properties>
               <Events>
@@ -691,7 +691,7 @@
                   </Border>
                 </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="txfd50total"/>
+                  <ComponentRef name="txfd20"/>
                 </Property>
               </Properties>
               <Events>
@@ -711,7 +711,7 @@
                   </Border>
                 </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="txfd20total"/>
+                  <ComponentRef name="txfd10"/>
                 </Property>
               </Properties>
               <Events>
@@ -731,7 +731,7 @@
                   </Border>
                 </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="txfd10total"/>
+                  <ComponentRef name="txfd5"/>
                 </Property>
               </Properties>
               <Events>
@@ -751,7 +751,7 @@
                   </Border>
                 </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="txfd5total"/>
+                  <ComponentRef name="txfd2"/>
                 </Property>
               </Properties>
               <Events>
@@ -769,6 +769,9 @@
                   <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
                     <LineBorder/>
                   </Border>
+                </Property>
+                <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+                  <ComponentRef name="txfd1"/>
                 </Property>
               </Properties>
               <Events>
@@ -788,7 +791,7 @@
                   </Border>
                 </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="txfd1total"/>
+                  <ComponentRef name="txfd0050"/>
                 </Property>
               </Properties>
               <Events>
@@ -808,7 +811,7 @@
                   </Border>
                 </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="txfd0050total"/>
+                  <ComponentRef name="txfd0025"/>
                 </Property>
               </Properties>
               <Events>
@@ -828,7 +831,7 @@
                   </Border>
                 </Property>
                 <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                  <ComponentRef name="txfd0025total"/>
+                  <ComponentRef name="txfdHay"/>
                 </Property>
               </Properties>
               <Events>

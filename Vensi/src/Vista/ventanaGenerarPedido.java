@@ -12,6 +12,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
@@ -1000,6 +1001,11 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         char c = evt.getKeyChar();
         if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume();
+        
+        if (c == KeyEvent.VK_ENTER)
+        {
+            btnAgregar.doClick();
+        }
     }//GEN-LAST:event_txfdCantidadKeyTyped
 
     private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing

@@ -2,6 +2,7 @@ package Vista;
 
 import DAO.UsuarioDAO;
 import Modelo.Usuario;
+import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -284,6 +285,11 @@ public class ventanaGestionClave extends javax.swing.JFrame
         char c = evt.getKeyChar();
         if(c < '0' || c > '9') 
             evt.consume();
+        
+        if (c == KeyEvent.VK_ENTER)
+        {
+            btnConfirmarClave.doClick();
+        }
     }//GEN-LAST:event_passVerifKeyTyped
 
     private void btnVolverMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVolverMouseEntered

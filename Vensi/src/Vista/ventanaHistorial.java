@@ -7,6 +7,7 @@ import Modelo.Turno;
 import java.awt.Dimension;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
@@ -18,7 +19,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
-
 
 public class ventanaHistorial extends javax.swing.JFrame 
 {
@@ -37,9 +37,9 @@ public class ventanaHistorial extends javax.swing.JFrame
         initComponents();
         
         this.setLocationRelativeTo(null);   //centra la ventana
-        this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir  
-        this.setMinimumSize(new Dimension(870, 550));
-        this.setPreferredSize(new Dimension(870, 550)); 
+        //this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir  
+        this.setMinimumSize(new Dimension(890, 550));
+        this.setPreferredSize(new Dimension(890, 550)); 
         
         cbBuscarPor.addItem("Seleccionar");
         cbBuscarPor.addItem("Número");
@@ -94,8 +94,8 @@ public class ventanaHistorial extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Historial de registros");
-        setMinimumSize(new java.awt.Dimension(870, 550));
-        setPreferredSize(new java.awt.Dimension(870, 550));
+        setMinimumSize(new java.awt.Dimension(890, 550));
+        setPreferredSize(new java.awt.Dimension(890, 550));
         addWindowFocusListener(new java.awt.event.WindowFocusListener() {
             public void windowGainedFocus(java.awt.event.WindowEvent evt) {
                 formWindowGainedFocus(evt);
@@ -148,11 +148,21 @@ public class ventanaHistorial extends javax.swing.JFrame
 
         LabFechaHasta.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
         LabFechaHasta.setForeground(new java.awt.Color(255, 255, 255));
-        LabFechaHasta.setText("hasta");
+        LabFechaHasta.setText("antes del");
 
         dateDesde.setNextFocusableComponent(dateHasta);
+        dateDesde.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateDesdeActionPerformed(evt);
+            }
+        });
 
         dateHasta.setNextFocusableComponent(btnVaciarFechaHasta);
+        dateHasta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dateHastaActionPerformed(evt);
+            }
+        });
 
         btnVaciarFechaHasta.setBackground(new java.awt.Color(255, 153, 153));
         btnVaciarFechaHasta.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
@@ -214,22 +224,23 @@ public class ventanaHistorial extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(txfdNro, javax.swing.GroupLayout.PREFERRED_SIZE, 80, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel2)
-                                .addGap(18, 18, 18)
-                                .addComponent(cbBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addComponent(labFecha)
                                 .addGap(12, 12, 12)
                                 .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(LabFechaHasta)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(LabFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(77, 77, 77)
+                                .addComponent(jLabel2)
+                                .addGap(18, 18, 18)
+                                .addComponent(cbBuscarPor, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(18, 18, 18)
                         .addComponent(btnVaciarFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 60, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 47, Short.MAX_VALUE)
                 .addComponent(btnBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -246,12 +257,12 @@ public class ventanaHistorial extends javax.swing.JFrame
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(txfdNro)
                             .addComponent(labNro, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(15, 15, 15)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(LabFechaHasta, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(14, 14, 14)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(labFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(labFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(LabFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
@@ -299,7 +310,7 @@ public class ventanaHistorial extends javax.swing.JFrame
         panelRB.setLayout(panelRBLayout);
         panelRBLayout.setHorizontalGroup(
             panelRBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 187, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
             .addGroup(panelRBLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelRBLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -557,7 +568,12 @@ public class ventanaHistorial extends javax.swing.JFrame
     private void txfdNroKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdNroKeyTyped
         char c = evt.getKeyChar();
         if((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE))         
-            evt.consume();         
+            evt.consume();    
+        
+        if (c == KeyEvent.VK_ENTER)
+        {
+            btnBuscar.doClick();
+        }
     }//GEN-LAST:event_txfdNroKeyTyped
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
@@ -575,6 +591,15 @@ public class ventanaHistorial extends javax.swing.JFrame
 
     private void btnVaciarFechaHastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciarFechaHastaActionPerformed
         dateHasta.setDate(null);
+        
+        if (rbTurno.isSelected())
+        {
+            llenarTabla("Turno");
+        }   
+        if (rbCargaStock.isSelected())
+        {
+            llenarTabla("CargaStock");
+        }
     }//GEN-LAST:event_btnVaciarFechaHastaActionPerformed
 
     private void rbTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbTurnoActionPerformed
@@ -647,6 +672,28 @@ public class ventanaHistorial extends javax.swing.JFrame
         btnVaciarFechaHasta.setIcon(icono);
     }//GEN-LAST:event_btnVaciarFechaHastaMouseExited
 
+    private void dateDesdeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateDesdeActionPerformed
+        if (rbTurno.isSelected())
+        {
+            llenarTabla("Turno");
+        }   
+        if (rbCargaStock.isSelected())
+        {
+            llenarTabla("CargaStock");
+        }
+    }//GEN-LAST:event_dateDesdeActionPerformed
+
+    private void dateHastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dateHastaActionPerformed
+        if (rbTurno.isSelected())
+        {
+            llenarTabla("Turno");
+        }   
+        if (rbCargaStock.isSelected())
+        {
+            llenarTabla("CargaStock");
+        }
+    }//GEN-LAST:event_dateHastaActionPerformed
+
     public static void main(String args[]) 
     {
         java.awt.EventQueue.invokeLater(new Runnable() 
@@ -686,6 +733,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                         if (listaTurnos.isEmpty()) 
                         {
                             JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
+                            tablaVacia();
                         } 
                         else 
                         {
@@ -731,6 +779,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                             if (t == null) 
                             {
                                 JOptionPane.showMessageDialog(null, "No hay turnos registrados.");
+                                tablaVacia();
                             } 
                             else 
                             {
@@ -785,6 +834,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                             if (listaEntradastocks.isEmpty()) 
                             {
                                 JOptionPane.showMessageDialog(null, "No hay cargas de stock registradas.");
+                                tablaVacia();
                             } 
                             else 
                             {
@@ -823,6 +873,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                                 if (es == null) 
                                 {
                                     JOptionPane.showMessageDialog(null, "No hay cargas de stock registradas.");
+                                    tablaVacia();
                                 } 
                                 else 
                                 {
