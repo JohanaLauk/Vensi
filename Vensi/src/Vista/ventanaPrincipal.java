@@ -365,21 +365,25 @@ public class ventanaPrincipal extends javax.swing.JFrame
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVentasActionPerformed
-        ventanaVenta vVenta = new ventanaVenta();
-        vVenta.setVisible(true);    //hace visible una ventana
-        dispose();  //cierra la ventana que deja
+        ventanaSeguridad vSeguridad = new ventanaSeguridad();
+        vSeguridad.nombreBtn = "Ventas";
+        vSeguridad.setVisible(true);
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministracionActionPerformed
-        ventanaAdministracion vAdministracion = new ventanaAdministracion();
+        ventanaSeguridad vSeguridad = new ventanaSeguridad();
+        vSeguridad.nombreBtn = "Administracion";
+        vSeguridad.setVisible(true);
+        
+        /*ventanaAdministracion vAdministracion = new ventanaAdministracion();
         vAdministracion.setVisible(true);   //hace visible una ventana
-        dispose();  //cierra la ventana que deja
+        dispose();  //cierra la ventana que deja*/
     }//GEN-LAST:event_btnAdministracionActionPerformed
 
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
-        ventanaHistorial vHistorial = new ventanaHistorial();
-        vHistorial.setVisible(true);    //hace visible una ventana
-        dispose();  //cierra la ventana que deja
+        ventanaSeguridad vSeguridad = new ventanaSeguridad();
+        vSeguridad.nombreBtn = "Historial";
+        vSeguridad.setVisible(true);
     }//GEN-LAST:event_btnHistorialActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -387,15 +391,15 @@ public class ventanaPrincipal extends javax.swing.JFrame
     }//GEN-LAST:event_btnSalirActionPerformed
 
     private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
-        ventanaGenerarPedido vPedido = new ventanaGenerarPedido();
-        vPedido.setVisible(true);    //hace visible una ventana
-        dispose();  //cierra la ventana que deja
+        ventanaSeguridad vSeguridad = new ventanaSeguridad();
+        vSeguridad.nombreBtn = "Pedidos";
+        vSeguridad.setVisible(true);       
     }//GEN-LAST:event_btnPedidosActionPerformed
 
     private void btnCargaStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargaStockActionPerformed
-        ventanaCargaStock vInventario = new ventanaCargaStock();
-        vInventario.setVisible(true);    //hace visible una ventana
-        dispose();  //cierra la ventana que deja
+        ventanaSeguridad vSeguridad = new ventanaSeguridad();
+        vSeguridad.nombreBtn = "CargaStock";
+        vSeguridad.setVisible(true);
     }//GEN-LAST:event_btnCargaStockActionPerformed
 
     private void btnVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseEntered

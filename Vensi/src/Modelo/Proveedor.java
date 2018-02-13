@@ -14,9 +14,7 @@ public class Proveedor  implements java.io.Serializable
     private String pais;
     private String contacto;
     private Boolean estado = true;
-    /*private Set<Producto> productos = new HashSet<Producto>(0);
-    private Set<Pedido> pedidos = new HashSet<Pedido>(0);
-    private Set<Entradastock> entradastocks = new HashSet<Entradastock>(0);*/
+    private Set<Producto> misProductos = new HashSet<Producto>(0);
 
     public Proveedor() 
     { }
@@ -102,32 +100,14 @@ public class Proveedor  implements java.io.Serializable
         this.estado = estado;
     }
     
-    /*public Set<Producto> getProductos() 
+    public Set<Producto> getMisProductos() 
     {
-        return this.productos;
+        return this.misProductos;
     }    
-    public void setProductos(Set<Producto> productos) 
+    public void setMisProductos(Set<Producto> misProductos) 
     {
-        this.productos = productos;
+        this.misProductos = misProductos;
     }
-    
-    public Set<Pedido> getPedidos() 
-    {
-        return this.pedidos;
-    }    
-    public void setPedidos(Set<Pedido> pedidos) 
-    {
-        this.pedidos = pedidos;
-    }
-
-    public Set<Entradastock> getEntradastocks() 
-    {
-        return this.entradastocks;
-    }        
-    public void setEntradastocks(Set<Entradastock> entradastocks) 
-    {
-        this.entradastocks = entradastocks;
-    }*/
 }
 
 

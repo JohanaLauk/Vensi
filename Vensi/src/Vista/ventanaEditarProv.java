@@ -1,9 +1,11 @@
 package Vista;
 
 import DAO.ProveedorDAO;
+import Modelo.Producto;
 import Modelo.Proveedor;
 import Utils.Validar;
 import java.awt.Dimension;
+import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -309,7 +311,7 @@ public class ventanaEditarProv extends javax.swing.JFrame
             {
                 Proveedor provRepetido = pDAO.buscar1PorCuit(cuitInput);
                 
-                if (provRepetido == null || elProv.getCuit().equals(cuitInput))                    
+                if (provRepetido == null || elProv.getCuit().equals(cuitInput))   //si el cuit es unico (no se repite)...                 
                 {                
                     prov.setRazonSocial(txfdEditarRazonSocial.getText().toUpperCase());
                     prov.setCuit(cuitInput);
@@ -325,7 +327,20 @@ public class ventanaEditarProv extends javax.swing.JFrame
                     } 
                     else 
                     {
-                        prov.setEstado(false);
+                        Set<Producto> misProdusctos = prov.getMisProductos();
+                        
+                        if (misProdusctos.size() != 0)       //si tiene producto...  
+                        {
+                            JOptionPane.showMessageDialog(null, "¡ALERTA! No puede deshabilitar el proveedor porque aún tiene productos a cargo."
+                                    + "\nDiríjase a \"Gestión del producto\" y quite la referencia del proveedor de su producto, "
+                                    + "\nsí es ese el caso (recuerde que un producto siempre debe tener, al menos, un proveedor a cargo)."
+                                    + "\nDe lo contrario, aguarde a que el producto se agote, quite la referencia del proveedor, "
+                                    + "\ndeshabilite el producto y luego deshabilite el proveedor.");
+                        }
+                        else    //Si no tiene productos referenciados...
+                        {
+                            prov.setEstado(false);
+                        }
                     }
 
                     pDAO.modificar(prov, id_recibido);

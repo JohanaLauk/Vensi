@@ -627,7 +627,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
                             if (seleccionado) 
                             {
                                 int idSelec = Integer.parseInt(tablaProv.getValueAt(i, 2).toString());
-                                prodEditar.addProveedors(prDAO.buscarPorId(idSelec));
+                                prodEditar.addProveedors(prDAO.buscarPorId(idSelec));   //le agrega el proveedor al producto
                                 alMenosUnCheck = true;
                             }
                         }

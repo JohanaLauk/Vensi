@@ -48,44 +48,6 @@
         <set name="proveedors" table="producto_proveedor" lazy="false" >
             <key column="id_producto"/>
             <many-to-many column="id_proveedor" class="Modelo.Proveedor" />
-        </set>
-        
-        <!-- <set name="proveedors" table="producto_proveedor" inverse="false" lazy="false" fetch="select">
-            <key>
-                <column name="id_producto" not-null="true" />
-            </key>
-            <many-to-many entity-name="Modelo.Proveedor">
-                <column name="id_proveedor" not-null="true" />
-            </many-to-many>
-        </set>
-        
-        <set name="itemVentas" table="item_venta" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_producto" not-null="true" />
-            </key>
-            <one-to-many class="Modelo.ItemVenta" />
-        </set>
-        
-        <set name="itemPedidos" table="item_pedido" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_producto" not-null="true" />
-            </key>
-            <one-to-many class="Modelo.ItemPedido" />
-        </set>
-        
-        <set name="itemEntradastocks" table="item_entradastock" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_producto" not-null="true" />
-            </key>
-            <one-to-many class="Modelo.ItemEntradastock" />
-        </set>
-        
-        <set name="itemImprimirs" table="item_imprimir" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_producto" not-null="true" />
-            </key>
-            <one-to-many class="Modelo.ItemImprimir" />
-        </set> -->
-        
+        </set>        
     </class>
 </hibernate-mapping>

@@ -19,10 +19,6 @@ public class Producto  implements java.io.Serializable
     private Boolean oferta = false;
     private Boolean porPeso;
     private Set<Proveedor> proveedors = new HashSet<Proveedor>(0);
-    /*private Set<ItemVenta> itemVentas = new HashSet<ItemVenta>(0);
-    private Set<ItemPedido> itemPedidos = new HashSet<ItemPedido>(0);
-    private Set<ItemEntradastock> itemEntradastocks = new HashSet<ItemEntradastock>(0);
-    private Set<ItemImprimir> itemImprimirs = new HashSet<ItemImprimir>(0);*/
 
     public Producto() 
     { }
@@ -156,42 +152,6 @@ public class Producto  implements java.io.Serializable
     {
         this.proveedors.add(p);
     }
-    
-    /*public Set<ItemVenta> getItemVentas() 
-    {
-        return this.itemVentas;
-    }    
-    public void setItemVentas(Set<ItemVenta> itemVentas) 
-    {
-        this.itemVentas = itemVentas;
-    }
-    
-    public Set<ItemPedido> getItemPedidos() 
-    {
-        return this.itemPedidos;
-    }    
-    public void setItemPedidos(Set<ItemPedido> itemPedidos) 
-    {
-        this.itemPedidos = itemPedidos;
-    }
-    
-    public Set<ItemEntradastock> getItemEntradastocks() 
-    {
-        return this.itemEntradastocks;
-    }    
-    public void setItemEntradastocks(Set<ItemEntradastock> itemEntradastocks) 
-    {
-        this.itemEntradastocks = itemEntradastocks;
-    }
-    
-    public Set<ItemImprimir> getItemImprimirs() 
-    {
-        return this.itemImprimirs;
-    }    
-    public void setItemImprimirs(Set<ItemImprimir> itemImprimirs) 
-    {
-        this.itemImprimirs = itemImprimirs;
-    }*/
 }
 
 

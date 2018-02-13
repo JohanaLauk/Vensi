@@ -33,28 +33,13 @@
             <column name="estado" />
         </property>
         
-        <!-- <set name="productos" table="producto_proveedor" inverse="true" lazy="true" fetch="select">
+        <set name="misProductos" table="producto_proveedor" inverse="true" lazy="true" fetch="select">
             <key>
                 <column name="id_proveedor" not-null="true" />
             </key>
             <many-to-many entity-name="Modelo.Producto">
                 <column name="id_producto" not-null="true" />
             </many-to-many>
-        </set>
-        
-        <set name="pedidos" table="pedido" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_proveedor" not-null="true" />
-            </key>
-            <one-to-many class="Modelo.Pedido" />
-        </set>
-        
-        <set name="entradastocks" table="entradastock" inverse="true" lazy="true" fetch="select">
-            <key>
-                <column name="id_proveedor" not-null="true" />
-            </key>
-            <one-to-many class="Modelo.Entradastock" />
-        </set> -->
-        
+        </set>        
     </class>
 </hibernate-mapping>

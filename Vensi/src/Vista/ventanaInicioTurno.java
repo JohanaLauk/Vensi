@@ -211,7 +211,7 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Contraseña incorrecta");
+            JOptionPane.showMessageDialog(null, "¡ERROR! \nPin incorrecto. Intentalo nuevamente");
             txfdPin.setText("");
             btnSI.setEnabled(false);
         }

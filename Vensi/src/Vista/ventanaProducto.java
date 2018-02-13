@@ -627,14 +627,13 @@ public class ventanaProducto extends javax.swing.JFrame
     private void cbFiltroProvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroProvActionPerformed
         if (!cbFiltroProv.getSelectedItem().equals("Todos"))
         {
-            proveedorSelec = cbFiltroProv.getSelectedItem().toString();
-            llenarTablaFiltroProv();
+            proveedorSelec = cbFiltroProv.getSelectedItem().toString();            
         }
         else
         {
             proveedorSelec = "Todos";
-            llenarTabla();
-        }        
+        }       
+        llenarTabla();
     }//GEN-LAST:event_cbFiltroProvActionPerformed
 
     private void cbSituacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbSituacionActionPerformed
@@ -756,145 +755,7 @@ public class ventanaProducto extends javax.swing.JFrame
             }
         });
     }
-    
-    public void llenarTablaFiltroProv()
-    {
-        modelo = new DefaultTableModel();
-        List<Producto> lista = null;
         
-        if (!proveedorSelec.equals("Todos") || proveedorSelec != null)
-        {            
-            Proveedor prov = prDAO.buscarPorCuitNombre(proveedorSelec, "Habilitados").get(0);
-            lista = pDAO.listar(OrdenarTabla(), prov.getId());
-        }
-        
-        String[] datos = new String[11];
- 
-        modelo.addColumn("Código");         //0
-        modelo.addColumn("Descripción");    //1 
-        modelo.addColumn("Precio costo");   //2
-        modelo.addColumn("Precio venta");   //3
-        modelo.addColumn("$ por kg");       //4
-        modelo.addColumn("Stock");          //5 
-        modelo.addColumn("Stock mínimo");   //6
-        modelo.addColumn("Tipo de venta");  //7
-        modelo.addColumn("Peso del envase");//8
-        modelo.addColumn("Estado");         //9
-        modelo.addColumn("ID");             //10
-        
-        tablaProd.setModel(modelo);
-        
-        for (Producto p : lista)
-        {
-            datos[0] = p.getCodigo();
-            datos[1] = p.getDescripcion();
-            datos[2] = String.valueOf("$" + formatoPrecios.format(p.getPrecioCosto()));
-            datos[3] = String.valueOf("$" + formatoPrecios.format(p.getPrecioVenta()));            
-            
-            if (p.isPorPeso())
-            {
-                datos[4] = String.valueOf("$" + formatoPrecios.format(p.getPrecioVentaXKilo()));
-                
-                int pesoEnv1 = p.getPesoEnvase();
-                double pesoEnv2 = p.getPesoEnvase();
-                datos[8] = String.valueOf(formatoKilos.format(pesoEnv2 / 1000) + "kg");
-                
-                int stockGR1 = p.getStock();    //gr
-                double stockGR2 = p.getStock();
-                int stockU = stockGR1 / pesoEnv1;  // u = gr / peso gr
-                double stockKG = stockGR2 / 1000;   //kg =  gr / 1000            
-                datos[5] = String.valueOf(stockU+"  ("+ formatoKilos.format(stockKG) + "kg)");
-                
-                int stockMinGR1 = p.getStockMinimo();
-                double stockMinGR2 = p.getStockMinimo();
-                int stockMinU = stockMinGR1 / pesoEnv1;
-                double stockMinKG = stockMinGR2 / 1000;          
-                
-                datos[6] = String.valueOf(stockMinU+"  ("+ formatoKilos.format(stockMinKG) + "kg)");
-                                
-                datos[7] = "Por peso";   
-            }
-            else
-            {
-                datos[4] = String.valueOf("---");
-                datos[5] = String.valueOf(p.getStock());
-                datos[6] = String.valueOf(p.getStockMinimo());
-                datos[7] = "Por unidad";
-                datos[8] = "---";
-            }
-            
-            if (p.isEstado())   //habilitado
-            {
-                if (p.isOferta() && !p.isSuspendido())
-                {
-                    datos[9] = "Habilitado - Oferta";
-                }
-                else
-                {
-                    if (p.isSuspendido() && !p.isOferta())
-                    {
-                        datos[9] = "Habilitado - Suspendido";
-                    }
-                    else
-                    {
-                        datos[9] = "Habilitado";
-                    }                         
-                }                
-            }
-            else
-            {
-                datos[9] = "Deshabilitado";
-            } 
-                        
-            datos[10] = String.valueOf(p.getId());            
-           
-            modelo.addRow(datos);
-        }                
-                
-        tablaProd.setModel(modelo);                
-        
-        tcm = tablaProd.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(100);
-        tcm.getColumn(1).setPreferredWidth(300);
-        tcm.getColumn(2).setPreferredWidth(20);
-        tcm.getColumn(3).setPreferredWidth(20);
-        tcm.getColumn(4).setPreferredWidth(20);
-        tcm.getColumn(5).setPreferredWidth(30);
-        tcm.getColumn(6).setPreferredWidth(20);
-        tcm.getColumn(7).setPreferredWidth(30);
-        tcm.getColumn(8).setPreferredWidth(50);
-        tcm.getColumn(9).setPreferredWidth(80);  
-        tcm.getColumn(10).setPreferredWidth(0);  
-        tcm.getColumn(10).setMaxWidth(0);
-        tcm.getColumn(10).setMinWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(10).setMaxWidth(0);
-        tablaProd.getTableHeader().getColumnModel().getColumn(10).setMinWidth(0);
-        
-        tablaProd.addFocusListener(new FocusListener() 
-        {
-            @Override
-            public void focusGained(FocusEvent fe)  //recupera el foco
-            {
-                tablaProd.setRowSelectionAllowed(true);     //permitir seleccion
-            }
-
-            @Override
-            public void focusLost(FocusEvent fe)    //pierde el foco
-            {                
-                tablaProd.setRowSelectionAllowed(false);    //no permitir seleccion
-            } 
-        });
-        
-        tablaProd.addMouseListener(new MouseAdapter() 
-        {
-            @Override
-            public void mouseClicked(MouseEvent me) 
-            {
-                tablaProd.setRowSelectionAllowed(true);
-            } 
-        });
-    }
-    
     public void llenarTabla()
     {        
         modelo = new DefaultTableModel();
@@ -903,6 +764,11 @@ public class ventanaProducto extends javax.swing.JFrame
         if (proveedorSelec.equals("Todos") || proveedorSelec == null)
         {
             lista = pDAO.listar(OrdenarTabla());
+        }
+        else
+        {
+            Proveedor prov = prDAO.buscarPorCuitNombre(proveedorSelec, "Habilitados").get(0);
+            lista = pDAO.listar(OrdenarTabla(), prov.getId());
         }
         
         String[] datos = new String[12];
@@ -983,10 +849,17 @@ public class ventanaProducto extends javax.swing.JFrame
             {
                 datos[9] = "Deshabilitado";
             }    
-    
-            Set<Proveedor> listaProv = p.getProveedors();   
             
-            datos[10] = String.valueOf(listaProv.size());            
+            if (proveedorSelec.equals("Todos")) 
+            {
+                Set<Proveedor> listaProv = p.getProveedors();   //proveedores que abastecen el producto            
+                datos[10] = String.valueOf(listaProv.size());
+            }
+            else    //filtró por proveedor
+            {
+                datos[10] = String.valueOf("---");
+            }
+            
             datos[11] = String.valueOf(p.getId());            
            
             modelo.addRow(datos);
