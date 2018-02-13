@@ -13,7 +13,9 @@ import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -44,6 +46,7 @@ public class ventanaVenta extends javax.swing.JFrame
     Redondear r = new Redondear();    
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
+    DateFormat fechaHoraFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     
     ImageIcon icono;
         
@@ -73,8 +76,12 @@ public class ventanaVenta extends javax.swing.JFrame
                 btnQuitar.setEnabled(false);
                 btnAgregar.setEnabled(false);
             } 
-        });              
+        });      
         
+        turnoActual = tDAO.obtenerUltimo();
+        this.setTitle("Sistema de ventas   -   Turno N°" + turnoActual.getId() 
+                        + "  -  Apertura: " + fechaHoraFormat.format(turnoActual.getFechaHoraInicio()) + "hs.");        
+                
         llenarTabla();
         llenarTablaCarrito();        
         verificarTurno();               
@@ -685,8 +692,7 @@ public class ventanaVenta extends javax.swing.JFrame
     }//GEN-LAST:event_cbOrdenCampoActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        int cantFilasCarrito = tablaCarrito.getRowCount();        
-        turnoActual = tDAO.obtenerUltimo();
+        int cantFilasCarrito = tablaCarrito.getRowCount();   
         
         if (cantFilasCarrito != 0)     //carrito NO vacio
         {            
@@ -779,6 +785,7 @@ public class ventanaVenta extends javax.swing.JFrame
         turnoActual.setCantVentas(turnoActual.getCantVentas() + 1);  
         tDAO.modificar(turnoActual, turnoActual.getId());
         
+        JOptionPane.showMessageDialog(null, "¡Compra efectuada!");
         labMontoTotalCompra.setText("Total compra: $0,00");
         llenarTabla();
         llenarTablaCarrito();

@@ -7,7 +7,7 @@ import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 
 public class ventanaPrincipal extends javax.swing.JFrame 
-{
+{    
     ImageIcon icono;
     int x, y;
     
@@ -20,7 +20,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         AWTUtilities.setWindowOpaque(this, false);  //quita el fondo del frame
         
         Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/Vensi.png"));
-        this.setIconImage(ico);
+        this.setIconImage(ico);    
     }
 
     @SuppressWarnings("unchecked")

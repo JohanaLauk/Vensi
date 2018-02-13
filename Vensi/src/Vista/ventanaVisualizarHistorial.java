@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 
@@ -331,6 +332,11 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                 btnImprimirMouseExited(evt);
             }
         });
+        btnImprimir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnImprimirActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout panelBotonesLayout = new javax.swing.GroupLayout(panelBotones);
         panelBotones.setLayout(panelBotonesLayout);
@@ -410,6 +416,14 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         icono = new ImageIcon(getClass().getResource("/Recursos/vHistorial/imprimir_50.png"));     
         btnImprimir.setIcon(icono);
     }//GEN-LAST:event_btnImprimirMouseExited
+
+    private void btnImprimirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnImprimirActionPerformed
+        int imprimir = JOptionPane.showConfirmDialog(null, "¿Está seguro de imprimir este registro?", "Imprimir registro", JOptionPane.YES_NO_OPTION);
+        if (imprimir == 0)
+        {
+        
+        }
+    }//GEN-LAST:event_btnImprimirActionPerformed
 
     public static void main(String args[]) 
     {

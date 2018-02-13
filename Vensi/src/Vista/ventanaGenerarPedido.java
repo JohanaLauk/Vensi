@@ -1,9 +1,11 @@
 package Vista;
 
+import DAO.ItemVentaDAO;
 import DAO.ProductoDAO;
 import DAO.ProveedorDAO;
 import Impresion.Generar;
 import Modelo.ItemImprimir;
+import Modelo.ItemVenta;
 import Modelo.Producto;
 import Modelo.Proveedor;
 import java.awt.Color;
@@ -38,7 +40,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
     Producto elProd = null;
     Proveedor elProv = null;
     String provSelec = "Seleccionar";
-    String provProvisorio = "Seleccionar";
+    String provViejo = "Seleccionar";
     
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
@@ -89,7 +91,8 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
             } 
         });    
         
-        listarAlarma();        
+        listarAlarma();  
+        //listarProdOfertas();  método sólo para prueba.
         llenarCBBProveedor();
         mostrarTablaVacia();
         llenarTablaPedido();         
@@ -208,7 +211,6 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         labBuscar.setForeground(new java.awt.Color(255, 255, 255));
         labBuscar.setText("Buscar:");
 
-        txfdBuscarProd.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdBuscarProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdBuscarProd.setPrompt("busque por código o por descripción");
         txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -416,7 +418,6 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
             }
         });
 
-        txfdCantidad.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdCantidad.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCantidad.setNextFocusableComponent(btnAgregar);
@@ -727,70 +728,112 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed
         provSelec = String.valueOf(cbProveedores.getSelectedItem());
+        List<Proveedor> listaTotalProv = provDAO.listar("Habilitados", "razonSocial", "ASC");
         
-        if (!provProvisorio.equals(provSelec))
+        if (provViejo.equals("Seleccionar") && !provSelec.equals("Seleccionar"))   //abre la ventana y selecciona un prov
         {
-            List<Proveedor> listaTotalProv = provDAO.listar("Habilitados", "razonSocial", "ASC");
-               
-            if (provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
-            {  
-                mostrarTablaVacia();   
+            labBuscar.setEnabled(true);
+            labFiltrarPor.setEnabled(true);
+            labOrdenarPor.setEnabled(true);
+            txfdBuscarProd.setEnabled(true);
 
-                if (provSelec.equals("Seleccionar"))
-                {
-                    llenarTablaPedido();
-                }
-
-                limpiarList();
-                habilitarBTNImprimir();
-
-                btnAgregar.setEnabled(false);
-                btnQuitar.setEnabled(false);
-                txfdCantidad.setText(null);
-
-                for (int i=0 ; i < panelBusqueda.getComponents().length ; i++)
-                {
-                    panelBusqueda.getComponent(i).setEnabled(false);
-                }
-            }
-            else    
+            cbFiltro.setEnabled(true);
+            if (filtroSelec.equals("Habilitados"))
             {
-                labBuscar.setEnabled(true);
-                labFiltrarPor.setEnabled(true);
-                labOrdenarPor.setEnabled(true);
-                txfdBuscarProd.setEnabled(true);
-
-                cbFiltro.setEnabled(true);
-                if (filtroSelec.equals("Habilitados"))
-                {
-                    cbSituacion.setEnabled(true);
-                }
-                else
-                {
-                    cbSituacion.setEnabled(false);
-                }            
-                cbOrdenCampo.setEnabled(true);
-                cbTipoOrden.setEnabled(true);
-
-                for (Proveedor p : listaTotalProv)
-                {
-                    if (p.getRazonSocial().equals(provSelec))
-                    {
-                        elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
-                        llenarTabla();
-                    }
-                }      
-
-                llenarTablaPedido();
-
-                limpiarList();
-                habilitarBTNImprimir();
-                btnAgregar.setEnabled(false);
-                btnQuitar.setEnabled(false);
-                txfdCantidad.setText(null);            
+                cbSituacion.setEnabled(true);
             }
+            else
+            {
+                cbSituacion.setEnabled(false);
+            }            
+            cbOrdenCampo.setEnabled(true);
+            cbTipoOrden.setEnabled(true);
+
+            for (Proveedor p : listaTotalProv)
+            {
+                if (p.getRazonSocial().equals(provSelec))
+                {
+                    elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
+                    llenarTabla();
+                }
+            }      
+
+            llenarTablaPedido();
+            provViejo = provSelec;
         }
-        provProvisorio = provSelec;       
+        else    //si selecciona por segunda vez un prov...
+        {
+            if (!provViejo.equals(provSelec))
+            {       
+                int cambiar = JOptionPane.showConfirmDialog(null, "Al seleccionar otro proveedor, perderá la lista actual de productos.\n¿Está seguro de continuar?", "¡ADVERTENCIA!", JOptionPane.YES_NO_OPTION);
+                if (cambiar == 0)
+                {
+                    if (provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
+                    {  
+                        mostrarTablaVacia();   
+
+                        if (provSelec.equals("Seleccionar"))
+                        {
+                            llenarTablaPedido();
+                        }
+
+                        limpiarList();
+                        habilitarBTNImprimir();
+
+                        btnAgregar.setEnabled(false);
+                        btnQuitar.setEnabled(false);
+                        txfdCantidad.setText(null);
+
+                        for (int i=0 ; i < panelBusqueda.getComponents().length ; i++)
+                        {
+                            panelBusqueda.getComponent(i).setEnabled(false);
+                        }
+                    }
+                    else    
+                    {
+                        labBuscar.setEnabled(true);
+                        labFiltrarPor.setEnabled(true);
+                        labOrdenarPor.setEnabled(true);
+                        txfdBuscarProd.setEnabled(true);
+
+                        cbFiltro.setEnabled(true);
+                        if (filtroSelec.equals("Habilitados"))
+                        {
+                            cbSituacion.setEnabled(true);
+                        }
+                        else
+                        {
+                            cbSituacion.setEnabled(false);
+                        }            
+                        cbOrdenCampo.setEnabled(true);
+                        cbTipoOrden.setEnabled(true);
+
+                        for (Proveedor p : listaTotalProv)
+                        {
+                            if (p.getRazonSocial().equals(provSelec))
+                            {
+                                elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
+                                llenarTabla();
+                            }
+                        }      
+
+                        llenarTablaPedido();
+
+                        limpiarList();
+                        habilitarBTNImprimir();
+                        btnAgregar.setEnabled(false);
+                        btnQuitar.setEnabled(false);
+                        txfdCantidad.setText(null);            
+                    }
+                    provViejo = provSelec;
+                }
+                else    //si dice que NO quiere continuar... es decir, no hay cambios..
+                {
+                    provViejo = provViejo; 
+                    cbProveedores.setSelectedItem(provViejo);  
+                }
+            }
+        }         
     }//GEN-LAST:event_cbProveedoresActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -886,35 +929,39 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         
         if (!provSelec.equals("Seleccionar") && !provSelec.equals("No hay proveedores") && filasTabla!=0 )
         {
-            for (int i=0 ; i<filasTabla ; i++)   //recorre todas las filas del carrito
-            { 
-                String idProd = tablaPedido.getValueAt(i, 4).toString();                    
-                Producto elProd = prodDAO.buscarPorId(Integer.parseInt(idProd));
-                String cantidad = tablaPedido.getValueAt(i, 2).toString();
-                
-                ItemImprimir unItemImp = new ItemImprimir();
-                unItemImp.setProducto(elProd);
-                unItemImp.setCantidad(Integer.parseInt(cantidad));
-                
-                listaProdImprimir.add(unItemImp);                
-            }
-            
-            List<Proveedor> listaTotalProv = provDAO.listar("Habilitados", "razonSocial", "ASC");
-            
-            for (Proveedor p : listaTotalProv)
+            int imprimir = JOptionPane.showConfirmDialog(null, "¿Está seguro de imprimir la nota de pedido?", "Imprimir nota de pedido", JOptionPane.YES_NO_OPTION);
+            if (imprimir == 0)
             {
-                if (p.getRazonSocial().equals(provSelec))
-                {
-                    datosProv.add(p.getRazonSocial());
-                    datosProv.add(p.getCuit());
-                    datosProv.add(p.getDireccion());
-                    datosProv.add(p.getLocalidad() + ", " + p.getProvincia() + " (" + p.getPais() + ")");
-                    datosProv.add(p.getContacto());
+                for (int i=0 ; i<filasTabla ; i++)   //recorre todas las filas del carrito
+                { 
+                    String idProd = tablaPedido.getValueAt(i, 4).toString();                    
+                    Producto elProd = prodDAO.buscarPorId(Integer.parseInt(idProd));
+                    String cantidad = tablaPedido.getValueAt(i, 2).toString();
+
+                    ItemImprimir unItemImp = new ItemImprimir();
+                    unItemImp.setProducto(elProd);
+                    unItemImp.setCantidad(Integer.parseInt(cantidad));
+
+                    listaProdImprimir.add(unItemImp);                
                 }
+
+                List<Proveedor> listaTotalProv = provDAO.listar("Habilitados", "razonSocial", "ASC");
+
+                for (Proveedor p : listaTotalProv)
+                {
+                    if (p.getRazonSocial().equals(provSelec))
+                    {
+                        datosProv.add(p.getRazonSocial());
+                        datosProv.add(p.getCuit());
+                        datosProv.add(p.getDireccion());
+                        datosProv.add(p.getLocalidad() + ", " + p.getProvincia() + " (" + p.getPais() + ")");
+                        datosProv.add(p.getContacto());
+                    }
+                }            
+
+                Generar generarNotaPedido = new Generar();
+                generarNotaPedido.notaPedido();//listaProdImprimir, datosProv);     //aca debería pasarle por parametro lo que debe imprimir
             }            
-            
-            Generar generarNotaPedido = new Generar();
-            generarNotaPedido.notaPedido();//listaProdImprimir, datosProv);     //aca debería pasarle por parametro lo que debe imprimir
         }
         else 
         {
@@ -1368,6 +1415,30 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         modeloList.addElement("DESCRIPCIÓN:    ");
         listInfoProd.setForeground(Color.BLACK);
         listInfoProd.setModel(modeloList);
+    }
+    
+    public void listarProdOfertas()     //método provisorio | lo hice acá sólo para prueba
+    {
+        ItemVentaDAO ivDAO = new ItemVentaDAO();
+        modeloList = new DefaultListModel(); 
+        modeloList.clear();
+        
+        List<ItemVenta> prodOfertas = ivDAO.listarVentasOferta(10);
+        
+        if (prodOfertas != null)
+        {
+            for (ItemVenta iv : prodOfertas)
+            {
+                modeloList.addElement("Código " + iv.getProducto().getCodigo() + " | " + iv.getProducto().getDescripcion() 
+                                        + " | Turno N°" + iv.getTurno().getId());
+            }     
+            listProdAlarma.setForeground(Color.BLUE);
+            listProdAlarma.setModel(modeloList);
+        }
+        else
+        {
+            JOptionPane.showMessageDialog(null, "listarProdOfertas VACIA");
+        }
     }
     
     // Variables declaration - do not modify//GEN-BEGIN:variables

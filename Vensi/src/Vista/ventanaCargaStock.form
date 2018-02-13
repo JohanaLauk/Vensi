@@ -219,16 +219,8 @@
                 </Component>
                 <Component class="org.jdesktop.swingx.JXTextField" name="txfdBuscarProd">
                   <Properties>
-                    <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                      <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                        <EmptyBorder/>
-                      </Border>
-                    </Property>
                     <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                       <Font name="Calibri" size="15" style="0"/>
-                    </Property>
-                    <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
-                      <ComponentRef name="default"/>
                     </Property>
                     <Property name="prompt" type="java.lang.String" value="busque por c&#xf3;digo o por descripci&#xf3;n"/>
                   </Properties>

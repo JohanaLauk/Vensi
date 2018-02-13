@@ -46,14 +46,14 @@ public class ProductoDAO
         prod.setDescripcion(p.getDescripcion());
         prod.setPrecioCosto(p.getPrecioCosto());
         prod.setPrecioVenta(p.getPrecioVenta());
-        prod.setPrecioVentaXKilo(p.getPrecioVentaXKilo());
-        prod.setPesoEnvase(p.getPesoEnvase());
+        prod.setPrecioVentaXKilo(p.getPrecioVentaXKilo());        
         prod.setStock(p.getStock());
         prod.setStockMinimo(p.getStockMinimo());
+        prod.setPesoEnvase(p.getPesoEnvase());
         prod.setEstado(p.isEstado());
-        prod.setPorPeso(p.isPorPeso());        
+        prod.setSuspendido(p.isSuspendido());               
         prod.setOferta(p.isOferta());
-        prod.setSuspendido(p.isSuspendido());
+        prod.setPorPeso(p.isPorPeso()); 
         prod.setProveedors(p.getProveedors());
             
         tx = session.beginTransaction();
@@ -1658,8 +1658,7 @@ public class ProductoDAO
             tx = session.beginTransaction();
             Query query = session.createQuery("FROM Producto p WHERE p.stock <= p.stockMinimo AND p.estado = TRUE");
             lista = query.list();
-            tx.commit();
-            
+            tx.commit();            
         } 
         catch (Exception e) 
         {
@@ -1670,7 +1669,7 @@ public class ProductoDAO
             session.close();
         }
         return lista;
-    }
+    }  
     
     public void restarStock(int id, int cantidad)
     {

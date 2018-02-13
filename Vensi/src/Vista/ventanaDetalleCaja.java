@@ -8,7 +8,9 @@ import Modelo.EntradaSalida;
 import Modelo.ItemVenta;
 import Modelo.Producto;
 import Modelo.Turno;
+import java.text.DateFormat;
 import java.text.DecimalFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import javax.swing.ImageIcon;
 import javax.swing.table.DefaultTableModel;
@@ -32,6 +34,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     DecimalFormat formatoKilos = new DecimalFormat("0.000");
+    DateFormat fechaHoraFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
     
     ImageIcon icono;
                 
@@ -43,7 +46,9 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir  
         
         turnoActual = tDAO.obtenerUltimo();
-        
+        this.setTitle("Información de caja   -   Turno N°" + turnoActual.getId() 
+                        + "  -  Apertura: " + fechaHoraFormat.format(turnoActual.getFechaHoraInicio()) + "hs.");
+                
         llenarTabla();  
                
         txfdTotalVenta.setText("$   " + String.valueOf(formatoPrecios.format(calcularVenta())));
@@ -67,6 +72,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         txfdTotalCaja = new javax.swing.JTextField();
         btnCargarES = new javax.swing.JButton();
         btnVolverDC = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Información de caja");
@@ -185,6 +191,10 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             }
         });
 
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("MOVIMIENTOS DE CAJA");
+
         javax.swing.GroupLayout panelDatosLayout = new javax.swing.GroupLayout(panelDatos);
         panelDatos.setLayout(panelDatosLayout);
         panelDatosLayout.setHorizontalGroup(
@@ -206,13 +216,16 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
                         .addComponent(btnCargarES, javax.swing.GroupLayout.DEFAULT_SIZE, 195, Short.MAX_VALUE)
                         .addGap(72, 72, 72)
                         .addComponent(btnVolverDC, javax.swing.GroupLayout.PREFERRED_SIZE, 195, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jScrollPane1))
+                    .addComponent(jScrollPane1)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelDatosLayout.setVerticalGroup(
             panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelDatosLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 374, Short.MAX_VALUE)
+                .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 347, Short.MAX_VALUE)
                 .addGroup(panelDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelDatosLayout.createSequentialGroup()
                         .addGap(16, 16, 16)
@@ -483,6 +496,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnCargarES;
     private javax.swing.JButton btnVolverDC;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JLabel labRetiros;
     private javax.swing.JLabel labTotalCaja;

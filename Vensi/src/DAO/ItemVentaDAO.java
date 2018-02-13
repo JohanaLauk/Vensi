@@ -141,8 +141,26 @@ public class ItemVentaDAO
         return lista;
     }
     
-    /*public List<Turno> listarProdOferta()
-    {
-        
-    }*/
+    public List<ItemVenta> listarVentasOferta(int nroTurno)
+    {        
+        session = NewHibernateUtil.getSessionFactory().openSession();
+        List<ItemVenta> listaProdOferta = null;
+        try 
+        {
+            tx = session.beginTransaction();
+            Query query = session.createQuery("FROM ItemVenta iv WHERE iv.turno.id = :nroTurno AND iv.producto.oferta = true");
+            query.setParameter("nroTurno", nroTurno);
+            listaProdOferta = query.list();
+            tx.commit();            
+        } 
+        catch (Exception e) 
+        {
+            JOptionPane.showMessageDialog(null, "Error. listarVentasOferta");
+        }
+        finally
+        {
+            session.close();
+        }
+        return listaProdOferta;    
+    }
 }

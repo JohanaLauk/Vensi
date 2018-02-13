@@ -38,7 +38,7 @@ public class ventanaCargaStock extends javax.swing.JFrame
     Producto elProd = null;
     Proveedor elProv = null;
     String provSelec = "Seleccionar";
-    String provProvisorio = "Seleccionar";
+    String provViejo = "Seleccionar";
     
     Redondear r = new Redondear();
     DecimalFormat formatoPrecios = new DecimalFormat("0.00");
@@ -195,7 +195,6 @@ public class ventanaCargaStock extends javax.swing.JFrame
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Buscar:");
 
-        txfdBuscarProd.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdBuscarProd.setFont(new java.awt.Font("Calibri", 0, 15)); // NOI18N
         txfdBuscarProd.setPrompt("busque por código o por descripción");
         txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -926,114 +925,118 @@ public class ventanaCargaStock extends javax.swing.JFrame
         
         if (filasTablaInv > 0)
         {
-            Producto producto = null; 
+            int cargar = JOptionPane.showConfirmDialog(null, "¿Está seguro de cargar los productos al Inventario?", "Actualizar inventario", JOptionPane.YES_NO_OPTION);
+            if (cargar == 0)
+            {
+                Producto producto = null; 
 
-            //<-----Entradastock-------------------------------------------------------------------------------------
-            Entradastock eStock = new Entradastock();        
-            eStock.setFechaHora(new Date());        
-            eStock.setProveedor(elProv);        
-            eStockDAO.alta(eStock);
-            //------Entradastock------------------------------------------------------------------------------------->
-
-            for (int i = 0 ; i<filasTablaInv ; i++)
-            {            
-                producto = prodDAO.buscarPorId(Integer.parseInt(tablaListaInventario.getValueAt(i,4).toString()));
-                                        
-                //<-----ItemEntradastock-------------------------------------------------------------------------------------
-                ItemEntradastock itemES = new ItemEntradastock();
-                itemES.setProducto(producto);
-                itemES.setEntradastock(eStock);
-                int cant = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
-                itemES.setCantidad(cant);            
-
-                String cadenaPC = tablaListaInventario.getValueAt(i,2).toString();
-                if (!cadenaPC.equals("---"))
-                {
-                    double pc = Double.parseDouble(cadenaPC.substring(1));
-                    itemES.setPrecioCosto(pc);
-                }
-
-                String cadenaPV = tablaListaInventario.getValueAt(i,3).toString();
-                if (!cadenaPV.equals("---"))
-                {
-                    double pv = Double.parseDouble(cadenaPV.substring(1));
-                    itemES.setPrecioVenta(pv);
-                }
-
-                iESDAO.alta(itemES);
-                //------ItemEntradastock------------------------------------------------------------------------------------->
-
-                
                 //<-----Entradastock-------------------------------------------------------------------------------------
-                cantidadTotal += itemES.getCantidad();
-                eStock.setCantidadTotal(cantidadTotal);
-               
-                if (cadenaPC.equals("---"))   //si NO ingresó un precioCostoNUEVO, calcula el importeT con el pcVIEJO
-                {
-                    double pcProd = producto.getPrecioCosto();
-                    precioCTItem = itemES.getCantidad() * pcProd;
-                }
-                else    //si SÍ ingreso un precioCostoNUEVO, calcula el importeTotal.
-                {
-                    precioCTItem = itemES.getCantidad() * itemES.getPrecioCosto();                    
-                }        
-                importeCostoT += precioCTItem;
-                eStock.setImporteCostoTotal(importeCostoT);
-                eStockDAO.modificar(eStock, eStock.getId());
+                Entradastock eStock = new Entradastock();        
+                eStock.setFechaHora(new Date());        
+                eStock.setProveedor(elProv);        
+                eStockDAO.alta(eStock);
                 //------Entradastock------------------------------------------------------------------------------------->
-                
-                
-                //<-----Producto--------------------------------------------------------------------------------------------
-                double precioCostoU = 0;            
 
-                if (cadenaPC.equals("---"))
-                {
-                    precioCostoU = 0;
-                }
-                else
-                {
-                    cadenaPC = cadenaPC.substring(1);
-                    precioCostoU = Double.parseDouble(cadenaPC);
-                }
+                for (int i = 0 ; i<filasTablaInv ; i++)
+                {            
+                    producto = prodDAO.buscarPorId(Integer.parseInt(tablaListaInventario.getValueAt(i,4).toString()));
 
-                double precioVentaU = 0;
-                double precioVentaXkilo = 0;
+                    //<-----ItemEntradastock-------------------------------------------------------------------------------------
+                    ItemEntradastock itemES = new ItemEntradastock();
+                    itemES.setProducto(producto);
+                    itemES.setEntradastock(eStock);
+                    int cant = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
+                    itemES.setCantidad(cant);            
 
-                if (cadenaPV.equals("---"))
-                {
-                    precioVentaU = 0;
-                    precioVentaXkilo = 0;
-                }
-                else
-                {
-                    cadenaPV = cadenaPV.substring(1);
-                    precioVentaU = Double.parseDouble(cadenaPV);
+                    String cadenaPC = tablaListaInventario.getValueAt(i,2).toString();
+                    if (!cadenaPC.equals("---"))
+                    {
+                        double pc = Double.parseDouble(cadenaPC.substring(1));
+                        itemES.setPrecioCosto(pc);
+                    }
 
-                    precioVentaXkilo = (1000 * precioVentaU) / producto.getPesoEnvase();
-                    precioVentaXkilo = r.RedondearAIntArriba(precioVentaXkilo);
-                }               
+                    String cadenaPV = tablaListaInventario.getValueAt(i,3).toString();
+                    if (!cadenaPV.equals("---"))
+                    {
+                        double pv = Double.parseDouble(cadenaPV.substring(1));
+                        itemES.setPrecioVenta(pv);
+                    }
 
-                if (producto.isPorPeso())
-                {    
-                    int cantU = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
-                    int cantGR = cantU * producto.getPesoEnvase();
-                    prodDAO.sumarStock(producto.getId(), cantGR);
-                }
-                else
-                {
-                    prodDAO.sumarStock(producto.getId(), Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString()));
-                }            
+                    iESDAO.alta(itemES);
+                    //------ItemEntradastock------------------------------------------------------------------------------------->
 
-                prodDAO.setearPreciosUnidad(producto.getId(), precioCostoU, precioVentaU, precioVentaXkilo);
-                //------Producto-------------------------------------------------------------------------------------------->
-            }          
-                            
-            JOptionPane.showMessageDialog(null, "¡Finalizado con éxito!");
 
-            txfdCantidad.setText(null);
-            txfdPrecioCU.setText(null);        
-            llenarTablaInventario();
-            llenarTabla();
+                    //<-----Entradastock-------------------------------------------------------------------------------------
+                    cantidadTotal += itemES.getCantidad();
+                    eStock.setCantidadTotal(cantidadTotal);
+
+                    if (cadenaPC.equals("---"))   //si NO ingresó un precioCostoNUEVO, calcula el importeT con el pcVIEJO
+                    {
+                        double pcProd = producto.getPrecioCosto();
+                        precioCTItem = itemES.getCantidad() * pcProd;
+                    }
+                    else    //si SÍ ingreso un precioCostoNUEVO, calcula el importeTotal.
+                    {
+                        precioCTItem = itemES.getCantidad() * itemES.getPrecioCosto();                    
+                    }        
+                    importeCostoT += precioCTItem;
+                    eStock.setImporteCostoTotal(importeCostoT);
+                    eStockDAO.modificar(eStock, eStock.getId());
+                    //------Entradastock------------------------------------------------------------------------------------->
+
+
+                    //<-----Producto--------------------------------------------------------------------------------------------
+                    double precioCostoU = 0;            
+
+                    if (cadenaPC.equals("---"))
+                    {
+                        precioCostoU = 0;
+                    }
+                    else
+                    {
+                        cadenaPC = cadenaPC.substring(1);
+                        precioCostoU = Double.parseDouble(cadenaPC);
+                    }
+
+                    double precioVentaU = 0;
+                    double precioVentaXkilo = 0;
+
+                    if (cadenaPV.equals("---"))
+                    {
+                        precioVentaU = 0;
+                        precioVentaXkilo = 0;
+                    }
+                    else
+                    {
+                        cadenaPV = cadenaPV.substring(1);
+                        precioVentaU = Double.parseDouble(cadenaPV);
+
+                        precioVentaXkilo = (1000 * precioVentaU) / producto.getPesoEnvase();
+                        precioVentaXkilo = r.RedondearAIntArriba(precioVentaXkilo);
+                    }               
+
+                    if (producto.isPorPeso())
+                    {    
+                        int cantU = Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString());
+                        int cantGR = cantU * producto.getPesoEnvase();
+                        prodDAO.sumarStock(producto.getId(), cantGR);
+                    }
+                    else
+                    {
+                        prodDAO.sumarStock(producto.getId(), Integer.parseInt(tablaListaInventario.getValueAt(i,1).toString()));
+                    }            
+
+                    prodDAO.setearPreciosUnidad(producto.getId(), precioCostoU, precioVentaU, precioVentaXkilo);
+                    //------Producto-------------------------------------------------------------------------------------------->
+                }          
+
+                JOptionPane.showMessageDialog(null, "¡Inventario actualizado con éxito!");
+
+                txfdCantidad.setText(null);
+                txfdPrecioCU.setText(null);        
+                llenarTablaInventario();
+                llenarTabla();
+            }            
         }
         else
         {
@@ -1043,72 +1046,107 @@ public class ventanaCargaStock extends javax.swing.JFrame
 
     private void cbProveedoresActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbProveedoresActionPerformed
         provSelec = String.valueOf(cbProveedores.getSelectedItem());
+        List<Proveedor> listaProvHab = provDAO.listar("Habilitados", "razonSocial", "ASC");
         
-        if (!provProvisorio.equals(provSelec))
+        if (provViejo.equals("Seleccionar") && !provSelec.equals("Seleccionar"))   //abre la ventana y selecciona un prov
         {
-            List<Proveedor> listaProvHab = provDAO.listar("Habilitados", "razonSocial", "ASC");
-                
-            if (provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
-            {  
-                mostrarTablaVacia();   
-
-                for (int i=0 ; i < panelBusqueda.getComponents().length ; i++)
-                {
-                    panelBusqueda.getComponent(i).setEnabled(false);
-                }
-                for (int i=0 ; i < panelComboBox.getComponents().length ; i++)
-                {
-                    panelComboBox.getComponent(i).setEnabled(false);
-                }  
-
-                if (provSelec.equals("Seleccionar"))
-                {
-                    llenarTablaInventario();
-                }
-
-                limpiarList();
-                tablaProd.clearSelection();
-                tablaListaInventario.clearSelection();
-                btnAgregar.setEnabled(false);
-                btnQuitar.setEnabled(false);
-                txfdCantidad.setText(null);
-                txfdPrecioCU.setText(null);
-                txfdPrecioVU.setText(null);
-                btnCargarInventario.setEnabled(false);
-            }
-            else
+            for (int i=0 ; i < panelBusqueda.getComponents().length ; i++)
             {
-                for (int i=0 ; i < panelBusqueda.getComponents().length ; i++)
+                panelBusqueda.getComponent(i).setEnabled(true);
+            }
+            for (int i=0 ; i < panelComboBox.getComponents().length ; i++)
+            {
+                panelComboBox.getComponent(i).setEnabled(true);
+            } 
+            cbSituacion.setEnabled(false);
+
+            for (Proveedor p : listaProvHab)
+            {
+                if (p.getRazonSocial().equals(provSelec))
                 {
-                    panelBusqueda.getComponent(i).setEnabled(true);
+                    elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
+                    llenarTabla();
                 }
-                for (int i=0 ; i < panelComboBox.getComponents().length ; i++)
-                {
-                    panelComboBox.getComponent(i).setEnabled(true);
-                } 
-                cbSituacion.setEnabled(false);
+            }      
 
-                for (Proveedor p : listaProvHab)
+            llenarTablaInventario();
+            provViejo = provSelec;
+        }
+        else    //si selecciona por segunda vez un prov...
+        {
+            if (!provViejo.equals(provSelec))  //si la opción que estaba es diferente a la que quiere ahora...
+            {            
+                int cambiar = JOptionPane.showConfirmDialog(null, "Al seleccionar otro proveedor, perderá la lista actual de productos.\n¿Está seguro de continuar?", "¡ADVERTENCIA!", JOptionPane.YES_NO_OPTION);
+                if (cambiar == 0)
                 {
-                    if (p.getRazonSocial().equals(provSelec))
-                    {
-                        elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
-                        llenarTabla();
+                    if (provSelec.equals("Seleccionar") || provSelec.equals("No hay proveedores"))
+                    {  
+                        mostrarTablaVacia();   
+
+                        for (int i=0 ; i < panelBusqueda.getComponents().length ; i++)
+                        {
+                            panelBusqueda.getComponent(i).setEnabled(false);
+                        }
+                        for (int i=0 ; i < panelComboBox.getComponents().length ; i++)
+                        {
+                            panelComboBox.getComponent(i).setEnabled(false);
+                        }  
+
+                        if (provSelec.equals("Seleccionar"))
+                        {
+                            llenarTablaInventario();
+                        }
+
+                        limpiarList();
+                        tablaProd.clearSelection();
+                        tablaListaInventario.clearSelection();
+                        btnAgregar.setEnabled(false);
+                        btnQuitar.setEnabled(false);
+                        txfdCantidad.setText(null);
+                        txfdPrecioCU.setText(null);
+                        txfdPrecioVU.setText(null);
+                        btnCargarInventario.setEnabled(false);
                     }
-                }      
+                    else
+                    {
+                        for (int i=0 ; i < panelBusqueda.getComponents().length ; i++)
+                        {
+                            panelBusqueda.getComponent(i).setEnabled(true);
+                        }
+                        for (int i=0 ; i < panelComboBox.getComponents().length ; i++)
+                        {
+                            panelComboBox.getComponent(i).setEnabled(true);
+                        } 
+                        cbSituacion.setEnabled(false);
 
-                llenarTablaInventario();         
-                
-                limpiarList();
-                habilitarBTNCargaI();
-                btnAgregar.setEnabled(false);
-                btnQuitar.setEnabled(false);
-                txfdCantidad.setText(null);
-                txfdPrecioCU.setText(null);
-                txfdPrecioVU.setText(null);       
+                        for (Proveedor p : listaProvHab)
+                        {
+                            if (p.getRazonSocial().equals(provSelec))
+                            {
+                                elProv = provDAO.buscarPorCuitNombre(provSelec, "Habilitados").get(0);
+                                llenarTabla();
+                            }
+                        }      
+
+                        llenarTablaInventario();         
+
+                        limpiarList();
+                        habilitarBTNCargaI();
+                        btnAgregar.setEnabled(false);
+                        btnQuitar.setEnabled(false);
+                        txfdCantidad.setText(null);
+                        txfdPrecioCU.setText(null);
+                        txfdPrecioVU.setText(null);       
+                    }    
+                    provViejo = provSelec;
+                } 
+                else    //si dice que NO quiere continuar... es decir, no hay cambios..
+                {
+                    provViejo = provViejo; 
+                    cbProveedores.setSelectedItem(provViejo);                    
+                }
             }
         }
-        provProvisorio = provSelec;
     }//GEN-LAST:event_cbProveedoresActionPerformed
 
     private void txfdBuscarProdKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdBuscarProdKeyReleased
