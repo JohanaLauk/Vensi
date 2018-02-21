@@ -124,6 +124,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         btnAceptarCerrarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/aceptar_50.png"))); // NOI18N
         btnAceptarCerrarTurno.setText("Aceptar");
         btnAceptarCerrarTurno.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAceptarCerrarTurno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAceptarCerrarTurno.setFocusPainted(false);
         btnAceptarCerrarTurno.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAceptarCerrarTurno.setIconTextGap(20);
@@ -147,6 +148,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         btnCancelarCerrarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/no_50.png"))); // NOI18N
         btnCancelarCerrarTurno.setText("Cancelar");
         btnCancelarCerrarTurno.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCancelarCerrarTurno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelarCerrarTurno.setFocusPainted(false);
         btnCancelarCerrarTurno.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnCancelarCerrarTurno.setIconTextGap(20);
@@ -188,29 +190,25 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         panelCalculosLayout.setHorizontalGroup(
             panelCalculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCalculosLayout.createSequentialGroup()
+                .addGap(27, 27, 27)
+                .addGroup(panelCalculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfdMontoEsperado)
+                    .addComponent(txfdHay)
+                    .addComponent(txfdDiferencia)
+                    .addComponent(jLabel13))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(panelCalculosLayout.createSequentialGroup()
+                .addContainerGap()
                 .addGroup(panelCalculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelCalculosLayout.createSequentialGroup()
-                        .addGap(30, 30, 30)
-                        .addGroup(panelCalculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txfdMontoEsperado)
-                            .addComponent(txfdHay)
-                            .addComponent(txfdDiferencia)
-                            .addComponent(jLabel13))
-                        .addGap(0, 18, Short.MAX_VALUE))
-                    .addGroup(panelCalculosLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnCancelarCerrarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(panelCalculosLayout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(btnAceptarCerrarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(btnCancelarCerrarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
+                    .addComponent(btnAceptarCerrarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelCalculosLayout.setVerticalGroup(
             panelCalculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCalculosLayout.createSequentialGroup()
-                .addGap(21, 21, 21)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txfdMontoEsperado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -222,10 +220,11 @@ public class ventanaCierreTurno extends javax.swing.JFrame
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txfdDiferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(37, 37, 37)
+                .addComponent(btnCancelarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnAceptarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22)
-                .addComponent(btnCancelarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         panelEntradas.setOpaque(false);
@@ -233,60 +232,70 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         jButton1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton1.setText("500 x");
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.setFocusPainted(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton2.setText("200 x");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton2.setFocusPainted(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton3.setText("100 x");
         jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton3.setFocusPainted(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton5.setText("20 x");
         jButton5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton5.setFocusPainted(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton6.setText("10 x");
         jButton6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton6.setFocusPainted(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton7.setText("5 x");
         jButton7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton7.setFocusPainted(false);
         jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton8.setText("2 x ");
         jButton8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton8.setFocusPainted(false);
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton9.setText("1 x");
         jButton9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton9.setFocusPainted(false);
         jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton10.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton10.setText("00,50 x");
         jButton10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton10.setFocusPainted(false);
         jButton10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         jButton11.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton11.setText("00,25 x");
         jButton11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton11.setFocusPainted(false);
         jButton11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -306,6 +315,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         jButton4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jButton4.setText("50 x");
         jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton4.setFocusPainted(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
@@ -443,66 +453,77 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         txfd500total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
         txfd500total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd500total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txfd500total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd500total.setNextFocusableComponent(txfd200);
 
         txfd200total.setEditable(false);
         txfd200total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
         txfd200total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd200total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txfd200total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd200total.setNextFocusableComponent(txfd100);
 
         txfd100total.setEditable(false);
         txfd100total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
         txfd100total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd100total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txfd100total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd100total.setNextFocusableComponent(txfd50);
 
         txfd50total.setEditable(false);
         txfd50total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
         txfd50total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd50total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txfd50total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd50total.setNextFocusableComponent(txfd20);
 
         txfd20total.setEditable(false);
         txfd20total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
         txfd20total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd20total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txfd20total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd20total.setNextFocusableComponent(txfd10);
 
         txfd10total.setEditable(false);
         txfd10total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
         txfd10total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd10total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txfd10total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd10total.setNextFocusableComponent(txfd5);
 
         txfd5total.setEditable(false);
         txfd5total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
         txfd5total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd5total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txfd5total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd5total.setNextFocusableComponent(txfd2);
 
         txfd2total.setEditable(false);
         txfd2total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
         txfd2total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd2total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txfd2total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd2total.setNextFocusableComponent(txfd1);
 
         txfd1total.setEditable(false);
         txfd1total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
         txfd1total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd1total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txfd1total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd1total.setNextFocusableComponent(txfd0050);
 
         txfd0050total.setEditable(false);
         txfd0050total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
         txfd0050total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd0050total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txfd0050total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd0050total.setNextFocusableComponent(txfd0025);
 
         txfd0025total.setEditable(false);
         txfd0025total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
         txfd0025total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd0025total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txfd0025total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd0025total.setNextFocusableComponent(btnAceptarCerrarTurno);
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N

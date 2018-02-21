@@ -117,9 +117,9 @@ public class ventanaProducto extends javax.swing.JFrame
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Buscar:");
 
+        txfdBuscarProd.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdBuscarProd.setHorizontalAlignment(javax.swing.JTextField.LEFT);
-        txfdBuscarProd.setDisabledTextColor(new java.awt.Color(51, 51, 51));
-        txfdBuscarProd.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        txfdBuscarProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdBuscarProd.setNextFocusableComponent(btnEditarProd);
         txfdBuscarProd.setPrompt("Busque por código o por descripción");
         txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -133,6 +133,7 @@ public class ventanaProducto extends javax.swing.JFrame
         jLabel2.setText("Proveedor:");
 
         cbFiltroProv.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        cbFiltroProv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbFiltroProv.setNextFocusableComponent(cbFiltroEstado);
         cbFiltroProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +179,7 @@ public class ventanaProducto extends javax.swing.JFrame
 
         cbFiltroEstado.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         cbFiltroEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
-        cbFiltroEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        cbFiltroEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbFiltroEstado.setNextFocusableComponent(cbSituacion);
         cbFiltroEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -188,6 +189,7 @@ public class ventanaProducto extends javax.swing.JFrame
 
         cbSituacion.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo habilitados", "Sólo ofertas", "Sólo suspendidos" }));
+        cbSituacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbSituacion.setNextFocusableComponent(cbCampoOrden);
         cbSituacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,6 +204,7 @@ public class ventanaProducto extends javax.swing.JFrame
 
         cbCampoOrden.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         cbCampoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Descripción", "Código", "Precio costo", "Precio venta", "Stock", "Stock mínimo", "Peso del envase" }));
+        cbCampoOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbCampoOrden.setNextFocusableComponent(cbTipoOrden);
         cbCampoOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -211,6 +214,7 @@ public class ventanaProducto extends javax.swing.JFrame
 
         cbTipoOrden.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         cbTipoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        cbTipoOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbTipoOrden.setNextFocusableComponent(btnNuevoProd);
         cbTipoOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -261,7 +265,7 @@ public class ventanaProducto extends javax.swing.JFrame
                 return false;
             }
         };
-        tablaProd.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tablaProd.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tablaProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         tablaProd.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -273,7 +277,7 @@ public class ventanaProducto extends javax.swing.JFrame
         ));
         tablaProd.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         tablaProd.setFocusable(false);
-        tablaProd.setGridColor(new java.awt.Color(204, 204, 204));
+        tablaProd.setGridColor(new java.awt.Color(153, 153, 153));
         tablaProd.setNextFocusableComponent(btnEditarProd);
         tablaProd.setRowHeight(20);
         tablaProd.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);

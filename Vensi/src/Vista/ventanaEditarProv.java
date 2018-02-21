@@ -79,7 +79,9 @@ public class ventanaEditarProv extends javax.swing.JFrame
         jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel5.setText("Estado:");
 
+        cbEditarEstado.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cbEditarEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "Deshabilitado" }));
+        cbEditarEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbEditarEstado.setNextFocusableComponent(btnAceptarEditar);
 
         txfdEditarRazonSocial.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -124,8 +126,8 @@ public class ventanaEditarProv extends javax.swing.JFrame
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setText("Contacto:");
 
+        txfdEditarCuit.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarCuit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txfdEditarCuit.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txfdEditarCuit.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarCuit.setPrompt("XX-XXXXXXXX-X");
         txfdEditarCuit.addKeyListener(new java.awt.event.KeyAdapter() {

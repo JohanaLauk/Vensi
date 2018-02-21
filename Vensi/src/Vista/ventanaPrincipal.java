@@ -142,7 +142,6 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnHistorial.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/historial_100.png"))); // NOI18N
         btnHistorial.setToolTipText("");
-        btnHistorial.setBorder(null);
         btnHistorial.setBorderPainted(false);
         btnHistorial.setContentAreaFilled(false);
         btnHistorial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -166,7 +165,6 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnPedidos.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnPedidos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/pedido_100.png"))); // NOI18N
         btnPedidos.setToolTipText("");
-        btnPedidos.setBorder(null);
         btnPedidos.setBorderPainted(false);
         btnPedidos.setContentAreaFilled(false);
         btnPedidos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -190,7 +188,6 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnAdministracion.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnAdministracion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/adminBD_100.png"))); // NOI18N
         btnAdministracion.setToolTipText("");
-        btnAdministracion.setBorder(null);
         btnAdministracion.setBorderPainted(false);
         btnAdministracion.setContentAreaFilled(false);
         btnAdministracion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -214,7 +211,6 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnVentas.setFont(new java.awt.Font("Calibri", 0, 50)); // NOI18N
         btnVentas.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/ventas_100.png"))); // NOI18N
         btnVentas.setToolTipText("");
-        btnVentas.setBorder(null);
         btnVentas.setBorderPainted(false);
         btnVentas.setContentAreaFilled(false);
         btnVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -237,10 +233,10 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
         btnSalir.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/apagar_50.png"))); // NOI18N
         btnSalir.setToolTipText("Salir");
-        btnSalir.setBorder(null);
         btnSalir.setBorderPainted(false);
         btnSalir.setContentAreaFilled(false);
         btnSalir.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnSalir.setFocusPainted(false);
         btnSalir.setNextFocusableComponent(btnVentas);
         btnSalir.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -259,7 +255,6 @@ public class ventanaPrincipal extends javax.swing.JFrame
 
         btnCargaStock.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/cargaStock_100.png"))); // NOI18N
         btnCargaStock.setToolTipText("");
-        btnCargaStock.setBorder(null);
         btnCargaStock.setBorderPainted(false);
         btnCargaStock.setContentAreaFilled(false);
         btnCargaStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
@@ -278,7 +273,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
                 btnCargaStockActionPerformed(evt);
             }
         });
-        panelDerecha.add(btnCargaStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 140, -1, 110));
+        panelDerecha.add(btnCargaStock, new org.netbeans.lib.awtextra.AbsoluteConstraints(312, 140, 120, 110));
 
         btnMinimizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vPrincipal/minimizar_50.png"))); // NOI18N
         btnMinimizar.setToolTipText("Minimizar");

@@ -116,6 +116,7 @@ public class ventanaHistorial extends javax.swing.JFrame
 
         jPanel2.setOpaque(false);
 
+        cbBuscarPor.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cbBuscarPor.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbBuscarPor.setNextFocusableComponent(txfdNro);
         cbBuscarPor.addActionListener(new java.awt.event.ActionListener() {
@@ -258,12 +259,13 @@ public class ventanaHistorial extends javax.swing.JFrame
                             .addComponent(txfdNro)
                             .addComponent(labNro, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(14, 14, 14)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(labFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(LabFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 36, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(dateHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                .addComponent(labFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(dateDesde, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(44, 44, 44)
                         .addComponent(btnVaciarFechaHasta, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))))
@@ -356,6 +358,7 @@ public class ventanaHistorial extends javax.swing.JFrame
                 return false;
             }
         };
+        tablaHistorial.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tablaHistorial.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         tablaHistorial.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -369,6 +372,7 @@ public class ventanaHistorial extends javax.swing.JFrame
             }
         ));
         tablaHistorial.setFocusable(false);
+        tablaHistorial.setGridColor(new java.awt.Color(153, 153, 153));
         tablaHistorial.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaHistorial.getTableHeader().setResizingAllowed(false);
         tablaHistorial.getTableHeader().setReorderingAllowed(false);

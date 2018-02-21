@@ -145,10 +145,11 @@ public class ventanaCargarES extends javax.swing.JFrame
             }
         });
 
-        txAreaDescripcion.setEditable(false);
         txAreaDescripcion.setColumns(20);
+        txAreaDescripcion.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txAreaDescripcion.setRows(5);
-        txAreaDescripcion.setNextFocusableComponent(btnCancelar);
+        txAreaDescripcion.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txAreaDescripcion.setNextFocusableComponent(btnConfirmar);
         jScrollPane2.setViewportView(txAreaDescripcion);
 
         jLabel6.setBackground(new java.awt.Color(0, 0, 0));
@@ -156,6 +157,8 @@ public class ventanaCargarES extends javax.swing.JFrame
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Monto:");
 
+        txfdMonto.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        txfdMonto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdMonto.setNextFocusableComponent(txAreaDescripcion);
         txfdMonto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -238,6 +241,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Informacíon del producto:");
 
+        listaInfoProdAnular.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         listaInfoProdAnular.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         listaInfoProdAnular.setForeground(new java.awt.Color(255, 0, 0));
         listaInfoProdAnular.setNextFocusableComponent(btnAnular);
@@ -273,6 +277,7 @@ public class ventanaCargarES extends javax.swing.JFrame
         labTituloPanelAnularProd.setText("ANULACIÓN DE PRODUCTO");
         labTituloPanelAnularProd.setToolTipText("");
 
+        txfdCantProdAnular.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdCantProdAnular.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdCantProdAnular.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCantProdAnular.setNextFocusableComponent(listaInfoProdAnular);
@@ -287,6 +292,7 @@ public class ventanaCargarES extends javax.swing.JFrame
             }
         });
 
+        txfdCodNomProdAnular.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdCodNomProdAnular.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdCodNomProdAnular.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCodNomProdAnular.setNextFocusableComponent(txfdCantProdAnular);

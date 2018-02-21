@@ -174,6 +174,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         txfdCodigo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCodigo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdCodigo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdCodigo.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txfdCodigo.setNextFocusableComponent(txfdDescripcion);
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
@@ -182,16 +183,17 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         txfdDescripcion.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdDescripcion.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdDescripcion.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        txfdDescripcion.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
         txfdDescripcion.setNextFocusableComponent(txfdPrecioCosto);
 
         jLabel7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel7.setText("Precio costo:");
 
         txfdPrecioCosto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdPrecioCosto.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txfdPrecioCosto.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdPrecioCosto.setNextFocusableComponent(txfdPrecioVenta);
         txfdPrecioCosto.setPrompt("Ej: \"00\" o \"00.00\"");
-        txfdPrecioCosto.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdPrecioCostoKeyTyped(evt);
@@ -202,10 +204,10 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel3.setText("Precio venta:");
 
         txfdPrecioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdPrecioVenta.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txfdPrecioVenta.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdPrecioVenta.setNextFocusableComponent(txfdStockInicial);
         txfdPrecioVenta.setPrompt("Ej: \"00\" o \"00.00\"");
-        txfdPrecioVenta.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdPrecioVentaKeyTyped(evt);
@@ -216,10 +218,10 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel9.setText("Stock inicial:");
 
         txfdStockInicial.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdStockInicial.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txfdStockInicial.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdStockInicial.setNextFocusableComponent(txfdStockMinimo);
         txfdStockInicial.setPrompt("Ingrese la cantidad en unidades");
-        txfdStockInicial.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdStockInicial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdStockInicialKeyTyped(evt);
@@ -230,10 +232,10 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel4.setText("Stock mínimo:");
 
         txfdStockMinimo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdStockMinimo.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txfdStockMinimo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdStockMinimo.setNextFocusableComponent(rbUnidad);
         txfdStockMinimo.setPrompt("Ingrese la cantidad en unidades");
-        txfdStockMinimo.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdStockMinimo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdStockMinimoKeyTyped(evt);
@@ -257,7 +259,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             .addComponent(txfdDescripcion)
             .addComponent(txfdPrecioCosto, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addComponent(txfdPrecioVenta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(txfdStockInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 325, Short.MAX_VALUE)
+            .addComponent(txfdStockInicial, javax.swing.GroupLayout.DEFAULT_SIZE, 327, Short.MAX_VALUE)
             .addComponent(txfdStockMinimo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelIzquierdoLayout.setVerticalGroup(
@@ -294,7 +296,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel5.setText("Se vende por:");
 
         bgTipoVenta.add(rbUnidad);
-        rbUnidad.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        rbUnidad.setFont(new java.awt.Font("Calibri", 2, 16)); // NOI18N
         rbUnidad.setText("Unidad");
         rbUnidad.setNextFocusableComponent(rbPeso);
         rbUnidad.setOpaque(false);
@@ -305,7 +307,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         });
 
         bgTipoVenta.add(rbPeso);
-        rbPeso.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        rbPeso.setFont(new java.awt.Font("Calibri", 2, 16)); // NOI18N
         rbPeso.setText("Peso");
         rbPeso.setNextFocusableComponent(txfdPesoEnvase);
         rbPeso.setOpaque(false);
@@ -326,6 +328,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
         cbSituación.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cbSituación.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Oferta", "Suspendido" }));
+        cbSituación.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbSituación.setNextFocusableComponent(btnAceptarNuevoProd);
         cbSituación.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -336,6 +339,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel8.setText("Seleccione el/los proveedor/es:");
 
+        tablaProv.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tablaProv.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         tablaProv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -360,6 +364,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                 return canEdit [columnIndex];
             }
         });
+        tablaProv.setGridColor(new java.awt.Color(153, 153, 153));
         jScrollPane3.setViewportView(tablaProv);
         if (tablaProv.getColumnModel().getColumnCount() > 0) {
             tablaProv.getColumnModel().getColumn(0).setResizable(false);
@@ -373,6 +378,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
 
         txfdPesoEnvase.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdPesoEnvase.setToolTipText("Ej: 1000");
+        txfdPesoEnvase.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txfdPesoEnvase.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdPesoEnvase.setPrompt("Ej: 1000");
         txfdPesoEnvase.addKeyListener(new java.awt.event.KeyAdapter() {

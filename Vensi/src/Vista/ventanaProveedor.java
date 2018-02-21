@@ -94,8 +94,9 @@ public class ventanaProveedor extends javax.swing.JFrame
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Buscar:");
 
-        cbFiltroCampoProv.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        cbFiltroCampoProv.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cbFiltroCampoProv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Habilitados", "Deshabilitados" }));
+        cbFiltroCampoProv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbFiltroCampoProv.setNextFocusableComponent(btnNuevoProv);
         cbFiltroCampoProv.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -107,9 +108,9 @@ public class ventanaProveedor extends javax.swing.JFrame
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Filtrar por:");
 
+        txfdBuscarProv.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdBuscarProv.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdBuscarProv.setPrompt("Busque por código o por descripción");
-        txfdBuscarProv.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdBuscarProv.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfdBuscarProvKeyReleased(evt);
@@ -121,16 +122,18 @@ public class ventanaProveedor extends javax.swing.JFrame
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
         jLabel2.setText("Ordenar por:");
 
-        cbCampoOrden.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        cbCampoOrden.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cbCampoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Razón social", "Cuit" }));
+        cbCampoOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbCampoOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbCampoOrdenActionPerformed(evt);
             }
         });
 
-        cbTipoOrden.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        cbTipoOrden.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cbTipoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ascendente", "Descendente" }));
+        cbTipoOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbTipoOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbTipoOrdenActionPerformed(evt);
@@ -180,6 +183,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         btnNuevoProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/prov+_50.png"))); // NOI18N
         btnNuevoProv.setText("Nuevo");
         btnNuevoProv.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnNuevoProv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnNuevoProv.setFocusPainted(false);
         btnNuevoProv.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnNuevoProv.setIconTextGap(50);
@@ -203,6 +207,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         btnEditarProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/editar_50.png"))); // NOI18N
         btnEditarProv.setText("Editar");
         btnEditarProv.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnEditarProv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnEditarProv.setFocusPainted(false);
         btnEditarProv.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEditarProv.setIconTextGap(50);
@@ -226,6 +231,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         btnMenuPpal.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/home_50.png"))); // NOI18N
         btnMenuPpal.setText("Menú principal");
         btnMenuPpal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnMenuPpal.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnMenuPpal.setFocusPainted(false);
         btnMenuPpal.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnMenuPpal.setIconTextGap(10);
@@ -249,6 +255,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         btnVolverProv.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vGestion/volver_50.png"))); // NOI18N
         btnVolverProv.setText("Volver");
         btnVolverProv.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnVolverProv.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnVolverProv.setFocusPainted(false);
         btnVolverProv.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnVolverProv.setIconTextGap(40);
@@ -274,6 +281,8 @@ public class ventanaProveedor extends javax.swing.JFrame
                 return false;
             }
         };
+        tablaProv.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tablaProv.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         tablaProv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -283,6 +292,7 @@ public class ventanaProveedor extends javax.swing.JFrame
             }
         ));
         tablaProv.setFocusable(false);
+        tablaProv.setGridColor(new java.awt.Color(153, 153, 153));
         tablaProv.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaProv.getTableHeader().setResizingAllowed(false);
         tablaProv.getTableHeader().setReorderingAllowed(false);

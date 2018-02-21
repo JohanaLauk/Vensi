@@ -98,6 +98,8 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
                 return false;
             }
         };
+        tablaDetalleCaja.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tablaDetalleCaja.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         tablaDetalleCaja.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -107,6 +109,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
             }
         ));
         tablaDetalleCaja.setFocusable(false);
+        tablaDetalleCaja.setGridColor(new java.awt.Color(153, 153, 153));
         tablaDetalleCaja.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaDetalleCaja.getTableHeader().setResizingAllowed(false);
         tablaDetalleCaja.getTableHeader().setReorderingAllowed(false);

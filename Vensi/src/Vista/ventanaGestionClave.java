@@ -51,6 +51,7 @@ public class ventanaGestionClave extends javax.swing.JFrame
 
         cbTipoClave.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cbTipoClave.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Propietario", "Empleado" }));
+        cbTipoClave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbTipoClave.setNextFocusableComponent(passActual);
 
         btnVolver.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N

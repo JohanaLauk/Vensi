@@ -93,6 +93,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         panelIzquierdo.setOpaque(false);
 
+        txfdEditarStockMinimo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarStockMinimo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarStockMinimo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarStockMinimo.setNextFocusableComponent(rbUnidad);
@@ -107,6 +108,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel7.setText("Stock mínimo:");
 
+        txfdEditarPrecioVenta.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarPrecioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarPrecioVenta.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarPrecioVenta.setNextFocusableComponent(txfdEditarStockMinimo);
@@ -121,6 +123,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setText("Precio venta:");
 
+        txfdEditarPrecioCosto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarPrecioCosto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarPrecioCosto.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarPrecioCosto.setNextFocusableComponent(txfdEditarPrecioVenta);
@@ -199,7 +202,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel5.setText("Se vende por:");
 
         bgTipoVenta.add(rbUnidad);
-        rbUnidad.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        rbUnidad.setFont(new java.awt.Font("Calibri", 2, 16)); // NOI18N
         rbUnidad.setText("Unidad");
         rbUnidad.setNextFocusableComponent(rbPeso);
         rbUnidad.setOpaque(false);
@@ -210,7 +213,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         });
 
         bgTipoVenta.add(rbPeso);
-        rbPeso.setFont(new java.awt.Font("Calibri", 0, 16)); // NOI18N
+        rbPeso.setFont(new java.awt.Font("Calibri", 2, 16)); // NOI18N
         rbPeso.setText("Peso");
         rbPeso.setNextFocusableComponent(txfdEditarPesoEnvase);
         rbPeso.setOpaque(false);
@@ -231,6 +234,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         cbEstado.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cbEstado.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Habilitado", "Deshabilitado" }));
+        cbEstado.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbEstado.setNextFocusableComponent(cbSituacion);
         cbEstado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -243,6 +247,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         cbSituacion.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         cbSituacion.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Ninguno", "Oferta", "Suspendido" }));
+        cbSituacion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbSituacion.setNextFocusableComponent(btnAceptarEditar);
         cbSituacion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -253,6 +258,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel6.setText("Proveedor/es:");
 
+        tablaProv.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tablaProv.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         tablaProv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -277,6 +283,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
                 return canEdit [columnIndex];
             }
         });
+        tablaProv.setGridColor(new java.awt.Color(153, 153, 153));
         jScrollPane1.setViewportView(tablaProv);
         if (tablaProv.getColumnModel().getColumnCount() > 0) {
             tablaProv.getColumnModel().getColumn(0).setResizable(false);
@@ -288,10 +295,12 @@ public class ventanaEditarProd extends javax.swing.JFrame
             tablaProv.getColumnModel().getColumn(2).setMaxWidth(0);
         }
 
+        txfdEditarPesoEnvase.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarPesoEnvase.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarPesoEnvase.setToolTipText("Ej: 1000");
         txfdEditarPesoEnvase.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarPesoEnvase.setPrompt("Ej: 1000");
+        txfdEditarPesoEnvase.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdEditarPesoEnvase.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdEditarPesoEnvaseKeyTyped(evt);

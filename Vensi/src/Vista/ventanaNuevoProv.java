@@ -103,10 +103,11 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         txfdPais.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdPais.setNextFocusableComponent(txfdContacto);
 
+        txfdCuit.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdCuit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txfdCuit.setDisabledTextColor(new java.awt.Color(51, 51, 51));
         txfdCuit.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCuit.setPrompt("XX-XXXXXXXX-X");
+        txfdCuit.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdCuit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdCuitKeyTyped(evt);
@@ -181,6 +182,7 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         btnAceptar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/confirmar_50.png"))); // NOI18N
         btnAceptar.setText("Aceptar");
         btnAceptar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAceptar.setFocusPainted(false);
         btnAceptar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAceptar.setIconTextGap(10);
@@ -204,6 +206,7 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/cancelar_50.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar.setFocusPainted(false);
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnCancelar.setIconTextGap(10);

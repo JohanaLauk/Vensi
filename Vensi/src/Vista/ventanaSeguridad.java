@@ -2,6 +2,7 @@ package Vista;
 
 import DAO.UsuarioDAO;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
 public class ventanaSeguridad extends javax.swing.JFrame 
@@ -9,6 +10,8 @@ public class ventanaSeguridad extends javax.swing.JFrame
     UsuarioDAO uDAO = new UsuarioDAO();
     
     static String nombreBtn;
+    
+    ImageIcon icono;
     
     public ventanaSeguridad() 
     {
@@ -66,8 +69,18 @@ public class ventanaSeguridad extends javax.swing.JFrame
         btnAceptar.setText("Aceptar");
         btnAceptar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAceptar.setBorderPainted(false);
+        btnAceptar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnAceptar.setFocusPainted(false);
         btnAceptar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnAceptar.setIconTextGap(20);
+        btnAceptar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnAceptarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnAceptarMouseExited(evt);
+            }
+        });
         btnAceptar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAceptarActionPerformed(evt);
@@ -80,8 +93,18 @@ public class ventanaSeguridad extends javax.swing.JFrame
         btnCancelar.setText("Cancelar");
         btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCancelar.setBorderPainted(false);
+        btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCancelar.setFocusPainted(false);
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnCancelar.setIconTextGap(20);
+        btnCancelar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnCancelarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnCancelarMouseExited(evt);
+            }
+        });
         btnCancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCancelarActionPerformed(evt);
@@ -239,6 +262,26 @@ public class ventanaSeguridad extends javax.swing.JFrame
             }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
+
+    private void btnCancelarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/no_lleno_50.png"));     
+        btnCancelar.setIcon(icono);
+    }//GEN-LAST:event_btnCancelarMouseEntered
+
+    private void btnCancelarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnCancelarMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/vTurno/no_50.png"));     
+        btnCancelar.setIcon(icono);
+    }//GEN-LAST:event_btnCancelarMouseExited
+
+    private void btnAceptarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/aceptar_lleno_50.png"));     
+        btnAceptar.setIcon(icono);
+    }//GEN-LAST:event_btnAceptarMouseEntered
+
+    private void btnAceptarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnAceptarMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/aceptar_50.png"));     
+        btnAceptar.setIcon(icono);
+    }//GEN-LAST:event_btnAceptarMouseExited
 
     public static void main(String args[]) 
     {

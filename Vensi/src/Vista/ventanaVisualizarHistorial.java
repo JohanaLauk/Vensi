@@ -101,6 +101,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         jLabel1.setText("Información");
 
+        listDatosTP.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         listDatosTP.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         jScrollPane1.setViewportView(listDatosTP);
 
@@ -111,7 +112,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         txfdVenta.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfdVenta.setForeground(new java.awt.Color(255, 255, 255));
         txfdVenta.setText("$");
-        txfdVenta.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txfdVenta.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         labTotalCaja.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         labTotalCaja.setText("Total caja:");
@@ -124,14 +125,14 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         txfdTotalCaja.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfdTotalCaja.setForeground(new java.awt.Color(255, 255, 255));
         txfdTotalCaja.setText("$");
-        txfdTotalCaja.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txfdTotalCaja.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         txfdEfectivo.setEditable(false);
         txfdEfectivo.setBackground(new java.awt.Color(0, 153, 0));
         txfdEfectivo.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfdEfectivo.setForeground(new java.awt.Color(255, 255, 255));
         txfdEfectivo.setText("$");
-        txfdEfectivo.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txfdEfectivo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         labEfectivo.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         labEfectivo.setText("Efectivo:");
@@ -144,7 +145,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         txfdDiferencia.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfdDiferencia.setForeground(new java.awt.Color(255, 255, 255));
         txfdDiferencia.setText("$");
-        txfdDiferencia.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txfdDiferencia.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         javax.swing.GroupLayout panelCalculosLayout = new javax.swing.GroupLayout(panelCalculos);
         panelCalculos.setLayout(panelCalculosLayout);
@@ -188,7 +189,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                     .addGroup(panelCalculosLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(labDiferencia)))
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelInfoLayout = new javax.swing.GroupLayout(panelInfo);
@@ -225,6 +226,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                 return false;
             }
         };
+        tablaTP.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         tablaTP.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         tablaTP.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -238,6 +240,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             }
         ));
         tablaTP.setFocusable(false);
+        tablaTP.setGridColor(new java.awt.Color(153, 153, 153));
         tablaTP.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaTP.getTableHeader().setResizingAllowed(false);
         tablaTP.getTableHeader().setReorderingAllowed(false);
@@ -250,13 +253,13 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         txfdImporte.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfdImporte.setForeground(new java.awt.Color(255, 255, 255));
         txfdImporte.setText("$");
-        txfdImporte.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txfdImporte.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         txfdUnidades.setBackground(new java.awt.Color(0, 0, 204));
         txfdUnidades.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfdUnidades.setForeground(new java.awt.Color(255, 255, 255));
         txfdUnidades.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txfdUnidades.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txfdUnidades.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
 
         labUnidades.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         labUnidades.setText("Unidades:");
