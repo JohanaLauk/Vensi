@@ -13,6 +13,8 @@ public class ventanaGestionClave extends javax.swing.JFrame
     DefaultListModel modeloLista;
     UsuarioDAO uDAO = new UsuarioDAO();
     
+    String nombreUsuario = "Seleccionar";
+    
     ImageIcon icono;
     
     public ventanaGestionClave() 
@@ -53,6 +55,11 @@ public class ventanaGestionClave extends javax.swing.JFrame
         cbTipoClave.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccionar", "Propietario", "Empleado" }));
         cbTipoClave.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbTipoClave.setNextFocusableComponent(passActual);
+        cbTipoClave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cbTipoClaveActionPerformed(evt);
+            }
+        });
 
         btnVolver.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnVolver.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/atras_50.png"))); // NOI18N
@@ -212,62 +219,53 @@ public class ventanaGestionClave extends javax.swing.JFrame
     }//GEN-LAST:event_btnVolverActionPerformed
 
     private void btnConfirmarClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarClaveActionPerformed
-        String nombreUsuario = null;
-        
-        if (cbTipoClave.getSelectedItem().equals("Propietario"))
+        if (nombreUsuario.equals("Propietario") || nombreUsuario.equals("Empleado"))
         {
-            nombreUsuario = "Propietario";
-        }
-        else
-        {
-            if (cbTipoClave.getSelectedItem().equals("Empleado"))                
+            if (passActual.getText().isEmpty() | passNuevo.getText().isEmpty() | passVerif.getText().isEmpty())
             {
-                nombreUsuario = "Empleado";
+                JOptionPane.showMessageDialog(null,"Debe completar todos los campos.");
             }
             else
             {
-                JOptionPane.showMessageDialog(null,"No ha seleccionado un usuario.");
-            }
-        }  
-        
-        if(passActual.getText().isEmpty() | passNuevo.getText().isEmpty() | passVerif.getText().isEmpty())
-        {
-            JOptionPane.showMessageDialog(null,"Debe completar todos los campos.");
-        }
-        else
-        {
-            int pinActual = Integer.parseInt(passActual.getText());
-            int pinNuevo = Integer.parseInt(passNuevo.getText());
-            int pinVerif = Integer.parseInt(passVerif.getText());
-            
-            List<Usuario> lista = uDAO.listar();
-            for (Usuario u : lista)
-            {
-                if (u.getNombreUsuario().equals(nombreUsuario))
+                int pinActual = Integer.parseInt(passActual.getText());
+                int pinNuevo = Integer.parseInt(passNuevo.getText());
+                int pinVerif = Integer.parseInt(passVerif.getText());
+
+                List<Usuario> lista = uDAO.listar();
+                
+                for (Usuario u : lista)
                 {
-                    if (u.getPin() == pinActual)
+                    if (u.getNombreUsuario().equals(nombreUsuario))
                     {
-                        if (pinNuevo == pinVerif)
+                        if (u.getPin() == pinActual)    //si el pin guardado coincide con el pin actual ingresado...
                         {
-                            uDAO.modificarContraseña(nombreUsuario, pinNuevo);                       
+                            if (pinNuevo == pinVerif)   //si el pin nuevo y el pin verif coinciden...
+                            {
+                                uDAO.modificarContraseña(nombreUsuario, pinNuevo);  //lo modifica
+                                
+                                JOptionPane.showMessageDialog(null,"¡Se ha modificado el pin del usuario '"+nombreUsuario+"' correctamente!");
+                                
+                                passActual.setText(null);
+                                passNuevo.setText(null);
+                                passVerif.setText(null);
+                            }
+                            else
+                            {
+                                JOptionPane.showMessageDialog(null,"El pin nuevo y el pin de verificación no coinciden.");
+                            }            
                         }
                         else
                         {
-                            JOptionPane.showMessageDialog(null,"Los pines no coinciden.");
-                        }            
+                            JOptionPane.showMessageDialog(null,"El pin actual del usuario '"+nombreUsuario+"' no es correcto.");
+                        }
                     }
-                    else
-                    {
-                        JOptionPane.showMessageDialog(null,"El pin actual del usuario '"+nombreUsuario+"' no es correcto.");
-                    }
-                }
-            } 
-            JOptionPane.showMessageDialog(null,"Se ha modificado el pin correctamente.");
-            
-            passActual.setText(null);
-            passNuevo.setText(null);
-            passVerif.setText(null);
-        }
+                } 
+            }            
+        }        
+        else
+        {
+            JOptionPane.showMessageDialog(null,"No ha seleccionado un usuario.");
+        } 
     }//GEN-LAST:event_btnConfirmarClaveActionPerformed
 
     private void passActualKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_passActualKeyTyped
@@ -312,6 +310,23 @@ public class ventanaGestionClave extends javax.swing.JFrame
         icono = new ImageIcon(getClass().getResource("/Recursos/aceptar_50.png"));     
         btnConfirmarClave.setIcon(icono);
     }//GEN-LAST:event_btnConfirmarClaveMouseExited
+
+    private void cbTipoClaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbTipoClaveActionPerformed
+        if (cbTipoClave.getSelectedItem().equals("Propietario"))
+        {
+            nombreUsuario = "Propietario";
+        }
+        
+        if (cbTipoClave.getSelectedItem().equals("Empleado"))                
+        {
+            nombreUsuario = "Empleado";
+        }
+        
+        if (cbTipoClave.getSelectedItem().equals("Seleccionar"))                
+        {
+            nombreUsuario = "Seleccionar";
+        }
+    }//GEN-LAST:event_cbTipoClaveActionPerformed
 
     public static void main(String args[]) 
     {

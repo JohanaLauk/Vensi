@@ -101,7 +101,6 @@ public class ventanaCargarES extends javax.swing.JFrame
         btnCancelar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnCancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/no_50.png"))); // NOI18N
         btnCancelar.setText("Cancelar");
-        btnCancelar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnCancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCancelar.setFocusPainted(false);
         btnCancelar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -125,7 +124,6 @@ public class ventanaCargarES extends javax.swing.JFrame
         btnConfirmar.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnConfirmar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/si_50.png"))); // NOI18N
         btnConfirmar.setText("Confirmar");
-        btnConfirmar.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnConfirmar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnConfirmar.setFocusPainted(false);
         btnConfirmar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -248,10 +246,9 @@ public class ventanaCargarES extends javax.swing.JFrame
         jScrollPane1.setViewportView(listaInfoProdAnular);
 
         btnAnular.setBackground(new java.awt.Color(204, 204, 255));
-        btnAnular.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnAnular.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         btnAnular.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/anular_50.png"))); // NOI18N
         btnAnular.setText("Anular");
-        btnAnular.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnAnular.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAnular.setFocusPainted(false);
         btnAnular.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
@@ -277,7 +274,6 @@ public class ventanaCargarES extends javax.swing.JFrame
         labTituloPanelAnularProd.setText("ANULACIÓN DE PRODUCTO");
         labTituloPanelAnularProd.setToolTipText("");
 
-        txfdCantProdAnular.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdCantProdAnular.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdCantProdAnular.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCantProdAnular.setNextFocusableComponent(listaInfoProdAnular);
@@ -292,7 +288,6 @@ public class ventanaCargarES extends javax.swing.JFrame
             }
         });
 
-        txfdCodNomProdAnular.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdCodNomProdAnular.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdCodNomProdAnular.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCodNomProdAnular.setNextFocusableComponent(txfdCantProdAnular);
@@ -417,150 +412,158 @@ public class ventanaCargarES extends javax.swing.JFrame
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnConfirmarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnConfirmarActionPerformed
-        EntradaSalida unaES = new EntradaSalida();
-        Turno turnoActual = tDAO.obtenerUltimo();
-        
-        if (nombre.equals("Ninguno"))
+        int confirmarES = JOptionPane.showConfirmDialog(null, "¿Está seguro de continuar?", "Cargar entrada/salida", JOptionPane.YES_NO_OPTION);
+        if (confirmarES == 0)
         {
-            JOptionPane.showMessageDialog(null, "Falta seleccionar el tipo de entrada o salida");
-        }
-        else
-        {
-            if (nombre.equals("Apertura de caja"))
+            EntradaSalida unaES = new EntradaSalida();
+            Turno turnoActual = tDAO.obtenerUltimo();
+
+            if (nombre.equals("Ninguno"))
             {
-                unaES.setTipo(true);    //entrada
+                JOptionPane.showMessageDialog(null, "Falta seleccionar el tipo de entrada o salida");
             }
             else
             {
-                unaES.setTipo(false);   //salida                             
-            }            
-        }
-        
-        String descripcion = txAreaDescripcion.getText();        
-        
-        if (validar.validarPrecio(txfdMonto.getText()))
-        {
-            unaES.setMonto(Double.parseDouble(txfdMonto.getText()));        
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "Utilice punto en el campo Monto");
-        }
-        
-        unaES.setNombre(nombre.toUpperCase());       
-        
-        if (descripcion.equals(""))
-        {
-            if (nombre.equals("Apertura de caja"))
+                if (nombre.equals("Apertura de caja"))
+                {
+                    unaES.setTipo(true);    //entrada
+                }
+                else
+                {
+                    unaES.setTipo(false);   //salida                             
+                }            
+            }
+
+            String descripcion = txAreaDescripcion.getText();        
+
+            if (validar.validarPrecio(txfdMonto.getText()))
             {
-                unaES.setDescripcion(null);
+                unaES.setMonto(Double.parseDouble(txfdMonto.getText()));        
             }
             else
             {
-                unaES.setDescripcion("Sin descripción".toUpperCase());
-            }            
+                JOptionPane.showMessageDialog(null, "Utilice punto en el campo Monto");
+            }
+
+            unaES.setNombre(nombre.toUpperCase());       
+
+            if (descripcion.equals(""))
+            {
+                if (nombre.equals("Apertura de caja"))
+                {
+                    unaES.setDescripcion(null);
+                }
+                else
+                {
+                    unaES.setDescripcion("Sin descripción".toUpperCase());
+                }            
+            }
+            else
+            {
+                unaES.setDescripcion(descripcion.toUpperCase());
+            }        
+
+            unaES.setCantProd(0);       
+            unaES.setHora(new Date());       
+            unaES.setTurno(turnoActual);
+
+            esDAO.alta(unaES);
+
+            dispose();
         }
-        else
-        {
-            unaES.setDescripcion(descripcion.toUpperCase());
-        }        
-        
-        unaES.setCantProd(0);       
-        unaES.setHora(new Date());       
-        unaES.setTurno(turnoActual);
-        
-        esDAO.alta(unaES);
-        
-        dispose();
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAnularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAnularActionPerformed
-        int cantInput = Integer.parseInt(txfdCantProdAnular.getText());
-        double cantDouble = Double.parseDouble(txfdCantProdAnular.getText());
-        
-        boolean esta = false;
-        Turno turnoActual = tDAO.obtenerUltimo();
-        
-        List<ItemVenta> listaVentas = itDAO.listar(turnoActual.getId());
-        ItemVenta item = null;
-        
-        for (ItemVenta v : listaVentas) //lista de ventas del turno que esta abierto
+        int confirmarAnulacion = JOptionPane.showConfirmDialog(null, "¿Está seguro de continuar?", "Anular producto vendido", JOptionPane.YES_NO_OPTION);
+        if (confirmarAnulacion == 0)
         {
-            for (ItemVenta i : listaIV) //contiene 1 sólo prod
+            int cantInput = Integer.parseInt(txfdCantProdAnular.getText());
+            double cantDouble = Double.parseDouble(txfdCantProdAnular.getText());
+
+            boolean esta = false;
+            Turno turnoActual = tDAO.obtenerUltimo();
+
+            List<ItemVenta> listaVentas = itDAO.listar(turnoActual.getId());
+            ItemVenta item = null;
+
+            for (ItemVenta v : listaVentas) //lista de ventas del turno que esta abierto
             {
-                if (v.getProducto().getId() == i.getProducto().getId()) //El prod buscado se encuentra en las ventas. 
+                for (ItemVenta i : listaIV) //contiene 1 sólo prod
                 {
-                    esta = true; 
-                    item = v;
-                }   
-            }
-        } 
-        if (esta)
-        {
-            if (item.getCantidad() >= cantInput)    //si la cantidad ingresada es menor a la cantidad que hay vendido...
-            {                
-                pDAO.sumarStock(item.getProducto().getId(), cantInput);   //actualizo el stock del producto
-                item.setCantidad(item.getCantidad() - cantInput);  //resto la cantidad del itemVenta
-                
-                if (item.getProducto().isPorPeso())
-                {
-                    double cantKilo = cantDouble / 1000; 
+                    if (v.getProducto().getId() == i.getProducto().getId()) //El prod buscado se encuentra en las ventas. 
+                    {
+                        esta = true; 
+                        item = v;
+                    }   
+                }
+            } 
+            if (esta)
+            {
+                if (item.getCantidad() >= cantInput)    //si la cantidad ingresada es menor a la cantidad que hay vendido...
+                {                
+                    pDAO.sumarStock(item.getProducto().getId(), cantInput);   //actualizo el stock del producto
+                    item.setCantidad(item.getCantidad() - cantInput);  //resto la cantidad del itemVenta
 
-                    double precioRestar = cantKilo * item.getProducto().getPrecioVentaXKilo();
-                    precioRestar = r.RedondearAIntArriba(precioRestar); 
-                    
-                    item.setMonto(item.getMonto() - precioRestar);
+                    if (item.getProducto().isPorPeso())
+                    {
+                        double cantKilo = cantDouble / 1000; 
+
+                        double precioRestar = cantKilo * item.getProducto().getPrecioVentaXKilo();
+                        precioRestar = r.RedondearAIntArriba(precioRestar); 
+
+                        item.setMonto(item.getMonto() - precioRestar);
+                    }
+                    else
+                    {
+                        item.setMonto(item.getMonto() - (item.getProducto().getPrecioVenta() * cantInput));
+                    }
+
+                    EntradaSalida unES = new EntradaSalida();
+
+                    unES.setNombre("Anulación de venta".toUpperCase());
+                    unES.setDescripcion(item.getProducto().getDescripcion().toUpperCase());
+                    unES.setCantProd(cantInput);                        
+
+                    if (item.getProducto().isPorPeso())
+                    {
+                        double cantKilo = cantDouble / 1000; 
+
+                        double precioRestar = cantKilo * item.getProducto().getPrecioVentaXKilo();
+                        precioRestar = r.RedondearAIntArriba(precioRestar); 
+
+                        unES.setMonto(precioRestar);
+                    }
+                    else
+                    {
+                        unES.setMonto(item.getProducto().getPrecioVenta() * cantInput);
+                    }
+
+                    unES.setTipo(false);
+                    unES.setHora(new Date());
+
+                    unES.setTurno(turnoActual);
+
+                    esDAO.alta(unES);
+                    itDAO.modificar(item, item.getId());
+
+                    JOptionPane.showMessageDialog(null, "¡Venta anulada exitosamente!");
+                    dispose();
                 }
                 else
                 {
-                    item.setMonto(item.getMonto() - (item.getProducto().getPrecioVenta() * cantInput));
+                    JOptionPane.showMessageDialog(null, "La cantidad ingresada debe ser menor o igual a la cantidad que se ha vendido.");
+                }  
+
+                if (item.getCantidad() == 0)
+                {                
+                    itDAO.borrar(item.getId());     //borrar Item_venta
                 }
-                
-                EntradaSalida unES = new EntradaSalida();
-
-                unES.setNombre("Anulación de venta".toUpperCase());
-                unES.setDescripcion(item.getProducto().getDescripcion().toUpperCase());
-                unES.setCantProd(cantInput);                        
-
-                if (item.getProducto().isPorPeso())
-                {
-                    double cantKilo = cantDouble / 1000; 
-
-                    double precioRestar = cantKilo * item.getProducto().getPrecioVentaXKilo();
-                    precioRestar = r.RedondearAIntArriba(precioRestar); 
-                    
-                    unES.setMonto(precioRestar);
-                }
-                else
-                {
-                    unES.setMonto(item.getProducto().getPrecioVenta() * cantInput);
-                }
-
-                unES.setTipo(false);
-                unES.setHora(new Date());
-                
-                unES.setTurno(turnoActual);
-
-                esDAO.alta(unES);
-                itDAO.modificar(item, item.getId());
-
-                JOptionPane.showMessageDialog(null, "Venta anulada.");
-                dispose();
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "La cantidad ingresada debe ser menor o igual a la cantidad que se ha vendido.");
-            }  
-            
-            if (item.getCantidad() == 0)
-            {                
-                itDAO.borrar(item.getId());     //borrar Item_venta
+                JOptionPane.showMessageDialog(null, "No se han realizado compras de este producto.");
             }
-        }
-        else
-        {
-            JOptionPane.showMessageDialog(null, "No se han realizado compras de este producto.");
-        }      
+        }              
     }//GEN-LAST:event_btnAnularActionPerformed
 
     private void txfdMontoKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txfdMontoKeyTyped

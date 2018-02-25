@@ -15,7 +15,7 @@ public class Vensi
         UsuarioDAO uDAO = new UsuarioDAO();
         ProductoDAO pDAO = new ProductoDAO();
         
-        if(uDAO.listar().isEmpty())
+        if (uDAO.listar().isEmpty())
         {
             Usuario propietario = new Usuario();
             propietario.setNombreUsuario("Propietario");

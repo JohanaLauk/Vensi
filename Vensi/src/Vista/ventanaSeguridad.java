@@ -9,7 +9,8 @@ public class ventanaSeguridad extends javax.swing.JFrame
 {
     UsuarioDAO uDAO = new UsuarioDAO();
     
-    static String nombreBtn;
+    static String nombreBtn;   
+    int cont; 
     
     ImageIcon icono;
     
@@ -17,7 +18,9 @@ public class ventanaSeguridad extends javax.swing.JFrame
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);     //centra la ventana   
+        cont = 0;        
+        
+        this.setLocationRelativeTo(null);     //centra la ventana     
     }
 
     @SuppressWarnings("unchecked")
@@ -201,31 +204,43 @@ public class ventanaSeguridad extends javax.swing.JFrame
 
     private void btnCancelarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarActionPerformed
         dispose();
+        ventanaPrincipal vPpal = new ventanaPrincipal();
+        vPpal.setVisible(true);        
     }//GEN-LAST:event_btnCancelarActionPerformed
 
     private void btnAceptarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarActionPerformed
-        int pin = Integer.parseInt(txfdPin.getText());
+        int pin = Integer.parseInt(txfdPin.getText());        
         
         if (nombreBtn.equals("Ventas"))            
         {
-            if(uDAO.verificar("Propietario", pin) || uDAO.verificar("Empleado", pin))
+            if (uDAO.verificar("Propietario", pin) || uDAO.verificar("Empleado", pin))
             {
                 ventanaVenta vVenta = new ventanaVenta();
                 vVenta.setVisible(true);    //hace visible una ventana
-                dispose();  //cierra la ventana que deja            
+                dispose();  //cierra la ventana que deja   
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "¡ACCESO DENEGADO!"
-                                                    + "\nPin incorrecto, intentalo nuevamente."
+                if (cont > 3)
+                {
+                    JOptionPane.showMessageDialog(null, "¡ACCESO DENEGADO!"
+                                                    + "\n¡Pin incorrecto!"
                                                     + "\nSi el mensaje se repite, probablemente usted no tenga permiso para acceder aquí.");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "¡ACCESO DENEGADO!"
+                                                    + "\nPin incorrecto, intentalo nuevamente.");
+                }
+                
                 txfdPin.setText("");
                 btnAceptar.setEnabled(false);
-            }
+                cont ++;
+            }           
         }
         else
         {
-            if(uDAO.verificar("Propietario", pin))
+            if (uDAO.verificar("Propietario", pin))
             {
                 if (nombreBtn.equals("Administracion"))
                 {
@@ -254,11 +269,21 @@ public class ventanaSeguridad extends javax.swing.JFrame
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "¡ACCESO DENEGADO!"
-                                                    + "\nPin incorrecto, intentalo nuevamente."
+                if (cont > 3)
+                {
+                    JOptionPane.showMessageDialog(null, "¡ACCESO DENEGADO!"
+                                                    + "\n¡Pin incorrecto!"
                                                     + "\nSi el mensaje se repite, probablemente usted no tenga permiso para acceder aquí.");
+                }
+                else
+                {
+                    JOptionPane.showMessageDialog(null, "¡ACCESO DENEGADO!"
+                                                    + "\nPin incorrecto, intentalo nuevamente.");
+                }
+                
                 txfdPin.setText("");
                 btnAceptar.setEnabled(false);
+                cont ++;
             }
         }
     }//GEN-LAST:event_btnAceptarActionPerformed

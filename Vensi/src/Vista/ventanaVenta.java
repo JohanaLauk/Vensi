@@ -81,11 +81,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 btnAgregar.setEnabled(false);
             } 
         });      
-        
-        turnoActual = tDAO.obtenerUltimo();
-        this.setTitle("Sistema de ventas   -   Turno N°" + turnoActual.getId() 
-                        + "  -  Apertura: " + fechaHoraFormat.format(turnoActual.getFechaHoraInicio()) + "hs.");        
-                
+               
         llenarTabla();
         llenarTablaCarrito();        
         verificarTurno();               
@@ -139,6 +135,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 formWindowGainedFocus(evt);
             }
             public void windowLostFocus(java.awt.event.WindowEvent evt) {
+                formWindowLostFocus(evt);
             }
         });
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -285,7 +282,6 @@ public class ventanaVenta extends javax.swing.JFrame
             }
         });
 
-        txfdBuscarProd.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdBuscarProd.setToolTipText("");
         txfdBuscarProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdBuscarProd.setPrompt("Busque por código o por descripción");
@@ -1124,6 +1120,12 @@ public class ventanaVenta extends javax.swing.JFrame
         ventanaPrincipal vPrincipal = new ventanaPrincipal();
         vPrincipal.setVisible(true);
     }//GEN-LAST:event_formWindowClosing
+
+    private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+        limpiarList();
+        tablaProd.clearSelection();
+        tablaCarrito.clearSelection();
+    }//GEN-LAST:event_formWindowLostFocus
     
     public static void main(String args[]) 
     {        
@@ -1379,9 +1381,10 @@ public class ventanaVenta extends javax.swing.JFrame
     
     public void verificarTurno()
     {
+        turnoActual = tDAO.obtenerUltimo();
         List<Turno> listaTurno = tDAO.listar();
         
-        if (listaTurno.isEmpty())  //turno cerrado  //lista vacía
+        if (listaTurno.isEmpty())  //turno cerrado  //lista vacía (sin turnos)
         {   
             for (int i=0 ; i < panelBotonesArriba.getComponents().length ; i++)
             {
@@ -1414,6 +1417,9 @@ public class ventanaVenta extends javax.swing.JFrame
             btnCerrarTurno.setIcon(icono); 
             
             tablaVacia();
+            
+            this.setTitle("Sistema de ventas   -   Turno sin iniciar");
+            
         }
         else    //turno abierto   //lista con turnos
         {      
@@ -1449,6 +1455,9 @@ public class ventanaVenta extends javax.swing.JFrame
 
                 icono = new ImageIcon(getClass().getResource("/Recursos/vVenta/turnoSinCerrar_50.png"));     
                 btnCerrarTurno.setIcon(icono);
+                
+                this.setTitle("Sistema de ventas   -   Turno N°" + turnoActual.getId() 
+                        + "  -  Apertura: " + fechaHoraFormat.format(turnoActual.getFechaHoraInicio()) + "hs.");
             }
             else    //turno cerrado
             {      
@@ -1485,6 +1494,8 @@ public class ventanaVenta extends javax.swing.JFrame
                     btnCerrarTurno.setIcon(icono);
             
                     tablaVacia();
+                    
+                    this.setTitle("Sistema de ventas   -   Turno sin iniciar");
                 }                
             }
         }

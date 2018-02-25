@@ -6,6 +6,8 @@ import DAO.TurnoDAO;
 import Modelo.EntradaSalida;
 import Modelo.ItemVenta;
 import Modelo.Turno;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -20,6 +22,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     Turno turnoActual = null;    
     public static int cantVentas;
     
+    DateFormat fechaHoraFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    
     ImageIcon icono;
     
     public ventanaCierreTurno() 
@@ -29,6 +33,9 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         this.setLocationRelativeTo(null);   //centra la ventana  
           
         turnoActual = tDAO.obtenerUltimo();
+        
+        this.setTitle("Cierre de turno   -   Turno N°" + turnoActual.getId() 
+                        + "  -  Apertura: " + fechaHoraFormat.format(turnoActual.getFechaHoraInicio()) + "hs.");
         
         //el HAY se calcula automaticamente a medida que va ingresando los billetes
         txfdMontoEsperado.setText("$   " + String.valueOf(calcularMontoEsperado()));

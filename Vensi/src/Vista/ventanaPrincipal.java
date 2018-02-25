@@ -10,7 +10,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
 {    
     ImageIcon icono;
     int x, y;
-    
+       
     public ventanaPrincipal() 
     {
         initComponents();
@@ -363,22 +363,21 @@ public class ventanaPrincipal extends javax.swing.JFrame
         ventanaSeguridad vSeguridad = new ventanaSeguridad();
         vSeguridad.nombreBtn = "Ventas";
         vSeguridad.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnVentasActionPerformed
 
     private void btnAdministracionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAdministracionActionPerformed
         ventanaSeguridad vSeguridad = new ventanaSeguridad();
         vSeguridad.nombreBtn = "Administracion";
         vSeguridad.setVisible(true);
-        
-        /*ventanaAdministracion vAdministracion = new ventanaAdministracion();
-        vAdministracion.setVisible(true);   //hace visible una ventana
-        dispose();  //cierra la ventana que deja*/
+        this.dispose();
     }//GEN-LAST:event_btnAdministracionActionPerformed
 
     private void btnHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnHistorialActionPerformed
         ventanaSeguridad vSeguridad = new ventanaSeguridad();
         vSeguridad.nombreBtn = "Historial";
         vSeguridad.setVisible(true);
+        this.dispose();
     }//GEN-LAST:event_btnHistorialActionPerformed
 
     private void btnSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSalirActionPerformed
@@ -388,13 +387,15 @@ public class ventanaPrincipal extends javax.swing.JFrame
     private void btnPedidosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPedidosActionPerformed
         ventanaSeguridad vSeguridad = new ventanaSeguridad();
         vSeguridad.nombreBtn = "Pedidos";
-        vSeguridad.setVisible(true);       
+        vSeguridad.setVisible(true);   
+        this.dispose();
     }//GEN-LAST:event_btnPedidosActionPerformed
 
     private void btnCargaStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargaStockActionPerformed
         ventanaSeguridad vSeguridad = new ventanaSeguridad();
-        vSeguridad.nombreBtn = "CargaStock";
+        vSeguridad.nombreBtn = "CargaStock";        
         vSeguridad.setVisible(true);
+        this.dispose();        
     }//GEN-LAST:event_btnCargaStockActionPerformed
 
     private void btnVentasMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnVentasMouseEntered

@@ -8,6 +8,8 @@ import Modelo.EntradaSalida;
 import Modelo.ItemVenta;
 import Modelo.Producto;
 import Modelo.Turno;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -44,6 +46,16 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);   //centra la ventana 
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir  
+        
+        //Al hacer click en el JFrame...
+        this.addMouseListener(new MouseAdapter()
+        {
+            @Override
+            public void mouseClicked(MouseEvent me) 
+            {
+                tablaDetalleCaja.clearSelection();
+            } 
+        });
         
         turnoActual = tDAO.obtenerUltimo();
         this.setTitle("Información de caja   -   Turno N°" + turnoActual.getId() 

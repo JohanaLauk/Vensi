@@ -117,7 +117,6 @@ public class ventanaProducto extends javax.swing.JFrame
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
         jLabel1.setText("Buscar:");
 
-        txfdBuscarProd.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdBuscarProd.setHorizontalAlignment(javax.swing.JTextField.LEFT);
         txfdBuscarProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdBuscarProd.setNextFocusableComponent(btnEditarProd);
@@ -296,14 +295,6 @@ public class ventanaProducto extends javax.swing.JFrame
         btnNuevoProd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnNuevoProd.setIconTextGap(50);
         btnNuevoProd.setNextFocusableComponent(btnEditarProd);
-        btnNuevoProd.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                btnNuevoProdFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                btnNuevoProdFocusLost(evt);
-            }
-        });
         btnNuevoProd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnNuevoProdMouseEntered(evt);
@@ -329,14 +320,6 @@ public class ventanaProducto extends javax.swing.JFrame
         btnEditarProd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnEditarProd.setIconTextGap(50);
         btnEditarProd.setNextFocusableComponent(btnVolverProd);
-        btnEditarProd.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                btnEditarProdFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                btnEditarProdFocusLost(evt);
-            }
-        });
         btnEditarProd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnEditarProdMouseEntered(evt);
@@ -362,14 +345,6 @@ public class ventanaProducto extends javax.swing.JFrame
         btnVolverProd.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnVolverProd.setIconTextGap(30);
         btnVolverProd.setNextFocusableComponent(btnMenuPpal);
-        btnVolverProd.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                btnVolverProdFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                btnVolverProdFocusLost(evt);
-            }
-        });
         btnVolverProd.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnVolverProdMouseEntered(evt);
@@ -395,14 +370,6 @@ public class ventanaProducto extends javax.swing.JFrame
         btnMenuPpal.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         btnMenuPpal.setIconTextGap(20);
         btnMenuPpal.setNextFocusableComponent(txfdBuscarProd);
-        btnMenuPpal.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
-                btnMenuPpalFocusGained(evt);
-            }
-            public void focusLost(java.awt.event.FocusEvent evt) {
-                btnMenuPpalFocusLost(evt);
-            }
-        });
         btnMenuPpal.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnMenuPpalMouseEntered(evt);
@@ -705,46 +672,6 @@ public class ventanaProducto extends javax.swing.JFrame
         btnMenuPpal.setIcon(icono);
     }//GEN-LAST:event_btnMenuPpalMouseExited
 
-    private void btnEditarProdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditarProdFocusGained
-        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/editar_lleno_50.png"));     
-        btnEditarProd.setIcon(icono);
-    }//GEN-LAST:event_btnEditarProdFocusGained
-
-    private void btnEditarProdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnEditarProdFocusLost
-        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/editar_50.png"));     
-        btnEditarProd.setIcon(icono);
-    }//GEN-LAST:event_btnEditarProdFocusLost
-
-    private void btnNuevoProdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevoProdFocusGained
-        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/prod+_lleno_50.png"));     
-        btnNuevoProd.setIcon(icono);
-    }//GEN-LAST:event_btnNuevoProdFocusGained
-
-    private void btnNuevoProdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnNuevoProdFocusLost
-        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/prod+_50.png"));     
-        btnNuevoProd.setIcon(icono);
-    }//GEN-LAST:event_btnNuevoProdFocusLost
-
-    private void btnVolverProdFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnVolverProdFocusGained
-        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/volver_lleno_50.png"));     
-        btnVolverProd.setIcon(icono);
-    }//GEN-LAST:event_btnVolverProdFocusGained
-
-    private void btnVolverProdFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnVolverProdFocusLost
-        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/volver_50.png"));     
-        btnVolverProd.setIcon(icono);
-    }//GEN-LAST:event_btnVolverProdFocusLost
-
-    private void btnMenuPpalFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnMenuPpalFocusGained
-        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/home_lleno_50.png"));     
-        btnMenuPpal.setIcon(icono);
-    }//GEN-LAST:event_btnMenuPpalFocusGained
-
-    private void btnMenuPpalFocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_btnMenuPpalFocusLost
-        icono = new ImageIcon(getClass().getResource("/Recursos/vGestion/home_50.png"));     
-        btnMenuPpal.setIcon(icono);
-    }//GEN-LAST:event_btnMenuPpalFocusLost
-
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
         llenarTabla();
     }//GEN-LAST:event_formWindowGainedFocus
@@ -810,8 +737,16 @@ public class ventanaProducto extends javax.swing.JFrame
                 int stockGR1 = p.getStock();    //gr
                 double stockGR2 = p.getStock();
                 int stockU = stockGR1 / pesoEnv1;  // u = gr / peso gr
-                double stockKG = stockGR2 / 1000;   //kg =  gr / 1000            
-                datos[5] = String.valueOf(stockU+"  ("+ formatoKilos.format(stockKG) + "kg)");
+                double stockKG = stockGR2 / 1000;   //kg =  gr / 1000  
+                
+                if (stockU == 0)
+                {
+                    datos[5] = String.valueOf(formatoKilos.format(stockKG) + "kg");
+                }
+                else
+                {
+                    datos[5] = String.valueOf(stockU+"  ("+ formatoKilos.format(stockKG) + "kg)");
+                }                
                 
                 int stockMinGR1 = p.getStockMinimo();
                 double stockMinGR2 = p.getStockMinimo();
@@ -877,12 +812,12 @@ public class ventanaProducto extends javax.swing.JFrame
         tablaProd.setModel(modelo);                
         
         tcm = tablaProd.getColumnModel();
-        tcm.getColumn(0).setPreferredWidth(100);
+        tcm.getColumn(0).setPreferredWidth(80);
         tcm.getColumn(1).setPreferredWidth(300);
         tcm.getColumn(2).setPreferredWidth(20);
         tcm.getColumn(3).setPreferredWidth(20);
         tcm.getColumn(4).setPreferredWidth(20);
-        tcm.getColumn(5).setPreferredWidth(30);
+        tcm.getColumn(5).setPreferredWidth(50);
         tcm.getColumn(6).setPreferredWidth(20);
         tcm.getColumn(7).setPreferredWidth(30);
         tcm.getColumn(8).setPreferredWidth(50);
@@ -955,8 +890,16 @@ public class ventanaProducto extends javax.swing.JFrame
                 int stockGR1 = p.getStock();    //gr
                 double stockGR2 = p.getStock();
                 int stockU = stockGR1 / pesoEnv1;  // u = gr / peso gr
-                double stockKG = stockGR2 / 1000;   //kg =  gr / 1000            
-                datos[5] = String.valueOf(stockU + "  ("+ formatoKilos.format(stockKG) + "kg)");
+                double stockKG = stockGR2 / 1000;   //kg =  gr / 1000 
+                
+                if (stockU == 0)
+                {
+                    datos[5] = String.valueOf(formatoKilos.format(stockKG) + "kg");
+                }
+                else
+                {
+                    datos[5] = String.valueOf(stockU+"  ("+ formatoKilos.format(stockKG) + "kg)");
+                }
                 
                 int stockMinGR1 = p.getStockMinimo();
                 double stockMinGR2 = p.getStockMinimo();
@@ -1009,12 +952,12 @@ public class ventanaProducto extends javax.swing.JFrame
         tablaProd.setModel(modelo2);
         
         tcm2 = tablaProd.getColumnModel();
-        tcm2.getColumn(0).setPreferredWidth(100);
+        tcm2.getColumn(0).setPreferredWidth(80);
         tcm2.getColumn(1).setPreferredWidth(300);
         tcm2.getColumn(2).setPreferredWidth(20);
         tcm2.getColumn(3).setPreferredWidth(20);
         tcm2.getColumn(4).setPreferredWidth(20);
-        tcm2.getColumn(5).setPreferredWidth(30);
+        tcm2.getColumn(5).setPreferredWidth(50);
         tcm2.getColumn(6).setPreferredWidth(20);
         tcm2.getColumn(7).setPreferredWidth(30);
         tcm2.getColumn(8).setPreferredWidth(50);
