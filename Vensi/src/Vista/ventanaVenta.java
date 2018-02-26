@@ -11,6 +11,8 @@ import Modelo.Turno;
 import Utils.Redondear;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -62,6 +64,9 @@ public class ventanaVenta extends javax.swing.JFrame
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir        
         this.setMinimumSize(new Dimension(1210, 600));  //Indica que hasta esa medida se puede minimizar        
         this.setPreferredSize(new Dimension(1210, 600));    //al ejecutarse, la ventana aparece con esa medida
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
         
         //Al hacer click en el JFrame...
         this.addMouseListener(new MouseAdapter()
@@ -671,6 +676,7 @@ public class ventanaVenta extends javax.swing.JFrame
         {
             ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
             vCierreTurno.setVisible(true);
+            this.dispose();
         }
         else
         {
@@ -681,6 +687,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 {
                     ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
                     vCierreTurno.setVisible(true);
+                    this.dispose();
                 }
             }
             if (listaAperturas.size() == 0 && listaSueldos.size() != 0) //NO aperturas | SI sueldos 
@@ -690,6 +697,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 {
                     ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
                     vCierreTurno.setVisible(true);
+                    this.dispose();
                 }
             }
             if (listaAperturas.size() == 0 && listaSueldos.size() == 0) //NO aperturas | NO sueldos 
@@ -700,6 +708,7 @@ public class ventanaVenta extends javax.swing.JFrame
                 {
                     ventanaCierreTurno vCierreTurno = new ventanaCierreTurno();
                     vCierreTurno.setVisible(true);
+                    this.dispose();
                 }
             }
         }

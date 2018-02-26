@@ -19,7 +19,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         this.setPreferredSize(new Dimension(820, 480));        
         AWTUtilities.setWindowOpaque(this, false);  //quita el fondo del frame
         
-        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/Vensi.png"));
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
         this.setIconImage(ico);    
     }
 

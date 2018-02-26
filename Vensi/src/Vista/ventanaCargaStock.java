@@ -5,6 +5,8 @@ import Modelo.*;
 import Utils.Redondear;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -55,6 +57,9 @@ public class ventanaCargaStock extends javax.swing.JFrame
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir
         this.setMinimumSize(new Dimension(1300, 650));  //Indica que hasta esa medida se puede minimizar        
         this.setPreferredSize(new Dimension(1300, 650));    //al ejecutarse, la ventana aparece con esa medida
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
         
         txfdCantidad.setEnabled(false);
         txfdPrecioCU.setEnabled(false);
@@ -197,7 +202,6 @@ public class ventanaCargaStock extends javax.swing.JFrame
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Buscar:");
 
-        txfdBuscarProd.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdBuscarProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdBuscarProd.setPrompt("busque por código o por descripción");
         txfdBuscarProd.setPromptForeground(new java.awt.Color(51, 51, 51));
@@ -433,7 +437,6 @@ public class ventanaCargaStock extends javax.swing.JFrame
         labCantidad.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         labCantidad.setText("Cantidad:");
 
-        txfdCantidad.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdCantidad.setToolTipText("Ingrese la cantidad en unidades");
         txfdCantidad.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -449,7 +452,6 @@ public class ventanaCargaStock extends javax.swing.JFrame
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel1.setText("Precio costo:");
 
-        txfdPrecioCU.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdPrecioCU.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdPrecioCU.setToolTipText("Ingrese el precio costo unitario");
         txfdPrecioCU.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
@@ -465,7 +467,6 @@ public class ventanaCargaStock extends javax.swing.JFrame
         jLabel9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel9.setText("Precio venta:");
 
-        txfdPrecioVU.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdPrecioVU.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdPrecioVU.setToolTipText("Ingrese el precio venta unitario");
         txfdPrecioVU.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N

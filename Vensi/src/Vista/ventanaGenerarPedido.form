@@ -669,11 +669,6 @@
             </Component>
             <Component class="org.jdesktop.swingx.JXTextField" name="txfdCantidad">
               <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                    <EmptyBorder/>
-                  </Border>
-                </Property>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="14" style="0"/>

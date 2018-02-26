@@ -2,6 +2,8 @@ package Vista;
 
 import DAO.UsuarioDAO;
 import Modelo.Usuario;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import java.util.List;
 import javax.swing.DefaultListModel;
@@ -22,6 +24,9 @@ public class ventanaGestionClave extends javax.swing.JFrame
         initComponents();
         
         this.setLocationRelativeTo(null);     //centra la ventana 
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
     }
     
     @SuppressWarnings("unchecked")

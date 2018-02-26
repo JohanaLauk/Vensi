@@ -177,15 +177,13 @@
             </Component>
             <Component class="org.jdesktop.swingx.JXTextField" name="txfdBuscarProv">
               <Properties>
-                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-                  <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                    <EmptyBorder/>
-                  </Border>
-                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="14" style="0"/>
                 </Property>
-                <Property name="prompt" type="java.lang.String" value="Busque por c&#xf3;digo o por descripci&#xf3;n"/>
+                <Property name="prompt" type="java.lang.String" value="Busque por raz&#xf3;n social o por cuit/cuil"/>
+                <Property name="promptForeground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
               </Properties>
               <Events>
                 <EventHandler event="keyReleased" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="txfdBuscarProvKeyReleased"/>
@@ -213,7 +211,7 @@
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
                     <StringItem index="0" value="Raz&#xf3;n social"/>
-                    <StringItem index="1" value="Cuit"/>
+                    <StringItem index="1" value="Cuit/Cuil"/>
                   </StringArray>
                 </Property>
                 <Property name="cursor" type="java.awt.Cursor" editor="org.netbeans.modules.form.editors2.CursorEditor">

@@ -5,6 +5,8 @@ import Modelo.Producto;
 import Modelo.Proveedor;
 import Utils.Validar;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -26,6 +28,9 @@ public class ventanaEditarProv extends javax.swing.JFrame
         this.setMinimumSize(new Dimension(333, 635));  //al minimizar la ventana no permite que sea mas chico que esa medida       
         this.setPreferredSize(new Dimension(333, 635));    //al minimizar la ventana aparece con esa medida    
                
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
+        
         elProv = pDAO.buscarPorId(id_recibido);
         
         mostrarProvSelec();
@@ -71,7 +76,7 @@ public class ventanaEditarProv extends javax.swing.JFrame
         jLabel1.setText("Razon social:");
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel2.setText("CUIT:");
+        jLabel2.setText("CUIT/CUIL:");
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel3.setText("Dirección:");
@@ -351,13 +356,13 @@ public class ventanaEditarProv extends javax.swing.JFrame
                 }
                 else
                 {
-                    JOptionPane.showMessageDialog(null, "El nuevo CUIT del proveedor que ingresó ya existe.\n" +
+                    JOptionPane.showMessageDialog(null, "El nuevo CUIT/CUIL del proveedor que ingresó ya existe.\n" +
                                                         "Corrobore en el inventario para mayor seguridad y control.");
                 }
             } 
             else 
             {
-                JOptionPane.showMessageDialog(null, "El CUIT debe tener el siguiente formato \"xx-xxxxxxxx-x\"");
+                JOptionPane.showMessageDialog(null, "El CUIT/CUIL debe tener el siguiente formato \"xx-xxxxxxxx-x\"");
             }
         } 
         else 

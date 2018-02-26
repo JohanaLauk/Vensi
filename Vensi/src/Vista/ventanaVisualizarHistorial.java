@@ -10,6 +10,8 @@ import Modelo.ItemVenta;
 import Modelo.Entradastock;
 import Modelo.Turno;
 import Modelo.EntradaSalida;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.text.DateFormat;
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
@@ -45,6 +47,9 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         initComponents();
         
         this.setLocationRelativeTo(null);   //centra la ventana
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
                
         if (tablaSelec.equals("Turno"))
         {

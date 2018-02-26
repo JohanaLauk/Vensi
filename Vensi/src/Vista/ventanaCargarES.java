@@ -5,6 +5,8 @@ import Modelo.*;
 import Utils.Redondear;
 import Utils.Validar;
 import java.awt.Color;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.text.DecimalFormat;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +38,9 @@ public class ventanaCargarES extends javax.swing.JFrame
         initComponents();
         
         this.setLocationRelativeTo(null);   //centra la ventana
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
                         
         habDeshabComponentes(nombre);          
     }

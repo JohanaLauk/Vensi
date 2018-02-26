@@ -5,6 +5,8 @@ import DAO.TurnoDAO;
 import Modelo.Entradastock;
 import Modelo.Turno;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -39,7 +41,10 @@ public class ventanaHistorial extends javax.swing.JFrame
         this.setLocationRelativeTo(null);   //centra la ventana
         //this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir  
         this.setMinimumSize(new Dimension(890, 550));
-        this.setPreferredSize(new Dimension(890, 550)); 
+        this.setPreferredSize(new Dimension(890, 550));
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
         
         cbBuscarPor.addItem("Seleccionar");
         cbBuscarPor.addItem("Número");

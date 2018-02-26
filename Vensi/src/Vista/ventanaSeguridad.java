@@ -1,6 +1,8 @@
 package Vista;
 
 import DAO.UsuarioDAO;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -16,11 +18,14 @@ public class ventanaSeguridad extends javax.swing.JFrame
     
     public ventanaSeguridad() 
     {
-        initComponents();
-        
-        cont = 0;        
+        initComponents();           
         
         this.setLocationRelativeTo(null);     //centra la ventana     
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
+        
+        cont = 0;   
     }
 
     @SuppressWarnings("unchecked")

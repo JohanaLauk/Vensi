@@ -4,6 +4,8 @@ import DAO.TurnoDAO;
 import DAO.UsuarioDAO;
 import Modelo.Turno;
 import Modelo.Usuario;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -21,6 +23,9 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         initComponents();
         
         this.setLocationRelativeTo(null);   //centra la ventana
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
         
         btnSI.setEnabled(false);
     }

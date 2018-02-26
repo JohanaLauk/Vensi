@@ -8,6 +8,8 @@ import Modelo.EntradaSalida;
 import Modelo.ItemVenta;
 import Modelo.Producto;
 import Modelo.Turno;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.text.DateFormat;
@@ -46,6 +48,9 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
         
         this.setLocationRelativeTo(null);   //centra la ventana 
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir  
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
         
         //Al hacer click en el JFrame...
         this.addMouseListener(new MouseAdapter()

@@ -5,6 +5,8 @@ import DAO.ProveedorDAO;
 import Modelo.*;
 import Utils.Redondear;
 import Utils.Validar;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.util.*;
 import javax.swing.ImageIcon;
 import javax.swing.JCheckBox;
@@ -35,6 +37,9 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         initComponents();
                 
         this.setLocationRelativeTo(null);     //centra la ventana                
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
         
         txfdPesoEnvase.setEnabled(false);           
         llenarTabla();

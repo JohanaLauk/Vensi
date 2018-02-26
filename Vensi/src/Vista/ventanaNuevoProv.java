@@ -3,6 +3,8 @@ package Vista;
 import DAO.ProveedorDAO;
 import Modelo.Proveedor;
 import Utils.Validar;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
 
@@ -17,7 +19,10 @@ public class ventanaNuevoProv extends javax.swing.JFrame
     {
         initComponents();
         
-        this.setLocationRelativeTo(null);     //centra la ventana                
+        this.setLocationRelativeTo(null);     //centra la ventana    
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
     }
     
     @SuppressWarnings("unchecked")
@@ -56,7 +61,7 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         jLabel1.setText("Razón social:");
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
-        jLabel2.setText("CUIT:");
+        jLabel2.setText("CUIT/CUIL:");
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel3.setText("Dirección:");
@@ -103,7 +108,6 @@ public class ventanaNuevoProv extends javax.swing.JFrame
         txfdPais.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdPais.setNextFocusableComponent(txfdContacto);
 
-        txfdCuit.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdCuit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdCuit.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCuit.setPrompt("XX-XXXXXXXX-X");
@@ -304,13 +308,13 @@ public class ventanaNuevoProv extends javax.swing.JFrame
                 } 
                 else 
                 {
-                    JOptionPane.showMessageDialog(null, "El CUIT del proveedor que desea crear ya existe.\n" +
+                    JOptionPane.showMessageDialog(null, "El CUIT/CUIL del proveedor que desea crear ya existe.\n" +
                                                         "Corrobore en el inventario para mayor seguridad y control.");
                 }
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "El CUIT debe tener el siguiente formato \"xx-xxxxxxxx-x\"");                                                    
+                JOptionPane.showMessageDialog(null, "El CUIT/CUIL debe tener el siguiente formato \"xx-xxxxxxxx-x\"");                                                    
             }
         } 
         else 

@@ -1,6 +1,8 @@
 package Vista;
 
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import javax.swing.ImageIcon;
 
 public class ventanaAdministracion extends javax.swing.JFrame 
@@ -14,7 +16,10 @@ public class ventanaAdministracion extends javax.swing.JFrame
         this.setLocationRelativeTo(null);     //centra la ventana        
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir  
         this.setMinimumSize(new Dimension(835, 501));  //al minimizar la ventana no permite que sea mas chico que esa medida 
-        this.setPreferredSize(new Dimension(835, 501));        
+        this.setPreferredSize(new Dimension(835, 501));  
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
     }
     
     @SuppressWarnings("unchecked")

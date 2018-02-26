@@ -10,6 +10,8 @@ import Modelo.Producto;
 import Modelo.Proveedor;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.KeyEvent;
@@ -57,6 +59,9 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         this.setMinimumSize(new Dimension(1300, 650));  //Indica que hasta esa medida se puede minimizar        
         this.setPreferredSize(new Dimension(1300, 650));    //al ejecutarse, la ventana aparece con esa medida
                         
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
+        
         for (int i=0 ; i < panelBusqueda.getComponents().length ; i++)
         {
             panelBusqueda.getComponent(i).setEnabled(false);
@@ -431,7 +436,6 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
             }
         });
 
-        txfdCantidad.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdCantidad.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCantidad.setNextFocusableComponent(btnAgregar);

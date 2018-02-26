@@ -7,6 +7,8 @@ import Modelo.Proveedor;
 import Utils.Redondear;
 import Utils.Validar;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.text.DecimalFormat;
 import java.util.*;
 import javax.swing.ImageIcon;
@@ -41,6 +43,9 @@ public class ventanaEditarProd extends javax.swing.JFrame
         this.setLocationRelativeTo(null);     //centra la ventana  
         this.setMinimumSize(new Dimension(666, 428));  //al minimizar la ventana no permite que sea mas chico que esa medida
         this.setPreferredSize(new Dimension(666, 428));    //al minimizar la ventana aparece con esa medida        
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
         
         elProd = pDAO.buscarPorId(id_recibido);
 
@@ -93,7 +98,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         panelIzquierdo.setOpaque(false);
 
-        txfdEditarStockMinimo.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarStockMinimo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarStockMinimo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarStockMinimo.setNextFocusableComponent(rbUnidad);
@@ -108,7 +112,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel7.setText("Stock mínimo:");
 
-        txfdEditarPrecioVenta.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarPrecioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarPrecioVenta.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarPrecioVenta.setNextFocusableComponent(txfdEditarStockMinimo);
@@ -123,7 +126,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setText("Precio venta:");
 
-        txfdEditarPrecioCosto.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarPrecioCosto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarPrecioCosto.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarPrecioCosto.setNextFocusableComponent(txfdEditarPrecioVenta);
@@ -295,7 +297,6 @@ public class ventanaEditarProd extends javax.swing.JFrame
             tablaProv.getColumnModel().getColumn(2).setMaxWidth(0);
         }
 
-        txfdEditarPesoEnvase.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarPesoEnvase.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarPesoEnvase.setToolTipText("Ej: 1000");
         txfdEditarPesoEnvase.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N

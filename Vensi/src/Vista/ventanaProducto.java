@@ -10,6 +10,8 @@ import Modelo.Proveedor;
 import Utils.CentrarColumnas;
 import Utils.ColorFilas;
 import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
@@ -49,6 +51,9 @@ public class ventanaProducto extends javax.swing.JFrame
         this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir        
         this.setMinimumSize(new Dimension(1120,600));
         this.setPreferredSize(new Dimension(1120,600));      
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
         
         cbSituacion.setEnabled(false);
         

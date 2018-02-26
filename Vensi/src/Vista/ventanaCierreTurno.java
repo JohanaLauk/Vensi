@@ -6,7 +6,12 @@ import DAO.TurnoDAO;
 import Modelo.EntradaSalida;
 import Modelo.ItemVenta;
 import Modelo.Turno;
+import java.awt.Dimension;
+import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.text.DateFormat;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -23,6 +28,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     public static int cantVentas;
     
     DateFormat fechaHoraFormat = new SimpleDateFormat("dd/MM/yyyy HH:mm");
+    DecimalFormat formatoPrecios = new DecimalFormat("0.00");
     
     ImageIcon icono;
     
@@ -31,6 +37,12 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         initComponents();
         
         this.setLocationRelativeTo(null);   //centra la ventana  
+        this.setExtendedState(MAXIMIZED_BOTH);  //maximiza la ventana al abrir        
+        this.setMinimumSize(new Dimension(1150, 730));
+        this.setPreferredSize(new Dimension(1150, 730));
+        
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);
           
         turnoActual = tDAO.obtenerUltimo();
         
@@ -38,9 +50,13 @@ public class ventanaCierreTurno extends javax.swing.JFrame
                         + "  -  Apertura: " + fechaHoraFormat.format(turnoActual.getFechaHoraInicio()) + "hs.");
         
         //el HAY se calcula automaticamente a medida que va ingresando los billetes
-        txfdMontoEsperado.setText("$   " + String.valueOf(calcularMontoEsperado()));
-        txfdDiferencia.setText("$   " + String.valueOf(calcularDiferencia()));        
+        txfdMontoEsperado.setText("$   " + String.valueOf(formatoPrecios.format(calcularMontoEsperado())));
+        txfdDiferencia.setText("$   " + String.valueOf(formatoPrecios.format(calcularDiferencia())));       
+        
+        txfdMontoEntradas.setText("$   " + String.valueOf(formatoPrecios.format(calcularMontoVentas() + calcularMontoEntradas())));
+        txfdMontoSalidas.setText("$   " + String.valueOf(formatoPrecios.format(calcularMontoSalidas())));
     }
+    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -56,6 +72,11 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         txfdDiferencia = new javax.swing.JTextField();
         txfdMontoEsperado = new javax.swing.JTextField();
         txfdHay = new javax.swing.JTextField();
+        jLabel16 = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        txfdMontoEntradas = new javax.swing.JTextField();
+        txfdMontoSalidas = new javax.swing.JTextField();
         panelEntradas = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
@@ -105,29 +126,35 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Cierre de turno");
-        setResizable(false);
+        setMinimumSize(new java.awt.Dimension(1150, 730));
+        setPreferredSize(new java.awt.Dimension(1150, 730));
+        addWindowListener(new java.awt.event.WindowAdapter() {
+            public void windowClosing(java.awt.event.WindowEvent evt) {
+                formWindowClosing(evt);
+            }
+        });
 
         panelTodo.setBackground(new java.awt.Color(102, 102, 102));
 
         panelCalculos.setOpaque(false);
 
-        jLabel12.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jLabel12.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel12.setText("Efectivo hay");
 
-        jLabel13.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jLabel13.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(255, 255, 255));
         jLabel13.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel13.setText("Monto esperado");
 
-        jLabel14.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jLabel14.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(255, 255, 255));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel14.setText("Diferencia");
 
         btnAceptarCerrarTurno.setBackground(new java.awt.Color(153, 255, 153));
-        btnAceptarCerrarTurno.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnAceptarCerrarTurno.setFont(new java.awt.Font("Calibri", 1, 26)); // NOI18N
         btnAceptarCerrarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/aceptar_50.png"))); // NOI18N
         btnAceptarCerrarTurno.setText("Aceptar");
         btnAceptarCerrarTurno.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -151,7 +178,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         });
 
         btnCancelarCerrarTurno.setBackground(new java.awt.Color(255, 153, 153));
-        btnCancelarCerrarTurno.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnCancelarCerrarTurno.setFont(new java.awt.Font("Calibri", 1, 26)); // NOI18N
         btnCancelarCerrarTurno.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vTurno/no_50.png"))); // NOI18N
         btnCancelarCerrarTurno.setText("Cancelar");
         btnCancelarCerrarTurno.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -175,138 +202,202 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         });
 
         txfdDiferencia.setEditable(false);
-        txfdDiferencia.setBackground(new java.awt.Color(255, 255, 255));
-        txfdDiferencia.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        txfdDiferencia.setBackground(new java.awt.Color(242, 116, 39));
+        txfdDiferencia.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         txfdDiferencia.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdDiferencia.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdDiferencia.setNextFocusableComponent(txfd500);
 
         txfdMontoEsperado.setEditable(false);
-        txfdMontoEsperado.setBackground(new java.awt.Color(255, 255, 255));
-        txfdMontoEsperado.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        txfdMontoEsperado.setBackground(new java.awt.Color(63, 157, 224));
+        txfdMontoEsperado.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         txfdMontoEsperado.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdMontoEsperado.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdMontoEsperado.setNextFocusableComponent(txfdHay);
 
         txfdHay.setEditable(false);
-        txfdHay.setBackground(new java.awt.Color(255, 255, 255));
-        txfdHay.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        txfdHay.setBackground(new java.awt.Color(15, 190, 85));
+        txfdHay.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         txfdHay.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdHay.setText("$   0,00");
+        txfdHay.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdHay.setNextFocusableComponent(txfdDiferencia);
+
+        jLabel16.setFont(new java.awt.Font("Calibri", 1, 36)); // NOI18N
+        jLabel16.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        jLabel16.setText("    CÁLCULOS");
+        jLabel16.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        jLabel17.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        jLabel17.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("Monto entradas");
+
+        jLabel18.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        jLabel18.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("Monto salidas");
+
+        txfdMontoEntradas.setBackground(new java.awt.Color(0, 0, 0));
+        txfdMontoEntradas.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        txfdMontoEntradas.setForeground(new java.awt.Color(255, 255, 255));
+        txfdMontoEntradas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdMontoEntradas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+
+        txfdMontoSalidas.setBackground(new java.awt.Color(0, 0, 0));
+        txfdMontoSalidas.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        txfdMontoSalidas.setForeground(new java.awt.Color(255, 255, 255));
+        txfdMontoSalidas.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdMontoSalidas.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
 
         javax.swing.GroupLayout panelCalculosLayout = new javax.swing.GroupLayout(panelCalculos);
         panelCalculos.setLayout(panelCalculosLayout);
         panelCalculosLayout.setHorizontalGroup(
             panelCalculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel12, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 278, Short.MAX_VALUE)
+            .addComponent(jLabel17, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(panelCalculosLayout.createSequentialGroup()
                 .addGap(27, 27, 27)
-                .addGroup(panelCalculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(panelCalculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txfdMontoEsperado)
                     .addComponent(txfdHay)
-                    .addComponent(txfdDiferencia)
-                    .addComponent(jLabel13))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txfdDiferencia))
+                .addGap(22, 22, 22))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCalculosLayout.createSequentialGroup()
+                .addGap(33, 33, 33)
+                .addComponent(btnCancelarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                .addGap(12, 12, 12)
+                .addComponent(btnAceptarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 1, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
             .addGroup(panelCalculosLayout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(panelCalculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(btnCancelarCerrarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, 164, Short.MAX_VALUE)
-                    .addComponent(btnAceptarCerrarTurno, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
+                .addGap(89, 89, 89)
+                .addComponent(txfdMontoEntradas)
+                .addGap(89, 89, 89))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelCalculosLayout.createSequentialGroup()
+                .addGap(90, 90, 90)
+                .addComponent(txfdMontoSalidas)
+                .addGap(88, 88, 88))
         );
         panelCalculosLayout.setVerticalGroup(
             panelCalculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelCalculosLayout.createSequentialGroup()
+                .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 59, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel13)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txfdMontoEsperado, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
+                .addComponent(txfdMontoEsperado, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel12)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txfdHay, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(33, 33, 33)
+                .addComponent(txfdHay, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel14)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txfdDiferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(37, 37, 37)
-                .addComponent(btnCancelarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txfdDiferencia, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(20, 20, 20)
+                .addComponent(jLabel17)
+                .addGap(1, 1, 1)
+                .addComponent(txfdMontoEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(btnAceptarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txfdMontoSalidas, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(99, 99, 99)
+                .addGroup(panelCalculosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(btnAceptarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnCancelarCerrarTurno, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
 
+        panelEntradas.setFont(new java.awt.Font("Calibri", 0, 11)); // NOI18N
         panelEntradas.setOpaque(false);
 
-        jButton1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(192, 195, 197));
+        jButton1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jButton1.setText("500 x");
         jButton1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton1.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton1.setFocusPainted(false);
         jButton1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton2.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jButton2.setBackground(new java.awt.Color(192, 195, 197));
+        jButton2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jButton2.setText("200 x");
         jButton2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton2.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton2.setFocusPainted(false);
         jButton2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton3.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jButton3.setBackground(new java.awt.Color(192, 195, 197));
+        jButton3.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jButton3.setText("100 x");
         jButton3.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton3.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton3.setFocusPainted(false);
         jButton3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jButton5.setBackground(new java.awt.Color(192, 195, 197));
+        jButton5.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jButton5.setText("20 x");
         jButton5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton5.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton5.setFocusPainted(false);
         jButton5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton6.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jButton6.setBackground(new java.awt.Color(192, 195, 197));
+        jButton6.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jButton6.setText("10 x");
         jButton6.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton6.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton6.setFocusPainted(false);
         jButton6.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton7.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jButton7.setBackground(new java.awt.Color(192, 195, 197));
+        jButton7.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jButton7.setText("5 x");
         jButton7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton7.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton7.setFocusPainted(false);
         jButton7.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton8.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jButton8.setBackground(new java.awt.Color(192, 195, 197));
+        jButton8.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jButton8.setText("2 x ");
         jButton8.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton8.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton8.setFocusPainted(false);
         jButton8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jButton9.setBackground(new java.awt.Color(192, 195, 197));
+        jButton9.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jButton9.setText("1 x");
         jButton9.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton9.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton9.setFocusPainted(false);
         jButton9.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton10.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jButton10.setBackground(new java.awt.Color(192, 195, 197));
+        jButton10.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jButton10.setText("00,50 x");
         jButton10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton10.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton10.setFocusPainted(false);
         jButton10.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        jButton11.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jButton11.setBackground(new java.awt.Color(192, 195, 197));
+        jButton11.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jButton11.setText("00,25 x");
         jButton11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton11.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton11.setFocusPainted(false);
         jButton11.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        txfd500.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txfd500.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd500.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd500.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd500.setNextFocusableComponent(txfd200);
@@ -319,14 +410,15 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jButton4.setBackground(new java.awt.Color(192, 195, 197));
+        jButton4.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jButton4.setText("50 x");
         jButton4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jButton4.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jButton4.setFocusPainted(false);
         jButton4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
-        txfd200.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txfd200.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd200.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd200.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd200.setNextFocusableComponent(txfd100);
@@ -339,7 +431,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
-        txfd100.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txfd100.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd100.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd100.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd100.setNextFocusableComponent(txfd50);
@@ -352,7 +444,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
-        txfd50.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txfd50.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd50.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd50.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd50.setNextFocusableComponent(txfd20);
@@ -365,7 +457,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
-        txfd20.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txfd20.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd20.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd20.setNextFocusableComponent(txfd10);
@@ -378,7 +470,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
-        txfd10.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txfd10.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd10.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd10.setNextFocusableComponent(txfd5);
@@ -391,7 +483,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
-        txfd5.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txfd5.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd5.setNextFocusableComponent(txfd2);
@@ -404,7 +496,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
-        txfd2.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txfd2.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd2.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd2.setNextFocusableComponent(txfd1);
@@ -417,7 +509,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
-        txfd1.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txfd1.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd1.setNextFocusableComponent(txfd0050);
@@ -430,7 +522,7 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
-        txfd0050.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txfd0050.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd0050.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd0050.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd0050.setNextFocusableComponent(txfd0025);
@@ -443,10 +535,10 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             }
         });
 
-        txfd0025.setFont(new java.awt.Font("Calibri", 0, 18)); // NOI18N
+        txfd0025.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd0025.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd0025.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        txfd0025.setNextFocusableComponent(txfdHay);
+        txfd0025.setNextFocusableComponent(txfd500);
         txfd0025.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfd0025KeyReleased(evt);
@@ -457,77 +549,88 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         });
 
         txfd500total.setEditable(false);
-        txfd500total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        txfd500total.setBackground(new java.awt.Color(153, 255, 153));
+        txfd500total.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd500total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd500total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd500total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd500total.setNextFocusableComponent(txfd200);
 
         txfd200total.setEditable(false);
-        txfd200total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        txfd200total.setBackground(new java.awt.Color(153, 255, 153));
+        txfd200total.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd200total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd200total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd200total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd200total.setNextFocusableComponent(txfd100);
 
         txfd100total.setEditable(false);
-        txfd100total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        txfd100total.setBackground(new java.awt.Color(153, 255, 153));
+        txfd100total.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd100total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd100total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd100total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd100total.setNextFocusableComponent(txfd50);
 
         txfd50total.setEditable(false);
-        txfd50total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        txfd50total.setBackground(new java.awt.Color(153, 255, 153));
+        txfd50total.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd50total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd50total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd50total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd50total.setNextFocusableComponent(txfd20);
 
         txfd20total.setEditable(false);
-        txfd20total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        txfd20total.setBackground(new java.awt.Color(153, 255, 153));
+        txfd20total.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd20total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd20total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd20total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd20total.setNextFocusableComponent(txfd10);
 
         txfd10total.setEditable(false);
-        txfd10total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        txfd10total.setBackground(new java.awt.Color(153, 255, 153));
+        txfd10total.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd10total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd10total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd10total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd10total.setNextFocusableComponent(txfd5);
 
         txfd5total.setEditable(false);
-        txfd5total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        txfd5total.setBackground(new java.awt.Color(153, 255, 153));
+        txfd5total.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd5total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd5total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd5total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd5total.setNextFocusableComponent(txfd2);
 
         txfd2total.setEditable(false);
-        txfd2total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        txfd2total.setBackground(new java.awt.Color(153, 255, 153));
+        txfd2total.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd2total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd2total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd2total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd2total.setNextFocusableComponent(txfd1);
 
         txfd1total.setEditable(false);
-        txfd1total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        txfd1total.setBackground(new java.awt.Color(153, 255, 153));
+        txfd1total.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd1total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd1total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd1total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd1total.setNextFocusableComponent(txfd0050);
 
         txfd0050total.setEditable(false);
-        txfd0050total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        txfd0050total.setBackground(new java.awt.Color(153, 255, 153));
+        txfd0050total.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd0050total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd0050total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd0050total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txfd0050total.setNextFocusableComponent(txfd0025);
 
         txfd0025total.setEditable(false);
-        txfd0025total.setFont(new java.awt.Font("Calibri", 3, 18)); // NOI18N
+        txfd0025total.setBackground(new java.awt.Color(153, 255, 153));
+        txfd0025total.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         txfd0025total.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfd0025total.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         txfd0025total.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -535,58 +638,58 @@ public class ventanaCierreTurno extends javax.swing.JFrame
 
         jLabel1.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel1.setText(" =");
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("=");
 
         jLabel2.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel2.setText(" =");
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("=");
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText(" =");
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("=");
 
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel4.setText(" =");
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("=");
 
         jLabel5.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel5.setText(" =");
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("=");
 
         jLabel6.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel6.setText(" =");
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel6.setText("=");
 
         jLabel7.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel7.setText(" =");
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel7.setText("=");
 
         jLabel8.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel8.setText(" =");
+        jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel8.setText("=");
 
         jLabel9.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel9.setText(" =");
+        jLabel9.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel9.setText("=");
 
         jLabel10.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel10.setText(" =");
+        jLabel10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel10.setText("=");
 
         jLabel11.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel11.setText(" =");
+        jLabel11.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel11.setText("=");
 
         javax.swing.GroupLayout panelEntradasLayout = new javax.swing.GroupLayout(panelEntradas);
         panelEntradas.setLayout(panelEntradasLayout);
@@ -596,144 +699,148 @@ public class ventanaCierreTurno extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(panelEntradasLayout.createSequentialGroup()
-                        .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, 73, Short.MAX_VALUE)
-                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(6, 6, 6)
-                        .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txfd200, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                            .addComponent(txfd500)
-                            .addComponent(txfd100, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(txfd50, javax.swing.GroupLayout.Alignment.TRAILING)))
+                        .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                .addComponent(txfd200, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txfd500, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(txfd100, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txfd50, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addGroup(panelEntradasLayout.createSequentialGroup()
-                        .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jButton6, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txfd0050, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
+                            .addComponent(txfd1)
+                            .addComponent(txfd2)
+                            .addComponent(txfd5)
+                            .addComponent(txfd10)
+                            .addComponent(txfd20, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(txfd0025))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txfd10, javax.swing.GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
-                                .addComponent(txfd5)
-                                .addComponent(txfd2)
-                                .addComponent(txfd1)
-                                .addComponent(txfd0050))
-                            .addComponent(txfd0025, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(panelEntradasLayout.createSequentialGroup()
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txfd20, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(0, 4, Short.MAX_VALUE)
-                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txfd100total, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfd50total, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfd20total, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfd500total, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfd200total, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfd10total, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfd5total, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfd2total, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfd1total, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfd0050total, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfd0025total, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                .addGap(4, 4, 4)
+                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(txfd2total, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfd1total, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfd0050total, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfd0025total, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfd10total, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfd20total, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfd50total, javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfd500total)
+                    .addComponent(txfd200total)
+                    .addComponent(txfd100total)
+                    .addComponent(txfd5total))
                 .addContainerGap())
         );
         panelEntradasLayout.setVerticalGroup(
             panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelEntradasLayout.createSequentialGroup()
-                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfd500total, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfd500, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfd500)
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfd500total))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txfd200)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txfd200total))
+                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(txfd200total)
+                    .addGroup(javax.swing.GroupLayout.Alignment.LEADING, panelEntradasLayout.createSequentialGroup()
+                        .addGap(4, 4, 4)
+                        .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txfd200, javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(txfd100, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
-                    .addComponent(txfd100total, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfd50total)
-                    .addComponent(jLabel4)
+                    .addGroup(panelEntradasLayout.createSequentialGroup()
+                        .addGap(2, 2, 2)
+                        .addComponent(txfd100))
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfd100total))
+                .addGap(6, 6, 6)
+                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txfd50, javax.swing.GroupLayout.Alignment.TRAILING))
+                    .addComponent(txfd50)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfd50total))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfd20total, javax.swing.GroupLayout.DEFAULT_SIZE, 32, Short.MAX_VALUE)
-                    .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txfd20, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel6))
+                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(jButton5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfd20)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfd20total))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfd10total)
+                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txfd10)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfd10total))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfd5total)
+                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfd5)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txfd5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfd5total))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfd2total)
+                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfd2)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txfd2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfd2total))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfd1total)
+                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfd1)
                     .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txfd1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfd1total))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txfd0050total)
+                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txfd0050, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txfd0050)
+                    .addGroup(panelEntradasLayout.createSequentialGroup()
+                        .addGap(1, 1, 1)
+                        .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txfd0050total))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton11, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txfd0025, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addComponent(txfd0025total, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGroup(panelEntradasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
+                    .addComponent(txfd0025)
+                    .addComponent(jButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txfd0025total)))
         );
 
-        jLabel15.setFont(new java.awt.Font("Calibri", 1, 15)); // NOI18N
+        jLabel15.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(255, 255, 255));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel15.setText("Ingrese la cantidad de billetes de la caja:");
+        jLabel15.setText("Ingrese la cantidad de billetes existentes en la caja");
+        jLabel15.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout panelTodoLayout = new javax.swing.GroupLayout(panelTodo);
         panelTodo.setLayout(panelTodoLayout);
@@ -741,11 +848,11 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTodoLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(panelCalculos, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(19, 19, 19)
+                .addComponent(panelCalculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelEntradas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 271, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(panelEntradas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 520, Short.MAX_VALUE))
                 .addContainerGap())
         );
         panelTodoLayout.setVerticalGroup(
@@ -753,19 +860,23 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             .addGroup(panelTodoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(panelCalculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelTodoLayout.createSequentialGroup()
-                        .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 19, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(panelEntradas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
-                .addContainerGap())
+                        .addComponent(panelCalculos, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addContainerGap())
+                    .addGroup(panelTodoLayout.createSequentialGroup()
+                        .addComponent(jLabel15)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(panelEntradas, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(19, 19, 19))))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(panelTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(panelTodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(0, 0, 0))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -969,12 +1080,21 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         double hay = calcularHay();
         double montoEsperado = calcularMontoEsperado();
         
-        diferencia = hay - montoEsperado;
+        if (montoEsperado < 0)  //si el monto esperado es negativo...
+        {
+            diferencia = montoEsperado + hay;   //Ej: -4759 = -5399 + 640;
+        }
+        else
+        {
+            diferencia = hay - montoEsperado;   //Ej:  4759 =  5399 - 640:
+        }        
         
         return diferencia;
     }
     
     private void btnCancelarCerrarTurnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCancelarCerrarTurnoActionPerformed
+        ventanaVenta vVenta = new ventanaVenta();        
+        vVenta.setVisible(true);    //hace visible una ventana  
         dispose();
     }//GEN-LAST:event_btnCancelarCerrarTurnoActionPerformed
 
@@ -1000,7 +1120,9 @@ public class ventanaCierreTurno extends javax.swing.JFrame
             tDAO.modificar(turnoActual, turnoActual.getId());
             
             JOptionPane.showMessageDialog(null, "¡Se ha cerrado el turno correctamente!");
-              
+                          
+            ventanaVenta vVenta = new ventanaVenta();        
+            vVenta.setVisible(true);    //hace visible una ventana
             dispose();
         }               
     }//GEN-LAST:event_btnAceptarCerrarTurnoActionPerformed
@@ -1268,6 +1390,11 @@ public class ventanaCierreTurno extends javax.swing.JFrame
         btnCancelarCerrarTurno.setIcon(icono);
     }//GEN-LAST:event_btnCancelarCerrarTurnoMouseExited
 
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        ventanaVenta vVenta = new ventanaVenta();        
+        vVenta.setVisible(true);    //hace visible una ventana
+    }//GEN-LAST:event_formWindowClosing
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAceptarCerrarTurno;
     private javax.swing.JButton btnCancelarCerrarTurno;
@@ -1289,6 +1416,9 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -1324,6 +1454,8 @@ public class ventanaCierreTurno extends javax.swing.JFrame
     private javax.swing.JTextField txfd5total;
     private javax.swing.JTextField txfdDiferencia;
     private javax.swing.JTextField txfdHay;
+    private javax.swing.JTextField txfdMontoEntradas;
     private javax.swing.JTextField txfdMontoEsperado;
+    private javax.swing.JTextField txfdMontoSalidas;
     // End of variables declaration//GEN-END:variables
 }

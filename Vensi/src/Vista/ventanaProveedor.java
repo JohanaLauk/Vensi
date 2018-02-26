@@ -4,6 +4,8 @@ import DAO.ProveedorDAO;
 import Modelo.Proveedor;
 import java.awt.Dimension;
 import static java.awt.Frame.MAXIMIZED_BOTH;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.awt.event.MouseAdapter;
@@ -35,6 +37,9 @@ public class ventanaProveedor extends javax.swing.JFrame
         this.setMinimumSize(new Dimension(1120,600));  //al minimizar la ventana no permite que sea mas chico que esa medida        
         this.setPreferredSize(new Dimension(1120,600));    //al minimizar la ventana aparece con esa medida
          
+        Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
+        this.setIconImage(ico);       
+        
         //Al hacer click en el JFrame se quita la seleccion en el JTable
         this.addMouseListener(new MouseAdapter()
         {
@@ -108,9 +113,9 @@ public class ventanaProveedor extends javax.swing.JFrame
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Filtrar por:");
 
-        txfdBuscarProv.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdBuscarProv.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        txfdBuscarProv.setPrompt("Busque por código o por descripción");
+        txfdBuscarProv.setPrompt("Busque por razón social o por cuit/cuil");
+        txfdBuscarProv.setPromptForeground(new java.awt.Color(102, 102, 102));
         txfdBuscarProv.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfdBuscarProvKeyReleased(evt);
@@ -123,7 +128,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         jLabel2.setText("Ordenar por:");
 
         cbCampoOrden.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        cbCampoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Razón social", "Cuit" }));
+        cbCampoOrden.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Razón social", "Cuit/Cuil" }));
         cbCampoOrden.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbCampoOrden.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -406,11 +411,15 @@ public class ventanaProveedor extends javax.swing.JFrame
         if (txfdBuscarProv.getText().equals("") || txfdBuscarProv.getText() == null)
         {
             cbFiltroCampoProv.setEnabled(true); 
+            cbCampoOrden.setEnabled(true);
+            cbTipoOrden.setEnabled(true);
             llenarTabla();
         }
         else
         {
             cbFiltroCampoProv.setEnabled(false);
+            cbCampoOrden.setEnabled(false);
+            cbTipoOrden.setEnabled(false);
         }
     }//GEN-LAST:event_txfdBuscarProvKeyReleased
 
@@ -482,7 +491,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         {
             ordenSelec = "razonSocial";
         }
-        if (cbCampoOrden.getSelectedItem().equals("Cuit"))
+        if (cbCampoOrden.getSelectedItem().equals("Cuit/Cuil"))
         {
             ordenSelec = "cuit";
         }
@@ -524,7 +533,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         String[] datos = new String[7]; 
         
         modelo.addColumn("Razón social");
-        modelo.addColumn("Cuit");
+        modelo.addColumn("Cuit/Cuil");
         modelo.addColumn("Direción");
         modelo.addColumn("Lugar");        
         modelo.addColumn("Contacto");
@@ -667,7 +676,7 @@ public class ventanaProveedor extends javax.swing.JFrame
         String [] datos = new String[7]; 
         
         modelo2.addColumn("Razón social");
-        modelo2.addColumn("Cuit");
+        modelo2.addColumn("Cuit/Cuil");
         modelo2.addColumn("Direción");
         modelo2.addColumn("Lugar");
         modelo2.addColumn("Contacto");
