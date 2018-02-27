@@ -143,6 +143,9 @@
             <Component class="org.jdesktop.swingx.JXTextField" name="txfdEditarStockMinimo">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="14" style="0"/>
                 </Property>
@@ -169,6 +172,9 @@
             <Component class="org.jdesktop.swingx.JXTextField" name="txfdEditarPrecioVenta">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="14" style="0"/>
                 </Property>
@@ -195,6 +201,9 @@
             <Component class="org.jdesktop.swingx.JXTextField" name="txfdEditarPrecioCosto">
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="14" style="0"/>
                 </Property>
@@ -545,6 +554,9 @@
               <Properties>
                 <Property name="horizontalAlignment" type="int" value="0"/>
                 <Property name="toolTipText" type="java.lang.String" value="Ej: 1000"/>
+                <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+                  <Color blue="66" green="66" red="66" type="rgb"/>
+                </Property>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Calibri" size="14" style="0"/>
                 </Property>

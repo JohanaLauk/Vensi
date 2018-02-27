@@ -50,7 +50,8 @@ public class ProveedorDAO
         prov.setLocalidad(p.getLocalidad());
         prov.setProvincia(p.getProvincia());
         prov.setPais(p.getPais());
-            
+        prov.setMisProductos(p.getMisProductos());
+                    
         tx = session.beginTransaction();
         try
         {
@@ -71,7 +72,7 @@ public class ProveedorDAO
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Proveedor modificado");
-    }  
+    }    
     
     public List<Proveedor> listar(String filtro, String orden, String tipoOrden)
     {

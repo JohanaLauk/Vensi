@@ -76,8 +76,42 @@ public class ProductoDAO
             session.close();
         }
         //JOptionPane.showMessageDialog(null, "Producto modificado");
-    }    
-       
+    }         
+    
+    public boolean encontrarProv(String cuitProv)
+    {
+        session = NewHibernateUtil.getSessionFactory().openSession();
+        List<Producto> lista = null;
+        boolean existe = false; 
+        
+        try
+        {      
+            tx = session.beginTransaction();
+            Query query = session.createQuery("FROM Producto p JOIN FETCH p.proveedors pv WHERE p.estado = TRUE AND pv.cuit LIKE :cuitProv");            
+            query.setParameter("cuitProv", cuitProv);
+            lista = query.list(); 
+            
+            if (lista.size() > 0)   //El producto TIENE al menos 1 prov
+            {
+                existe = true;
+            }
+            else
+            {
+                existe = false;
+            }
+            tx.commit();      
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error. Al buscar el proveedor en el producto");
+        }        
+        finally
+        {
+            session.close();
+        }       
+        return existe;        
+    }
+        
     public Producto buscarPorId(int id)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
@@ -124,6 +158,29 @@ public class ProductoDAO
         return p;
     }
     
+    public Producto buscarPorCodigo2(String codigo)
+    {
+        session = NewHibernateUtil.getSessionFactory().openSession();
+        Producto p = null;
+        try
+        {            
+            tx = session.beginTransaction();
+            Query query = session.createQuery("FROM Producto p WHERE p.codigo LIKE :codigo");
+            query.setParameter("codigo", codigo);
+            p = (Producto)query.uniqueResult();
+            tx.commit();            
+        }
+        catch (Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "Error. Producto por codigo");
+        }     
+        finally
+        {
+            session.close();
+        }
+        return p;
+    }
+    
     public Producto buscarPorCodigo(String codigo, int proveedor)
     {
         session = NewHibernateUtil.getSessionFactory().openSession();
@@ -135,10 +192,9 @@ public class ProductoDAO
             query.setParameter("codigo", codigo);
             query.setParameter("proveedor", proveedor);
             p = (Producto)query.uniqueResult();
-            tx.commit();
-            
+            tx.commit();            
         }
-        catch(Exception e)
+        catch (Exception e)
         {
             JOptionPane.showMessageDialog(null, "Error. Producto por codigo");
         }        
@@ -203,10 +259,8 @@ public class ProductoDAO
                     query.setParameter("cadena", "%"+cadena.toUpperCase()+"%");
                     lista = query.list();
                 }
-            }
-            
-            tx.commit();
-            
+            }            
+            tx.commit();            
         }
         catch (Exception e)
         {

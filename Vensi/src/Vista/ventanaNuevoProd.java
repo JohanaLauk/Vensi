@@ -195,10 +195,11 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel7.setText("Precio costo:");
 
         txfdPrecioCosto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txfdPrecioCosto.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txfdPrecioCosto.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txfdPrecioCosto.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdPrecioCosto.setNextFocusableComponent(txfdPrecioVenta);
         txfdPrecioCosto.setPrompt("Ej: \"00\" o \"00.00\"");
+        txfdPrecioCosto.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdPrecioCosto.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdPrecioCostoKeyTyped(evt);
@@ -209,10 +210,11 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel3.setText("Precio venta:");
 
         txfdPrecioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txfdPrecioVenta.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txfdPrecioVenta.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txfdPrecioVenta.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdPrecioVenta.setNextFocusableComponent(txfdStockInicial);
         txfdPrecioVenta.setPrompt("Ej: \"00\" o \"00.00\"");
+        txfdPrecioVenta.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdPrecioVenta.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdPrecioVentaKeyTyped(evt);
@@ -223,10 +225,11 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel9.setText("Stock inicial:");
 
         txfdStockInicial.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txfdStockInicial.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txfdStockInicial.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txfdStockInicial.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdStockInicial.setNextFocusableComponent(txfdStockMinimo);
         txfdStockInicial.setPrompt("Ingrese la cantidad en unidades");
+        txfdStockInicial.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdStockInicial.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdStockInicialKeyTyped(evt);
@@ -237,10 +240,11 @@ public class ventanaNuevoProd extends javax.swing.JFrame
         jLabel4.setText("Stock mínimo:");
 
         txfdStockMinimo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txfdStockMinimo.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txfdStockMinimo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txfdStockMinimo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdStockMinimo.setNextFocusableComponent(rbUnidad);
         txfdStockMinimo.setPrompt("Ingrese la cantidad en unidades");
+        txfdStockMinimo.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdStockMinimo.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdStockMinimoKeyTyped(evt);
@@ -381,11 +385,13 @@ public class ventanaNuevoProd extends javax.swing.JFrame
             tablaProv.getColumnModel().getColumn(2).setMaxWidth(0);
         }
 
+        txfdPesoEnvase.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdPesoEnvase.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdPesoEnvase.setToolTipText("Ej: 1000");
-        txfdPesoEnvase.setDisabledTextColor(new java.awt.Color(51, 51, 51));
+        txfdPesoEnvase.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txfdPesoEnvase.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdPesoEnvase.setPrompt("Ej: 1000");
+        txfdPesoEnvase.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdPesoEnvase.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdPesoEnvaseKeyTyped(evt);
@@ -530,7 +536,7 @@ public class ventanaNuevoProd extends javax.swing.JFrame
     }//GEN-LAST:event_btnCancelarNuevoProdActionPerformed
 
     private void btnAceptarNuevoProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAceptarNuevoProdActionPerformed
-        Producto unProd = new Producto();
+        Producto unProd = new Producto();        
         String codigoInput = txfdCodigo.getText();
         
         boolean preciosOK = false;
@@ -557,15 +563,15 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                     if (validar.validarPrecio(txfdPrecioCosto.getText()) || validar.validarPrecio(txfdPrecioVenta.getText()))
                     {
                         double precioC = Double.parseDouble(txfdPrecioCosto.getText());
-                        unProd.setPrecioCosto(precioC);//r.RedondearCentavos(precioC));
+                        unProd.setPrecioCosto(precioC);
 
                         double precioV = Double.parseDouble(txfdPrecioVenta.getText());
-                        unProd.setPrecioVenta(precioV); //r.RedondearCentavos(precioV));
+                        unProd.setPrecioVenta(precioV);
                         preciosOK = true;
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null, "Utilice el siguiente formato para los precios \"00.00\"");
+                        JOptionPane.showMessageDialog(null, "Utilice el siguiente formato para los precios \"00.00\".");
                         preciosOK = false;
                     }
                 } 
@@ -684,32 +690,35 @@ public class ventanaNuevoProd extends javax.swing.JFrame
                             if (seleccionado)
                             {
                                 int idSelec = Integer.parseInt(tablaProv.getValueAt(i, 2).toString());
-                                unProd.addProveedors(prDAO.buscarPorId(idSelec));
+                                
+                                unProd.addProveedors(prDAO.buscarPorId(idSelec));   //se le agregue el prov a un prod   
+                            
                                 alMenosUnCheck = true;
                             }                            
                         }
                         
                         if (preciosOK && rbOK && alMenosUnCheck)
-                        {
+                        {                                          
                             pDAO.alta(unProd);
+                                
                             dispose();                  
                         }
                         else
                         {
-                            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor");
+                            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor.");
                         }
                     }
                 }    
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "El CÓDIGO del producto que desea crear ya existe.\n" +
-                                                    "Corrobore en el inventario para mayor seguridad y control.");                
+                JOptionPane.showMessageDialog(null, "¡El CÓDIGO del producto que desea crear ya existe!" +
+                                                  "\nCorrobore en el inventario para mayor seguridad y control.");                
             }                   
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
+            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios: \"Código\" y/o \"Descripción\".");
         }
     }//GEN-LAST:event_btnAceptarNuevoProdActionPerformed
 

@@ -108,6 +108,10 @@ public class Proveedor  implements java.io.Serializable
     {
         this.misProductos = misProductos;
     }
+    /*public void addMisProductos(Producto p)
+    {
+        this.misProductos.add(p);
+    }*/
 }
 
 

@@ -33,7 +33,12 @@
             <column name="estado" />
         </property>
         
-        <set name="misProductos" table="producto_proveedor" inverse="true" lazy="true" fetch="select">
+        <!-- <set name="misProductos" table="producto_proveedor" lazy="false" >
+            <key column="id_proveedor"/>
+            <many-to-many column="id_producto" class="Modelo.Producto" />
+        </set> -->
+        
+        <set name="misProductos" table="producto_proveedor" inverse="true" lazy="false" fetch="select">
             <key>
                 <column name="id_proveedor" not-null="true" />
             </key>

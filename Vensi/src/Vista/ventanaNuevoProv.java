@@ -314,12 +314,12 @@ public class ventanaNuevoProv extends javax.swing.JFrame
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "El CUIT/CUIL debe tener el siguiente formato \"xx-xxxxxxxx-x\"");                                                    
+                JOptionPane.showMessageDialog(null, "El CUIT/CUIL debe tener el siguiente formato \"xx-xxxxxxxx-x\".");                                                    
             }
         } 
         else 
         {
-            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
+            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios: \"Razón social\" y/o \"Cuit/Cuil\".");
         }
     }//GEN-LAST:event_btnAceptarActionPerformed
 

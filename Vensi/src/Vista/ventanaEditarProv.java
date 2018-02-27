@@ -1,5 +1,6 @@
 package Vista;
 
+import DAO.ProductoDAO;
 import DAO.ProveedorDAO;
 import Modelo.Producto;
 import Modelo.Proveedor;
@@ -7,6 +8,7 @@ import Utils.Validar;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.List;
 import java.util.Set;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -14,6 +16,7 @@ import javax.swing.JOptionPane;
 public class ventanaEditarProv extends javax.swing.JFrame 
 {
     ProveedorDAO pDAO = new ProveedorDAO();
+    ProductoDAO pdDAO = new ProductoDAO();
     Validar validar = new Validar();
     public static int id_recibido;
     Proveedor elProv = null;      
@@ -131,10 +134,11 @@ public class ventanaEditarProv extends javax.swing.JFrame
         jLabel4.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
         jLabel4.setText("Contacto:");
 
-        txfdEditarCuit.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         txfdEditarCuit.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdEditarCuit.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txfdEditarCuit.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarCuit.setPrompt("XX-XXXXXXXX-X");
+        txfdEditarCuit.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdEditarCuit.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdEditarCuitKeyTyped(evt);
@@ -312,13 +316,13 @@ public class ventanaEditarProv extends javax.swing.JFrame
         Proveedor prov = new Proveedor();
         String cuitInput = txfdEditarCuit.getText();        
         
-        if (!txfdEditarRazonSocial.getText().equals("") && !cuitInput.equals("")) 
+        if (!txfdEditarRazonSocial.getText().equals("") && !cuitInput.equals("")) //si los valores no son nulos...
         {
             if (validar.validarCUIT(cuitInput)) 
             {
                 Proveedor provRepetido = pDAO.buscar1PorCuit(cuitInput);
                 
-                if (provRepetido == null || elProv.getCuit().equals(cuitInput))   //si el cuit es unico (no se repite)...                 
+                if (provRepetido == null || elProv.getCuit().equals(cuitInput))   //si el cuit es nuevo y guarda el mismo valor almacenado...                 
                 {                
                     prov.setRazonSocial(txfdEditarRazonSocial.getText().toUpperCase());
                     prov.setCuit(cuitInput);
@@ -332,26 +336,25 @@ public class ventanaEditarProv extends javax.swing.JFrame
                     {
                         prov.setEstado(true);
                     } 
-                    else 
-                    {
-                        Set<Producto> misProdusctos = prov.getMisProductos();
+                    else    //Si quiere deshabilitar el proveedor... no tiene que tener productos a cargo.
+                    {                 
+                        boolean provee = pdDAO.encontrarProv(provRepetido.getCuit());                        
                         
-                        if (misProdusctos.size() != 0)       //si tiene producto...  
+                        if (provee)   //SI tiene productos
                         {
-                            JOptionPane.showMessageDialog(null, "¡ALERTA! No puede deshabilitar el proveedor porque aún tiene productos a cargo."
-                                    + "\nDiríjase a \"Gestión del producto\" y quite la referencia del proveedor de su producto, "
-                                    + "\nsí es ese el caso (recuerde que un producto siempre debe tener, al menos, un proveedor a cargo)."
-                                    + "\nDe lo contrario, aguarde a que el producto se agote, quite la referencia del proveedor, "
-                                    + "\ndeshabilite el producto y luego deshabilite el proveedor.");
+                            JOptionPane.showMessageDialog(null, "¡ALERTA! "
+                                        + "\nNo puede deshabilitar el proveedor porque aún tiene productos a cargo."
+                                        + "\nDiríjase a \"Gestión del producto\" y quite la referencia del proveedor de su producto, "
+                                        + "\nsí ese es el caso (recuerde que un producto siempre debe tener, al menos, un proveedor a cargo)."
+                                        + "\nDe lo contrario, aguarde a que el producto se agote, quite la referencia del proveedor, "
+                                        + "\ndeshabilite el producto y luego deshabilite el proveedor.");                               
                         }
-                        else    //Si no tiene productos referenciados...
+                        else      //NO tiene productos
                         {
-                            prov.setEstado(false);
+                            prov.setEstado(false);   
                         }
-                    }
-
+                    }      
                     pDAO.modificar(prov, id_recibido);
-
                     dispose();
                 }
                 else
@@ -362,12 +365,12 @@ public class ventanaEditarProv extends javax.swing.JFrame
             } 
             else 
             {
-                JOptionPane.showMessageDialog(null, "El CUIT/CUIL debe tener el siguiente formato \"xx-xxxxxxxx-x\"");
+                JOptionPane.showMessageDialog(null, "El CUIT/CUIL debe tener el siguiente formato \"xx-xxxxxxxx-x\".");
             }
         } 
         else 
         {
-            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
+            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios: \"Razón social\" y/o \"Cuit/Cuil\".");
         }
     }//GEN-LAST:event_btnAceptarEditarActionPerformed
 

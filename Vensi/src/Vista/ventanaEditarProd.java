@@ -99,6 +99,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         panelIzquierdo.setOpaque(false);
 
         txfdEditarStockMinimo.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdEditarStockMinimo.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txfdEditarStockMinimo.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarStockMinimo.setNextFocusableComponent(rbUnidad);
         txfdEditarStockMinimo.setPrompt("Ingrese la cantidad en unidades");
@@ -113,6 +114,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel7.setText("Stock mínimo:");
 
         txfdEditarPrecioVenta.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdEditarPrecioVenta.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txfdEditarPrecioVenta.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarPrecioVenta.setNextFocusableComponent(txfdEditarStockMinimo);
         txfdEditarPrecioVenta.setPrompt("Ej: \"00\" o \"00.00\"");
@@ -127,6 +129,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
         jLabel4.setText("Precio venta:");
 
         txfdEditarPrecioCosto.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txfdEditarPrecioCosto.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txfdEditarPrecioCosto.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarPrecioCosto.setNextFocusableComponent(txfdEditarPrecioVenta);
         txfdEditarPrecioCosto.setPrompt("Ej: \"00\" o \"00.00\"");
@@ -299,6 +302,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         txfdEditarPesoEnvase.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txfdEditarPesoEnvase.setToolTipText("Ej: 1000");
+        txfdEditarPesoEnvase.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txfdEditarPesoEnvase.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdEditarPesoEnvase.setPrompt("Ej: 1000");
         txfdEditarPesoEnvase.setPromptForeground(new java.awt.Color(51, 51, 51));
@@ -496,7 +500,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
         if (!codigoInput.equals("") && !txfdEditarDescripcion.getText().equals("") && (rbPeso.isSelected() || rbUnidad.isSelected()))
         {   //Ingresó CODIGO, DESCRIPCION y marcó el TIPO DE VENTA
-            Producto prodRepetido = pDAO.buscarPorCodigo(codigoInput);
+            Producto prodRepetido = pDAO.buscarPorCodigo2(codigoInput);
 
             if (prodRepetido == null || elProd.getCodigo().equals(codigoInput))
             {
@@ -523,7 +527,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
                     }
                     else
                     {
-                        JOptionPane.showMessageDialog(null, "Utilice el siguiente formato para los precios \"00.00\"");
+                        JOptionPane.showMessageDialog(null, "Utilice el siguiente formato para los precios \"00.00\".");
                         preciosOK = false;
                     }
                 }
@@ -601,16 +605,7 @@ public class ventanaEditarProd extends javax.swing.JFrame
                     }
 
                     if (rbOK)
-                    {
-                        if (cbEstado.getSelectedItem().equals("Habilitado"))
-                        {
-                            prodEditar.setEstado(true);
-                        }
-                        else
-                        {
-                            prodEditar.setEstado(false);
-                        }
-
+                    {      
                         if (situacion.equals("Ninguno"))
                         {
                             prodEditar.setOferta(false);
@@ -632,37 +627,63 @@ public class ventanaEditarProd extends javax.swing.JFrame
 
                         for (int i = 0; i < tablaProv.getModel().getRowCount(); i++) 
                         {
-                            boolean seleccionado = Boolean.parseBoolean(tablaProv.getValueAt(i, 1).toString());
-
-                            if (seleccionado) 
+                            boolean seleccionado = Boolean.parseBoolean(tablaProv.getValueAt(i, 1).toString()); 
+                                                                                                                
+                            if (seleccionado) //Seleccionó proveedor.
                             {
-                                int idSelec = Integer.parseInt(tablaProv.getValueAt(i, 2).toString());
-                                prodEditar.addProveedors(prDAO.buscarPorId(idSelec));   //le agrega el proveedor al producto
+                                int idSelec = Integer.parseInt(tablaProv.getValueAt(i, 2).toString());                                
+                                             
+                                prodEditar.addProveedors(prDAO.buscarPorId(idSelec));   //El producto AHORA TIENE al proveedor.                            
+                                
                                 alMenosUnCheck = true;
                             }
                         }
 
-                        if (preciosOK && rbOK && alMenosUnCheck)
+                        if (preciosOK && rbOK && alMenosUnCheck)    //si seleccionó al menos 1 proveedor...
                         {
-                            pDAO.modificar(prodEditar, id_recibido);
-                            dispose();
+                            if (cbEstado.getSelectedItem().equals("Deshabilitado"))   //Quiere deshabilitar.
+                            {    
+                                JOptionPane.showMessageDialog(null, "¡ALERTA!"
+                                                                 + "\nNo es posible deshabilitar el producto porque pertenece a un proveedor."
+                                                                 + "\nSi desea deshabilitarlo, debe quitarle el proveedor, y luego continuar.");                                  
+                                
+                            }
+                            else    //Quiere habilitar.
+                            {
+                                prodEditar.setEstado(true);     //habilita el producto
+                                
+                                pDAO.modificar(prodEditar, id_recibido);                            
+                            
+                                dispose();
+                            } 
                         }
-                        else
+                        else    //Si no seleccionó un proveedor...
                         {
-                            JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor.");
+                            if (cbEstado.getSelectedItem().equals("Deshabilitado"))     //Quiere deshabilitar
+                            {                                
+                                prodEditar.setEstado(false);
+                                
+                                pDAO.modificar(prodEditar, id_recibido);                            
+                            
+                                dispose();
+                            }
+                            else    //si está habilitado.
+                            {
+                                JOptionPane.showMessageDialog(null, "Debe seleccionar al menos un proveedor.");  
+                            }                            
                         }
                     }
                 }
             }
             else
             {
-                JOptionPane.showMessageDialog(null, "El nuevo CÓDIGO del producto que ingresó ya existe.\n" +
-                    "Corrobore en el inventario para mayor seguridad y control.");
+                JOptionPane.showMessageDialog(null, "¡El nuevo CÓDIGO que ingresó del producto ya existe!" +
+                                                  "\nCorrobore en el inventario para mayor seguridad y control.");
             }
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios");
+            JOptionPane.showMessageDialog(null, "Debe completar los campos obligatorios: \"Código\" y/o \"Descripción\".");
         }        
     }//GEN-LAST:event_btnAceptarEditarActionPerformed
 

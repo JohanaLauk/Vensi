@@ -123,9 +123,11 @@ public class ventanaProducto extends javax.swing.JFrame
         jLabel1.setText("Buscar:");
 
         txfdBuscarProd.setHorizontalAlignment(javax.swing.JTextField.LEFT);
+        txfdBuscarProd.setDisabledTextColor(new java.awt.Color(102, 102, 102));
         txfdBuscarProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdBuscarProd.setNextFocusableComponent(btnEditarProd);
         txfdBuscarProd.setPrompt("Busque por código o por descripción");
+        txfdBuscarProd.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfdBuscarProdKeyReleased(evt);
