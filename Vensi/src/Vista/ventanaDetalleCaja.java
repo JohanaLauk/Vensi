@@ -145,7 +145,7 @@ public class ventanaDetalleCaja extends javax.swing.JFrame
 
         labRetiros.setBackground(new java.awt.Color(204, 0, 0));
         labRetiros.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
-        labRetiros.setText("Retiros:");
+        labRetiros.setText("Salidas:");
 
         txfdRetiros.setBackground(new java.awt.Color(255, 0, 0));
         txfdRetiros.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N

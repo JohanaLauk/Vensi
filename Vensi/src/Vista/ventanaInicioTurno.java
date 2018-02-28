@@ -6,6 +6,7 @@ import Modelo.Turno;
 import Modelo.Usuario;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.util.Date;
 import java.util.List;
 import javax.swing.ImageIcon;
@@ -228,6 +229,11 @@ public class ventanaInicioTurno extends javax.swing.JFrame
         char c = evt.getKeyChar();
         if ((c < '0' || c > '9') && (c != java.awt.event.KeyEvent.VK_BACK_SPACE)) 
             evt.consume(); 
+        
+        if (c == KeyEvent.VK_ENTER)
+        {
+            btnSI.doClick();
+        }
     }//GEN-LAST:event_txfdPinKeyTyped
 
     private void btnNOMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnNOMouseEntered

@@ -289,7 +289,8 @@ public class ventanaVenta extends javax.swing.JFrame
 
         txfdBuscarProd.setToolTipText("");
         txfdBuscarProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        txfdBuscarProd.setPrompt("Busque por código o por descripción");
+        txfdBuscarProd.setNextFocusableComponent(tablaProd);
+        txfdBuscarProd.setPrompt("Busque el producto por código o por descripción");
         txfdBuscarProd.setPromptForeground(new java.awt.Color(51, 51, 51));
         txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
@@ -302,7 +303,7 @@ public class ventanaVenta extends javax.swing.JFrame
         jLabel4.setText("Filtrar por:");
 
         cbFiltro.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Sólo habilitados", "Sólo ofertas" }));
+        cbFiltro.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Todos", "Venta normal", "Venta con oferta" }));
         cbFiltro.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         cbFiltro.setNextFocusableComponent(cbOrdenCampo);
         cbFiltro.addActionListener(new java.awt.event.ActionListener() {
@@ -367,6 +368,7 @@ public class ventanaVenta extends javax.swing.JFrame
         ));
         tablaProd.setFocusable(false);
         tablaProd.setGridColor(new java.awt.Color(153, 153, 153));
+        tablaProd.setNextFocusableComponent(txfdCantidad);
         tablaProd.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaProd.getTableHeader().setResizingAllowed(false);
         tablaProd.getTableHeader().setReorderingAllowed(false);
@@ -402,10 +404,10 @@ public class ventanaVenta extends javax.swing.JFrame
         listInfoProd.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         jScrollPane3.setViewportView(listInfoProd);
 
-        jLabel6.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Calibri", 1, 17)); // NOI18N
         jLabel6.setText("Datos del producto:");
 
-        jLabel5.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Calibri", 1, 15)); // NOI18N
         jLabel5.setText("Cantidad:");
 
         btnAgregar.setBackground(new java.awt.Color(153, 255, 153));
@@ -416,7 +418,7 @@ public class ventanaVenta extends javax.swing.JFrame
         btnAgregar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregar.setFocusPainted(false);
         btnAgregar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnAgregar.setNextFocusableComponent(btnQuitar);
+        btnAgregar.setNextFocusableComponent(tablaProd);
         btnAgregar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnAgregarMouseEntered(evt);
@@ -439,7 +441,7 @@ public class ventanaVenta extends javax.swing.JFrame
         btnQuitar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnQuitar.setFocusPainted(false);
         btnQuitar.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        btnQuitar.setNextFocusableComponent(btnConfirmar);
+        btnQuitar.setNextFocusableComponent(tablaProd);
         btnQuitar.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 btnQuitarMouseEntered(evt);
@@ -563,13 +565,15 @@ public class ventanaVenta extends javax.swing.JFrame
         ));
         tablaCarrito.setFocusable(false);
         tablaCarrito.setGridColor(new java.awt.Color(153, 153, 153));
+        tablaCarrito.setNextFocusableComponent(btnQuitar);
         tablaCarrito.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tablaCarrito.getTableHeader().setResizingAllowed(false);
         tablaCarrito.getTableHeader().setReorderingAllowed(false);
         jScrollPane2.setViewportView(tablaCarrito);
 
-        jLabel2.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        jLabel2.setText("Carrito:");
+        jLabel2.setFont(new java.awt.Font("Calibri", 1, 16)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("CARRITO");
 
         javax.swing.GroupLayout panelTablaCarritoLayout = new javax.swing.GroupLayout(panelTablaCarrito);
         panelTablaCarrito.setLayout(panelTablaCarritoLayout);
@@ -591,9 +595,9 @@ public class ventanaVenta extends javax.swing.JFrame
         panelTablaCarritoLayout.setVerticalGroup(
             panelTablaCarritoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTablaCarritoLayout.createSequentialGroup()
-                .addComponent(jLabel2)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 177, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(labMontoTotalCompra, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -836,22 +840,22 @@ public class ventanaVenta extends javax.swing.JFrame
                         //JOptionPane.showMessageDialog(null, "Producto nuevo, ItemVenta agregado.");
                     }
                 }                    
-                pDAO.restarStock(Integer.parseInt(idProd), cantidad);   //Descuenta stock                
+                pDAO.restarStock(Integer.parseInt(idProd), cantidad);   //Descuenta stock   
+                
+                turnoActual.setCantVentas(turnoActual.getCantVentas() + 1);  
+                tDAO.modificar(turnoActual, turnoActual.getId());
+
+                JOptionPane.showMessageDialog(null, "¡Compra efectuada con éxito!");
+                labMontoTotalCompra.setText("Total compra: $0,00");
+                llenarTabla();
+                llenarTablaCarrito();
+                limpiarList();
             }            
         }
         else
         {
-            JOptionPane.showMessageDialog(null, "El carrito está vacío.");
-        }
-        
-        turnoActual.setCantVentas(turnoActual.getCantVentas() + 1);  
-        tDAO.modificar(turnoActual, turnoActual.getId());
-        
-        JOptionPane.showMessageDialog(null, "¡Compra efectuada!");
-        labMontoTotalCompra.setText("Total compra: $0,00");
-        llenarTabla();
-        llenarTablaCarrito();
-        limpiarList();
+            JOptionPane.showMessageDialog(null, "¡El carrito de venta está vacío!");
+        }       
     }//GEN-LAST:event_btnConfirmarActionPerformed
 
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
@@ -1028,8 +1032,26 @@ public class ventanaVenta extends javax.swing.JFrame
     }//GEN-LAST:event_txfdBuscarProdKeyReleased
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        llenarTabla(); 
         verificarTurno();
+        
+        String cadena = txfdBuscarProd.getText();
+        if (cadena.equals(""))  //no hay busqueda
+        {
+            llenarTabla(); 
+            
+            cbFiltro.setEnabled(true);
+            cbOrdenCampo.setEnabled(true);
+            cbTipoOrden.setEnabled(true);
+        }
+        else
+        {
+            listaBusqueda = pDAO.buscarPorCodigoNombre(cadena, "Habilitados", situacionSelec);
+            llenarTablaBusqueda(listaBusqueda);
+
+            cbFiltro.setEnabled(false);
+            cbOrdenCampo.setEnabled(false);
+            cbTipoOrden.setEnabled(false);
+        }      
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void cbFiltroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cbFiltroActionPerformed
@@ -1037,11 +1059,11 @@ public class ventanaVenta extends javax.swing.JFrame
         {
             situacionSelec = "HabOferta";
         }
-        if (cbFiltro.getSelectedItem().equals("Sólo habilitados"))
+        if (cbFiltro.getSelectedItem().equals("Venta normal"))
         {
             situacionSelec = "Habilitado";
         }
-        if (cbFiltro.getSelectedItem().equals("Sólo ofertas"))
+        if (cbFiltro.getSelectedItem().equals("Venta con oferta"))
         {
             situacionSelec = "Oferta";
         }        
@@ -1197,7 +1219,7 @@ public class ventanaVenta extends javax.swing.JFrame
         tcm.getColumn(1).setPreferredWidth(400);
         tcm.getColumn(2).setPreferredWidth(30);
         tcm.getColumn(3).setPreferredWidth(30);
-        tcm.getColumn(4).setPreferredWidth(60);
+        tcm.getColumn(4).setPreferredWidth(80);
         tcm.getColumn(5).setPreferredWidth(0);     
         tcm.getColumn(5).setMaxWidth(0);
         tcm.getColumn(5).setMinWidth(0);
@@ -1368,7 +1390,7 @@ public class ventanaVenta extends javax.swing.JFrame
         tcm3.getColumn(1).setPreferredWidth(400);
         tcm3.getColumn(2).setPreferredWidth(30);
         tcm3.getColumn(3).setPreferredWidth(30);
-        tcm3.getColumn(4).setPreferredWidth(60);
+        tcm3.getColumn(4).setPreferredWidth(80);
         tcm3.getColumn(5).setPreferredWidth(0);     
         tcm3.getColumn(5).setMaxWidth(0);
         tcm3.getColumn(5).setMinWidth(0);
