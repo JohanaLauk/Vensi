@@ -113,8 +113,6 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         panelProv = new javax.swing.JPanel();
         labProveedor = new javax.swing.JLabel();
         cbProveedores = new javax.swing.JComboBox<>();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        tablaProd = new javax.swing.JTable();
         panelBusqueda = new javax.swing.JPanel();
         labBuscar = new javax.swing.JLabel();
         txfdBuscarProd = new org.jdesktop.swingx.JXTextField();
@@ -124,6 +122,8 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         labOrdenarPor = new javax.swing.JLabel();
         cbOrdenCampo = new javax.swing.JComboBox<>();
         cbTipoOrden = new javax.swing.JComboBox<>();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        tablaProd = new javax.swing.JTable();
         panelAlarma = new javax.swing.JPanel();
         jLabel8 = new javax.swing.JLabel();
         jScrollPane4 = new javax.swing.JScrollPane();
@@ -191,38 +191,15 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        tablaProd = new javax.swing.JTable()
-        {
-            public boolean isCellEditable(int rowIndex, int colIndex)
-            {
-                return false;
-            }
-        };
-        tablaProd.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        tablaProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        tablaProd.setModel(new javax.swing.table.DefaultTableModel(
-            new Object [][] {
-
-            },
-            new String [] {
-
-            }
-        ));
-        tablaProd.setFocusable(false);
-        tablaProd.setGridColor(new java.awt.Color(153, 153, 153));
-        tablaProd.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        tablaProd.getTableHeader().setResizingAllowed(false);
-        tablaProd.getTableHeader().setReorderingAllowed(false);
-        jScrollPane1.setViewportView(tablaProd);
-
         panelBusqueda.setOpaque(false);
 
         labBuscar.setFont(new java.awt.Font("Calibri", 1, 20)); // NOI18N
         labBuscar.setForeground(new java.awt.Color(255, 255, 255));
         labBuscar.setText("Buscar:");
 
+        txfdBuscarProd.setToolTipText("Busque el producto por código o por descripción");
         txfdBuscarProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        txfdBuscarProd.setPrompt("busque por código o por descripción");
+        txfdBuscarProd.setPrompt("Busque el producto por código o por descripción");
         txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfdBuscarProdKeyReleased(evt);
@@ -282,10 +259,11 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         panelBusquedaLayout.setHorizontalGroup(
             panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBusquedaLayout.createSequentialGroup()
-                .addGap(0, 0, Short.MAX_VALUE)
+                .addGap(0, 0, 0)
                 .addComponent(labBuscar)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(panelBusquedaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txfdBuscarProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelBusquedaLayout.createSequentialGroup()
                         .addComponent(labFiltrarPor)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -297,8 +275,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(cbOrdenCampo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txfdBuscarProd, javax.swing.GroupLayout.PREFERRED_SIZE, 612, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(cbTipoOrden, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         panelBusquedaLayout.setVerticalGroup(
@@ -317,6 +294,30 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
                     .addComponent(cbSituacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
+        tablaProd = new javax.swing.JTable()
+        {
+            public boolean isCellEditable(int rowIndex, int colIndex)
+            {
+                return false;
+            }
+        };
+        tablaProd.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        tablaProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
+        tablaProd.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+
+            }
+        ));
+        tablaProd.setFocusable(false);
+        tablaProd.setGridColor(new java.awt.Color(153, 153, 153));
+        tablaProd.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        tablaProd.getTableHeader().setResizingAllowed(false);
+        tablaProd.getTableHeader().setReorderingAllowed(false);
+        jScrollPane1.setViewportView(tablaProd);
+
         javax.swing.GroupLayout panelIzquierdoLayout = new javax.swing.GroupLayout(panelIzquierdo);
         panelIzquierdo.setLayout(panelIzquierdoLayout);
         panelIzquierdoLayout.setHorizontalGroup(
@@ -326,7 +327,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
                     .addComponent(jScrollPane1)
                     .addComponent(panelProv, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(panelIzquierdoLayout.createSequentialGroup()
-                        .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 683, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(panelBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
@@ -342,9 +343,10 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
 
         panelAlarma.setBackground(new java.awt.Color(102, 184, 211));
 
-        jLabel8.setFont(new java.awt.Font("Calibri", 1, 16)); // NOI18N
+        jLabel8.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        jLabel8.setForeground(new java.awt.Color(0, 0, 255));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel8.setText("ALARMA DE TODOS LOS PRODUCTOS FALTANTES:");
+        jLabel8.setText("ALARMA DE PRODUCTOS:");
         jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         listProdAlarma.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -373,7 +375,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
 
         panelInfoProd.setBackground(new java.awt.Color(102, 184, 211));
 
-        jLabel5.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel5.setFont(new java.awt.Font("Calibri", 1, 15)); // NOI18N
         jLabel5.setText("Cantidad:");
 
         btnAgregar.setBackground(new java.awt.Color(153, 255, 153));
@@ -409,7 +411,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         });
         jScrollPane2.setViewportView(listInfoProd);
 
-        jLabel6.setFont(new java.awt.Font("Calibri", 1, 15)); // NOI18N
+        jLabel6.setFont(new java.awt.Font("Calibri", 1, 17)); // NOI18N
         jLabel6.setText("Datos del producto:");
 
         btnQuitar.setBackground(new java.awt.Color(255, 153, 153));
@@ -488,12 +490,12 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
         panelTablaPeodo.setBackground(new java.awt.Color(102, 184, 211));
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 15)); // NOI18N
-        jLabel3.setText("Lista pedido:");
+        jLabel3.setText("LISTA:");
 
         btnImprimirPedido.setBackground(new java.awt.Color(255, 255, 255));
         btnImprimirPedido.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
         btnImprimirPedido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/vHistorial/imprimir_50.png"))); // NOI18N
-        btnImprimirPedido.setText("Imprimir pedido");
+        btnImprimirPedido.setText("Imprimir nota pedido");
         btnImprimirPedido.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btnImprimirPedido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnImprimirPedido.setFocusPainted(false);
@@ -570,7 +572,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
                 .addContainerGap()
                 .addGroup(panelTablaPeodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaPeodoLayout.createSequentialGroup()
-                        .addComponent(btnVolverMP, javax.swing.GroupLayout.DEFAULT_SIZE, 182, Short.MAX_VALUE)
+                        .addComponent(btnVolverMP, javax.swing.GroupLayout.DEFAULT_SIZE, 198, Short.MAX_VALUE)
                         .addGap(18, 18, 18)
                         .addComponent(btnImprimirPedido, javax.swing.GroupLayout.PREFERRED_SIZE, 290, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jScrollPane3)
@@ -584,7 +586,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelTablaPeodoLayout.createSequentialGroup()
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 17, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 80, Short.MAX_VALUE)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.DEFAULT_SIZE, 77, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelTablaPeodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(btnImprimirPedido, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -599,7 +601,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
             .addGroup(panelTodoLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(panelIzquierdo, javax.swing.GroupLayout.PREFERRED_SIZE, 317, Short.MAX_VALUE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelTodoLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(panelInfoProd, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(panelTablaPeodo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -956,7 +958,8 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
             int imprimir = JOptionPane.showConfirmDialog(null, "¿Está seguro de imprimir la nota de pedido?", "Imprimir nota de pedido", JOptionPane.YES_NO_OPTION);
             if (imprimir == 0)
             {
-                for (int i=0 ; i<filasTabla ; i++)   //recorre todas las filas del carrito
+                JOptionPane.showMessageDialog(null, "Acción no permitida aún");
+                /*for (int i=0 ; i<filasTabla ; i++)   //recorre todas las filas del carrito
                 { 
                     String idProd = tablaPedido.getValueAt(i, 4).toString();                    
                     Producto elProd = prodDAO.buscarPorId(Integer.parseInt(idProd));
@@ -985,6 +988,7 @@ public class ventanaGenerarPedido extends javax.swing.JFrame
 
                 Generar generarNotaPedido = new Generar();
                 generarNotaPedido.notaPedido();//listaProdImprimir, datosProv);     //aca debería pasarle por parametro lo que debe imprimir
+                */
             }            
         }
         else 

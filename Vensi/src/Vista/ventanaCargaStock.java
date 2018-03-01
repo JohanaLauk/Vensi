@@ -202,9 +202,10 @@ public class ventanaCargaStock extends javax.swing.JFrame
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Buscar:");
 
+        txfdBuscarProd.setToolTipText("Busque el producto por código o por descripción");
         txfdBuscarProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
-        txfdBuscarProd.setPrompt("busque por código o por descripción");
-        txfdBuscarProd.setPromptForeground(new java.awt.Color(51, 51, 51));
+        txfdBuscarProd.setPrompt("Busque el producto por código o por descripción");
+        txfdBuscarProd.setPromptForeground(new java.awt.Color(102, 102, 102));
         txfdBuscarProd.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 txfdBuscarProdKeyReleased(evt);
@@ -434,7 +435,7 @@ public class ventanaCargaStock extends javax.swing.JFrame
 
         panelInput.setOpaque(false);
 
-        labCantidad.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        labCantidad.setFont(new java.awt.Font("Calibri", 1, 15)); // NOI18N
         labCantidad.setText("Cantidad:");
 
         txfdCantidad.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -442,14 +443,14 @@ public class ventanaCargaStock extends javax.swing.JFrame
         txfdCantidad.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdCantidad.setNextFocusableComponent(txfdPrecioCU);
         txfdCantidad.setPrompt("unidades");
-        txfdCantidad.setPromptForeground(new java.awt.Color(51, 51, 51));
+        txfdCantidad.setPromptForeground(new java.awt.Color(102, 102, 102));
         txfdCantidad.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdCantidadKeyTyped(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Calibri", 1, 15)); // NOI18N
         jLabel1.setText("Precio costo:");
 
         txfdPrecioCU.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -457,14 +458,14 @@ public class ventanaCargaStock extends javax.swing.JFrame
         txfdPrecioCU.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdPrecioCU.setNextFocusableComponent(txfdPrecioVU);
         txfdPrecioCU.setPrompt("Ej: 0.00");
-        txfdPrecioCU.setPromptForeground(new java.awt.Color(51, 51, 51));
+        txfdPrecioCU.setPromptForeground(new java.awt.Color(102, 102, 102));
         txfdPrecioCU.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdPrecioCUKeyTyped(evt);
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Calibri", 1, 14)); // NOI18N
+        jLabel9.setFont(new java.awt.Font("Calibri", 1, 15)); // NOI18N
         jLabel9.setText("Precio venta:");
 
         txfdPrecioVU.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -472,7 +473,7 @@ public class ventanaCargaStock extends javax.swing.JFrame
         txfdPrecioVU.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdPrecioVU.setNextFocusableComponent(btnAgregar);
         txfdPrecioVU.setPrompt("Ej: 0.00");
-        txfdPrecioVU.setPromptForeground(new java.awt.Color(51, 51, 51));
+        txfdPrecioVU.setPromptForeground(new java.awt.Color(102, 102, 102));
         txfdPrecioVU.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txfdPrecioVUKeyTyped(evt);
@@ -614,7 +615,7 @@ public class ventanaCargaStock extends javax.swing.JFrame
         });
 
         jLabel3.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
-        jLabel3.setText("Lista para el inventario:");
+        jLabel3.setText("LISTA:");
 
         javax.swing.GroupLayout panelTablaInventarioLayout = new javax.swing.GroupLayout(panelTablaInventario);
         panelTablaInventario.setLayout(panelTablaInventarioLayout);
@@ -951,7 +952,7 @@ public class ventanaCargaStock extends javax.swing.JFrame
         
         if (filasTablaInv > 0)
         {
-            int cargar = JOptionPane.showConfirmDialog(null, "¿Está seguro de cargar los productos al Inventario?", "Actualizar inventario", JOptionPane.YES_NO_OPTION);
+            int cargar = JOptionPane.showConfirmDialog(null, "¿Está seguro de cargar los productos al inventario?", "Actualizar inventario", JOptionPane.YES_NO_OPTION);
             if (cargar == 0)
             {
                 Producto producto = null; 

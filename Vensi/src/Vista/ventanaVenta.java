@@ -85,11 +85,10 @@ public class ventanaVenta extends javax.swing.JFrame
                 btnQuitar.setEnabled(false);
                 btnAgregar.setEnabled(false);
             } 
-        });      
-               
-        llenarTabla();
+        });                     
+        
         llenarTablaCarrito();        
-        verificarTurno();               
+        verificarTurno();    //desde aca sabe que listar en la tabla prod
     }
     
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -287,7 +286,7 @@ public class ventanaVenta extends javax.swing.JFrame
             }
         });
 
-        txfdBuscarProd.setToolTipText("");
+        txfdBuscarProd.setToolTipText("Busque el producto por código o por descripción");
         txfdBuscarProd.setFont(new java.awt.Font("Calibri", 0, 14)); // NOI18N
         txfdBuscarProd.setNextFocusableComponent(tablaProd);
         txfdBuscarProd.setPrompt("Busque el producto por código o por descripción");
@@ -1032,12 +1031,10 @@ public class ventanaVenta extends javax.swing.JFrame
     }//GEN-LAST:event_txfdBuscarProdKeyReleased
 
     private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
-        verificarTurno();
-        
         String cadena = txfdBuscarProd.getText();
         if (cadena.equals(""))  //no hay busqueda
         {
-            llenarTabla(); 
+            verificarTurno();   //desde aca sabe que listar en la tabla prod
             
             cbFiltro.setEnabled(true);
             cbOrdenCampo.setEnabled(true);
@@ -1153,6 +1150,7 @@ public class ventanaVenta extends javax.swing.JFrame
     }//GEN-LAST:event_formWindowClosing
 
     private void formWindowLostFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowLostFocus
+        txfdCantidad.setText(null);
         limpiarList();
         tablaProd.clearSelection();
         tablaCarrito.clearSelection();
@@ -1185,8 +1183,7 @@ public class ventanaVenta extends javax.swing.JFrame
         for (Producto p : lista)
         {
             datos[0] = p.getCodigo();
-            datos[1] = p.getDescripcion();
-                        
+            datos[1] = p.getDescripcion();                        
             
             if (p.isPorPeso())
             {
@@ -1256,7 +1253,9 @@ public class ventanaVenta extends javax.swing.JFrame
                     String cod = tablaProd.getValueAt(filaSelec, 0).toString();
                     String desc = tablaProd.getValueAt(filaSelec, 1).toString();
                     
-                    modeloList = new DefaultListModel(); 
+                    txfdCantidad.setText(null);
+                    
+                    modeloList = new DefaultListModel();                                         
                     modeloList.clear();
                     modeloList.addElement("CÓDIGO:    " + cod);
                     modeloList.addElement("DESCRIPCIÓN:    " + desc);
@@ -1324,6 +1323,8 @@ public class ventanaVenta extends javax.swing.JFrame
                 {
                     String cod = tablaCarrito.getValueAt(filaSelec, 4).toString();
                     String desc = tablaCarrito.getValueAt(filaSelec, 0).toString();
+                    
+                    txfdCantidad.setText(null);
                     
                     modeloList = new DefaultListModel(); 
                     modeloList.clear();
@@ -1449,8 +1450,7 @@ public class ventanaVenta extends javax.swing.JFrame
             
             tablaVacia();
             
-            this.setTitle("Sistema de ventas   -   Turno sin iniciar");
-            
+            this.setTitle("Sistema de ventas   -   Turno sin iniciar");            
         }
         else    //turno abierto   //lista con turnos
         {      
@@ -1489,6 +1489,8 @@ public class ventanaVenta extends javax.swing.JFrame
                 
                 this.setTitle("Sistema de ventas   -   Turno N°" + turnoActual.getId() 
                         + "  -  Apertura: " + fechaHoraFormat.format(turnoActual.getFechaHoraInicio()) + "hs.");
+                
+                llenarTabla();
             }
             else    //turno cerrado
             {      
@@ -1593,7 +1595,7 @@ public class ventanaVenta extends javax.swing.JFrame
         tcm.getColumn(1).setPreferredWidth(400);
         tcm.getColumn(2).setPreferredWidth(30);
         tcm.getColumn(3).setPreferredWidth(30);
-        tcm.getColumn(4).setPreferredWidth(60);
+        tcm.getColumn(4).setPreferredWidth(80);
         tcm.getColumn(5).setPreferredWidth(0);     
         tcm.getColumn(5).setMaxWidth(0);
         tcm.getColumn(5).setMinWidth(0);

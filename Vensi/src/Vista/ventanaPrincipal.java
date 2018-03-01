@@ -4,7 +4,9 @@ import com.sun.awt.AWTUtilities;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 public class ventanaPrincipal extends javax.swing.JFrame 
 {    
@@ -42,6 +44,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnSalir = new javax.swing.JButton();
         btnCargaStock = new javax.swing.JButton();
         btnMinimizar = new org.jdesktop.swingx.JXButton();
+        btnManual = new javax.swing.JButton();
         LabTitulo = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
         labBarraTitulo = new javax.swing.JLabel();
@@ -297,6 +300,28 @@ public class ventanaPrincipal extends javax.swing.JFrame
         });
         panelDerecha.add(btnMinimizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 0, 60, 70));
 
+        btnManual.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        btnManual.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Recursos/manual_50.png"))); // NOI18N
+        btnManual.setToolTipText("Manual de uso");
+        btnManual.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btnManual.setBorderPainted(false);
+        btnManual.setContentAreaFilled(false);
+        btnManual.setFocusPainted(false);
+        btnManual.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                btnManualMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btnManualMouseExited(evt);
+            }
+        });
+        btnManual.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnManualActionPerformed(evt);
+            }
+        });
+        panelDerecha.add(btnManual, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, 50));
+
         LabTitulo.setBackground(new java.awt.Color(255, 255, 255));
         LabTitulo.setFont(new java.awt.Font("Calibri", 1, 48)); // NOI18N
         LabTitulo.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
@@ -481,6 +506,31 @@ public class ventanaPrincipal extends javax.swing.JFrame
         btnMinimizar.setIcon(icono);  
     }//GEN-LAST:event_btnMinimizarMouseExited
 
+    private void btnManualActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnManualActionPerformed
+        try 
+        {
+            Runtime.getRuntime().exec("rundll32 url.dll, FileProtocolHandler " + "C:\\Users\\Johana\\Desktop\\Vensi_manualUsuario.pdf");
+                    
+            /*File path = new File ("/Recursos/Vensi_manualUsuario.pdf");
+            Desktop.getDesktop().open(path);*/
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+            JOptionPane.showMessageDialog(null, "No se puedo abrir el manual de usuario","ERROR",JOptionPane.ERROR_MESSAGE);
+        }
+    }//GEN-LAST:event_btnManualActionPerformed
+
+    private void btnManualMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnManualMouseEntered
+        icono = new ImageIcon(getClass().getResource("/Recursos/manual_lleno_50.png"));     
+        btnManual.setIcon(icono);
+    }//GEN-LAST:event_btnManualMouseEntered
+
+    private void btnManualMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnManualMouseExited
+        icono = new ImageIcon(getClass().getResource("/Recursos/manual_50.png"));     
+        btnManual.setIcon(icono);
+    }//GEN-LAST:event_btnManualMouseExited
+
     public static void main(String args[]) 
     {               
         java.awt.EventQueue.invokeLater(new Runnable() 
@@ -497,6 +547,7 @@ public class ventanaPrincipal extends javax.swing.JFrame
     private javax.swing.JButton btnAdministracion;
     private javax.swing.JButton btnCargaStock;
     private javax.swing.JButton btnHistorial;
+    private javax.swing.JButton btnManual;
     private org.jdesktop.swingx.JXButton btnMinimizar;
     private javax.swing.JButton btnPedidos;
     private javax.swing.JButton btnSalir;

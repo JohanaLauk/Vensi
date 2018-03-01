@@ -51,6 +51,8 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         Image ico = Toolkit.getDefaultToolkit().getImage(ClassLoader.getSystemResource("Recursos/V.jpg"));
         this.setIconImage(ico);
                
+        btnImprimir.setVisible(false);
+        
         if (tablaSelec.equals("Turno"))
         {
             this.setTitle("Visualización del Turno N°" + idSelec);            
@@ -90,6 +92,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         txfdImporte = new javax.swing.JTextField();
         txfdUnidades = new javax.swing.JTextField();
         labUnidades = new javax.swing.JLabel();
+        labSubTitulo = new javax.swing.JLabel();
         panelBotones = new javax.swing.JPanel();
         btnVolver = new javax.swing.JButton();
         btnImprimir = new javax.swing.JButton();
@@ -194,7 +197,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                     .addGroup(panelCalculosLayout.createSequentialGroup()
                         .addGap(1, 1, 1)
                         .addComponent(labDiferencia)))
-                .addContainerGap(25, Short.MAX_VALUE))
+                .addContainerGap(23, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout panelInfoLayout = new javax.swing.GroupLayout(panelInfo);
@@ -269,6 +272,10 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         labUnidades.setFont(new java.awt.Font("Calibri", 1, 24)); // NOI18N
         labUnidades.setText("Unidades:");
 
+        labSubTitulo.setFont(new java.awt.Font("Calibri", 1, 18)); // NOI18N
+        labSubTitulo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        labSubTitulo.setText("MOVIMIENTOS DE CAJA");
+
         javax.swing.GroupLayout panelTablaLayout = new javax.swing.GroupLayout(panelTabla);
         panelTabla.setLayout(panelTablaLayout);
         panelTablaLayout.setHorizontalGroup(
@@ -283,11 +290,14 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
                 .addComponent(labImporte)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(txfdImporte, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addComponent(labSubTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         panelTablaLayout.setVerticalGroup(
             panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(panelTablaLayout.createSequentialGroup()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 235, Short.MAX_VALUE)
+                .addComponent(labSubTitulo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 208, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(panelTablaLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(labImporte)
@@ -351,7 +361,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         panelBotonesLayout.setHorizontalGroup(
             panelBotonesLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelBotonesLayout.createSequentialGroup()
-                .addComponent(btnVolver, javax.swing.GroupLayout.DEFAULT_SIZE, 255, Short.MAX_VALUE)
+                .addComponent(btnVolver, javax.swing.GroupLayout.PREFERRED_SIZE, 255, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(btnImprimir, javax.swing.GroupLayout.PREFERRED_SIZE, 443, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -429,7 +439,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
         int imprimir = JOptionPane.showConfirmDialog(null, "¿Está seguro de imprimir este registro?", "Imprimir registro", JOptionPane.YES_NO_OPTION);
         if (imprimir == 0)
         {
-        
+            JOptionPane.showMessageDialog(null, "Acción no permitida aún");
         }
     }//GEN-LAST:event_btnImprimirActionPerformed
 
@@ -465,6 +475,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             modelo.addColumn("Salida");
             
             Turno t = tDAO.buscarPorID(idSelec);
+            labSubTitulo.setText("MOVIMIENTOS DE CAJA");
             
             modeloList = new DefaultListModel();
             modeloList.addElement("NÚMERO:  " + String.valueOf(t.getId()));
@@ -480,7 +491,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             }            
             modeloList.addElement("USUARIO:  " + String.valueOf(t.getUsuario().getNombreUsuario()));            
             modeloList.addElement(""); 
-            modeloList.addElement("----------------------------------------------------------------------------------------------------------------");
+            modeloList.addElement("---------------------------------------------------------------------------------------------------------------");
             modeloList.addElement("Cantidad ventas confirmadas:  " + t.getCantVentas());
             modeloList.addElement("Cantidad aperturas:               " + t.getCantEntradas() + "   |     Monto:    $" + formatoPrecios.format(t.getMontoEntradas()));
             modeloList.addElement("Cantidad retiros/Sueldos:      " + t.getCantSalidas() + "   |     Monto:    $" + formatoPrecios.format(t.getMontoSalidas()));
@@ -566,6 +577,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
             modelo.addColumn("Precio venta");
             
             Entradastock es = eStockDAO.buscarPorID(idSelec);
+            labSubTitulo.setText("PRODUCTOS CARGADOS");
             
             modeloList = new DefaultListModel();
             modeloList.addElement("NÚMERO:  " + String.valueOf(es.getId()));
@@ -649,6 +661,7 @@ public class ventanaVisualizarHistorial extends javax.swing.JFrame
     private javax.swing.JLabel labDiferencia;
     private javax.swing.JLabel labEfectivo;
     private javax.swing.JLabel labImporte;
+    private javax.swing.JLabel labSubTitulo;
     private javax.swing.JLabel labTotalCaja;
     private javax.swing.JLabel labUnidades;
     private javax.swing.JLabel labVenta;

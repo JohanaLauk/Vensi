@@ -291,6 +291,7 @@ public class ventanaHistorial extends javax.swing.JFrame
         rbTurno.setText("Turno");
         rbTurno.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         rbTurno.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rbTurno.setFocusPainted(false);
         rbTurno.setNextFocusableComponent(rbCargaStock);
         rbTurno.setOpaque(false);
         rbTurno.addActionListener(new java.awt.event.ActionListener() {
@@ -305,6 +306,7 @@ public class ventanaHistorial extends javax.swing.JFrame
         rbCargaStock.setText("Carga stock");
         rbCargaStock.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         rbCargaStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        rbCargaStock.setFocusPainted(false);
         rbCargaStock.setNextFocusableComponent(cbBuscarPor);
         rbCargaStock.setOpaque(false);
         rbCargaStock.addActionListener(new java.awt.event.ActionListener() {
@@ -599,7 +601,10 @@ public class ventanaHistorial extends javax.swing.JFrame
     }//GEN-LAST:event_formWindowGainedFocus
 
     private void btnVaciarFechaHastaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVaciarFechaHastaActionPerformed
-        dateHasta.setDate(null);
+        if (dateHasta.getDate() != null)
+        {
+            dateHasta.setDate(null);
+        }
         
         if (rbTurno.isSelected())
         {
